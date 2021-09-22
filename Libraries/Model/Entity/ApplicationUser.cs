@@ -13,10 +13,11 @@ namespace Libraries.Model.Entity
             Paymentverification = new HashSet<Paymentverification>();
             // ApprovalproccessSendFromUser = new HashSet<Approvalproccess>();
         }
-
+        
         public DateTime? PasswordSetDate { get; set; }
         public short? IsDefaultPassword { get; set; }
         public string Name { get; set; }
+        public string ChangePasswordStatus { get; set; }
         public DateTime? CreatedDate { get; set; }
         public int? CreatedBy { get; set; }
         public DateTime? ModifiedDate { get; set; }

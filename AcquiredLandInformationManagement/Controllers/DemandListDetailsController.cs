@@ -75,7 +75,7 @@ namespace AcquiredLandInformationManagement.Controllers
         public async Task<IActionResult> Create(Demandlistdetails demandlistdetails)
         {
             bool IsValidpdf = CheckMimeType(demandlistdetails);
-
+            bool IsValidpdf1 = CheckMimeType1(demandlistdetails);
             await BindDropDown(demandlistdetails);
             demandlistdetails.VillageList = await _demandListDetailsService.GetVillageList();
             demandlistdetails.KhasraNoList = await _demandListDetailsService.GetKhasraList(demandlistdetails.VillageId);
@@ -84,78 +84,86 @@ namespace AcquiredLandInformationManagement.Controllers
             {
                 if (IsValidpdf == true)
                 {
-                    FileHelper fileHelper = new FileHelper();
-                    demandlistdetails.ENMDocumentName = demandlistdetails.ENMDocumentIFormFile == null ? demandlistdetails.ENMDocumentName : fileHelper.SaveFile1(ENMDocumentFilePath, demandlistdetails.ENMDocumentIFormFile);
-
-                    demandlistdetails.CreatedBy = SiteContext.UserId;
-                    var result = await _demandListDetailsService.Create(demandlistdetails);
-
-                    if (result == true)
+                    if (IsValidpdf1 == true)
                     {
-                        //************ Save Appeal  ************  
+                        FileHelper fileHelper = new FileHelper();
+                        demandlistdetails.ENMDocumentName = demandlistdetails.ENMDocumentIFormFile == null ? demandlistdetails.ENMDocumentName : fileHelper.SaveFile1(ENMDocumentFilePath, demandlistdetails.ENMDocumentIFormFile);
 
-                        if (
-                            demandlistdetails.AppealNo != null
+                        demandlistdetails.CreatedBy = SiteContext.UserId;
+                        var result = await _demandListDetailsService.Create(demandlistdetails);
 
-
-
-                            )
+                        if (result == true)
                         {
-                            Appealdetail appealdetail = new Appealdetail();
+                            //************ Save Appeal  ************  
+
+                            if (
+                                demandlistdetails.AppealNo != null
 
 
-                            appealdetail.AppealNo = demandlistdetails.AppealNo == null ? "" : demandlistdetails.AppealNo;
-                            appealdetail.AppealByDept = demandlistdetails.AppealByDept == null ? "" : demandlistdetails.AppealByDept;
-                            appealdetail.EnmSno = demandlistdetails.Enmsno.ToString();
-                            appealdetail.DemandListNo = demandlistdetails.DemandListNo.ToString();
-                            appealdetail.Department = demandlistdetails.Department == null ? "" : demandlistdetails.Department;
-                            appealdetail.DateOfAppeal = demandlistdetails.DateOfAppeal;
-                            appealdetail.PanelLawer = demandlistdetails.PanelLawer;
-                            appealdetail.IsActive = 1;
 
-                            appealdetail.DemandListId = demandlistdetails.Id;
-                            appealdetail.CreatedBy = SiteContext.UserId;
-                            result = await _demandListDetailsService.SaveAppeal(appealdetail);
+                                )
+                            {
+                                Appealdetail appealdetail = new Appealdetail();
+
+
+                                appealdetail.AppealNo = demandlistdetails.AppealNo == null ? "" : demandlistdetails.AppealNo;
+                                appealdetail.AppealByDept = demandlistdetails.AppealByDept == null ? "" : demandlistdetails.AppealByDept;
+                                appealdetail.EnmSno = demandlistdetails.Enmsno.ToString();
+                                appealdetail.DemandListNo = demandlistdetails.DemandListNo.ToString();
+                                appealdetail.Department = demandlistdetails.Department == null ? "" : demandlistdetails.Department;
+                                appealdetail.DateOfAppeal = demandlistdetails.DateOfAppeal;
+                                appealdetail.PanelLawer = demandlistdetails.PanelLawer;
+                                appealdetail.IsActive = 1;
+
+                                appealdetail.DemandListId = demandlistdetails.Id;
+                                appealdetail.CreatedBy = SiteContext.UserId;
+                                result = await _demandListDetailsService.SaveAppeal(appealdetail);
+                            }
+                            //************ Save Payment  ************  
+
+                            if (
+
+                                demandlistdetails.VoucherNo != null
+
+
+                                )
+                            {
+                                Paymentdetail paymentdetail = new Paymentdetail();
+                                paymentdetail.PaymentProofDocumentName = demandlistdetails.PaymentProofDocumentIFormFile == null ?
+                              demandlistdetails.PaymentProofDocumentName : fileHelper.SaveFile1(PaymentProofDocumentFilePath,
+                              demandlistdetails.PaymentProofDocumentIFormFile);
+
+                                paymentdetail.AmountPaid = (decimal)demandlistdetails.AmountPaid;
+                                paymentdetail.EnmSno = demandlistdetails.Enmsno.ToString();
+                                paymentdetail.DemandListNo = demandlistdetails.DemandListNo.ToString();
+                                paymentdetail.ChequeDate = demandlistdetails.ChequeDate;
+                                paymentdetail.ChequeNo = demandlistdetails.ChequeNo;
+                                paymentdetail.BankName = demandlistdetails.BankName;
+                                paymentdetail.VoucherNo = demandlistdetails.VoucherNo;
+                                paymentdetail.PercentPaid = (decimal)demandlistdetails.PercentPaid;
+                                paymentdetail.PaymentProofDocumentIFormFile = demandlistdetails.PaymentProofDocumentIFormFile;
+
+                                paymentdetail.DemandListId = demandlistdetails.Id;
+                                paymentdetail.CreatedBy = SiteContext.UserId;
+                                result = await _demandListDetailsService.SavePayment(paymentdetail);
+                            }
+                            ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+                            ViewBag.VillageList = await _demandListDetailsService.GetVillageList();
+                            return View("Index");
+
                         }
-                        //************ Save Payment  ************  
-
-                        if (
-
-                            demandlistdetails.VoucherNo != null
-
-
-                            )
+                        else
                         {
-                            Paymentdetail paymentdetail = new Paymentdetail();
-                            paymentdetail.PaymentProofDocumentName = demandlistdetails.PaymentProofDocumentIFormFile == null ?
-                          demandlistdetails.PaymentProofDocumentName : fileHelper.SaveFile1(PaymentProofDocumentFilePath,
-                          demandlistdetails.PaymentProofDocumentIFormFile);
+                            ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                            await BindDropDown(demandlistdetails);
+                            return View(demandlistdetails);
 
-                            paymentdetail.AmountPaid = (decimal)demandlistdetails.AmountPaid;
-                            paymentdetail.EnmSno = demandlistdetails.Enmsno.ToString();
-                            paymentdetail.DemandListNo = demandlistdetails.DemandListNo.ToString();
-                            paymentdetail.ChequeDate = demandlistdetails.ChequeDate;
-                            paymentdetail.ChequeNo = demandlistdetails.ChequeNo;
-                            paymentdetail.BankName = demandlistdetails.BankName;
-                            paymentdetail.VoucherNo = demandlistdetails.VoucherNo;
-                            paymentdetail.PercentPaid = (decimal)demandlistdetails.PercentPaid;
-                            paymentdetail.PaymentProofDocumentIFormFile = demandlistdetails.PaymentProofDocumentIFormFile;
-
-                            paymentdetail.DemandListId = demandlistdetails.Id;
-                            paymentdetail.CreatedBy = SiteContext.UserId;
-                            result = await _demandListDetailsService.SavePayment(paymentdetail);
                         }
-                        ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        ViewBag.VillageList = await _demandListDetailsService.GetVillageList();
-                        return View("Index");
-
                     }
                     else
                     {
-                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        await BindDropDown(demandlistdetails);
+                        ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
                         return View(demandlistdetails);
-
                     }
                 }
                 else
@@ -209,6 +217,7 @@ namespace AcquiredLandInformationManagement.Controllers
         public async Task<IActionResult> Edit(int id, Demandlistdetails demandlistdetails)
         {
             bool IsValidpdf = CheckMimeType(demandlistdetails);
+            bool IsValidpdf1 = CheckMimeType1(demandlistdetails);
             await BindDropDown(demandlistdetails);
             demandlistdetails.VillageList = await _demandListDetailsService.GetVillageList();
             demandlistdetails.KhasraNoList = await _demandListDetailsService.GetKhasraList(demandlistdetails.VillageId);
@@ -216,114 +225,122 @@ namespace AcquiredLandInformationManagement.Controllers
             {
                 if (IsValidpdf == true)
                 {
-                    FileHelper fileHelper = new FileHelper();
-                    demandlistdetails.ENMDocumentName = demandlistdetails.ENMDocumentIFormFile == null ? demandlistdetails.ENMDocumentName : fileHelper.SaveFile1(ENMDocumentFilePath, demandlistdetails.ENMDocumentIFormFile);
-                    demandlistdetails.ModifiedBy = SiteContext.UserId;
-                    var result = await _demandListDetailsService.Update(id, demandlistdetails);
-
-                    if (result == true)
+                    if (IsValidpdf1 == true)
                     {
-                        //************ Save Appeal  ************  
-                        var data = await _demandListDetailsService.FetchSingleAppeal(id);
+                        FileHelper fileHelper = new FileHelper();
+                        demandlistdetails.ENMDocumentName = demandlistdetails.ENMDocumentIFormFile == null ? demandlistdetails.ENMDocumentName : fileHelper.SaveFile1(ENMDocumentFilePath, demandlistdetails.ENMDocumentIFormFile);
+                        demandlistdetails.ModifiedBy = SiteContext.UserId;
+                        var result = await _demandListDetailsService.Update(id, demandlistdetails);
 
-                        if (data != null)
-
+                        if (result == true)
                         {
+                            //************ Save Appeal  ************  
+                            var data = await _demandListDetailsService.FetchSingleAppeal(id);
+
+                            if (data != null)
+
+                            {
 
 
-                            Appealdetail appealdetail = new Appealdetail();
+                                Appealdetail appealdetail = new Appealdetail();
 
 
-                            appealdetail.AppealNo = demandlistdetails.AppealNo;
-                            appealdetail.AppealByDept = demandlistdetails.AppealByDept;
-                            appealdetail.DemandListNo = demandlistdetails.DemandListNo.ToString();
-                            appealdetail.EnmSno = demandlistdetails.Enmsno.ToString();
-                            appealdetail.Department = demandlistdetails.Department;
-                            appealdetail.Department = demandlistdetails.Department;
-                            appealdetail.DateOfAppeal = demandlistdetails.DateOfAppeal;
-                            appealdetail.PanelLawer = demandlistdetails.PanelLawer;
+                                appealdetail.AppealNo = demandlistdetails.AppealNo;
+                                appealdetail.AppealByDept = demandlistdetails.AppealByDept;
+                                appealdetail.DemandListNo = demandlistdetails.DemandListNo.ToString();
+                                appealdetail.EnmSno = demandlistdetails.Enmsno.ToString();
+                                appealdetail.Department = demandlistdetails.Department;
+                                appealdetail.Department = demandlistdetails.Department;
+                                appealdetail.DateOfAppeal = demandlistdetails.DateOfAppeal;
+                                appealdetail.PanelLawer = demandlistdetails.PanelLawer;
 
-                            appealdetail.DemandListId = demandlistdetails.Id;
-                            appealdetail.CreatedBy = SiteContext.UserId;
-                            appealdetail.IsActive = 1;
-                            result = await _demandListDetailsService.UpdateAppeal(id, appealdetail);
+                                appealdetail.DemandListId = demandlistdetails.Id;
+                                appealdetail.CreatedBy = SiteContext.UserId;
+                                appealdetail.IsActive = 1;
+                                result = await _demandListDetailsService.UpdateAppeal(id, appealdetail);
+                            }
+                            else
+                            {
+
+                                Appealdetail appealdetail = new Appealdetail();
+
+                                appealdetail.AppealNo = demandlistdetails.AppealNo;
+                                appealdetail.AppealByDept = demandlistdetails.AppealByDept;
+                                appealdetail.EnmSno = demandlistdetails.Enmsno.ToString();
+                                appealdetail.DemandListNo = demandlistdetails.DemandListNo.ToString();
+                                appealdetail.Department = demandlistdetails.Department;
+                                appealdetail.DateOfAppeal = demandlistdetails.DateOfAppeal;
+                                appealdetail.PanelLawer = demandlistdetails.PanelLawer;
+
+                                appealdetail.DemandListId = demandlistdetails.Id;
+                                appealdetail.CreatedBy = SiteContext.UserId;
+                                appealdetail.IsActive = 1;
+                                result = await _demandListDetailsService.SaveAppeal(appealdetail);
+
+                            }
+                            //************ Save Payment  ************  
+                            var dataa = await _demandListDetailsService.FetchSinglePayment(id);
+
+                            if (dataa != null)
+
+                            {
+
+                                Paymentdetail paymentdetail = new Paymentdetail();
+                                paymentdetail.PaymentProofDocumentName = demandlistdetails.PaymentProofDocumentIFormFile == null ?
+                               demandlistdetails.PaymentProofDocumentName : fileHelper.SaveFile1(PaymentProofDocumentFilePath,
+                               demandlistdetails.PaymentProofDocumentIFormFile);
+
+
+                                paymentdetail.AmountPaid = (decimal)demandlistdetails.AmountPaid;
+                                paymentdetail.ChequeDate = demandlistdetails.ChequeDate;
+                                paymentdetail.ChequeNo = demandlistdetails.ChequeNo;
+                                paymentdetail.BankName = demandlistdetails.BankName;
+                                paymentdetail.VoucherNo = demandlistdetails.VoucherNo;
+                                paymentdetail.PercentPaid = (decimal)demandlistdetails.PercentPaid;
+                                paymentdetail.PaymentProofDocumentIFormFile = demandlistdetails.PaymentProofDocumentIFormFile;
+                                paymentdetail.EnmSno = demandlistdetails.Enmsno.ToString();
+                                paymentdetail.DemandListNo = demandlistdetails.DemandListNo.ToString();
+                                paymentdetail.DemandListId = demandlistdetails.Id;
+                                paymentdetail.IsActive = 1;
+                                result = await _demandListDetailsService.UpdatePayment(id, paymentdetail);
+                            }
+                            else
+                            {
+                                Paymentdetail paymentdetail = new Paymentdetail();
+                                paymentdetail.AmountPaid = (decimal)demandlistdetails.AmountPaid;
+                                paymentdetail.ChequeDate = demandlistdetails.ChequeDate;
+                                paymentdetail.ChequeNo = demandlistdetails.ChequeNo;
+                                paymentdetail.BankName = demandlistdetails.BankName;
+                                paymentdetail.VoucherNo = demandlistdetails.VoucherNo;
+                                paymentdetail.PercentPaid = (decimal)demandlistdetails.PercentPaid;
+                                paymentdetail.PaymentProofDocumentIFormFile = demandlistdetails.PaymentProofDocumentIFormFile;
+                                paymentdetail.EnmSno = demandlistdetails.Enmsno.ToString();
+                                paymentdetail.DemandListNo = demandlistdetails.DemandListNo.ToString();
+                                paymentdetail.DemandListId = demandlistdetails.Id;
+                                paymentdetail.CreatedBy = SiteContext.UserId;
+                                paymentdetail.IsActive = 1;
+                                result = await _demandListDetailsService.SavePayment(paymentdetail);
+
+                            }
+                            ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
+                            ViewBag.VillageList = await _demandListDetailsService.GetVillageList();
+                            return View("Index");
+                            //ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
+                            //var list = await _demandListDetailsService.GetAllDemandlistdetails();
+                            //return View("Index", list);
                         }
                         else
                         {
-
-                            Appealdetail appealdetail = new Appealdetail();
-
-                            appealdetail.AppealNo = demandlistdetails.AppealNo;
-                            appealdetail.AppealByDept = demandlistdetails.AppealByDept;
-                            appealdetail.EnmSno = demandlistdetails.Enmsno.ToString();
-                            appealdetail.DemandListNo = demandlistdetails.DemandListNo.ToString();
-                            appealdetail.Department = demandlistdetails.Department;
-                            appealdetail.DateOfAppeal = demandlistdetails.DateOfAppeal;
-                            appealdetail.PanelLawer = demandlistdetails.PanelLawer;
-
-                            appealdetail.DemandListId = demandlistdetails.Id;
-                            appealdetail.CreatedBy = SiteContext.UserId;
-                            appealdetail.IsActive = 1;
-                            result = await _demandListDetailsService.SaveAppeal(appealdetail);
+                            ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                            await BindDropDown(demandlistdetails);
+                            return View(demandlistdetails);
 
                         }
-                        //************ Save Payment  ************  
-                        var dataa = await _demandListDetailsService.FetchSinglePayment(id);
-
-                        if (dataa != null)
-
-                        {
-
-                            Paymentdetail paymentdetail = new Paymentdetail();
-                            paymentdetail.PaymentProofDocumentName = demandlistdetails.PaymentProofDocumentIFormFile == null ?
-                           demandlistdetails.PaymentProofDocumentName : fileHelper.SaveFile1(PaymentProofDocumentFilePath,
-                           demandlistdetails.PaymentProofDocumentIFormFile);
-
-
-                            paymentdetail.AmountPaid = (decimal)demandlistdetails.AmountPaid;
-                            paymentdetail.ChequeDate = demandlistdetails.ChequeDate;
-                            paymentdetail.ChequeNo = demandlistdetails.ChequeNo;
-                            paymentdetail.BankName = demandlistdetails.BankName;
-                            paymentdetail.VoucherNo = demandlistdetails.VoucherNo;
-                            paymentdetail.PercentPaid = (decimal)demandlistdetails.PercentPaid;
-                            paymentdetail.PaymentProofDocumentIFormFile = demandlistdetails.PaymentProofDocumentIFormFile;
-                            paymentdetail.EnmSno = demandlistdetails.Enmsno.ToString();
-                            paymentdetail.DemandListNo = demandlistdetails.DemandListNo.ToString();
-                            paymentdetail.DemandListId = demandlistdetails.Id;
-                            paymentdetail.IsActive = 1;
-                            result = await _demandListDetailsService.UpdatePayment(id, paymentdetail);
-                        }
-                        else
-                        {
-                            Paymentdetail paymentdetail = new Paymentdetail();
-                            paymentdetail.AmountPaid = (decimal)demandlistdetails.AmountPaid;
-                            paymentdetail.ChequeDate = demandlistdetails.ChequeDate;
-                            paymentdetail.ChequeNo = demandlistdetails.ChequeNo;
-                            paymentdetail.BankName = demandlistdetails.BankName;
-                            paymentdetail.VoucherNo = demandlistdetails.VoucherNo;
-                            paymentdetail.PercentPaid = (decimal)demandlistdetails.PercentPaid;
-                            paymentdetail.PaymentProofDocumentIFormFile = demandlistdetails.PaymentProofDocumentIFormFile;
-                            paymentdetail.EnmSno = demandlistdetails.Enmsno.ToString();
-                            paymentdetail.DemandListNo = demandlistdetails.DemandListNo.ToString();
-                            paymentdetail.DemandListId = demandlistdetails.Id;
-                            paymentdetail.CreatedBy = SiteContext.UserId;
-                            paymentdetail.IsActive = 1;
-                            result = await _demandListDetailsService.SavePayment(paymentdetail);
-
-                        }
-                        ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                        ViewBag.VillageList = await _demandListDetailsService.GetVillageList();
-                        return View("Index");
-                        //ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                        //var list = await _demandListDetailsService.GetAllDemandlistdetails();
-                        //return View("Index", list);
                     }
                     else
                     {
-                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        await BindDropDown(demandlistdetails);
+                        ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
                         return View(demandlistdetails);
-
                     }
                 }
                 else
@@ -531,6 +548,77 @@ namespace AcquiredLandInformationManagement.Controllers
                                 iTextSharp.text.pdf.PdfReader oPdfReader = new iTextSharp.text.pdf.PdfReader(FilePath);
                                 oPdfReader.Close();
                                 fullpath = _Configuration.GetSection("FilePaths:DemandListDetails:DocumentFIlePath").Value.ToString();
+                                FileInfo doc = new FileInfo(fullpath);
+                                if (doc.Exists)
+                                {
+                                    doc.Delete();
+                                }
+                            }
+                            catch (iTextSharp.text.exceptions.InvalidPdfException)
+                            {
+                                Flag = false;
+                            }
+
+                        }
+                    }
+                    catch (OutOfMemoryException ex)
+                    {
+                        Flag = false;
+
+                        if (System.IO.File.Exists(fullpath))
+                        {
+                            try
+                            {
+                                System.IO.File.Delete(fullpath);
+                            }
+                            catch (Exception exs)
+                            {
+                            }
+                        }
+                        // Image.FromFile will throw this if file is invalid.  
+                    }
+
+                }
+            }
+
+            return Flag;
+        }
+
+        public bool CheckMimeType1(Demandlistdetails demandlistdetails)
+        {
+            bool Flag = true;
+            string fullpath = string.Empty;
+           
+            string extension = string.Empty;
+            ENMDocumentFilePath = _Configuration.GetSection("FilePaths:DemandListDetails:PaymentProofDocumentFIlePath").Value.ToString();
+            IFormFile files = demandlistdetails.PaymentProofDocumentIFormFile;
+            if (files != null)
+            {
+                extension = System.IO.Path.GetExtension(files.FileName);
+                string FileName = Guid.NewGuid().ToString() + "_" + files.FileName;
+                ENMDocumentFilePath = _Configuration.GetSection("FilePaths:DemandListDetails:PaymentProofDocumentFIlePath").Value.ToString();
+                string FilePath = Path.Combine(ENMDocumentFilePath, FileName);
+                if (files.Length > 0)
+                {
+                    if (!Directory.Exists(ENMDocumentFilePath))
+                    {
+                        DirectoryInfo di = Directory.CreateDirectory(ENMDocumentFilePath);// Try to create the directory.
+                    }
+                    try
+                    {
+                        if (extension.ToLower() == ".pdf")
+                        {
+                            try
+                            {
+                                using (var stream = new FileStream(FilePath, FileMode.Create))
+                                {
+                                    files.CopyTo(stream);
+
+                                }
+
+                                iTextSharp.text.pdf.PdfReader oPdfReader = new iTextSharp.text.pdf.PdfReader(FilePath);
+                                oPdfReader.Close();
+                                fullpath = _Configuration.GetSection("FilePaths:DemandListDetails:PaymentProofDocumentFIlePath").Value.ToString();
                                 FileInfo doc = new FileInfo(fullpath);
                                 if (doc.Exists)
                                 {

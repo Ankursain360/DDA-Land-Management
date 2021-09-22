@@ -432,7 +432,7 @@ namespace AcquiredLandInformationManagement.Controllers
         {
             bool Flag = true;
             string fullpath = string.Empty;
-           
+
             string extension = string.Empty;
             GztNoUs507documentlayout = _configuration.GetSection("FilePaths:Gramsabhaland:GazzetteNoUs507documentpath").Value.ToString();
             IFormFile files = gramsabhaland.GNus507Document1;
@@ -498,6 +498,355 @@ namespace AcquiredLandInformationManagement.Controllers
 
             return Flag;
         }
+        //public bool CheckMimeType1(Gramsabhaland gramsabhaland)
+        //{
+        //    bool Flag = true;
+        //    string fullpath = string.Empty;
 
+        //    string extension = string.Empty;
+        //    GztNoUs507documentlayout = _configuration.GetSection("FilePaths:Gramsabhaland:GazzetteNoUs507documentpath").Value.ToString();
+        //    IFormFile files = gramsabhaland.GNus507Document1;
+        //    if (files != null)
+        //    {
+        //        extension = System.IO.Path.GetExtension(files.FileName);
+        //        string FileName = Guid.NewGuid().ToString() + "_" + files.FileName;
+        //        GztNoUs507documentlayout = _configuration.GetSection("FilePaths:Gramsabhaland:GazzetteNoUs507documentpath").Value.ToString();
+        //        string FilePath = Path.Combine(GztNoUs507documentlayout, FileName);
+        //        if (files.Length > 0)
+        //        {
+        //            if (!Directory.Exists(GztNoUs507documentlayout))
+        //            {
+        //                DirectoryInfo di = Directory.CreateDirectory(GztNoUs507documentlayout);// Try to create the directory.
+        //            }
+        //            try
+        //            {
+        //                if (extension.ToLower() == ".pdf")
+        //                {
+        //                    try
+        //                    {
+        //                        using (var stream = new FileStream(FilePath, FileMode.Create))
+        //                        {
+        //                            files.CopyTo(stream);
+
+        //                        }
+
+        //                        iTextSharp.text.pdf.PdfReader oPdfReader = new iTextSharp.text.pdf.PdfReader(FilePath);
+        //                        oPdfReader.Close();
+        //                        fullpath = _configuration.GetSection("FilePaths:Gramsabhaland:GazzetteNoUs507documentpath").Value.ToString();
+        //                        FileInfo doc = new FileInfo(fullpath);
+        //                        if (doc.Exists)
+        //                        {
+        //                            doc.Delete();
+        //                        }
+        //                    }
+        //                    catch (iTextSharp.text.exceptions.InvalidPdfException)
+        //                    {
+        //                        Flag = false;
+        //                    }
+
+        //                }
+        //            }
+        //            catch (OutOfMemoryException ex)
+        //            {
+        //                Flag = false;
+
+        //                if (System.IO.File.Exists(fullpath))
+        //                {
+        //                    try
+        //                    {
+        //                        System.IO.File.Delete(fullpath);
+        //                    }
+        //                    catch (Exception exs)
+        //                    {
+        //                    }
+        //                }
+        //                // Image.FromFile will throw this if file is invalid.  
+        //            }
+
+        //        }
+        //    }
+
+        //    return Flag;
+        //}
+        //public bool CheckMimeType2(Gramsabhaland gramsabhaland)
+        //{
+        //    bool Flag = true;
+        //    string fullpath = string.Empty;
+
+        //    string extension = string.Empty;
+        //    GztNoUs507documentlayout = _configuration.GetSection("FilePaths:Gramsabhaland:Us22NoDocumentpath").Value.ToString();
+        //    IFormFile files = gramsabhaland.GNus507Document1;
+        //    if (files != null)
+        //    {
+        //        extension = System.IO.Path.GetExtension(files.FileName);
+        //        string FileName = Guid.NewGuid().ToString() + "_" + files.FileName;
+        //        GztNoUs507documentlayout = _configuration.GetSection("FilePaths:Gramsabhaland:Us22NoDocumentpath").Value.ToString();
+        //        string FilePath = Path.Combine(GztNoUs507documentlayout, FileName);
+        //        if (files.Length > 0)
+        //        {
+        //            if (!Directory.Exists(GztNoUs507documentlayout))
+        //            {
+        //                DirectoryInfo di = Directory.CreateDirectory(GztNoUs507documentlayout);// Try to create the directory.
+        //            }
+        //            try
+        //            {
+        //                if (extension.ToLower() == ".pdf")
+        //                {
+        //                    try
+        //                    {
+        //                        using (var stream = new FileStream(FilePath, FileMode.Create))
+        //                        {
+        //                            files.CopyTo(stream);
+
+        //                        }
+
+        //                        iTextSharp.text.pdf.PdfReader oPdfReader = new iTextSharp.text.pdf.PdfReader(FilePath);
+        //                        oPdfReader.Close();
+        //                        fullpath = _configuration.GetSection("FilePaths:Gramsabhaland:Us22NoDocumentpath").Value.ToString();
+        //                        FileInfo doc = new FileInfo(fullpath);
+        //                        if (doc.Exists)
+        //                        {
+        //                            doc.Delete();
+        //                        }
+        //                    }
+        //                    catch (iTextSharp.text.exceptions.InvalidPdfException)
+        //                    {
+        //                        Flag = false;
+        //                    }
+
+        //                }
+        //            }
+        //            catch (OutOfMemoryException ex)
+        //            {
+        //                Flag = false;
+
+        //                if (System.IO.File.Exists(fullpath))
+        //                {
+        //                    try
+        //                    {
+        //                        System.IO.File.Delete(fullpath);
+        //                    }
+        //                    catch (Exception exs)
+        //                    {
+        //                    }
+        //                }
+        //                // Image.FromFile will throw this if file is invalid.  
+        //            }
+
+        //        }
+        //    }
+
+        //    return Flag;
+        //}
+        //public bool CheckMimeType3(Gramsabhaland gramsabhaland)
+        //{
+        //    bool Flag = true;
+        //    string fullpath = string.Empty;
+
+        //    string extension = string.Empty;
+        //    GztNoUs507documentlayout = _configuration.GetSection("FilePaths:Gramsabhaland:Us22otherNoDocumentpath").Value.ToString();
+        //    IFormFile files = gramsabhaland.GNus507Document1;
+        //    if (files != null)
+        //    {
+        //        extension = System.IO.Path.GetExtension(files.FileName);
+        //        string FileName = Guid.NewGuid().ToString() + "_" + files.FileName;
+        //        GztNoUs507documentlayout = _configuration.GetSection("FilePaths:Gramsabhaland:Us22otherNoDocumentpath").Value.ToString();
+        //        string FilePath = Path.Combine(GztNoUs507documentlayout, FileName);
+        //        if (files.Length > 0)
+        //        {
+        //            if (!Directory.Exists(GztNoUs507documentlayout))
+        //            {
+        //                DirectoryInfo di = Directory.CreateDirectory(GztNoUs507documentlayout);// Try to create the directory.
+        //            }
+        //            try
+        //            {
+        //                if (extension.ToLower() == ".pdf")
+        //                {
+        //                    try
+        //                    {
+        //                        using (var stream = new FileStream(FilePath, FileMode.Create))
+        //                        {
+        //                            files.CopyTo(stream);
+
+        //                        }
+
+        //                        iTextSharp.text.pdf.PdfReader oPdfReader = new iTextSharp.text.pdf.PdfReader(FilePath);
+        //                        oPdfReader.Close();
+        //                        fullpath = _configuration.GetSection("FilePaths:Gramsabhaland:Us22otherNoDocumentpath").Value.ToString();
+        //                        FileInfo doc = new FileInfo(fullpath);
+        //                        if (doc.Exists)
+        //                        {
+        //                            doc.Delete();
+        //                        }
+        //                    }
+        //                    catch (iTextSharp.text.exceptions.InvalidPdfException)
+        //                    {
+        //                        Flag = false;
+        //                    }
+
+        //                }
+        //            }
+        //            catch (OutOfMemoryException ex)
+        //            {
+        //                Flag = false;
+
+        //                if (System.IO.File.Exists(fullpath))
+        //                {
+        //                    try
+        //                    {
+        //                        System.IO.File.Delete(fullpath);
+        //                    }
+        //                    catch (Exception exs)
+        //                    {
+        //                    }
+        //                }
+        //                // Image.FromFile will throw this if file is invalid.  
+        //            }
+
+        //        }
+        //    }
+
+        //    return Flag;
+        //}
+        //public bool CheckMimeType4(Gramsabhaland gramsabhaland)
+        //{
+        //    bool Flag = true;
+        //    string fullpath = string.Empty;
+
+        //    string extension = string.Empty;
+        //    GztNoUs507documentlayout = _configuration.GetSection("FilePaths:Gramsabhaland:UpTssSurveyReportPath").Value.ToString();
+        //    IFormFile files = gramsabhaland.GNus507Document1;
+        //    if (files != null)
+        //    {
+        //        extension = System.IO.Path.GetExtension(files.FileName);
+        //        string FileName = Guid.NewGuid().ToString() + "_" + files.FileName;
+        //        GztNoUs507documentlayout = _configuration.GetSection("FilePaths:Gramsabhaland:UpTssSurveyReportPath").Value.ToString();
+        //        string FilePath = Path.Combine(GztNoUs507documentlayout, FileName);
+        //        if (files.Length > 0)
+        //        {
+        //            if (!Directory.Exists(GztNoUs507documentlayout))
+        //            {
+        //                DirectoryInfo di = Directory.CreateDirectory(GztNoUs507documentlayout);// Try to create the directory.
+        //            }
+        //            try
+        //            {
+        //                if (extension.ToLower() == ".pdf")
+        //                {
+        //                    try
+        //                    {
+        //                        using (var stream = new FileStream(FilePath, FileMode.Create))
+        //                        {
+        //                            files.CopyTo(stream);
+
+        //                        }
+
+        //                        iTextSharp.text.pdf.PdfReader oPdfReader = new iTextSharp.text.pdf.PdfReader(FilePath);
+        //                        oPdfReader.Close();
+        //                        fullpath = _configuration.GetSection("FilePaths:Gramsabhaland:UpTssSurveyReportPath").Value.ToString();
+        //                        FileInfo doc = new FileInfo(fullpath);
+        //                        if (doc.Exists)
+        //                        {
+        //                            doc.Delete();
+        //                        }
+        //                    }
+        //                    catch (iTextSharp.text.exceptions.InvalidPdfException)
+        //                    {
+        //                        Flag = false;
+        //                    }
+
+        //                }
+        //            }
+        //            catch (OutOfMemoryException ex)
+        //            {
+        //                Flag = false;
+
+        //                if (System.IO.File.Exists(fullpath))
+        //                {
+        //                    try
+        //                    {
+        //                        System.IO.File.Delete(fullpath);
+        //                    }
+        //                    catch (Exception exs)
+        //                    {
+        //                    }
+        //                }
+        //                // Image.FromFile will throw this if file is invalid.  
+        //            }
+
+        //        }
+        //    }
+
+        //    return Flag;
+        //}
+        //public bool CheckMimeType5(Gramsabhaland gramsabhaland)
+        //{
+        //    bool Flag = true;
+        //    string fullpath = string.Empty;
+
+        //    string extension = string.Empty;
+        //    GztNoUs507documentlayout = _configuration.GetSection("FilePaths:Gramsabhaland:KabzaProceedingPath").Value.ToString();
+        //    IFormFile files = gramsabhaland.GNus507Document1;
+        //    if (files != null)
+        //    {
+        //        extension = System.IO.Path.GetExtension(files.FileName);
+        //        string FileName = Guid.NewGuid().ToString() + "_" + files.FileName;
+        //        GztNoUs507documentlayout = _configuration.GetSection("FilePaths:Gramsabhaland:KabzaProceedingPath").Value.ToString();
+        //        string FilePath = Path.Combine(GztNoUs507documentlayout, FileName);
+        //        if (files.Length > 0)
+        //        {
+        //            if (!Directory.Exists(GztNoUs507documentlayout))
+        //            {
+        //                DirectoryInfo di = Directory.CreateDirectory(GztNoUs507documentlayout);// Try to create the directory.
+        //            }
+        //            try
+        //            {
+        //                if (extension.ToLower() == ".pdf")
+        //                {
+        //                    try
+        //                    {
+        //                        using (var stream = new FileStream(FilePath, FileMode.Create))
+        //                        {
+        //                            files.CopyTo(stream);
+
+        //                        }
+
+        //                        iTextSharp.text.pdf.PdfReader oPdfReader = new iTextSharp.text.pdf.PdfReader(FilePath);
+        //                        oPdfReader.Close();
+        //                        fullpath = _configuration.GetSection("FilePaths:Gramsabhaland:KabzaProceedingPath").Value.ToString();
+        //                        FileInfo doc = new FileInfo(fullpath);
+        //                        if (doc.Exists)
+        //                        {
+        //                            doc.Delete();
+        //                        }
+        //                    }
+        //                    catch (iTextSharp.text.exceptions.InvalidPdfException)
+        //                    {
+        //                        Flag = false;
+        //                    }
+
+        //                }
+        //            }
+        //            catch (OutOfMemoryException ex)
+        //            {
+        //                Flag = false;
+
+        //                if (System.IO.File.Exists(fullpath))
+        //                {
+        //                    try
+        //                    {
+        //                        System.IO.File.Delete(fullpath);
+        //                    }
+        //                    catch (Exception exs)
+        //                    {
+        //                    }
+        //                }
+        //                // Image.FromFile will throw this if file is invalid.  
+        //            }
+
+        //        }
+        //    }
+
+        //    return Flag;
+        //}
     }
 }

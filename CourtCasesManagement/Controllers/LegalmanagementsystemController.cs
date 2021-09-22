@@ -2,30 +2,29 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
+
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
-using CourtCasesManagement.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
-using Microsoft.AspNetCore.Authorization;
 using Dto.Search;
-using Microsoft.Extensions.Configuration;
-using Utility.Helper;
-using Microsoft.AspNetCore.Http;
-using System.IO;
 using CourtCasesManagement.Filters;
 using Core.Enum;
 using Dto.Master;
+using Utility.Helper;
+using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Http;
+using System.IO;
+
 namespace CourtCasesManagement.Controllers
 {
     public class LegalmanagementsystemController : BaseController
     {
-        
+        public object JsonRequestBehavior { get; private set; }
         private readonly ILegalmanagementsystemservice _legalmanagementsystemService;
         public IConfiguration _configuration;
          public LegalmanagementsystemController(ILegalmanagementsystemservice legalmanagementsystemService, IConfiguration configuration)
@@ -78,6 +77,7 @@ namespace CourtCasesManagement.Controllers
         [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Legalmanagementsystem legalmanagementsystem)
         {
+            bool IsValidpdf = CheckMimeType(legalmanagementsystem);
             await BindDropDownView(legalmanagementsystem);
             legalmanagementsystem.ZoneList = await _legalmanagementsystemService.GetZoneList();
             legalmanagementsystem.LocalityList = await _legalmanagementsystemService.GetLocalityList(Convert.ToInt32(legalmanagementsystem.ZoneId));
@@ -91,32 +91,40 @@ namespace CourtCasesManagement.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    FileHelper fileHelper = new FileHelper();
-                    if (legalmanagementsystem.DocumentFile!=null)
+                    if (IsValidpdf == true)
                     {
-                        legalmanagementsystem.DocumentFilePath = fileHelper.SaveFile(DocumentFilePathLayout,legalmanagementsystem.DocumentFile);
-                    }
-                    if (legalmanagementsystem.StayFile != null)
-                    {
-                        legalmanagementsystem.StayInterimGrantedDocument = fileHelper.SaveFile(StayFilePathLayout, legalmanagementsystem.StayFile);
-                    }
-                    if (legalmanagementsystem.JudgementFile != null)
-                    {
-                        legalmanagementsystem.JudgementFilePath = fileHelper.SaveFile(JudgementFilePathLayout, legalmanagementsystem.JudgementFile);
-                    }
+                        FileHelper fileHelper = new FileHelper();
+                        if (legalmanagementsystem.DocumentFile != null)
+                        {
+                            legalmanagementsystem.DocumentFilePath = fileHelper.SaveFile(DocumentFilePathLayout, legalmanagementsystem.DocumentFile);
+                        }
+                        if (legalmanagementsystem.StayFile != null)
+                        {
+                            legalmanagementsystem.StayInterimGrantedDocument = fileHelper.SaveFile(StayFilePathLayout, legalmanagementsystem.StayFile);
+                        }
+                        if (legalmanagementsystem.JudgementFile != null)
+                        {
+                            legalmanagementsystem.JudgementFilePath = fileHelper.SaveFile(JudgementFilePathLayout, legalmanagementsystem.JudgementFile);
+                        }
 
-                    var result = await _legalmanagementsystemService.Create(legalmanagementsystem);
-                    if (result == true)
-                    {
-                        ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        ViewBag.Items = await _legalmanagementsystemService.GetAllLegalmanagementsystem();
-                        
-                        return View("Index");
+                        var result = await _legalmanagementsystemService.Create(legalmanagementsystem);
+                        if (result == true)
+                        {
+                            ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+                            ViewBag.Items = await _legalmanagementsystemService.GetAllLegalmanagementsystem();
+
+                            return View("Index");
+                        }
+                        else
+                        {
+                            ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                            await BindDropDownView(legalmanagementsystem);
+                            return View(legalmanagementsystem);
+                        }
                     }
                     else
                     {
-                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        await BindDropDownView(legalmanagementsystem);
+                        ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
                         return View(legalmanagementsystem);
                     }
                 }
@@ -169,8 +177,8 @@ namespace CourtCasesManagement.Controllers
         [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Legalmanagementsystem legalmanagementsystem,IFormFile Assignfile, IFormFile AssignJfile, IFormFile AssignSIfile)
         {
+            bool IsValidpdf = CheckMimeType(legalmanagementsystem);
             await BindDropDownView(legalmanagementsystem);
-
             legalmanagementsystem.ZoneList = await _legalmanagementsystemService.GetZoneList();
             legalmanagementsystem.LocalityList = await _legalmanagementsystemService.GetLocalityList(Convert.ToInt32(legalmanagementsystem.ZoneId));
             legalmanagementsystem.CasestatusList = await _legalmanagementsystemService.GetCasestatusList();
@@ -181,81 +189,92 @@ namespace CourtCasesManagement.Controllers
            
             if (ModelState.IsValid)
             {
-                /* For Layout Plan File Upload*/
-                string FileName = "";
-                string filePath = "";
-                legalmanagementsystem.DocumentFile = Assignfile;
-             string   DocumentFilePathLayout = _configuration.GetSection("FilePaths:CourtCasesManagementFiles:DocumentFileDocument").Value.ToString();
-                if (legalmanagementsystem.DocumentFile != null)
+                if (IsValidpdf == true)
                 {
-                    if (!Directory.Exists(DocumentFilePathLayout))
-                    {
-                        // Try to create the directory.
-                        DirectoryInfo di = Directory.CreateDirectory(DocumentFilePathLayout);
-                    }
-                    FileName = Guid.NewGuid().ToString() + "_" + legalmanagementsystem.DocumentFile.FileName;
-                    filePath = Path.Combine(DocumentFilePathLayout, FileName);
-                    using (var stream = new FileStream(filePath, FileMode.Create))
-                    {
-                        legalmanagementsystem.DocumentFile.CopyTo(stream);
-                    }
-                    legalmanagementsystem.DocumentFilePath = filePath;
-                }
-                /*.......For Judgement File .......*/
-                string FileNameJ = "";
-                string filePathJ = "";
-                legalmanagementsystem.JudgementFile = AssignJfile;
-                string JudgementFilePathLayout = _configuration.GetSection("FilePaths:CourtCasesManagementFiles:JudgementFileDocument").Value.ToString();
-                if (legalmanagementsystem.JudgementFile != null)
-                {
-                    if (!Directory.Exists(JudgementFilePathLayout))
-                    {
-                        // Try to create the directory.
-                        DirectoryInfo dij = Directory.CreateDirectory(JudgementFilePathLayout);
-                    }
-                    FileNameJ = Guid.NewGuid().ToString() + "_" + legalmanagementsystem.JudgementFile.FileName;
-                    filePathJ = Path.Combine(JudgementFilePathLayout, FileNameJ);
-                    using (var stream = new FileStream(filePathJ, FileMode.Create))
-                    {
-                        legalmanagementsystem.JudgementFile.CopyTo(stream);
-                    }
-                    legalmanagementsystem.JudgementFilePath = filePathJ;
-                }
-                /*.......For Stay Interim File .......*/
-                string FileNameS = "";
-                string filePathS = "";
-                legalmanagementsystem.StayFile = AssignJfile;
-                string StayFilePathLayout = _configuration.GetSection("FilePaths:CourtCasesManagementFiles:StayFileDocument").Value.ToString();
-                if (legalmanagementsystem.StayFile != null)
-                {
-                    if (!Directory.Exists(StayFilePathLayout))
-                    {
-                        // Try to create the directory.
-                        DirectoryInfo dij = Directory.CreateDirectory(StayFilePathLayout);
-                    }
-                    FileNameS = Guid.NewGuid().ToString() + "_" + legalmanagementsystem.StayFile.FileName;
-                    filePathS = Path.Combine(StayFilePathLayout, FileNameS);
-                    using (var stream = new FileStream(filePathS, FileMode.Create))
-                    {
-                        legalmanagementsystem.StayFile.CopyTo(stream);
-                    }
-                    legalmanagementsystem.StayInterimGrantedDocument = filePathS;
-                }
 
-               
+                    /* For Layout Plan File Upload*/
+                    string FileName = "";
+                    string filePath = "";
+                    legalmanagementsystem.DocumentFile = Assignfile;
+                    string DocumentFilePathLayout = _configuration.GetSection("FilePaths:CourtCasesManagementFiles:DocumentFileDocument").Value.ToString();
+                    if (legalmanagementsystem.DocumentFile != null)
+                    {
+                        if (!Directory.Exists(DocumentFilePathLayout))
+                        {
+                            // Try to create the directory.
+                            DirectoryInfo di = Directory.CreateDirectory(DocumentFilePathLayout);
+                        }
+                        FileName = Guid.NewGuid().ToString() + "_" + legalmanagementsystem.DocumentFile.FileName;
+                        filePath = Path.Combine(DocumentFilePathLayout, FileName);
+                        using (var stream = new FileStream(filePath, FileMode.Create))
+                        {
+                            legalmanagementsystem.DocumentFile.CopyTo(stream);
+                        }
+                        legalmanagementsystem.DocumentFilePath = filePath;
+                    }
+                    /*.......For Judgement File .......*/
+                    string FileNameJ = "";
+                    string filePathJ = "";
+                    legalmanagementsystem.JudgementFile = AssignJfile;
+                    string JudgementFilePathLayout = _configuration.GetSection("FilePaths:CourtCasesManagementFiles:JudgementFileDocument").Value.ToString();
+                    if (legalmanagementsystem.JudgementFile != null)
+                    {
+                        if (!Directory.Exists(JudgementFilePathLayout))
+                        {
+                            // Try to create the directory.
+                            DirectoryInfo dij = Directory.CreateDirectory(JudgementFilePathLayout);
+                        }
+                        FileNameJ = Guid.NewGuid().ToString() + "_" + legalmanagementsystem.JudgementFile.FileName;
+                        filePathJ = Path.Combine(JudgementFilePathLayout, FileNameJ);
+                        using (var stream = new FileStream(filePathJ, FileMode.Create))
+                        {
+                            legalmanagementsystem.JudgementFile.CopyTo(stream);
+                        }
+                        legalmanagementsystem.JudgementFilePath = filePathJ;
+                    }
+                    /*.......For Stay Interim File .......*/
+                    string FileNameS = "";
+                    string filePathS = "";
+                    legalmanagementsystem.StayFile = AssignJfile;
+                    string StayFilePathLayout = _configuration.GetSection("FilePaths:CourtCasesManagementFiles:StayFileDocument").Value.ToString();
+                    if (legalmanagementsystem.StayFile != null)
+                    {
+                        if (!Directory.Exists(StayFilePathLayout))
+                        {
+                            // Try to create the directory.
+                            DirectoryInfo dij = Directory.CreateDirectory(StayFilePathLayout);
+                        }
+                        FileNameS = Guid.NewGuid().ToString() + "_" + legalmanagementsystem.StayFile.FileName;
+                        filePathS = Path.Combine(StayFilePathLayout, FileNameS);
+                        using (var stream = new FileStream(filePathS, FileMode.Create))
+                        {
+                            legalmanagementsystem.StayFile.CopyTo(stream);
+                        }
+                        legalmanagementsystem.StayInterimGrantedDocument = filePathS;
+                    }
 
-                var result = await _legalmanagementsystemService.Update(id, legalmanagementsystem);
+
+
+                    var result = await _legalmanagementsystemService.Update(id, legalmanagementsystem);
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                      var result1 = await _legalmanagementsystemService.GetAllLegalmanagementsystem();
-                    return View("Index", result1);
-                }
+                        var result1 = await _legalmanagementsystemService.GetAllLegalmanagementsystem();
+                        return View("Index", result1);
+                    }
                     else
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                         return View(legalmanagementsystem);
                     }
+                }
+                else
+                {
+
+
+                    ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
+                    return View(legalmanagementsystem);
+                }
                 }
                 else
                 {
@@ -397,7 +416,150 @@ namespace CourtCasesManagement.Controllers
             return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
 
-      
+
+        [HttpPost]
+        public JsonResult CheckFile()
+        {
+            bool IsImg = true;
+            string fullpath = string.Empty;
+            //   string fullpath = string.Empty;
+            string extension = string.Empty;
+            string DocumentFilePathLayout = _configuration.GetSection("FilePaths:CourtCasesManagementFiles:DocumentFileDocument").Value.ToString();           
+            IFormFile files = Request.Form.Files["file"];
+            if (files != null)
+            {
+                extension = System.IO.Path.GetExtension(files.FileName);
+                string FileName = Guid.NewGuid().ToString() + "_" + files.FileName;
+                DocumentFilePathLayout = _configuration.GetSection("FilePaths:CourtCasesManagementFiles:DocumentFileDocument").Value.ToString();
+                string FilePath = Path.Combine(DocumentFilePathLayout, FileName);
+                if (files.Length > 0)
+                {
+                    if (!Directory.Exists(DocumentFilePathLayout))
+                    {
+                        DirectoryInfo di = Directory.CreateDirectory(DocumentFilePathLayout);// Try to create the directory.
+                    }
+                    try
+                    {
+                        if (extension.ToLower() == ".pdf")
+                        {
+                            try
+                            {
+                                using (var stream = new FileStream(FilePath, FileMode.Create))
+                                {
+                                    files.CopyTo(stream);
+
+                                }
+
+                                iTextSharp.text.pdf.PdfReader oPdfReader = new iTextSharp.text.pdf.PdfReader(FilePath);
+                                oPdfReader.Close();
+                                fullpath = _configuration.GetSection("FilePaths:CourtCasesManagementFiles:DocumentFileDocument").Value.ToString();
+                                FileInfo doc = new FileInfo(fullpath);
+                                if (doc.Exists)
+                                {
+                                    doc.Delete();
+                                }
+                            }
+                            catch (iTextSharp.text.exceptions.InvalidPdfException)
+                            {
+                                IsImg = false;
+                            }
+
+                        }
+                    }
+                    catch (OutOfMemoryException ex)
+                    {
+                        IsImg = false;
+
+                        if (System.IO.File.Exists(fullpath))
+                        {
+                            try
+                            {
+                                System.IO.File.Delete(fullpath);
+                            }
+                            catch (Exception exs)
+                            {
+                            }
+                        }
+                        // Image.FromFile will throw this if file is invalid.  
+                    }
+
+                }
+            }
+
+            return Json(IsImg, JsonRequestBehavior);
+        }
+
+
+        public bool CheckMimeType(Legalmanagementsystem legalmanagementsystem)
+        {
+            bool Flag = true;
+            string fullpath = string.Empty;          
+            string extension = string.Empty;
+            string DocumentFilePathLayout = _configuration.GetSection("FilePaths:CourtCasesManagementFiles:DocumentFileDocument").Value.ToString();
+            IFormFile files = legalmanagementsystem.DocumentFile;
+            if (files != null)
+            {
+                extension = System.IO.Path.GetExtension(files.FileName);
+                string FileName = Guid.NewGuid().ToString() + "_" + files.FileName;
+                DocumentFilePathLayout = _configuration.GetSection("FilePaths:CourtCasesManagementFiles:DocumentFileDocument").Value.ToString();
+                string FilePath = Path.Combine(DocumentFilePathLayout, FileName);
+                if (files.Length > 0)
+                {
+                    if (!Directory.Exists(DocumentFilePathLayout))
+                    {
+                        DirectoryInfo di = Directory.CreateDirectory(DocumentFilePathLayout);// Try to create the directory.
+                    }
+                    try
+                    {
+                        if (extension.ToLower() == ".pdf")
+                        {
+                            try
+                            {
+                                using (var stream = new FileStream(FilePath, FileMode.Create))
+                                {
+                                    files.CopyTo(stream);
+
+                                }
+
+                                iTextSharp.text.pdf.PdfReader oPdfReader = new iTextSharp.text.pdf.PdfReader(FilePath);
+                                oPdfReader.Close();
+                                fullpath = _configuration.GetSection("FilePaths:CourtCasesManagementFiles:DocumentFileDocument").Value.ToString();
+                                FileInfo doc = new FileInfo(fullpath);
+                                if (doc.Exists)
+                                {
+                                    doc.Delete();
+                                }
+                            }
+                            catch (iTextSharp.text.exceptions.InvalidPdfException)
+                            {
+                                Flag = false;
+                            }
+
+                        }
+                    }
+                    catch (OutOfMemoryException ex)
+                    {
+                        Flag = false;
+
+                        if (System.IO.File.Exists(fullpath))
+                        {
+                            try
+                            {
+                                System.IO.File.Delete(fullpath);
+                            }
+                            catch (Exception exs)
+                            {
+                            }
+                        }
+                        // Image.FromFile will throw this if file is invalid.  
+                    }
+
+                }
+            }
+
+            return Flag;
+        }
+
 
 
     }
