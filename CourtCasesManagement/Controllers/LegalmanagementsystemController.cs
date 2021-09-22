@@ -536,6 +536,10 @@ namespace CourtCasesManagement.Controllers
                             }
 
                         }
+                        else
+                        {
+                            Flag = false;
+                        }
                     }
                     catch (OutOfMemoryException ex)
                     {

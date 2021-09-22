@@ -385,6 +385,12 @@ namespace AcquiredLandInformationManagement.Controllers
                             }
 
                         }
+                        else
+                        {
+                            Flag = false;
+                        }
+
+
                     }
                     catch (OutOfMemoryException ex)
                     {

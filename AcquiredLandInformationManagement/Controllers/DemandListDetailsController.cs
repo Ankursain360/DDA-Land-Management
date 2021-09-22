@@ -488,6 +488,10 @@ namespace AcquiredLandInformationManagement.Controllers
                             }
 
                         }
+                        else
+                        {
+                            Flag = false;
+                        }
                     }
                     catch (OutOfMemoryException ex)
                     {
@@ -559,6 +563,10 @@ namespace AcquiredLandInformationManagement.Controllers
                                 Flag = false;
                             }
 
+                        }
+                        else
+                        {
+                            Flag = false;
                         }
                     }
                     catch (OutOfMemoryException ex)
