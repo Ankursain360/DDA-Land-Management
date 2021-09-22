@@ -163,6 +163,7 @@ namespace AcquiredLandInformationManagement.Controllers
         {
             bool IsValidpdf = CheckMimeType(mutation);
             await BindDropDown(mutation);
+            mutation.KhasraNoList = await _mutationService.GetKhasraList(mutation.AcquiredVillageId);
             mutation.VillageList = await _mutationService.GetVillageList();
 
             if (ModelState.IsValid)
@@ -219,11 +220,13 @@ namespace AcquiredLandInformationManagement.Controllers
                 else
                 {
                     ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
+                    await BindDropDown(mutation);
                     return View(mutation);
                 }
             }
             else
             {
+                await BindDropDown(mutation);
                 return View(mutation);
             }
         }

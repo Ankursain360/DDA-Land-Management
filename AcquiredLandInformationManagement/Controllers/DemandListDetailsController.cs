@@ -490,7 +490,7 @@ namespace AcquiredLandInformationManagement.Controllers
                         }
                         else
                         {
-                            Flag = false;
+                            IsImg = false;
                         }
                     }
                     catch (OutOfMemoryException ex)
