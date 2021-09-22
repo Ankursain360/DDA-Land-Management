@@ -740,10 +740,10 @@
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <a target="_blank" href="/LandTransfer/ViewDocument?path=@(Model.CopyofOrderDocPath)">@(Model.CopyofOrderDocPath == "" || Model.CopyofOrderDocPath == string.Empty || Model.CopyofOrderDocPath == null ? "": "View Document")</a>
 
-                    <input type="file" asp-for="CopyofOrder" placeholder="Copy of Order" class="floating-label-field floating-label-field--s3 "
+                    <input type="file" asp-for="CopyofOrder" placeholder="Copy of Order" class="floating-label-field floating-label-field--s3 checkExtension"
                            accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
                     <span asp-validation-for="CopyofOrder" class="text-danger lb-sm"></span>
-                    <label class="floating-label">Copy of Order</label>
+                    <label class="floating-label">Copy of Order<span style="color:red">(.pdf only)</span></label>
                 </div>
             </div>
             <div class="col-md-4">
@@ -757,11 +757,11 @@
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <a target="_blank" href="/LandTransfer/ViewDocument?path=@(Model.HandedOverFile)">@(Model.HandedOverFile == "" || Model.HandedOverFile == string.Empty || Model.HandedOverFile == null ? "": "View Document")</a>
 
-                    <input type="file" asp-for="HandedOverFiles" placeholder="Document" class="floating-label-field floating-label-field--s3 "
+                    <input type="file" asp-for="HandedOverFiles" placeholder="Document" class="floating-label-field floating-label-field--s3 checkExtension"
                            accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
 
                     <span asp-validation-for="HandedOverFiles" class="text-danger lb-sm"></span>
-                    <label class="floating-label" asp-for="HandedOverFiles">Handover/Other Document </label>
+                    <label class="floating-label" asp-for="HandedOverFiles">Handover/Other Document<span style="color:red">(.pdf only)</span> </label>
                 </div>
             </div>
         </div>
@@ -867,11 +867,11 @@
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <a target="_blank" href="/LandTransfer/ViewDocument?path=@(Model.TakenOverDocument)">@(Model.TakenOverDocument == "" || Model.TakenOverDocument == string.Empty || Model.TakenOverDocument == null ? "": "View Document")</a>
 
-                    <input type="file" asp-for="TakenOverFile" placeholder="Document" class="floating-label-field floating-label-field--s3 "
+                    <input type="file" asp-for="TakenOverFile" placeholder="Document" class="floating-label-field floating-label-field--s3 checkExtension"
                            accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
 
                     <span asp-validation-for="TakenOverFile" class="text-danger lb-sm"></span>
-                    <label class="floating-label" asp-for="TakenOverFile">Takenover/Other Document </label>
+                    <label class="floating-label" asp-for="TakenOverFile">Takenover/Other Document<span style="color:red">(.pdf only)</span></label>
                 </div>
             </div>
         </div>

@@ -21,6 +21,9 @@ using Microsoft.AspNetCore.Hosting;
 using System.Text;
 using Dto.Master;
 
+using Microsoft.AspNetCore.Http;
+
+
 namespace EncroachmentDemolition.Controllers
 {
     public class AnnexureAApprovalController : BaseController
@@ -43,6 +46,8 @@ namespace EncroachmentDemolition.Controllers
         string FirfilePath = "";
         string ApprovalDocumentPath = "";
         string DocumentFilePath = "";
+
+        public object JsonRequestBehavior { get; private set; }
 
         public AnnexureAApprovalController(IEncroachmentRegisterationService encroachmentRegisterationService,
             IConfiguration configuration, IWatchandwardService watchandwardService,
@@ -112,11 +117,13 @@ namespace EncroachmentDemolition.Controllers
         [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(int id, Fixingdemolition fixingdemolition)
         {
+            bool IsValidpdf = CheckMimeType(fixingdemolition);
             var result = false;
             var IsApplicationPendingAtUserEnd = await _annexureAApprovalService.IsApplicationPendingAtUserEnd(id, SiteContext.UserId);
             if (IsApplicationPendingAtUserEnd)
             {
-                var Data = await _annexureAApprovalService.FetchSingleResult(id);
+                if (IsValidpdf == true) { 
+                    var Data = await _annexureAApprovalService.FetchSingleResult(id);
                 FileHelper fileHelper = new FileHelper();
                 #region Approval Proccess At Further level start Added by Renu 16 march 2021
                 var FirstApprovalProcessData = await _approvalproccessService.FirstApprovalProcessData((_configuration.GetSection("workflowPreccessGuidRequestDemolition").Value), fixingdemolition.Id);
@@ -476,9 +483,22 @@ namespace EncroachmentDemolition.Controllers
 
 
                 }
+            }
+            else
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
+                return View(fixingdemolition);
+            }
                 #endregion
 
             }
+          
+            
+            
+            
+            
+            
+            
             else
             {
                 ViewBag.Message = Alert.Show("Application Already Submited ", "", AlertType.Warning);
@@ -865,5 +885,160 @@ namespace EncroachmentDemolition.Controllers
             return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
 
         }
+
+
+
+
+
+
+        [HttpPost]
+        public JsonResult CheckFile()
+        {
+            bool IsImg = true;
+            string fullpath = string.Empty;
+            //   string fullpath = string.Empty;
+            string extension = string.Empty;
+            ApprovalDocumentPath = _configuration.GetSection("FilePaths:FixingDemolitionFiles:ApprovalDocumentPath").Value.ToString();
+            IFormFile files = Request.Form.Files["file"];
+            if (files != null)
+            {
+                extension = System.IO.Path.GetExtension(files.FileName);
+                string FileName = Guid.NewGuid().ToString() + "_" + files.FileName;
+                ApprovalDocumentPath = _configuration.GetSection("FilePaths:FixingDemolitionFiles:ApprovalDocumentPath").Value.ToString();
+                string FilePath = Path.Combine(ApprovalDocumentPath, FileName);
+                if (files.Length > 0)
+                {
+                    if (!Directory.Exists(ApprovalDocumentPath))
+                    {
+                        DirectoryInfo di = Directory.CreateDirectory(ApprovalDocumentPath);// Try to create the directory.
+                    }
+                    try
+                    {
+                        if (extension.ToLower() == ".pdf")
+                        {
+                            try
+                            {
+                                using (var stream = new FileStream(FilePath, FileMode.Create))
+                                {
+                                    files.CopyTo(stream);
+
+                                }
+
+                                iTextSharp.text.pdf.PdfReader oPdfReader = new iTextSharp.text.pdf.PdfReader(FilePath);
+                                oPdfReader.Close();
+                                fullpath = _configuration.GetSection("FilePaths:FixingDemolitionFiles:ApprovalDocumentPath").Value.ToString();
+                                FileInfo doc = new FileInfo(fullpath);
+                                if (doc.Exists)
+                                {
+                                    doc.Delete();
+                                }
+                            }
+                            catch (iTextSharp.text.exceptions.InvalidPdfException)
+                            {
+                                IsImg = false;
+                            }
+
+                        }
+                    }
+                    catch (OutOfMemoryException ex)
+                    {
+                        IsImg = false;
+
+                        if (System.IO.File.Exists(fullpath))
+                        {
+                            try
+                            {
+                                System.IO.File.Delete(fullpath);
+                            }
+                            catch (Exception exs)
+                            {
+                            }
+                        }
+                        // Image.FromFile will throw this if file is invalid.  
+                    }
+
+                }
+            }
+
+            return Json(IsImg, JsonRequestBehavior);
+        }
+
+
+
+
+
+        public bool CheckMimeType(Fixingdemolition fixingdemolition)
+        {
+            bool Flag = true;
+            string fullpath = string.Empty;
+            string extension = string.Empty;
+            ApprovalDocumentPath = _configuration.GetSection("FilePaths:FixingDemolitionFiles:ApprovalDocumentPath").Value.ToString();
+            IFormFile files = fixingdemolition.ApprovalDocument;
+            if (files != null)
+            {
+                extension = System.IO.Path.GetExtension(files.FileName);
+                string FileName = Guid.NewGuid().ToString() + "_" + files.FileName;
+                ApprovalDocumentPath = _configuration.GetSection("FilePaths:FixingDemolitionFiles:ApprovalDocumentPath").Value.ToString();
+                string FilePath = Path.Combine(ApprovalDocumentPath, FileName);
+                if (files.Length > 0)
+                {
+                    if (!Directory.Exists(ApprovalDocumentPath))
+                    {
+                        DirectoryInfo di = Directory.CreateDirectory(ApprovalDocumentPath);// Try to create the directory.
+                    }
+                    try
+                    {
+                        if (extension.ToLower() == ".pdf")
+                        {
+                            try
+                            {
+                                using (var stream = new FileStream(FilePath, FileMode.Create))
+                                {
+                                    files.CopyTo(stream);
+
+                                }
+
+                                iTextSharp.text.pdf.PdfReader oPdfReader = new iTextSharp.text.pdf.PdfReader(FilePath);
+                                oPdfReader.Close();
+                                fullpath = _configuration.GetSection("FilePaths:FixingDemolitionFiles:ApprovalDocumentPath").Value.ToString();
+
+                                FileInfo doc = new FileInfo(fullpath);
+                                if (doc.Exists)
+                                {
+                                    doc.Delete();
+                                }
+                            }
+                            catch (iTextSharp.text.exceptions.InvalidPdfException)
+                            {
+                                Flag = false;
+                            }
+
+                        }
+                    }
+                    catch (OutOfMemoryException ex)
+                    {
+                        Flag = false;
+
+                        if (System.IO.File.Exists(fullpath))
+                        {
+                            try
+                            {
+                                System.IO.File.Delete(fullpath);
+                            }
+                            catch (Exception exs)
+                            {
+                            }
+                        }
+                        // Image.FromFile will throw this if file is invalid.  
+                    }
+
+                }
+            }
+
+            return Flag;
+        }
+
+
+
     }
 }

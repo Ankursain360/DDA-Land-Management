@@ -102,7 +102,15 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public List<IFormFile> LocationMapFile { get; set; }
         [NotMapped]
+        public IFormFile LocationMapFile1 { get; set; }
+
+        [NotMapped]
         public List<IFormFile> Firfile { get; set; }
+
+        [NotMapped]
+        public IFormFile Firfile1 { get; set; }
+
+
         [NotMapped]
         public List<Department> DepartmentList { get; set; }
         [NotMapped]
