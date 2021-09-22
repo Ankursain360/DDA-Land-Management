@@ -75,7 +75,8 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap" title="Court Type">
                     <select class="floating-label-field floating-label-field--s3" asp-for="CourtTypeId" asp-items="@(new SelectList(Model.CourttypeList, "Id","CourtType"))">
-                        <option value="0">All</option>
+                        <option selected="selected" disabled="disabled" value="">--Select-- </option>
+
                     </select>
                     <span class="d-block text-danger field-validation-valid" asp-validation-for="CourtTypeId"></span>
                     <label class="floating-label" asp-for="CourtTypeId">Court Type</label>
@@ -89,7 +90,8 @@
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3" asp-for="CaseStatusId"
                             asp-items="@(new SelectList(Model.CasestatusList, "Id","CaseStatus"))">
-                        <option value="0">All</option>
+                        <option selected="selected" disabled="disabled" value="">--Select-- </option>
+
                     </select>
                     <span class="d-block text-danger field-validation-valid" asp-validation-for="CaseStatusId"></span>
                     <label class="floating-label" asp-for="CaseStatusId">Case Status </label>
@@ -112,7 +114,8 @@
                             asp-items="@(new SelectList(Model.ZoneList, "Id","Name"))"
                             onchange="return GetLocalityList(this.options[this.selectedIndex].value);">
 
-                        <option value="0">All</option>
+                        <option selected="selected" disabled="disabled" value="">--Select-- </option>
+
                     </select>
                     <span class="d-block text-danger field-validation-valid" asp-validation-for="ZoneId"></span>
                     <label asp-for="ZoneId" class="floating-label">Zone </label>
@@ -123,7 +126,8 @@
                 <div class="floating-label-wrap">
 
                     <select class="floating-label-field floating-label-field--s3" asp-for="LocalityId">
-                        <option value="0">All</option>
+                        <option selected="selected" disabled="disabled" value="">--Select-- </option>
+
                     </select>
                     <span class="d-block text-danger field-validation-valid" asp-validation-for="LocalityId"></span>
                     <label class="floating-label">Locality (Village) Name </label>
