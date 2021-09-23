@@ -190,6 +190,7 @@ namespace DamagePayee.Controllers
         {
             bool IsValidpdf = CheckMimeType(doortodoorsurvey);
             bool IsValidpdf1 = CheckMimeType1(doortodoorsurvey);
+            doortodoorsurvey.PresentuseList = await _doortodoorsurveyService.GetAllPresentuse();
             try
             {
                 doortodoorsurvey.PresentuseList = await _doortodoorsurveyService.GetAllPresentuse();
@@ -524,6 +525,10 @@ namespace DamagePayee.Controllers
                             }
 
                         }
+                        else 
+                        { 
+                            Flag = false;
+                        }
                     }
                     catch (OutOfMemoryException ex)
                     {
@@ -593,6 +598,10 @@ namespace DamagePayee.Controllers
                                 Flag = false;
                             }
 
+                        }
+                        else
+                        {
+                            Flag = false;
                         }
                     }
                     catch (OutOfMemoryException ex)

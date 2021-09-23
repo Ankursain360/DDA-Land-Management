@@ -92,6 +92,11 @@ namespace DamagePayee.Controllers
         public async Task<IActionResult> Create(Damagepayeeregister damagepayeeregister)
         {
             bool IsValidpdf = CheckMimeType(damagepayeeregister);
+            bool IsValidpdf1 = CheckMimeType1(damagepayeeregister);
+            bool IsValidpdf2 = CheckMimeType2(damagepayeeregister);
+            bool IsValidpdf3 = CheckMimeType3(damagepayeeregister);
+            bool IsValidpdf4 = CheckMimeType4(damagepayeeregister);
+
            
             ViewBag.LocalityList = await _damagepayeeregisterService.GetLocalityList();
             await BindDropDown(damagepayeeregister);
@@ -122,468 +127,514 @@ namespace DamagePayee.Controllers
                 {
                     if (IsValidpdf == true)
                     {
-
-                        FileHelper fileHelper = new FileHelper();
-                        damagepayeeregister.DocumentName = damagepayeeregister.DocumentIFormFile == null ? damagepayeeregister.DocumentName : fileHelper.SaveFile1(DocumentFilePath, damagepayeeregister.DocumentIFormFile);
-
-                        if (damagepayeeregister.PropertyPhoto != null)
+                        if (IsValidpdf1 == true)
                         {
-                            damagepayeeregister.PropertyPhotoPath = fileHelper.SaveFile(PropertyPhotographLayout, damagepayeeregister.PropertyPhoto);
-                        }
-                        if (damagepayeeregister.ShowCauseNotice != null)
-                        {
-                            damagepayeeregister.ShowCauseNoticePath = fileHelper.SaveFile(ShowCauseNoticeDocument, damagepayeeregister.ShowCauseNotice);
-                        }
-                        if (damagepayeeregister.Fgform != null)
-                        {
-                            damagepayeeregister.FgformPath = fileHelper.SaveFile(FGFormDocument, damagepayeeregister.Fgform);
-                        }
-                        if (damagepayeeregister.DocumentForFile != null)
-                        {
-                            damagepayeeregister.DocumentForFilePath = fileHelper.SaveFile(BillDocument, damagepayeeregister.DocumentForFile);
-                        }
-
-                        if (damagepayeeregister.ATSFile != null)
-                        {
-                            damagepayeeregister.AtsfilePath = fileHelper.SaveFile(ATSDocument, damagepayeeregister.ATSFile);
-                        }
-                        if (damagepayeeregister.GPAFile != null)
-                        {
-                            damagepayeeregister.GpafilePath = fileHelper.SaveFile(GPADocument, damagepayeeregister.GPAFile);
-                        }
-                        if (damagepayeeregister.MutationFile != null)
-                        {
-                            damagepayeeregister.MutationFilePath = fileHelper.SaveFile(MutationDocument, damagepayeeregister.MutationFile);
-                        }
-                        if (damagepayeeregister.WillFile != null)
-                        {
-                            damagepayeeregister.WillFilePath = fileHelper.SaveFile(WillDocument, damagepayeeregister.WillFile);
-                        }
-
-
-
-
-                        #region Approval Proccess At 1st level Check Initial Before Creating Record  Added by Renu 21 April 2021
-
-                        Approvalproccess approvalproccess = new Approvalproccess();
-                        var DataFlow = await dataAsync();
-                        for (int i = 0; i < DataFlow.Count; i++)
-                        {
-                            if (!DataFlow[i].parameterSkip)
+                            if (IsValidpdf2 == true)
                             {
-                                if (DataFlow[i].parameterConditional == (_configuration.GetSection("ApprovalZoneWise").Value))
+                                if (IsValidpdf3 == true)
                                 {
-                                    if (SiteContext.ZoneId == null)
+                                    if (IsValidpdf4 == true)
                                     {
-                                        ViewBag.Message = Alert.Show("Your Zone is not available , Without zone application cannot be processed further, Please contact system administrator", "", AlertType.Warning);
+
+
+
+                                        FileHelper fileHelper = new FileHelper();
+                                        damagepayeeregister.DocumentName = damagepayeeregister.DocumentIFormFile == null ? damagepayeeregister.DocumentName : fileHelper.SaveFile1(DocumentFilePath, damagepayeeregister.DocumentIFormFile);
+
+                                        if (damagepayeeregister.PropertyPhoto != null)
+                                        {
+                                            damagepayeeregister.PropertyPhotoPath = fileHelper.SaveFile(PropertyPhotographLayout, damagepayeeregister.PropertyPhoto);
+                                        }
+                                        if (damagepayeeregister.ShowCauseNotice != null)
+                                        {
+                                            damagepayeeregister.ShowCauseNoticePath = fileHelper.SaveFile(ShowCauseNoticeDocument, damagepayeeregister.ShowCauseNotice);
+                                        }
+                                        if (damagepayeeregister.Fgform != null)
+                                        {
+                                            damagepayeeregister.FgformPath = fileHelper.SaveFile(FGFormDocument, damagepayeeregister.Fgform);
+                                        }
+                                        if (damagepayeeregister.DocumentForFile != null)
+                                        {
+                                            damagepayeeregister.DocumentForFilePath = fileHelper.SaveFile(BillDocument, damagepayeeregister.DocumentForFile);
+                                        }
+
+                                        if (damagepayeeregister.ATSFile != null)
+                                        {
+                                            damagepayeeregister.AtsfilePath = fileHelper.SaveFile(ATSDocument, damagepayeeregister.ATSFile);
+                                        }
+                                        if (damagepayeeregister.GPAFile != null)
+                                        {
+                                            damagepayeeregister.GpafilePath = fileHelper.SaveFile(GPADocument, damagepayeeregister.GPAFile);
+                                        }
+                                        if (damagepayeeregister.MutationFile != null)
+                                        {
+                                            damagepayeeregister.MutationFilePath = fileHelper.SaveFile(MutationDocument, damagepayeeregister.MutationFile);
+                                        }
+                                        if (damagepayeeregister.WillFile != null)
+                                        {
+                                            damagepayeeregister.WillFilePath = fileHelper.SaveFile(WillDocument, damagepayeeregister.WillFile);
+                                        }
+
+
+
+
+                                        #region Approval Proccess At 1st level Check Initial Before Creating Record  Added by Renu 21 April 2021
+
+                                        Approvalproccess approvalproccess = new Approvalproccess();
+                                        var DataFlow = await dataAsync();
+                                        for (int i = 0; i < DataFlow.Count; i++)
+                                        {
+                                            if (!DataFlow[i].parameterSkip)
+                                            {
+                                                if (DataFlow[i].parameterConditional == (_configuration.GetSection("ApprovalZoneWise").Value))
+                                                {
+                                                    if (SiteContext.ZoneId == null)
+                                                    {
+                                                        ViewBag.Message = Alert.Show("Your Zone is not available , Without zone application cannot be processed further, Please contact system administrator", "", AlertType.Warning);
+                                                        return View(damagepayeeregister);
+                                                    }
+
+                                                    damagepayeeregister.ApprovalZoneId = SiteContext.ZoneId;
+                                                }
+                                                if (DataFlow[i].parameterValue == (_configuration.GetSection("ApprovalRoleType").Value))
+                                                {
+                                                    for (int j = 0; j < DataFlow[i].parameterName.Count; j++)
+                                                    {
+                                                        List<UserProfileDto> UserListRoleBasis = null;
+                                                        if (DataFlow[i].parameterConditional == (_configuration.GetSection("ApprovalZoneWise").Value))
+                                                            UserListRoleBasis = await _userProfileService.GetUserOnRoleZoneBasis(Convert.ToInt32(DataFlow[i].parameterName[j]), SiteContext.ZoneId ?? 0);
+                                                        else
+                                                            UserListRoleBasis = await _userProfileService.GetUserOnRoleBasis(Convert.ToInt32(DataFlow[i].parameterName[j]));
+
+                                                        StringBuilder multouserszonewise = new StringBuilder();
+                                                        int col = 0;
+                                                        if (UserListRoleBasis != null)
+                                                        {
+                                                            for (int h = 0; h < UserListRoleBasis.Count; h++)
+                                                            {
+                                                                if (col > 0)
+                                                                    multouserszonewise.Append(",");
+                                                                multouserszonewise.Append(UserListRoleBasis[h].UserId);
+                                                                col++;
+                                                            }
+                                                            approvalproccess.SendTo = multouserszonewise.ToString();
+                                                        }
+
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    approvalproccess.SendTo = String.Join(",", (DataFlow[i].parameterName));
+                                                    if (DataFlow[i].parameterConditional == (_configuration.GetSection("ApprovalZoneWise").Value))
+                                                    {
+                                                        StringBuilder multouserszonewise = new StringBuilder();
+                                                        int col = 0;
+                                                        if (approvalproccess.SendTo != null)
+                                                        {
+                                                            string[] multiTo = approvalproccess.SendTo.Split(',');
+                                                            foreach (string MultiUserId in multiTo)
+                                                            {
+                                                                if (col > 0)
+                                                                    multouserszonewise.Append(",");
+                                                                var UserProfile = await _userProfileService.GetUserByIdZone(Convert.ToInt32(MultiUserId), SiteContext.ZoneId ?? 0);
+                                                                multouserszonewise.Append(UserProfile.UserId);
+                                                                col++;
+                                                            }
+                                                            approvalproccess.SendTo = multouserszonewise.ToString();
+                                                        }
+                                                    }
+                                                }
+
+
+                                                break;
+                                            }
+                                        }
+                                        #endregion
+
+                                        var result = await _damagepayeeregisterService.Create(damagepayeeregister);
+
+
+                                        if (result)
+                                        {
+                                            //******* creating damage payee user ******
+
+                                            var resultpassword = await _damagepayeeregisterService.CreateUser(damagepayeeregister);
+                                            if (!resultpassword.Equals("False"))
+                                            {
+                                                //At successfull completion send mail and sms
+                                                string DisplayName = damagepayeeregister.payeeName[0].ToString();
+                                                string EmailID = damagepayeeregister.EmailId[0].ToString();
+                                                string Id = damagepayeeregister.Id.ToString().Unidecode();
+                                                string LoginName = damagepayeeregister.payeeName[0].ToString();
+                                                string ContactNo = damagepayeeregister.MobileNo[0].ToString();
+                                                string Password = resultpassword;
+                                                string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "UserMailDetails.html");
+                                                string loginlink = "https://damage.managemybusinessess.com/DamagePayeeRegistration/Create";
+                                                #region Mail Generation Added By Renu
+
+                                                MailSMSHelper mailG = new MailSMSHelper();
+
+                                                #region HTML Body Generation
+                                                DamageRegisterBodyDTO bodyDTO = new DamageRegisterBodyDTO();
+                                                bodyDTO.displayName = DisplayName;
+                                                bodyDTO.loginName = LoginName;
+                                                bodyDTO.password = Password;
+                                                bodyDTO.path = path;
+                                                bodyDTO.emailId = EmailID;
+                                                bodyDTO.contactNo = ContactNo;
+                                                bodyDTO.Link = loginlink;
+                                                string strBodyMsg = mailG.PopulateBodyRegister(bodyDTO);
+                                                #endregion
+
+                                                //var sendMailResult = mailG.SendMailWithAttachment(strMailSubject, strBodyMsg, EmailID, strMailCC, strMailBCC, strAttachPath);
+                                                #region Common Mail Genration
+                                                SentMailGenerationDto maildto = new SentMailGenerationDto();
+                                                maildto.strMailSubject = "Damage Payee User Details ";
+                                                maildto.strMailCC = ""; maildto.strMailBCC = ""; maildto.strAttachPath = "";
+                                                maildto.strBodyMsg = strBodyMsg;
+                                                maildto.defaultPswd = (_configuration.GetSection("EmailConfiguration:defaultPswd").Value).ToString();
+                                                maildto.fromMail = (_configuration.GetSection("EmailConfiguration:fromMail").Value).ToString();
+                                                maildto.fromMailPwd = (_configuration.GetSection("EmailConfiguration:fromMailPwd").Value).ToString();
+                                                maildto.mailHost = (_configuration.GetSection("EmailConfiguration:mailHost").Value).ToString();
+                                                maildto.port = Convert.ToInt32(_configuration.GetSection("EmailConfiguration:port").Value);
+
+                                                maildto.strMailTo = EmailID;
+                                                var sendMailResult = mailG.SendMailWithAttachment(maildto);
+                                                #endregion
+                                                #endregion
+                                            }
+
+
+                                            //****** code for saving  Damage payee personal info *****
+
+                                            if (damagepayeeregister.payeeName != null &&
+                                              damagepayeeregister.Gender != null &&
+                                              damagepayeeregister.Address != null &&
+                                              damagepayeeregister.MobileNo != null)
+                                            {
+                                                if (damagepayeeregister.payeeName.Count > 0 &&
+                                            damagepayeeregister.Gender.Count > 0 &&
+                                            damagepayeeregister.Address.Count > 0 &&
+                                            damagepayeeregister.MobileNo.Count > 0)
+
+                                                {
+                                                    List<Damagepayeepersonelinfo> damagepayeepersonelinfo = new List<Damagepayeepersonelinfo>();
+                                                    for (int i = 0; i < damagepayeeregister.payeeName.Count; i++)
+                                                    {
+                                                        damagepayeepersonelinfo.Add(new Damagepayeepersonelinfo
+                                                        {
+                                                            Name = damagepayeeregister.payeeName.Count <= i ? string.Empty : damagepayeeregister.payeeName[i],
+                                                            FatherName = damagepayeeregister.payeeFatherName.Count <= i ? string.Empty : damagepayeeregister.payeeFatherName[i],
+                                                            Gender = damagepayeeregister.Gender.Count <= i ? "1" : damagepayeeregister.Gender[i],
+                                                            Address = damagepayeeregister.Address.Count <= i ? string.Empty : damagepayeeregister.Address[i],
+                                                            MobileNo = damagepayeeregister.MobileNo.Count <= i ? string.Empty : damagepayeeregister.MobileNo[i],
+                                                            EmailId = damagepayeeregister.EmailId.Count <= i ? string.Empty : damagepayeeregister.EmailId[i],
+                                                            DamagePayeeRegisterTempId = damagepayeeregister.Id,
+                                                            AadharNo = damagepayeeregister.AadharNo.Count <= i ? string.Empty : damagepayeeregister.AadharNo[i],
+                                                            PanNo = damagepayeeregister.PanNo.Count <= i ? string.Empty : damagepayeeregister.PanNo[i],
+
+                                                            AadharNoFilePath = damagepayeeregister.Aadhar != null ?
+                                                                                        damagepayeeregister.Aadhar.Count <= i ? string.Empty :
+                                                                                        fileHelper.SaveFile(AadharNoDocument, damagepayeeregister.Aadhar[i]) :
+                                                                                        damagepayeeregister.AadharNoFilePath[i] != null || damagepayeeregister.AadharNoFilePath[i] != "" ?
+                                                                                        damagepayeeregister.AadharNoFilePath[i] : string.Empty,
+                                                            PanNoFilePath = damagepayeeregister.Pan != null ?
+                                                                                        damagepayeeregister.Pan.Count <= i ? string.Empty :
+                                                                                        fileHelper.SaveFile(PanNoDocument, damagepayeeregister.Pan[i]) :
+                                                                                        damagepayeeregister.PanNoFilePath[i] != null || damagepayeeregister.PanNoFilePath[i] != "" ?
+                                                                                        damagepayeeregister.PanNoFilePath[i] : string.Empty,
+                                                            PhotographPath = damagepayeeregister.Photograph != null ?
+                                                                                        damagepayeeregister.Photograph.Count <= i ? string.Empty :
+                                                                                        fileHelper.SaveFile(PhotographPersonelDocument, damagepayeeregister.Photograph[i]) :
+                                                                                        damagepayeeregister.PhotographFilePath[i] != null || damagepayeeregister.PhotographFilePath[i] != "" ?
+                                                                                        damagepayeeregister.PhotographFilePath[i] : string.Empty,
+                                                            SignaturePath = damagepayeeregister.SignatureFile != null ?
+                                                                                        damagepayeeregister.SignatureFile.Count <= i ? string.Empty :
+                                                                                        fileHelper.SaveFile(SignaturePersonelDocument, damagepayeeregister.SignatureFile[i]) :
+                                                                                        damagepayeeregister.SignatureFilePath[i] != null || damagepayeeregister.SignatureFilePath[i] != "" ?
+                                                                                        damagepayeeregister.SignatureFilePath[i] : string.Empty,
+                                                            //OtherDocPath = damagepayeeregister.OtherDocFile != null ?
+                                                            //                            damagepayeeregister.OtherDocFile.Count <= i ? string.Empty :
+                                                            //                            fileHelper.SaveFile(OtherDocDocument, damagepayeeregister.OtherDocFile[i]) :
+                                                            //                            damagepayeeregister.OtherDocFilePath[i] != null || damagepayeeregister.OtherDocFilePath[i] != "" ?
+                                                            //                            damagepayeeregister.OtherDocFilePath[i] : string.Empty
+
+
+
+                                                        });
+                                                    }
+                                                    foreach (var item in damagepayeepersonelinfo)
+                                                    {
+                                                        result = await _damagepayeeregisterService.SavePayeePersonalInfo(item);
+                                                    }
+                                                }
+                                            }
+
+
+                                            //****** code for saving  Allotte Type *****
+                                            if (damagepayeeregister.Name != null &&
+                                             damagepayeeregister.FatherName != null &&
+                                             damagepayeeregister.Date != null)
+                                            {
+                                                if (
+                                                 damagepayeeregister.Name.Count > 0 &&
+                                                 damagepayeeregister.FatherName.Count > 0 &&
+                                                 damagepayeeregister.Date.Count > 0
+                                                 )
+                                                {
+                                                    List<Allottetype> allottetype = new List<Allottetype>();
+                                                    for (int i = 0; i < damagepayeeregister.Name.Count; i++)
+                                                    {
+                                                        allottetype.Add(new Allottetype
+                                                        {
+                                                            Name = damagepayeeregister.Name.Count <= i ? string.Empty : damagepayeeregister.Name[i],
+                                                            FatherName = damagepayeeregister.FatherName.Count <= i ? string.Empty : damagepayeeregister.FatherName[i],
+                                                            Date = damagepayeeregister.Date.Count <= i ? DateTime.Now : damagepayeeregister.Date[i],
+                                                            DamagePayeeRegisterTempId = damagepayeeregister.Id,
+                                                            AtsgpadocumentPath = damagepayeeregister.ATSGPA != null ?
+                                                                                        damagepayeeregister.ATSGPA.Count <= i ? string.Empty :
+                                                                                        fileHelper.SaveFile(PhotoFilePathLayout, damagepayeeregister.ATSGPA[i]) :
+                                                                                        damagepayeeregister.ATSGPAFilePath[i] != null || damagepayeeregister.ATSGPAFilePath[i] != "" ?
+                                                                                        damagepayeeregister.ATSGPAFilePath[i] : string.Empty
+
+
+                                                        });
+                                                    }
+                                                    result = await _damagepayeeregisterService.SaveAllotteType(allottetype);
+                                                }
+                                            }
+
+                                            //****** code for saving  Damage payment history *****
+
+                                            if (damagepayeeregister.PaymntName != null &&
+                                                  damagepayeeregister.RecieptNo != null &&
+                                                  damagepayeeregister.PaymentMode != null &&
+                                                  damagepayeeregister.PaymentDate != null &&
+                                                  damagepayeeregister.Amount != null)
+                                            {
+
+
+                                                if (
+                                                     damagepayeeregister.PaymntName.Count > 0 &&
+                                                     damagepayeeregister.RecieptNo.Count > 0 &&
+                                                     damagepayeeregister.PaymentMode.Count > 0 &&
+                                                     damagepayeeregister.PaymentDate.Count > 0 &&
+                                                     damagepayeeregister.Amount.Count > 0
+                                                     )
+
+                                                {
+                                                    List<Damagepaymenthistory> damagepaymenthistory = new List<Damagepaymenthistory>();
+                                                    for (int i = 0; i < damagepayeeregister.payeeName.Count; i++)
+                                                    {
+                                                        damagepaymenthistory.Add(new Damagepaymenthistory
+                                                        {
+                                                            Name = damagepayeeregister.PaymntName.Count <= i ? string.Empty : damagepayeeregister.PaymntName[i],
+                                                            RecieptNo = damagepayeeregister.RecieptNo.Count <= i ? string.Empty : damagepayeeregister.RecieptNo[i],
+                                                            PaymentMode = damagepayeeregister.PaymentMode.Count <= i ? string.Empty : damagepayeeregister.PaymentMode[i],
+                                                            PaymentDate = damagepayeeregister.PaymentDate.Count <= i ? DateTime.Now : damagepayeeregister.PaymentDate[i],
+                                                            Amount = damagepayeeregister.Amount.Count <= i ? 0 : damagepayeeregister.Amount[i],
+                                                            RecieptDocumentPath = damagepayeeregister.Reciept != null ?
+                                                                                        damagepayeeregister.Reciept.Count <= i ? string.Empty :
+                                                                                        fileHelper.SaveFile(RecieptDocumentPathLayout, damagepayeeregister.Reciept[i]) :
+                                                                                        damagepayeeregister.RecieptFilePath[i] != null || damagepayeeregister.RecieptFilePath[i] != "" ?
+                                                                                        damagepayeeregister.RecieptFilePath[i] : string.Empty,
+                                                            DamagePayeeRegisterTempId = damagepayeeregister.Id
+                                                        });
+                                                    }
+
+                                                    result = await _damagepayeeregisterService.SavePaymentHistory(damagepaymenthistory);
+
+                                                }
+                                            }
+
+                                            if (result)
+                                            {
+                                                var isApprovalStart = _approvalproccessService.CheckIsApprovalStart((_configuration.GetSection("workflowPreccessGuidDamagePayee").Value), damagepayeeregister.Id);
+                                                if (isApprovalStart == 0 && damagepayeeregister.PendingAt != "0")
+                                                {
+                                                    #region Approval Proccess At 1st level start Added by Renu 21 April 2021
+                                                    var workflowtemplatedata = await _workflowtemplateService.FetchSingleResultOnProcessGuid((_configuration.GetSection("workflowPreccessGuidDamagePayee").Value));
+                                                    var ApprovalStatus = await _approvalproccessService.GetStatusIdFromStatusCode((int)ApprovalActionStatus.Forward);
+
+                                                    for (int i = 0; i < DataFlow.Count; i++)
+                                                    {
+                                                        if (!DataFlow[i].parameterSkip)
+                                                        {
+                                                            damagepayeeregister.ApprovedStatus = ApprovalStatus.Id;
+                                                            damagepayeeregister.PendingAt = approvalproccess.SendTo;
+                                                            result = await _damagepayeeregisterService.UpdateBeforeApproval(damagepayeeregister.Id, damagepayeeregister);  //Update Table details 
+                                                            if (result)
+                                                            {
+                                                                approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
+                                                                approvalproccess.ProcessGuid = (_configuration.GetSection("workflowPreccessGuidDamagePayee").Value);
+                                                                approvalproccess.ServiceId = damagepayeeregister.Id;
+                                                                approvalproccess.SendFrom = SiteContext.UserId.ToString();
+                                                                approvalproccess.SendFromProfileId = SiteContext.ProfileId.ToString();
+                                                                #region set sendto and sendtoprofileid 
+                                                                StringBuilder multouserprofileid = new StringBuilder();
+                                                                int col = 0;
+                                                                if (approvalproccess.SendTo != null)
+                                                                {
+                                                                    string[] multiTo = approvalproccess.SendTo.Split(',');
+                                                                    foreach (string MultiUserId in multiTo)
+                                                                    {
+                                                                        if (col > 0)
+                                                                            multouserprofileid.Append(",");
+                                                                        var UserProfile = await _userProfileService.GetUserById(Convert.ToInt32(MultiUserId));
+                                                                        multouserprofileid.Append(UserProfile.Id);
+                                                                        col++;
+                                                                    }
+                                                                    approvalproccess.SendToProfileId = multouserprofileid.ToString();
+                                                                }
+                                                                #endregion
+                                                                approvalproccess.PendingStatus = 1;   //1
+                                                                approvalproccess.Status = ApprovalStatus.Id;   //1
+                                                                approvalproccess.Level = i + 1;
+                                                                approvalproccess.Version = workflowtemplatedata.Version;
+                                                                approvalproccess.Remarks = "Record Added and Send for Approval";///May be Uncomment
+                                                                result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
+
+                                                                #region Insert Into usernotification table Added By Renu 18 June 2021
+                                                                if (result == true && approvalproccess.SendTo != null)
+                                                                {
+                                                                    var notificationtemplate = await _approvalproccessService.FetchSingleNotificationTemplate(_configuration.GetSection("userNotificationGuidDamagePayee").Value);
+                                                                    var user = await _userProfileService.GetUserById(SiteContext.UserId);
+                                                                    Usernotification usernotification = new Usernotification();
+                                                                    var replacement = notificationtemplate.Template.Replace("{proccess name}", "Damage Payee Register").Replace("{from user}", user.User.UserName).Replace("{datetime}", DateTime.Now.ToString());
+                                                                    usernotification.Message = replacement;
+                                                                    usernotification.UserNotificationGuid = (_configuration.GetSection("userNotificationGuidDamagePayee").Value);
+                                                                    usernotification.ProcessGuid = approvalproccess.ProcessGuid;
+                                                                    usernotification.ServiceId = approvalproccess.ServiceId;
+                                                                    usernotification.SendFrom = approvalproccess.SendFrom;
+                                                                    usernotification.SendTo = approvalproccess.SendTo;
+                                                                    result = await _userNotificationService.Create(usernotification, SiteContext.UserId);
+                                                                }
+                                                                #endregion
+
+                                                            }
+
+                                                            break;
+                                                        }
+                                                    }
+
+                                                    #endregion
+
+                                                    #region Approval Proccess  Mail Generation Added by Renu 08 May 2021
+                                                    var sendMailResult = false;
+                                                    var DataApprovalSatatusMsg = await _approvalproccessService.FetchSingleApprovalStatus(Convert.ToInt32(ApprovalStatus.Id));
+                                                    if (approvalproccess.SendTo != null)
+                                                    {
+                                                        #region Mail Generate
+                                                        //At successfull completion send mail and sms
+                                                        Uri uri = new Uri("https://master.managemybusinessess.com/ApprovalProcess/Index");
+                                                        string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "ApprovalMailDetailsContent.html");
+                                                        string link = "<a target=\"_blank\" href=\"" + uri + "\">Click Here</a>";
+                                                        string linkhref = "https://master.managemybusinessess.com/ApprovalProcess/Index";
+
+                                                        var senderUser = await _userProfileService.GetUserById(SiteContext.UserId);
+                                                        StringBuilder multousermailId = new StringBuilder();
+                                                        if (approvalproccess.SendTo != null)
+                                                        {
+                                                            int col = 0;
+                                                            string[] multiTo = approvalproccess.SendTo.Split(',');
+                                                            foreach (string MultiUserId in multiTo)
+                                                            {
+                                                                if (col > 0)
+                                                                    multousermailId.Append(",");
+                                                                var RecevierUsers = await _userProfileService.GetUserById(Convert.ToInt32(MultiUserId));
+                                                                multousermailId.Append(RecevierUsers.User.Email);
+                                                                col++;
+                                                            }
+                                                        }
+
+                                                        #region Mail Generation Added By Renu
+
+                                                        MailSMSHelper mailG = new MailSMSHelper();
+
+                                                        #region HTML Body Generation
+                                                        ApprovalMailBodyDto bodyDTO = new ApprovalMailBodyDto();
+                                                        bodyDTO.ApplicationName = "Damage Payee Register Application";
+                                                        bodyDTO.Status = DataApprovalSatatusMsg.SentStatusName;
+                                                        bodyDTO.SenderName = senderUser.User.Name;
+                                                        bodyDTO.Link = linkhref;
+                                                        bodyDTO.AppRefNo = damagepayeeregister.RefNo;
+                                                        bodyDTO.SubmitDate = DateTime.Now.ToString("dd-MMM-yyyy");
+                                                        bodyDTO.Remarks = approvalproccess.Remarks;
+                                                        bodyDTO.path = path;
+                                                        string strBodyMsg = mailG.PopulateBodyApprovalMailDetails(bodyDTO);
+                                                        #endregion
+
+
+                                                        //sendMailResult = mailG.SendMailWithAttachment(strMailSubject, strBodyMsg, multousermailId.ToString(), strMailCC, strMailBCC, strAttachPath);
+                                                        #region Common Mail Genration
+                                                        SentMailGenerationDto maildto = new SentMailGenerationDto();
+                                                        maildto.strMailSubject = "Pending Damage Payee Register Application Approval Request Details ";
+                                                        maildto.strMailCC = ""; maildto.strMailBCC = ""; maildto.strAttachPath = "";
+                                                        maildto.strBodyMsg = strBodyMsg;
+                                                        maildto.defaultPswd = (_configuration.GetSection("EmailConfiguration:defaultPswd").Value).ToString();
+                                                        maildto.fromMail = (_configuration.GetSection("EmailConfiguration:fromMail").Value).ToString();
+                                                        maildto.fromMailPwd = (_configuration.GetSection("EmailConfiguration:fromMailPwd").Value).ToString();
+                                                        maildto.mailHost = (_configuration.GetSection("EmailConfiguration:mailHost").Value).ToString();
+                                                        maildto.port = Convert.ToInt32(_configuration.GetSection("EmailConfiguration:port").Value);
+
+                                                        maildto.strMailTo = multousermailId.ToString();
+                                                        sendMailResult = mailG.SendMailWithAttachment(maildto);
+                                                        #endregion
+                                                        #endregion
+
+
+                                                        #endregion
+                                                    }
+                                                    #endregion
+                                                }
+
+                                            }
+                                            ViewBag.Message = Alert.Show(Messages.AddAndApprovalRecordSuccess, "", AlertType.Success);
+
+                                            //   var result1 = await _damagepayeeregisterService.GetAllDamagepayeeregister();
+                                            return View("Index");
+                                        }
+
+                                        else
+                                        {
+                                            ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                                            return View(damagepayeeregister);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                                         return View(damagepayeeregister);
                                     }
 
-                                    damagepayeeregister.ApprovalZoneId = SiteContext.ZoneId;
-                                }
-                                if (DataFlow[i].parameterValue == (_configuration.GetSection("ApprovalRoleType").Value))
-                                {
-                                    for (int j = 0; j < DataFlow[i].parameterName.Count; j++)
-                                    {
-                                        List<UserProfileDto> UserListRoleBasis = null;
-                                        if (DataFlow[i].parameterConditional == (_configuration.GetSection("ApprovalZoneWise").Value))
-                                            UserListRoleBasis = await _userProfileService.GetUserOnRoleZoneBasis(Convert.ToInt32(DataFlow[i].parameterName[j]), SiteContext.ZoneId ?? 0);
-                                        else
-                                            UserListRoleBasis = await _userProfileService.GetUserOnRoleBasis(Convert.ToInt32(DataFlow[i].parameterName[j]));
 
-                                        StringBuilder multouserszonewise = new StringBuilder();
-                                        int col = 0;
-                                        if (UserListRoleBasis != null)
-                                        {
-                                            for (int h = 0; h < UserListRoleBasis.Count; h++)
-                                            {
-                                                if (col > 0)
-                                                    multouserszonewise.Append(",");
-                                                multouserszonewise.Append(UserListRoleBasis[h].UserId);
-                                                col++;
-                                            }
-                                            approvalproccess.SendTo = multouserszonewise.ToString();
-                                        }
-
-                                    }
                                 }
                                 else
                                 {
-                                    approvalproccess.SendTo = String.Join(",", (DataFlow[i].parameterName));
-                                    if (DataFlow[i].parameterConditional == (_configuration.GetSection("ApprovalZoneWise").Value))
-                                    {
-                                        StringBuilder multouserszonewise = new StringBuilder();
-                                        int col = 0;
-                                        if (approvalproccess.SendTo != null)
-                                        {
-                                            string[] multiTo = approvalproccess.SendTo.Split(',');
-                                            foreach (string MultiUserId in multiTo)
-                                            {
-                                                if (col > 0)
-                                                    multouserszonewise.Append(",");
-                                                var UserProfile = await _userProfileService.GetUserByIdZone(Convert.ToInt32(MultiUserId), SiteContext.ZoneId ?? 0);
-                                                multouserszonewise.Append(UserProfile.UserId);
-                                                col++;
-                                            }
-                                            approvalproccess.SendTo = multouserszonewise.ToString();
-                                        }
-                                    }
-                                }
-
-
-                                break;
-                            }
-                        }
-                        #endregion
-
-                        var result = await _damagepayeeregisterService.Create(damagepayeeregister);
-
-
-                        if (result)
-                        {
-                            //******* creating damage payee user ******
-
-                            var resultpassword = await _damagepayeeregisterService.CreateUser(damagepayeeregister);
-                            if (!resultpassword.Equals("False"))
-                            {
-                                //At successfull completion send mail and sms
-                                string DisplayName = damagepayeeregister.payeeName[0].ToString();
-                                string EmailID = damagepayeeregister.EmailId[0].ToString();
-                                string Id = damagepayeeregister.Id.ToString().Unidecode();
-                                string LoginName = damagepayeeregister.payeeName[0].ToString();
-                                string ContactNo = damagepayeeregister.MobileNo[0].ToString();
-                                string Password = resultpassword;
-                                string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "UserMailDetails.html");
-                                string loginlink = "https://damage.managemybusinessess.com/DamagePayeeRegistration/Create";
-                                #region Mail Generation Added By Renu
-
-                                MailSMSHelper mailG = new MailSMSHelper();
-
-                                #region HTML Body Generation
-                                DamageRegisterBodyDTO bodyDTO = new DamageRegisterBodyDTO();
-                                bodyDTO.displayName = DisplayName;
-                                bodyDTO.loginName = LoginName;
-                                bodyDTO.password = Password;
-                                bodyDTO.path = path;
-                                bodyDTO.emailId = EmailID;
-                                bodyDTO.contactNo = ContactNo;
-                                bodyDTO.Link = loginlink;
-                                string strBodyMsg = mailG.PopulateBodyRegister(bodyDTO);
-                                #endregion
-
-                                //var sendMailResult = mailG.SendMailWithAttachment(strMailSubject, strBodyMsg, EmailID, strMailCC, strMailBCC, strAttachPath);
-                                #region Common Mail Genration
-                                SentMailGenerationDto maildto = new SentMailGenerationDto();
-                                maildto.strMailSubject = "Damage Payee User Details ";
-                                maildto.strMailCC = ""; maildto.strMailBCC = ""; maildto.strAttachPath = "";
-                                maildto.strBodyMsg = strBodyMsg;
-                                maildto.defaultPswd = (_configuration.GetSection("EmailConfiguration:defaultPswd").Value).ToString();
-                                maildto.fromMail = (_configuration.GetSection("EmailConfiguration:fromMail").Value).ToString();
-                                maildto.fromMailPwd = (_configuration.GetSection("EmailConfiguration:fromMailPwd").Value).ToString();
-                                maildto.mailHost = (_configuration.GetSection("EmailConfiguration:mailHost").Value).ToString();
-                                maildto.port = Convert.ToInt32(_configuration.GetSection("EmailConfiguration:port").Value);
-
-                                maildto.strMailTo = EmailID;
-                                var sendMailResult = mailG.SendMailWithAttachment(maildto);
-                                #endregion
-                                #endregion
-                            }
-
-
-                            //****** code for saving  Damage payee personal info *****
-
-                            if (damagepayeeregister.payeeName != null &&
-                              damagepayeeregister.Gender != null &&
-                              damagepayeeregister.Address != null &&
-                              damagepayeeregister.MobileNo != null)
-                            {
-                                if (damagepayeeregister.payeeName.Count > 0 &&
-                            damagepayeeregister.Gender.Count > 0 &&
-                            damagepayeeregister.Address.Count > 0 &&
-                            damagepayeeregister.MobileNo.Count > 0)
-
-                                {
-                                    List<Damagepayeepersonelinfo> damagepayeepersonelinfo = new List<Damagepayeepersonelinfo>();
-                                    for (int i = 0; i < damagepayeeregister.payeeName.Count; i++)
-                                    {
-                                        damagepayeepersonelinfo.Add(new Damagepayeepersonelinfo
-                                        {
-                                            Name = damagepayeeregister.payeeName.Count <= i ? string.Empty : damagepayeeregister.payeeName[i],
-                                            FatherName = damagepayeeregister.payeeFatherName.Count <= i ? string.Empty : damagepayeeregister.payeeFatherName[i],
-                                            Gender = damagepayeeregister.Gender.Count <= i ? "1" : damagepayeeregister.Gender[i],
-                                            Address = damagepayeeregister.Address.Count <= i ? string.Empty : damagepayeeregister.Address[i],
-                                            MobileNo = damagepayeeregister.MobileNo.Count <= i ? string.Empty : damagepayeeregister.MobileNo[i],
-                                            EmailId = damagepayeeregister.EmailId.Count <= i ? string.Empty : damagepayeeregister.EmailId[i],
-                                            DamagePayeeRegisterTempId = damagepayeeregister.Id,
-                                            AadharNo = damagepayeeregister.AadharNo.Count <= i ? string.Empty : damagepayeeregister.AadharNo[i],
-                                            PanNo = damagepayeeregister.PanNo.Count <= i ? string.Empty : damagepayeeregister.PanNo[i],
-
-                                            AadharNoFilePath = damagepayeeregister.Aadhar != null ?
-                                                                        damagepayeeregister.Aadhar.Count <= i ? string.Empty :
-                                                                        fileHelper.SaveFile(AadharNoDocument, damagepayeeregister.Aadhar[i]) :
-                                                                        damagepayeeregister.AadharNoFilePath[i] != null || damagepayeeregister.AadharNoFilePath[i] != "" ?
-                                                                        damagepayeeregister.AadharNoFilePath[i] : string.Empty,
-                                            PanNoFilePath = damagepayeeregister.Pan != null ?
-                                                                        damagepayeeregister.Pan.Count <= i ? string.Empty :
-                                                                        fileHelper.SaveFile(PanNoDocument, damagepayeeregister.Pan[i]) :
-                                                                        damagepayeeregister.PanNoFilePath[i] != null || damagepayeeregister.PanNoFilePath[i] != "" ?
-                                                                        damagepayeeregister.PanNoFilePath[i] : string.Empty,
-                                            PhotographPath = damagepayeeregister.Photograph != null ?
-                                                                        damagepayeeregister.Photograph.Count <= i ? string.Empty :
-                                                                        fileHelper.SaveFile(PhotographPersonelDocument, damagepayeeregister.Photograph[i]) :
-                                                                        damagepayeeregister.PhotographFilePath[i] != null || damagepayeeregister.PhotographFilePath[i] != "" ?
-                                                                        damagepayeeregister.PhotographFilePath[i] : string.Empty,
-                                            SignaturePath = damagepayeeregister.SignatureFile != null ?
-                                                                        damagepayeeregister.SignatureFile.Count <= i ? string.Empty :
-                                                                        fileHelper.SaveFile(SignaturePersonelDocument, damagepayeeregister.SignatureFile[i]) :
-                                                                        damagepayeeregister.SignatureFilePath[i] != null || damagepayeeregister.SignatureFilePath[i] != "" ?
-                                                                        damagepayeeregister.SignatureFilePath[i] : string.Empty,
-                                            //OtherDocPath = damagepayeeregister.OtherDocFile != null ?
-                                            //                            damagepayeeregister.OtherDocFile.Count <= i ? string.Empty :
-                                            //                            fileHelper.SaveFile(OtherDocDocument, damagepayeeregister.OtherDocFile[i]) :
-                                            //                            damagepayeeregister.OtherDocFilePath[i] != null || damagepayeeregister.OtherDocFilePath[i] != "" ?
-                                            //                            damagepayeeregister.OtherDocFilePath[i] : string.Empty
-
-
-
-                                        });
-                                    }
-                                    foreach (var item in damagepayeepersonelinfo)
-                                    {
-                                        result = await _damagepayeeregisterService.SavePayeePersonalInfo(item);
-                                    }
-                                }
-                            }
-
-
-                            //****** code for saving  Allotte Type *****
-                            if (damagepayeeregister.Name != null &&
-                             damagepayeeregister.FatherName != null &&
-                             damagepayeeregister.Date != null)
-                            {
-                                if (
-                                 damagepayeeregister.Name.Count > 0 &&
-                                 damagepayeeregister.FatherName.Count > 0 &&
-                                 damagepayeeregister.Date.Count > 0
-                                 )
-                                {
-                                    List<Allottetype> allottetype = new List<Allottetype>();
-                                    for (int i = 0; i < damagepayeeregister.Name.Count; i++)
-                                    {
-                                        allottetype.Add(new Allottetype
-                                        {
-                                            Name = damagepayeeregister.Name.Count <= i ? string.Empty : damagepayeeregister.Name[i],
-                                            FatherName = damagepayeeregister.FatherName.Count <= i ? string.Empty : damagepayeeregister.FatherName[i],
-                                            Date = damagepayeeregister.Date.Count <= i ? DateTime.Now : damagepayeeregister.Date[i],
-                                            DamagePayeeRegisterTempId = damagepayeeregister.Id,
-                                            AtsgpadocumentPath = damagepayeeregister.ATSGPA != null ?
-                                                                        damagepayeeregister.ATSGPA.Count <= i ? string.Empty :
-                                                                        fileHelper.SaveFile(PhotoFilePathLayout, damagepayeeregister.ATSGPA[i]) :
-                                                                        damagepayeeregister.ATSGPAFilePath[i] != null || damagepayeeregister.ATSGPAFilePath[i] != "" ?
-                                                                        damagepayeeregister.ATSGPAFilePath[i] : string.Empty
-
-
-                                        });
-                                    }
-                                    result = await _damagepayeeregisterService.SaveAllotteType(allottetype);
-                                }
-                            }
-
-                            //****** code for saving  Damage payment history *****
-
-                            if (damagepayeeregister.PaymntName != null &&
-                                  damagepayeeregister.RecieptNo != null &&
-                                  damagepayeeregister.PaymentMode != null &&
-                                  damagepayeeregister.PaymentDate != null &&
-                                  damagepayeeregister.Amount != null)
-                            {
-
-
-                                if (
-                                     damagepayeeregister.PaymntName.Count > 0 &&
-                                     damagepayeeregister.RecieptNo.Count > 0 &&
-                                     damagepayeeregister.PaymentMode.Count > 0 &&
-                                     damagepayeeregister.PaymentDate.Count > 0 &&
-                                     damagepayeeregister.Amount.Count > 0
-                                     )
-
-                                {
-                                    List<Damagepaymenthistory> damagepaymenthistory = new List<Damagepaymenthistory>();
-                                    for (int i = 0; i < damagepayeeregister.payeeName.Count; i++)
-                                    {
-                                        damagepaymenthistory.Add(new Damagepaymenthistory
-                                        {
-                                            Name = damagepayeeregister.PaymntName.Count <= i ? string.Empty : damagepayeeregister.PaymntName[i],
-                                            RecieptNo = damagepayeeregister.RecieptNo.Count <= i ? string.Empty : damagepayeeregister.RecieptNo[i],
-                                            PaymentMode = damagepayeeregister.PaymentMode.Count <= i ? string.Empty : damagepayeeregister.PaymentMode[i],
-                                            PaymentDate = damagepayeeregister.PaymentDate.Count <= i ? DateTime.Now : damagepayeeregister.PaymentDate[i],
-                                            Amount = damagepayeeregister.Amount.Count <= i ? 0 : damagepayeeregister.Amount[i],
-                                            RecieptDocumentPath = damagepayeeregister.Reciept != null ?
-                                                                        damagepayeeregister.Reciept.Count <= i ? string.Empty :
-                                                                        fileHelper.SaveFile(RecieptDocumentPathLayout, damagepayeeregister.Reciept[i]) :
-                                                                        damagepayeeregister.RecieptFilePath[i] != null || damagepayeeregister.RecieptFilePath[i] != "" ?
-                                                                        damagepayeeregister.RecieptFilePath[i] : string.Empty,
-                                            DamagePayeeRegisterTempId = damagepayeeregister.Id
-                                        });
-                                    }
-
-                                    result = await _damagepayeeregisterService.SavePaymentHistory(damagepaymenthistory);
+                                    ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
+                                    return View(damagepayeeregister);
 
                                 }
+
                             }
 
-                            if (result)
+
+                            else
                             {
-                                var isApprovalStart = _approvalproccessService.CheckIsApprovalStart((_configuration.GetSection("workflowPreccessGuidDamagePayee").Value), damagepayeeregister.Id);
-                                if (isApprovalStart == 0 && damagepayeeregister.PendingAt != "0")
-                                {
-                                    #region Approval Proccess At 1st level start Added by Renu 21 April 2021
-                                    var workflowtemplatedata = await _workflowtemplateService.FetchSingleResultOnProcessGuid((_configuration.GetSection("workflowPreccessGuidDamagePayee").Value));
-                                    var ApprovalStatus = await _approvalproccessService.GetStatusIdFromStatusCode((int)ApprovalActionStatus.Forward);
-
-                                    for (int i = 0; i < DataFlow.Count; i++)
-                                    {
-                                        if (!DataFlow[i].parameterSkip)
-                                        {
-                                            damagepayeeregister.ApprovedStatus = ApprovalStatus.Id;
-                                            damagepayeeregister.PendingAt = approvalproccess.SendTo;
-                                            result = await _damagepayeeregisterService.UpdateBeforeApproval(damagepayeeregister.Id, damagepayeeregister);  //Update Table details 
-                                            if (result)
-                                            {
-                                                approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
-                                                approvalproccess.ProcessGuid = (_configuration.GetSection("workflowPreccessGuidDamagePayee").Value);
-                                                approvalproccess.ServiceId = damagepayeeregister.Id;
-                                                approvalproccess.SendFrom = SiteContext.UserId.ToString();
-                                                approvalproccess.SendFromProfileId = SiteContext.ProfileId.ToString();
-                                                #region set sendto and sendtoprofileid 
-                                                StringBuilder multouserprofileid = new StringBuilder();
-                                                int col = 0;
-                                                if (approvalproccess.SendTo != null)
-                                                {
-                                                    string[] multiTo = approvalproccess.SendTo.Split(',');
-                                                    foreach (string MultiUserId in multiTo)
-                                                    {
-                                                        if (col > 0)
-                                                            multouserprofileid.Append(",");
-                                                        var UserProfile = await _userProfileService.GetUserById(Convert.ToInt32(MultiUserId));
-                                                        multouserprofileid.Append(UserProfile.Id);
-                                                        col++;
-                                                    }
-                                                    approvalproccess.SendToProfileId = multouserprofileid.ToString();
-                                                }
-                                                #endregion
-                                                approvalproccess.PendingStatus = 1;   //1
-                                                approvalproccess.Status = ApprovalStatus.Id;   //1
-                                                approvalproccess.Level = i + 1;
-                                                approvalproccess.Version = workflowtemplatedata.Version;
-                                                approvalproccess.Remarks = "Record Added and Send for Approval";///May be Uncomment
-                                                result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
-
-                                                #region Insert Into usernotification table Added By Renu 18 June 2021
-                                                if (result == true && approvalproccess.SendTo != null)
-                                                {
-                                                    var notificationtemplate = await _approvalproccessService.FetchSingleNotificationTemplate(_configuration.GetSection("userNotificationGuidDamagePayee").Value);
-                                                    var user = await _userProfileService.GetUserById(SiteContext.UserId);
-                                                    Usernotification usernotification = new Usernotification();
-                                                    var replacement = notificationtemplate.Template.Replace("{proccess name}", "Damage Payee Register").Replace("{from user}", user.User.UserName).Replace("{datetime}", DateTime.Now.ToString());
-                                                    usernotification.Message = replacement;
-                                                    usernotification.UserNotificationGuid = (_configuration.GetSection("userNotificationGuidDamagePayee").Value);
-                                                    usernotification.ProcessGuid = approvalproccess.ProcessGuid;
-                                                    usernotification.ServiceId = approvalproccess.ServiceId;
-                                                    usernotification.SendFrom = approvalproccess.SendFrom;
-                                                    usernotification.SendTo = approvalproccess.SendTo;
-                                                    result = await _userNotificationService.Create(usernotification, SiteContext.UserId);
-                                                }
-                                                #endregion
-
-                                            }
-
-                                            break;
-                                        }
-                                    }
-
-                                    #endregion
-
-                                    #region Approval Proccess  Mail Generation Added by Renu 08 May 2021
-                                    var sendMailResult = false;
-                                    var DataApprovalSatatusMsg = await _approvalproccessService.FetchSingleApprovalStatus(Convert.ToInt32(ApprovalStatus.Id));
-                                    if (approvalproccess.SendTo != null)
-                                    {
-                                        #region Mail Generate
-                                        //At successfull completion send mail and sms
-                                        Uri uri = new Uri("https://master.managemybusinessess.com/ApprovalProcess/Index");
-                                        string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "ApprovalMailDetailsContent.html");
-                                        string link = "<a target=\"_blank\" href=\"" + uri + "\">Click Here</a>";
-                                        string linkhref = "https://master.managemybusinessess.com/ApprovalProcess/Index";
-
-                                        var senderUser = await _userProfileService.GetUserById(SiteContext.UserId);
-                                        StringBuilder multousermailId = new StringBuilder();
-                                        if (approvalproccess.SendTo != null)
-                                        {
-                                            int col = 0;
-                                            string[] multiTo = approvalproccess.SendTo.Split(',');
-                                            foreach (string MultiUserId in multiTo)
-                                            {
-                                                if (col > 0)
-                                                    multousermailId.Append(",");
-                                                var RecevierUsers = await _userProfileService.GetUserById(Convert.ToInt32(MultiUserId));
-                                                multousermailId.Append(RecevierUsers.User.Email);
-                                                col++;
-                                            }
-                                        }
-
-                                        #region Mail Generation Added By Renu
-
-                                        MailSMSHelper mailG = new MailSMSHelper();
-
-                                        #region HTML Body Generation
-                                        ApprovalMailBodyDto bodyDTO = new ApprovalMailBodyDto();
-                                        bodyDTO.ApplicationName = "Damage Payee Register Application";
-                                        bodyDTO.Status = DataApprovalSatatusMsg.SentStatusName;
-                                        bodyDTO.SenderName = senderUser.User.Name;
-                                        bodyDTO.Link = linkhref;
-                                        bodyDTO.AppRefNo = damagepayeeregister.RefNo;
-                                        bodyDTO.SubmitDate = DateTime.Now.ToString("dd-MMM-yyyy");
-                                        bodyDTO.Remarks = approvalproccess.Remarks;
-                                        bodyDTO.path = path;
-                                        string strBodyMsg = mailG.PopulateBodyApprovalMailDetails(bodyDTO);
-                                        #endregion
-
-
-                                        //sendMailResult = mailG.SendMailWithAttachment(strMailSubject, strBodyMsg, multousermailId.ToString(), strMailCC, strMailBCC, strAttachPath);
-                                        #region Common Mail Genration
-                                        SentMailGenerationDto maildto = new SentMailGenerationDto();
-                                        maildto.strMailSubject = "Pending Damage Payee Register Application Approval Request Details ";
-                                        maildto.strMailCC = ""; maildto.strMailBCC = ""; maildto.strAttachPath = "";
-                                        maildto.strBodyMsg = strBodyMsg;
-                                        maildto.defaultPswd = (_configuration.GetSection("EmailConfiguration:defaultPswd").Value).ToString();
-                                        maildto.fromMail = (_configuration.GetSection("EmailConfiguration:fromMail").Value).ToString();
-                                        maildto.fromMailPwd = (_configuration.GetSection("EmailConfiguration:fromMailPwd").Value).ToString();
-                                        maildto.mailHost = (_configuration.GetSection("EmailConfiguration:mailHost").Value).ToString();
-                                        maildto.port = Convert.ToInt32(_configuration.GetSection("EmailConfiguration:port").Value);
-
-                                        maildto.strMailTo = multousermailId.ToString();
-                                        sendMailResult = mailG.SendMailWithAttachment(maildto);
-                                        #endregion
-                                        #endregion
-
-
-                                        #endregion
-                                    }
-                                    #endregion
-                                }
+                                ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
+                                return View(damagepayeeregister);
 
                             }
-                            ViewBag.Message = Alert.Show(Messages.AddAndApprovalRecordSuccess, "", AlertType.Success);
 
-                            //   var result1 = await _damagepayeeregisterService.GetAllDamagepayeeregister();
-                            return View("Index");
+
                         }
                         else
                         {
-                            ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                            ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
                             return View(damagepayeeregister);
+
                         }
+
                     }
                     else
                     {
@@ -683,6 +734,11 @@ namespace DamagePayee.Controllers
         [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Damagepayeeregister damagepayeeregister)
         {
+            bool IsValidpdf = CheckMimeType(damagepayeeregister);
+            bool IsValidpdf1 = CheckMimeType1(damagepayeeregister);
+            bool IsValidpdf2 = CheckMimeType2(damagepayeeregister);
+            bool IsValidpdf3 = CheckMimeType3(damagepayeeregister);
+            bool IsValidpdf4 = CheckMimeType4(damagepayeeregister);
             var Data = await _damagepayeeregisterService.FetchSingleResult(id);
             ViewBag.LocalityList = await _damagepayeeregisterService.GetLocalityList();
 
@@ -708,245 +764,297 @@ namespace DamagePayee.Controllers
             if (ModelState.IsValid)
 
             {
-                FileHelper fileHelper = new FileHelper();
-                damagepayeeregister.DocumentName = damagepayeeregister.DocumentIFormFile == null ? damagepayeeregister.DocumentName : fileHelper.SaveFile1(DocumentFilePath, damagepayeeregister.DocumentIFormFile);
-
-                if (damagepayeeregister.PropertyPhoto != null)
+                if (IsValidpdf == true)
                 {
-                    damagepayeeregister.PropertyPhotoPath = fileHelper.SaveFile(PropertyPhotographLayout, damagepayeeregister.PropertyPhoto);
-                }
-                else
-                {
-                    damagepayeeregister.PropertyPhotoPath = Data.PropertyPhotoPath;
-                }
-                if (damagepayeeregister.ShowCauseNotice != null)
-                {
-                    damagepayeeregister.ShowCauseNoticePath = fileHelper.SaveFile(ShowCauseNoticeDocument, damagepayeeregister.ShowCauseNotice);
-                }
-                else
-                {
-                    damagepayeeregister.ShowCauseNoticePath = Data.ShowCauseNoticePath;
-                }
-                if (damagepayeeregister.Fgform != null)
-                {
-                    damagepayeeregister.FgformPath = fileHelper.SaveFile(FGFormDocument, damagepayeeregister.Fgform);
-                }
-                else
-                {
-                    damagepayeeregister.FgformPath = Data.FgformPath;
-                }
-                if (damagepayeeregister.DocumentForFile != null)
-                {
-                    damagepayeeregister.DocumentForFilePath = fileHelper.SaveFile(BillDocument, damagepayeeregister.DocumentForFile);
-                }
-                else
-                {
-                    damagepayeeregister.DocumentForFilePath = Data.DocumentForFilePath;
-                }
-                if (damagepayeeregister.ATSFile != null)
-                {
-                    damagepayeeregister.AtsfilePath = fileHelper.SaveFile(ATSDocument, damagepayeeregister.ATSFile);
-                }
-                else
-                {
-                    damagepayeeregister.AtsfilePath = Data.AtsfilePath;
-                }
-                if (damagepayeeregister.GPAFile != null)
-                {
-                    damagepayeeregister.GpafilePath = fileHelper.SaveFile(GPADocument, damagepayeeregister.GPAFile);
-                }
-                else
-                {
-                    damagepayeeregister.GpafilePath = Data.GpafilePath;
-                }
-                if (damagepayeeregister.MutationFile != null)
-                {
-                    damagepayeeregister.MutationFilePath = fileHelper.SaveFile(MutationDocument, damagepayeeregister.MutationFile);
-                }
-                else
-                {
-                    damagepayeeregister.MutationFilePath = Data.MutationFilePath;
-                }
-                if (damagepayeeregister.WillFile != null)
-                {
-                    damagepayeeregister.WillFilePath = fileHelper.SaveFile(WillDocument, damagepayeeregister.WillFile);
-                }
-                else
-                {
-                    damagepayeeregister.WillFilePath = Data.WillFilePath;
-                }
-                var result = await _damagepayeeregisterService.Update(id, damagepayeeregister);
-                if (result)
-                {
-
-
-                    //****** code for saving  Damage payee personal info *****
-
-                    if (damagepayeeregister.payeeName != null &&
-                      damagepayeeregister.Gender != null &&
-                      damagepayeeregister.Address != null &&
-                      damagepayeeregister.MobileNo != null)
+                    if (IsValidpdf1 == true)
                     {
-                        if (damagepayeeregister.payeeName.Count > 0 &&
-                    damagepayeeregister.Gender.Count > 0 &&
-                    damagepayeeregister.Address.Count > 0 &&
-                    damagepayeeregister.MobileNo.Count > 0)
-
+                        if (IsValidpdf2 == true)
                         {
-                            List<Damagepayeepersonelinfo> damagepayeepersonelinfo = new List<Damagepayeepersonelinfo>();
-                            result = await _damagepayeeregisterService.DeletePayeePersonalInfo(id);
-                            for (int i = 0; i < damagepayeeregister.payeeName.Count; i++)
+                            if (IsValidpdf3 == true)
                             {
-                                damagepayeepersonelinfo.Add(new Damagepayeepersonelinfo
+                                if (IsValidpdf4 == true)
                                 {
-                                    Name = damagepayeeregister.payeeName.Count <= i ? string.Empty : damagepayeeregister.payeeName[i],
-                                    FatherName = damagepayeeregister.payeeFatherName.Count <= i ? string.Empty : damagepayeeregister.payeeFatherName[i],
-                                    Gender = damagepayeeregister.Gender.Count <= i ? "1" : damagepayeeregister.Gender[i],
-                                    Address = damagepayeeregister.Address.Count <= i ? string.Empty : damagepayeeregister.Address[i],
-                                    MobileNo = damagepayeeregister.MobileNo.Count <= i ? string.Empty : damagepayeeregister.MobileNo[i],
-                                    EmailId = damagepayeeregister.EmailId.Count <= i ? string.Empty : damagepayeeregister.EmailId[i],
-                                    DamagePayeeRegisterTempId = damagepayeeregister.Id,
-                                    AadharNo = damagepayeeregister.AadharNo.Count <= i ? string.Empty : damagepayeeregister.AadharNo[i],
-                                    PanNo = damagepayeeregister.PanNo.Count <= i ? string.Empty : damagepayeeregister.PanNo[i],
 
-                                    AadharNoFilePath = damagepayeeregister.Aadhar != null ?
-                                                                damagepayeeregister.Aadhar.Count <= i ? string.Empty :
-                                                                fileHelper.SaveFile(AadharNoDocument, damagepayeeregister.Aadhar[i]) :
-                                                                damagepayeeregister.AadharNoFilePath[i] != null || damagepayeeregister.AadharNoFilePath[i] != "" ?
-                                                                damagepayeeregister.AadharNoFilePath[i] : string.Empty,
-                                    PanNoFilePath = damagepayeeregister.Pan != null ?
-                                                                damagepayeeregister.Pan.Count <= i ? string.Empty :
-                                                                fileHelper.SaveFile(PanNoDocument, damagepayeeregister.Pan[i]) :
-                                                                damagepayeeregister.PanNoFilePath[i] != null || damagepayeeregister.PanNoFilePath[i] != "" ?
-                                                                damagepayeeregister.PanNoFilePath[i] : string.Empty,
-                                    PhotographPath = damagepayeeregister.Photograph != null ?
-                                                                damagepayeeregister.Photograph.Count <= i ? string.Empty :
-                                                                fileHelper.SaveFile(PhotographPersonelDocument, damagepayeeregister.Photograph[i]) :
-                                                                damagepayeeregister.PhotographFilePath[i] != null || damagepayeeregister.PhotographFilePath[i] != "" ?
-                                                                damagepayeeregister.PhotographFilePath[i] : string.Empty,
-                                    SignaturePath = damagepayeeregister.SignatureFile != null ?
-                                                                damagepayeeregister.SignatureFile.Count <= i ? string.Empty :
-                                                                fileHelper.SaveFile(SignaturePersonelDocument, damagepayeeregister.SignatureFile[i]) :
-                                                                damagepayeeregister.SignatureFilePath[i] != null || damagepayeeregister.SignatureFilePath[i] != "" ?
-                                                                damagepayeeregister.SignatureFilePath[i] : string.Empty,
-                                    //OtherDocPath = damagepayeeregister.OtherDocFile != null ?
-                                    //                                damagepayeeregister.OtherDocFile.Count <= i ? string.Empty :
-                                    //                                fileHelper.SaveFile(OtherDocDocument, damagepayeeregister.OtherDocFile[i]) :
-                                    //                                damagepayeeregister.OtherDocFilePath[i] != null || damagepayeeregister.OtherDocFilePath[i] != "" ?
-                                    //                                damagepayeeregister.OtherDocFilePath[i] : string.Empty
+                                    FileHelper fileHelper = new FileHelper();
+                                damagepayeeregister.DocumentName = damagepayeeregister.DocumentIFormFile == null ? damagepayeeregister.DocumentName : fileHelper.SaveFile1(DocumentFilePath, damagepayeeregister.DocumentIFormFile);
 
-                                });
+                                if (damagepayeeregister.PropertyPhoto != null)
+                                {
+                                    damagepayeeregister.PropertyPhotoPath = fileHelper.SaveFile(PropertyPhotographLayout, damagepayeeregister.PropertyPhoto);
+                                }
+                                else
+                                {
+                                    damagepayeeregister.PropertyPhotoPath = Data.PropertyPhotoPath;
+                                }
+                                if (damagepayeeregister.ShowCauseNotice != null)
+                                {
+                                    damagepayeeregister.ShowCauseNoticePath = fileHelper.SaveFile(ShowCauseNoticeDocument, damagepayeeregister.ShowCauseNotice);
+                                }
+                                else
+                                {
+                                    damagepayeeregister.ShowCauseNoticePath = Data.ShowCauseNoticePath;
+                                }
+                                if (damagepayeeregister.Fgform != null)
+                                {
+                                    damagepayeeregister.FgformPath = fileHelper.SaveFile(FGFormDocument, damagepayeeregister.Fgform);
+                                }
+                                else
+                                {
+                                    damagepayeeregister.FgformPath = Data.FgformPath;
+                                }
+                                if (damagepayeeregister.DocumentForFile != null)
+                                {
+                                    damagepayeeregister.DocumentForFilePath = fileHelper.SaveFile(BillDocument, damagepayeeregister.DocumentForFile);
+                                }
+                                else
+                                {
+                                    damagepayeeregister.DocumentForFilePath = Data.DocumentForFilePath;
+                                }
+                                if (damagepayeeregister.ATSFile != null)
+                                {
+                                    damagepayeeregister.AtsfilePath = fileHelper.SaveFile(ATSDocument, damagepayeeregister.ATSFile);
+                                }
+                                else
+                                {
+                                    damagepayeeregister.AtsfilePath = Data.AtsfilePath;
+                                }
+                                if (damagepayeeregister.GPAFile != null)
+                                {
+                                    damagepayeeregister.GpafilePath = fileHelper.SaveFile(GPADocument, damagepayeeregister.GPAFile);
+                                }
+                                else
+                                {
+                                    damagepayeeregister.GpafilePath = Data.GpafilePath;
+                                }
+                                if (damagepayeeregister.MutationFile != null)
+                                {
+                                    damagepayeeregister.MutationFilePath = fileHelper.SaveFile(MutationDocument, damagepayeeregister.MutationFile);
+                                }
+                                else
+                                {
+                                    damagepayeeregister.MutationFilePath = Data.MutationFilePath;
+                                }
+                                if (damagepayeeregister.WillFile != null)
+                                {
+                                    damagepayeeregister.WillFilePath = fileHelper.SaveFile(WillDocument, damagepayeeregister.WillFile);
+                                }
+                                else
+                                {
+                                    damagepayeeregister.WillFilePath = Data.WillFilePath;
+                                }
+                                var result = await _damagepayeeregisterService.Update(id, damagepayeeregister);
+                                if (result)
+                                {
 
+
+                                    //****** code for saving  Damage payee personal info *****
+
+                                    if (damagepayeeregister.payeeName != null &&
+                                      damagepayeeregister.Gender != null &&
+                                      damagepayeeregister.Address != null &&
+                                      damagepayeeregister.MobileNo != null)
+                                    {
+                                        if (damagepayeeregister.payeeName.Count > 0 &&
+                                    damagepayeeregister.Gender.Count > 0 &&
+                                    damagepayeeregister.Address.Count > 0 &&
+                                    damagepayeeregister.MobileNo.Count > 0)
+
+                                        {
+                                            List<Damagepayeepersonelinfo> damagepayeepersonelinfo = new List<Damagepayeepersonelinfo>();
+                                            result = await _damagepayeeregisterService.DeletePayeePersonalInfo(id);
+                                            for (int i = 0; i < damagepayeeregister.payeeName.Count; i++)
+                                            {
+                                                damagepayeepersonelinfo.Add(new Damagepayeepersonelinfo
+                                                {
+                                                    Name = damagepayeeregister.payeeName.Count <= i ? string.Empty : damagepayeeregister.payeeName[i],
+                                                    FatherName = damagepayeeregister.payeeFatherName.Count <= i ? string.Empty : damagepayeeregister.payeeFatherName[i],
+                                                    Gender = damagepayeeregister.Gender.Count <= i ? "1" : damagepayeeregister.Gender[i],
+                                                    Address = damagepayeeregister.Address.Count <= i ? string.Empty : damagepayeeregister.Address[i],
+                                                    MobileNo = damagepayeeregister.MobileNo.Count <= i ? string.Empty : damagepayeeregister.MobileNo[i],
+                                                    EmailId = damagepayeeregister.EmailId.Count <= i ? string.Empty : damagepayeeregister.EmailId[i],
+                                                    DamagePayeeRegisterTempId = damagepayeeregister.Id,
+                                                    AadharNo = damagepayeeregister.AadharNo.Count <= i ? string.Empty : damagepayeeregister.AadharNo[i],
+                                                    PanNo = damagepayeeregister.PanNo.Count <= i ? string.Empty : damagepayeeregister.PanNo[i],
+
+                                                    AadharNoFilePath = damagepayeeregister.Aadhar != null ?
+                                                                                damagepayeeregister.Aadhar.Count <= i ? string.Empty :
+                                                                                fileHelper.SaveFile(AadharNoDocument, damagepayeeregister.Aadhar[i]) :
+                                                                                damagepayeeregister.AadharNoFilePath[i] != null || damagepayeeregister.AadharNoFilePath[i] != "" ?
+                                                                                damagepayeeregister.AadharNoFilePath[i] : string.Empty,
+                                                    PanNoFilePath = damagepayeeregister.Pan != null ?
+                                                                                damagepayeeregister.Pan.Count <= i ? string.Empty :
+                                                                                fileHelper.SaveFile(PanNoDocument, damagepayeeregister.Pan[i]) :
+                                                                                damagepayeeregister.PanNoFilePath[i] != null || damagepayeeregister.PanNoFilePath[i] != "" ?
+                                                                                damagepayeeregister.PanNoFilePath[i] : string.Empty,
+                                                    PhotographPath = damagepayeeregister.Photograph != null ?
+                                                                                damagepayeeregister.Photograph.Count <= i ? string.Empty :
+                                                                                fileHelper.SaveFile(PhotographPersonelDocument, damagepayeeregister.Photograph[i]) :
+                                                                                damagepayeeregister.PhotographFilePath[i] != null || damagepayeeregister.PhotographFilePath[i] != "" ?
+                                                                                damagepayeeregister.PhotographFilePath[i] : string.Empty,
+                                                    SignaturePath = damagepayeeregister.SignatureFile != null ?
+                                                                                damagepayeeregister.SignatureFile.Count <= i ? string.Empty :
+                                                                                fileHelper.SaveFile(SignaturePersonelDocument, damagepayeeregister.SignatureFile[i]) :
+                                                                                damagepayeeregister.SignatureFilePath[i] != null || damagepayeeregister.SignatureFilePath[i] != "" ?
+                                                                                damagepayeeregister.SignatureFilePath[i] : string.Empty,
+                                                    //OtherDocPath = damagepayeeregister.OtherDocFile != null ?
+                                                    //                                damagepayeeregister.OtherDocFile.Count <= i ? string.Empty :
+                                                    //                                fileHelper.SaveFile(OtherDocDocument, damagepayeeregister.OtherDocFile[i]) :
+                                                    //                                damagepayeeregister.OtherDocFilePath[i] != null || damagepayeeregister.OtherDocFilePath[i] != "" ?
+                                                    //                                damagepayeeregister.OtherDocFilePath[i] : string.Empty
+
+                                                });
+
+
+                                            }
+                                            foreach (var item in damagepayeepersonelinfo)
+                                            {
+                                                result = await _damagepayeeregisterService.SavePayeePersonalInfo(item);
+                                            }
+                                        }
+                                    }
+
+                                    //****** code for saving  Allotte Type *****
+                                    if (damagepayeeregister.Name != null &&
+                                     damagepayeeregister.FatherName != null &&
+                                     damagepayeeregister.Date != null)
+                                    {
+                                        if (
+                                         damagepayeeregister.Name.Count > 0 &&
+                                         damagepayeeregister.FatherName.Count > 0 &&
+                                         damagepayeeregister.Date.Count > 0
+                                         )
+                                        {
+
+                                            List<Allottetype> allottetype = new List<Allottetype>();
+                                            result = await _damagepayeeregisterService.DeleteAllotteType(id);
+                                            for (int i = 0; i < damagepayeeregister.Name.Count; i++)
+                                            {
+                                                allottetype.Add(new Allottetype
+                                                {
+                                                    Name = damagepayeeregister.Name.Count <= i ? string.Empty : damagepayeeregister.Name[i],
+                                                    FatherName = damagepayeeregister.FatherName.Count <= i ? string.Empty : damagepayeeregister.FatherName[i],
+                                                    Date = damagepayeeregister.Date.Count <= i ? DateTime.Now : damagepayeeregister.Date[i],
+                                                    DamagePayeeRegisterTempId = damagepayeeregister.Id,
+                                                    AtsgpadocumentPath = damagepayeeregister.ATSGPA != null ?
+                                                                                damagepayeeregister.ATSGPA.Count <= i ? string.Empty :
+                                                                                fileHelper.SaveFile(PhotoFilePathLayout, damagepayeeregister.ATSGPA[i]) :
+                                                                                damagepayeeregister.ATSGPAFilePath[i] != null || damagepayeeregister.ATSGPAFilePath[i] != "" ?
+                                                                                damagepayeeregister.ATSGPAFilePath[i] : string.Empty
+
+                                                });
+                                            }
+                                            result = await _damagepayeeregisterService.SaveAllotteType(allottetype);
+                                        }
+                                    }
+
+                                    //****** code for saving  Damage payment history *****
+
+                                    if (damagepayeeregister.PaymntName != null &&
+                                          damagepayeeregister.RecieptNo != null &&
+                                          damagepayeeregister.PaymentMode != null &&
+                                          damagepayeeregister.PaymentDate != null &&
+                                          damagepayeeregister.Amount != null)
+                                    {
+
+
+                                        if (
+                                             damagepayeeregister.PaymntName.Count > 0 &&
+                                             damagepayeeregister.RecieptNo.Count > 0 &&
+                                             damagepayeeregister.PaymentMode.Count > 0 &&
+                                             damagepayeeregister.PaymentDate.Count > 0 &&
+                                             damagepayeeregister.Amount.Count > 0
+                                             )
+
+                                        {
+                                            List<Damagepaymenthistory> damagepaymenthistory = new List<Damagepaymenthistory>();
+                                            result = await _damagepayeeregisterService.DeletePaymentHistory(id);
+                                            for (int i = 0; i < damagepayeeregister.payeeName.Count; i++)
+                                            {
+                                                damagepaymenthistory.Add(new Damagepaymenthistory
+                                                {
+                                                    Name = damagepayeeregister.PaymntName.Count <= i ? string.Empty : damagepayeeregister.PaymntName[i],
+                                                    RecieptNo = damagepayeeregister.RecieptNo.Count <= i ? string.Empty : damagepayeeregister.RecieptNo[i],
+                                                    PaymentMode = damagepayeeregister.PaymentMode.Count <= i ? string.Empty : damagepayeeregister.PaymentMode[i],
+                                                    PaymentDate = damagepayeeregister.PaymentDate.Count <= i ? DateTime.Now : damagepayeeregister.PaymentDate[i],
+                                                    Amount = damagepayeeregister.Amount.Count <= i ? 0 : damagepayeeregister.Amount[i],
+                                                    RecieptDocumentPath = damagepayeeregister.Reciept != null ?
+                                                                                damagepayeeregister.Reciept.Count <= i ? string.Empty :
+                                                                                fileHelper.SaveFile(RecieptDocumentPathLayout, damagepayeeregister.Reciept[i]) :
+                                                                                damagepayeeregister.RecieptFilePath[i] != null || damagepayeeregister.RecieptFilePath[i] != "" ?
+                                                                                damagepayeeregister.RecieptFilePath[i] : string.Empty,
+                                                    DamagePayeeRegisterTempId = damagepayeeregister.Id
+
+
+
+                                                });
+                                            }
+
+                                            result = await _damagepayeeregisterService.SavePaymentHistory(damagepaymenthistory);
+
+                                        }
+                                    }
+                                    if (result)
+                                    {
+                                        ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
+                                        var result1 = await _damagepayeeregisterService.GetAllDamagepayeeregister();
+                                        return View("Index", result1);
+                                    }
+                                    else
+                                    {
+                                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                                        return View(damagepayeeregister);
+                                    }
+
+                                }
+
+                                else
+                                {
+                                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                                    return View(damagepayeeregister);
+                                }
 
                             }
-                            foreach (var item in damagepayeepersonelinfo)
+                            else
                             {
-                                result = await _damagepayeeregisterService.SavePayeePersonalInfo(item);
+
+
+                                ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
+                                return View(damagepayeeregister);
                             }
                         }
-                    }
-
-                    //****** code for saving  Allotte Type *****
-                    if (damagepayeeregister.Name != null &&
-                     damagepayeeregister.FatherName != null &&
-                     damagepayeeregister.Date != null)
-                    {
-                        if (
-                         damagepayeeregister.Name.Count > 0 &&
-                         damagepayeeregister.FatherName.Count > 0 &&
-                         damagepayeeregister.Date.Count > 0
-                         )
+                        else
                         {
 
-                            List<Allottetype> allottetype = new List<Allottetype>();
-                            result = await _damagepayeeregisterService.DeleteAllotteType(id);
-                            for (int i = 0; i < damagepayeeregister.Name.Count; i++)
-                            {
-                                allottetype.Add(new Allottetype
-                                {
-                                    Name = damagepayeeregister.Name.Count <= i ? string.Empty : damagepayeeregister.Name[i],
-                                    FatherName = damagepayeeregister.FatherName.Count <= i ? string.Empty : damagepayeeregister.FatherName[i],
-                                    Date = damagepayeeregister.Date.Count <= i ? DateTime.Now : damagepayeeregister.Date[i],
-                                    DamagePayeeRegisterTempId = damagepayeeregister.Id,
-                                    AtsgpadocumentPath = damagepayeeregister.ATSGPA != null ?
-                                                                damagepayeeregister.ATSGPA.Count <= i ? string.Empty :
-                                                                fileHelper.SaveFile(PhotoFilePathLayout, damagepayeeregister.ATSGPA[i]) :
-                                                                damagepayeeregister.ATSGPAFilePath[i] != null || damagepayeeregister.ATSGPAFilePath[i] != "" ?
-                                                                damagepayeeregister.ATSGPAFilePath[i] : string.Empty
 
-                                });
-                            }
-                            result = await _damagepayeeregisterService.SaveAllotteType(allottetype);
+                            ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
+                            return View(damagepayeeregister);
                         }
-                    }
-
-                    //****** code for saving  Damage payment history *****
-
-                    if (damagepayeeregister.PaymntName != null &&
-                          damagepayeeregister.RecieptNo != null &&
-                          damagepayeeregister.PaymentMode != null &&
-                          damagepayeeregister.PaymentDate != null &&
-                          damagepayeeregister.Amount != null)
-                    {
-
-
-                        if (
-                             damagepayeeregister.PaymntName.Count > 0 &&
-                             damagepayeeregister.RecieptNo.Count > 0 &&
-                             damagepayeeregister.PaymentMode.Count > 0 &&
-                             damagepayeeregister.PaymentDate.Count > 0 &&
-                             damagepayeeregister.Amount.Count > 0
-                             )
-
+                        }
+                        else
                         {
-                            List<Damagepaymenthistory> damagepaymenthistory = new List<Damagepaymenthistory>();
-                            result = await _damagepayeeregisterService.DeletePaymentHistory(id);
-                            for (int i = 0; i < damagepayeeregister.payeeName.Count; i++)
-                            {
-                                damagepaymenthistory.Add(new Damagepaymenthistory
-                                {
-                                    Name = damagepayeeregister.PaymntName.Count <= i ? string.Empty : damagepayeeregister.PaymntName[i],
-                                    RecieptNo = damagepayeeregister.RecieptNo.Count <= i ? string.Empty : damagepayeeregister.RecieptNo[i],
-                                    PaymentMode = damagepayeeregister.PaymentMode.Count <= i ? string.Empty : damagepayeeregister.PaymentMode[i],
-                                    PaymentDate = damagepayeeregister.PaymentDate.Count <= i ? DateTime.Now : damagepayeeregister.PaymentDate[i],
-                                    Amount = damagepayeeregister.Amount.Count <= i ? 0 : damagepayeeregister.Amount[i],
-                                    RecieptDocumentPath = damagepayeeregister.Reciept != null ?
-                                                                damagepayeeregister.Reciept.Count <= i ? string.Empty :
-                                                                fileHelper.SaveFile(RecieptDocumentPathLayout, damagepayeeregister.Reciept[i]) :
-                                                                damagepayeeregister.RecieptFilePath[i] != null || damagepayeeregister.RecieptFilePath[i] != "" ?
-                                                                damagepayeeregister.RecieptFilePath[i] : string.Empty,
-                                    DamagePayeeRegisterTempId = damagepayeeregister.Id
 
 
-
-                                });
-                            }
-
-                            result = await _damagepayeeregisterService.SavePaymentHistory(damagepaymenthistory);
-
+                            ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
+                            return View(damagepayeeregister);
                         }
-                    }
-                    if (result)
-                    {
-                        ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                        var result1 = await _damagepayeeregisterService.GetAllDamagepayeeregister();
-                        return View("Index", result1);
-                    }
-                    else
-                    {
-                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(damagepayeeregister);
-                    }
-
                 }
-
                 else
                 {
-                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+
+
+                    ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
                     return View(damagepayeeregister);
                 }
+                }
+                else
+                {
 
-            }
+
+                    ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
+                    return View(damagepayeeregister);
+                }
+        
+        }
 
 
             else
@@ -1266,6 +1374,10 @@ namespace DamagePayee.Controllers
                             }
 
                         }
+                        else
+                        {
+                            Flag = false;
+                        }
                     }
                     catch (OutOfMemoryException ex)
                     {
@@ -1337,6 +1449,10 @@ namespace DamagePayee.Controllers
                                 Flag = false;
                             }
 
+                        }
+                        else
+                        {
+                            Flag = false;
                         }
                     }
                     catch (OutOfMemoryException ex)
@@ -1410,6 +1526,11 @@ namespace DamagePayee.Controllers
                             }
 
                         }
+                        else
+                        {
+                            Flag = false;
+                        }
+
                     }
                     catch (OutOfMemoryException ex)
                     {
@@ -1481,6 +1602,10 @@ namespace DamagePayee.Controllers
                             }
 
                         }
+                        else
+                        {
+                            Flag = false;
+                        }
                     }
                     catch (OutOfMemoryException ex)
                     {
@@ -1551,6 +1676,10 @@ namespace DamagePayee.Controllers
                                 Flag = false;
                             }
 
+                        }
+                        else
+                        {
+                            Flag = false;
                         }
                     }
                     catch (OutOfMemoryException ex)
@@ -1624,6 +1753,10 @@ namespace DamagePayee.Controllers
                             }
 
                         }
+                        else
+                        {
+                            Flag = false;
+                        }
                     }
                     catch (OutOfMemoryException ex)
                     {
@@ -1694,6 +1827,10 @@ namespace DamagePayee.Controllers
                                 Flag = false;
                             }
 
+                        }
+                        else
+                        {
+                            Flag = false;
                         }
                     }
                     catch (OutOfMemoryException ex)
@@ -1768,6 +1905,10 @@ namespace DamagePayee.Controllers
                             }
 
                         }
+                        else
+                        {
+                            Flag = false;
+                        }
                     }
                     catch (OutOfMemoryException ex)
                     {
@@ -1839,6 +1980,10 @@ namespace DamagePayee.Controllers
                                 Flag = false;
                             }
 
+                        }
+                        else
+                        {
+                            Flag = false;
                         }
                     }
                     catch (OutOfMemoryException ex)
@@ -1912,6 +2057,10 @@ namespace DamagePayee.Controllers
                             }
 
                         }
+                        else
+                        {
+                            Flag = false;
+                        }
                     }
                     catch (OutOfMemoryException ex)
                     {
@@ -1983,6 +2132,10 @@ namespace DamagePayee.Controllers
                                 Flag = false;
                             }
 
+                        }
+                        else
+                        {
+                            Flag = false;
                         }
                     }
                     catch (OutOfMemoryException ex)
@@ -2056,6 +2209,10 @@ namespace DamagePayee.Controllers
                             }
 
                         }
+                        else
+                        {
+                            Flag = false;
+                        }
                     }
                     catch (OutOfMemoryException ex)
                     {
@@ -2126,6 +2283,10 @@ namespace DamagePayee.Controllers
                                 Flag = false;
                             }
 
+                        }
+                        else
+                        {
+                            Flag = false;
                         }
                     }
                     catch (OutOfMemoryException ex)
@@ -2198,6 +2359,10 @@ namespace DamagePayee.Controllers
                                 Flag = false;
                             }
 
+                        }
+                        else
+                        {
+                            Flag = false;
                         }
                     }
                     catch (OutOfMemoryException ex)
