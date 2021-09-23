@@ -168,17 +168,20 @@ namespace NewLandAcquisition.Controllers
                     else
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
+                        await BindDropDown(newlanddemandlistdetails);
                         return View(newlanddemandlistdetails);
                     }
               }
                 else
                 {
                     ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
+                    await BindDropDown(newlanddemandlistdetails);
                     return View(newlanddemandlistdetails);
                 }
             }
             else
             {
+                await BindDropDown(newlanddemandlistdetails);
                 return View(newlanddemandlistdetails);
             }
 
@@ -224,7 +227,7 @@ namespace NewLandAcquisition.Controllers
             bool IsValidpdf1 = CheckMimeType1(newlanddemandlistdetails);
             await BindDropDown(newlanddemandlistdetails);
             newlanddemandlistdetails.VillageList = await _newLandDemandListDetailsService.GetVillageList();
-
+            newlanddemandlistdetails.KhasraNoList = await _newLandDemandListDetailsService.GetKhasraList(newlanddemandlistdetails.VillageId);
             if (ModelState.IsValid)
             {
                 if (IsValidpdf == true)
@@ -341,18 +344,21 @@ namespace NewLandAcquisition.Controllers
                     else
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
+                        await BindDropDown(newlanddemandlistdetails);
                         return View(newlanddemandlistdetails);
                     }
                 }
                 else
                 {
                     ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
+                    await BindDropDown(newlanddemandlistdetails);
                     return View(newlanddemandlistdetails);
 
                 }
             }
             else
             {
+                await BindDropDown(newlanddemandlistdetails);
                 return View(newlanddemandlistdetails);
             }
         }
@@ -634,6 +640,10 @@ namespace NewLandAcquisition.Controllers
                             }
 
                         }
+                        else
+                        {
+                            Flag = false;
+                        }
                     }
                     catch (OutOfMemoryException ex)
                     {
@@ -704,6 +714,10 @@ namespace NewLandAcquisition.Controllers
                                 Flag = false;
                             }
 
+                        }
+                        else
+                        {
+                            Flag = false;
                         }
                     }
                     catch (OutOfMemoryException ex)

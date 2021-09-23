@@ -639,6 +639,10 @@ namespace NewLandAcquisition.Controllers
                             }
 
                         }
+                        else
+                        {
+                            Flag = false;
+                        }
                     }
                     catch (OutOfMemoryException ex)
                     {
