@@ -116,7 +116,8 @@ namespace EncroachmentDemolition.Controllers
             var IsApplicationPendingAtUserEnd = await _watchAndWardApprovalService.IsApplicationPendingAtUserEnd(id, SiteContext.UserId);
             if (IsApplicationPendingAtUserEnd)
             {
-                if (IsValidpdf == true) { 
+                if (IsValidpdf == true)
+                { 
                     var Data = await _watchAndWardApprovalService.FetchSingleResult(id);
                 Data.LocalityList = await _watchandwardService.GetAllLocality();
                 Data.KhasraList = await _watchandwardService.GetAllKhasra();
@@ -506,20 +507,11 @@ namespace EncroachmentDemolition.Controllers
             }
 
             }
-          
-            
-            
-            
-            
-            
-            
-            
             
             else
             {
                 ViewBag.Message = Alert.Show("Application Already Submited ", "", AlertType.Warning);
                 TempData["Message"] = Alert.Show("Application Already Submited ", "", AlertType.Warning);
-
                 return RedirectToAction("Index");
             }
         }
@@ -967,6 +959,10 @@ namespace EncroachmentDemolition.Controllers
                                 Flag = false;
                             }
 
+                        }
+                        else
+                        {
+                            Flag = false;
                         }
                     }
                     catch (OutOfMemoryException ex)

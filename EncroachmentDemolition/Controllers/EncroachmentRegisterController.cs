@@ -916,6 +916,11 @@ namespace EncroachmentDemolition.Controllers
                             }
 
                         }
+                        else
+                        {
+                            Flag = false;
+
+                        }
                     }
                     catch (OutOfMemoryException ex)
                     {
@@ -973,7 +978,7 @@ namespace EncroachmentDemolition.Controllers
 
                                 iTextSharp.text.pdf.PdfReader oPdfReader = new iTextSharp.text.pdf.PdfReader(FilePath);
                                 oPdfReader.Close();
-                                fullpath =_configuration.GetSection("FilePaths:EncroachmentRegisterationFiles:LocationMapFilePath").Value.ToString();
+                                fullpath = _configuration.GetSection("FilePaths:EncroachmentRegisterationFiles:LocationMapFilePath").Value.ToString();
 
 
                                 FileInfo doc = new FileInfo(fullpath);
@@ -987,6 +992,10 @@ namespace EncroachmentDemolition.Controllers
                                 Flag = false;
                             }
 
+                        }
+                        else
+                        {
+                            Flag = false;
                         }
                     }
                     catch (OutOfMemoryException ex)
