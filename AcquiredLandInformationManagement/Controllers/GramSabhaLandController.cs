@@ -178,63 +178,71 @@ namespace AcquiredLandInformationManagement.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Gramsabhaland gramsabhaland)
         {
+            bool IsValidpdf = CheckMimeType(gramsabhaland);
+            gramsabhaland.ZoneList = await _gramsabhalandService.GetAllZone();
+            gramsabhaland.VillageList = await _gramsabhalandService.GetAllVillage(gramsabhaland.ZoneId);
 
             if (ModelState.IsValid)
             {
-
-
-
-
-
-                FileHelper file = new FileHelper();
-                if (gramsabhaland.GNus507Document1 != null)
-                {
-                    gramsabhaland.GazzetteNotificationUs507document = file.SaveFile1(GztNoUs507documentlayout, gramsabhaland.GNus507Document1);
-
-                }
-                if (gramsabhaland.Us22Document2 != null)
-                {
-                    gramsabhaland.Us22notificationDocument = file.SaveFile1(Us22NoDocumentlayout, gramsabhaland.Us22Document2);
-
-                }
-                if (gramsabhaland.Us22OtherDocument3 != null)
-                {
-                    gramsabhaland.Us22otherNotificationDocument = file.SaveFile1(Us22otherNoDocumentlayout, gramsabhaland.Us22OtherDocument3);
-
-                }
-                if (gramsabhaland.TssSurveyDocument4 != null)
-                {
-                    gramsabhaland.UploadTssSurveyReport = file.SaveFile1(UpTssSurveyReportlayout, gramsabhaland.TssSurveyDocument4);
-
-                }
-                if (gramsabhaland.KabzaDocument5 != null)
-                {
-                    gramsabhaland.KabzaProceeding = file.SaveFile1(KabzaProceedingDocumentlayout, gramsabhaland.KabzaDocument5);
-
-                }
-
-                try
+                if (IsValidpdf == true)
                 {
 
-                    gramsabhaland.ModifiedBy = SiteContext.UserId;
-                    var result = await _gramsabhalandService.Update(id, gramsabhaland);
-                    if (result == true)
+                    FileHelper file = new FileHelper();
+                    if (gramsabhaland.GNus507Document1 != null)
                     {
-                        ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
+                        gramsabhaland.GazzetteNotificationUs507document = file.SaveFile1(GztNoUs507documentlayout, gramsabhaland.GNus507Document1);
 
-                        return View("Index");
                     }
-                    else
+                    if (gramsabhaland.Us22Document2 != null)
+                    {
+                        gramsabhaland.Us22notificationDocument = file.SaveFile1(Us22NoDocumentlayout, gramsabhaland.Us22Document2);
+
+                    }
+                    if (gramsabhaland.Us22OtherDocument3 != null)
+                    {
+                        gramsabhaland.Us22otherNotificationDocument = file.SaveFile1(Us22otherNoDocumentlayout, gramsabhaland.Us22OtherDocument3);
+
+                    }
+                    if (gramsabhaland.TssSurveyDocument4 != null)
+                    {
+                        gramsabhaland.UploadTssSurveyReport = file.SaveFile1(UpTssSurveyReportlayout, gramsabhaland.TssSurveyDocument4);
+
+                    }
+                    if (gramsabhaland.KabzaDocument5 != null)
+                    {
+                        gramsabhaland.KabzaProceeding = file.SaveFile1(KabzaProceedingDocumentlayout, gramsabhaland.KabzaDocument5);
+
+                    }
+
+                    try
+                    {
+
+                        gramsabhaland.ModifiedBy = SiteContext.UserId;
+                        var result = await _gramsabhalandService.Update(id, gramsabhaland);
+                        if (result == true)
+                        {
+                            ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
+
+                            return View("Index");
+                        }
+                        else
+                        {
+                            ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                            return View(gramsabhaland);
+
+                        }
+                    }
+                    catch (Exception ex)
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                         return View(gramsabhaland);
-
                     }
                 }
-                catch (Exception ex)
+                else
                 {
-                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                    ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
                     return View(gramsabhaland);
+
                 }
             }
             return View(gramsabhaland);

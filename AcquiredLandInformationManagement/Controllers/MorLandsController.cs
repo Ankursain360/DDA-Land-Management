@@ -146,6 +146,8 @@ namespace AcquiredLandInformationManagement.Controllers
         [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Morland morland)
         {
+            morland.LandNotificationList = await _morlandService.GetAllLandNotification();
+
             bool IsValidpdf = CheckMimeType(morland);
             if (ModelState.IsValid)
             {

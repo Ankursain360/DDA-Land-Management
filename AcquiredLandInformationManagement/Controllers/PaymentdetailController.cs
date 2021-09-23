@@ -74,8 +74,6 @@ namespace AcquiredLandInformationManagement.Controllers
             bool IsValidpdf = CheckMimeType(paymentdetail);
             try
             {
-
-
                 if (ModelState.IsValid)
                 {
                     if (IsValidpdf == true)

@@ -163,17 +163,20 @@ namespace AcquiredLandInformationManagement.Controllers
                     else
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
+                        await BindDropDown(demandlistdetails);
                         return View(demandlistdetails);
                     }
                 }
                 else
                 {
                     ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
+                    await BindDropDown(demandlistdetails);
                     return View(demandlistdetails);
                 }
             }
             else
             {
+                await BindDropDown(demandlistdetails);
                 return View(demandlistdetails);
             }
 
@@ -340,12 +343,14 @@ namespace AcquiredLandInformationManagement.Controllers
                     else
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
+                        await BindDropDown(demandlistdetails);
                         return View(demandlistdetails);
                     }
                 }
                 else
                 {
                     ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
+                    await BindDropDown(demandlistdetails);
                     return View(demandlistdetails);
                 }
             }

@@ -139,7 +139,7 @@ namespace AcquiredLandInformationManagement.Controllers
         {
             bool IsValidpdf = CheckMimeType(undersection4);
 
-
+            undersection4.ProposalList = await _undersection4service.GetAllProposal();
             if (ModelState.IsValid)
             {
                 if (IsValidpdf == true)
