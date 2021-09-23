@@ -986,6 +986,10 @@ namespace LeaseForPublic.Controllers
                             }
 
                         }
+                        else
+                        {
+                            Flag = false;
+                        }
                     }
                     catch (OutOfMemoryException ex)
                     {
@@ -1055,6 +1059,10 @@ namespace LeaseForPublic.Controllers
                                 Flag = false;
                             }
 
+                        }
+                        else
+                        {
+                            Flag = false;
                         }
                     }
                     catch (OutOfMemoryException ex)
@@ -1126,6 +1134,10 @@ namespace LeaseForPublic.Controllers
                                 Flag = false;
                             }
 
+                        }
+                        else
+                        {
+                            Flag = false;
                         }
                     }
                     catch (OutOfMemoryException ex)
