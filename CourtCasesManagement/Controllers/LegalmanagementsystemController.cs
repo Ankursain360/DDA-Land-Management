@@ -265,6 +265,7 @@ namespace CourtCasesManagement.Controllers
                     else
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                        await BindDropDownView(legalmanagementsystem);
                         return View(legalmanagementsystem);
                     }
                 }
@@ -273,12 +274,14 @@ namespace CourtCasesManagement.Controllers
 
 
                     ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
+                    await BindDropDownView(legalmanagementsystem);
                     return View(legalmanagementsystem);
                 }
                 }
                 else
                 {
-                    return View(legalmanagementsystem);
+                await BindDropDownView(legalmanagementsystem);
+                return View(legalmanagementsystem);
                 }
             }
         [AcceptVerbs("Get", "Post")]
