@@ -1012,6 +1012,10 @@ namespace LandInventory.Controllers
                             }
 
                         }
+                        else
+                        {
+                            Flag = false;
+                        }
                     }
                     catch (OutOfMemoryException ex)
                     {

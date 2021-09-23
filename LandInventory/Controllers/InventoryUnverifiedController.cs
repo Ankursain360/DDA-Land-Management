@@ -373,6 +373,9 @@ namespace LandInventory.Controllers
                 else
                 {
                     ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
+                    ViewBag.Items = await _propertyregistrationService.GetClassificationOfLandDropDownList();
+                    ViewBag.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
+                    await BindDropDown(propertyregistration);
                     return View(propertyregistration);
                 }
             }
@@ -713,6 +716,11 @@ namespace LandInventory.Controllers
                                 Flag = false;
                             }
 
+                        }
+                        else
+                        {
+                            Flag = false;
+                            
                         }
                     }
                     catch (OutOfMemoryException ex)
