@@ -17,10 +17,11 @@ using Service.Common;
 using System.IdentityModel.Tokens.Jwt;
 using System.IO;
 using System.Linq;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.CookiePolicy;
+
 
 namespace GIS
 {
@@ -56,6 +57,17 @@ namespace GIS
             {
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
+                options.HttpOnly = HttpOnlyPolicy.Always;
+                options.Secure = CookieSecurePolicy.Always;
+            });
+
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(Convert.ToInt32(Configuration.GetSection("CookiesSettings:CookiesTimeout").Value));
+                options.Cookie.HttpOnly = true;
+                options.Cookie.Domain = (Configuration.GetSection("CookiesSettings:CookiesDomain").Value).ToString();
+                //options.Cookie.Path = "/Home";
+                options.Cookie.IsEssential = true;
             });
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
@@ -92,7 +104,7 @@ namespace GIS
             })
           .AddCookie("Cookies", options =>
           {
-              options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
+              options.ExpireTimeSpan = TimeSpan.FromMinutes(Convert.ToInt32(Configuration.GetSection("CookiesSettings:CookiesTimeout").Value));
               options.SlidingExpiration = true;
               options.Cookie.Name = "Auth-cookie";
           })
@@ -137,8 +149,10 @@ namespace GIS
             app.UseRouting();
             app.UseCookiePolicy();
             app.UseAuthentication();
-            app.UseAuthorization(); 
-           
+            app.UseAuthorization();
+            app.UseSession();
+            //prevent session hijacking
+            app.preventSessionHijacking();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapDefaultControllerRoute().RequireAuthorization();

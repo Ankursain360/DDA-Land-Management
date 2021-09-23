@@ -122,7 +122,8 @@ namespace EncroachmentDemolition.Controllers
             var IsApplicationPendingAtUserEnd = await _annexureAApprovalService.IsApplicationPendingAtUserEnd(id, SiteContext.UserId);
             if (IsApplicationPendingAtUserEnd)
             {
-                if (IsValidpdf == true) { 
+                if (IsValidpdf == true)
+                { 
                     var Data = await _annexureAApprovalService.FetchSingleResult(id);
                 FileHelper fileHelper = new FileHelper();
                 #region Approval Proccess At Further level start Added by Renu 16 march 2021
@@ -486,18 +487,14 @@ namespace EncroachmentDemolition.Controllers
             }
             else
             {
-                ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
+                    ViewBag.Items = await _userProfileService.GetRole();
+                    await BindApprovalStatusDropdown(fixingdemolition);
+                    ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
                 return View(fixingdemolition);
             }
                 #endregion
 
             }
-          
-            
-            
-            
-            
-            
             
             else
             {
@@ -1012,6 +1009,11 @@ namespace EncroachmentDemolition.Controllers
                             {
                                 Flag = false;
                             }
+
+                        }
+                        else
+                        {
+                            Flag = false;
 
                         }
                     }

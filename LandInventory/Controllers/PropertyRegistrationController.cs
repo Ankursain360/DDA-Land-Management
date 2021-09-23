@@ -597,7 +597,7 @@ namespace LandInventory.Controllers
                         //  var result1 = await _propertyregistrationService.GetAllPropertyregistration(SiteContext.UserId);
                         ViewBag.Items = await _propertyregistrationService.GetClassificationOfLandDropDownList();
                         ViewBag.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
-                        return View("Index");
+                        return View("propertyregistration");
 
                     }
                 }
@@ -605,6 +605,8 @@ namespace LandInventory.Controllers
                 {
 
                     ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
+                    ViewBag.Items = await _propertyregistrationService.GetClassificationOfLandDropDownList();
+                    ViewBag.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
                     return View(propertyregistration);
                 }
 
@@ -1042,6 +1044,10 @@ namespace LandInventory.Controllers
                                 Flag = false;
                             }
 
+                        }
+                        else
+                        {
+                            Flag = false;
                         }
                     }
                     catch (OutOfMemoryException ex)

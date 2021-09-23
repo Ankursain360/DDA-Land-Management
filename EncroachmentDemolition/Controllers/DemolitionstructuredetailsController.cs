@@ -770,7 +770,7 @@ namespace EncroachmentDemolition.Controllers
                 {
                     return View(demolitionstructuredetails);
                 }
-            }
+              }
                 else
                 {
                     ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
@@ -1180,6 +1180,11 @@ namespace EncroachmentDemolition.Controllers
                             {
                                 Flag = false;
                             }
+
+                        }
+                        else
+                        {
+                            Flag = false;
 
                         }
                     }

@@ -433,16 +433,7 @@ namespace LandInventory.Controllers
                     ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
                     return View(landtransfer);
                 }
-
-
-
-
             }
-
-
-
-
-
             else
             {
                 return View(landtransfer);
@@ -698,6 +689,10 @@ namespace LandInventory.Controllers
                             }
 
                         }
+                        else
+                        {
+                            Flag = false;
+                        }
                     }
                     catch (OutOfMemoryException ex)
                     {
@@ -771,6 +766,11 @@ namespace LandInventory.Controllers
                             }
 
                         }
+                        else
+                        {
+                            Flag = false;
+                        }
+
                     }
                     catch (OutOfMemoryException ex)
                     {
@@ -844,6 +844,10 @@ namespace LandInventory.Controllers
                                 Flag = false;
                             }
 
+                        }
+                        else
+                        {
+                            Flag = false;
                         }
                     }
                     catch (OutOfMemoryException ex)
