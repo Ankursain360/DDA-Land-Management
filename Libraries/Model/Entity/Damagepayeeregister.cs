@@ -125,6 +125,10 @@ namespace Libraries.Model.Entity
         public IFormFile PropertyPhoto { get; set; }
         [NotMapped]
         public IFormFile ShowCauseNotice { get; set; }
+
+        [NotMapped]
+        public IFormFile ShowCauseNotice1 { get; set; }
+
         [NotMapped]
         public IFormFile DocumentIFormFile { get; set; }
 
@@ -197,20 +201,52 @@ namespace Libraries.Model.Entity
         public List<string> AadharNoFilePath { get; set; }
         [NotMapped]
         public List<IFormFile> Aadhar { get; set; }
+
+        [NotMapped]
+        public IFormFile Aadhar1 { get; set; }
+
+
+        [NotMapped]
+        public IFormFile Receipt1 { get; set; }
+
         [NotMapped]      
         public List<string> PanNo { get; set; }
+
+        [NotMapped]
+        public IFormFile PanNo1 { get; set; }
+
         [NotMapped]
         public List<string> PanNoFilePath { get; set; }
+
+        [NotMapped]
+        public IFormFile PanNoFilePath1 { get; set; }
+
         [NotMapped]
         public List<IFormFile> Pan { get; set; }
+
+        [NotMapped]
+        public IFormFile Pan1 { get; set; }
+
         [NotMapped]
         public List<IFormFile> Photograph { get; set; }
         [Required(ErrorMessage = "Photo is mandatory")]
+
+        [NotMapped]
+        public IFormFile Photograph1 { get; set; }
+
         [NotMapped]
         public List<string> PhotographFilePath { get; set; }
+
+        [NotMapped]
+        public IFormFile PhotographFilePath1 { get; set; }
+
         [NotMapped]
         public List<IFormFile> SignatureFile { get; set; }
         [Required(ErrorMessage = "Signature is mandatory")]
+
+        [NotMapped]
+        public IFormFile SignatureFile1 { get; set; }
+
         [NotMapped]
         public List<string> SignatureFilePath { get; set; }
         //[NotMapped]

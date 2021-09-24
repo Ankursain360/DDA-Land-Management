@@ -100,7 +100,7 @@
                                         <a id="viewAadharId" asp-action="ViewPersonelInfoAadharFile" class="badge badge-primary px-2" target="_blank" style="display:none;">(View File)</a>
                                         <input type="hidden" asp-for="AadharNoFilePath" />
 
-                                        <input asp-for="Aadhar" type="file" class="floating-label-field floating-label-field--s3 " />
+                                        <input asp-for="Aadhar" type="file" class="floating-label-field floating-label-field--s3 checkExtension" />
                                         <span asp-validation-for="Aadhar" class="d-block text-danger field-validation-valid"></span>
 
 
@@ -111,7 +111,7 @@
                                         <span asp-validation-for="PanNo" class="d-block text-danger field-validation-valid"></span>
                                         <br />
                                         <a id="viewPanId" asp-action="ViewPersonelInfoPanFile" class="badge badge-primary px-2" target="_blank" style="display:none;">(View File)</a>
-                                        <input asp-for="Pan" type="file" class="floating-label-field floating-label-field--s3 " />
+                                        <input asp-for="Pan" type="file" class="floating-label-field floating-label-field--s3 checkExtension" />
                                         <input type="hidden" asp-for="PanNoFilePath" />
                                         <span asp-validation-for="Pan" class="d-block text-danger field-validation-valid msg4"></span>
 
@@ -119,14 +119,14 @@
                                     </td>
                                     <td>
                                         <a id="viewPhotoId" asp-action="ViewPersonelInfoPhotoFile" class="badge badge-primary px-2" target="_blank" style="display:none;">(View File)</a>
-                                        <input asp-for="Photograph" type="file" class="floating-label-field floating-label-field--s3" />
+                                        <input asp-for="Photograph" type="file" class="floating-label-field floating-label-field--s3 checkExtension" />
                                         <input type="hidden" asp-for="PhotographFilePath" />
                                         <span asp-validation-for="Photograph" class="d-block text-danger field-validation-valid"></span>
 
                                     </td>
                                     <td>
                                         <a id="viewSignatureId" asp-action="ViewPersonelInfoSignautreFile" class="badge badge-primary px-2" target="_blank" style="display:none;">(View File)</a>
-                                        <input asp-for="SignatureFile" type="file" class="floating-label-field floating-label-field--s3" />
+                                        <input asp-for="SignatureFile" type="file" class="floating-label-field floating-label-field--s3 checkExtension" />
                                         <input type="hidden" asp-for="SignatureFilePath" />
                                         <span asp-validation-for="SignatureFile" class="d-block text-danger field-validation-valid"></span>
 
@@ -342,7 +342,7 @@
                                 {
 
 
-                                    <input type="file" placeholder="Property Photo" class="floating-label-field floating-label-field--s3" asp-for="PropertyPhoto" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                                    <input type="file" placeholder="Property Photo" class="floating-label-field floating-label-field--s3 checkExtension" asp-for="PropertyPhoto" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
                                     <span asp-validation-for="PropertyPhoto" class="d-block text-danger field-validation-valid"></span>
                                     <a class="badge badge-primary px-2" asp-action="DownloadPropertyPhoto" asp-route-id="@Model.Id" target="_blank">
                                         View File - (@Model.PropertyPhotoPath.Split('\\')?.LastOrDefault()?.Remove(0, 37))
@@ -350,7 +350,7 @@
                                 }
                                 else
                                 {
-                                    <input type="file" asp-for="PropertyPhoto" class="floating-label-field floating-label-field--s3" placeholder="Property Photo">
+                                    <input type="file" asp-for="PropertyPhoto" class="floating-label-field floating-label-field--s3 checkExtension" placeholder="Property Photo">
                                     <span asp-validation-for="PropertyPhoto" class="d-block text-danger field-validation-valid"></span>
 
                                 }
@@ -559,7 +559,7 @@
                             if (Model.ShowCauseNoticePath != null)
                             {
 
-                                <input type="file" asp-for="ShowCauseNotice" class="floating-label-field floating-label-field--s3" placeholder="ShowCauseNotice">
+                                <input type="file" asp-for="ShowCauseNotice" class="floating-label-field floating-label-field--s3 checkExtension" placeholder="ShowCauseNotice">
                                 <a class="badge badge-primary px-2" asp-action="DownloadShowCauseNotice" asp-route-id="@Model.Id" target="_blank">
                                     View File - (@Model.ShowCauseNoticePath.Split('\\')?.LastOrDefault()?.Remove(0, 37))
                                 </a>
@@ -568,7 +568,7 @@
                             }
                             else
                             {
-                                <input type="file" asp-for="ShowCauseNotice" class="floating-label-field floating-label-field--s3" placeholder="ShowCauseNotice">
+                                <input type="file" asp-for="ShowCauseNotice" class="floating-label-field floating-label-field--s3 checkExtension" placeholder="ShowCauseNotice">
                                 <span asp-validation-for="ShowCauseNotice" class="d-block text-danger field-validation-valid"></span>
 
                             }
@@ -583,7 +583,7 @@
                             if (Model.FgformPath != null)
                             {
 
-                                <input type="file" asp-for="Fgform" class="floating-label-field floating-label-field--s3" placeholder="Name">
+                                <input type="file" asp-for="Fgform" class="floating-label-field floating-label-field--s3 checkExtension" placeholder="Name">
                                 <a class="badge badge-primary px-2" asp-action="DownloadFgform" asp-route-id="@Model.Id" target="_blank">
                                     View File - (@Model.FgformPath.Split('\\')?.LastOrDefault()?.Remove(0, 37))
                                 </a>
@@ -591,7 +591,7 @@
                             }
                             else
                             {
-                                <input type="file" asp-for="Fgform" class="floating-label-field floating-label-field--s3" placeholder="Name">
+                                <input type="file" asp-for="Fgform" class="floating-label-field floating-label-field--s3 checkExtension" placeholder="Name">
                                 <span asp-validation-for="Fgform" class="d-block text-danger field-validation-valid"></span>
 
                             }
