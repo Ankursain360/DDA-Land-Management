@@ -1,4 +1,5 @@
 using AuthServer.Data;
+using AuthServer.Filters;
 using AuthServer.Models;
 using IdentityServer4.EntityFramework.DbContexts;
 using IdentityServer4.EntityFramework.Mappers;
@@ -66,7 +67,11 @@ namespace AuthServer
 
             services.Configure<DataProtectionTokenProviderOptions>(opt =>
           opt.TokenLifespan = TimeSpan.FromHours(2));
-
+            services.AddMvc(option =>
+            {
+                option.Filters.Add(typeof(ExceptionLogFilter));
+               
+            });
             services.AddSession(options =>
             {
                 options.IdleTimeout = TimeSpan.FromMinutes(Convert.ToInt32(Configuration.GetSection("CookiesSettings:CookiesTimeout").Value));
