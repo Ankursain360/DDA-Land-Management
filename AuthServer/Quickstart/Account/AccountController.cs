@@ -301,8 +301,8 @@ namespace IdentityServerHost.Quickstart.UI
                 await _signInManager.SignOutAsync();
                 await _httpContextAccessor.HttpContext.SignOutAsync(IdentityConstants.ApplicationScheme);
                 await _httpContextAccessor.HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
-                await _httpContextAccessor.HttpContext.SignOutAsync("Cookies");
-                await _httpContextAccessor.HttpContext.SignOutAsync("oidc");
+                //await _httpContextAccessor.HttpContext.SignOutAsync("Cookies");
+                //await _httpContextAccessor.HttpContext.SignOutAsync("oidc");
                 // raise the logout event
                 await _events.RaiseAsync(new UserLogoutSuccessEvent(User.GetSubjectId(), User.GetDisplayName()));
             }
