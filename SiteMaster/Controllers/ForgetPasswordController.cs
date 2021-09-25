@@ -123,7 +123,9 @@ namespace SiteMaster.Controllers
                         else
                             TempData["Message"] = Alert.Show("Dear User,<br/>" + DisplayName + " Enable to send mail or sms ", "", AlertType.Info);
 
-                        return RedirectToAction("Create", "ForgetPassword");
+                        // return RedirectToAction("Create", "ForgetPassword");
+                        return RedirectToAction("ForgetPasswordMail", "ForgetPassword", new { username = user.UserName });
+                      
                     }
                     else
                     {
@@ -219,7 +221,11 @@ namespace SiteMaster.Controllers
             return new FileStreamResult(s, "image/png");
 
         }
-
+        public IActionResult ForgetPasswordMail(string username)
+        {
+            ViewBag.name = username;
+            return View();
+        }
     }
 }
 
