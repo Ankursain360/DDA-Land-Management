@@ -268,10 +268,11 @@ namespace DamagePayeePublicInterface.Controllers
                                                                                 DamagePayeeRegisterTempId = damagepayeeregistertemp.Id,
                                                                                // DecryptStringAES(model.Password, key);
                                                                             AadharNo = DecryptStringAES(damagepayeeregistertemp.AadharNo.Count <= i ? string.Empty : damagepayeeregistertemp.AadharNo[i],key),
+                                                                                PanNo = DecryptStringAES(damagepayeeregistertemp.PanNo.Count <= i ? string.Empty : damagepayeeregistertemp.PanNo[i], key),
 
-                                                                               
 
-                                                                            PanNo = damagepayeeregistertemp.PanNo.Count <= i ? string.Empty : damagepayeeregistertemp.PanNo[i],
+
+                                                                                //PanNo = damagepayeeregistertemp.PanNo.Count <= i ? string.Empty : damagepayeeregistertemp.PanNo[i],
                                                                                 AadharNoFilePath = damagepayeeregistertemp.Aadhar != null ?
                                                                                                         damagepayeeregistertemp.Aadhar.Count <= i ? string.Empty :
                                                                                                         fileHelper.SaveFile(AadharNoDocument, damagepayeeregistertemp.Aadhar[i]) :
