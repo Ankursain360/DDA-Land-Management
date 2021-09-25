@@ -318,7 +318,8 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public int ApprovalUserId { get; set; }
-
+        [NotMapped]
+        public string EncryptData { get; set; }
         [NotMapped]
         public int ApprovalRoleId { get; set; }
 

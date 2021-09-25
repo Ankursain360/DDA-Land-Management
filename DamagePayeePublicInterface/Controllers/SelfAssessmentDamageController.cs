@@ -17,12 +17,8 @@ using Dto.Master;
 using Core.Enum;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
-
-
-
 using Microsoft.AspNetCore.Http;
-
-
+using System.Security.Cryptography;
 
 namespace DamagePayeePublicInterface.Controllers
 {
@@ -76,14 +72,19 @@ namespace DamagePayeePublicInterface.Controllers
                 ViewBag.RebateValue = 0;
             else
                 ViewBag.RebateValue = Math.Round((value.RebatePercentage), 2);
+
+            Data.EncryptData = SetEncriptionKey();
+
             if (Data != null)
             {
+                Data.EncryptData = SetEncriptionKey();
                 ViewBag.MainDamagePayeeId = Data.Id;
                 await BindDropDown(Data);
                 return View(Data);
             }
             else
             {
+                damagepayeeregistertemp.EncryptData = SetEncriptionKey();
                 ViewBag.MainDamagePayeeId = 0;
                 await BindDropDown(damagepayeeregistertemp);
                 return View(damagepayeeregistertemp);
@@ -95,17 +96,7 @@ namespace DamagePayeePublicInterface.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(Damagepayeeregister damagepayeeregistertemp)
         {
-            bool IsValidpdfAAdhar = CheckMimeTypeForaadharaCard(damagepayeeregistertemp);
-            bool IsValidpdfPanCard = CheckMimeTypeForPanCardDocument(damagepayeeregistertemp);
-            bool IsValidpdfPhotograph = CheckMimeTypeForPhotographPersonelDocument(damagepayeeregistertemp);
-            bool IsValidpdfSingnature = CheckMimeTypeForSingnatureDocument(damagepayeeregistertemp);
-            bool IsValidpdfShowCaseNotice = CheckMimeTypeForShowCaseNotice(damagepayeeregistertemp);
-            bool IsValidpdfFgForm = CheckMimeTypeForFgform(damagepayeeregistertemp);
-            bool IsValidpdfBill = CheckMimeTypeForDocumentBill(damagepayeeregistertemp);
-            bool IsValidpdfSGPDocument = CheckMimeTypeForDocumentATSGPADocument(damagepayeeregistertemp);
-            bool IsValidpdfReceiptDocument = CheckMimeTypeForReceiptDocument(damagepayeeregistertemp);
-            bool IsValidpdfReceiptPropertyPhoto = CheckMimeTypeForPropertyPhoto(damagepayeeregistertemp);
-            
+            string key = damagepayeeregistertemp.EncryptData;
             await BindDropDown(damagepayeeregistertemp);
             string PhotoFilePathLayout = _configuration.GetSection("FilePaths:DamagePayeeFiles:ATSGPADocument").Value.ToString();
             string RecieptDocumentPathLayout = _configuration.GetSection("FilePaths:DamagePayeeFiles:RecieptDocument").Value.ToString();
@@ -119,6 +110,17 @@ namespace DamagePayeePublicInterface.Controllers
             string ShowCauseNoticeDocument = _configuration.GetSection("FilePaths:DamagePayeeFiles:ShowCauseNotice").Value.ToString();
             string FGFormDocument = _configuration.GetSection("FilePaths:DamagePayeeFiles:FGForm").Value.ToString();
             string BillDocument = _configuration.GetSection("FilePaths:DamagePayeeFiles:Bill").Value.ToString();
+            bool IsValidpdfAAdhar = CheckMimeTypeForaadharaCard(damagepayeeregistertemp);
+            bool IsValidpdfPanCard = CheckMimeTypeForPanCardDocument(damagepayeeregistertemp);
+            bool IsValidpdfPhotograph = CheckMimeTypeForPhotographPersonelDocument(damagepayeeregistertemp);
+            bool IsValidpdfSingnature = CheckMimeTypeForSingnatureDocument(damagepayeeregistertemp);
+            bool IsValidpdfShowCaseNotice = CheckMimeTypeForShowCaseNotice(damagepayeeregistertemp);
+            bool IsValidpdfFgForm = CheckMimeTypeForFgform(damagepayeeregistertemp);
+            bool IsValidpdfBill = CheckMimeTypeForDocumentBill(damagepayeeregistertemp);
+            bool IsValidpdfSGPDocument = CheckMimeTypeForDocumentATSGPADocument(damagepayeeregistertemp);
+            bool IsValidpdfReceiptDocument = CheckMimeTypeForReceiptDocument(damagepayeeregistertemp);
+            bool IsValidpdfReceiptPropertyPhoto = CheckMimeTypeForPropertyPhoto(damagepayeeregistertemp);
+
             if (ModelState.IsValid)
             {
                 if (IsValidpdfAAdhar == true)
@@ -264,8 +266,12 @@ namespace DamagePayeePublicInterface.Controllers
                                                                                 MobileNo = damagepayeeregistertemp.MobileNo.Count <= i ? string.Empty : damagepayeeregistertemp.MobileNo[i],
                                                                                 EmailId = damagepayeeregistertemp.EmailId.Count <= i ? string.Empty : damagepayeeregistertemp.EmailId[i],
                                                                                 DamagePayeeRegisterTempId = damagepayeeregistertemp.Id,
-                                                                                AadharNo = damagepayeeregistertemp.AadharNo.Count <= i ? string.Empty : damagepayeeregistertemp.AadharNo[i],
-                                                                                PanNo = damagepayeeregistertemp.PanNo.Count <= i ? string.Empty : damagepayeeregistertemp.PanNo[i],
+                                                                               // DecryptStringAES(model.Password, key);
+                                                                            AadharNo = DecryptStringAES(damagepayeeregistertemp.AadharNo.Count <= i ? string.Empty : damagepayeeregistertemp.AadharNo[i],key),
+
+                                                                               
+
+                                                                            PanNo = damagepayeeregistertemp.PanNo.Count <= i ? string.Empty : damagepayeeregistertemp.PanNo[i],
                                                                                 AadharNoFilePath = damagepayeeregistertemp.Aadhar != null ?
                                                                                                         damagepayeeregistertemp.Aadhar.Count <= i ? string.Empty :
                                                                                                         fileHelper.SaveFile(AadharNoDocument, damagepayeeregistertemp.Aadhar[i]) :
@@ -293,7 +299,7 @@ namespace DamagePayeePublicInterface.Controllers
                                                                                 //                            damagepayeeregistertemp.OtherDocFilePath[i] : string.Empty
 
 
-                                                                            });
+                                                                            }); ; ;
                                                                         }
                                                                         foreach (var item in damagepayeepersonelinfotemp)
                                                                         {
@@ -995,6 +1001,103 @@ namespace DamagePayeePublicInterface.Controllers
         }
 
 
+
+        private string SetEncriptionKey()
+        {
+            Random random = new Random();
+            string combination = "0123456789ABCDEFGHIJKMNOPQRSTUVWXYZabcdefghijkmnopqrstuvxyz";
+            StringBuilder captcha = new StringBuilder();
+            for (int i = 0; i < 16; i++)
+                captcha.Append(combination[random.Next(combination.Length)]);
+            string key = captcha.ToString();
+            HttpContext.Session.SetString("haskey", captcha.ToString());
+            return key;
+        }
+
+        public static string DecryptStringAES(string cipherText, string keys)
+        {
+            var keybytes = Encoding.UTF8.GetBytes(keys);
+            var iv = Encoding.UTF8.GetBytes(keys);
+
+            var encrypted = Convert.FromBase64String(cipherText);
+            var decriptedFromJavascript = DecryptStringFromBytes(encrypted, keybytes, iv);
+            return string.Format(decriptedFromJavascript);
+        }
+        private static string DecryptStringFromBytes(byte[] cipherText, byte[] key, byte[] iv)
+        {
+            if (cipherText == null || cipherText.Length <= 0)
+            {
+                throw new ArgumentNullException("cipherText");
+            }
+            if (key == null || key.Length <= 0)
+            {
+                throw new ArgumentNullException("key");
+            }
+            if (iv == null || iv.Length <= 0)
+            {
+                throw new ArgumentNullException("key");
+            }
+
+            // Declare the string used to hold  
+            // the decrypted text.  
+            string plaintext = null;
+
+            // Create an RijndaelManaged object  
+            // with the specified key and IV.  
+            using (var rijAlg = new RijndaelManaged())
+            {
+                //Settings  
+                rijAlg.Mode = CipherMode.CBC;
+                rijAlg.Padding = PaddingMode.PKCS7;
+                rijAlg.FeedbackSize = 128;
+
+                rijAlg.Key = key;
+                rijAlg.IV = iv;
+
+                // Create a decrytor to perform the stream transform.  
+                var decryptor = rijAlg.CreateDecryptor(rijAlg.Key, rijAlg.IV);
+
+                try
+                {
+                    // Create the streams used for decryption.  
+                    using (var msDecrypt = new MemoryStream(cipherText))
+                    {
+                        using (var csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read))
+                        {
+
+                            using (var srDecrypt = new StreamReader(csDecrypt))
+                            {
+                                // Read the decrypted bytes from the decrypting stream  
+                                // and place them in a string.  
+                                plaintext = srDecrypt.ReadToEnd();
+
+                            }
+
+                        }
+                    }
+                }
+                catch
+                {
+                    plaintext = "keyError";
+                }
+            }
+
+            return plaintext;
+        }
+
+        private string GenerateHashKey()
+        {
+            StringBuilder myStr = new StringBuilder();
+            myStr.Append(Request.Headers["User-Agent"].ToString());
+            myStr.Append(Guid.NewGuid().ToString());
+            //myStr.Append(Request.Browser.MajorVersion);
+            //myStr.Append(Request.Browser.MinorVersion);
+            //myStr.Append(Request.LogonUserIdentity.User.Value);
+            SHA1 sha = new SHA1CryptoServiceProvider();
+            byte[] hashdata = sha.ComputeHash(Encoding.UTF8.GetBytes(myStr.ToString()));
+            return Convert.ToBase64String(hashdata);
+        }
+
         [HttpPost]
         public JsonResult CheckFile()
         {
@@ -1067,8 +1170,6 @@ namespace DamagePayeePublicInterface.Controllers
 
             return Json(IsImg, JsonRequestBehavior);
         }
-
-
 
         public bool CheckMimeTypeForaadharaCard(Damagepayeeregister damagepayeeregister)
         {

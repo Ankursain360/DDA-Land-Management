@@ -9,6 +9,8 @@
         <input type="hidden" asp-for="Id" value="@ViewBag.MainDamagePayeeId" />
         <input type="hidden" asp-for="IsMutaionYes" value="0" />
         <input type="hidden" asp-for="ApprovedStatus" />
+        <input type="hidden" asp-for="EncryptData" id="hdnvals" />
+
         <h3 class="mb-3 d-flex">Add Details <span class="ms-auto"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span> </h3>
         <div id="DivOpenSubstitutionForm">
             <div id="DivFileInformation">
@@ -94,20 +96,20 @@
                                     </td>
                                     <td>
 
-                                        <input asp-for="AadharNo" type="text" maxlength="15" class="floating-label-field floating-label-field--s3" />
+                                        <input asp-for="AadharNo" type="password" maxlength="50" class="floating-label-field floating-label-field--s3" />
                                         <span asp-validation-for="AadharNo" class="d-block text-danger field-validation-valid msg3"></span>
                                         <br />
                                         <a id="viewAadharId" asp-action="ViewPersonelInfoAadharFile" class="badge badge-primary px-2" target="_blank" style="display:none;">(View File)</a>
                                         <input type="hidden" asp-for="AadharNoFilePath" />
 
-                                        <input asp-for="Aadhar" type="file" class="floating-label-field floating-label-field--s3 checkExtension" />
+                                        <input asp-for="Aadhar" maxlength="50" type="file" class="floating-label-field floating-label-field--s3 checkExtension" />
                                         <span asp-validation-for="Aadhar" class="d-block text-danger field-validation-valid"></span>
 
 
                                     </td>
                                     <td>
 
-                                        <input asp-for="PanNo" maxlength="15" type="text" class="floating-label-field floating-label-field--s3" />
+                                        <input asp-for="PanNo" maxlength="50" type="password" class="floating-label-field floating-label-field--s3" />
                                         <span asp-validation-for="PanNo" class="d-block text-danger field-validation-valid"></span>
                                         <br />
                                         <a id="viewPanId" asp-action="ViewPersonelInfoPanFile" class="badge badge-primary px-2" target="_blank" style="display:none;">(View File)</a>
@@ -132,12 +134,12 @@
 
                                     </td>
                                     @*<td>
-                                        <a id="viewOtherDocId" asp-action="ViewOtherDocumentFile" class="badge badge-primary px-2" target="_blank" style="display:none;">(View File)</a>
-                                        <input type="hidden" asp-for="OtherDocFilePath" />
-                                        <input  asp-for="OtherDocFile" type="file" class="floating-label-field floating-label-field--s3" />
-                                        <span asp-validation-for="OtherDocFile" class="d-block text-danger field-validation-valid"></span>
+                                            <a id="viewOtherDocId" asp-action="ViewOtherDocumentFile" class="badge badge-primary px-2" target="_blank" style="display:none;">(View File)</a>
+                                            <input type="hidden" asp-for="OtherDocFilePath" />
+                                            <input  asp-for="OtherDocFile" type="file" class="floating-label-field floating-label-field--s3" />
+                                            <span asp-validation-for="OtherDocFile" class="d-block text-danger field-validation-valid"></span>
 
-                                    </td>*@
+                                        </td>*@
                                     <td>
                                         <div class="floating-label-wrap mb-3 mb-md-0">
                                             <a class="delete-record" data-id="0" style="display: none; font-size: 40px;"><i class="ri-indeterminate-circle-fill"></i></a>
@@ -755,12 +757,12 @@
         </b>
 
         @*<div class="row mt-3 mb-3">
-            <div class="col-md-12">
-                <h5 class="my-3" style="color:Black;font:bold">
-            Note: Please calculate Damage CHARGES on FINANCIAL year basis. For any FINANCIAL year (or part thereof) & the due date of payment would be 31st MARCH of that FINANCIAL year.</h5>
+                <div class="col-md-12">
+                    <h5 class="my-3" style="color:Black;font:bold">
+                Note: Please calculate Damage CHARGES on FINANCIAL year basis. For any FINANCIAL year (or part thereof) & the due date of payment would be 31st MARCH of that FINANCIAL year.</h5>
 
-            </div>
-        </div>*@
+                </div>
+            </div>*@
         <div id="divSelfAssessmentAmount" style="margin-top:-10px;">
             <h3 class="my-3 d-flex sub-heading">Amount Payable as per self assessment</h3>
             <input id="RebatePercentage" type="hidden" value="@ViewBag.RebateValue" />
@@ -831,19 +833,33 @@
 
         <div class="row mt-md-3">
             <div class="col-md-12">
-                <input type="submit" value="Submit" class="btn btn-theme" onclick="return PageValidation();" />
+                <input type="submit" value="Submit" class="btn btn-theme" id="btnsubmit" onclick="return PageValidation();" />
                 <a class="btn btn-theme" asp-action="Print" asp-controller="SelfAssessmentDamage" target="_blank">Print</a>
                 <input type="submit" value="Click Here For Payment" class="btn btn-theme" onclick="return CheckPaymentValidation();" />
             </div>
         </div>
     </form>
 
-        </div>
+</div>
 
-        <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
-        <environment include="Development">
-            <script src="~/js/selfassessmentdamagecreate.js"></script>
-        </environment>
-        <environment exclude="Development">
-            <script src="~/js/selfassessmentdamagecreate.min.js" asp-append-version="true"></script>
-        </environment>
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+
+<environment include="Development">
+    <script src="~/js/aes.js"></script>
+</environment>
+
+<environment include="Development">
+    <script src="~/js/selfassessmentdamagecreate.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/aes.min.js" asp-append-version="true"></script>
+</environment>
+<environment exclude="Development">
+
+    <script src="~/js/selfassessmentdamagecreate.min.js" asp-append-version="true"></script>
+</environment>
+
+
