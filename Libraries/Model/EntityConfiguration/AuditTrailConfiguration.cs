@@ -72,7 +72,7 @@ namespace Model.EntityConfiguration
                 .IsUnicode(false);
 
             builder.Property(e => e.UrlReferrer)
-                .HasMaxLength(200)
+                .HasMaxLength(2000)
                 .IsUnicode(false);
 
 
