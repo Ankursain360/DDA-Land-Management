@@ -158,7 +158,7 @@ namespace IdentityServerHost.Quickstart.UI
                         string DisplayName = model.Username.ToString();
                         string EmailID = user.Email.ToString();
                        // string Id = "";
-                        string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "MailDetails.html");
+                        string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "MailDetails1.html");
 
                         #region Mail Generation Added By Renu
 
