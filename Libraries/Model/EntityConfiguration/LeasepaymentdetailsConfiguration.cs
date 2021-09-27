@@ -8,7 +8,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Leasepaymentdetails> builder)
         {
-            builder.ToTable("leasepaymentdetails", "lms");
+            //builder.ToTable("leasepaymentdetails", "lms");
 
             builder.HasIndex(e => e.PaymentTypeId)
                 .HasName("fkLeasePaymentType");

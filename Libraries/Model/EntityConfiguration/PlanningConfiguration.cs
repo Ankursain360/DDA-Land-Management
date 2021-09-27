@@ -8,7 +8,7 @@ namespace Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Planning> entity)
         {
-            entity.ToTable("planning");
+            //entity.ToTable("planning");
 
             entity.Property(e => e.Id).HasColumnType("int(11)");
 

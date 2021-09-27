@@ -8,7 +8,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Gisdim> entity)
         {
-            entity.ToTable("gisdim", "lms");
+            //entity.ToTable("gisdim", "lms");
 
             entity.HasIndex(e => e.VillageId)
                 .HasName("GISDimVillageId_idx");

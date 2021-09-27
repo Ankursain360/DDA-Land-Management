@@ -8,7 +8,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Gistext> entity)
         {
-            entity.ToTable("gistext", "lms");
+            //entity.ToTable("gistext", "lms");
 
             entity.HasIndex(e => e.VillageId)
                 .HasName("GISText_idx");

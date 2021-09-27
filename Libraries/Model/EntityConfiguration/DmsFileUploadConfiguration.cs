@@ -14,7 +14,7 @@ namespace Libraries.Model.EntityConfiguration
 
         public void Configure(EntityTypeBuilder<Dmsfileupload> builder)
         {
-            builder.ToTable("dmsfileupload", "lms");
+            //builder.ToTable("dmsfileupload", "lms");
 
             builder.HasIndex(e => e.DepartmentId)
                 .HasName("fk_DepartmentIdDMSFileUpload_idx");

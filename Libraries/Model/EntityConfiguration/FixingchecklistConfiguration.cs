@@ -11,7 +11,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Fixingchecklist> builder)
         {
-            builder.ToTable("fixingchecklist", "lms");
+            //builder.ToTable("fixingchecklist", "lms");
 
 
             builder.HasIndex(e => e.DemolitionChecklistId)

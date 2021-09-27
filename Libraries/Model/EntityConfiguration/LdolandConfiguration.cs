@@ -8,7 +8,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Ldoland> builder)
         {
-            builder.ToTable("ldoland", "lms");
+            //builder.ToTable("ldoland", "lms");
 
             
             builder.HasIndex(e => e.OtherLandNotificationId)

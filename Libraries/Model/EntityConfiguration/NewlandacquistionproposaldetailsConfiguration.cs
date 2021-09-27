@@ -14,7 +14,7 @@ namespace Libraries.Model.EntityConfiguration
         public void Configure(EntityTypeBuilder<Newlandacquistionproposaldetails> builder)
         {
 
-            builder.ToTable("newlandacquistionproposaldetails", "lms");
+            //builder.ToTable("newlandacquistionproposaldetails", "lms");
 
             builder.HasIndex(e => e.SchemeId)
                 .HasName("fknewSchemeId_idx");

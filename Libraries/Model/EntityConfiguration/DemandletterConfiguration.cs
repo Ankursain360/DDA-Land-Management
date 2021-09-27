@@ -15,7 +15,7 @@ namespace Libraries.Model.EntityConfiguration
 
 
 
-            builder.ToTable("demandletter", "lms");
+            //builder.ToTable("demandletter", "lms");
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
 

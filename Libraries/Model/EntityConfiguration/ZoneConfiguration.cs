@@ -11,7 +11,7 @@ namespace Libraries.Model.EntityConfiguration
 
         public void Configure(EntityTypeBuilder<Zone> builder)
         {
-            builder.ToTable("zone", "lms");
+            //builder.ToTable("zone", "lms");
 
             builder.HasIndex(e => e.Code)
                 .HasName("Code_UNIQUE")

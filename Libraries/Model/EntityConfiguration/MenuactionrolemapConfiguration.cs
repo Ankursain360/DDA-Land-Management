@@ -8,7 +8,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Menuactionrolemap> builder)
         {
-            builder.ToTable("menuactionrolemap", "lms");
+            //builder.ToTable("menuactionrolemap", "lms");
 
             builder.HasIndex(e => e.ActionId)
                 .HasName("fk_menumap_action_id_idx");

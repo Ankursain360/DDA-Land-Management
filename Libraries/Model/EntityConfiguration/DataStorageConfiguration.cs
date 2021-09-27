@@ -9,7 +9,7 @@ namespace Libraries.Model.EntityConfiguration
         public void Configure(EntityTypeBuilder<Datastoragedetails> builder)
         {
 
-            builder.ToTable("datastoragedetails", "lms");
+            //builder.ToTable("datastoragedetails", "lms");
 
             builder.HasIndex(e => e.AlmirahId)
                 .HasName("fk_AlmirahId");

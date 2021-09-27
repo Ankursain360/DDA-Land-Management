@@ -11,7 +11,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Natureofencroachment> builder)
         {
-            builder.ToTable("natureofencroachment", "lms");
+            //builder.ToTable("natureofencroachment", "lms");
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
             builder.Property(e => e.CreatedBy).HasColumnType("int(11)");

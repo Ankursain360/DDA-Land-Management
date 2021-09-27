@@ -14,7 +14,7 @@ namespace Model.EntityConfiguration
         public void Configure(EntityTypeBuilder<Watchandwardreportfiledetails> builder)
         {
 
-            builder.ToTable("watchandwardreportfiledetails", "lms");
+            //builder.ToTable("watchandwardreportfiledetails", "lms");
 
             builder.HasIndex(e => e.WatchAndWardId)
                 .HasName("FKWatchAndWardfile_idx");

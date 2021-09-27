@@ -8,7 +8,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<DailyRoaster> entity)
         {
-            entity.ToTable("dailyroaster");
+            //entity.ToTable("dailyroaster");
 
             entity.HasIndex(e => e.MonthlyRoasterId)
                 .HasName("MonthlyRoasterId_idx");
@@ -26,7 +26,7 @@ namespace Libraries.Model.EntityConfiguration
             entity.Property(e => e.ModifiedBy).HasColumnType("int(11)");
 
             entity.Property(e => e.MonthlyRoasterId).HasColumnType("int(11)");
-            entity.ToTable("dailyroaster");
+            //entity.ToTable("dailyroaster");
 
             entity.HasIndex(e => e.MonthlyRoasterId)
                 .HasName("MonthlyRoasterId_idx");

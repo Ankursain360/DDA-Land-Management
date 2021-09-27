@@ -11,7 +11,7 @@ namespace Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Giszero> builder)
         {
-            builder.ToTable("giszero", "lms");
+            //builder.ToTable("giszero", "lms");
 
             builder.HasIndex(e => e.VillageId)
                 .HasName("fk_VillageIdZero_idx");

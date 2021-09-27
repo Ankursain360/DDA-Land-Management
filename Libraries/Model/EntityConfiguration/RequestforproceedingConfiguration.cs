@@ -13,7 +13,7 @@ namespace Libraries.Model.EntityConfiguration
         {
 
 
-            builder.ToTable("requestforproceeding", "lms");
+            //builder.ToTable("requestforproceeding", "lms");
 
             builder.HasIndex(e => e.AllotmentId)
                 .HasName("fkalltmentid_idx");

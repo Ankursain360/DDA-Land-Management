@@ -9,7 +9,7 @@ namespace Libraries.Model.EntityConfiguration
         public void Configure(EntityTypeBuilder<Almirah> builder)
         {
 
-            builder.ToTable("almirah", "lms");
+            //builder.ToTable("almirah", "lms");
 
             builder.Property(e => e.Id)
                     .HasColumnName("id")

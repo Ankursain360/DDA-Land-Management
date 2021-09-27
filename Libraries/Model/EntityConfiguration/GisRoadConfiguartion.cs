@@ -11,7 +11,7 @@ namespace Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Gisroad> builder)
         {
-            builder.ToTable("gisroad", "lms");
+            //builder.ToTable("gisroad", "lms");
 
             builder.HasIndex(e => e.VillageId)
                 .HasName("fk_VillageIdRoad_idx");

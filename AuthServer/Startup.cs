@@ -77,7 +77,7 @@ namespace AuthServer
                 options.IdleTimeout = TimeSpan.FromMinutes(Convert.ToInt32(Configuration.GetSection("CookiesSettings:CookiesTimeout").Value));
                 options.Cookie.HttpOnly = true;
                 options.Cookie.Domain = HostEnvironment.IsProduction() ? (Configuration.GetSection("CookiesSettings:CookiesDomain").Value).ToString() : "localhost";
-                options.Cookie.Path = Configuration.GetSection("CookiesSettings:CookiesPath").Value.ToString();
+               // options.Cookie.Path = Configuration.GetSection("CookiesSettings:CookiesPath").Value.ToString();
                 options.Cookie.IsEssential = true;
 
             });

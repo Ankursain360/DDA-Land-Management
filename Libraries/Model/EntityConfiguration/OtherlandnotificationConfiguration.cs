@@ -13,7 +13,7 @@ namespace Libraries.Model.EntityConfiguration
         {
 
 
-            builder.ToTable("otherlandnotification", "lms");
+            //builder.ToTable("otherlandnotification", "lms");
 
             builder.Property(e => e.Id)
                 .HasColumnName("id")

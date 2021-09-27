@@ -13,7 +13,7 @@ namespace Libraries.Model.EntityConfiguration
         public void Configure(EntityTypeBuilder<Hearingdetails> builder)
         {
            
-                builder.ToTable("hearingdetails", "lms");
+                //builder.ToTable("hearingdetails", "lms");
 
                 builder.HasIndex(e => e.ReqProcId)
                     .HasName("fk_ReqProcId");

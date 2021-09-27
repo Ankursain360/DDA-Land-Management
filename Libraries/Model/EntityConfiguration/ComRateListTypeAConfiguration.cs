@@ -8,7 +8,7 @@ namespace Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Comratelisttypea> builder)
         {
-            builder.ToTable("comratelisttypea", "lms");
+            //builder.ToTable("comratelisttypea", "lms");
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
 

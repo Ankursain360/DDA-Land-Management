@@ -12,7 +12,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Surveyuserrole> builder)
         {
-            builder.ToTable("surveyuserrole", "lms");
+            //builder.ToTable("surveyuserrole", "lms");
 
             builder.Property(e => e.CreatedDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
 

@@ -11,7 +11,7 @@ namespace Libraries.Model.EntityConfiguration
     {
     public void Configure(EntityTypeBuilder<Newlandannexure1khasrarpt> builder)
     {
-            builder.ToTable("newlandannexure1khasrarpt", "lms");
+            //builder.ToTable("newlandannexure1khasrarpt", "lms");
 
             builder.HasIndex(e => e.NewLandAnnexure1Id)
                 .HasName("FkNewLandAnnexure1Id_idx");

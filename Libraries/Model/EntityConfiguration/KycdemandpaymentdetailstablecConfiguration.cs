@@ -11,7 +11,7 @@ namespace Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Kycdemandpaymentdetailstablec> builder)
         {
-            builder.ToTable("kycdemandpaymentdetailstablec", "lms");
+            //builder.ToTable("kycdemandpaymentdetailstablec", "lms");
 
             builder.HasIndex(e => e.DemandPaymentId)
                 .HasName("fy_paymentdemand_idx");

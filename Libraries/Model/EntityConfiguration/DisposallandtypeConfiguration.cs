@@ -13,7 +13,7 @@ namespace Libraries.Model.EntityConfiguration
         public void Configure(EntityTypeBuilder<Disposallandtype> builder)
         {
 
-            builder.ToTable("disposallandtype", "lms");
+            //builder.ToTable("disposallandtype", "lms");
 
             builder.HasIndex(e => e.Name)
                 .HasName("Name_UNIQUE")

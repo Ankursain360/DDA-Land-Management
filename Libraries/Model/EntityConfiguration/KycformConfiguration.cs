@@ -13,7 +13,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Kycform> builder)
         {
-            builder.ToTable("kycform", "lms");
+            //builder.ToTable("kycform", "lms");
 
             builder.HasIndex(e => e.ApprovedStatus)
                    .HasName("fk_approvalstatus_idx");

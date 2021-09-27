@@ -8,7 +8,7 @@ namespace Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Userprofile> builder)
         {
-            builder.ToTable("userprofile", "lms");
+            //builder.ToTable("userprofile", "lms");
 
             builder.HasIndex(e => e.BranchId)
                     .HasName("fk_BranchIdUserprofile_idx");

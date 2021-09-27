@@ -9,7 +9,7 @@ namespace Libraries.Model.EntityConfiguration
         public void Configure(EntityTypeBuilder<Gisencroachment> entity)
         {
 
-            entity.ToTable("gisencroachment", "lms");
+            //entity.ToTable("gisencroachment", "lms");
 
             entity.HasIndex(e => e.VillageId)
                 .HasName("gisencroachmentVillageId_idx");

@@ -8,7 +8,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<AssignedPropertyDailyRoaster> entity)
         {
-            entity.ToTable("assignedpropertydailyroaster");
+            //entity.ToTable("assignedpropertydailyroaster");
 
             entity.HasIndex(e => e.DailyRoasterId)
                 .HasName("DailyRoasterId_idx");

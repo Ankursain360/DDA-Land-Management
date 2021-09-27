@@ -11,7 +11,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Leasedeed> builder)
         {
-            builder.ToTable("leasedeed", "lms");
+            //builder.ToTable("leasedeed", "lms");
 
             builder.HasIndex(e => e.AllotmentId)
                 .HasName("FkAllotmentId_idx");

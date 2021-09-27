@@ -13,7 +13,7 @@ namespace Libraries.Model.EntityConfiguration
         {
 
 
-            builder.ToTable("request", "lms");
+            //builder.ToTable("request", "lms");
 
             builder.HasIndex(e => e.ApprovedStatus)
                 .HasName("fk_ApprovedStatusRequest_idx");

@@ -12,7 +12,7 @@ namespace Libraries.Model.EntityConfiguration
 
         public void Configure(EntityTypeBuilder<EncrocherPeople> builder)
         {
-            builder.ToTable("encrocherpeople", "lms");
+            //builder.ToTable("encrocherpeople", "lms");
 
             builder.HasIndex(e => e.EnchId)
                    .HasName("fkEnchId_idx");

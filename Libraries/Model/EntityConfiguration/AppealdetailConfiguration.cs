@@ -14,7 +14,7 @@ namespace Libraries.Model.EntityConfiguration
 
         public void Configure(EntityTypeBuilder<Appealdetail> builder)
         {
-            builder.ToTable("appealdetail", "lms");
+            //builder.ToTable("appealdetail", "lms");
 
             builder.HasIndex(e => e.DemandListId)
                       .HasName("fk_DemandListIdAppealDetails_idx");

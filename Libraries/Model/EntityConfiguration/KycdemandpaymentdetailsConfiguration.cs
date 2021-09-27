@@ -11,7 +11,7 @@ namespace Libraries.Model.EntityConfiguration
 
         public void Configure(EntityTypeBuilder<Kycdemandpaymentdetails> builder)
         {
-            builder.ToTable("kycdemandpaymentdetails", "lms");
+            //builder.ToTable("kycdemandpaymentdetails", "lms");
             builder.HasIndex(e => e.ApprovedStatus)
                .HasName("fk_ApprovedStatus_idx");
 

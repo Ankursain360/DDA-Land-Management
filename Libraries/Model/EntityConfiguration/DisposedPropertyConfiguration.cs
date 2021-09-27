@@ -14,7 +14,7 @@ namespace Libraries.Model.EntityConfiguration
 
         public void Configure(EntityTypeBuilder<Disposedproperty> builder)
         {
-            builder.ToTable("disposedproperty", "lms");
+            //builder.ToTable("disposedproperty", "lms");
 
             builder.HasIndex(e => e.PropertyRegistrationId)
                 .HasName("fkDIsposedPropertyRegistrationId_idx");

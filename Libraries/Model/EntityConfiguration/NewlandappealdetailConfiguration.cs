@@ -13,7 +13,7 @@ namespace Libraries.Model.EntityConfiguration
         public void Configure(EntityTypeBuilder<Newlandappealdetail> builder)
 
         {
-            builder.ToTable("newlandappealdetail", "lms");
+            //builder.ToTable("newlandappealdetail", "lms");
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
 

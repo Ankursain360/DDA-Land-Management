@@ -8,7 +8,7 @@ namespace Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Doortodoorsurvey> builder)
         {
-            builder.ToTable("doortodoorsurvey", "lms");
+            //builder.ToTable("doortodoorsurvey", "lms");
 
             builder.HasIndex(e => e.CreatedBy)
                 .HasName("fk_CreatedByDoortoDoorSurvey_idx");

@@ -11,7 +11,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Allotteeevidenceupload> builder)
         {
-            builder.ToTable("allotteeevidenceupload", "lms");
+            //builder.ToTable("allotteeevidenceupload", "lms");
 
             builder.HasIndex(e => e.RequestProceedingId)
                 .HasName("fk_RequestIdAllotteeEvicdence_idx");

@@ -13,7 +13,7 @@ namespace Libraries.Model.EntityConfiguration
         public void Configure(EntityTypeBuilder<Allotmententry> builder)
         {
             {
-                builder.ToTable("allotmententry", "lms");
+                //builder.ToTable("allotmententry", "lms");
 
                 builder.HasIndex(e => e.ApplicationId)
                     .HasName("fkleaseappid_idx");

@@ -8,7 +8,7 @@ namespace Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Landtransfer> entity)
         {
-            entity.ToTable("landtransfer");
+            //entity.ToTable("landtransfer");
 
             entity.HasIndex(e => e.HandedOverDepartmentId)
                 .HasName("LandTransferHandedOverDepartmentId_idx");

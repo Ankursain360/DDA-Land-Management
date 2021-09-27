@@ -12,7 +12,7 @@ namespace Libraries.Model.EntityConfiguration
         public void Configure(EntityTypeBuilder<Newlandjointsurvey> builder)
         {
 
-            builder.ToTable("newlandjointsurvey", "lms");
+            //builder.ToTable("newlandjointsurvey", "lms");
 
             builder.HasIndex(e => e.KhasraId)
                 .HasName("fk1khasraid1_idx");

@@ -14,7 +14,7 @@ namespace Libraries.Model.EntityConfiguration
 
         public void Configure(EntityTypeBuilder<Usernotification> builder)
         {
-            builder.ToTable("usernotification", "lms");
+            //builder.ToTable("usernotification", "lms");
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
 

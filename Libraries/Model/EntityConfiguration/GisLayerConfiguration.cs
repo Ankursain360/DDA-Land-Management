@@ -14,7 +14,7 @@ namespace Libraries.Model.EntityConfiguration
 
         public void Configure(EntityTypeBuilder<Gislayer> builder)
         {
-            builder.ToTable("gislayer", "lms");
+            //builder.ToTable("gislayer", "lms");
 
             builder.HasIndex(e => e.Code)
                 .HasName("Code_UNIQUE")

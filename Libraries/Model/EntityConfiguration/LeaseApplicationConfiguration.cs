@@ -11,7 +11,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Leaseapplication> builder)
         {
-            builder.ToTable("leaseapplication", "lms");
+            //builder.ToTable("leaseapplication", "lms");
 
             builder.HasIndex(e => e.ApprovedStatus)
                 .HasName("fk_ApprovedStatusLeaseApplication_idx");

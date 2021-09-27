@@ -13,7 +13,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Demolishedstructurerpt> builder)
         {
-            builder.ToTable("demolishedstructurerpt", "lms");
+            //builder.ToTable("demolishedstructurerpt", "lms");
 
             builder.HasIndex(e => e.DemolitionStructureDetailsId)
                 .HasName("fkDemolitionstructureid_idx");

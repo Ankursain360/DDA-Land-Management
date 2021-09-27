@@ -11,7 +11,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Leasenoticegeneration> builder)
         {
-            builder.ToTable("leasenoticegeneration", "lms");
+            //builder.ToTable("leasenoticegeneration", "lms");
 
             builder.HasIndex(e => e.RequestProceedingId)
                 .HasName("fk_RequestProceedingIdNotice_idx");

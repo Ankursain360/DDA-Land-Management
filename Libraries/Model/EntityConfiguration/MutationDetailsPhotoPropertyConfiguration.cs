@@ -12,7 +12,7 @@ namespace Libraries.Model.builderConfiguration
     {
         public void Configure(EntityTypeBuilder<Mutationdetailsphotoproperty> builder)
         {
-            builder.ToTable("mutationdetailsphotoproperty", "lms");
+            //builder.ToTable("mutationdetailsphotoproperty", "lms");
 
             builder.HasIndex(e => e.MutationDetailsId)
                 .HasName("MutationDetailsPhotoPropId_idx");

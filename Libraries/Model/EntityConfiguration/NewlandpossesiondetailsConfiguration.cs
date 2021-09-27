@@ -14,7 +14,7 @@ namespace Libraries.Model.EntityConfiguration
 
 
 
-            builder.ToTable("newlandpossessiondetails", "lms");
+            //builder.ToTable("newlandpossessiondetails", "lms");
 
             builder.HasIndex(e => e.KhasraId)
                 .HasName("fkpvillageid_idx");

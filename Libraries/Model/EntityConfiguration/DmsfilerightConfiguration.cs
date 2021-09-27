@@ -10,7 +10,7 @@ namespace Libraries.Model.EntityConfiguration
         {
 
 
-            builder.ToTable("dmsfileright", "lms");
+            //builder.ToTable("dmsfileright", "lms");
 
             builder.HasIndex(e => e.UserId)
                 .HasName("useridfk_idx");

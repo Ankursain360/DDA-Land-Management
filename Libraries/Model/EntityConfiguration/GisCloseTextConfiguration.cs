@@ -11,7 +11,7 @@ namespace Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Gisclosetext> builder)
         {
-            builder.ToTable("gisclosetext", "lms");
+            //builder.ToTable("gisclosetext", "lms");
 
             builder.HasIndex(e => e.VillageId)
                 .HasName("fk_VillageIdCloseText_idx");

@@ -11,7 +11,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Allottetype> builder)
         {
-            builder.ToTable("allottetype", "lms");
+            //builder.ToTable("allottetype", "lms");
 
             builder.HasIndex(e => e.DamagePayeeRegisterTempId)
                 .HasName("FKdamagePayeetempId_idx");

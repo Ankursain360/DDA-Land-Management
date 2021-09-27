@@ -13,7 +13,7 @@ namespace Libraries.Model.EntityConfiguration
 
         public void Configure(EntityTypeBuilder<Log> builder)
         {
-            builder.ToTable("log", "lms");
+            //builder.ToTable("log", "lms");
 
             builder.Property(e => e.Id).HasColumnType("int(10) unsigned");
 

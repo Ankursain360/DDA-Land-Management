@@ -14,7 +14,7 @@ namespace Libraries.Model.EntityConfiguration
 
         public void Configure(EntityTypeBuilder<Nazul> entity)
         {
-            entity.ToTable("nazul", "lms");
+            //entity.ToTable("nazul", "lms");
 
             entity.HasIndex(e => e.VillageId)
                 .HasName("fkNazulvillageId_idx");

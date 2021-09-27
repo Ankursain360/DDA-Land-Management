@@ -14,7 +14,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Interestrate> builder)
         {
-            builder.ToTable("intersetrate", "lms");
+            //builder.ToTable("intersetrate", "lms");
 
             builder.HasIndex(e => e.PropertyTypeId)
                 .HasName("fkpropertytype_idx");

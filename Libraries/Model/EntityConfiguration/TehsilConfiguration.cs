@@ -10,7 +10,7 @@ namespace Libraries.Model.EntityConfiguration
 
         public void Configure(EntityTypeBuilder<Tehsil> builder)
         {
-            builder.ToTable("tehsil", "lms");
+            //builder.ToTable("tehsil", "lms");
 
             builder.HasIndex(e => e.Name)
                 .HasName("Name_UNIQUE")

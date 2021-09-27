@@ -11,7 +11,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Jointsurvey> builder)
         {
-            builder.ToTable("jointsurvey", "lms");
+            //builder.ToTable("jointsurvey", "lms");
 
             builder.HasIndex(e => e.KhasraId)
                 .HasName("fk_Khasra_idx");

@@ -13,7 +13,7 @@ namespace Libraries.Model.EntityConfiguration
 
         public void Configure(EntityTypeBuilder<Division> builder)
         {
-            builder.ToTable("division", "lms");
+            //builder.ToTable("division", "lms");
 
             builder.HasIndex(e => e.DepartmentId)
                 .HasName("fkDepartmentid1_idx");

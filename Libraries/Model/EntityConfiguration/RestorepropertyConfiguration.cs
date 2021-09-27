@@ -14,7 +14,7 @@ namespace Libraries.Model.EntityConfiguration
         public void Configure(EntityTypeBuilder<Restoreproperty> builder)
         {
 
-            builder.ToTable("restoreproperty", "lms");
+            //builder.ToTable("restoreproperty", "lms");
 
             builder.HasIndex(e => e.PropertyRegistrationId)
                 .HasName("fkPropertyRegistration_idx");

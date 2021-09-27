@@ -12,7 +12,7 @@ namespace Libraries.Model.EntityConfiguration
 
 
 
-            builder.ToTable("fixingprogram", "lms");
+            //builder.ToTable("fixingprogram", "lms");
 
             builder.HasIndex(e => e.DemolitionProgramId)
                 .HasName("fk13demolitionprogramid_idx");

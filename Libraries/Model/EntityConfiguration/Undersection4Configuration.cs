@@ -12,7 +12,7 @@ namespace Libraries.Model.EntityConfiguration
 
         public void Configure(EntityTypeBuilder<Undersection4> builder)
         {
-            builder.ToTable("undersection4", "lms");
+            //builder.ToTable("undersection4", "lms");
 
             builder.HasIndex(e => e.Number)
                    .HasName("Number_UNIQUE")

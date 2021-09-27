@@ -8,7 +8,7 @@ namespace Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Comencrochmenttype> builder)
         {
-            builder.ToTable("comencrochmenttype", "lms");
+            //builder.ToTable("comencrochmenttype", "lms");
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
 

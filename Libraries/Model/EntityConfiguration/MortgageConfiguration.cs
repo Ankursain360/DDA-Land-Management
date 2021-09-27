@@ -11,7 +11,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Mortgage> builder)
         {
-            builder.ToTable("mortgage", "lms");
+            //builder.ToTable("mortgage", "lms");
 
             builder.HasIndex(e => e.AllottmentId)
                 .HasName("fk_AllottmentIdMortgage_idx");

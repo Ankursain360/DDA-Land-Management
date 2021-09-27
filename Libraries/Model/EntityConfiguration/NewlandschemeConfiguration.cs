@@ -11,7 +11,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Newlandscheme> builder)
         {
-            builder.ToTable("newlandscheme", "lms");
+            //builder.ToTable("newlandscheme", "lms");
 
             builder.HasIndex(e => e.Code)
                      .HasName("Code_UNIQUE")

@@ -8,7 +8,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Row> builder)
         {
-            builder.ToTable("row", "lms");
+            //builder.ToTable("row", "lms");
 
             builder.Property(e => e.Id)
                 .HasColumnName("id")

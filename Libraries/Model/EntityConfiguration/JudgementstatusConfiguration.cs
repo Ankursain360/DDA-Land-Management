@@ -14,7 +14,7 @@ namespace Libraries.Model.EntityConfiguration
         public void Configure(EntityTypeBuilder<Judgementstatus> builder)
         {
 
-            builder.ToTable("judgementstatus", "lms");
+            //builder.ToTable("judgementstatus", "lms");
 
             builder.Property(e => e.CreatedDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
 

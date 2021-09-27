@@ -9,7 +9,7 @@ namespace Libraries.Model.EntityConfiguration
         {
 
 
-            builder.ToTable("datastoragepartfilenodetails", "lms");
+            //builder.ToTable("datastoragepartfilenodetails", "lms");
 
             builder.HasIndex(e => e.DataStorageDetailsId)
                 .HasName("fk_DataStorageDetailsId_idx");

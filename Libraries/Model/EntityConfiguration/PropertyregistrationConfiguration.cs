@@ -14,7 +14,7 @@ namespace Libraries.Model.EntityConfiguration
 
         public void Configure(EntityTypeBuilder<Propertyregistration> builder)
         {
-            builder.ToTable("propertyregistration", "lms");
+            //builder.ToTable("propertyregistration", "lms");
 
             builder.HasIndex(e => e.ClassificationOfLandId)
                 .HasName("ClassificationOfLandId");

@@ -11,7 +11,7 @@ namespace Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Gisrailwayline> builder)
         {
-            builder.ToTable("gisrailwayline", "lms");
+            //builder.ToTable("gisrailwayline", "lms");
 
             builder.HasIndex(e => e.VillageId)
                 .HasName("fk_VillageIdRailwayLine_idx");

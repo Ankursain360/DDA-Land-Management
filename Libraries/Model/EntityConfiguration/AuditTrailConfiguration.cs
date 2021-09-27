@@ -13,7 +13,7 @@ namespace Model.EntityConfiguration
         public void Configure(EntityTypeBuilder<AuditModel> builder)
         {
 
-            builder.ToTable("auditmodel", "lms");
+            //builder.ToTable("auditmodel", "lms");
 
             builder.Property(e => e.Id)
                  .HasColumnName("id")

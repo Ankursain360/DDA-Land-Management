@@ -12,7 +12,7 @@ namespace Libraries.Model.EntityConfiguration
         public void Configure(EntityTypeBuilder<Possesionplan> builder)
         {
 
-            builder.ToTable("possesionplan", "lms");
+            //builder.ToTable("possesionplan", "lms");
 
             builder.HasIndex(e => e.AllotmentId)
                 .HasName("fk_Allotmentid");

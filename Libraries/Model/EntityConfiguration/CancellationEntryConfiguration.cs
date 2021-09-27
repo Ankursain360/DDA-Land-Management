@@ -11,7 +11,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Cancellationentry> builder)
         {
-            builder.ToTable("cancellationentry", "lms");
+            //builder.ToTable("cancellationentry", "lms");
 
             builder.HasIndex(e => e.AllotmentId)
                 .HasName("fkalltmentidCancellation_idx");

@@ -11,7 +11,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Courtcasesmapping> builder)
         {
-            builder.ToTable("courtcasesmapping", "lms");
+            //builder.ToTable("courtcasesmapping", "lms");
 
             builder.HasIndex(e => e.KhasraNoId)
                 .HasName("fk_KhasraidCourtCaseMapping_idx");

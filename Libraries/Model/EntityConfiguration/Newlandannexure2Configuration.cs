@@ -8,7 +8,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Newlandannexure2> builder)
         {
-            builder.ToTable("newlandannexure2", "lms");
+            //builder.ToTable("newlandannexure2", "lms");
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
 

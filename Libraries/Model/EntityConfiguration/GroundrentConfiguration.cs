@@ -11,7 +11,7 @@ namespace Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Groundrent> builder)
         {
-            builder.ToTable("groundrent", "lms");
+            //builder.ToTable("groundrent", "lms");
 
             builder.HasIndex(e => e.LeasePurposesTypeId)
                 .HasName("fkleasepurposegroundrateid_idx");

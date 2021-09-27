@@ -11,7 +11,7 @@ namespace Libraries.Model.EntityConfiguration
 
         public void Configure(EntityTypeBuilder<Newlandenhancecompensation> builder)
         {
-            builder.ToTable("newlandenhancecompensation", "lms");
+            //builder.ToTable("newlandenhancecompensation", "lms");
 
             builder.HasIndex(e => e.KhasraId)
                 .HasName("fknewenhanceKhasra_idx");

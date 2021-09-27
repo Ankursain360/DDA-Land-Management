@@ -14,7 +14,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<EncroachmentPhotoFileDetails> builder)
         {
-            builder.ToTable("encroachmentphotofiledetails");
+            //builder.ToTable("encroachmentphotofiledetails");
             builder.HasIndex(e => e.EncroachmentRegistrationId)
                 .HasName("EncroachmentRegistrationPhotoId_idx");
             builder.Property(e => e.Id).HasColumnType("int(11)");

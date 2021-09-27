@@ -14,7 +14,7 @@ namespace Libraries.Model.EntityConfiguration
 
         public void Configure(EntityTypeBuilder<Servicetype> builder)
         {
-            builder.ToTable("servicetype", "lms");
+            //builder.ToTable("servicetype", "lms");
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
 

@@ -11,7 +11,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Newlandus22plot> builder)
         {
-            builder.ToTable("newlandus22plot", "lms");
+            //builder.ToTable("newlandus22plot", "lms");
 
             builder.HasIndex(e => e.KhasraId)
                     .HasName("fkus22khasra_idx");

@@ -10,7 +10,7 @@ namespace Libraries.Model.EntityConfiguration
         public void Configure(EntityTypeBuilder<Bundle> builder)
         {
 
-            builder.ToTable("Bundle", "lms");
+            //builder.ToTable("Bundle", "lms");
 
             builder.Property(e => e.Id)
                     .HasColumnName("id")

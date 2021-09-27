@@ -14,7 +14,7 @@ namespace Libraries.Model.EntityConfiguration
 
         public void Configure(EntityTypeBuilder<Disposaltype> builder)
         {
-            builder.ToTable("disposaltype", "lms");
+            //builder.ToTable("disposaltype", "lms");
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
 

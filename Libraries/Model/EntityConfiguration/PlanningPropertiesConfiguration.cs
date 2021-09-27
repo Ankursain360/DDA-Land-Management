@@ -11,7 +11,7 @@ namespace Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<PlanningProperties> entity)
         {
-            entity.ToTable("planningproperties");
+            //entity.ToTable("planningproperties");
 
             entity.HasIndex(e => e.PlanningId)
                 .HasName("PlanningId_idx");

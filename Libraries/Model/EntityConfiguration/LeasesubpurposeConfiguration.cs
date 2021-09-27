@@ -13,7 +13,7 @@ namespace Libraries.Model.EntityConfiguration
 
         public void Configure(EntityTypeBuilder<Leasesubpurpose> builder)
         {
-            builder.ToTable("leasesubpurpose", "lms");
+            //builder.ToTable("leasesubpurpose", "lms");
 
             builder.HasIndex(e => e.PurposeUseId)
                 .HasName("fkleasepurposeid_idx");

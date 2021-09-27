@@ -8,7 +8,7 @@ namespace Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Newlandnotificationfilepath> builder)
         {
-            builder.ToTable("newlandnotificationfilepath", "lms");
+            //builder.ToTable("newlandnotificationfilepath", "lms");
 
             builder.HasIndex(e => e.NewlandNotificationId)
                                 .HasName("fknewlandnotification_idx");
