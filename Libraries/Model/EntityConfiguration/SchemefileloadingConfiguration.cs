@@ -15,7 +15,7 @@ namespace Libraries.Model.EntityConfiguration
         public void Configure(EntityTypeBuilder<Schemefileloading> builder)
         {
 
-            builder.ToTable("schemefileloading", "lms");
+            //builder.ToTable("schemefileloading", "lms");
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
