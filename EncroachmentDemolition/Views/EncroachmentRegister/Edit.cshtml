@@ -324,12 +324,12 @@
                             <a class="badge bg-primary px-2" asp-action="DownloadFirfile" asp-route-id="@item.Id"> (View Existing Document @(FirFile += 1) )</a>
 
                         }
-                        <input type="file" asp-for="Firfile" id="Firfile" class="floating-label-field floating-label-field--s3" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
+                        <input type="file" asp-for="Firfile" id="Firfile" class="floating-label-field floating-label-field--s3 checkExtension" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
                         <span asp-validation-for="Firfile" class="text-danger"></span>
                     }
                     else
                     {
-                        <input type="file" asp-for="Firfile" id="Firfile" class="floating-label-field floating-label-field--s3" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
+                        <input type="file" asp-for="Firfile" id="Firfile" class="floating-label-field floating-label-field--s3 checkExtension" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
                         <span asp-validation-for="Firfile" class="text-danger"></span>
                     }
                 }
@@ -366,12 +366,12 @@
                             <a asp-action="DownloadLocationMapFile" class="badge bg-primary px-2" asp-route-id="@item.Id"> (View Existing Document @(LocationMapFile += 1) )</a>
 
                         }
-                        <input type="file" asp-for="LocationMapFile" id="LocationMapFile" class="floating-label-field floating-label-field--s3" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
+                        <input type="file" asp-for="LocationMapFile" id="LocationMapFile" class="floating-label-field floating-label-field--s3 checkExtension" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
                         <span asp-validation-for="LocationMapFile" class="text-danger"></span>
                     }
                     else
                     {
-                        <input type="file" asp-for="LocationMapFile" id="LocationMapFile" class="floating-label-field floating-label-field--s3" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
+                        <input type="file" asp-for="LocationMapFile" id="LocationMapFile" class="floating-label-field floating-label-field--s3 checkExtension" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
                         <span asp-validation-for="LocationMapFile" class="text-danger"></span>
                     }
                 }
@@ -391,12 +391,12 @@
                             <a asp-action="DownloadPhotoFile" class="badge bg-primary px-2" asp-route-id="@item.Id"> (View Existing Document @(PhotoFile += 1 ))</a>
 
                         }
-                        <input type="file" class="floating-label-field floating-label-field--s3" asp-for="PhotoFile" id="PhotoFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
+                        <input type="file" class="floating-label-field floating-label-field--s3 checkExtension" asp-for="PhotoFile" id="PhotoFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
                         <span asp-validation-for="PhotoFile" class="text-danger"></span>
                     }
                     else
                     {
-                        <input type="file" class="floating-label-field floating-label-field--s3" asp-for="PhotoFile" id="PhotoFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
+                        <input type="file" class="floating-label-field floating-label-field--s3 checkExtension" asp-for="PhotoFile" id="PhotoFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
                         <span asp-validation-for="PhotoFile" class="text-danger"></span>
                         <label class="floating-label">Photo (<span style="color:red;"> max size 5 mb</span>)</label>
                     }
