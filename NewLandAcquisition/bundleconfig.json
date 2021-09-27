@@ -334,5 +334,11 @@
     "inputFiles": [
       "wwwroot/js/newlanddemandlistdetailsindex.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/paymentdetailcreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/paymentdetailcreate.js"
+    ]
   }
 ]
