@@ -187,9 +187,10 @@ namespace SiteMaster.Controllers
                         foreach (var error in resetPassResult.Errors)
                         {
                             ModelState.TryAddModelError(error.Code, error.Description);
-                            ViewBag.Message = Alert.Show(error.Description, "", AlertType.Error);
+                            // ViewBag.Message = Alert.Show(error.Description, "", AlertType.Error);
+                            ModelState.AddModelError("", error.Description);
                         }
-                       // return View(resetPasswordDto);
+                        return View(resetPasswordDto);
                     }
                     return RedirectToAction(nameof(ResetPasswordConfirmation));
                 }

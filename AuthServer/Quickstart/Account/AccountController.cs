@@ -603,13 +603,15 @@ namespace IdentityServerHost.Quickstart.UI
                     //    // Validate Captcha Code
                     if (!Captcha.ValidateCaptchaCode(resetPasswordDto.CaptchaCode, HttpContext))
                     {
-                        ViewBag.Message = Alert.Show("Invalid Catacha.", "", AlertType.Error);
+                        ModelState.AddModelError("CaptchaCode", "Invalid Captcha.");
+                        //ViewBag.Message = Alert.Show("Invalid Catacha.", "", AlertType.Error);
                         return View(resetPasswordDto);
                     }
                     var user = await _userManager.FindByNameAsync(resetPasswordDto.Username);
                     if (user == null)
                     {
-                        ViewBag.Message = Alert.Show("No Authenticated User", "", AlertType.Error);
+                        ModelState.AddModelError("Username", "No Authenticated User with username - " + resetPasswordDto.Username + ".");
+                       // ViewBag.Message = Alert.Show("No Authenticated User", "", AlertType.Error);
                         return View(resetPasswordDto);
                     }
                     var resetPassResult = await _userManager.ResetPasswordAsync(user, resetPasswordDto.Token, resetPasswordDto.Password);
@@ -618,7 +620,8 @@ namespace IdentityServerHost.Quickstart.UI
                         foreach (var error in resetPassResult.Errors)
                         {
                             ModelState.TryAddModelError(error.Code, error.Description);
-                            ViewBag.Message = Alert.Show(error.Description, "", AlertType.Error);
+                            //ViewBag.Message = Alert.Show(error.Description, "", AlertType.Error);
+                            ModelState.AddModelError("", error.Description);
                         }
                          return View(resetPasswordDto);
                     }
