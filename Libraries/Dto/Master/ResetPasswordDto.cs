@@ -9,7 +9,7 @@ namespace Dto.Master
 {
     public class ResetPasswordDto
     {
-        [Required]
+        [Required(ErrorMessage = "Password is mandatory")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
         [DataType(DataType.Password)]
