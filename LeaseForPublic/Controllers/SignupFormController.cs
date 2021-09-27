@@ -20,13 +20,11 @@ using Service.IApplicationService;
 using System.Text;
 using Microsoft.AspNetCore.Http;
 using Dto.Search;
-
-
-
-
+using LeaseForPublic.SecurityHeaders;
 
 namespace LeaseForPublic.Controllers
 {
+    [SecurityHeaders]
     public class SignupFormController : BaseController
     {
         private readonly ILeasesignupService _leasesignupService;

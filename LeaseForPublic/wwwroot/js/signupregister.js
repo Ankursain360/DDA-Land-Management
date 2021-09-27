@@ -118,19 +118,15 @@ $("#signup2").click(function () {
         HttpPost(`/SignupForm/sendotp`, 'json', model, function (response) {
             // setTimeout(function () {
             $("#loader-wrapper").css("display", "block");
-            //   }, 2000);
-            //alert(response);
             if (response[0] == "true") {
                 setTimeout(function () {
                     $("#loader-wrapper").css("display", "none");
                 }, 3000);
-
-              //  localStorage.setItem("otp", response[2]);
-
                 $("#sinupshow").hide();
                 $("#shomsgsuccess").show();
                 $("#sotp").show();
                 $("#sotp").val(response.otp);
+                resetCaptchaImage();
                 //  $("#loader-wrapper").css("display", "none");
             } else {
                 resetCaptchaImage();

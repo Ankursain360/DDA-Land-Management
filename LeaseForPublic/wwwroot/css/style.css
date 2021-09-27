@@ -109,6 +109,17 @@ background: linear-gradient(to left, #9e1c32, #991141, #900f50, #83155d, #721e68
 Color: #ffffff
 Font-size: 0.80rem
 Font-Family: Open Sans Regular*/
+.hide {
+    display: none;
+}
+
+.successMsg {
+    display: none;
+}
+.failedMsg {
+    color: red; 
+    font-size: 13px
+}
 
 .container {
     position: relative;

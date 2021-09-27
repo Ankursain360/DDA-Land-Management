@@ -6,7 +6,7 @@
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_LayoutLogin.cshtml";
 }
-<div id="loader-wrapper" style="display:none">
+<div id="loader-wrapper" class="hide">
     <div id="loader"></div>
     <div class="loader-section section-left"></div>
     <div class="loader-section section-right"></div>
@@ -27,67 +27,55 @@
                 <form asp-action="Create" method="post" class="d-block px-2" id="form">
 
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <label style="color:red; font-size:13px" id="err-otp">Already Registered User? <a class="" asp-action="CreateLogin" asp-controller="SignupForm">Click here to login</a></label>
+                    <label class="failedMsg" id="err-otp">Already Registered User? <a class="" asp-action="CreateLogin" asp-controller="SignupForm">Click here to login</a></label>
 
-                    <label style="color:green; display:none; font-size:13px" id="shomsgsuccess">OTP Sent successfully, Please enter OTP</label>
-                    <label style="color:red; display:none; font-size:13px" id="err-otp">InValid Otp</label>
-                    <label style="color:red;display:none; font-size:13px" id="err-comm">You are already registered with this emaild or mobile number.</label>
-                    <label style="color:green;display:none; font-size:13px" id="suc-comm">Otp Match</label>
+                    <label class="hide successMsg" id="shomsgsuccess">OTP Sent successfully, Please enter OTP</label>
+                    <label class="hide failedMsg" id="err-otp">InValid Otp</label>
+                    <label class="hide failedMsg" id="err-comm">You are already registered with this emaild or mobile number.</label>
+                    <label class="hide successMsg" id="suc-comm">Otp Match</label>
                     <div id="sinupshow">
 
                         <div class="row">
                             <div class="mb-3 form-icons">
                                 <i class="ri-user-line"></i>
-
                                 <input type="text" asp-for="Name" autocomplete="off" class="form-control" id="name" placeholder="Name *">
                                 <span asp-validation-for="Name" class="d-block text-danger field-validation-valid msg"></span>
                             </div>
-                            <label style="color:red;display:none; font-size:13px" id="err-name">Please Enter Name</label>
+                            <label class="hide failedMsg" id="err-name">Please Enter Name</label>
                         </div>
-
                         <div class="row">
                             <div class="mb-3 form-icons">
                                 <i class="ri-smartphone-line"></i>
                                 <input type="text" asp-for="MobileNo" maxlength="10" autocomplete="off" class="form-control numbers" id="mobile" placeholder="Mobile Number *">
-
                             </div>
-                            <label style="color:red;display:none; font-size:13px" id="err-mob">Please Enter 10 Digit Mobile No</label>
+                            <label class="hide failedMsg" id="err-mob">Please Enter 10 Digit Mobile No</label>
                         </div>
-
                         <div class="row">
-
                             <div class="mb-3 form-icons">
                                 <i class="ri-mail-line"></i>
                                 <input type="text" asp-for="EmailId" autocomplete="off" id="email" class="form-control" placeholder="Email  *">
-
                             </div>
-                            <label style="color:red;display:none; font-size:13px" id="err-email">Please Enter Valid Email</label>
+                            <label class="hide failedMsg" id="err-email">Please Enter Valid Email</label>
                         </div>
-
                         <div class="row">
-                            <div class="form-group icon">
+                            <div class="mb-3 form-icons">
                                 <i class="ri-code-s-slash-line"></i>
-                                <input asp-for="CaptchaCode" type="text" class="form-control" placeholder="Enter Captcha *" autocomplete="off">
+                                <input asp-for="CaptchaCode" type="text" class="form-control" placeholder="Enter Captcha (Case-Sensitive)" autocomplete="off">
                             </div>
-                            <label style="color:red;display:none; font-size:13px" id="err-captcha">Please Enter Captcha Code</label>
+                            <label class="hide failedMsg" id="err-captcha">Please Enter Captcha Code</label>
                         </div>
                         <div class="row">
-                            <div>
+                            <div class="form-group">
                                 <div class="codeImg">
                                     <img src="~/get-captcha-image" id="img-captcha">
-                                    <i class="ri-refresh-line" id="refreshcaptcha" style="font-size:26px;"></i>
+                                    <i class="ri-refresh-line fs-5" id="refreshcaptcha"></i>
                                     @* <span class="ri-refresh-line" style="font-size:26px;" id="refreshcaptcha"></span>*@
                                 </div>
                             </div>
                         </div>
-
-
-
-
                         <div class="row  mt-md-3">
                             <div>
                                 <div class="d-flex align-items-center">
-
                                     <button id="signup2" class="btn btn-theme text-white d-flex align-items-center" type="button">Register</button>
                                     @*<a class="btn btn-theme text-white d-flex align-items-center" asp-action="CreateLogin" asp-controller="SignupForm">Go To Login <i class="ri-arrow-right-line ms-3"></i></a>*@
 
@@ -98,40 +86,23 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="row  mt-md-3" id="sotp" style="display:none;">
-
-
+                    <div class="row mt-md-3 hide" id="sotp">
                         <div>
                             <div class="d-flex align-items-center">
                                 <input type="password" name="otp" id="otp" class="form-control numbers" placeholder="OTP *">
-
                             </div>
-
-
                         </div>
                         <div class="mt-md-3">
                             <div class="d-flex align-items-center">
                                 <button class="btn btn-theme text-white d-flex align-items-center" id="otp-button" type="button"> Submit OTP</button>
-
                             </div>
                         </div>
-
                     </div>
-
-
-
-
-
-
-
                 </form>
-
             </div>
             <div class="col-md-6 col-lg-7">
-                <img src="~/images/img.png" alt="DDA" class="d-none d-md-block image-right" width="450">
+                <img src="~/images/img.png" alt="DDA" class="d-none d-md-block image-right">
                 <img src="~/images/formBg.png" alt="DDA" class="d-block formBg">
-
             </div>
         </div>
     </div>
@@ -145,15 +116,21 @@
 <environment exclude="Development">
     <script src="~/js/signupregister.min.js" asp-append-version="true"></script>
 </environment>
+<environment include="Development">
+    <script src="~/js/site.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/site.min.js" asp-append-version="true"></script>
+</environment>
 @*<script>
-    //For Loader
-    $(window).on('load', function () {
-      
-        $("#loader-wrapper").css("display", "none");
-    });
-    $(window).on('beforeunload', function () {
-      
-        $("#loader-wrapper").css("display", "block");
-    });
+        //For Loader
+        $(window).on('load', function () {
 
-</script>*@
+            $("#loader-wrapper").css("display", "none");
+        });
+        $(window).on('beforeunload', function () {
+
+            $("#loader-wrapper").css("display", "block");
+        });
+
+    </script>*@
