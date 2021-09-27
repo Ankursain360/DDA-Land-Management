@@ -65,7 +65,8 @@ namespace SiteMaster.Controllers
                     //    // Validate Captcha Code
                     if (!Captcha.ValidateCaptchaCode(model.CaptchaCode, HttpContext))
                     {
-                        ViewBag.Message = Alert.Show("Invalid Catacha.", "", AlertType.Error);
+                        //ViewBag.Message = Alert.Show("Invalid Catacha.", "", AlertType.Error);
+                        ModelState.AddModelError("CaptchaCode", "Invalid Captcha.");
                         return View(model);
                     }
 
@@ -73,7 +74,8 @@ namespace SiteMaster.Controllers
                     var user = await _userManager.FindByNameAsync(model.Username);
                     if (user == null)
                     {
-                        ViewBag.Message = Alert.Show("Unable to load user " + model.Username + ".", "", AlertType.Warning);
+                        // ViewBag.Message = Alert.Show("Unable to load user " + model.Username + ".", "", AlertType.Warning);
+                        ModelState.AddModelError("Username", "Unable to load user " + model.Username + ".");
                         return View(model);
                     }
 
@@ -168,13 +170,15 @@ namespace SiteMaster.Controllers
                     //    // Validate Captcha Code
                     if (!Captcha.ValidateCaptchaCode(resetPasswordDto.CaptchaCode, HttpContext))
                     {
-                        ViewBag.Message = Alert.Show("Invalid Catacha.", "", AlertType.Error);
+                        ModelState.AddModelError("CaptchaCode", "Invalid Captcha.");
+                        // ViewBag.Message = Alert.Show("Invalid Catacha.", "", AlertType.Error);
                         return View(resetPasswordDto);
                     }
                     var user = await _userManager.FindByNameAsync(resetPasswordDto.Username);
                     if (user == null)
                     {
-                        ViewBag.Message = Alert.Show("No Authenticated User", "", AlertType.Error);
+                        ModelState.AddModelError("Username", "Unable to load user " + resetPasswordDto.Username + ".");
+                        // ViewBag.Message = Alert.Show("No Authenticated User", "", AlertType.Error);
                         return View(resetPasswordDto);
                     }
                     var resetPassResult = await _userManager.ResetPasswordAsync(user, resetPasswordDto.Token, resetPasswordDto.Password);

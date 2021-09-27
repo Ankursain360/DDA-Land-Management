@@ -19,7 +19,8 @@
     <div class="row mt-md-3">
         <div class="form-group icon">
             @*<i class="ri-code-s-slash-line"></i>*@
-            <input asp-for="CaptchaCode" type="text" class="form-control" placeholder="Enter Captcha *" autocomplete="off">
+            <input asp-for="CaptchaCode" type="text" class="form-control" placeholder="Enter Captcha *" maxlength="4" autocomplete="off">
+            <span asp-validation-for="CaptchaCode" class="text-danger"></span>
         </div>
     </div>
 

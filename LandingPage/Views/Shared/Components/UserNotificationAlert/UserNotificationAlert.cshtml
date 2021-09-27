@@ -2,16 +2,16 @@
 
 <div class="dropdown noti text-white my-2  me-3 order-md-3">
     <a href="#" role="button" id="notification" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class='p-2 d-block text-white no-dec'>
-        <i class="ri-notification-2-fill" style="font-size: 1.15rem"></i>
+        <i class="ri-notification-2-fill fontsize"></i>
         @if (Model.Count > 0)
         {
             <small class="bg-success rounded-circle position-absolute nofi-active">@Model[0].TotalNotification</small>
         }
     </a>
 
-    <div class="dropdown-menu dropdown-menu-right p-0" aria-labelledby="notification" style="width: 320px;">
+    <div class="dropdown-menu dropdown-menu-right p-0 notifstyle" aria-labelledby="notification">
 
-        <ul class="list-unstyled m-0 p-0" style="max-height: 250px;overflow: auto;">
+        <ul class="list-unstyled m-0 p-0 notiful" >
             @foreach (var menu in Model)
             {
                 <li class="px-3 border-bottom">
@@ -20,12 +20,12 @@
                         <a href="@menu.URL" class="d-flex align-items-center py-2 my-1" onclick="NoNotification()">
                             <img src="https://auth.managemybusinessess.com/login/logo-circle.png" class="rounded-circle me-2" width="52" height="52">
                             <div class="ps-1">
-                                <p class="mb-0 text-left" style="line-height:1.4;">
+                                <p class="mb-0 text-left notifP" >
                                     @menu.Message
                                 </p>
                                 <div class="d-flex align-items-center text-muted">
                                     <i class="ri-calendar-event-line me-1"></i>
-                                    <span class="d-block w-100 text-left" style="font-size:.7rem">@(menu.SubmitDate == "0" ?"Today" : menu.SubmitDate + " days ago")</span>
+                                    <span class="d-block w-100 text-left notifS" >@(menu.SubmitDate == "0" ?"Today" : menu.SubmitDate + " days ago")</span>
                                 </div>
                             </div>
                         </a>
@@ -35,12 +35,12 @@
                         <a class="d-flex align-items-center py-2 my-1" asp-action="UpdateUserNotification" asp-controller="UserNotification" asp-route-id="@menu.Id" asp-route-url="@menu.URL" onclick="RefreshNotification()" target="_blank">
                             <img src="https://auth.managemybusinessess.com/login/logo-circle.png" class="rounded-circle me-2" width="52" height="52">
                             <div class="ps-1">
-                                <p class="mb-0 text-left" style="line-height:1.4;">
+                                <p class="mb-0 text-left notifP">
                                     @menu.Message
                                 </p>
                                 <div class="d-flex align-items-center text-muted">
                                     <i class="ri-calendar-event-line me-1"></i>
-                                    <span class="d-block w-100 text-left" style="font-size:.7rem">@(menu.SubmitDate == "0" ?"Today" : menu.SubmitDate + " days ago")</span>
+                                    <span class="d-block w-100 text-left notifS" >@(menu.SubmitDate == "0" ?"Today" : menu.SubmitDate + " days ago")</span>
                                 </div>
                             </div>
                         </a>

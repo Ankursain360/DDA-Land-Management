@@ -17,6 +17,7 @@ namespace Dto.Master
 
         [NotMapped]
         [StringLength(4)]
+        [Required(ErrorMessage = "Captcha is mandatory")]
         public string CaptchaCode { get; set; }
     }
 }

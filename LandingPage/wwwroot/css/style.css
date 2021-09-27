@@ -1926,3 +1926,37 @@ textarea.floating-label-field--s3 {
         background-color: #00b128 !important;
     }
 }
+
+//***** new css*****/
+
+.displayprop {
+    display: none;
+    
+}
+.visibleprop {
+    visibility: hidden;
+}
+.minheight {
+    min-height: 100vh;
+}
+
+.fontsize {
+   font-size :1.15rem;
+}
+.notifstyle {
+    width: 320px;
+}
+.notiful {
+    max-height: 250px;
+    overflow: auto;
+}
+.notifP {
+    line-height:1.4;
+}
+.notifS {
+   font-size:.7rem;
+}
+.notimg {
+   width: 60px;
+   height: 60px;
+}
