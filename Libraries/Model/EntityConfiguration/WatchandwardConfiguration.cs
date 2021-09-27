@@ -13,7 +13,7 @@ namespace Libraries.Model.EntityConfiguration
 
         public void Configure(EntityTypeBuilder<Watchandward> builder)
         {
-            builder.ToTable("watchandward", "lms");
+            //builder.ToTable("watchandward", "lms");
 
             builder.HasIndex(e => e.ApprovedStatus)
                 .HasName("fk_ApprovedStatuswatchward_idx");

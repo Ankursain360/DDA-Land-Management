@@ -11,7 +11,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Legalmanagementsystem> builder)
         {
-            builder.ToTable("legalmanagementsystem", "lms");
+            //builder.ToTable("legalmanagementsystem", "lms");
 
             builder.HasIndex(e => e.CaseStatusId)
                 .HasName("LegalCaseStatusId_idx");

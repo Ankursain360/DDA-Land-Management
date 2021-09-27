@@ -13,7 +13,7 @@ namespace Libraries.Model.EntityConfiguration
         public void Configure(EntityTypeBuilder<Timeextension> builder)
         {
 
-            builder.ToTable("timeextension", "lms");
+            //builder.ToTable("timeextension", "lms");
 
             builder.Property(e => e.CreatedDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
 

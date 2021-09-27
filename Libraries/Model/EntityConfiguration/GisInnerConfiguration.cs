@@ -11,7 +11,7 @@ namespace Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Gisinner> builder)
         {
-            builder.ToTable("gisinner", "lms");
+            //builder.ToTable("gisinner", "lms");
 
             builder.HasIndex(e => e.VillageId)
                 .HasName("fk_VillageIdInner_idx");

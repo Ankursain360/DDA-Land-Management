@@ -11,7 +11,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Structure> entity)
         {
-            entity.ToTable("structure", "lms");
+            //entity.ToTable("structure", "lms");
 
             entity.HasIndex(e => e.Name)
                 .HasName("StructureName_UNIQUE")

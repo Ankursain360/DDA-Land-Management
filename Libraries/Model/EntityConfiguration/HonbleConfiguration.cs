@@ -12,7 +12,7 @@ namespace Libraries.Model.EntityConfiguration
         public void Configure(EntityTypeBuilder<Honble> builder)
         {
 
-            builder.ToTable("honble", "lms");
+            //builder.ToTable("honble", "lms");
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
 

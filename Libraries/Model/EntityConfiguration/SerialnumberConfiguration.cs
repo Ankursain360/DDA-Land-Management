@@ -13,7 +13,7 @@ namespace Libraries.Model.EntityConfiguration
         public void Configure(EntityTypeBuilder<Serialnumber> builder)
         {
 
-            builder.ToTable("serialnumber", "lms");
+            //builder.ToTable("serialnumber", "lms");
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
 

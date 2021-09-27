@@ -11,7 +11,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Approvalstatus> builder)
         {
-            builder.ToTable("approvalstatus", "lms");
+            //builder.ToTable("approvalstatus", "lms");
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
 

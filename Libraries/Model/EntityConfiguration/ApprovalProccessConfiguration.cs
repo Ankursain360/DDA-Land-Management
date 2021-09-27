@@ -11,7 +11,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Approvalproccess> builder)
         {
-            builder.ToTable("approvalproccess", "lms");
+            //builder.ToTable("approvalproccess", "lms");
 
             builder.HasIndex(e => e.Status)
                 .HasName("fk_ApprovalStatusApprovalProcess_idx");

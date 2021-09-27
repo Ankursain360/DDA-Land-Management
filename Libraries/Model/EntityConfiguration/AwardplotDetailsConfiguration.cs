@@ -12,7 +12,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Awardplotdetails> builder)
         {
-            builder.ToTable("awardplotdetails", "lms");
+            //builder.ToTable("awardplotdetails", "lms");
 
             builder.HasIndex(e => e.AwardMasterId)
                     .HasName("AwardmasterId_idx");

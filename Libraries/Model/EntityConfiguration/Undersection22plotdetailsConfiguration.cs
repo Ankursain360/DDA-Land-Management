@@ -13,7 +13,7 @@ namespace Libraries.Model.EntityConfiguration
         public void Configure(EntityTypeBuilder<Undersection22plotdetails> builder)
         {
 
-            builder.ToTable("undersection22plotdetails", "lms");
+            //builder.ToTable("undersection22plotdetails", "lms");
 
             builder.HasIndex(e => e.AcquiredlandvillageId)
                 .HasName("fkAcqlandVillageid_idx");

@@ -14,7 +14,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Premiumrate> builder)
         {
-            builder.ToTable("premiumrate", "lms");
+            //builder.ToTable("premiumrate", "lms");
 
             builder.HasIndex(e => e.LeasePurposesTypeId)
                 .HasName("fkleasepurposepremrateid_idx");

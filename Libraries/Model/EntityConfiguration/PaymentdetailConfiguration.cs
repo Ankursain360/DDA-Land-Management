@@ -14,7 +14,7 @@ namespace Libraries.Model.EntityConfiguration
 
         public void Configure(EntityTypeBuilder<Paymentdetail> builder)
         {
-            builder.ToTable("paymentdetail", "lms");
+            //builder.ToTable("paymentdetail", "lms");
 
             builder.HasIndex(e => e.DemandListId)
                  .HasName("fk_DemandListIdPaymentDetails_idx");

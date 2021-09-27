@@ -14,7 +14,7 @@ namespace Libraries.Model.EntityConfiguration
 
         public void Configure(EntityTypeBuilder<Booktransferland> builder)
         {
-            builder.ToTable("booktransferland", "lms");
+            //builder.ToTable("booktransferland", "lms");
 
             builder.HasIndex(e => e.KhasraId)
                 .HasName("fkBookTransferLandKhasra_idx");

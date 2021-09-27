@@ -14,7 +14,7 @@ namespace Libraries.Model.EntityConfiguration
 
 
 
-            builder.ToTable("fixingdocument", "lms");
+            //builder.ToTable("fixingdocument", "lms");
 
             builder.HasIndex(e => e.DemolitionDocumentId)
                 .HasName("fk14demolitiondocumentid_idx");

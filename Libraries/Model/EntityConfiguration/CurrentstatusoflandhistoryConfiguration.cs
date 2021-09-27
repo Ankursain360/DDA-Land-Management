@@ -13,7 +13,7 @@ namespace Model.EntityConfiguration
 
         public void Configure(EntityTypeBuilder<Currentstatusoflandhistory> entity)
         {
-            entity.ToTable("currentstatusoflandhistory");
+            //entity.ToTable("currentstatusoflandhistory");
 
             entity.HasIndex(e => e.LandTransferId)
                 .HasName("fkLandTransferId_idx");

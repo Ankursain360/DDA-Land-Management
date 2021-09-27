@@ -14,7 +14,7 @@ namespace Libraries.Model.EntityConfiguration
         public void Configure(EntityTypeBuilder<Undersection22> builder)
         {
 
-            builder.ToTable("undersection22", "lms");
+            //builder.ToTable("undersection22", "lms");
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
 

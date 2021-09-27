@@ -13,7 +13,7 @@ namespace Libraries.Model.EntityConfiguration
         public void Configure(EntityTypeBuilder<Undersection6> builder)
         {
 
-            builder.ToTable("undersection6", "lms");
+            //builder.ToTable("undersection6", "lms");
 
             builder.HasIndex(e => e.Undersection4Id)
                 .HasName("usd4id_idx");

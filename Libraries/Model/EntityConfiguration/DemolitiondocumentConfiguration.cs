@@ -11,7 +11,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Demolitiondocument> builder)
         {
-            builder.ToTable("demolitiondocument", "lms");
+            //builder.ToTable("demolitiondocument", "lms");
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
 

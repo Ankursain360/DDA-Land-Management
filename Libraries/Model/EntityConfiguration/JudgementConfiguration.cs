@@ -15,7 +15,7 @@ namespace Libraries.Model.EntityConfiguration
         public void Configure(EntityTypeBuilder<Judgement> builder)
         {
 
-            builder.ToTable("judgement", "lms");
+            //builder.ToTable("judgement", "lms");
 
             builder.HasIndex(e => e.JudgementStatusId)
                 .HasName("fkjudgementstatus_idx");

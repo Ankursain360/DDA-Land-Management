@@ -14,7 +14,7 @@ namespace Model.EntityConfiguration
         public void Configure(EntityTypeBuilder<Hearingdetailsphotofiledetails> builder)
         {
 
-            builder.ToTable("hearingdetailsphotofiledetails", "lms");
+            //builder.ToTable("hearingdetailsphotofiledetails", "lms");
 
             builder.HasIndex(e => e.HearingDetailsId)
                 .HasName("FkHearingDetailsId_idx");

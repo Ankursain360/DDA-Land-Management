@@ -8,7 +8,7 @@ namespace Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<MonthlyRoaster> entity)
         {
-            entity.ToTable("monthlyroaster");
+            //entity.ToTable("monthlyroaster");
 
             entity.HasIndex(e => e.DepartmentId)
                 .HasName("MonthlyRousterDepartmentId_idx");

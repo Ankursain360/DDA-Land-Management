@@ -10,7 +10,7 @@ namespace Libraries.Model.EntityConfiguration
         {
 
 
-            builder.ToTable("court", "lms");
+            //builder.ToTable("court", "lms");
 
             builder.HasIndex(e => e.Id)
                 .HasName("Id_UNIQUE")

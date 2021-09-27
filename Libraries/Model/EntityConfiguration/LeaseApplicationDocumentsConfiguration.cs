@@ -11,7 +11,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Leaseapplicationdocuments> builder)
         {
-            builder.ToTable("leaseapplicationdocuments", "lms");
+            //builder.ToTable("leaseapplicationdocuments", "lms");
 
             builder.HasIndex(e => e.DocumentChecklistId)
                 .HasName("fk_DocumentChecklistIdDocument_idx");

@@ -13,7 +13,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Jaraiowner> builder)
         {
-            builder.ToTable("jaraiowner", "lms");
+            //builder.ToTable("jaraiowner", "lms");
 
             builder.HasIndex(e => e.JaraiDetailId)
                 .HasName("FKJaraiid_idx");

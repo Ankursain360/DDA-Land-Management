@@ -11,7 +11,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Fixingdemolition> builder)
         {
-            builder.ToTable("fixingdemolition", "lms");
+            //builder.ToTable("fixingdemolition", "lms");
 
             builder.HasIndex(e => e.ApprovedStatus)
                 .HasName("fk_ApprovedStatusFixingDemolition_idx");

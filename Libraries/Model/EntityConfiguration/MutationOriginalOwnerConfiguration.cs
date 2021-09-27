@@ -11,7 +11,7 @@ namespace Libraries.Model.builderConfiguration
     {
         public void Configure(EntityTypeBuilder<Mutationoriginalowner> builder)
         {
-            builder.ToTable("mutationoriginalowner", "lms");
+            //builder.ToTable("mutationoriginalowner", "lms");
 
             builder.HasIndex(e => e.MutationId)
                 .HasName("MutationId_idx");

@@ -11,7 +11,7 @@ namespace Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Gisdimtext> builder)
         {
-            builder.ToTable("gisdimtext", "lms");
+            //builder.ToTable("gisdimtext", "lms");
 
             builder.HasIndex(e => e.VillageId)
                 .HasName("fk_VillageIdDimText_idx");

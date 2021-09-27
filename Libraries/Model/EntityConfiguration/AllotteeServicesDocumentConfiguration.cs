@@ -11,7 +11,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Allotteeservicesdocument> builder)
         {
-            builder.ToTable("allotteeservicesdocument", "lms");
+            //builder.ToTable("allotteeservicesdocument", "lms");
 
             builder.HasIndex(e => e.DocumentChecklistId)
                 .HasName("fk_DocumentChecklistIdAllotteeDocument_idx");

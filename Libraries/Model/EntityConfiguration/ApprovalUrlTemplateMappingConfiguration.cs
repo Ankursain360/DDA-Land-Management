@@ -11,7 +11,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Approvalurltemplatemapping> builder)
         {
-            builder.ToTable("approvalurltemplatemapping", "lms");
+            //builder.ToTable("approvalurltemplatemapping", "lms");
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
 

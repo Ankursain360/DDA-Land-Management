@@ -9,7 +9,7 @@ namespace Libraries.Model.EntityConfiguration
         public void Configure(EntityTypeBuilder<Noticetodamagepayee> builder)
         {
 
-            builder.ToTable("noticetodamagepayee", "lms");
+            //builder.ToTable("noticetodamagepayee", "lms");
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
 

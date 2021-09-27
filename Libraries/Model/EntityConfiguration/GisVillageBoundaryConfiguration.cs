@@ -11,7 +11,7 @@ namespace Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Gisvillageboundary> builder)
         {
-            builder.ToTable("gisvillageboundary", "lms");
+            //builder.ToTable("gisvillageboundary", "lms");
 
             builder.HasIndex(e => e.VillageId)
                 .HasName("fk_VillageIdVillageBoundary_idx");

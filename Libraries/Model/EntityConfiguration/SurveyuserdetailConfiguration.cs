@@ -12,7 +12,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Surveyuserdetail> builder)
         {
-            builder.ToTable("surveyuserdetail", "lms");
+            //builder.ToTable("surveyuserdetail", "lms");
 
             builder.HasIndex(e => e.RoleId)
                 .HasName("fksurveyrole_idx");

@@ -8,7 +8,7 @@ namespace Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Encrochmenttype> builder)
         {
-            builder.ToTable("encrochmenttype", "lms");
+            //builder.ToTable("encrochmenttype", "lms");
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
 

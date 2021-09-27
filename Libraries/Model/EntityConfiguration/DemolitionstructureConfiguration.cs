@@ -8,7 +8,7 @@ namespace Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Demolitionstructure> builder)
         {
-            builder.ToTable("demolitionstructure", "lms");
+            //builder.ToTable("demolitionstructure", "lms");
 
             builder.HasIndex(e => e.DemolitionStructureDetailsId)
                 .HasName("fkdemolitionstructuredemodetails_idx");

@@ -11,7 +11,7 @@ namespace Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<DetailsOfEncroachment> builder)
         {
-            builder.ToTable("detailsofencroachment");
+            //builder.ToTable("detailsofencroachment");
 
             builder.HasIndex(e => e.EncroachmentRegisterationId)
                 .HasName("EncroachmentRegisterationId_idx");

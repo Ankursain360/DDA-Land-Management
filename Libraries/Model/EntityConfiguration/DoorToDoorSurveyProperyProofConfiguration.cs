@@ -8,7 +8,7 @@ namespace Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Doortodoorsurveypropertyproof> builder)
         {
-            builder.ToTable("doortodoorsurveypropertyproof", "lms");
+            //builder.ToTable("doortodoorsurveypropertyproof", "lms");
 
             builder.HasIndex(e => e.DoorToDoorSurveyId)
                 .HasName("fk_doortodoorPropertyProof_idx");

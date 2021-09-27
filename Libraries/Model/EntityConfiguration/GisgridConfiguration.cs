@@ -8,7 +8,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Gisgrid> entity)
         {
-            entity.ToTable("gisgrid", "lms");
+            //entity.ToTable("gisgrid", "lms");
 
             entity.HasIndex(e => e.VillageId)
                 .HasName("GISGrid_idx");

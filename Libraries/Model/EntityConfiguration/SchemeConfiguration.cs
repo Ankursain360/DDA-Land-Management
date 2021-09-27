@@ -13,7 +13,7 @@ namespace Libraries.Model.EntityConfiguration
 
         public void Configure(EntityTypeBuilder<Scheme> builder)
         {
-            builder.ToTable("scheme", "lms");
+            //builder.ToTable("scheme", "lms");
 
             builder.HasIndex(e => e.Code)
                      .HasName("Code_UNIQUE")

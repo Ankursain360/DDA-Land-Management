@@ -14,7 +14,7 @@ namespace Libraries.Model.EntityConfiguration
 
         public void Configure(EntityTypeBuilder<Interest> builder)
         {
-            builder.ToTable("interest", "lms");
+            //builder.ToTable("interest", "lms");
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
 

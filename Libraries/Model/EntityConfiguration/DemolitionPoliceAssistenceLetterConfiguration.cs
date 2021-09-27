@@ -14,7 +14,7 @@ namespace Libraries.Model.EntityConfiguration
 
         public void Configure(EntityTypeBuilder<Demolitionpoliceassistenceletter> builder)
         {
-            builder.ToTable("demolitionpoliceassistenceletter", "lms");
+            //builder.ToTable("demolitionpoliceassistenceletter", "lms");
 
             builder.HasIndex(e => e.FixingDemolitionId)
                 .HasName("fk_LetterFixingDemolitionId_idx");

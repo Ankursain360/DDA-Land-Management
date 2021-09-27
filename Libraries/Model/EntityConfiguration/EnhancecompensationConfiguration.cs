@@ -12,7 +12,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Enhancecompensation> builder)
         {
-            builder.ToTable("enhancecompensation", "lms");
+            //builder.ToTable("enhancecompensation", "lms");
 
             builder.HasIndex(e => e.KhasraId)
                 .HasName("fk3khasraid_idx");

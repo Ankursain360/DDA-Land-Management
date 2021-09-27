@@ -11,7 +11,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Undersection17> builder)
         {
-            builder.ToTable("undersection17", "lms");
+            //builder.ToTable("undersection17", "lms");
 
             builder.HasIndex(e => e.UnderSection6Id)
                 .HasName("fkUndersection6id_idx");

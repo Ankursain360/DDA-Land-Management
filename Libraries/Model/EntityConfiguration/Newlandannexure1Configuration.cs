@@ -12,7 +12,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Newlandannexure1> builder)
         {
-            builder.ToTable("newlandannexure1", "lms");
+            //builder.ToTable("newlandannexure1", "lms");
 
             builder.HasIndex(e => e.DistrictId)
                 .HasName("FkAnexx1District_idx");

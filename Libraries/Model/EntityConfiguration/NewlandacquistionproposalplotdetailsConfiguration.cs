@@ -14,7 +14,7 @@ namespace Libraries.Model.EntityConfiguration
 
         public void Configure(EntityTypeBuilder<Newlandacquistionproposalplotdetails> builder)
         {
-            builder.ToTable("newlandacquistionproposalplotdetails", "lms");
+            //builder.ToTable("newlandacquistionproposalplotdetails", "lms");
 
             builder.HasIndex(e => e.AcquiredlandvillageId)
                 .HasName("fknewVillage_idx");

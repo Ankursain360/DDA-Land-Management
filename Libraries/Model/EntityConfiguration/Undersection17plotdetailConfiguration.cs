@@ -12,7 +12,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Undersection17plotdetail> builder)
         {
-            builder.ToTable("undersection17plotdetail", "lms");
+            //builder.ToTable("undersection17plotdetail", "lms");
 
             builder.HasIndex(e => e.KhasraId)
                     .HasName("fkkhasraid_idx");

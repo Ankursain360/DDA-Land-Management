@@ -8,7 +8,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Gisgosha> entity)
         {
-            entity.ToTable("gisgosha", "lms");
+            //entity.ToTable("gisgosha", "lms");
 
             entity.HasIndex(e => e.VillageId)
                 .HasName("GisGoshaVillageId_idx");

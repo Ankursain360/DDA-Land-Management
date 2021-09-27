@@ -13,7 +13,7 @@ namespace Libraries.Model.EntityConfiguration
         public void Configure(EntityTypeBuilder<Kycapprovalproccess> builder)
         {
 
-            builder.ToTable("kycapprovalproccess", "lms");
+            //builder.ToTable("kycapprovalproccess", "lms");
 
             builder.HasIndex(e => e.Status)
                 .HasName("fkapprovalstatus_idx");

@@ -11,7 +11,7 @@ namespace Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Gisfieldboun> builder)
         {
-            builder.ToTable("gisfieldboun", "lms");
+            //builder.ToTable("gisfieldboun", "lms");
 
             builder.HasIndex(e => e.VillageId)
                 .HasName("fk_VillageIdFieldBoun_idx");

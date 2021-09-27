@@ -13,7 +13,7 @@ namespace Libraries.Model.EntityConfiguration
         public void Configure(EntityTypeBuilder<Demandletters> builder)
         {
 
-            builder.ToTable("demandletters", "lms");
+            //builder.ToTable("demandletters", "lms");
 
             builder.HasIndex(e => e.LocalityId)
                 .HasName("fk_localityIdDemandLetters_idx");

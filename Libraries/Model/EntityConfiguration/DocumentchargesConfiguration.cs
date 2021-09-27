@@ -11,7 +11,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Documentcharges> builder)
         {
-            builder.ToTable("documentcharges", "lms");
+            //builder.ToTable("documentcharges", "lms");
 
             builder.HasIndex(e => e.LeasePurposesTypeId)
                 .HasName("fkpurposedocid_idx");

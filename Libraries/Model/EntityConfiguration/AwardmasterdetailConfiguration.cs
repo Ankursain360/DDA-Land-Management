@@ -8,7 +8,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Awardmasterdetail> builder)
         {
-            builder.ToTable("awardmasterdetail", "lms");
+            //builder.ToTable("awardmasterdetail", "lms");
 
             builder.HasIndex(e => e.VillageId)
                .HasName("VillageId_idx");

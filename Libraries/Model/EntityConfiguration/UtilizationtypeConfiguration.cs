@@ -13,13 +13,13 @@ namespace Libraries.Model.EntityConfiguration
         public void Configure(EntityTypeBuilder<Utilizationtype> builder)
         {
 
-            builder.ToTable("page", "lms");
+            //builder.ToTable("page", "lms");
 
             builder.HasIndex(e => e.Name)
                     .HasName("Name_UNIQUE")
                     .IsUnique();
 
-            builder.ToTable("utilizationtype", "lms");
+            //builder.ToTable("utilizationtype", "lms");
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
 

@@ -8,7 +8,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Module> builder)
         {
-            builder.ToTable("module", "lms");
+            //builder.ToTable("module", "lms");
 
             builder.HasIndex(e => e.ModuleCategoryId)
                      .HasName("fk_ModuleCategoryId_idx");

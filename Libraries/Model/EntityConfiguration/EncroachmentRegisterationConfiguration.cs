@@ -12,7 +12,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<EncroachmentRegisteration> builder)
         {
-                builder.ToTable("encroachmentregisteration");
+                //builder.ToTable("encroachmentregisteration");
 
             builder.HasIndex(e => e.ApprovedStatus)
                 .HasName("fk_ApprovedStatusEncroachmentregistration_idx");

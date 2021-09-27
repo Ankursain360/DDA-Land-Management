@@ -12,7 +12,7 @@ namespace Model.EntityConfiguration
         public void Configure(EntityTypeBuilder<Leasesignup> builder)
         {
 
-            builder.ToTable("leasesignup", "lms");
+            //builder.ToTable("leasesignup", "lms");
 
             builder.HasIndex(e => e.KycId)
                 .HasName("fkKycId_idx");

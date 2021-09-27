@@ -14,7 +14,7 @@ namespace Libraries.Model.EntityConfiguration
 
         public void Configure(EntityTypeBuilder<Gisdata> builder)
         {
-            builder.ToTable("gisdata", "lms");
+            //builder.ToTable("gisdata", "lms");
 
             builder.HasIndex(e => e.GisLayerId)
                 .HasName("fk_ColorCodeGisData_idx");

@@ -8,7 +8,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Leasepaymenttype> builder)
         {
-            builder.ToTable("leasepaymenttype", "lms");
+            //builder.ToTable("leasepaymenttype", "lms");
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
 

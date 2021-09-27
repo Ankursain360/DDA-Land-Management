@@ -12,7 +12,7 @@ namespace Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<ApplicationNotificationTemplate> builder)
         {
-            builder.ToTable("notificationtemplate", "lms");
+            //builder.ToTable("notificationtemplate", "lms");
 
             builder.Property(e => e.Id)
                     .HasColumnType("int(11)")

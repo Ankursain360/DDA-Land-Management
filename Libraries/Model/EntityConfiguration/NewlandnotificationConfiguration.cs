@@ -9,7 +9,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Newlandnotification> builder)
         {
-            builder.ToTable("newlandnotification", "lms");
+            //builder.ToTable("newlandnotification", "lms");
 
             builder.HasIndex(e => e.NotificationTypeId)
                 .HasName("fk_NotificationType_idx");

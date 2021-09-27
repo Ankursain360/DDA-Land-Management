@@ -13,7 +13,7 @@ namespace Libraries.Model.EntityConfiguration
 
         public void Configure(EntityTypeBuilder<Disposalland> builder)
         {
-            builder.ToTable("disposalland", "lms");
+            //builder.ToTable("disposalland", "lms");
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
 

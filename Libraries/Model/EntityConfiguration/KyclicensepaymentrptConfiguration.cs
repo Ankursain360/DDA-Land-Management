@@ -12,7 +12,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Kyclicensepaymentrpt> builder)
         {
-            builder.ToTable("kyclicensepaymentrpt", "lms");
+            //builder.ToTable("kyclicensepaymentrpt", "lms");
 
             builder.HasIndex(e => e.KycformId)
                 .HasName("FKkycformid_idx");

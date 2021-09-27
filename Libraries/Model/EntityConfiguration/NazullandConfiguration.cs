@@ -12,7 +12,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Nazulland> builder)
         {
-            builder.ToTable("nazulland", "lms");
+            //builder.ToTable("nazulland", "lms");
 
             builder.HasIndex(e => e.DivisionId)
                 .HasName("FKnazullandDivision_idx");

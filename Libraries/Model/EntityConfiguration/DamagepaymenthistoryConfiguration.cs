@@ -11,7 +11,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Damagepaymenthistory> builder)
         {
-            builder.ToTable("damagepaymenthistory", "lms");
+            //builder.ToTable("damagepaymenthistory", "lms");
 
             builder.HasIndex(e => e.DamagePayeeRegisterTempId)
                 .HasName("fk_damagepayeregistertemp_idx");

@@ -13,7 +13,7 @@ namespace Libraries.Model.EntityConfiguration
         {
            
 
-            builder.ToTable("paymentverification", "lms");
+            //builder.ToTable("paymentverification", "lms");
 
             builder.HasIndex(e => e.VerifiedBy)
                 .HasName("fkaspnetuserid_idx");

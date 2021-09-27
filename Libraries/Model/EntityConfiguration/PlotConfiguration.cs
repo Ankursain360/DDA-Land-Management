@@ -8,7 +8,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Plot> entity)
         {
-            entity.ToTable("plot", "lms");
+            //entity.ToTable("plot", "lms");
 
             entity.HasIndex(e => e.VillageId)
                 .HasName("FKGisVillageId_idx");

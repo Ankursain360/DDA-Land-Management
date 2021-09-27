@@ -11,7 +11,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Casenature> builder)
         {
-            builder.ToTable("casenature", "lms");
+            //builder.ToTable("casenature", "lms");
 
             builder.HasIndex(e => e.Name)
                 .HasName("Name_UNIQUE")

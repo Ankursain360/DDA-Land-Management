@@ -10,7 +10,7 @@ namespace Libraries.Model.EntityConfiguration
 
         public void Configure(EntityTypeBuilder<Vacantlandimage> builder)
         {
-            builder.ToTable("vacantlandimage", "lms");
+            //builder.ToTable("vacantlandimage", "lms");
 
             builder.HasIndex(e => e.DepartmentId)
                 .HasName("fk_DepartmentIdVacantLand_idx");

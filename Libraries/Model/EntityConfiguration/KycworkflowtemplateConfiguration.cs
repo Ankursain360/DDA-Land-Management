@@ -13,7 +13,7 @@ namespace Libraries.Model.EntityConfiguration
         public void Configure(EntityTypeBuilder<Kycworkflowtemplate> builder)
         {
 
-            builder.ToTable("kycworkflowtemplate", "lms");
+            //builder.ToTable("kycworkflowtemplate", "lms");
 
             builder.HasIndex(e => e.ModuleId)
                 .HasName("fkmodulekyc_idx");

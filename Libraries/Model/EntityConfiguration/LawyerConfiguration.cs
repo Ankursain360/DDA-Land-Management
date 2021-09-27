@@ -9,7 +9,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Lawyer> builder)
         {
-            builder.ToTable("lawyer", "lms");
+            //builder.ToTable("lawyer", "lms");
 
             builder.HasIndex(e => e.Id)
                     .HasName("Id_UNIQUE")

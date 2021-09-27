@@ -14,7 +14,7 @@ namespace Libraries.Model.EntityConfiguration
 
         public void Configure(EntityTypeBuilder<Processworkflow> builder)
         {
-            builder.ToTable("processworkflow", "lms");
+            //builder.ToTable("processworkflow", "lms");
 
             builder.HasIndex(e => e.WorkflowTemplateId)
                 .HasName("fk_WorkflowTemplateID_idx");

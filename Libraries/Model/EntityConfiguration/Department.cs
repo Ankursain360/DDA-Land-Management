@@ -14,7 +14,7 @@ namespace Libraries.Model.EntityConfiguration
 
         public void Configure(EntityTypeBuilder<Department> builder)
         {
-            builder.ToTable("department", "lms");
+            //builder.ToTable("department", "lms");
 
             builder.HasIndex(e => e.Name)
                 .HasName("Name_UNIQUE")

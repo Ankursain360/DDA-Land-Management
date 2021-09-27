@@ -8,7 +8,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Gisclean> entity)
         {
-            entity.ToTable("gisclean", "lms");
+            //entity.ToTable("gisclean", "lms");
 
             entity.HasIndex(e => e.VillageId)
                 .HasName("GisCleanVillageId_idx");

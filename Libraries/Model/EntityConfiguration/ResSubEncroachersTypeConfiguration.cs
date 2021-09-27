@@ -8,7 +8,7 @@ namespace Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Ressubencroacherstype> builder)
         {
-            builder.ToTable("ressubencroacherstype", "lms");
+            //builder.ToTable("ressubencroacherstype", "lms");
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
 

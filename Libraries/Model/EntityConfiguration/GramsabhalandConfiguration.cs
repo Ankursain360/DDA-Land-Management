@@ -13,7 +13,7 @@ namespace Libraries.Model.EntityConfiguration
         {
 
 
-            builder.ToTable("gramsabhaland", "lms");
+            //builder.ToTable("gramsabhaland", "lms");
 
             builder.HasIndex(e => e.VillageId)
                 .HasName("fkVillageId_idx");

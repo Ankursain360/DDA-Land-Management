@@ -14,7 +14,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Jaraifarmer> builder)
         {
-            builder.ToTable("jaraifarmer", "lms");
+            //builder.ToTable("jaraifarmer", "lms");
 
             builder.HasIndex(e => e.JaraiDetailId)
                 .HasName("FKJaraimainid_idx");

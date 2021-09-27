@@ -13,7 +13,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Areareclaimedrpt> builder)
         {
-            builder.ToTable("areareclaimedrpt", "lms");
+            //builder.ToTable("areareclaimedrpt", "lms");
 
             builder.HasIndex(e => e.DemolitionStructureDetailsId)
                 .HasName("FKdemolitionstructureid_idx");

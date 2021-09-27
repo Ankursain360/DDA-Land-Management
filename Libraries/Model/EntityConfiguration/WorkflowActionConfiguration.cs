@@ -14,7 +14,7 @@ namespace Libraries.Model.EntityConfiguration
 
         public void Configure(EntityTypeBuilder<Workflowaction> builder)
         {
-            builder.ToTable("workflowaction", "lms");
+            //builder.ToTable("workflowaction", "lms");
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
 

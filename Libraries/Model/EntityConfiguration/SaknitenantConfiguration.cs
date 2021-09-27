@@ -10,7 +10,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Saknitenant> builder)
         {
-            builder.ToTable("saknitenant", "lms");
+            //builder.ToTable("saknitenant", "lms");
 
             builder.HasIndex(e => e.SakniDetailId)
                 .HasName("FKsakni_idx");

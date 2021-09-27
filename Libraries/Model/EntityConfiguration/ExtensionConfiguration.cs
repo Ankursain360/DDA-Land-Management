@@ -11,7 +11,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Extension> builder)
         {
-            builder.ToTable("extension", "lms");
+            //builder.ToTable("extension", "lms");
 
             builder.HasIndex(e => e.AllotmentId)
                 .HasName("fk_AllotmentIdExtintion_idx");

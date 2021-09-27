@@ -8,7 +8,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Morland> builder)
         {
-            builder.ToTable("morland", "lms");
+            //builder.ToTable("morland", "lms");
 
             builder.HasIndex(e => e.LandNotificationId)
                      .HasName("LandNotificationId");

@@ -11,7 +11,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Documentchecklist> builder)
         {
-            builder.ToTable("documentchecklist", "lms");
+            //builder.ToTable("documentchecklist", "lms");
 
             builder.HasIndex(e => e.ServiceTypeId)
                 .HasName("fk_ServicetypeChecklist_idx");

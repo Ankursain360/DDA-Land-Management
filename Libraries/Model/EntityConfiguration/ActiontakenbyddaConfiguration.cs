@@ -15,7 +15,7 @@ namespace Libraries.Model.EntityConfiguration
         public void Configure(EntityTypeBuilder<Actiontakenbydda> builder)
         {
 
-            builder.ToTable("actiontakenbydda", "lms");
+            //builder.ToTable("actiontakenbydda", "lms");
 
             builder.HasIndex(e => e.RequestForProceedingId)
                 .HasName("fkactionProceedingId_idx");

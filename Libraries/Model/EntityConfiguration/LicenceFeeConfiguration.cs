@@ -13,7 +13,7 @@ namespace Libraries.Model.EntityConfiguration
 
         public void Configure(EntityTypeBuilder<Licencefees> entity)
         {
-            entity.ToTable("licencefees", "lms");
+            //entity.ToTable("licencefees", "lms");
 
             entity.HasIndex(e => e.LeasePurposesTypeId)
                 .HasName("fkleasepurposefeesid_idx");

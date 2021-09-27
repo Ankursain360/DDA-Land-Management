@@ -12,7 +12,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Issuereturnfile> builder)
         {
-            builder.ToTable("issuereturnfile", "lms");
+            //builder.ToTable("issuereturnfile", "lms");
 
             builder.HasIndex(e => e.BranchId)
                 .HasName("fk_filebranch_idx");

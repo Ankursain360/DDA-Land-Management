@@ -11,7 +11,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<PropertyRegistrationHistory> entity)
         {
-            entity.ToTable("propertyregistrationhistory");
+            //entity.ToTable("propertyregistrationhistory");
 
             entity.HasIndex(e => e.DepartmentId)
                 .HasName("LandTransferHistoryCurrentDepartment_idx");

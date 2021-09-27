@@ -14,7 +14,7 @@ namespace Libraries.Model.EntityConfiguration
         public void Configure(EntityTypeBuilder<Newlandvillage> builder)
     {
 
-        builder.ToTable("newlandvillage", "lms");
+        //builder.ToTable("newlandvillage", "lms");
 
         builder.HasIndex(e => e.DistrictId)
             .HasName("tehsilid_idx");

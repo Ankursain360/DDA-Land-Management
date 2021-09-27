@@ -10,7 +10,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Damagecalculation> builder)
         {
-            builder.ToTable("damagecalculation", "lms");
+            //builder.ToTable("damagecalculation", "lms");
 
             builder.HasIndex(e => e.LocalityId)
                 .HasName("fk_LocalityIdDamageCalculation_idx");

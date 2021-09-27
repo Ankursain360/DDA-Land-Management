@@ -14,7 +14,7 @@ namespace Libraries.Model.EntityConfiguration
 
         public void Configure(EntityTypeBuilder<Deletedproperty> builder)
         {
-            builder.ToTable("deletedproperty", "lms");
+            //builder.ToTable("deletedproperty", "lms");
 
             builder.HasIndex(e => e.PropertyRegistrationId)
                 .HasName("fkPropertyRegistrationId_idx");

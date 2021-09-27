@@ -12,7 +12,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Branch> builder)
         {
-            builder.ToTable("branch", "lms");
+            //builder.ToTable("branch", "lms");
 
             builder.HasIndex(e => e.DepartmentId)
                 .HasName("fk_branchdept_idx");

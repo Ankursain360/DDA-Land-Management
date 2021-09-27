@@ -10,7 +10,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Onlinecomplaint> builder)
         {
-            builder.ToTable("onlinecomplaint", "lms");
+            //builder.ToTable("onlinecomplaint", "lms");
 
             builder.HasIndex(e => e.ApprovedStatus)
                 .HasName("fk_ApprovedStatusFixingDemolition_idx");
