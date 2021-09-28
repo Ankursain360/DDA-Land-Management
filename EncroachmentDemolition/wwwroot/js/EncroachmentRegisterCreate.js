@@ -280,7 +280,7 @@ $('.checkExtension').on('change', function (e) {
                 $.ajax({
                     async: false,
                     type: "POST",
-                    url: "../EncroachmentRegister/CheckFile",
+                    url: "/EncroachmentRegister/CheckFile",
                     contentType: false,
                     processData: false,
                     data: myformData,
