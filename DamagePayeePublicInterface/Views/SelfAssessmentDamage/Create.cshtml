@@ -96,8 +96,8 @@
                                     </td>
                                     <td>
 
-                                        <input asp-for="AadharNo" type="password" maxlength="50" class="floating-label-field floating-label-field--s3" />
-                                        <span asp-validation-for="AadharNo" class="d-block text-danger field-validation-valid msg3"></span>
+                                        <input asp-for="AadharNo" type="password" maxlength="12" class="floating-label-field floating-label-field--s3" />
+                                        <span asp-validation-for="AadharNo" class="d-block text-danger field-validation-valid msgaadhar"></span>
                                         <br />
                                         <a id="viewAadharId" asp-action="ViewPersonelInfoAadharFile" class="badge badge-primary px-2" target="_blank" style="display:none;">(View File)</a>
                                         <input type="hidden" asp-for="AadharNoFilePath" />
@@ -109,8 +109,8 @@
                                     </td>
                                     <td>
 
-                                        <input asp-for="PanNo" maxlength="50" type="password" class="floating-label-field floating-label-field--s3" />
-                                        <span asp-validation-for="PanNo" class="d-block text-danger field-validation-valid"></span>
+                                        <input asp-for="PanNo" maxlength="10" type="password" class="floating-label-field floating-label-field--s3" onchange="return chkvalid(this);"/>
+                                        <span asp-validation-for="PanNo" class="d-block text-danger field-validation-valid msgpan"></span>
                                         <br />
                                         <a id="viewPanId" asp-action="ViewPersonelInfoPanFile" class="badge badge-primary px-2" target="_blank" style="display:none;">(View File)</a>
                                         <input asp-for="Pan" type="file" class="floating-label-field floating-label-field--s3 checkExtension" />
