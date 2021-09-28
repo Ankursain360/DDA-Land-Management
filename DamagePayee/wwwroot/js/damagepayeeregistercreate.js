@@ -255,6 +255,7 @@ $(document).delegate('a.add-record', 'click', function (e) {
         debugger
 
         $("#tbl_posts #add .floating-label-field").val('');
+        $("#tbl_posts #add .field-validation-valid").html('');
     }
     else {
         alert('Please fill record before add new record ');
@@ -475,28 +476,44 @@ $(function () {
     });
 });
 
-$(function () {
-    $('#PanNo').on('change', function () {
-        debugger;
-        var input = $(this).val();
+//$(function () {
+//    $('#PanNo').on('change', function () {
+//        debugger;
+//        var input = $(this).val();
 
-        /// [A - Z]{ 5 } [0 - 9]{ 4 } [A - Z]{ 1 } $ /
-        var re = /^([a-zA-Z]{5})(\d{4})([a-zA-Z]{1})$/;
-        var is_valid = re.test(input.val());
-        //alert('Please enter valid email id');
-        if (is_valid == false) {
-            // alert('Please enter valid email id');
+//        /// [A - Z]{ 5 } [0 - 9]{ 4 } [A - Z]{ 1 } $ /
+//        var re = /^([a-zA-Z]{5})(\d{4})([a-zA-Z]{1})$/;
+//        var is_valid = re.test(input.val());
+//        //alert('Please enter valid email id');
+//        if (is_valid == false) {
+//            // alert('Please enter valid email id');
            
-            $('#PanNo').val(' ');
-            $('.msg4').empty().html('Please enter valid Pan card number ');
-        }
-        else {
-            $('#PanNo').val(input.val());
+//            $('#PanNo').val(' ');
+//            $('.msg4').empty().html('Please enter valid Pan card number ');
+//        }
+//        else {
+//            $('#PanNo').val(input.val());
            
-        }
+//        }
 
-    });
-});
+//    });
+//});
+
+
+function chkvalid(input) {
+    var value = $(input).val();
+    var re = /^([a-zA-Z]{5})(\d{4})([a-zA-Z]{1})$/;
+    var is_valid = re.test(value);
+    if (!is_valid) {
+        $(input).val('');
+        $(input).focus();
+
+        $(input).nextAll('span:first').empty().html('Please enter valid Pan card number');
+    } 
+      
+}
+
+
 $('#DocumentIFormFile').change(function () {
     var fileInput = document.getElementById('DocumentIFormFile');
     var filePath = fileInput.value;

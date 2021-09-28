@@ -207,10 +207,10 @@ function FillRepeatorAtEdit() {/* -----------Added by ishu  --------------- */
             $("#tbl_posts #add #SignatureFilePath").val(data[i].signaturePath);
             //$("#tbl_posts #add #OtherDocFilePath").val(data[i].otherDocPath);
 
-            $("#tbl_posts #add #viewAadharId").text(data[i].aadharNoFilePath.split("\\")[data[i].aadharNoFilePath.split("\\").length - 1].slice(37));
-            $("#tbl_posts #add #viewPanId").text(data[i].panNoFilePath.split("\\")[data[i].panNoFilePath.split("\\").length - 1].slice(37));
-            $("#tbl_posts #add #viewPhotoId").text(data[i].photographPath.split("\\")[data[i].photographPath.split("\\").length - 1].slice(37));
-            $("#tbl_posts #add #viewSignatureId").text(data[i].signaturePath.split("\\")[data[i].signaturePath.split("\\").length - 1].slice(37));
+            data[i].aadharNoFilePath == null ? "" :  $("#tbl_posts #add #viewAadharId").text(data[i].aadharNoFilePath.split("\\")[data[i].aadharNoFilePath.split("\\").length - 1].slice(37));
+            data[i].panNoFilePath == null ? "" : $("#tbl_posts #add #viewPanId").text(data[i].panNoFilePath.split("\\")[data[i].panNoFilePath.split("\\").length - 1].slice(37));
+            data[i].photographPath == null ? "" : $("#tbl_posts #add #viewPhotoId").text(data[i].photographPath.split("\\")[data[i].photographPath.split("\\").length - 1].slice(37));
+            data[i].signaturePath == null ? "" : $("#tbl_posts #add #viewSignatureId").text(data[i].signaturePath.split("\\")[data[i].signaturePath.split("\\").length - 1].slice(37));
             //$("#tbl_posts #add #viewOtherDocId").text(data[i].otherDocPath.split("\\")[data[i].otherDocPath.split("\\").length - 1].slice(37));
 
            
@@ -341,7 +341,7 @@ function FillAllotteAtEdit() {/* -----------Added by ishu  --------------- */
             $("#tbl_DamageAssessee #addDamageAssessee #Date").val(data[i].date);
             $("#tbl_DamageAssessee #addDamageAssessee #ATSGPAFilePath").val(data[i].atsgpadocumentPath);
 
-            $("#tbl_DamageAssessee #addDamageAssessee #viewATSId").text(data[i].atsgpadocumentPath.split("\\")[data[i].atsgpadocumentPath.split("\\").length - 1].slice(37));
+            data[i].atsgpadocumentPath == null ? "" :  $("#tbl_DamageAssessee #addDamageAssessee #viewATSId").text(data[i].atsgpadocumentPath.split("\\")[data[i].atsgpadocumentPath.split("\\").length - 1].slice(37));
 
             if (data[i].atsgpadocumentPath != "" && data[i].atsgpadocumentPath != null) {
                 $("#tbl_DamageAssessee #addDamageAssessee #viewATSId").attr('href', '/DamagePayeeRegister/ViewATSFile/' + data[i].id)
@@ -441,7 +441,7 @@ function FillPaymentHistoryAtEdit() {/* -----------Added by ishu  --------------
             $("#tbl_Payment #addPayment #Amount").val(data[i].amount);
             $("#tbl_Payment #addPayment #RecieptFilePath").val(data[i].recieptDocumentPath);
            
-            $("#tbl_Payment #addPayment #viewReceiptId").text(data[i].recieptDocumentPath.split("\\")[data[i].recieptDocumentPath.split("\\").length - 1].slice(37));
+            data[i].recieptDocumentPath == null ? "" :  $("#tbl_Payment #addPayment #viewReceiptId").text(data[i].recieptDocumentPath.split("\\")[data[i].recieptDocumentPath.split("\\").length - 1].slice(37));
 
             if (data[i].recieptDocumentPath != "" && data[i].recieptDocumentPath != null) {
                 $("#tbl_Payment #addPayment #viewReceiptId").attr('href', '/DamagePayeeRegister/ViewReceiptFile/' + data[i].id)
@@ -610,28 +610,43 @@ $(function () {
     });
 });
 
-$(function () {
-    $('#PanNo').on('change', function () {
-        debugger;
-        var input = $(this);
+//$(function () {
+//    $('#PanNo').on('change', function () {
+//        debugger;
+//        var input = $(this);
 
-        /// [A - Z]{ 5 } [0 - 9]{ 4 } [A - Z]{ 1 } $ /
-        var re = /^([a-zA-Z]{5})(\d{4})([a-zA-Z]{1})$/;
-        var is_valid = re.test(input.val());
-        //alert('Please enter valid email id');
-        if (is_valid == false) {
-            // alert('Please enter valid email id');
+//        /// [A - Z]{ 5 } [0 - 9]{ 4 } [A - Z]{ 1 } $ /
+//        var re = /^([a-zA-Z]{5})(\d{4})([a-zA-Z]{1})$/;
+//        var is_valid = re.test(input.val());
+//        //alert('Please enter valid email id');
+//        if (is_valid == false) {
+//            // alert('Please enter valid email id');
 
-            $('#PanNo').val(' ');
-            $('.msg4').empty().html('Please enter valid Pan card number ');
-        }
-        else {
-            $('#PanNo').val(input.val());
+//            $('#PanNo').val(' ');
+//            $('.msg4').empty().html('Please enter valid Pan card number ');
+//        }
+//        else {
+//            $('#PanNo').val(input.val());
 
-        }
+//        }
 
-    });
-});
+//    });
+//});
+
+
+function chkvalid(input) {
+    var value = $(input).val();
+    var re = /^([a-zA-Z]{5})(\d{4})([a-zA-Z]{1})$/;
+    var is_valid = re.test(value);
+    if (!is_valid) {
+        $(input).val('');
+        $(input).focus();
+
+        $(input).nextAll('span:first').empty().html('Please enter valid Pan card number');
+    }
+
+}
+
 $('#DocumentIFormFile').change(function () {
     var fileInput = document.getElementById('DocumentIFormFile');
     var filePath = fileInput.value;

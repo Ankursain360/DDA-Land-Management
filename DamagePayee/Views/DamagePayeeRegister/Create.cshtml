@@ -127,8 +127,8 @@
                                     </td>
                                     <td>
 
-                                        <input asp-for="PanNo"  maxlength="15" type="text" class="floating-label-field floating-label-field--s3 " />
-                                        <span asp-validation-for="PanNo" class="d-block text-danger field-validation-valid"></span>
+                                        <input asp-for="PanNo"  maxlength="10" type="text" class="floating-label-field floating-label-field--s3 "onchange="return chkvalid(this);" />
+                                        <span asp-validation-for="PanNo" class="d-block text-danger field-validation-valid msgpan"></span>
 
                                         <input type="hidden" asp-for="PanNoFilePath" />
                                         <br />
