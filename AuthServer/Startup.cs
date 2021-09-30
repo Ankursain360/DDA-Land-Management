@@ -1,5 +1,6 @@
 using AuthServer.Data;
 using AuthServer.Filters;
+using AuthServer.Infrastructure.Extensions;
 using AuthServer.Models;
 using IdentityServer4.EntityFramework.DbContexts;
 using IdentityServer4.EntityFramework.Mappers;
@@ -18,7 +19,8 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
 using System.Reflection;
-
+using Service.Common;
+using Libraries.Model;
 namespace AuthServer
 {
     public class Startup
@@ -63,6 +65,7 @@ namespace AuthServer
                 options.User.RequireUniqueEmail = true;
             })
                 .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddEntityFrameworkStores<DataContext>()
                 .AddDefaultTokenProviders();
 
             services.Configure<DataProtectionTokenProviderOptions>(opt =>
@@ -77,11 +80,14 @@ namespace AuthServer
                 options.IdleTimeout = TimeSpan.FromMinutes(Convert.ToInt32(Configuration.GetSection("CookiesSettings:CookiesTimeout").Value));
                 options.Cookie.HttpOnly = true;
                 options.Cookie.Domain = HostEnvironment.IsProduction() ? (Configuration.GetSection("CookiesSettings:CookiesDomain").Value).ToString() : "localhost";
-               // options.Cookie.Path = Configuration.GetSection("CookiesSettings:CookiesPath").Value.ToString();
+                // options.Cookie.Path = Configuration.GetSection("CookiesSettings:CookiesPath").Value.ToString();
                 options.Cookie.IsEssential = true;
 
             });
+            services.AddDbContext<DataContext>(a => a.UseMySQL(Configuration.GetSection("ConnectionString:lmsConnection").Value));
 
+            services.RegisterDependency();
+            services.AddAutoMapperSetup();
             var builder = services.AddIdentityServer(options =>
             {
                 options.Events.RaiseErrorEvents = true;

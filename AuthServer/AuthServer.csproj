@@ -33,6 +33,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Libraries\Notification\Notification.csproj" />
+    <ProjectReference Include="..\Libraries\Service\Service.csproj" />
     <ProjectReference Include="..\Libraries\Utility\Utility.csproj" />
   </ItemGroup>
 

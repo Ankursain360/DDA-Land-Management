@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Dto.Search;
-//using Libraries.Model.Entity;
-//using Libraries.Service.IApplicationService;
 using Microsoft.AspNetCore.Mvc;
 using Notification;
 using Notification.Constants;
@@ -18,26 +16,27 @@ using System.Text.Encodings.Web;
 using System.Linq;
 using Microsoft.AspNetCore.Http;
 using Dto.Master;
-//using Service.IApplicationService;
 using Microsoft.AspNetCore.WebUtilities;
 using System.Text;
 using IdentityServerAspNetIdentity.Models;
+using Libraries.Service.IApplicationService;
+using Libraries.Model.Entity;
 
-namespace SiteMaster.Controllers
+namespace IdentityServerHost.Quickstart
 {
     public class ForgetPasswordController : Controller
     {
         public string Email { get; set; }
         private readonly IHostingEnvironment _hostingEnvironment;
         public readonly IConfiguration _configuration;
-       // private readonly IUserProfileService _userProfileService;
-        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IPasswordhistoryService _passwordhistoryService;
+        private readonly UserManager<IdentityServerAspNetIdentity.Models.ApplicationUser> _userManager;
 
         public ForgetPasswordController(IConfiguration configuration, IHostingEnvironment en,
-           // , IUserProfileService userProfileService,
-            UserManager<ApplicationUser> userManager)
+             IPasswordhistoryService passwordhistoryService,
+            UserManager<IdentityServerAspNetIdentity.Models.ApplicationUser> userManager)
         {
-           // _userProfileService = userProfileService;
+            _passwordhistoryService = passwordhistoryService;
             _userManager = userManager;
             _configuration = configuration;
             _hostingEnvironment = en;
@@ -177,11 +176,21 @@ namespace SiteMaster.Controllers
                     var user = await _userManager.FindByNameAsync(resetPasswordDto.Username);
                     if (user == null)
                     {
-                        ModelState.AddModelError("Username", "Unable to load user " + resetPasswordDto.Username + ".");
+                        ModelState.AddModelError("Username", "No user found with username" + resetPasswordDto.Username + ".");
                         // ViewBag.Message = Alert.Show("No Authenticated User", "", AlertType.Error);
                         return View(resetPasswordDto);
                     }
-                    var resetPassResult = await _userManager.ResetPasswordAsync(user, resetPasswordDto.Token, resetPasswordDto.Password);
+                    //chk previous  passwords 
+                   
+                    var encodedpassword = (new EncryptionHelper()).Base64Encode(resetPasswordDto.Password); 
+                    var result1 = await _passwordhistoryService.IsPreviousPassword(user.Id, encodedpassword);
+                    if (result1) 
+                    {
+                        ModelState.AddModelError("Password", "You Cannot Reuse Previous 5 Password");
+                        return View(resetPasswordDto);
+                    }
+                    
+                   var resetPassResult = await _userManager.ResetPasswordAsync(user, resetPasswordDto.Token, resetPasswordDto.Password);
                     if (!resetPassResult.Succeeded)
                     {
                         foreach (var error in resetPassResult.Errors)
@@ -192,6 +201,21 @@ namespace SiteMaster.Controllers
                         }
                         return View(resetPasswordDto);
                     }
+                    //insert into password history table
+
+                    Passwordhistory history = new Passwordhistory();
+
+                    history.UserId = user.Id;
+                    history.UserName = user.UserName;
+
+                    // history.Password = _userManager.PasswordHasher.HashPassword(user, resetPasswordDto.Password);
+                    // history.Password = resetPasswordDto.Password;
+                    history.Password = encodedpassword;
+                    history.CreatedBy = user.Id;
+                    history.IpAddress = HttpContext.Connection.RemoteIpAddress.ToString(); 
+                    
+                  var  result = await _passwordhistoryService.Create(history);
+
                     return RedirectToAction(nameof(ResetPasswordConfirmation));
                 }
                 else

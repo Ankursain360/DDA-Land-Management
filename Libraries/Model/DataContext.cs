@@ -14,6 +14,7 @@ namespace Libraries.Model
         {
 
         }
+        //public virtual DbSet<ApplicationUser> ApplicationUser { get; set; }
         public virtual DbSet<Approvalstatus> Approvalstatus { get; set; }
         public virtual DbSet<Userprofile> Userprofile { get; set; }
         public virtual DbSet<SystemUser> SystemUser { get; set; }
@@ -145,7 +146,7 @@ namespace Libraries.Model
         public virtual DbSet<ModuleCategory> ModuleCategory { get; set; }
         public virtual DbSet<Otherlandnotification> Otherlandnotification { get; set; }
 
-
+        public virtual DbSet<Passwordhistory> Passwordhistory { get; set; }
         //**********  Court case management**********
         public virtual DbSet<Legalmanagementsystem> Legalmanagementsystem { get; set; }
         public virtual DbSet<Court> Court { get; set; }
@@ -611,6 +612,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new KycapprovalproccessConfiguration());
             modelBuilder.ApplyConfiguration(new KycworkflowtemplateConfiguration());
             modelBuilder.ApplyConfiguration(new KycdemandpaymentdetailsConfiguration());
+            modelBuilder.ApplyConfiguration(new PasswordhistoryConfiguration());
             //modelBuilder.ApplyConfiguration(new KyclicensepaymentrptConfiguration());
             base.OnModelCreating(modelBuilder);
         }

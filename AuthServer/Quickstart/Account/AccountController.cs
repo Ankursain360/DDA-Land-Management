@@ -31,6 +31,8 @@ using Utility.Helper;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
+using Libraries.Service.IApplicationService;
+using Libraries.Model.Entity;
 
 namespace IdentityServerHost.Quickstart.UI
 {
@@ -39,22 +41,24 @@ namespace IdentityServerHost.Quickstart.UI
     public class AccountController : Controller
     {
         private readonly IHostingEnvironment _hostingEnvironment;
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly UserManager<IdentityServerAspNetIdentity.Models.ApplicationUser> _userManager;
+        private readonly SignInManager<IdentityServerAspNetIdentity.Models.ApplicationUser> _signInManager;
         private readonly IIdentityServerInteractionService _interaction;
         private readonly IClientStore _clientStore;
         private readonly IAuthenticationSchemeProvider _schemeProvider;
         private readonly IEventService _events;
         public IConfiguration _configuration;
-        private readonly IHttpContextAccessor _httpContextAccessor; 
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IPasswordhistoryService _passwordhistoryService;
         public AccountController(
-            UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager,
+            UserManager<IdentityServerAspNetIdentity.Models.ApplicationUser> userManager,
+            SignInManager<IdentityServerAspNetIdentity.Models.ApplicationUser> signInManager,
             IIdentityServerInteractionService interaction,
             IClientStore clientStore,
             IAuthenticationSchemeProvider schemeProvider,
             IEventService events,
-            IConfiguration configuration, 
+            IConfiguration configuration,
+             IPasswordhistoryService passwordhistoryService,
             IHttpContextAccessor httpContextAccessor, IHostingEnvironment en)
            
         {
@@ -67,7 +71,7 @@ namespace IdentityServerHost.Quickstart.UI
             _configuration = configuration;
             _httpContextAccessor = httpContextAccessor;
             _hostingEnvironment = en;
-            
+            _passwordhistoryService = passwordhistoryService;
         }
 
         /// <summary>
@@ -581,6 +585,7 @@ namespace IdentityServerHost.Quickstart.UI
             return Convert.ToBase64String(hashdata);
         }
         #endregion
+
         #region Reset password on first login ,code added by ishu 20/9/2021
         [HttpGet]
         [AllowAnonymous]
@@ -614,6 +619,15 @@ namespace IdentityServerHost.Quickstart.UI
                        // ViewBag.Message = Alert.Show("No Authenticated User", "", AlertType.Error);
                         return View(resetPasswordDto);
                     }
+                    //chk previous  passwords 
+
+                    var encodedpassword = (new EncryptionHelper()).Base64Encode(resetPasswordDto.Password);
+                    var result1 = await _passwordhistoryService.IsPreviousPassword(user.Id, encodedpassword);
+                    if (result1)
+                    {
+                        ModelState.AddModelError("Password", "You Cannot Reuse Previous 5 Passwords");
+                        return View(resetPasswordDto);
+                    }
                     var resetPassResult = await _userManager.ResetPasswordAsync(user, resetPasswordDto.Token, resetPasswordDto.Password);
                     if (!resetPassResult.Succeeded)
                     {
@@ -628,6 +642,22 @@ namespace IdentityServerHost.Quickstart.UI
                     user.ChangePasswordStatus = "F";
                     IdentityResult result = await _userManager.UpdateAsync(user);
                     var res= result.Succeeded ? true : false;
+                    #region
+                    //insert into password history table
+
+                    Passwordhistory history = new Passwordhistory();
+
+                    history.UserId = user.Id;
+                    history.UserName = user.UserName;
+
+                    // history.Password = _userManager.PasswordHasher.HashPassword(user, resetPasswordDto.Password);
+                    // history.Password = resetPasswordDto.Password;
+                    history.Password = encodedpassword;
+                    history.CreatedBy = user.Id;
+                    history.IpAddress = HttpContext.Connection.RemoteIpAddress.ToString();
+
+                    var result2 = await _passwordhistoryService.Create(history);
+                    #endregion
                     return RedirectToAction(nameof(ResetPasswordConfirmation));
                 }
                 else
