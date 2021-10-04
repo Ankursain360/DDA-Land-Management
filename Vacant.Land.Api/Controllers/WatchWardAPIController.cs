@@ -44,8 +44,8 @@ namespace Vacant.Land.Api.Controllers
             {       
                 if (dto != null)
                 {
-                    if (dto.Date == null  ||
-                        dto.LocalityId == null || dto.LocalityId == 0 ||
+                    if(dto.Date == null  ||
+                       // dto.LocalityId == null || dto.LocalityId == 0 ||
                         //dto.KhasraId == null || dto.KhasraId == 0||
                         dto.PrimaryListNo == 0 ||
                         dto.Landmark == null || dto.Landmark == "" ||
@@ -230,19 +230,7 @@ namespace Vacant.Land.Api.Controllers
             ApiSaveWatchandwardDtoResponseDetails apiResponseDetails = new ApiSaveWatchandwardDtoResponseDetails();
             try
             {
-                //if (dto != null)
-                //{
-                //    //if (dto.RoleId == 0 || dto.UserId == 0)
-                //{
-                //    List<ApiSaveDoor2DoorSurveyDto> dtoData = new List<ApiSaveDoor2DoorSurveyDto>();
-                //    apiResponseDetails = new ApiSaveDoor2DoorSurveyResponseDetails
-                //    {
-                //        responseCode = "400",
-                //        responseMessage = "Bad Request. Insufficient Parameters",
-                //        ApiSaveDoor2DoorSurveyDto = dtoData
-                //    };
-                //    return NotFound(apiResponseDetails);
-                //}
+                
 
                 var data = await _watchWardAPIService.GetAllWatchandward(dto);
                         
@@ -270,18 +258,7 @@ namespace Vacant.Land.Api.Controllers
                         };
                         return NotFound(apiResponseDetails);
                     }
-                //}
-                //else
-                //{
-                //    List<ApiSaveDoor2DoorSurveyDto> dtoData = new List<ApiSaveDoor2DoorSurveyDto>();
-                //    apiResponseDetails = new ApiSaveDoor2DoorSurveyResponseDetails
-                //    {
-                //        responseCode = "400",
-                //        responseMessage = "Bad Request. Insufficient Parameters",
-                //        ApiSaveDoor2DoorSurveyDto = dtoData
-                //    };
-                //    return NotFound(apiResponseDetails);
-                //}
+                
             }
             catch (Exception ex)
             {

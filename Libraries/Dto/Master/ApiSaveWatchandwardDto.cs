@@ -11,8 +11,8 @@ namespace Dto.Master
         public int Id { get; set; }
         public string RefNo { get; set; }
         public DateTime? Date { get; set; }
-        public int? LocalityId { get; set; }
-        public int? KhasraId { get; set; }
+       // public int? LocalityId { get; set; }
+        //public int? KhasraId { get; set; }
         public int PrimaryListNo { get; set; }
         public string Landmark { get; set; }
         public int Encroachment { get; set; }
@@ -31,7 +31,7 @@ namespace Dto.Master
         //public IList<string> PhotoFileDataPath { get; set; }
         //public IList<string> ReportFileDataPath { get; set; }
         public string PrimaryListNoName { get; set; }
-        public string LocalityName { get; set; }
+       // public string LocalityName { get; set; }
        // public string KhasraName { get; set; }
     }
 
