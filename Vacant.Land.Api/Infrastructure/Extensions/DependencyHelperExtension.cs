@@ -30,11 +30,17 @@ namespace Vacant.Land.Api.Infrastructure.Extensions
             services.AddScoped<IPropertyRegistrationRepository, PropertyRegistrationRepository>();
             services.AddScoped<IPlanningRepositry, PlanningRepositry>();
             services.AddScoped<IInsertVacantLandImagesRepository, InsertVacantLandImagesRepository>();
+            services.AddScoped<IWatchWardAPIRepository, WatchWardAPIRepository>();
+            services.AddScoped<IWatchandwardRepository, WatchandwardRepository>();
 
 
             /* Application Services */
             services.AddScoped<INazullandService, NazullandService>();
             services.AddScoped<IPropertyRegistrationService, PropertyRegistrationService>();
+            services.AddScoped<IWatchWardAPIService, WatchWardAPIService>();
+            services.AddScoped<IWatchandwardService, WatchandwardService>();
+
+
             /* Land transfer Services */
             services.AddScoped<INazullandService, NazullandService>();
             services.AddScoped<ILandTransferService, LandTransferService>();
