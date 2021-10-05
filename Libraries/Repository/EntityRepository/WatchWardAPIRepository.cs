@@ -5,6 +5,7 @@ using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using Libraries.Repository.IEntityRepository;
 using Microsoft.EntityFrameworkCore;
+using Model.Entity;
 using Repository.Common;
 using System;
 using System.Collections.Generic;
@@ -84,33 +85,7 @@ namespace Libraries.Repository.EntityRepository
             {
                 for (int i = 0; i < Data.Count; i++)
                 {
-                    //List<string> propertyDocument = new List<string>();
-                    //List<string> identityDocument = new List<string>();
-                    ////Fetch identity document
-                    //var identityDocumentData = await _dbContext.Doortodoorsurveyidentityproof
-                    //                                     .Where(x => x.DoorToDoorSurveyId == Data[i].Id)
-                    //                                     .ToListAsync();
-                    //if (identityDocumentData != null)
-                    //{
-                    //    for (int h = 0; h < identityDocumentData.Count; h++)
-                    //    {
-                    //        identityDocument.Add(identityDocumentPath + identityDocumentData[h].OccupantIdentityPrrofFilePath);
-                    //    }
-                    //}
-                    //Fetch Property document
-                    //var propertyDocumentData = await _dbContext.Doortodoorsurveypropertyproof
-                    //                                    .Where(x => x.DoorToDoorSurveyId == Data[i].Id)
-                    //                                    .ToListAsync();
-                    //if (propertyDocumentData != null)
-                    //{
-                    //    for (int h = 0; h < propertyDocumentData.Count; h++)
-                    //    {
-                    //        propertyDocument.Add(propertyDocumentPath + propertyDocumentData[h].PropertyFilePath);
-                    //    }
-                    //}
-
-
-
+                    
                     listData.Add(new ApiSaveWatchandwardDto()
                     {
                      Id = Data[i].Id,
@@ -136,6 +111,17 @@ namespace Libraries.Repository.EntityRepository
                 }
             }
             return listData;
+        }
+        public async Task<Userprofile> GetUserOngivenUserId(int userId)
+        {
+            return await _dbContext.Userprofile
+                                  .Include(a => a.User)
+                                  .Include(a => a.Role)
+                                  .Include(a => a.Department)
+                                  .Include(a => a.Zone)
+                                  .Include(a => a.District)
+                                  .Where(a => a.IsActive == 1 && a.UserId == userId)
+                                  .FirstOrDefaultAsync();
         }
 
     }

@@ -32,15 +32,20 @@ namespace Vacant.Land.Api.Infrastructure.Extensions
             services.AddScoped<IInsertVacantLandImagesRepository, InsertVacantLandImagesRepository>();
             services.AddScoped<IWatchWardAPIRepository, WatchWardAPIRepository>();
             services.AddScoped<IWatchandwardRepository, WatchandwardRepository>();
-
-
+            services.AddScoped<IApprovalProccessRepository, ApprovalProccessRepository>();
+            services.AddScoped<IUserNotificationRepository, UserNotificationRepository>();
+            services.AddScoped<IUserProfileRepository, UserProfileRepository>();
+            services.AddScoped<IWorkflowTemplateRepository, WorkflowTemplateRepository>();
             /* Application Services */
             services.AddScoped<INazullandService, NazullandService>();
             services.AddScoped<IPropertyRegistrationService, PropertyRegistrationService>();
             services.AddScoped<IWatchWardAPIService, WatchWardAPIService>();
             services.AddScoped<IWatchandwardService, WatchandwardService>();
 
-
+            services.AddScoped<IUserProfileService, UserProfileService>();
+            services.AddScoped<IWorkflowTemplateService, WorkflowTemplateService>();
+            services.AddScoped<IApprovalProccessService, ApprovalProccessService>();
+            services.AddScoped<IUserNotificationService, UserNotificationService>();
             /* Land transfer Services */
             services.AddScoped<INazullandService, NazullandService>();
             services.AddScoped<ILandTransferService, LandTransferService>();

@@ -1,0 +1,235 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        .p {
+            color: black;
+        }
+
+        fieldset {
+            border: 1px solid #ddd !important;
+            margin: 0;
+            xmin-width: 0;
+            padding: 10px;
+            position: relative;
+            border-radius: 4px;
+            background-color: #f5f5f5;
+            padding-left: 10px !important;
+        }
+
+        label {
+            font-weight: 500;
+        }
+
+        .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+            border-top: 0px none;
+        }
+    </style>
+</head>
+<body>
+
+
+    <div class="content" style="max-width: 800px; margin: auto; background: white; padding: 10px;">
+        <div class="panel-body">
+
+            <table class="table" border="0" style="border:none; border-top: none; ">
+
+                <tr>
+                    <td align="center">
+
+                        
+                        <img src="../../images/DDAlogo.png" alt=" DDA logo" style="height:90px;width:90px;" />
+                    </td>
+                </tr>
+
+                <tr align="center">
+                    <td align="center">
+                        <p style="color:black">
+                            <b>
+                                DELHI DEVELOPMENT AUTHORITY<br />
+                                OFFICE OF THE {OfficeName}, {OfficeDepartment}, {OfficeZone}<br />
+                                {OfficeAddress}<br />
+
+                            </b>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p style="color:black;"><b>No.: {FileNo}</b> <span style="padding-left:300px;"><b>Date : {LetterDate}</b></span></p>
+                    </td>
+
+                    <!--<td style="padding-right:-200px;">
+                        <p style="color:black;"><b>Date : {LetterDate}</b></p>
+                    </td>-->
+
+                </tr>
+
+
+                <tr>
+                    <td>
+                        <label> To,</label>
+                        <p style="color:black;margin-bottom: 20px !important;">
+                            <b>The Dy.Commissioner Of Police</b><br />
+                            {DyCommOffcAddress}
+                        </p>
+                    </td>
+
+
+                </tr>
+
+
+
+                <tr>
+                    <td>
+                        <p style="color:black;margin-bottom:-5px; ">
+                            <b>
+                                Sub: Request for providing Police assistance to DDA Staff for carrying out demolition
+                                programme for removal of unauthorized construction/encroachment on DDA/Government land.
+                            </b>
+                        </p>
+
+                    </td>
+
+                </tr>
+                <tr>
+                </tr>
+
+
+
+                <tr>
+                    <td>
+                        <p style="color:black;margin-bottom:0.2% ;text-align-last:justify">
+
+                            <b>Sir/Madam,</b>
+
+
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p style="color:black;margin-top: -3%;">
+                            With the approval of competent authority,it has been decided to organize a demolition programme
+                            for removal of unauthorized construction / encroachment from the DDA/Govt land bearing
+                            Khasra No. <b>{KhasraNo}</b> Of Village <b> {VillageName}</b> address <b>{KhasraAddress}</b>.
+                            The said area falls under
+                            the jurisdiction of Police Station <b>{PoliceStationName}</b>. The operation would be held on<b> {OperationDate}, {OperationDay}</b> .
+                            The structures which are to be demolished will be identified by the Revenue Official(s)
+                            of <b>{RevenueOfficerZone}</b> Zone/Division, <b>{RevenueOfficerWing}</b> wing, <b>{RevenueOfficerBranch}</b> Branch,DDA.
+
+
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p style="color:black; margin-top: -3%; ">
+                            2. You are,therefore, requested to direct the concerned for providing necessary
+                            Police Assistance for maintainingLaw and Order during the demolition programme.
+
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p style="color: black;margin-top: -3%;">
+                            3. The meeting point will be <b>{PoliceStationName}</b> on date <b>{MeetingDate}</b> and time
+                            <b>{MeetingTime}</b>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p style=" color: black; margin-top: -3%;">
+                           <b>{GeneralConditions}</b>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">
+                        <p style="color:black">
+                            Dy.Director<br />
+                            <b>{OfficeZone}</b>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p style=" color: black; margin-top: -3%;">
+                            <b> Copy forwarded for kind information and necessary action to:-</b>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p style=" color: black; margin-top: -3%;">
+                            <b> 1. Member (Admn. & LM), DDA</b>
+
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p style=" color: black; margin-top: -3%;">
+
+                            <b> 2. Principal Commissioner(Hort.),DDA</b>
+
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p style=" color: black; margin-top: -3%;">
+                            <b>  3. Commissioner(LM),DDA</b>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p style=" color: black; margin-top: -3%;">
+                            <b> 4. Chief Engineer <b>{ChiefEngineerAddress}</b>, DDA</b>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p style=" color: black; margin-top: -3%;">
+                            <b> 5. Director(LM)</b>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p style=" color: black; margin-top: -3%;">
+                            <b>
+                                6. SHO <b>{SHOAddress}</b> Delhi/New Delhi with the request to arrange sufficient Police Force.
+                            </b>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">
+                        <p style="color:black">
+                            Dy.Director<br />
+                            <b>{OfficeZone}</b>
+                        </p>
+                    </td>
+                </tr>
+
+
+            </table>
+        </div>
+    </div>
+    <!--<script>
+        $(document).ready(function () {
+            window.print();
+        });
+
+    </script>-->
+</body>
+
+
+</html>

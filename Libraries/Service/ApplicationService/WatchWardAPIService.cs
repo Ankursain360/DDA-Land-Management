@@ -6,6 +6,7 @@ using Libraries.Repository.Common;
 using Libraries.Repository.IEntityRepository;
 using Libraries.Service.Common;
 using Libraries.Service.IApplicationService;
+using Model.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,6 +43,7 @@ namespace Libraries.Service.ApplicationService
             model.Latitude = dto.Latitude;
             model.Longitude = dto.Longitude;
             model.Remarks = dto.Remarks;
+            model.ApprovalZoneId = dto.ApprovalZoneId;
             model.IsActive = 1;
             model.CreatedBy = 1;
             model.CreatedDate = DateTime.Now;
@@ -50,7 +52,20 @@ namespace Libraries.Service.ApplicationService
             dto.Id = model.Id;
             return result;
         }
+       
 
+        public async Task<bool> UpdateBeforeApproval(ApiSaveWatchandwardDto dto)
+        {
+            var result = await _watchWardAPIRepository.FindBy(a => a.Id == dto.Id);
+            
+            Watchandward model = result.FirstOrDefault();
+            model.ApprovedStatus = dto.ApprovedStatus;
+            model.PendingAt = dto.PendingAt;
+            model.ModifiedBy = dto.CreatedBy;
+            model.ModifiedDate = DateTime.Now;
+            _watchWardAPIRepository.Edit(model);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
         public async Task<List<APIGetPrimaryListNoListDto>> GetPrimaryListNoList()
         {
             return await _watchWardAPIRepository.GetPrimaryListNoList();
@@ -80,6 +95,9 @@ namespace Libraries.Service.ApplicationService
         {
             return await _watchWardAPIRepository.GetAllWatchandward(dto);
         }
-
+        public async Task<Userprofile> GetUserOngivenUserId(int userId)
+        {
+            return await _watchWardAPIRepository.GetUserOngivenUserId(userId);
+        }
     }
 }
