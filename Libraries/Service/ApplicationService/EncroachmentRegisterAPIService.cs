@@ -31,33 +31,53 @@ namespace Libraries.Service.ApplicationService
             _encroachmentRegisterAPIRepository = encroachmentRegisterAPIRepository;
         }
 
-        //public async Task<bool> Create(ApiSaveWatchandwardDto dto)
-        //{
-        //    Watchandward model = new Watchandward();
-        //    model.RefNo = dto.RefNo;
-        //    model.Date = dto.Date;
-        //    model.PrimaryListNo = dto.PrimaryListNo;
-        //    model.Landmark = dto.Landmark;
-        //    model.Encroachment = dto.Encroachment;
-        //    model.StatusOnGround = dto.StatusOnGround;
-        //    model.IsActive = dto.IsActive;
-        //    model.PhotoPath = dto.PhotoPath;
-        //    model.Latitude = dto.Latitude;
-        //    model.Longitude = dto.Longitude;
-        //    model.Remarks = dto.Remarks;
-        //    model.ApprovalZoneId = dto.ApprovalZoneId;
-        //    model.IsActive = 1;
-        //    model.CreatedBy = 1;
-        //    model.CreatedDate = DateTime.Now;
-        //    _watchWardAPIRepository.Add(model);
-        //    var result = await _unitOfWork.CommitAsync() > 0;
-        //    dto.Id = model.Id;
-        //    return result;
-        //}
+    
+
+        public async Task<bool> Create(ApiSaveEncroachmentRegisterDto dto)
+        {
+            EncroachmentRegisteration model = new EncroachmentRegisteration();
+            model.WatchWardId = dto.WatchWardId;
+            model.RefNo = dto.RefNo;
+            model.DepartmentId = dto.DepartmentId;
+            model.ZoneId = dto.ZoneId;
+            model.DivisionId = dto.DivisionId;
+            model.LocalityId = dto.LocalityId;
+            model.EncrochmentDate = dto.EncrochmentDate;
+            model.KhasraNo = dto.KhasraNo;
+            model.AreaUnit = dto.AreaUnit;
+            model.TotalAreaInBighaInspection = dto.TotalAreaInBighaInspection;
+            model.TotalAreaInBiswaInspection = dto.TotalAreaInBiswaInspection;
+            model.TotalAreaInBiswaniInspection = dto.TotalAreaInBiswaniInspection;
+            model.TotalAreaInSqAcreHt = dto.TotalAreaInSqAcreHt;
+            model.Area = dto.Area;
+            model.LocationAddressWithLandMark = dto.LocationAddressWithLandMark;
+            model.EncroacherName = dto.EncroacherName;
+            model.StatusOfLand = dto.StatusOfLand;
+            model.IsPossession = dto.IsPossession;
+            model.PossessionType = dto.PossessionType;
+            model.OtherDepartment = dto.OtherDepartment;
+            model.PoliceStation = dto.PoliceStation;
+            model.SecurityGuardOnDuty = dto.SecurityGuardOnDuty;
+            model.IsEncroachment = dto.IsEncroachment;
+            model.Remarks = dto.Remarks;
+            model.ApprovalZoneId = dto.ApprovalZoneId;
+            model.IsActive = 1;
+            model.CreatedBy = 1;
+            model.CreatedDate = DateTime.Now;
+            _encroachmentRegisterAPIRepository.Add(model);
+            var result = await _unitOfWork.CommitAsync() > 0;
+            dto.Id = model.Id;
+            return result;
+        }
 
 
 
-      
+
+        public async Task<Zone> GetZonecode(int? zoneId)
+        {
+             Zone code = await _encroachmentRegisterAPIRepository.GetZonecode(zoneId);
+            return code;
+        }
         public async Task<List<APIGetDepartmentListDto>> GetDepartmentDropDownList()
         {
             List<APIGetDepartmentListDto> DepartmentList = await _encroachmentRegisterAPIRepository.GetDepartmentDropDownList();

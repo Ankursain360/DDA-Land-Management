@@ -24,11 +24,13 @@ namespace Libraries.Service.IApplicationService
         //Task<List<ApiSaveWatchandwardDto>> GetAllWatchandward(ApiWatchWardParmsDto dto);
         //Task<Userprofile> GetUserOngivenUserId(int userId);
         //Task<bool> UpdateBeforeApproval(ApiSaveWatchandwardDto dto);
+        Task<Zone> GetZonecode(int? zoneId);
         Task<List<APIGetDepartmentListDto>> GetDepartmentDropDownList();
         Task<List<ApiGetZoneListDto>> GetZoneDropDownList(int departmentId);
         Task<List<ApiGetDivisionListDto>> GetDivisionDropDownList(int zoneId);
         Task<List<ApiGetLocalityListDto>> GetLocalityDropDownList(int divisionId);
         Task<List<APIGetKhasraListDto>> GetKhasraDropDownList();
+        Task<bool> Create(ApiSaveEncroachmentRegisterDto dto);
     }
 }
 

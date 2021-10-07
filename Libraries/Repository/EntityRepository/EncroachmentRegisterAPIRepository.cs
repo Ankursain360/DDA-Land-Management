@@ -23,7 +23,12 @@ namespace Libraries.Repository.EntityRepository
         {
 
         }
-
+        
+        public async Task<Zone> GetZonecode(int? zoneId)
+        {
+            return await _dbContext.Zone.Where(x => x.IsActive == 1 && x.Id ==zoneId).FirstOrDefaultAsync();
+        }
+        
         public async Task<List<APIGetDepartmentListDto>> GetDepartmentDropDownList()
         {
             List<APIGetDepartmentListDto> listData = new List<APIGetDepartmentListDto>();

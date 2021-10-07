@@ -14,7 +14,7 @@ namespace Libraries.Repository.IEntityRepository
 {
     public interface IEncroachmentRegisterAPIRepository : IGenericRepository<EncroachmentRegisteration>
     {
-        
+        Task<Zone> GetZonecode(int? zoneId);
         Task<List<APIGetDepartmentListDto>> GetDepartmentDropDownList();
         Task<List<ApiGetZoneListDto>> GetZoneDropDownList(int departmentId);
         Task<List<ApiGetDivisionListDto>> GetDivisionDropDownList(int zoneId);
