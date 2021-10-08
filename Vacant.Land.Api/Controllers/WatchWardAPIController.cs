@@ -280,7 +280,7 @@ namespace Vacant.Land.Api.Controllers
                                         approvalproccess.Remarks = "Record Added and Send for Approval";///May be Uncomment
                                         result = await _approvalproccessService.Create(approvalproccess, dto.UserId); //Create a row in approvalproccess Table
 
-                                        #region Insert Into usernotification table Added By Renu 18 June 2021
+                                        #region Insert Into usernotification table Added By ishu oct 2021
                                         if (result == true && approvalproccess.SendTo != null)
                                         {
                                             var notificationtemplate = await _approvalproccessService.FetchSingleNotificationTemplate(_configuration.GetSection("userNotificationGuidWatchWard").Value);

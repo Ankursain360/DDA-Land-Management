@@ -10,7 +10,7 @@ namespace Dto.Master
     public class ApiSaveEncroachmentRegisterDto
     {
         public int Id { get; set; }
-        public int WatchWardId { get; set; }
+        public int? WatchWardId { get; set; }
         public int UserId { get; set; }
         public string RefNo { get; set; }
         
@@ -32,7 +32,7 @@ namespace Dto.Master
         public string StatusOfLand { get; set; }
          public string IsPossession { get; set; }
         public string PossessionType { get; set; }
-        public int OtherDepartment { get; set; }
+        public int? OtherDepartment { get; set; }
         public string PoliceStation { get; set; }
         public string SecurityGuardOnDuty { get; set; }
         public string IsEncroachment { get; set; }

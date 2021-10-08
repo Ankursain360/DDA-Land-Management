@@ -31,6 +31,7 @@ namespace Libraries.Service.IApplicationService
         Task<List<ApiGetLocalityListDto>> GetLocalityDropDownList(int divisionId);
         Task<List<APIGetKhasraListDto>> GetKhasraDropDownList();
         Task<bool> Create(ApiSaveEncroachmentRegisterDto dto);
+        Task<bool> UpdateBeforeApproval(ApiSaveEncroachmentRegisterDto dto);
     }
 }
 

@@ -71,7 +71,18 @@ namespace Libraries.Service.ApplicationService
         }
 
 
+        public async Task<bool> UpdateBeforeApproval(ApiSaveEncroachmentRegisterDto dto)
+        {
+            var result = await _encroachmentRegisterAPIRepository.FindBy(a => a.Id == dto.Id);
 
+            EncroachmentRegisteration model = result.FirstOrDefault();
+            model.ApprovedStatus = dto.ApprovedStatus;
+            model.PendingAt = dto.PendingAt;
+            model.ModifiedBy = 1;
+            model.ModifiedDate = DateTime.Now;
+            _encroachmentRegisterAPIRepository.Edit(model);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
 
         public async Task<Zone> GetZonecode(int? zoneId)
         {

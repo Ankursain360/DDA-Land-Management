@@ -36,17 +36,22 @@ namespace Vacant.Land.Api.Infrastructure.Extensions
             services.AddScoped<IUserNotificationRepository, UserNotificationRepository>();
             services.AddScoped<IUserProfileRepository, UserProfileRepository>();
             services.AddScoped<IWorkflowTemplateRepository, WorkflowTemplateRepository>();
+            services.AddScoped<IEncroachmentRegisterAPIRepository, EncroachmentRegisterAPIRepository>();
+            services.AddScoped<IEncroachmentRegisterationRepository, EncroachmentRegisterationRepository>();
             /* Application Services */
             services.AddScoped<INazullandService, NazullandService>();
             services.AddScoped<IPropertyRegistrationService, PropertyRegistrationService>();
             services.AddScoped<IWatchWardAPIService, WatchWardAPIService>();
             services.AddScoped<IWatchandwardService, WatchandwardService>();
-
+            services.AddScoped<IEncroachmentRegisterAPIService, EncroachmentRegisterAPIService>();
             services.AddScoped<IUserProfileService, UserProfileService>();
             services.AddScoped<IWorkflowTemplateService, WorkflowTemplateService>();
             services.AddScoped<IApprovalProccessService, ApprovalProccessService>();
             services.AddScoped<IUserNotificationService, UserNotificationService>();
+            services.AddScoped<IEncroachmentRegisterationService, EncroachmentRegisterationService>();
+
             /* Land transfer Services */
+
             services.AddScoped<INazullandService, NazullandService>();
             services.AddScoped<ILandTransferService, LandTransferService>();
             services.AddScoped<ICurrentstatusoflandhistoryService, CurrentstatusoflandhistoryService>();
