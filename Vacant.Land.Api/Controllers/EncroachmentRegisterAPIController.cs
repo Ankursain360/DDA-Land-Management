@@ -766,5 +766,57 @@ namespace Vacant.Land.Api.Controllers
             return ObjList;
         }
         #endregion
+
+        [HttpPost]
+        [Route("[action]")]
+        [Route("api/EncroachmentRegisterAPI/GetAllEncroachmentRegisterAPIdata")]
+        public async Task<IActionResult> GetAllEncroachmentRegisterAPIdata([FromBody] ApiEncroachmentRegisterParmsDto dto)
+        {
+            ApiSaveEncroachmentRegisterDtoResponseDetails apiResponseDetails = new ApiSaveEncroachmentRegisterDtoResponseDetails();
+            try
+            {
+
+
+                var data = await _encroachmentRegisterAPIService.GetAllEncroachmentRegisterAPIdata(dto);
+
+                if (data != null )
+                {
+
+                    List<ApiSaveEncroachmentRegisterDto> dtoData = new List<ApiSaveEncroachmentRegisterDto>();
+                    apiResponseDetails = new ApiSaveEncroachmentRegisterDtoResponseDetails
+                    {
+                        responseCode = "200",
+                        responseMessage = "details fetched successfully",
+                        ApiSaveEncroachmentRegisterDto = data
+                    };
+
+                    return Ok(apiResponseDetails);
+                }
+                else
+                {
+                    List<ApiSaveEncroachmentRegisterDto> dtoData = new List<ApiSaveEncroachmentRegisterDto>();
+                    apiResponseDetails = new ApiSaveEncroachmentRegisterDtoResponseDetails
+                    {
+                        responseCode = "404",
+                        responseMessage = " details not found",
+                        ApiSaveEncroachmentRegisterDto = dtoData
+                    };
+                    return NotFound(apiResponseDetails);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                List<ApiSaveEncroachmentRegisterDto> dtoData = new List<ApiSaveEncroachmentRegisterDto>();
+                apiResponseDetails = new ApiSaveEncroachmentRegisterDtoResponseDetails
+                {
+                    responseCode = "500",
+                    responseMessage = "Internal Server Error",
+                    ApiSaveEncroachmentRegisterDto = dtoData
+                };
+                return NotFound(apiResponseDetails);
+            }
+        }
+
     }
 }

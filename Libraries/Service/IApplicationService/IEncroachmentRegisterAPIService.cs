@@ -32,6 +32,7 @@ namespace Libraries.Service.IApplicationService
         Task<List<APIGetKhasraListDto>> GetKhasraDropDownList();
         Task<bool> Create(ApiSaveEncroachmentRegisterDto dto);
         Task<bool> UpdateBeforeApproval(ApiSaveEncroachmentRegisterDto dto);
+        Task<List<ApiSaveEncroachmentRegisterDto>> GetAllEncroachmentRegisterAPIdata(ApiEncroachmentRegisterParmsDto dto);
     }
 }
 

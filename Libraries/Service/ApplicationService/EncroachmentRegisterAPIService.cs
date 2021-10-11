@@ -116,5 +116,10 @@ namespace Libraries.Service.ApplicationService
             List<APIGetKhasraListDto> List = await _encroachmentRegisterAPIRepository.GetKhasraDropDownList();
             return List;
         }
+
+        public async Task<List<ApiSaveEncroachmentRegisterDto>> GetAllEncroachmentRegisterAPIdata(ApiEncroachmentRegisterParmsDto dto)
+        {
+            return await _encroachmentRegisterAPIRepository.GetAllEncroachmentRegisterAPIdata(dto);
+        }
     }
 }

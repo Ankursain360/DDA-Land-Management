@@ -20,5 +20,6 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<ApiGetDivisionListDto>> GetDivisionDropDownList(int zoneId);
         Task<List<ApiGetLocalityListDto>> GetLocalityDropDownList(int divisionId);
         Task<List<APIGetKhasraListDto>> GetKhasraDropDownList();
+        Task<List<ApiSaveEncroachmentRegisterDto>> GetAllEncroachmentRegisterAPIdata(ApiEncroachmentRegisterParmsDto dto);
     }
 }

@@ -137,6 +137,61 @@ namespace Libraries.Repository.EntityRepository
             }
             return listData;
         }
+        public async Task<List<ApiSaveEncroachmentRegisterDto>> GetAllEncroachmentRegisterAPIdata(ApiEncroachmentRegisterParmsDto dto)
 
+        {
+            List<ApiSaveEncroachmentRegisterDto> listData = new List<ApiSaveEncroachmentRegisterDto>();
+
+
+            var Data = await _dbContext.EncroachmentRegisteration
+                                       .Include(x => x.Department)
+                                       .Include(x => x.OtherDepartmentNavigation)
+                                       .Include(x => x.Division)
+                                       .Include(x => x.Locality)
+                                       .Include(x => x.WatchWard)
+                                       .Include(x => x.Zone)
+                                     .Where(a => (a.IsActive == 1)
+                                     && a.EncrochmentDate == (dto.date == "" ? a.EncrochmentDate : Convert.ToDateTime(dto.date))
+                                     && (string.IsNullOrEmpty(dto.department) || a.Department.Name.Contains(dto.department))
+                                     && (string.IsNullOrEmpty(dto.zone) || a.Zone.Name.Contains(dto.zone))
+                                     && (string.IsNullOrEmpty(dto.division) || a.Division.Name.Contains(dto.division))
+                                     && (string.IsNullOrEmpty(dto.locality) || a.Locality.Name.Contains(dto.locality))
+                                     && (string.IsNullOrEmpty(dto.locality) || a.Locality.Name.Contains(dto.locality))
+                                     && (string.IsNullOrEmpty(dto.khasrano) || a.KhasraNo.Contains(dto.khasrano))
+                                    )
+                                  .OrderByDescending(a => a.Id)
+                                  .ToListAsync();
+            if (Data != null && Data.Count > 0)
+            {
+                for (int i = 0; i < Data.Count; i++)
+                {
+
+                    listData.Add(new ApiSaveEncroachmentRegisterDto()
+                    {
+                        Id = Data[i].Id,
+                        RefNo = Data[i].RefNo==null|| Data[i].RefNo == "0"?"NA": Data[i].RefNo,
+                        EncrochmentDate = Data[i].EncrochmentDate,
+                        DepartmentId = Data[i].DepartmentId==0|| Data[i].DepartmentId == null ? 0 : Data[i].DepartmentId,
+                        ZoneId = Data[i].ZoneId == 0 || Data[i].ZoneId == null ? 0 : Data[i].ZoneId,
+                        DivisionId = Data[i].DivisionId == 0 || Data[i].DivisionId == null ? 0 : Data[i].DivisionId,
+                        LocalityId = Data[i].LocalityId == 0 || Data[i].LocalityId == null ? 0 : Data[i].LocalityId,
+                        KhasraNo = Data[i].KhasraNo == null || Data[i].KhasraNo == "" ? "NA" : Data[i].KhasraNo,
+                        DepartmentName = Data[i].DepartmentId == 0|| Data[i].DepartmentId == null ? "NA": Data[i].Department.Name,
+                        ZoneName = Data[i].ZoneId == 0 || Data[i].ZoneId == null ? "NA" : Data[i].Zone.Name,
+                        DivisionName = Data[i].DivisionId == 0 || Data[i].DivisionId == null ? "NA" : Data[i].Division.Name,
+                        LocalityName = Data[i].LocalityId == 0 || Data[i].LocalityId == null ? "NA" : Data[i].Locality.Name,
+
+                        Area = Data[i].Area == null ? 0 : Data[i].Area,
+                        AreaUnit = Data[i].AreaUnit,
+                        IsEncroachment = Data[i].IsEncroachment == "" ? "NA" : Data[i].IsEncroachment,
+                        IsPossession = Data[i].IsPossession,
+                        EncroacherName= Data[i].EncroacherName == ""|| Data[i].EncroacherName ==null ? "NA" : Data[i].IsEncroachment,//null data err 
+                        Remarks = Data[i].Remarks,
+                        
+                    });
+                }
+            }
+            return listData;
+        }
     }
 }

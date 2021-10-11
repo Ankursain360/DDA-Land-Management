@@ -18,7 +18,11 @@ namespace Dto.Master
         public int ZoneId { get; set; }
         public int DivisionId { get; set; }
         public int LocalityId { get; set; }
-        
+        public string DepartmentName { get; set; }
+        public string ZoneName { get; set; }
+        public string DivisionName { get; set; }
+        public string LocalityName { get; set; }
+
         public DateTime EncrochmentDate { get; set; }
         public string KhasraNo  { get; set; }
         public int AreaUnit { get; set; }
