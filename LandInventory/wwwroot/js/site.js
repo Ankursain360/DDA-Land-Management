@@ -167,14 +167,27 @@ function numericDecimal(elementRef) {
 
 }
 
-//For Loader
+////For Loader
+//$(window).on('load', function () {
+//    $("#loader-wrapper").css("display", "none");
+//});
+//$(window).on('beforeunload', function () {
+//    $("#loader-wrapper").css("display", "block");
+//});
+////
+
 $(window).on('load', function () {
-    $("#loader-wrapper").css("display", "none");
+    //$("#loader-wrapper").css("display", "none");
+    setTimeout(function () {
+        $('#loader-wrapper').remove();
+    }, 3000);
 });
 $(window).on('beforeunload', function () {
-    $("#loader-wrapper").css("display", "block");
+    //$("#loader-wrapper").css("display", "block");
+    setTimeout(function () {
+        $('#loader-wrapper').remove();
+    }, 3000);
 });
-//
 
 function SuccessMessage(message) {
     toastr.success(message, 'Success', { timeOut: 3000, "progressBar": true });

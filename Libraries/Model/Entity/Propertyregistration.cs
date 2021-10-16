@@ -58,14 +58,20 @@ namespace Libraries.Model.Entity
         public int? TotalAreaInBigha { get; set; }
         public int? TotalAreaInBiswa { get; set; }
         public int? TotalAreaInBiswani { get; set; }
+
+      
         public decimal? TotalAreaInSqAcreHt { get; set; }
 
-
+        [Required(ErrorMessage = "Total Area is Mandatory Field", AllowEmptyStrings = false)]
         //  [Required(ErrorMessage = "Total Area is Mandatory Field")]
         [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
         [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Total Area; Max 18 digits")]
         public decimal? TotalArea { get; set; }
+        [Required(ErrorMessage = "Encroachment Status is Mandatory Field", AllowEmptyStrings = false)]
+
         public int EncroachmentStatusId { get; set; }
+
+       
         public string EncroachedPartiallyFully { get; set; }
         public decimal? EncrochedArea { get; set; }
 
@@ -80,6 +86,7 @@ namespace Libraries.Model.Entity
 
         [StringLength(4000)]
         public string EncraochmentDetails { get; set; }
+        [Required(ErrorMessage = "Protection of land is Mandatory Field", AllowEmptyStrings = false)]
 
         public int Boundary { get; set; }
         public decimal? BoundaryAreaCovered { get; set; }
@@ -96,11 +103,17 @@ namespace Libraries.Model.Entity
 
         [StringLength(500)]
         public string SubUse { get; set; }
+
+        [Required(ErrorMessage = "Built-Up is Mandatory Field", AllowEmptyStrings = false)]
+
         public int BuiltUp { get; set; }
 
         [StringLength(4000)]
         public string BuiltUpRemarks { get; set; }
         public string LayoutFilePath { get; set; }
+
+        [Required(ErrorMessage = "Litigation Status is Mandatory Field", AllowEmptyStrings = false)]
+
         public int LitigationStatus { get; set; }
         public string CourtName { get; set; }
         public string CaseNo { get; set; }
@@ -108,6 +121,9 @@ namespace Libraries.Model.Entity
 
         [StringLength(4000)]
         public string LitigationStatusRemarks { get; set; }
+
+        [Required(ErrorMessage = "Geo Referencing is Mandatory Field", AllowEmptyStrings = false)]
+
         public int GeoReferencing { get; set; }
         public string GeoFilePath { get; set; }
         public string GeoLattitude { get; set; }

@@ -801,3 +801,20 @@ function ValidateFileSize(fileid, file) {
 }
 
 
+
+function validateForm() {
+
+    let LitigationStatus = document.forms["kyc-form"]["LitigationStatus"].value;
+  //  let Letter = document.forms["kyc-form"]["Letter"].value;
+    var status = 1;
+    if (LitigationStatus == "") {
+
+        $("#LitigationStatus-error").show();
+        status = 2;
+        // return false;
+    }
+
+
+}
+
+

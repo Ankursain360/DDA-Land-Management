@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="pt-3">
-    <form asp-action="Create" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data" autocomplete="off">
+    <form asp-action="Create"  method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data" autocomplete="off">
         <h3 class="mb-3 d-flex">
             Add Details<span class="ms-auto"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span>
         </h3>@*id="myForm"*@
@@ -433,7 +433,9 @@
                                 <option value="1">Yes</option>
                             </select>
                             <span asp-validation-for="LitigationStatus" class="text-danger"></span>
-                            <label asp-for="LitigationStatus" class="floating-label">Litigation Status </label>
+                            <label asp-for="LitigationStatus" class="floating-label">Litigation Status1 </label>
+                            <label id="LitigationStatus-error" style="color:red;display:none;">This field is Mandatory</label>
+
                         </div>
                     </div>
                 </div>
