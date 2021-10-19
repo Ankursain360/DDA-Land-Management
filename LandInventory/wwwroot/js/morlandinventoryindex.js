@@ -35,6 +35,7 @@ $("#btnDescending").click(function () {
 $('#ddlSort').change(function () {
     GetDetails(currentPageNumber, currentPageSize, sortOrder);
 });
+
 function GetDetails(pageNumber, pageSize, sortOrder) {
     var param = GetSearchParam(pageNumber, pageSize, sortOrder);
     HttpPost(`/MORLandInventory/List`, 'html', param, function (response) {

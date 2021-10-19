@@ -8,14 +8,24 @@ $(function () {
 });
 
 function GetReport(pageNumber, pageSize, sortOrder) {
+   // $("#ddlSort option:selected").prop("selected", false);
     var param = GetSearchParam(pageNumber, pageSize, sortOrder);
     HttpPost(`/ReportofLandTransferDepartmentWise/List`, 'html', param, function (response) {
         $('#LoadReportView').html("");
         $('#LoadReportView').html(response);
+       
     });
 }
 $("#btnGenerate").click(function () {
+   
+    var name = $('#DepartmentId option:selected').val();
+    if (name =="") {
+        alert("Please select Department")
+    }
+
+    $("#ddlSort option:selected").prop("selected", false);
     GetReport(currentPageNumber, currentPageSize, sortOrder);
+  
 });
 $("#btnAscending").click(function () {
     $("#btnDescending").removeClass("active");
@@ -53,14 +63,40 @@ function GetSearchParam(pageNumber, pageSize, sortOrder) {
 }
 
 function onPaging(pageNo) {
+  
     pageNo = parseInt(pageNo);
-    GetReport(currentPageNumber, currentPageSize, sortOrder);
     currentPageNumber = pageNo;
+    GetReport(currentPageNumber, currentPageSize, sortOrder);
+    
 }
 
 function onChangePageSize(pageSize) {
     pageSize = parseInt(pageSize);
-    GetReport(currentPageNumber, currentPageSize, sortOrder);
     currentPageSize = pageSize;
+    GetReport(currentPageNumber, currentPageSize, sortOrder);
+  
 }
+
+
+$("#ReportType").change(function () {
+    var type = $(this).val();
+    var a = '';
+    if (type == 0) {
+        a += '<option selected="selected" value="department">Department</option>';
+        a += '<option value="zone">Zone</option>';
+        a += '<option value="division">Division</option>';
+        a += '<option value="handedoverdate">Handed Over Date</option>';
+       
+    } else {
+        a += '<option selected="selected" value="department">Department</option>';
+        a += '<option value="zone">Zone</option>';
+        a += '<option value="division">Division</option>';
+        a += '<option value="takenoverdate">Taken Over Date </option>';
+    } 
+    $("#ddlSort").html(a);
+   
+});
+
+
+
 

@@ -90,18 +90,33 @@ $("#btnDescending").click(function () {
     GetDetails(currentPageNumber, currentPageSize, sortby);
 });
 
+//$("#btnReset").click(function () {
+//    $('#DepartmentId').val('0').trigger('change');
+//    $('#ZoneId').val('0').trigger('change');
+//    $('#DivisionId').val('0').trigger('change');
+//    $('#LocalityId').val('0').trigger('change');
+//    $('#txtFromDate').val('');
+//    $('#txtToDate').val('');
+
+
+//    GetDetails(currentPageNumber, currentPageSize, sortby);
+
+//});
+
 $("#btnReset").click(function () {
-    $('#DepartmentId').val('0').trigger('change');
-    $('#ZoneId').val('0').trigger('change');
-    $('#DivisionId').val('0').trigger('change');
-    $('#LocalityId').val('0').trigger('change');
-    $('#txtFromDate').val('');
-    $('#txtToDate').val('');
+    //document.getElementById("VillageId").selectedIndex = "";
+
+    location.reload();
 
 
-    GetDetails(currentPageNumber, currentPageSize, sortby);
 
 });
+
+
+
+
+
+
 
 function onPaging(pageNo) {
     GetDetails(parseInt(pageNo), parseInt(currentPageSize), sortby);

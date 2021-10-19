@@ -29,4 +29,5 @@
 }
     </tbody>
 </table>
+
 @await Component.InvokeAsync("Pager", new { totalCount = Model.RowCount, pageNumber = Model.CurrentPage, pageSize = Model.PazeSize })
