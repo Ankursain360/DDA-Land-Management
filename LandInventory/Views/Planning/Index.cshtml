@@ -9,13 +9,13 @@
             <div class="col-md-4    ">
                 <div class="floating-label-wrap mb-6 mb-md-0">
                     <input type="text" id="txtName" class="floating-label-field floating-label-field--s3" placeholder="Name" />
-                    <label for="txtName" class="floating-label">Unplanned Property</label>
+                    <label for="txtName" class="floating-label">Department</label>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="floating-label-wrap mb-6 mb-md-0">
                     <input type="text" id="txtUserName" class="floating-label-field floating-label-field--s3" placeholder="Username" />
-                    <label for="txtUserName" class="floating-label">Planned Property</label>
+                    <label for="txtUserName" class="floating-label">Division</label>
                 </div>
             </div>
 
@@ -30,7 +30,8 @@
                         </button>
                     </div>
                     <div class="col-6 col-md-7 col-xl-6">
-                        <button class="btn btn-theme" type="submit" id="btnSearch">Submit</button>
+                        @*<button class="btn btn-theme" type="button" id="btnSearch">Submit</button>*@
+                        <button class="btn btn-theme btn-block" id="btnSearch" type="button">Submit</button>
                     </div>
                 </div>
             </div>
@@ -44,10 +45,10 @@
                 <div class="floating-label-wrap">
                     <select id="ddlSort" class="floating-label-field floating-label-field--s3">
                         <option selected="selected" value="department">Department</option>
-                        <option value="zone">Zone</option>
-                        <option value="division">Division</option>
-                        <option value="unplanned">Unplanned Property</option>
-                        <option value="planned">Planned Property</option>
+                        <option value="Department">Department</option>
+                        <option value="Zone">Zone</option>
+                       
+                        <option value="Division">Division</option>
                     </select>
                     <label for="field-1" class="floating-label">Sort by</label>
                 </div>

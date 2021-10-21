@@ -49,17 +49,143 @@ namespace Libraries.Repository.EntityRepository
 
 
 
-        public async Task<PagedResult<Planning>> GetPagedPlanning(PlanningSearchDto dto)
+        public async Task<PagedResult<Planning>> GetPagedPlanning(PlanningSearchDto model)
         {
-            return await _dbContext.Planning
+          var data = await _dbContext.Planning
                                     .Include(x => x.PlanningProperties)
                                     .ThenInclude(x => x.PropertyRegistration)
                                     .Include(x => x.Department)
                                     .Include(x => x.Zone)
                                     .Include(x => x.Division)
                                     .Include(x => x.Zone)
-                                    .Where(x => x.IsActive == 1 && x.IsVerify == 1)
-                                .GetPaged(dto.PageNumber, dto.PageSize);
+                                    .Where(x => x.IsActive == 1 && x.IsVerify == 1 && (string.IsNullOrEmpty(model.unplannedname) || x.Department.Name.Contains(model.unplannedname))
+                                    && (string.IsNullOrEmpty(model.plannedname) || x.Zone.Name.Contains(model.plannedname))
+                                    )
+                                .GetPaged(model.PageNumber, model.PageSize);
+
+
+
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+
+                    case ("DEPARTMENT"):
+                        data = null;
+                        data = await _dbContext.Planning
+                                    .Include(x => x.PlanningProperties)
+                                    .ThenInclude(x => x.PropertyRegistration)
+                                    .Include(x => x.Department)
+                                    .Include(x => x.Zone)
+                                    .Include(x => x.Division)
+                                    .Include(x => x.Zone)
+                                    .Where(x => x.IsActive == 1 && x.IsVerify == 1 && (string.IsNullOrEmpty(model.unplannedname) || x.Department.Name.Contains(model.unplannedname))
+                                    && (string.IsNullOrEmpty(model.plannedname) || x.Zone.Name.Contains(model.plannedname))
+                                    ).OrderBy(x => x.Department.Name)
+                                .GetPaged(model.PageNumber, model.PageSize);
+                                         break;
+
+                    case ("ZONE"):
+                        data = null;
+                        data = await _dbContext.Planning
+                                    .Include(x => x.PlanningProperties)
+                                    .ThenInclude(x => x.PropertyRegistration)
+                                    .Include(x => x.Department)
+                                    .Include(x => x.Zone)
+                                    .Include(x => x.Division)
+                                    .Include(x => x.Zone)
+                                    .Where(x => x.IsActive == 1 && x.IsVerify == 1 && (string.IsNullOrEmpty(model.unplannedname) || x.Department.Name.Contains(model.unplannedname))
+                                    && (string.IsNullOrEmpty(model.plannedname) || x.Zone.Name.Contains(model.plannedname))
+                                    ).OrderBy(x => x.Zone.Name)
+                                .GetPaged(model.PageNumber, model.PageSize);
+                        break;
+
+
+                    case ("DIVISION"):
+                        data = null;
+                        data = await _dbContext.Planning
+                                    .Include(x => x.PlanningProperties)
+                                    .ThenInclude(x => x.PropertyRegistration)
+                                    .Include(x => x.Department)
+                                    .Include(x => x.Zone)
+                                    .Include(x => x.Division)
+                                    .Include(x => x.Zone)
+                                    .Where(x => x.IsActive == 1 && x.IsVerify == 1 && (string.IsNullOrEmpty(model.unplannedname) || x.Department.Name.Contains(model.unplannedname))
+                                    && (string.IsNullOrEmpty(model.plannedname) || x.Zone.Name.Contains(model.plannedname))
+                                    ).OrderBy(x => x.Division.Name)
+                                .GetPaged(model.PageNumber, model.PageSize); break;
+
+
+
+
+
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+
+                    case ("DEPARTMENT"):
+                        data = null;
+                        data = await _dbContext.Planning
+                                    .Include(x => x.PlanningProperties)
+                                    .ThenInclude(x => x.PropertyRegistration)
+                                    .Include(x => x.Department)
+                                    .Include(x => x.Zone)
+                                    .Include(x => x.Division)
+                                    .Include(x => x.Zone)
+                                    .Where(x => x.IsActive == 1 && x.IsVerify == 1 && (string.IsNullOrEmpty(model.unplannedname) || x.Department.Name.Contains(model.unplannedname))
+                                    && (string.IsNullOrEmpty(model.plannedname) || x.Zone.Name.Contains(model.plannedname))
+                                    ).OrderByDescending(x => x.Department.Name)
+                                .GetPaged(model.PageNumber, model.PageSize);
+                        break;
+
+                    case ("ZONE"):
+                        data = null;
+                        data = await _dbContext.Planning
+                                    .Include(x => x.PlanningProperties)
+                                    .ThenInclude(x => x.PropertyRegistration)
+                                    .Include(x => x.Department)
+                                    .Include(x => x.Zone)
+                                    .Include(x => x.Division)
+                                    .Include(x => x.Zone)
+                                    .Where(x => x.IsActive == 1 && x.IsVerify == 1 && (string.IsNullOrEmpty(model.unplannedname) || x.Department.Name.Contains(model.unplannedname))
+                                    && (string.IsNullOrEmpty(model.plannedname) || x.Zone.Name.Contains(model.plannedname))
+                                    ).OrderByDescending(x => x.Zone.Name)
+                                .GetPaged(model.PageNumber, model.PageSize);
+                        break;
+
+
+                    case ("DIVISION"):
+                        data = null;
+                        data = await _dbContext.Planning
+                                    .Include(x => x.PlanningProperties)
+                                    .ThenInclude(x => x.PropertyRegistration)
+                                    .Include(x => x.Department)
+                                    .Include(x => x.Zone)
+                                    .Include(x => x.Division)
+                                    .Include(x => x.Zone)
+                                    .Where(x => x.IsActive == 1 && x.IsVerify == 1 && (string.IsNullOrEmpty(model.unplannedname) || x.Department.Name.Contains(model.unplannedname))
+                                    && (string.IsNullOrEmpty(model.plannedname) || x.Zone.Name.Contains(model.plannedname))
+                                    ).OrderByDescending(x => x.Division.Name)
+                                .GetPaged(model.PageNumber, model.PageSize); break;
+
+
+                }
+            }
+
+
+
+            return data;
+
+
+
+
+
+
+
         }
         public async Task<PagedResult<Planning>> GetUnverifiedPagedPlanning(PlanningSearchDto dto)
         {
@@ -71,8 +197,120 @@ namespace Libraries.Repository.EntityRepository
                                     .Include(x => x.Division)
                                     .Include(x => x.Zone)
                                         .Where(x => x.IsActive == 1 && x.IsVerify == 0
+                                      //  && (x.PlanningProperties. == (dto.plannedname == 0 ? x.PropertyRegistration.DepartmentId : model.departmentId))
+
+
                                         )
                                     .GetPaged(dto.PageNumber, dto.PageSize);
+
+
+
+
+            //int SortOrder = (int)dto.SortOrder;
+            //if (SortOrder == 1)
+            //{
+            //    switch (dto.SortBy.ToUpper())
+            //    {
+
+            //        case ("DEPARTMENT"):
+            //            data = null;
+            //            data = await _dbContext.Landtransfer.Where(x => x.IsActive == 1)
+            //   .Include(x => x.PropertyRegistration)
+            //   .Include(x => x.PropertyRegistration.Department)
+            //   .Include(x => x.PropertyRegistration.Zone)
+            //   .Include(x => x.PropertyRegistration.Division)
+            //   .Include(x => x.PropertyRegistration.Locality)
+            //   .OrderBy(x => x.PropertyRegistration.Department.Name).GetPaged<Landtransfer>(model.PageNumber, model.PageSize);
+            //            break;
+
+            //        case ("ZONE"):
+            //            data = null;
+            //            data = await _dbContext.Landtransfer.Where(x => x.IsActive == 1)
+            //   .Include(x => x.PropertyRegistration)
+            //   .Include(x => x.PropertyRegistration.Department)
+            //   .Include(x => x.PropertyRegistration.Zone)
+            //   .Include(x => x.PropertyRegistration.Division)
+            //   .Include(x => x.PropertyRegistration.Locality)
+            //   .OrderBy(x => x.PropertyRegistration.Zone.Name).GetPaged<Landtransfer>(model.PageNumber, model.PageSize);
+            //            break;
+
+
+            //        case ("DIVISION"):
+            //            data = null;
+            //            data = await _dbContext.Landtransfer.Where(x => x.IsActive == 1)
+            //   .Include(x => x.PropertyRegistration)
+            //   .Include(x => x.PropertyRegistration.Department)
+            //   .Include(x => x.PropertyRegistration.Zone)
+            //   .Include(x => x.PropertyRegistration.Division)
+            //   .Include(x => x.PropertyRegistration.Locality)
+            //   .OrderBy(x => x.PropertyRegistration.Division.Name).GetPaged<Landtransfer>(model.PageNumber, model.PageSize);
+            //            break;
+
+
+
+
+
+            //    }
+            //}
+            //else if (SortOrder == 2)
+            //{
+            //    switch (model.SortBy.ToUpper())
+            //    {
+
+            //        case ("DEPARTMENT"):
+            //            data = null;
+            //            data = await _dbContext.Landtransfer.Where(x => x.IsActive == 1)
+            //   .Include(x => x.PropertyRegistration)
+            //   .Include(x => x.PropertyRegistration.Department)
+            //   .Include(x => x.PropertyRegistration.Zone)
+            //   .Include(x => x.PropertyRegistration.Division)
+            //   .Include(x => x.PropertyRegistration.Locality)
+            //   .OrderByDescending(x => x.PropertyRegistration.Department.Name).GetPaged<Landtransfer>(model.PageNumber, model.PageSize);
+            //            break;
+
+            //        case ("ZONE"):
+            //            data = null;
+            //            data = await _dbContext.Landtransfer.Where(x => x.IsActive == 1)
+            //   .Include(x => x.PropertyRegistration)
+            //   .Include(x => x.PropertyRegistration.Department)
+            //   .Include(x => x.PropertyRegistration.Zone)
+            //   .Include(x => x.PropertyRegistration.Division)
+            //   .Include(x => x.PropertyRegistration.Locality)
+            //   .OrderByDescending(x => x.PropertyRegistration.Zone.Name).GetPaged<Landtransfer>(model.PageNumber, model.PageSize);
+            //            break;
+
+
+            //        case ("DIVISION"):
+            //            data = null;
+            //            data = await _dbContext.Landtransfer.Where(x => x.IsActive == 1)
+            //   .Include(x => x.PropertyRegistration)
+            //   .Include(x => x.PropertyRegistration.Department)
+            //   .Include(x => x.PropertyRegistration.Zone)
+            //   .Include(x => x.PropertyRegistration.Division)
+            //   .Include(x => x.PropertyRegistration.Locality)
+            //   .OrderByDescending(x => x.PropertyRegistration.Division.Name).GetPaged<Landtransfer>(model.PageNumber, model.PageSize);
+            //            break;
+
+            //    }
+            //}
+
+
+
+           // return data;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         }
         public async Task<List<Zone>> GetAllZone(int DepartmentId)
         {

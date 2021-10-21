@@ -239,8 +239,8 @@ namespace LandInventory.Controllers
             var result = await _planningService.VerifyProperty(planning.Id, planning);
             if (result)
             {
-                result = await _planningService.VerifyProperties(planning.Id);
-                if (result)
+              var result1 = await _planningService.VerifyProperties(planning.Id);
+                if (result1)
                 {
                     ViewBag.Message = Alert.Show(Messages.Verifiedsuccesfuly, "", AlertType.Success);
                     return View("VerificationPage");

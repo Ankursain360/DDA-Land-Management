@@ -10,6 +10,8 @@ namespace Libraries.Model.Entity
     {
         [Required]
         public int? LandTransferId { get; set; }
+
+        [Required(ErrorMessage = "Tss Survey is mandatory ")]
         public string Tsssurvey { get; set; }
         public string SurveyReportFilePath { get; set; }
         public int Encroachment { get; set; }

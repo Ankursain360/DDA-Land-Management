@@ -102,7 +102,7 @@ namespace LandInventory.Controllers
                             });
                         }
                     }
-                    result = await _planningService.CreateProperties(planningProperties);
+                var    result1 = await _planningService.CreateProperties(planningProperties);
                     if (result)
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);

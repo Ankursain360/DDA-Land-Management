@@ -22,6 +22,14 @@ $("#btnDescending").click(function () {
 $('#ddlSort').change(function () {
     GetLandTransfer(currentPageNumber, currentPageSize, sortOrder);
 });
+
+
+
+$("#btnSearch").click(function () {
+   
+    GetLandTransfer(currentPageNumber, currentPageSize, sortOrder);
+});
+
 $("#btnReset").click(function () {
     $('#txtName').val('');
     $('#txtUserName').val('');
@@ -30,12 +38,17 @@ $("#btnReset").click(function () {
 
 function GetLandTransfer(pageNumber, pageSize, sortOrder) {
     var param = GetSearchParam(pageNumber, pageSize, sortOrder);
+   
     HttpPost(`/Planning/List`, 'html', param, function (response) {
-       
+       // alert(JSON.stringify(response));
         $('#divLandTransferTable').html("");
         $('#divLandTransferTable').html(response);
     });
 }
+
+
+
+
 function GetSearchParam(pageNumber, pageSize, sortOrder) {
     var model = {
         sortBy: $("#ddlSort").children("option:selected").val(),

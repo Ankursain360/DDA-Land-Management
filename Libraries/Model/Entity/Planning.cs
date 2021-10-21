@@ -11,7 +11,8 @@ namespace Libraries.Model.Entity
         {
             PlanningProperties = new HashSet<PlanningProperties>();
         }
-        [Required]
+       
+        [Required(ErrorMessage = "Remarks is Mandatory")]
         public string Remarks { get; set; }
         public byte? IsVerify { get; set; }
         public byte? IsActive { get; set; }
@@ -22,15 +23,16 @@ namespace Libraries.Model.Entity
         public List<Division> DivisionList { get; set; }
         [NotMapped]
         public List<Zone> ZoneList { get; set; }
-        [Required(ErrorMessage = "The Department Field is required")]
+        
+        [Required(ErrorMessage = "Department Name is Mandatory")]
         public int DepartmentId { get; set; }
-        [Required(ErrorMessage = "The Division Field is required")]
+        [Required(ErrorMessage = "Division Name is Mandatory")]
         public int DivisionId { get; set; }
         [NotMapped]
         public List<int> PlannedProperties { get; set; }
         [NotMapped]
         public List<int> UnplannedProperties { get; set; }
-        [Required(ErrorMessage = "The Zone Field is required")]
+        [Required(ErrorMessage = "Zone Name is Mandatory")]
         public int ZoneId { get; set; }
         public virtual Department Department { get; set; }
         public virtual Division Division { get; set; }

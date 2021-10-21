@@ -50,13 +50,16 @@ $('#ddlSort').change(function () {
 
 
 function onPaging(pageNo) {
-    GetDetails(parseInt(pageNo), parseInt(currentPageSize), sortOrder);
+    
+    GetLandTransfer(parseInt(pageNo), parseInt(currentPageSize), sortOrder);
     currentPageNumber = pageNo;
 }
 
 function onChangePageSize(pageSize) {
-    GetDetails(parseInt(currentPageNumber), parseInt(pageSize), sortOrder);
+  
     currentPageSize = pageSize;
+    GetLandTransfer(parseInt(currentPageNumber), parseInt(pageSize), sortOrder);
+   
 }
 
 

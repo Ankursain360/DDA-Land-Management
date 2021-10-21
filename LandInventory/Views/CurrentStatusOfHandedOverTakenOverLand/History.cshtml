@@ -1,14 +1,14 @@
 ﻿@model Libraries.Model.Entity.Currentstatusoflandhistory
 
-@await Component.InvokeAsync("PageHeader", new { pageName = "Additional Information of Plot" })
+@await Component.InvokeAsync("PageHeader", new { pageName = "View History" })
 @{ ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml"; }
 
-<div class="row mt-md-3 justify-content-end mb-md-2">
 
-    <a asp-action="Index" class="btn btn-theme me-3" style="margin-top: -10px;">Back</a>
 
-</div>
+   
+  
+
 
 
 <div  class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
@@ -43,10 +43,12 @@
     </div>
     <div class="row mt-md-3">
         <div class="col-md-12" style="margin-bottom:40px;">
-           
+
             <input type="submit" value="Filter" id="btnFilter" class="btn btn-theme" />
 
             <input type="button" value="Refresh" onclick="location.reload(true);" class="btn btn-theme" />
+
+            <a asp-action="Index" class="btn btn-theme">Back </a>
         </div>
     </div>
 

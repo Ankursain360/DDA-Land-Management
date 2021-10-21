@@ -22,6 +22,7 @@
                             <div class="floating-label-wrap mb-3 mb-md-0">
 
                                 <select class="floating-label-field floating-label-field--s3" asp-for="ZoneId" onchange="GetDivisionList(this.value);">
+                                    <option>Select</option>
                                 </select>
                                 <label asp-for="ZoneId" class="floating-label">Zone<span style="color:red">*</span></label>
 
@@ -33,6 +34,7 @@
                         <div class="col-md-6">
                             <div class="floating-label-wrap mb-3 mb-md-0">
                                 <select class="floating-label-field floating-label-field--s3" asp-for="DivisionId" onchange="GetProperties()">
+                                    <option>Select</option>
                                 </select>
                                 <label asp-for="DivisionId" class="floating-label">Division<span style="color:red">*</span></label>
 
