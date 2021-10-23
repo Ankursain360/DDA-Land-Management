@@ -14,9 +14,11 @@ using Service.IApplicationService;
 using Microsoft.AspNetCore.Hosting;
 using System.Text;
 using Core.Enum;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Vacant.Land.Api.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     [Produces("application/json")]

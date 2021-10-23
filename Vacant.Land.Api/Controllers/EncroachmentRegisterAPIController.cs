@@ -18,9 +18,11 @@ using Microsoft.AspNetCore.Hosting;
 using System.Text;
 using Core.Enum;
 using System.IO;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Vacant.Land.Api.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     [Produces("application/json")]
@@ -71,7 +73,7 @@ namespace Vacant.Land.Api.Controllers
             FirfilePath = _configuration.GetSection("FilePaths:EncroachmentRegisterationFiles:FIRFilePath").Value.ToString();
 
         }
-
+       
         [HttpGet]
         [Route("[action]")]
         [Route("api/EncroachmentRegisterAPI/GetDepartmentList")]
@@ -770,6 +772,7 @@ namespace Vacant.Land.Api.Controllers
         [HttpPost]
         [Route("[action]")]
         [Route("api/EncroachmentRegisterAPI/GetAllEncroachmentRegisterAPIdata")]
+        
         public async Task<IActionResult> GetAllEncroachmentRegisterAPIdata([FromBody] ApiEncroachmentRegisterParmsDto dto)
         {
             ApiSaveEncroachmentRegisterDtoResponseDetails apiResponseDetails = new ApiSaveEncroachmentRegisterDtoResponseDetails();
