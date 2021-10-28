@@ -55,6 +55,7 @@ namespace Vacant.Land.Api
             services.AddMvc(option =>
             {
                 option.SuppressAsyncSuffixInActionNames = false;
+                option.Filters.Add(typeof(ExceptionLogFilter));
             });
             services.AddControllers();
             services.RegisterDependency();
@@ -67,8 +68,8 @@ namespace Vacant.Land.Api
           
             services.RegisterDependency();
             services.AddAutoMapperSetup();
-          
 
+           
             // Adding Authentication
             services.AddAuthentication(options =>
             {
@@ -103,7 +104,7 @@ namespace Vacant.Land.Api
             {
                 app.UseDeveloperExceptionPage();
             }
-
+           
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
