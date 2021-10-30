@@ -38,11 +38,11 @@ $("#btnGenerate").click(function () {
 
 function GetLandTransfer(pageNumber, pageSize, sortOrder) {
     var param = GetSearchParam(pageNumber, pageSize, sortOrder);
-     alert(JSON.stringify(param));
+    // alert(JSON.stringify(param));
 
     HttpPost(`/ReportofLandTransferPropertyNoWise/GetDetails`, 'html', param, function (response) {
-        alert("ggg");
-         alert(JSON.stringify(response));
+      //  alert("ggg");
+       //  alert(JSON.stringify(response));
         $('#LoadView').html("");
         $('#LoadView').html(response);
     });
