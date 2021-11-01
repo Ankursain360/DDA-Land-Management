@@ -5,7 +5,7 @@
 
 
 
-<form asp-action="Create" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
+<form asp-action="Create" id="CurrentStatus-form" onsubmit="return validateForm()" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data" method="post">
     <h3 class="mb-3 d-flex">
         Details<span class="ms-auto"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span>
 
@@ -855,8 +855,9 @@
                             <option value="No">No</option>
                             <option value="Yes">Yes</option>
                         </select>
-                        <span asp-validation-for="LandTransferId" class="text-danger"></span>
+                        <span asp-validation-for="Tsssurvey" class="text-danger"></span>
                         <label asp-for="LandTransferId" class="floating-label">TSS Survey </label>
+                        <label id="PossessionDate-error" style="color:red;display:none;"> TSS Survey is Mandatory</label>
 
                     </div>
                 </div>
@@ -1099,8 +1100,10 @@
             <div class="col-md-12">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <textarea asp-for="Remarks" placeholder="Remarks" type="text" class="floating-label-field floating-label-field--s3"></textarea>
-                    @*<span asp-validation-for="Remarks" class="text-danger"></span>*@
+                    <span asp-validation-for="Remarks" class="text-danger"></span>
                     <label class="floating-label">Remarks</label>
+                    <label id="PossessionDate-error1" style="color:red;display:none;"> Remarks is Mandatory</label>
+
 
                 </div>
             </div>

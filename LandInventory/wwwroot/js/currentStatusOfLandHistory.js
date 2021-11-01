@@ -25,8 +25,8 @@ $(document).ready(function () {
     });
 
 
-function GetHistory(pageNumber, pageSize, fromDate, toDate,Id) {
-    var param = GetSearchParam(pageNumber, pageSize, fromDate, toDate,Id);
+function GetHistory(pageNumber, pageSize, fromDate, toDate, Id) {
+    var param = GetSearchParam(pageNumber, pageSize, fromDate, toDate, Id);
     debugger;
     HttpPost(`/CurrentStatusOfHandedOverTakenOverLand/HistoryDetails`, 'html', param, function (response) {
         $('#LoadView').html("");

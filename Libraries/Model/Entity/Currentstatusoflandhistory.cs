@@ -11,7 +11,7 @@ namespace Libraries.Model.Entity
         [Required]
         public int? LandTransferId { get; set; }
 
-        [Required(ErrorMessage = "Tss Survey is mandatory ")]
+     //   [Required(ErrorMessage = "Tss Survey is mandatory ")]
         public string Tsssurvey { get; set; }
         public string SurveyReportFilePath { get; set; }
         public int Encroachment { get; set; }
@@ -44,6 +44,7 @@ namespace Libraries.Model.Entity
         public string PlannedUnplannedLand { get; set; }
         public string MainLandUse { get; set; }
         public string SubUse { get; set; }
+       // [Required(ErrorMessage = "Remarks is mandatory ")]
         public string Remarks { get; set; }
         public byte? IsActive { get; set; }
         [NotMapped]
