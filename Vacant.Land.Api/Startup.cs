@@ -52,6 +52,18 @@ namespace Vacant.Land.Api
             }
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddDbContext<DataContext>(a => a.UseMySQL(Configuration.GetSection("ConnectionString:Con").Value));
+           
+            //jwt token validation parameters
+            var key = Encoding.UTF8.GetBytes(Configuration["JWT:Secret"]);
+            var tokenValidationparams = new TokenValidationParameters()
+            {
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidAudience = Configuration["JWT:ValidAudience"],
+                ValidIssuer = Configuration["JWT:ValidIssuer"],
+                IssuerSigningKey = new SymmetricSecurityKey(key)
+            };
+
             services.AddMvc(option =>
             {
                 option.SuppressAsyncSuffixInActionNames = false;
@@ -83,14 +95,7 @@ namespace Vacant.Land.Api
             {
                 options.SaveToken = true;
                 options.RequireHttpsMetadata = false;
-                options.TokenValidationParameters = new TokenValidationParameters()
-                {
-                    ValidateIssuer = true,
-                    ValidateAudience = true,
-                    ValidAudience = Configuration["JWT:ValidAudience"],
-                    ValidIssuer = Configuration["JWT:ValidIssuer"],
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT:Secret"]))
-                };
+                options.TokenValidationParameters = tokenValidationparams;
             });
           
           
