@@ -52,7 +52,7 @@ namespace Vacant.Land.Api
             }
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddDbContext<DataContext>(a => a.UseMySQL(Configuration.GetSection("ConnectionString:Con").Value));
-           
+            
             //jwt token validation parameters
             var key = Encoding.UTF8.GetBytes(Configuration["JWT:Secret"]);
             var tokenValidationparams = new TokenValidationParameters()
@@ -63,7 +63,7 @@ namespace Vacant.Land.Api
                 ValidIssuer = Configuration["JWT:ValidIssuer"],
                 IssuerSigningKey = new SymmetricSecurityKey(key)
             };
-
+            services.AddSingleton(tokenValidationparams);
             services.AddMvc(option =>
             {
                 option.SuppressAsyncSuffixInActionNames = false;
