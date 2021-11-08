@@ -14,25 +14,25 @@ namespace Libraries.Model.Entity
             Doortodoorsurveyidentityproof = new HashSet<Doortodoorsurveyidentityproof>();
             Doortodoorsurveypropertyproof = new HashSet<Doortodoorsurveypropertyproof>();
         }
-
-        [Required(ErrorMessage = " The Property Address field is required")]
+      
+        [Required(ErrorMessage = "Property Address field is Mandatory Field")]
         public string PropertyAddress { get; set; }
         
-        [Required(ErrorMessage = " The Geo Referencing/Lattitude field is required")]
+        [Required(ErrorMessage = " The Geo Referencing/Lattitude field is Mandatory Field")]
         public string GeoReferencingLattitude { get; set; }
 
-        [Required(ErrorMessage = " The Geo Referencing/Longitude field is required")]
+        [Required(ErrorMessage = " The Geo Referencing/Longitude field is Mandatory Field")]
         public string Longitude { get; set; }
 
-        [Required(ErrorMessage = " The PresentUse field is required")]
+        [Required(ErrorMessage = " The PresentUse field is Mandatory Field")]
         public int? PresentUseId { get; set; }
 
-        [Required(ErrorMessage = " The Approx Property Area field is required")]
+        [Required(ErrorMessage = " The Approx Property Area field is Mandatory Field")]
         [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
         [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Approx Area of the Property; Max 18 digits")]
         public decimal? ApproxPropertyArea { get; set; }
 
-        [Required(ErrorMessage = " The Number Of Floors field is required")]
+        [Required(ErrorMessage = " The Number Of Floors field is Mandatory Field")]
         public string NumberOfFloors { get; set; }
         
         public string CaelectricityNo { get; set; }
@@ -40,7 +40,7 @@ namespace Libraries.Model.Entity
         public string KwaterNo { get; set; }
         
         public string PropertyHouseTaxNo { get; set; }
-        [Required(ErrorMessage = " The Occupant Name field is required")]
+        [Required(ErrorMessage = " The Occupant Name field is Mandatory Field")]
         public string OccupantName { get; set; }
 
         [RegularExpression(@"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$",
@@ -52,9 +52,9 @@ namespace Libraries.Model.Entity
         [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$",
                    ErrorMessage = "Invalid Mobile No Format.")]
         public string MobileNo { get; set; }
-        [Required(ErrorMessage = " The Occupant Aadhar No field is required")]
+        [Required(ErrorMessage = " The Occupant Aadhar No field is Mandatory Field")]
         public string OccupantAadharNo { get; set; }
-        [Required(ErrorMessage = " The Voter Id No field is required")]
+        [Required(ErrorMessage = " The Voter Id No field is Mandatory Field")]
         public string VoterIdNo { get; set; }
        
         public string OccupantIdentityPrrofFilePath { get; set; }
