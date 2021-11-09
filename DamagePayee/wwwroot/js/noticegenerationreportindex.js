@@ -35,18 +35,38 @@ $("#btnReset").click(function () {
 
 
 $("#btnAscending").click(function () {
+    debugger;
     $("#btnDescending").removeClass("active");
     $("#btnAscending").addClass("active");
     sortOrder = 1;//for Ascending
-    GetDetails(currentPageNumber, currentPageSize, sortOrder);
+    var fromDate = $('#txtFromDate').val();
+    var toDate = $('#txtToDate').val();
+    if (fromDate != '' && toDate!='') {
+        GetDetails(currentPageNumber, currentPageSize, sortOrder);
+    }
+    else
+    {
+        alert('Please Enter From Date and ToDate');
+
+    }
 });
 
 
 $("#btnDescending").click(function () {
+    debugger;
     $("#btnAscending").removeClass("active");
     $("#btnDescending").addClass("active");
     sortOrder = 2;//for Descending
-    GetDetails(currentPageNumber, currentPageSize, sortOrder);
+    var fromDate = $('#txtFromDate').val();
+    var toDate = $('#txtToDate').val();
+    if (fromDate != '' && toDate != '')
+    {
+    
+        GetDetails(currentPageNumber, currentPageSize, sortOrder);
+    }
+    else {
+           alert('Please Enter From Date and ToDate');
+        }
 });
 function GetDetails(pageNumber, pageSize, order) {
     var param = GetSearchParam(pageNumber, pageSize, order);
@@ -62,17 +82,22 @@ function GetSearchParam(pageNumber, pageSize, sortOrder) {
     var fileid = $('#Id option:selected').val();
     var fromDate = $('#txtFromDate').val();
     var toDate = $('#txtToDate').val();
-    var model = {
-        name: "notice generation report",
-        sortBy: $("#ddlSort").children("option:selected").val(),
-        sortOrder: parseInt(sortOrder),
-        pageSize: parseInt(pageSize),
-        pageNumber: parseInt(pageNumber),
-        FileNo: parseInt(fileid),
-        FromDate: fromDate,
-        ToDate: toDate
+    if (fromDate != '' && toDate != '') {
+        var model = {
+            name: "notice generation report",
+            sortBy: $("#ddlSort").children("option:selected").val(),
+            sortOrder: parseInt(sortOrder),
+            pageSize: parseInt(pageSize),
+            pageNumber: parseInt(pageNumber),
+            FileNo: parseInt(fileid),
+            FromDate: fromDate,
+            ToDate: toDate
+        }
+        return model;
     }
-    return model;
+    else {
+        alert('Please Enter From Date and ToDate');
+    }
 }
 
 function onPaging(pageNo) {

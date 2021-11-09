@@ -1,5 +1,5 @@
 ﻿var currentPageNumber = 1;
-var currentPageSize = 10;
+var currentPageSize = 5;
 var currentSortOrderAscending = 1;
 var currentSortOrderDescending = 2;
 
@@ -57,29 +57,48 @@ function onChangePageSize(pageSize) {
     currentPageSize = pageSize;
 }
 function Descending() {
+    debugger;
     $("#btnAscending").removeClass("active");
     $("#btnDescending").addClass("active");
-    var value = $("#ddlSort").children("option:selected").val();
-    $('#txtName').val('')
-    if (value !== "0") {
-        GetDetailsOrderby(currentPageNumber, currentPageSize, currentSortOrderDescending);
+    var value = $("#ddlSort").children("option:selected").val();   
+    var todate = (($('#ToDate').val()));
+    var fromDate = (($('#FromDate').val()));
+
+    if (todate != '' && fromDate != '') {
+        $('#txtName').val('')
+        if (value !== "0") {
+            GetDetailsOrderby(currentPageNumber, currentPageSize, currentSortOrderDescending);
+        }
+        else {
+            alert('Please select SortBy Value');
+        }
     }
-    else {
-        alert('Please select SortBy Value');
+    else
+    {
+        alert('Please enter FromDate and ToDate');
     }
 };
 function Ascending() {
+    debugger;
     $("#btnDescending").removeClass("active");
     $("#btnAscending").addClass("active");
     var value = $("#ddlSort").children("option:selected").val();
-    $('#txtName').val('')
+    var todate = (($('#ToDate').val()));
+    var fromDate = (($('#FromDate').val()));
+    if (todate != '' && fromDate != '') {
+        $('#txtName').val('')
 
-    if (value !== "0") {
+        if (value !== "0") {
 
-        GetDetailsOrderby(currentPageNumber, currentPageSize, currentSortOrderAscending);
+            GetDetailsOrderby(currentPageNumber, currentPageSize, currentSortOrderAscending);
+        }
+        else {
+            alert('Please select SortBy Value');
+        }
     }
-    else {
-        alert('Please select SortBy Value');
+    else
+    {
+        alert('Please enter FromDate and ToDate');
     }
 };
 function GetDetailsOrderby(pageNumber, pageSize, order) {

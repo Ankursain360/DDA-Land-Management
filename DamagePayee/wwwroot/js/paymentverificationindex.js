@@ -1,5 +1,7 @@
-﻿var currentPageNumber = 1;
-var currentPageSize = 10;
+﻿import { debug } from "console";
+
+var currentPageNumber = 1;
+var currentPageSize = 5;
 var currentSortOrderAscending = 1;
 var currentSortOrderDescending = 2;
 
@@ -69,6 +71,7 @@ function GetPaymentOrderBy(pageNumber, pageSize, order) {
     });
 }
 function Ascending() {
+    debugger;
     $("#btnDescending").removeClass("active");
     $("#btnAscending").addClass("active");
     var value = $("#ddlSort").children("option:selected").val();
@@ -81,6 +84,7 @@ function Ascending() {
 };
 
 function Descending() {
+    debugger;
     $("#btnAscending").removeClass("active");
     $("#btnDescending").addClass("active");
     var value = $("#ddlSort").children("option:selected").val();
