@@ -22,6 +22,10 @@ function GetDetails(pageNumber, pageSize, order) {
     });
 }
 
+$('#ddlSort').change(function () {
+    GetDetails(currentPageNumber, currentPageSize, sortby);
+});
+
 function GetSearchParam(pageNumber, pageSize, sortOrder) {
     debugger;
     var departmentid = $('#DepartmentId option:selected').val();
