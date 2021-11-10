@@ -28,6 +28,7 @@ using Dto.Master;
 
 namespace DamagePayee.Controllers
 {
+    [AllowAnonymous]
     public class DamagePayeeRegistrationController : BaseController
     {
        
@@ -56,6 +57,7 @@ namespace DamagePayee.Controllers
             return PartialView("_List", result);
         }
 
+        [AllowAnonymous]
         public IActionResult Create()
         {
             var Msg = TempData["Message"] as string;
@@ -67,7 +69,7 @@ namespace DamagePayee.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-
+               
         public async Task<IActionResult> Create(Payeeregistration payeeregistration)
         {
             try
@@ -160,7 +162,9 @@ namespace DamagePayee.Controllers
                 return View(payeeregistration);
             }
         }
+
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> RegistrationConfirmed()
         {
             EncryptionHelper encryptionHelper = new EncryptionHelper();
@@ -226,7 +230,6 @@ namespace DamagePayee.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-
         public async Task<IActionResult> Edit(int id, Payeeregistration payeeregistration)
         {
             if (ModelState.IsValid)
@@ -257,10 +260,6 @@ namespace DamagePayee.Controllers
             }
             return View(payeeregistration);
         }
-
-
-
-
 
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
