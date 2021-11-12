@@ -25,9 +25,11 @@ using System.Linq;
 using Unidecode.NET;
 using Microsoft.AspNetCore.Http;
 using Dto.Master;
+using Service.IApplicationService;
 
 namespace DamagePayee.Controllers
 {
+    [AllowAnonymous]
     public class DamagePayeeRegistrationController : BaseController
     {
        
@@ -35,12 +37,16 @@ namespace DamagePayee.Controllers
         private readonly IHostingEnvironment _hostingEnvironment;
         public Microsoft.Extensions.Configuration.IConfiguration _configuration;
         private readonly IDamagePayeeRegistrationService _damagePayeeRegistrationService;
-
-        public DamagePayeeRegistrationController(Microsoft.Extensions.Configuration.IConfiguration configuration, IDamagePayeeRegistrationService damagePayeeRegistrationService, IHostingEnvironment en)
+        private readonly IUserProfileService _userProfileService;
+        public DamagePayeeRegistrationController(Microsoft.Extensions.Configuration.IConfiguration configuration,
+            IDamagePayeeRegistrationService damagePayeeRegistrationService,
+            IHostingEnvironment en,
+            IUserProfileService userProfileService)
         {
             _damagePayeeRegistrationService = damagePayeeRegistrationService;
             _configuration = configuration;
             _hostingEnvironment = en;
+            _userProfileService = userProfileService;
         }
 
         public IActionResult Index()
@@ -56,6 +62,7 @@ namespace DamagePayee.Controllers
             return PartialView("_List", result);
         }
 
+        [AllowAnonymous]
         public IActionResult Create()
         {
             var Msg = TempData["Message"] as string;
@@ -67,7 +74,7 @@ namespace DamagePayee.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-
+               
         public async Task<IActionResult> Create(Payeeregistration payeeregistration)
         {
             try
@@ -140,7 +147,10 @@ namespace DamagePayee.Controllers
                         else
                             TempData["Message"] = Alert.Show("Dear User,<br/>" + LoginName + " Enable to send mail or sms ", "", AlertType.Info);
 
-                        return RedirectToAction("Create", "DamagePayeeRegistration");
+                        // return RedirectToAction("Create", "DamagePayeeRegistration");
+                        return RedirectToAction("MailSentMsg", "DamagePayeeRegistration", new { username = payeeregistration.Name });
+
+                        
                     }
                     else
                     {
@@ -160,7 +170,9 @@ namespace DamagePayee.Controllers
                 return View(payeeregistration);
             }
         }
+
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> RegistrationConfirmed()
         {
             EncryptionHelper encryptionHelper = new EncryptionHelper();
@@ -183,7 +195,23 @@ namespace DamagePayee.Controllers
                 {
                     payeeregistration.Id = UniqueId;
                     var result1 = await _damagePayeeRegistrationService.UpdateVerification(payeeregistration);
-                    
+                    // aspnet user creation
+                    if (result1)
+                    {
+                        
+                        AddUserDto model = new AddUserDto()
+                        {
+                            Name = result.Name,
+                            UserName = result.Name,
+                            Email = result.EmailId,
+                            PhoneNumber = result.MobileNumber,
+                            Password ="Payee@123",
+                            ConfirmPassword = "Payee@123",
+                            RoleId=20
+                            
+                        };
+                        await _userProfileService.CreateUser(model);
+                    }
                     return View("RegistrationConfirmed");
                 }
                 else
@@ -226,7 +254,6 @@ namespace DamagePayee.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-
         public async Task<IActionResult> Edit(int id, Payeeregistration payeeregistration)
         {
             if (ModelState.IsValid)
@@ -257,10 +284,6 @@ namespace DamagePayee.Controllers
             }
             return View(payeeregistration);
         }
-
-
-
-
 
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
@@ -316,6 +339,17 @@ namespace DamagePayee.Controllers
                 return NotFound();
             }
             return View(Data);
+        }
+
+        public IActionResult MailSentMsg(string username)
+        {
+            ViewBag.name = username;
+            return View();
+        }
+        public IActionResult logincredientialsMailSentMsg(string username)
+        {
+            ViewBag.name = username;
+            return View();
         }
     }
 }
