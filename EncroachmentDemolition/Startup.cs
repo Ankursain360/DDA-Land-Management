@@ -54,7 +54,7 @@ namespace EncroachmentDemolition
                 services.Configure<CookiePolicyOptions>(options =>
                 {
                     options.CheckConsentNeeded = context => false;
-                    options.MinimumSameSitePolicy = SameSiteMode.Lax;
+                    //options.MinimumSameSitePolicy = SameSiteMode.Lax;
                     options.HttpOnly = HttpOnlyPolicy.Always;
                     options.Secure = CookieSecurePolicy.Always;
                 });
@@ -150,7 +150,7 @@ namespace EncroachmentDemolition
                 {
                     HttpOnly = HttpOnlyPolicy.Always,
                     Secure = CookieSecurePolicy.Always,
-                    MinimumSameSitePolicy = SameSiteMode.Lax
+                 //   MinimumSameSitePolicy = SameSiteMode.Lax
                 });
             }
             app.UseAuthentication();
