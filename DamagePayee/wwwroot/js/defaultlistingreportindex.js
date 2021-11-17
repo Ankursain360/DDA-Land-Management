@@ -1,5 +1,5 @@
 ﻿var currentPageNumber = 1;
-var currentPageSize = 10;
+var currentPageSize = 5;
 var sortOrder = 1;//default Ascending 
 
 $(document).ready(function () {
@@ -24,6 +24,7 @@ $(document).ready(function () {
 
 });
 $('#ddlSort').change(function () {
+    debugger;
     var fromDate = $('#txtFromDate').val();
     var todate = $('#txtToDate').val();
     if (todate != '' && fromDate != '') {
@@ -59,8 +60,12 @@ function GetSearchParam(pageNumber, pageSize, sortOrder) {
         
         FromDate: fromDate,
         ToDate: toDate,
-        sortBy: $("#ddlSort").children("option:selected").val(),
-            sortOrder: parseInt(sortOrder),
+        sortby: $("#ddlSort").children("option:selected").val(),       
+        sortOrder: parseInt(sortOrder),
+        pageSize: parseInt(pageSize),
+        pageNumber: parseInt(pageNumber),       
+        FromDate: fromDate,
+        ToDate: toDate
     }
     return model;
 }
@@ -108,11 +113,11 @@ $("#btnReset").click(function () {
 
 });
 function onPaging(pageNo) {
-    GetDetails(parseInt(pageNo), parseInt(currentPageSize), sortby);
+    GetDetails(parseInt(pageNo), parseInt(currentPageSize), sortOrder);
     currentPageNumber = pageNo;
 }
 
 function onChangePageSize(pageSize) {
-    GetDetails(parseInt(currentPageNumber), parseInt(pageSize), sortby);
+    GetDetails(parseInt(currentPageNumber), parseInt(pageSize), sortOrder);
     currentPageSize = pageSize;
 }
