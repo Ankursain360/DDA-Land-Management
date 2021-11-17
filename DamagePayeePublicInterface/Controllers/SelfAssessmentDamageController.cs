@@ -112,8 +112,8 @@ namespace DamagePayeePublicInterface.Controllers
             string BillDocument = _configuration.GetSection("FilePaths:DamagePayeeFiles:Bill").Value.ToString();
             bool IsValidpdfAAdhar = CheckMimeTypeForaadharaCard(damagepayeeregistertemp);
             bool IsValidpdfPanCard = CheckMimeTypeForPanCardDocument(damagepayeeregistertemp);
-            bool IsValidpdfPhotograph = CheckMimeTypeForPhotographPersonelDocument(damagepayeeregistertemp);
-            bool IsValidpdfSingnature = CheckMimeTypeForSingnatureDocument(damagepayeeregistertemp);
+            //bool IsValidpdfPhotograph = CheckMimeTypeForPhotographPersonelDocument(damagepayeeregistertemp);
+            //bool IsValidpdfSingnature = CheckMimeTypeForSingnatureDocument(damagepayeeregistertemp);
             bool IsValidpdfShowCaseNotice = CheckMimeTypeForShowCaseNotice(damagepayeeregistertemp);
             bool IsValidpdfFgForm = CheckMimeTypeForFgform(damagepayeeregistertemp);
             bool IsValidpdfBill = CheckMimeTypeForDocumentBill(damagepayeeregistertemp);
@@ -132,14 +132,14 @@ namespace DamagePayeePublicInterface.Controllers
                             if (IsValidpdfPanCard == true)
                             {
 
-                                if (IsValidpdfPhotograph == true)
-                                {
+                                //if (IsValidpdfPhotograph == true)
+                                //{
                                     if (IsValidpdfSGPDocument == true)
                                     {
                                         if (IsValidpdfShowCaseNotice == true)
                                         {
-                                            if (IsValidpdfSingnature == true)
-                                            {
+                                            //if (IsValidpdfSingnature == true)
+                                            //{
                                                 if (IsValidpdfReceiptDocument == true)
                                                 {
                                                     if (IsValidpdfReceiptPropertyPhoto == true)
@@ -267,7 +267,7 @@ namespace DamagePayeePublicInterface.Controllers
                                                                                 EmailId = damagepayeeregistertemp.EmailId.Count <= i ? string.Empty : damagepayeeregistertemp.EmailId[i],
                                                                                 DamagePayeeRegisterTempId = damagepayeeregistertemp.Id,
                                                                                // DecryptStringAES(model.Password, key);
-                                                                            AadharNo = DecryptStringAES(damagepayeeregistertemp.AadharNo.Count <= i ? string.Empty : damagepayeeregistertemp.AadharNo[i],key),
+                                                                                AadharNo = DecryptStringAES(damagepayeeregistertemp.AadharNo.Count <= i ? string.Empty : damagepayeeregistertemp.AadharNo[i],key),
                                                                                 PanNo = DecryptStringAES(damagepayeeregistertemp.PanNo.Count <= i ? string.Empty : damagepayeeregistertemp.PanNo[i], key),
 
 
@@ -737,12 +737,12 @@ namespace DamagePayeePublicInterface.Controllers
                                                     ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
                                                     await BindDropDown(damagepayeeregistertemp);
                                                 }
-                                            }
-                                            else
-                                            {
-                                                ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
-                                                await BindDropDown(damagepayeeregistertemp);
-                                            }
+                                            //}
+                                            //else
+                                            //{
+                                            //    ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
+                                            //    await BindDropDown(damagepayeeregistertemp);
+                                            //}
                                         }
                                         else
                                         {
@@ -759,12 +759,12 @@ namespace DamagePayeePublicInterface.Controllers
                                     }
 
 
-                                }
-                                else
-                                {
-                                    ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
-                                    await BindDropDown(damagepayeeregistertemp);
-                                }
+                                //}
+                                //else
+                                //{
+                                //    ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
+                                //    await BindDropDown(damagepayeeregistertemp);
+                                //}
                             }
                             else
                             {
@@ -1322,154 +1322,154 @@ namespace DamagePayeePublicInterface.Controllers
             return Flag;
         }
 
-        public bool CheckMimeTypeForPhotographPersonelDocument(Damagepayeeregister damagepayeeregister)
-        {
-            bool Flag = true;
-            string fullpath = string.Empty;
-            string extension = string.Empty;
-            DocumentFilePath = _configuration.GetSection("FilePaths:DamagePayeeFiles:PhotographPersonelDocument").Value.ToString();
-            IFormFile files = damagepayeeregister.Photograph1;
-            if (files != null)
-            {
-                extension = System.IO.Path.GetExtension(files.FileName);
-                string FileName = Guid.NewGuid().ToString() + "_" + files.FileName;
-                DocumentFilePath = _configuration.GetSection("FilePaths:DamagePayeeFiles:PhotographPersonelDocument").Value.ToString();
-                string FilePath = Path.Combine(DocumentFilePath, FileName);
-                if (files.Length > 0)
-                {
-                    if (!Directory.Exists(DocumentFilePath))
-                    {
-                        DirectoryInfo di = Directory.CreateDirectory(DocumentFilePath);// Try to create the directory.
-                    }
-                    try
-                    {
-                        if (extension.ToLower() == ".pdf")
-                        {
-                            try
-                            {
-                                using (var stream = new FileStream(FilePath, FileMode.Create))
-                                {
-                                    files.CopyTo(stream);
+        //public bool CheckMimeTypeForPhotographPersonelDocument(Damagepayeeregister damagepayeeregister)
+        //{
+        //    bool Flag = true;
+        //    string fullpath = string.Empty;
+        //    string extension = string.Empty;
+        //    DocumentFilePath = _configuration.GetSection("FilePaths:DamagePayeeFiles:PhotographPersonelDocument").Value.ToString();
+        //    IFormFile files = damagepayeeregister.Photograph1;
+        //    if (files != null)
+        //    {
+        //        extension = System.IO.Path.GetExtension(files.FileName);
+        //        string FileName = Guid.NewGuid().ToString() + "_" + files.FileName;
+        //        DocumentFilePath = _configuration.GetSection("FilePaths:DamagePayeeFiles:PhotographPersonelDocument").Value.ToString();
+        //        string FilePath = Path.Combine(DocumentFilePath, FileName);
+        //        if (files.Length > 0)
+        //        {
+        //            if (!Directory.Exists(DocumentFilePath))
+        //            {
+        //                DirectoryInfo di = Directory.CreateDirectory(DocumentFilePath);// Try to create the directory.
+        //            }
+        //            try
+        //            {
+        //                if (extension.ToLower() == ".pdf")
+        //                {
+        //                    try
+        //                    {
+        //                        using (var stream = new FileStream(FilePath, FileMode.Create))
+        //                        {
+        //                            files.CopyTo(stream);
 
-                                }
+        //                        }
 
-                                iTextSharp.text.pdf.PdfReader oPdfReader = new iTextSharp.text.pdf.PdfReader(FilePath);
-                                oPdfReader.Close();
-                                fullpath = _configuration.GetSection("FilePaths:DamagePayeeFiles:PhotographPersonelDocument").Value.ToString();
-                                FileInfo doc = new FileInfo(fullpath);
-                                if (doc.Exists)
-                                {
-                                    doc.Delete();
-                                }
-                            }
-                            catch (iTextSharp.text.exceptions.InvalidPdfException)
-                            {
-                                Flag = false;
-                            }
+        //                        iTextSharp.text.pdf.PdfReader oPdfReader = new iTextSharp.text.pdf.PdfReader(FilePath);
+        //                        oPdfReader.Close();
+        //                        fullpath = _configuration.GetSection("FilePaths:DamagePayeeFiles:PhotographPersonelDocument").Value.ToString();
+        //                        FileInfo doc = new FileInfo(fullpath);
+        //                        if (doc.Exists)
+        //                        {
+        //                            doc.Delete();
+        //                        }
+        //                    }
+        //                    catch (iTextSharp.text.exceptions.InvalidPdfException)
+        //                    {
+        //                        Flag = false;
+        //                    }
 
-                        }
-                        else
-                        {
-                            Flag = false;
-                        }
-                    }
-                    catch (OutOfMemoryException ex)
-                    {
-                        Flag = false;
+        //                }
+        //                else
+        //                {
+        //                    Flag = false;
+        //                }
+        //            }
+        //            catch (OutOfMemoryException ex)
+        //            {
+        //                Flag = false;
 
-                        if (System.IO.File.Exists(fullpath))
-                        {
-                            try
-                            {
-                                System.IO.File.Delete(fullpath);
-                            }
-                            catch (Exception exs)
-                            {
-                            }
-                        }
-                        // Image.FromFile will throw this if file is invalid.  
-                    }
+        //                if (System.IO.File.Exists(fullpath))
+        //                {
+        //                    try
+        //                    {
+        //                        System.IO.File.Delete(fullpath);
+        //                    }
+        //                    catch (Exception exs)
+        //                    {
+        //                    }
+        //                }
+        //                // Image.FromFile will throw this if file is invalid.  
+        //            }
 
-                }
-            }
+        //        }
+        //    }
 
-            return Flag;
-        }
+        //    return Flag;
+        //}
 
 
-        public bool CheckMimeTypeForSingnatureDocument(Damagepayeeregister damagepayeeregister)
-        {
-            bool Flag = true;
-            string fullpath = string.Empty;
-            string extension = string.Empty;
-            DocumentFilePath = _configuration.GetSection("FilePaths:DamagePayeeFiles:SignaturePersonelDocument").Value.ToString();
-            IFormFile files = damagepayeeregister.SignatureFile1;
-            if (files != null)
-            {
-                extension = System.IO.Path.GetExtension(files.FileName);
-                string FileName = Guid.NewGuid().ToString() + "_" + files.FileName;
-                DocumentFilePath = _configuration.GetSection("FilePaths:DamagePayeeFiles:SignaturePersonelDocument").Value.ToString();
-                string FilePath = Path.Combine(DocumentFilePath, FileName);
-                if (files.Length > 0)
-                {
-                    if (!Directory.Exists(DocumentFilePath))
-                    {
-                        DirectoryInfo di = Directory.CreateDirectory(DocumentFilePath);// Try to create the directory.
-                    }
-                    try
-                    {
-                        if (extension.ToLower() == ".pdf")
-                        {
-                            try
-                            {
-                                using (var stream = new FileStream(FilePath, FileMode.Create))
-                                {
-                                    files.CopyTo(stream);
+        //public bool CheckMimeTypeForSingnatureDocument(Damagepayeeregister damagepayeeregister)
+        //{
+        //    bool Flag = true;
+        //    string fullpath = string.Empty;
+        //    string extension = string.Empty;
+        //    DocumentFilePath = _configuration.GetSection("FilePaths:DamagePayeeFiles:SignaturePersonelDocument").Value.ToString();
+        //    IFormFile files = damagepayeeregister.SignatureFile1;
+        //    if (files != null)
+        //    {
+        //        extension = System.IO.Path.GetExtension(files.FileName);
+        //        string FileName = Guid.NewGuid().ToString() + "_" + files.FileName;
+        //        DocumentFilePath = _configuration.GetSection("FilePaths:DamagePayeeFiles:SignaturePersonelDocument").Value.ToString();
+        //        string FilePath = Path.Combine(DocumentFilePath, FileName);
+        //        if (files.Length > 0)
+        //        {
+        //            if (!Directory.Exists(DocumentFilePath))
+        //            {
+        //                DirectoryInfo di = Directory.CreateDirectory(DocumentFilePath);// Try to create the directory.
+        //            }
+        //            try
+        //            {
+        //                if (extension.ToLower() == ".pdf")
+        //                {
+        //                    try
+        //                    {
+        //                        using (var stream = new FileStream(FilePath, FileMode.Create))
+        //                        {
+        //                            files.CopyTo(stream);
 
-                                }
+        //                        }
 
-                                iTextSharp.text.pdf.PdfReader oPdfReader = new iTextSharp.text.pdf.PdfReader(FilePath);
-                                oPdfReader.Close();
-                                fullpath = _configuration.GetSection("FilePaths:DamagePayeeFiles:SignaturePersonelDocument").Value.ToString();
-                                FileInfo doc = new FileInfo(fullpath);
-                                if (doc.Exists)
-                                {
-                                    doc.Delete();
-                                }
-                            }
-                            catch (iTextSharp.text.exceptions.InvalidPdfException)
-                            {
-                                Flag = false;
-                            }
+        //                        iTextSharp.text.pdf.PdfReader oPdfReader = new iTextSharp.text.pdf.PdfReader(FilePath);
+        //                        oPdfReader.Close();
+        //                        fullpath = _configuration.GetSection("FilePaths:DamagePayeeFiles:SignaturePersonelDocument").Value.ToString();
+        //                        FileInfo doc = new FileInfo(fullpath);
+        //                        if (doc.Exists)
+        //                        {
+        //                            doc.Delete();
+        //                        }
+        //                    }
+        //                    catch (iTextSharp.text.exceptions.InvalidPdfException)
+        //                    {
+        //                        Flag = false;
+        //                    }
 
-                        }
-                        else
-                        {
-                            Flag = false;
-                        }
-                    }
-                    catch (OutOfMemoryException ex)
-                    {
-                        Flag = false;
+        //                }
+        //                else
+        //                {
+        //                    Flag = false;
+        //                }
+        //            }
+        //            catch (OutOfMemoryException ex)
+        //            {
+        //                Flag = false;
 
-                        if (System.IO.File.Exists(fullpath))
-                        {
-                            try
-                            {
-                                System.IO.File.Delete(fullpath);
-                            }
-                            catch (Exception exs)
-                            {
-                            }
-                        }
-                        // Image.FromFile will throw this if file is invalid.  
-                    }
+        //                if (System.IO.File.Exists(fullpath))
+        //                {
+        //                    try
+        //                    {
+        //                        System.IO.File.Delete(fullpath);
+        //                    }
+        //                    catch (Exception exs)
+        //                    {
+        //                    }
+        //                }
+        //                // Image.FromFile will throw this if file is invalid.  
+        //            }
 
-                }
-            }
+        //        }
+        //    }
 
-            return Flag;
-        }
+        //    return Flag;
+        //}
 
 
         public bool CheckMimeTypeForShowCaseNotice(Damagepayeeregister damagepayeeregister)

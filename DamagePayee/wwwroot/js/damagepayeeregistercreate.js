@@ -413,92 +413,25 @@ $(function () {
 
 
 
-$(function () {
-    $('.EmailCheck').on('change', function () {
-        debugger;
-        var input = $(this); 
-    var re = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-        var is_email = re.test(input.val());
-     
-        if (is_email == false) {
-
-            $('.EmailCheck').val('');
-            $('.msg1').empty().html('Please enter valid email id ');
-        }
-        else {
-            $('.EmailCheck').val(input.val());
-        }
-    
-});
-});
 
 
 
-$(function () {
-    $('.NoCheck').on('change', function () {
-        debugger;
-        var input = $(this);
-        var re = /^([0-9]{10})$/;
-        var is_mobile = re.test(input.val());
-        //alert('Please enter valid email id');
-     
-        if (is_mobile == false) {
-            
-            $('.NoCheck').val('');
-            $('.msg2').empty().html('Please enter valid mobile number ');
-        }
-        else {
-            $('.NoCheck').val(input.val());
-        }
-
-    });
-});
 
 
 
-$(function () {
-    $('#AadharNo').on('change', function () {
-        debugger;
-        var input = $(this).val();
-       
-        var re = /^([2-9]{1}[0-9]{3}\s{1}[0-9]{4}\s{1}[0-9]{4})$/;
-        var is_valid = re.test(input.val());
-        //alert('Please enter valid email id');
-        if (is_valid == false) {
-            // alert('Please enter valid email id');
-           
-            $('#AadharNo').val('');
-            $('.msg3').empty().html('Please enter valid Aadhar card number ');
-        }
-        else {
-            $('#AadharNo').val(input.val());
-        }
-    });
-});
 
-//$(function () {
-//    $('#PanNo').on('change', function () {
-//        debugger;
-//        var input = $(this).val();
-
-//        /// [A - Z]{ 5 } [0 - 9]{ 4 } [A - Z]{ 1 } $ /
-//        var re = /^([a-zA-Z]{5})(\d{4})([a-zA-Z]{1})$/;
-//        var is_valid = re.test(input.val());
-//        //alert('Please enter valid email id');
-//        if (is_valid == false) {
-//            // alert('Please enter valid email id');
-           
-//            $('#PanNo').val(' ');
-//            $('.msg4').empty().html('Please enter valid Pan card number ');
-//        }
-//        else {
-//            $('#PanNo').val(input.val());
-           
-//        }
-
-//    });
-//});
-
+function chkvalidAadhar(input) {
+    var value = $(input).val();
+    // var re = /^ ([2-9]{ 1}[0-9]{3}\s[0-9]{4}\s[0-9]{4})$/;
+    var re = /^([2-9]{1}[0-9]{3}\s{1}[0-9]{4}\s{1}[0-9]{4})$/;
+    var is_valid = re.test(value);
+    if (!is_valid) {
+        $(input).val('');
+        $(input).focus();
+        // alert("Please enter valid Pan card number");
+        $(input).nextAll('span:first').empty().html('Please enter valid Aadhar card number');
+    }
+}
 
 function chkvalid(input) {
     var value = $(input).val();
@@ -512,6 +445,32 @@ function chkvalid(input) {
     } 
       
 }
+
+function chkvalidmobile(input) {
+    var value = $(input).val();
+    var re = /^([0-9]{10})$/;
+    var is_valid = re.test(value);
+    if (!is_valid) {
+        $(input).val('');
+        $(input).focus();
+        // alert("Please enter valid Pan card number");
+        $(input).nextAll('span:first').empty().html('Please enter valid mobile number');
+    }
+}
+
+
+function chkvalidemail(input) {
+    var value = $(input).val();
+    var re = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    var is_valid = re.test(value);
+    if (!is_valid) {
+        $(input).val('');
+        $(input).focus();
+        // alert("Please enter valid Pan card number");
+        $(input).nextAll('span:first').empty().html('Please enter valid email id');
+    }
+}
+
 
 
 $('#DocumentIFormFile').change(function () {

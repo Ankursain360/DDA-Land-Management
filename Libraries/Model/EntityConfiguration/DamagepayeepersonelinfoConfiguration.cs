@@ -23,7 +23,7 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
             builder.Property(e => e.AadharNo)
-                .HasMaxLength(15)
+                .HasMaxLength(50)
                 .IsUnicode(false);
 
             builder.Property(e => e.AadharNoFilePath).HasColumnType("longtext");
@@ -64,7 +64,7 @@ namespace Libraries.Model.EntityConfiguration
                 .IsUnicode(false);
 
             builder.Property(e => e.PanNo)
-                .HasMaxLength(15)
+                .HasMaxLength(50)
                 .IsUnicode(false);
 
             builder.Property(e => e.PanNoFilePath).HasColumnType("longtext");

@@ -231,8 +231,8 @@ namespace Libraries.Model.Entity
         public List<IFormFile> Photograph { get; set; }
         [Required(ErrorMessage = "Photo is mandatory")]
 
-        [NotMapped]
-        public IFormFile Photograph1 { get; set; }
+        //[NotMapped]
+        //public IFormFile Photograph1 { get; set; }
 
         [NotMapped]
         public List<string> PhotographFilePath { get; set; }
@@ -244,8 +244,8 @@ namespace Libraries.Model.Entity
         public List<IFormFile> SignatureFile { get; set; }
         [Required(ErrorMessage = "Signature is mandatory")]
 
-        [NotMapped]
-        public IFormFile SignatureFile1 { get; set; }
+        //[NotMapped]
+        //public IFormFile SignatureFile1 { get; set; }
 
         [NotMapped]
         public List<string> SignatureFilePath { get; set; }

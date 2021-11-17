@@ -78,19 +78,19 @@
 
                                     </td>
                                     <td>
-                                        <input asp-for="MobileNo" limit="10"  maxlength="12"  type="text" class="floating-label-field floating-label-field--s3 NoCheck" />
+                                        <input asp-for="MobileNo" limit="10"  maxlength="12"  type="text" class="floating-label-field floating-label-field--s3 numbers" onchange="return chkvalidmobile(this);" />
                                         <span asp-validation-for="MobileNo" class="d-block text-danger field-validation-valid msg2"></span>
 
                                     </td>
                                     <td>
-                                        <input asp-for="EmailId" limit="30" id="email"  maxlength="30" type="text" class="floating-label-field floating-label-field--s3 EmailCheck" />
+                                        <input asp-for="EmailId" limit="30" id="email"  maxlength="30" type="text" class="floating-label-field floating-label-field--s3" onchange="return chkvalidemail(this);" />
                                         <span asp-validation-for="EmailId" class="d-block text-danger field-validation-valid msg1"></span>
                                         <label style="color:red;display:none; font-size:13px" id="err-email">Please Enter Valid Email</label>
 
                                     </td>
                                     <td>
 
-                                        <input asp-for="AadharNo" limit="12"  type="text" maxlength="15" class="floating-label-field floating-label-field--s3 numbers" />
+                                        <input asp-for="AadharNo"   type="text" maxlength="15" class="floating-label-field floating-label-field--s3 numbers" onchange="return chkvalidAadhar(this);" />
                                         <span asp-validation-for="AadharNo" class="d-block text-danger field-validation-valid msg3"></span>
 
                                         <input type="hidden" asp-for="AadharNoFilePath" />
@@ -127,7 +127,7 @@
                                     </td>
                                     <td>
 
-                                        <input asp-for="PanNo"  maxlength="10" type="text" class="floating-label-field floating-label-field--s3 "onchange="return chkvalid(this);" />
+                                        <input asp-for="PanNo"   type="text" class="floating-label-field floating-label-field--s3 "onchange="return chkvalid(this);" />
                                         <span asp-validation-for="PanNo" class="d-block text-danger field-validation-valid msgpan"></span>
 
                                         <input type="hidden" asp-for="PanNoFilePath" />
