@@ -25,6 +25,9 @@ namespace Libraries.Model.Entity
         public byte IsActive { get; set; }
 
         [NotMapped]
+        public Decimal RebatePercentage { get; set; }
+
+        [NotMapped]
         public List<Noticetodamagepayee> FileNoList { get; set; }
         [NotMapped]
         public int? FileId { get; set; }

@@ -74,6 +74,14 @@ namespace Service.ApplicationService
             return model;
         }
 
+
+     
+        public Decimal GetRebateCharges()
+        {
+            return _noticeToDamagePayeeRepository.GetRebateCharges();
+        }
+
+
         public async Task<bool> Update(int id, Noticetodamagepayee noticetodamagepayee)
         {
             var result = await _noticeToDamagePayeeRepository.FindBy(a => a.Id == id);

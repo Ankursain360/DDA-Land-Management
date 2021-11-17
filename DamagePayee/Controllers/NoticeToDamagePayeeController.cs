@@ -148,8 +148,7 @@ namespace DamagePayee.Controllers
         public async Task<IActionResult> View(int id)
         {
             var Data = await _noticeToDamagePayeeService.FetchSingleResult(id);
-
-
+            Data.RebatePercentage = _noticeToDamagePayeeService.GetRebateCharges();
             if (Data == null)
             {
                 return NotFound();
