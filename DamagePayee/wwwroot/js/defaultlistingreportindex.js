@@ -4,27 +4,35 @@ var sortOrder = 1;//default Ascending
 
 $(document).ready(function () {
     $("#btnGenerate").click(function () {
-        //debugger;
+        debugger;
         var result = ValidateForm();
         var fromDate = $('#txtFromDate').val();
-        var toDate = $('#txtToDate').val();
+        var todate = $('#txtToDate').val();
+        if (todate != '' && fromDate != '') {
 
-        //if (localityid != '' && localityid != undefined && fromDate != '' && toDate != '' && localityid != null && fromDate != null && toDate != null) {
-        if (result) {
-            GetDetails(currentPageNumber, currentPageSize, sortOrder);
+            if (result) {
+                GetDetails(currentPageNumber, currentPageSize, sortOrder);
+            }
         }
-        //}
-        //else {
-        //    alert('Please Fill All Fields');
-        //}
+        else
+        {
+            alert('Please enter FromDate and ToDate');
+
+        }
+       
     });
 
-    //$(".linkdisabled").click(function () {
-    //    return false;
-    //});
 });
 $('#ddlSort').change(function () {
-    GetDetails(currentPageNumber, currentPageSize, sortOrder);
+    var fromDate = $('#txtFromDate').val();
+    var todate = $('#txtToDate').val();
+    if (todate != '' && fromDate != '') {
+        GetDetails(currentPageNumber, currentPageSize, sortOrder);
+    }
+    else
+    {
+        alert('Please enter FromDate and ToDate');
+    }
 });
 
 
@@ -60,7 +68,16 @@ $("#btnAscending").click(function () {
     $("#btnDescending").removeClass("active");
     $("#btnAscending").addClass("active");
     sortOrder = 1;
-    GetDetails(currentPageNumber, currentPageSize, sortOrder);
+    var fromDate = $('#txtFromDate').val();
+    var todate = $('#txtToDate').val();
+    if (todate != '' && fromDate != '') {
+        GetDetails(currentPageNumber, currentPageSize, sortOrder);
+    }
+    else
+    {
+        alert('Please enter FromDate and ToDate');
+    }
+
 });
 
 
@@ -68,7 +85,17 @@ $("#btnDescending").click(function () {
     $("#btnAscending").removeClass("active");
     $("#btnDescending").addClass("active");
     sortOrder = 2;
-    GetDetails(currentPageNumber, currentPageSize, sortOrder);
+    var fromDate = $('#txtFromDate').val();
+    var todate = $('#txtToDate').val();
+    if (todate != '' && fromDate != '') {
+        GetDetails(currentPageNumber, currentPageSize, sortOrder);
+    }
+    else {
+        alert('Please enter FromDate and ToDate');
+
+    }
+
+    
 });
 
 $("#btnReset").click(function () {

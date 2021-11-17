@@ -60,26 +60,49 @@ function onChangePageSize(pageSize) {
     currentPageSize = pageSize;
 }
 function Descending() {
+        debugger;
+
     $("#btnAscending").removeClass("active");
     $("#btnDescending").addClass("active");
     var value = $("#ddlSort").children("option:selected").val();
+    var fromDate = (($('#FromDate').val()));
+    var todate = (($('#ToDate').val())); 
+
     $('#txtName').val('')
     if (value !== "0") {
-        GetDetailsOrderby(currentPageNumber, currentPageSize, currentSortOrderDescending);
+        if (todate != '' && fromDate != '') {
+
+            GetDetailsOrderby(currentPageNumber, currentPageSize, currentSortOrderAscending);
+        }
+        else
+        {
+            alert('Please enter FromDate and ToDate');
+        }
     }
     else {
         alert('Please select SortBy Value');
     }
 };
 function Ascending() {
+    debugger;
     $("#btnDescending").removeClass("active");
     $("#btnAscending").addClass("active");
     var value = $("#ddlSort").children("option:selected").val();
+    var fromDate = (($('#FromDate').val()));
+    var todate = (($('#ToDate').val())); 
+
     $('#txtName').val('')
 
     if (value !== "0") {
 
-        GetDetailsOrderby(currentPageNumber, currentPageSize, currentSortOrderAscending);
+        if (todate != '' && fromDate != '') {
+
+            GetDetailsOrderby(currentPageNumber, currentPageSize, currentSortOrderAscending);
+        }
+        else
+        {
+            alert('Please enter FromDate and ToDate');
+        }
     }
     else {
         alert('Please select SortBy Value');
