@@ -1,10 +1,11 @@
-﻿@model IEnumerable<Libraries.Model.Entity.Landtransfer>
+﻿@*@model IEnumerable<Libraries.Model.Entity.Landtransfer>*@
+@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Landtransfer>
 @{int rowNo = 0; }
-   
+
 <table class="table table-sm table-bordered mb-0 table-striped">
     <thead class="text-nowrap">
         <tr class="myapp-hed1">
-          
+
             <th>Department</th>
             <th>Zone</th>
             <th>Division</th>
@@ -18,13 +19,13 @@
             <th>Remarks </th>
         </tr>
     </thead>
-    <tbody >
-        @if (Model != null && Model.Count() > 0)
+    <tbody>
+        @if (Model != null && Model.Results.Count() > 0)
         {
-            @foreach (var item in Model)
+            @foreach (var item in Model.Results)
             {
                 <tr>
-                    
+
                     <td>@item.PropertyRegistration.Department.Name</td>
                     <td>@item.PropertyRegistration.Zone.Name</td>
                     <td>@item.PropertyRegistration.Division.Name</td>
@@ -59,5 +60,8 @@
         }
     </tbody>
 </table>
-        
-    
+
+
+@await Component.InvokeAsync("Pager", new { totalCount = Model.RowCount, pageNumber = Model.CurrentPage, pageSize = Model.PazeSize })
+
+

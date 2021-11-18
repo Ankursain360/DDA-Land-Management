@@ -320,10 +320,11 @@
                                 @{
                                     @if (ViewBag.EncroachAtrDocView != null)
                                     {
-                                        @Html.ActionLink(" (View File)", "EncroachAtrDownload", new { id = Model.Id }, new { @class = "badge badge-primary px-2" })
 
 
                                         <input type="file" class="floating-label-field floating-label-field--s3" asp-for="EncroachAtrDoc" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                                        @Html.ActionLink(" (View File)", "EncroachAtrDownload", new { id = Model.Id }, new { @class = "badge bg-primary px-2" })
+
                                     }
                                     else
                                     {
@@ -508,7 +509,7 @@
                                 {
 
                                     <input type="file" class="floating-label-field floating-label-field--s3 checkExtension" id="Assignfile" name="Assignfile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
-                                    @Html.ActionLink(" (View File)", "Download", new { id = Model.Id }, new { @class = "badge badge-primary px-2" })
+                                    @Html.ActionLink(" (View File)", "Download", new { id = Model.Id }, new { @class = "badge bg-primary px-2" })
                                 }
                                 else
                                 {
@@ -544,10 +545,11 @@
                                 @{
                                     @if (ViewBag.GeoDocView != null)
                                     {
-                                        @Html.ActionLink(" (View File)", "GeoDownload", new { id = Model.Id }, new { @class = "badge badge-primary px-2" })
 
 
                                         <input type="file" class="floating-label-field floating-label-field--s3" id="GeoAssignFile" name="GeoAssignFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                                        @Html.ActionLink(" (View File)", "GeoDownload", new { id = Model.Id }, new { @class = "badge bg-primary px-2" })
+
                                     }
                                     else
                                     {

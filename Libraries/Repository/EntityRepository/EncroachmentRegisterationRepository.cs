@@ -246,7 +246,7 @@ namespace Libraries.Repository.EntityRepository
                                                  && (string.IsNullOrEmpty(model.khasrano) || x.PrimaryListNoNavigation.KhasraNo.Contains(model.khasrano))
                                                  && (string.IsNullOrEmpty(model.primarylistno) || x.PrimaryListNoNavigation.PrimaryListNo.Contains(model.primarylistno))
                                                  )
-                                              .OrderBy(x => x.PrimaryListNo)
+                                              .OrderBy(x => x.PrimaryListNoNavigation.PrimaryListNo)
                                               .GetPaged<Watchandward>(model.PageNumber, model.PageSize);
 
                         break;
@@ -337,7 +337,7 @@ namespace Libraries.Repository.EntityRepository
                                                  && (string.IsNullOrEmpty(model.khasrano) || x.PrimaryListNoNavigation.KhasraNo.Contains(model.khasrano))
                                                  && (string.IsNullOrEmpty(model.primarylistno) || x.PrimaryListNoNavigation.PrimaryListNo.Contains(model.primarylistno))
                                                  )
-                                              .OrderByDescending(x => x.PrimaryListNo)
+                                              .OrderByDescending(x => x.PrimaryListNoNavigation.PrimaryListNo)
                                               .GetPaged<Watchandward>(model.PageNumber, model.PageSize);
 
                         break;

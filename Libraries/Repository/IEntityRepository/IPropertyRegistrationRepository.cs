@@ -47,7 +47,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Propertyregistration>> GetAllRestoreLandReportData();
         Task<List<Propertyregistration>> GetAllPropertyRegistrationReportList();
         Task<List<Propertyregistration>> GetAllPropertyRegistrationMORlist(int UserId);
-        Task<PagedResult<Propertyregistration>> GetInventoryUnverifiedVerified(InvnentoryUnverifiedVerifiedSearchDto model, int userId);
+        Task<PagedResult<Propertyregistration>> GetInventoryUnverifiedVerified(InvnentoryUnverifiedVerifiedSearchDto model, int userId,int? roleId);
         Task<PagedResult<Propertyregistration>> GetDeletedLandReportData(PropertyRegisterationSearchDto model);
         Task<List<Propertyregistration>> GetPrimaryListForAPI(int deptid, int zoneid, int divisionid);// for api added by renu
     }

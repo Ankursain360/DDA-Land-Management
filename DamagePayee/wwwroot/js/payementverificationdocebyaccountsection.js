@@ -126,22 +126,46 @@ function ValidCheck() {
 
 $("#Sortbyd").change(function () {
 
-    GetPaymentVerification(currentPageNumber, currentPageSize);
+    var value = $("#IsVerified").children("option:selected").val();
+    if (value != '') {
+
+        GetPaymentVerification(currentPageNumber, currentPageSize);
+    }
+    else {
+        alert('Please Select  Verification Status');
+    }
 
 });
 $("#ascId").click(function () {
+    debugger;
   
 
     $("#descId").removeClass("active");
     $("#ascId").addClass("active");
-    $("#sortdesc").val(2);
-    GetPaymentVerification(currentPageNumber, currentPageSize);
+    $("#sortdesc").val(2);   
+    var value = $("#IsVerified").children("option:selected").val();
+    if (value!='') {
+
+        GetPaymentVerification(currentPageNumber, currentPageSize);
+    }
+    else    
+    {
+        alert('Please Select  Verification Status');
+    }
 });
 $("#descId").click(function () {
+    debugger;
     $("#ascId").removeClass("active");
     $("#descId").addClass("active");
     $("#sortdesc").val(1);
-    GetPaymentVerification(currentPageNumber, currentPageSize);
+    var value = $("#IsVerified").children("option:selected").val();
+    if (value != '') {
+
+        GetPaymentVerification(currentPageNumber, currentPageSize);
+    }
+    else {
+        alert('Please Select  Verification Status');
+    }
 });
 
 

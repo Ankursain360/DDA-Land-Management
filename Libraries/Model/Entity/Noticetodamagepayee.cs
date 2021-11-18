@@ -8,21 +8,24 @@ namespace Libraries.Model.Entity
 {
     public class Noticetodamagepayee : AuditableEntity<int>
     {
-        [Required(ErrorMessage = " The File No field is required")]
+        [Required(ErrorMessage = "File No is Mandatory Field")]
         public string FileNo { get; set; }
 
         public DateTime GenerateDate { get; set; }
-        [Required(ErrorMessage = " The Name field is required")]
+        [Required(ErrorMessage = "Name is Mandatory Field")]
         public string Name { get; set; }
-        [Required(ErrorMessage = " The Address field is required")]
+        [Required(ErrorMessage = "Address is Mandatory Field")]
         public string Address { get; set; }
-        [Required(ErrorMessage = " The Property Details field is required")]
+        [Required(ErrorMessage = "Property Details is Mandatory Field")]
         public string PropertyDetails { get; set; }
-        [Required(ErrorMessage = " The Area field is required")]
+        [Required(ErrorMessage = "Area field is Mandatory Field")]
         public string Area { get; set; }
-        [Required(ErrorMessage = " The Interest Percentage field is required")]
+        [Required(ErrorMessage = "Interest Percentage field is Mandatory Field")]
         public string InterestPercentage { get; set; }
         public byte IsActive { get; set; }
+
+        [NotMapped]
+        public Decimal RebatePercentage { get; set; }
 
         [NotMapped]
         public List<Noticetodamagepayee> FileNoList { get; set; }

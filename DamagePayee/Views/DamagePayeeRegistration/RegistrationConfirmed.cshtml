@@ -1,11 +1,52 @@
-﻿
-@model IEnumerable<Libraries.Model.Entity.Payeeregistration>
-@await Component.InvokeAsync("PageHeader", new { pageName = "Damage Payee Registration Verifiction" })
-<div class="pt-3">
+﻿@model Libraries.Model.Entity.Payeeregistration
 
-    <h1 style="text-align:center;padding-top:10%">You are registered Successfully</h1>
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+
+
+<div class="container d-flex">
+    <div class="fromBg m-auto shadow-lg">
+        <div class="row align-items-center">
+            <div class="col-md-6 col-lg-5">
+                <div class="logo d-flex align-items-center mb-4">
+                    <img src="~/images/logo.png" alt="DDA" class="d-block me-3">
+                    <strong>
+                        Delhi Development Authority<br>
+                        Government of India
+                    </strong>
+                </div>
+                <form asp-action="MailSentMsg" class="d-block px-2" id="form">
+                    <p class="text-danger">
+                        Dear @ViewBag.name,
+                    </p>
+                    <p class="text-danger">
+                        <h3>You are registered Successfully</h3>
+
+                    </p>
+                    <p class="text-danger">
+                        <h3>Login Credentials has been sent on your registered emailid  </h3>
+
+                    </p>
+
+                </form>
+               
+            </div>
+            <div class="col-md-6 col-lg-7">
+                <img src="~/images/img.png" alt="DDA" class="d-none d-md-block image-right" width="450">
+                <img src="~/images/formBg.png" alt="DDA" class="d-block formBg">
+
+            </div>
+        </div>
+    </div>
 </div>
 
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
-
-
+<environment include="Development">
+    <script src="~/js/CaptchaCreate.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/CaptchaCreate.min.js" asp-append-version="true"></script>
+</environment>

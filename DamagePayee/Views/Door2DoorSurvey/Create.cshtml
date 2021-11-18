@@ -136,7 +136,7 @@
             <div class="floating-label-wrap mb-3 mb-md-0">
                 <input type="file" asp-for="DocumentPhoto" class="floating-label-field floating-label-field--s3 checkExtension" multiple accept="image/jpeg" />
                 <span asp-validation-for="OccupantIdentityPrrofFilePath" class="text-danger"></span>
-                <label class="floating-label">Identity Proof of the Occupants; Aadhar,Voter Card, DL, Passport</label>
+                <label class="floating-label">Identity Proof of the Occupants; Aadhar,Voter Card, DL, Passport<span style="color:red">(.pdf only)</span></label>
             </div>
         </div>
         <div class="col-md-6">
@@ -155,7 +155,7 @@
 
                 <input type="file" asp-for="PropertyPhoto" class="floating-label-field floating-label-field--s3 checkExtension" multiple accept="image/jpeg" />
                 <span asp-validation-for="PropertyPhoto" class="text-danger"></span>
-                <label class="floating-label">Document of Property, if any</label>
+                <label class="floating-label">Document of Property, if any<span style="color:red">(.pdf only)</span></label>
             </div>
         </div>
     </div>

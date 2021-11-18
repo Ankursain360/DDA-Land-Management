@@ -103,7 +103,7 @@ $("#collapse").click(function () {
         });
     });
 });
-function onChangeDepartment(id) {
+function onChangeDepartment1(id) {
     HttpGet(`/Demolitionstructuredetails/GetZoneList/?DepartmentId=${id}`, 'json', function (response) {
         var html = '<option value="">Select</option>';
         for (var i = 0; i < response.length; i++) {
@@ -114,7 +114,7 @@ function onChangeDepartment(id) {
         $("#LocalityId").html('<option value="">Select</option>');
     });
 };
-function onChangeZone(id) {
+function onChangeZone1(id) {
     HttpGet(`/Demolitionstructuredetails/GetDivisionList/?ZoneId=${id}`, 'json', function (response) {
         var html = '<option value="">Select</option>';
         for (var i = 0; i < response.length; i++) {
@@ -124,7 +124,7 @@ function onChangeZone(id) {
         $("#LocalityId").html('<option value="">Select</option>');
     });
 };
-function onChangeDivision(id) {
+function onChangeDivision1(id) {
     HttpGet(`/Demolitionstructuredetails/GetLocalityList/?DivisionId=${id}`, 'json', function (response) {
         var html = '<option value="">Select</option>';
         for (var i = 0; i < response.length; i++) {

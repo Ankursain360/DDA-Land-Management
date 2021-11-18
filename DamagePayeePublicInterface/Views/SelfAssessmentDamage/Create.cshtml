@@ -85,18 +85,18 @@
 
                                     </td>
                                     <td>
-                                        <input asp-for="MobileNo" maxlength="12" required type="text" class="floating-label-field floating-label-field--s3 NoCheck" />
+                                        <input asp-for="MobileNo" maxlength="12"limit="10"   required type="text" class="floating-label-field floating-label-field--s3 numbers" onchange="return chkvalidmobile(this);" />
                                         <span asp-validation-for="MobileNo" class="d-block text-danger field-validation-valid msg2"></span>
 
                                     </td>
                                     <td>
-                                        <input asp-for="EmailId" maxlength="30" required type="text" class="floating-label-field floating-label-field--s3 EmailCheck" />
+                                        <input asp-for="EmailId" maxlength="30" required type="text" class="floating-label-field floating-label-field--s3"  onchange="return chkvalidemail(this);" />
                                         <span asp-validation-for="EmailId" class="d-block text-danger field-validation-valid msg1"></span>
 
                                     </td>
                                     <td>
 
-                                        <input asp-for="AadharNo" type="password" maxlength="12" class="floating-label-field floating-label-field--s3" />
+                                        <input asp-for="AadharNo" type="password"  class="floating-label-field floating-label-field--s3 " onchange="return chkvalidAadhar(this);" />
                                         <span asp-validation-for="AadharNo" class="d-block text-danger field-validation-valid msgaadhar"></span>
                                         <br />
                                         <a id="viewAadharId" asp-action="ViewPersonelInfoAadharFile" class="badge badge-primary px-2" target="_blank" style="display:none;">(View File)</a>
@@ -109,7 +109,7 @@
                                     </td>
                                     <td>
 
-                                        <input asp-for="PanNo" maxlength="10" type="password" class="floating-label-field floating-label-field--s3" onchange="return chkvalid(this);"/>
+                                        <input asp-for="PanNo"  type="password" class="floating-label-field floating-label-field--s3" onchange="return chkvalid(this);"/>
                                         <span asp-validation-for="PanNo" class="d-block text-danger field-validation-valid msgpan"></span>
                                         <br />
                                         <a id="viewPanId" asp-action="ViewPersonelInfoPanFile" class="badge badge-primary px-2" target="_blank" style="display:none;">(View File)</a>

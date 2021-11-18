@@ -26,7 +26,8 @@
                     <select class="floating-label-field floating-label-field--s3"
                             asp-for="DepartmentId"
                             asp-items="@(new SelectList(Model.DepartmentList,"Id","Name"))"
-                            onchange="return onChangeDepartment(this.options[this.selectedIndex].value);">
+                            onchange="return onChangeDepartment1(this.options[this.selectedIndex].value);"
+                            >
                         <option value="">--Select--</option>
                     </select>
                     <span class="d-block text-danger field-validation-valid" asp-validation-for="DepartmentId"></span>
@@ -37,8 +38,9 @@
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3"
                             asp-for="ZoneId"
+                            
                             asp-items="@(new SelectList(Model.ZoneList,"Id","Name"))"
-                            onchange="return onChangeZone(this.options[this.selectedIndex].value)">
+                            onchange="return onChangeZone1(this.options[this.selectedIndex].value);">
                         <option value="">--Select--</option>
                     </select>
                     <span class="d-block text-danger field-validation-valid" asp-validation-for="ZoneId"></span>
@@ -52,7 +54,7 @@
                     <select class="floating-label-field floating-label-field--s3"
                             asp-for="DivisionId"
                             asp-items="@(new SelectList(Model.DivisionList,"Id","Name"))"
-                            onchange="return onChangeDivision(this.options[this.selectedIndex].value)">
+                            onchange="return onChangeDivision1(this.options[this.selectedIndex].value);">
                         <option value="">--Select--</option>
                     </select>
                     <span class="d-block text-danger field-validation-valid" asp-validation-for="DivisionId"></span>

@@ -52,9 +52,22 @@ namespace Vacant.Land.Api
             }
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddDbContext<DataContext>(a => a.UseMySQL(Configuration.GetSection("ConnectionString:Con").Value));
+            
+            //jwt token validation parameters
+            var key = Encoding.UTF8.GetBytes(Configuration["JWT:Secret"]);
+            var tokenValidationparams = new TokenValidationParameters()
+            {
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidAudience = Configuration["JWT:ValidAudience"],
+                ValidIssuer = Configuration["JWT:ValidIssuer"],
+                IssuerSigningKey = new SymmetricSecurityKey(key)
+            };
+            services.AddSingleton(tokenValidationparams);
             services.AddMvc(option =>
             {
                 option.SuppressAsyncSuffixInActionNames = false;
+                option.Filters.Add(typeof(ExceptionLogFilter));
             });
             services.AddControllers();
             services.RegisterDependency();
@@ -67,8 +80,8 @@ namespace Vacant.Land.Api
           
             services.RegisterDependency();
             services.AddAutoMapperSetup();
-          
 
+           
             // Adding Authentication
             services.AddAuthentication(options =>
             {
@@ -82,14 +95,7 @@ namespace Vacant.Land.Api
             {
                 options.SaveToken = true;
                 options.RequireHttpsMetadata = false;
-                options.TokenValidationParameters = new TokenValidationParameters()
-                {
-                    ValidateIssuer = true,
-                    ValidateAudience = true,
-                    ValidAudience = Configuration["JWT:ValidAudience"],
-                    ValidIssuer = Configuration["JWT:ValidIssuer"],
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT:Secret"]))
-                };
+                options.TokenValidationParameters = tokenValidationparams;
             });
           
           
@@ -103,7 +109,7 @@ namespace Vacant.Land.Api
             {
                 app.UseDeveloperExceptionPage();
             }
-
+           
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();

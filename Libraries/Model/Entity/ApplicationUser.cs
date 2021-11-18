@@ -11,6 +11,7 @@ namespace Libraries.Model.Entity
         {
             Userprofile = new HashSet<Userprofile>();
             Paymentverification = new HashSet<Paymentverification>();
+            RefreshToken = new HashSet<RefreshToken>();
             // ApprovalproccessSendFromUser = new HashSet<Approvalproccess>();
         }
         
@@ -26,7 +27,7 @@ namespace Libraries.Model.Entity
         public virtual ICollection<Userprofile> Userprofile { get; set; }
         public ICollection<Requestforproceeding> Requestforproceeding { get; set; }
         public ICollection<Paymentverification> Paymentverification { get; set; }
-
+        public virtual ICollection<RefreshToken> RefreshToken { get; set; }
 
         //  public virtual ICollection<Approvalproccess> ApprovalproccessSendFromUser { get; set; }
     }

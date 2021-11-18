@@ -4,6 +4,7 @@ using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using Libraries.Repository.IEntityRepository;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -262,6 +263,18 @@ namespace Libraries.Repository.EntityRepository
 
         
             return data;
+        }
+
+
+
+        public Decimal GetRebateCharges()
+        {
+
+            var rebate = (from f in _dbContext.Rebate
+                          where (f.FromDate <= DateTime.Now && (f.ToDate) >= DateTime.Now)
+                          select f.RebatePercentage).First();
+
+            return rebate;
         }
 
     }

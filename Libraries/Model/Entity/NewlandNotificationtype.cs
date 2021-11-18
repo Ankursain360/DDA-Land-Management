@@ -14,6 +14,8 @@ namespace Libraries.Model.Entity
             Newlandnotification = new HashSet<Newlandnotification>();
             Newlandnotificationdetails = new HashSet<Newlandnotificationdetails>();
         }
+
+        [Required(ErrorMessage = "NotificationType is Mandatory Field")]
         public string NotificationType { get; set; }
 
         [Required(ErrorMessage = "Status is mandatory")]

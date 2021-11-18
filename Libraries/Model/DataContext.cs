@@ -14,7 +14,8 @@ namespace Libraries.Model
         {
 
         }
-        //public virtual DbSet<ApplicationUser> ApplicationUser { get; set; }
+        public virtual DbSet<RefreshToken> RefreshToken { get; set; }
+       
         public virtual DbSet<Approvalstatus> Approvalstatus { get; set; }
         public virtual DbSet<Userprofile> Userprofile { get; set; }
         public virtual DbSet<SystemUser> SystemUser { get; set; }
@@ -616,6 +617,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new KycdemandpaymentdetailsConfiguration());
             modelBuilder.ApplyConfiguration(new PasswordhistoryConfiguration());
             //modelBuilder.ApplyConfiguration(new KyclicensepaymentrptConfiguration());
+            modelBuilder.ApplyConfiguration(new RefreshTokenConfiguration());
             base.OnModelCreating(modelBuilder);
         }
     }

@@ -17,13 +17,39 @@ function GetReport(pageNumber, pageSize, sortOrder) {
     });
 }
 $("#btnGenerate").click(function () {
+
+    var type = $('#ReportType').val();
+    
+    var a = '';
+    if (type == 0) {
+        a += '<option selected="selected" value="department">Department</option>';
+        a += '<option value="zone">Zone</option>';
+        a += '<option value="division">Division</option>';
+        a += '<option value="handedoverdate">Handed Over Date</option>';
+
+    } else {
+        a += '<option selected="selected" value="department">Department</option>';
+        a += '<option value="zone">Zone</option>';
+        a += '<option value="division">Division</option>';
+        a += '<option value="takenoverdate">Taken Over Date </option>';
+    }
    
+    $("#select2-ddlSort-container").html('<option selected="selected" value="department">Department</option>');
+    $("#ddlSort").html(a);
+
+
+
+
+
+
+
+
     var name = $('#DepartmentId option:selected').val();
     if (name =="") {
         alert("Please select Department")
     }
 
-    $("#ddlSort option:selected").prop("selected", false);
+    
     GetReport(currentPageNumber, currentPageSize, sortOrder);
   
 });

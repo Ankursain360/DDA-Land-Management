@@ -255,3 +255,39 @@ function ChangeNatureOfUtilizationStatus(status) {
     }
     callSelect2();
 };
+
+function validateForm() {
+    let Tsssurvey = document.forms["CurrentStatus-form"]["Tsssurvey"].value;
+    let Remarks = document.forms["CurrentStatus-form"]["Remarks"].value;
+    var status = 1; 
+
+
+    if (Tsssurvey == "") {
+
+        $("#PossessionDate-error").show();
+        status = 2;
+        // return false;
+    }
+
+    if (Remarks == "") {
+
+        $("#PossessionDate-error1").show();
+        status = 2;
+        // return false;
+    }
+
+    if (status == 2) {
+        return false;
+    }
+
+
+
+
+
+
+
+
+
+
+
+}

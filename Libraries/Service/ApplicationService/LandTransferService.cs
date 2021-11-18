@@ -166,9 +166,16 @@ namespace Libraries.Service.ApplicationService
         //    return await _landTransferRepository.GetLandTransferReportDepartmentwise(handedover);
         //}
 
-        public async Task<List<Landtransfer>> GetLandTransferReportDataKhasraNumberWise(int id)
+        //public async Task<List<Landtransfer>> GetLandTransferReportDataKhasraNumberWise(int id)
+        //{
+        //    return await _landTransferRepository.GetLandTransferReportDataKhasraNumberWise(id);
+        //}
+
+
+
+        public async Task<PagedResult<Landtransfer>> GetLandTransferReportDataKhasraNumberWise(LandtrasferreportkhasranowiseDto model)//added by ishu
         {
-            return await _landTransferRepository.GetLandTransferReportDataKhasraNumberWise(id);
+            return await _landTransferRepository.GetLandTransferReportDataKhasraNumberWise(model);
         }
 
         public async Task<List<Landtransfer>> GetLandTransferReportDataDepartmentWise(int reportType, int departmentId)//added by ishu

@@ -1,5 +1,5 @@
 ﻿var currentPageNumber = 1;
-var currentPageSize = 10;
+var currentPageSize = 5;
 var currentSortOrderAscending = 1;
 var currentSortOrderDescending = 2;
 
@@ -61,26 +61,44 @@ function Descending() {
     $("#btnAscending").removeClass("active");
     $("#btnDescending").addClass("active");
     var value = $("#ddlSort").children("option:selected").val();
-    $('#txtName').val('')
-    if (value !== "0") {
-        GetDetailsOrderby(currentPageNumber, currentPageSize, currentSortOrderDescending);
+    var todate = (($('#ToDate').val()));
+    var fromDate = (($('#FromDate').val()));
+    if (todate != '' && fromDate != '') {
+        $('#txtName').val('')
+        if (value !== "0") {
+            GetDetailsOrderby(currentPageNumber, currentPageSize, currentSortOrderDescending);
+        }
+        else {
+            alert('Please select SortBy Value');
+        }
     }
-    else {
-        alert('Please select SortBy Value');
+    else
+    {
+        alert('Please Enter From Date and ToDate');
+
     }
 };
 function Ascending() {
     $("#btnDescending").removeClass("active");
     $("#btnAscending").addClass("active");
     var value = $("#ddlSort").children("option:selected").val();
-    $('#txtName').val('')
+    var todate = (($('#ToDate').val()));
+    var fromDate = (($('#FromDate').val()));
+    if (todate != '' && fromDate != '') {
+        $('#txtName').val('')
 
-    if (value !== "0") {
+        if (value !== "0") {
 
-        GetDetailsOrderby(currentPageNumber, currentPageSize, currentSortOrderAscending);
+            GetDetailsOrderby(currentPageNumber, currentPageSize, currentSortOrderAscending);
+        }
+        else {
+            alert('Please select SortBy Value');
+        }
     }
-    else {
-        alert('Please select SortBy Value');
+    else
+    {
+        alert('Please Enter From Date and ToDate');
+
     }
 };
 function GetDetailsOrderby(pageNumber, pageSize, order) {
