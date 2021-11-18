@@ -320,7 +320,7 @@
                                 @if (ViewBag.EncroachAtrDocView != null)
                                 {
                                     <input type="file" disabled class="floating-label-field floating-label-field--s3" asp-for="EncroachAtrDoc" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
-                                    @Html.ActionLink(" (View File)", "EncroachAtrDownload", new { id = Model.Id }, new { @class = "badge badge-primary px-2" })
+                                    @Html.ActionLink(" (View File)", "EncroachAtrDownload", new { id = Model.Id }, new { @class = "badge bg-primary px-2" })
                                 }
                                 else
                                 {
@@ -506,7 +506,7 @@
                             {
                                 @*<a class="badge bg-primary px-2" asp-action="ViewDocument" asp-route-id="@Model.Id"> View Existing Photo @(Photo += 1 )</a>*@
                                 <input type="file" disabled class="floating-label-field floating-label-field--s3" id="Assignfile" name="Assignfile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
-                                @Html.ActionLink(" (View File1)", "Download", new { id = Model.Id }, new { @class = "badge bg-primary px-2" })
+                                @Html.ActionLink(" (View File)", "Download", new { id = Model.Id }, new { @class = "badge bg-primary px-2" })
                                 @*<a class="badge bg-primary px-2" asp-action="Download" asp-route-id="@Model.Id">
                     View File
                 </a>*@
