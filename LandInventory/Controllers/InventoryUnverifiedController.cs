@@ -70,7 +70,7 @@ namespace LandInventory.Controllers
         [HttpPost]
         public async Task<PartialViewResult> GetDetails([FromBody] InvnentoryUnverifiedVerifiedSearchDto model)
         {
-            var result = await _propertyregistrationService.GetInventoryUnverifiedVerified(model, SiteContext.UserId);
+            var result = await _propertyregistrationService.GetInventoryUnverifiedVerified(model, SiteContext.UserId,SiteContext.RoleId);
 
             ViewBag.IsUserCanEdit = SiteContext.UserId;
             if (result != null)

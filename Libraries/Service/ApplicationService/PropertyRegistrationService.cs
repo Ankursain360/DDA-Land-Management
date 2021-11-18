@@ -361,9 +361,9 @@ namespace Libraries.Service.ApplicationService
         }
 
 
-        public async Task<PagedResult<Propertyregistration>> GetInventoryUnverifiedVerified(InvnentoryUnverifiedVerifiedSearchDto model, int userId)
+        public async Task<PagedResult<Propertyregistration>> GetInventoryUnverifiedVerified(InvnentoryUnverifiedVerifiedSearchDto model, int userId,int? roleID)
         {
-            return await _propertyregistrationRepository.GetInventoryUnverifiedVerified(model, userId);
+            return await _propertyregistrationRepository.GetInventoryUnverifiedVerified(model, userId,roleID);
         }
 
         public async Task<bool> UpdatePropertyRegistrationForLandTransfer(int id, Propertyregistration propertyregistration)

@@ -994,11 +994,13 @@ namespace Libraries.Repository.EntityRepository
 
 
 
-        public async Task<PagedResult<Propertyregistration>> GetInventoryUnverifiedVerified(InvnentoryUnverifiedVerifiedSearchDto model, int userId)
+        public async Task<PagedResult<Propertyregistration>> GetInventoryUnverifiedVerified(InvnentoryUnverifiedVerifiedSearchDto model, int userId,int? RoleId)
         {
             int UserId = userId;
             var Iscreated = _dbContext.Propertyregistration.Where(x => x.CreatedBy == UserId).Count();
-            if (UserId == 14 || Iscreated > 0)
+            //if (UserId == 14 || Iscreated > 0)
+            // Role 9 For DD LMC Changes on 18Nov2021 By Sachin
+            if (RoleId == 9 || Iscreated > 0)
             {
                 var data = await _dbContext.Propertyregistration
                                  .Include(x => x.Locality)
