@@ -12,8 +12,8 @@ namespace Dto.Master
         public string Longitude { get; set; }
         public int? PresentUseId { get; set; }
         public decimal? ApproxPropertyArea { get; set; }
-        public string NumberOfFloors { get; set; }
-
+        public int? NumberOfFloors { get; set; }
+        public string NumberOfFloorsName { get; set; }
         public string CaelectricityNo { get; set; }
 
         public string KwaterNo { get; set; }
@@ -38,7 +38,9 @@ namespace Dto.Master
         public DateTime CreatedDate { get; set; }
         public string PresentUseName { get; set; }
         public String CreatedByName { get; set; }
-
+        public int? AreaUnit { get; set; }
+        public string AreaUnitName { get; set; }
+        public string FileNo { get; set; }
 
     }
 

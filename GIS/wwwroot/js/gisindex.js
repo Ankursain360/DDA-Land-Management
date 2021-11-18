@@ -1835,12 +1835,12 @@ function ShowKhasraNo(id) {
                 var khasradata = khasrano[aj].label.split("//");
                 if (khasradata.length > 1) {
                     marker.khasrano = khasradata[1];
-                    marker.Rectno = khasradata[0];
+                    marker.Rectno = khasradata[0]|0;
                 }
                 else {
 
                     marker.khasrano = khasradata[0];
-                    marker.Rectno = "";
+                    marker.Rectno = "0";
                 } 
                 marker.villageid = khasrano[aj].villageId;
                 google.maps.event.addListener(marker, 'click', function () {

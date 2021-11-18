@@ -51,7 +51,7 @@ namespace DoorToDoor.Api.Controllers
                         dto.Longitude == null || dto.Longitude == "" ||
                         dto.PresentUseId == null || dto.PresentUseId == 0 ||
                         dto.ApproxPropertyArea == null || dto.ApproxPropertyArea == 0 ||
-                        dto.NumberOfFloors == null || dto.NumberOfFloors == "" ||
+                        dto.NumberOfFloors == null || dto.NumberOfFloors == 0 ||
                         dto.OccupantName == null || dto.OccupantName == "" ||
                         dto.MobileNo == null || dto.MobileNo == "" ||
                         dto.OccupantAadharNo == null || dto.OccupantAadharNo == "" ||
@@ -202,7 +202,7 @@ namespace DoorToDoor.Api.Controllers
                         dto.Longitude == null || dto.Longitude == "" ||
                         dto.PresentUseId == null || dto.PresentUseId == 0 ||
                         dto.ApproxPropertyArea == null || dto.ApproxPropertyArea == 0 ||
-                        dto.NumberOfFloors == null || dto.NumberOfFloors == "" ||
+                        dto.NumberOfFloors == null || dto.NumberOfFloors == 0 ||
                         dto.OccupantName == null || dto.OccupantName == "" ||
                         dto.MobileNo == null || dto.MobileNo == "" ||
                         dto.OccupantAadharNo == null || dto.OccupantAadharNo == "" ||
@@ -589,6 +589,102 @@ namespace DoorToDoor.Api.Controllers
                     responseCode = "500",
                     responseMessage = "Internal Server Error",
                     ApiSurveyUserDetailsDto = dtoData
+                };
+                return NotFound(apiResponseDetails);
+            }
+        }
+
+        [HttpGet]
+        [Route("[action]")]
+        [Route("api/Door2DoorAPI/GetAreaUnit")]
+        public async Task<IActionResult> GetAreaUnit()
+        {
+            ApiGetAreaUnitResponseDetails apiResponseDetails = new ApiGetAreaUnitResponseDetails();
+            try
+            {
+                var data = await _door2DoorAPIService.Getareaunit();
+                if (data != null && data.Count > 0)
+                {
+
+                    List<ApiGetAreaUnitDto> dtoData = new List<ApiGetAreaUnitDto>();
+                    apiResponseDetails = new ApiGetAreaUnitResponseDetails
+                    {
+                        responseCode = "200",
+                        responseMessage = "details fetched successfully",
+                        ApiGetAreaUnitUseDto = data
+                    };
+
+                    return Ok(apiResponseDetails);
+                }
+                else
+                {
+                    List<ApiGetAreaUnitDto> dtoData = new List<ApiGetAreaUnitDto>();
+                    apiResponseDetails = new ApiGetAreaUnitResponseDetails
+                    {
+                        responseCode = "404",
+                        responseMessage = " details not found",
+                        ApiGetAreaUnitUseDto = dtoData
+                    };
+                    return NotFound(apiResponseDetails);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                List<ApiGetAreaUnitDto> dtoData = new List<ApiGetAreaUnitDto>();
+                apiResponseDetails = new ApiGetAreaUnitResponseDetails
+                {
+                    responseCode = "500",
+                    responseMessage = "Internal Server Error",
+                    ApiGetAreaUnitUseDto = dtoData
+                };
+                return NotFound(apiResponseDetails);
+            }
+        }
+
+        [HttpGet]
+        [Route("[action]")]
+        [Route("api/Door2DoorAPI/GetFloorNo")]
+        public async Task<IActionResult> GetFloorNo()
+        {
+            ApiGetFloorNoResponseDetails apiResponseDetails = new ApiGetFloorNoResponseDetails();
+            try
+            {
+                var data = await _door2DoorAPIService.GetFloorNo();
+                if (data != null && data.Count > 0)
+                {
+
+                    List<ApiGetFloorNoDto> dtoData = new List<ApiGetFloorNoDto>();
+                    apiResponseDetails = new ApiGetFloorNoResponseDetails
+                    {
+                        responseCode = "200",
+                        responseMessage = "details fetched successfully",
+                        ApiGetFloorNoDto = data
+                    };
+
+                    return Ok(apiResponseDetails);
+                }
+                else
+                {
+                    List<ApiGetFloorNoDto> dtoData = new List<ApiGetFloorNoDto>();
+                    apiResponseDetails = new ApiGetFloorNoResponseDetails
+                    {
+                        responseCode = "404",
+                        responseMessage = " details not found",
+                        ApiGetFloorNoDto = dtoData
+                    };
+                    return NotFound(apiResponseDetails);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                List<ApiGetFloorNoDto> dtoData = new List<ApiGetFloorNoDto>();
+                apiResponseDetails = new ApiGetFloorNoResponseDetails
+                {
+                    responseCode = "500",
+                    responseMessage = "Internal Server Error",
+                    ApiGetFloorNoDto = dtoData
                 };
                 return NotFound(apiResponseDetails);
             }

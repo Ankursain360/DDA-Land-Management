@@ -21,5 +21,7 @@ namespace Libraries.Service.IApplicationService
         Task<bool> SaveDoorToDoorSurveyPropertyProofs(Doortodoorsurveypropertyproof item);
         Task<bool> DeleteDoorToDoorSurveyIdentityProofs(int id);
         Task<bool> DeleteDoorToDoorSurveyPropertyProofs(int id);
+        Task<List<ApiGetAreaUnitDto>> Getareaunit();
+        Task<List<ApiGetFloorNoDto>> GetFloorNo();
     }
 }
