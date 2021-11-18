@@ -392,7 +392,7 @@ namespace DamagePayee.Controllers
                         // MunicipalNumberifany = result[i].MuncipalNo,
                         GeoReferencing = result[i].GeoReferencingLattitude,
                         ApproxAreaoftheProperty = result[i].ApproxPropertyArea.ToString(),
-                        NumberofFloors = result[i].NumberOfFloors,
+                        NumberofFloors = result[i].NumberOfFloors.ToString(),
 
                         Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
                     }); ;

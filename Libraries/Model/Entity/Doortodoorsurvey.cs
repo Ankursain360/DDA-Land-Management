@@ -62,7 +62,8 @@ namespace Libraries.Model.Entity
         public string DamagePaidPast { get; set; }
         public string PropertyFilePath { get; set; }
         public string Remarks { get; set; }
-
+        public int? AreaUnit { get; set; }
+        public string FileNo { get; set; }
         public byte IsActive { get; set; }
 
 
@@ -71,6 +72,8 @@ namespace Libraries.Model.Entity
         public List<Presentuse> PresentuseList { get; set; }
         public Surveyuserdetail CreatedByNavigation { get; set; }
         public virtual Presentuse PresentUseNavigation { get; set; }
+        public Areaunit AreaUnitNavigation { get; set; }
+        public Floors NumberOfFloorsNavigation { get; set; }
 
         [NotMapped]
         public List<IFormFile> DocumentPhoto { get; set; }
