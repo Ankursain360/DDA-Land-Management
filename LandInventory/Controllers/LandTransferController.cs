@@ -134,7 +134,8 @@ namespace LandInventory.Controllers
             {
                 Data = new Landtransfer();
             }
-            if (SiteContext.UserId == 14)
+            // if (SiteContext.UserId == 14)
+            if (SiteContext.RoleId == 9)// DD LMS
             {
                 ViewBag.IsValidateUser = 2;
             }
@@ -181,7 +182,8 @@ namespace LandInventory.Controllers
             {
                 Data = new Landtransfer();
             }
-            if (SiteContext.UserId == 14)
+            // if (SiteContext.UserId == 14)
+            if (SiteContext.RoleId == 9)// DD LMS
             {
                 ViewBag.IsValidateUser = 2;
             }
@@ -225,7 +227,8 @@ namespace LandInventory.Controllers
         public async Task<IActionResult> Verify(Landtransfer landtransfer)
         {
             //var Data = await _landTransferService.FetchSingleResult(landtransfer.Id);
-            if (SiteContext.UserId == 14)
+            // if (SiteContext.UserId == 14)
+            if (SiteContext.RoleId == 9)// DD LMS
             {
                 ViewBag.IsValidateUser = 2;
             }

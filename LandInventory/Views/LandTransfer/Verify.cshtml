@@ -579,8 +579,8 @@
         <div id="DivHandedOver">
            
             <h2 class="my-3 sub-heading">Handed Over</h2>
-            <div class="row">
-                <div class="form-group col-md-4">
+            <div class="pt-3 row">
+                <div class="col-md-4">
                     <div class="floating-label-wrap">
                         <select class="floating-label-field floating-label-field--s3"
                                 asp-for="HandedOverDepartmentId"
@@ -592,7 +592,7 @@
                         <label asp-for="HandedOverDepartmentId" class="floating-label">Department</label>
                     </div>
                 </div>
-                <div class="form-group col-md-4">
+                <div class="col-md-4">
                     <div class="floating-label-wrap">
                         <select class="floating-label-field floating-label-field--s3"
                                 asp-for="HandedOverZoneId"
@@ -607,7 +607,7 @@
 
                 </div>
 
-                <div class="form-group col-md-4">
+                <div class="col-md-4">
                     <div class="floating-label-wrap">
                         <select class="floating-label-field floating-label-field--s3"
                                 asp-items="@(new SelectList(Model.HandedOverDivisionList, "Id","Name"))"
@@ -621,7 +621,7 @@
 
                 </div>
             </div>
-            <div class="row">
+            <div class="pt-3 row">
                 <div class="form-group col-md-4">
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input asp-for="HandedOverByNameDesingnation" placeholder="Name/Designation" class="floating-label-field floating-label-field--s3 numbers" />
@@ -645,7 +645,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="pt-3 row">
                 <div class="form-group col-md-4">
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input asp-for="HandedOverMobileNo" placeholder="Mobile No." class="floating-label-field floating-label-field--s3 onlynumbers" />
@@ -720,7 +720,7 @@
         <br />
         <div id="DivTakenOver">
             <h2 class="my-3 sub-heading">Taken Over</h2>
-            <div class="row">
+            <div class="row pt-3">
                 <div class="form-group col-md-4">
                     <div class="floating-label-wrap">
                         <select class="floating-label-field floating-label-field--s3"
@@ -758,7 +758,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row pt-3">
                 <div class="form-group col-md-4">
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input asp-for="TakenOverByNameDesingnation" placeholder="Name/Designation" class="floating-label-field floating-label-field--s3 " />
@@ -781,7 +781,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row pt-3">
                 <div class="form-group col-md-4">
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input asp-for="TakenOverMobileNo" placeholder="Mobile No." class="floating-label-field floating-label-field--s3 onlynumbers" maxlength="10" />
