@@ -73,7 +73,7 @@ namespace DamagePayeePublicInterface.Controllers
             else
                 ViewBag.RebateValue = Math.Round((value.RebatePercentage), 2);
 
-            Data.EncryptData = SetEncriptionKey();
+            //Data.EncryptData = SetEncriptionKey();
 
             if (Data != null)
             {
