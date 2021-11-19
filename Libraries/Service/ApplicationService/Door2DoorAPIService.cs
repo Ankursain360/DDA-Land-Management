@@ -35,7 +35,7 @@ namespace Libraries.Service.ApplicationService
             model.Longitude = dto.Longitude;
             model.PresentUseId = dto.PresentUseId;
             model.ApproxPropertyArea = dto.ApproxPropertyArea;
-            //model.NumberOfFloors = dto.NumberOfFloors;
+            model.NumberOfFloors = dto.NumberOfFloors;
             model.CaelectricityNo = dto.CaelectricityNo;
             model.IsActive = dto.IsActive;
             model.KwaterNo = dto.KwaterNo;
