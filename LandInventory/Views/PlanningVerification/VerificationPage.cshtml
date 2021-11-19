@@ -30,7 +30,7 @@
                         </button>
                     </div>
                     <div class="col-6 col-md-7 col-xl-6">
-                        <button class="btn btn-theme" type="submit">Submit</button>
+                        <button id="btnSearch" class="btn btn-theme btn-block" type="submit">Search</button>
                     </div>
                 </div>
             </div>
@@ -42,7 +42,7 @@
         <div class="short-section d-md-flex align-items-center">
             <div class="p-3 d-flex align-items-end me-auto">
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3">
+                    <select id="ddlSort" class="floating-label-field floating-label-field--s3">
                         <option selected="selected" disabled="disabled">Select One</option>
                         <option>Unplanned Property</option>
                         <option>Planned Property</option>
@@ -50,8 +50,9 @@
                     <label for="field-1" class="floating-label">Short by</label>
                 </div>
                 <div class="short-btn d-flex align-items-center">
-                    <span class="btn slow active" title="Descending order"><i class="ri-sort-desc"></i></span>
-                    <span class="btn slow" title="Ascending order"><i class="ri-sort-asc"></i></span>
+                    <span class="btn slow active" id="btnAscending" title="Ascending order"><i class="ri-sort-asc"></i></span>
+                    <span class="btn slow" id="btnDescending" title="Descending order"><i class="ri-sort-desc"></i></span>
+
                 </div>
             </div>
 

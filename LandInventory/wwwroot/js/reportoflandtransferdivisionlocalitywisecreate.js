@@ -76,32 +76,40 @@ function GetSearchParam(pageNumber, pageSize, sortOrder) {
 
 
 $("#btnAscending").click(function () {
+    debugger;
     $("#btnDescending").removeClass("active");
     $("#btnAscending").addClass("active");
     sortby = 1;//for Ascending
-    GetDetails(currentPageNumber, currentPageSize, sortby);
+    var fromDate = (($('#txtFromDate').val()));
+    var todate = (($('#txtToDate').val())); 
+    if (todate != '' && fromDate != '') {
+
+        GetDetails(currentPageNumber, currentPageSize, sortby);
+    }
+    else {
+        alert('Please enter FromDate and ToDate');
+    }
+   
 });
 
 
 $("#btnDescending").click(function () {
+    debugger;
     $("#btnAscending").removeClass("active");
     $("#btnDescending").addClass("active");
     sortby = 2;//for Descending
-    GetDetails(currentPageNumber, currentPageSize, sortby);
+    var fromDate = (($('#txtFromDate').val()));
+    var todate = (($('#txtToDate').val())); 
+    if (todate != '' && fromDate != '') {
+
+        GetDetails(currentPageNumber, currentPageSize, sortby);
+    }
+    else {
+        alert('Please enter FromDate and ToDate');
+    }
 });
 
-//$("#btnReset").click(function () {
-//    $('#DepartmentId').val('0').trigger('change');
-//    $('#ZoneId').val('0').trigger('change');
-//    $('#DivisionId').val('0').trigger('change');
-//    $('#LocalityId').val('0').trigger('change');
-//    $('#txtFromDate').val('');
-//    $('#txtToDate').val('');
 
-
-//    GetDetails(currentPageNumber, currentPageSize, sortby);
-
-//});
 
 $("#btnReset").click(function () {
     //document.getElementById("VillageId").selectedIndex = "";

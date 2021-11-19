@@ -13,8 +13,10 @@
             <th rowspan="2">Khasra No.</th>
             <th rowspan="2"> Handed Over By  </th>
             <th rowspan="2"> Handed Over Date</th>
+            <th rowspan="2"> Handed Over Department  </th>
             <th rowspan="2"> Taken Over By  </th>
             <th rowspan="2"> Taken Over Date  </th>
+            <th rowspan="2"> Taken Over Department  </th>
             <th rowspan="2"> Transfer order Issue Authority</th>
             <th rowspan="2">Remarks </th>
         </tr>
@@ -26,23 +28,30 @@
 
             @foreach (var item in Model.Results)
             {
-                <tr>
-                    <td>@item.PropertyRegistration.Department.Name</td>
-                    <td>@item.PropertyRegistration.Zone.Name</td>
-                    <td>@item.PropertyRegistration.Division.Name</td>
-                    <td>@(item.PropertyRegistration.LocalityId == null ? "" : item.PropertyRegistration.Locality.Name)</td>
-                    <td>@(item.PropertyRegistration.KhasraNo == null ? "" :item.PropertyRegistration.KhasraNo)</td>
-                    <td>@item.HandedOverByNameDesingnation</td>
+        <tr>
+            <td>@item.PropertyRegistration.Department.Name</td>
+            <td>@item.PropertyRegistration.Zone.Name</td>
+            <td>@item.PropertyRegistration.Division.Name</td>
+            <td>@(item.PropertyRegistration.LocalityId == null ? "" : item.PropertyRegistration.Locality.Name)</td>
+            <td>@(item.PropertyRegistration.KhasraNo == null ? "" :item.PropertyRegistration.KhasraNo)</td>
+            <td>@item.HandedOverByNameDesingnation</td>
 
-                    <td>@item.HandedOverDate</td>
-                    <td>@item.TakenOverByNameDesingnation</td>
-                    <td>@(item.DateofTakenOver != null ? Convert.ToDateTime(item.DateofTakenOver).ToString("dd MMM yyyy") : "Not Available")
-                   </td>
+            @*<td>@item.HandedOverDate</td>*@
+            <td>
+                @(item.HandedOverDate != null ? Convert.ToDateTime(item.HandedOverDate).ToString("dd MMM yyyy") : "Not Available")
+            </td>
+            <td>@item.HandedOverDepartment.Name</td>
 
-                    <td>@item.TransferorderIssueAuthority</td>
-                    <td>@item.Remarks</td>
-                   
-                </tr>
+            <td>@item.TakenOverByNameDesingnation</td>
+            <td>
+                @(item.DateofTakenOver != null ? Convert.ToDateTime(item.DateofTakenOver).ToString("dd MMM yyyy") : "Not Available")
+            </td>
+            <td>@item.TakenOverDepartment.Name</td>
+
+            <td>@item.TransferorderIssueAuthority</td>
+            <td>@item.Remarks</td>
+
+        </tr>
             }
         }
         else

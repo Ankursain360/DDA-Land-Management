@@ -10,14 +10,28 @@ $("#btnAscending").click(function () {
     $("#btnDescending").removeClass("active");
     $("#btnAscending").addClass("active");
     sortOrder = 1;//for Ascending
-    GetLandTransfer(currentPageNumber, currentPageSize, sortOrder);
+    var value = $("#KhasraNo").children("option:selected").val();
+    if (value != '') {
+        GetLandTransfer(currentPageNumber, currentPageSize, sortOrder);
+    }
+    else {
+        alert('Please select Khasra No');
+    }
+  
 });
 
 $("#btnDescending").click(function () {
     $("#btnAscending").removeClass("active");
     $("#btnDescending").addClass("active");
     sortOrder = 2;//for Descending
-    GetLandTransfer(currentPageNumber, currentPageSize, sortOrder);
+    var value = $("#KhasraNo").children("option:selected").val();
+    if (value != '') {
+        GetLandTransfer(currentPageNumber, currentPageSize, sortOrder);
+    }
+    else {
+        alert('Please select Khasra No');
+    }
+    
 });
 $('#ddlSort').change(function () {
     GetLandTransfer(currentPageNumber, currentPageSize, sortOrder);
@@ -26,8 +40,15 @@ $('#ddlSort').change(function () {
 
 
 $("#btnGenerate").click(function () {
-   
-    GetLandTransfer(currentPageNumber, currentPageSize, sortOrder);
+    debugger;
+    var value = $("#KhasraNo").children("option:selected").val();  
+    if (value != '') {
+        GetLandTransfer(currentPageNumber, currentPageSize, sortOrder);
+    }
+    else
+    {
+        alert('Please select Khasra No');
+    }
 });
 
 //$("#btnReset").click(function () {
