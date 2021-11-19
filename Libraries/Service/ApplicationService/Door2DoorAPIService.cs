@@ -35,7 +35,7 @@ namespace Libraries.Service.ApplicationService
             model.Longitude = dto.Longitude;
             model.PresentUseId = dto.PresentUseId;
             model.ApproxPropertyArea = dto.ApproxPropertyArea;
-            model.NumberOfFloors = dto.NumberOfFloors;
+            //model.NumberOfFloors = dto.NumberOfFloors;
             model.CaelectricityNo = dto.CaelectricityNo;
             model.IsActive = dto.IsActive;
             model.KwaterNo = dto.KwaterNo;
@@ -50,6 +50,8 @@ namespace Libraries.Service.ApplicationService
             model.Remarks = dto.Remarks;
             model.CreatedBy = dto.CreatedBy;
             model.CreatedDate = DateTime.Now;
+            model.FileNo = dto.FileNo;
+            model.AreaUnit = dto.AreaUnit;
             _door2DoorAPIRepository.Add(model); 
             var result = await _unitOfWork.CommitAsync() > 0;
             dto.Id =  model.Id;
@@ -66,7 +68,7 @@ namespace Libraries.Service.ApplicationService
             model.Longitude = dto.Longitude;
             model.PresentUseId = dto.PresentUseId;
             model.ApproxPropertyArea = dto.ApproxPropertyArea;
-            model.NumberOfFloors = dto.NumberOfFloors;
+           // model.NumberOfFloors = dto.NumberOfFloors;
             model.CaelectricityNo = dto.CaelectricityNo;
             model.IsActive = dto.IsActive;
             model.KwaterNo = dto.KwaterNo;
@@ -81,6 +83,8 @@ namespace Libraries.Service.ApplicationService
             model.Remarks = dto.Remarks;
             model.ModifiedBy = dto.CreatedBy;
             model.ModifiedDate = DateTime.Now;
+            model.FileNo = dto.FileNo;
+            model.AreaUnit = dto.AreaUnit;
             _door2DoorAPIRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
@@ -125,6 +129,14 @@ namespace Libraries.Service.ApplicationService
         public async Task<bool> DeleteDoorToDoorSurveyPropertyProofs(int id)
         {
             return await _door2DoorAPIRepository.DeleteDoorToDoorSurveyPropertyProofs(id);
+        }
+        public async Task<List<ApiGetAreaUnitDto>> Getareaunit()
+        {
+            return await _door2DoorAPIRepository.Getareaunit();
+        }
+        public async Task<List<ApiGetFloorNoDto>> GetFloorNo()
+        {
+            return await _door2DoorAPIRepository.GetFloorNo();
         }
     }
 }

@@ -193,6 +193,8 @@ namespace Libraries.Model
         public virtual DbSet<Doortodoorsurvey> Doortodoorsurvey { get; set; }
         public virtual DbSet<Doortodoorsurveyidentityproof> Doortodoorsurveyidentityproof { get; set; }
         public virtual DbSet<Doortodoorsurveypropertyproof> Doortodoorsurveypropertyproof { get; set; }
+        public virtual DbSet<Areaunit> Areaunit { get; set; }
+        public virtual DbSet<Floors> Floors { get; set; }
         public virtual DbSet<Processworkflow> Processworkflow { get; set; }
         public virtual DbSet<Workflowaction> Workflowaction { get; set; }
         public virtual DbSet<Encrochmenttype> Encrochmenttype { get; set; }

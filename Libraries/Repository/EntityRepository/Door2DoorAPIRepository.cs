@@ -42,12 +42,14 @@ namespace Libraries.Repository.EntityRepository
             var Data = await _dbContext.Doortodoorsurvey
                                   .Include(a => a.PresentUseNavigation)
                                   .Include(a => a.CreatedByNavigation)
+                                  .Include(a => a.AreaUnitNavigation)
+                                  .Include(a => a.NumberOfFloorsNavigation)
                                   .Where(a => a.CreatedBy == (adminroleid == dto.RoleId ? a.CreatedBy : dto.UserId)
                                   && (a.OccupantName.ToUpper().Trim().Contains(dto.OccupantName == "" || dto.OccupantName == null ? a.OccupantName.ToUpper().Trim() : dto.OccupantName.ToUpper().Trim()))
                                   && (a.MobileNo.ToUpper().Trim().Contains(dto.OccupantContactNo == "" || dto.OccupantContactNo == null ? a.MobileNo.ToUpper().Trim() : dto.OccupantContactNo.ToUpper().Trim()))
                                   && (a.PropertyAddress.ToUpper().Trim().Contains(dto.PropertyAddress == "" || dto.PropertyAddress == null ? a.PropertyAddress.ToUpper().Trim() : dto.PropertyAddress.ToUpper().Trim()))
-                                  && (a.CreatedDate.Date >= ((dto.FromDate != null || dto.FromDate != "") ? Convert.ToDateTime(dto.FromDate).Date : a.CreatedDate.Date))
-                                  && (a.CreatedDate.Date <= ((dto.ToDate != null || dto.ToDate != "") ? Convert.ToDateTime(dto.ToDate).Date : a.CreatedDate.Date))
+                                  && (a.CreatedDate.Date >= ((dto.FromDate != null && dto.FromDate != "") ? Convert.ToDateTime(dto.FromDate).Date : a.CreatedDate.Date))
+                                  && (a.CreatedDate.Date <= ((dto.ToDate != null && dto.ToDate != "") ? Convert.ToDateTime(dto.ToDate).Date : a.CreatedDate.Date))
                                   )
                                   .OrderByDescending(a => a.Id)
                                   .ToListAsync();
@@ -91,7 +93,7 @@ namespace Libraries.Repository.EntityRepository
                         PresentUseId = Data[i].PresentUseId,
                         PresentUseName = Data[i].PresentUseNavigation.Name,
                         ApproxPropertyArea = Data[i].ApproxPropertyArea,
-                        NumberOfFloors = Data[i].NumberOfFloors,
+                       // NumberOfFloors = Data[i].NumberOfFloors,
                         CaelectricityNo = Data[i].CaelectricityNo,
                         IsActive = Data[i].IsActive,
                         KwaterNo = Data[i].KwaterNo,
@@ -106,7 +108,10 @@ namespace Libraries.Repository.EntityRepository
                         VoterIdNo = Data[i].VoterIdNo,
                         CreatedBy = Data[i].CreatedBy,
                         CreatedByName = Data[i].CreatedByNavigation.UserName,
-                        CreatedDate = Data[i].CreatedDate
+                        CreatedDate = Data[i].CreatedDate,
+                        NumberOfFloorsName = Data[i].NumberOfFloorsNavigation.Name,
+                        FileNo = Data[i].FileNo,
+                        AreaUnitName = Data[i].AreaUnitNavigation.Name
                     });
                 }
             }
@@ -143,6 +148,8 @@ namespace Libraries.Repository.EntityRepository
             var Data = await _dbContext.Doortodoorsurvey
                                   .Include(a => a.PresentUseNavigation)
                                   .Include(a => a.CreatedByNavigation)
+                                  .Include(a => a.AreaUnitNavigation)
+                                  .Include(a => a.NumberOfFloorsNavigation)
                                   .Include(a => a.Doortodoorsurveyidentityproof)
                                   .Include(a => a.Doortodoorsurveypropertyproof)
                                   .Where(a => a.IsActive == 1 && a.Id == dto.Id)
@@ -182,7 +189,7 @@ namespace Libraries.Repository.EntityRepository
                         PresentUseId = Data[i].PresentUseId,
                         PresentUseName = Data[i].PresentUseNavigation.Name,
                         ApproxPropertyArea = Data[i].ApproxPropertyArea,
-                        NumberOfFloors = Data[i].NumberOfFloors,
+                       // NumberOfFloors = Data[i].NumberOfFloors,
                         CaelectricityNo = Data[i].CaelectricityNo,
                         IsActive = Data[i].IsActive,
                         KwaterNo = Data[i].KwaterNo,
@@ -197,7 +204,10 @@ namespace Libraries.Repository.EntityRepository
                         PropertyFilePath = propertyDocument,
                         CreatedBy = Data[i].CreatedBy,
                         CreatedByName = Data[i].CreatedByNavigation.UserName,
-                        CreatedDate = Data[i].CreatedDate
+                        CreatedDate = Data[i].CreatedDate,
+                        NumberOfFloorsName=Data[i].NumberOfFloorsNavigation.Name,
+                        FileNo=Data[i].FileNo,
+                        AreaUnitName=Data[i].AreaUnitNavigation.Name
                     });
                 }
             }
@@ -241,6 +251,50 @@ namespace Libraries.Repository.EntityRepository
                         EmailId = Data[i].EmailId,
                         Password = Data[i].Password,
                         RoleId = Data[i].RoleId,
+                        IsActive = Data[i].IsActive
+                    });
+                }
+            }
+            return listData;
+        }
+
+        public async Task<List<ApiGetAreaUnitDto>> Getareaunit()
+        {
+            List<ApiGetAreaUnitDto> listData = new List<ApiGetAreaUnitDto>();
+
+            var Data = await _dbContext.Areaunit
+                                  .Where(a => a.IsActive == 1)
+                                  .ToListAsync();
+            if (Data != null && Data.Count > 0)
+            {
+                for (int i = 0; i < Data.Count; i++)
+                {
+                    listData.Add(new ApiGetAreaUnitDto()
+                    {
+                        Id = Data[i].Id,
+                        Name = Data[i].Name,
+                        IsActive = Data[i].IsActive
+                    });
+                }
+            }
+            return listData;
+        }
+
+        public async Task<List<ApiGetFloorNoDto>> GetFloorNo()
+        {
+            List<ApiGetFloorNoDto> listData = new List<ApiGetFloorNoDto>();
+
+            var Data = await _dbContext.Floors
+                                  .Where(a => a.IsActive == 1)
+                                  .ToListAsync();
+            if (Data != null && Data.Count > 0)
+            {
+                for (int i = 0; i < Data.Count; i++)
+                {
+                    listData.Add(new ApiGetFloorNoDto()
+                    {
+                        Id = Data[i].Id,
+                        Name = Data[i].Name,
                         IsActive = Data[i].IsActive
                     });
                 }
