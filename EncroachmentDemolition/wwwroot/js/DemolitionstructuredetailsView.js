@@ -34,9 +34,9 @@ $(document).ready(function () {
     var id = parseInt($('#FixingDemolitionId').val());
     var encroachmentId = parseInt($('#EncroachmentId').val());
     var watchWardId = parseInt($('#WatchWardId').val());
-    GetWatchWardDetails(watchWardId);
-    GetEncroachmentDetails(encroachmentId);
-    GetAnnexureADetails(id);
+    //GetWatchWardDetails(watchWardId);
+    //GetEncroachmentDetails(encroachmentId);
+    //GetAnnexureADetails(id);
 
     FillDemolitionRptAtEdit();
     FillAreaRptAtEdit();
