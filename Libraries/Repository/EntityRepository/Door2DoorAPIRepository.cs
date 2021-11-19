@@ -93,7 +93,7 @@ namespace Libraries.Repository.EntityRepository
                         PresentUseId = Data[i].PresentUseId,
                         PresentUseName = Data[i].PresentUseNavigation.Name,
                         ApproxPropertyArea = Data[i].ApproxPropertyArea,
-                       // NumberOfFloors = Data[i].NumberOfFloors,
+                        NumberOfFloors = Data[i].NumberOfFloors,
                         CaelectricityNo = Data[i].CaelectricityNo,
                         IsActive = Data[i].IsActive,
                         KwaterNo = Data[i].KwaterNo,

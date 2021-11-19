@@ -58,18 +58,18 @@
                                 <tr id="">
                                     <td style="text-align:center;"><span class="sn">1</span></td>
                                     <td>
-                                        <input asp-for="payeeName" maxlength="45" required type="text" class="floating-label-field floating-label-field--s3 Namecheck" />
+                                        <input asp-for="payeeName" maxlength="45"  type="text" class="floating-label-field floating-label-field--s3" />
                                         <span asp-validation-for="payeeName" class="d-block text-danger field-validation-valid msg"></span>
                                     </td>
                                     <td>
-                                        <input asp-for="payeeFatherName" maxlength="45" required type="text" class="floating-label-field floating-label-field--s3" />
+                                        <input asp-for="payeeFatherName" maxlength="45"  type="text" class="floating-label-field floating-label-field--s3" />
                                         <span asp-validation-for="payeeFatherName" class="d-block text-danger field-validation-valid"></span>
 
                                     </td>
                                     <td>
 
-                                        <select asp-for="Gender" required class="floating-label-field floating-label-field--s3">
-                                            <option value="0">---Select---</option>
+                                        <select asp-for="Gender"   class="floating-label-field floating-label-field--s3">
+                                            <option value="">---Select---</option>
                                             <option value="1">Male</option>
                                             <option value="2">Female</option>
                                             <option value="3">Other</option>
@@ -78,28 +78,28 @@
 
                                     </td>
                                     <td>
-                                        <textarea asp-for="Address" maxlength="100" required type="text" class="floating-label-field floating-label-field--s3"></textarea>
+                                        <textarea asp-for="Address" maxlength="100"  type="text" class="floating-label-field floating-label-field--s3"></textarea>
 
                                         @*<input asp-for="Address" maxlength="100" required type="text" class="floating-label-field floating-label-field--s3" />*@
                                         <span asp-validation-for="Address" class="d-block text-danger field-validation-valid"></span>
 
                                     </td>
                                     <td>
-                                        <input asp-for="MobileNo" maxlength="12"limit="10"   required type="text" class="floating-label-field floating-label-field--s3 numbers" onchange="return chkvalidmobile(this);" />
+                                        <input asp-for="MobileNo"  limit="10"    type="text" class="floating-label-field floating-label-field--s3 numbers" onchange="return chkvalidmobile(this);" />
                                         <span asp-validation-for="MobileNo" class="d-block text-danger field-validation-valid msg2"></span>
 
                                     </td>
                                     <td>
-                                        <input asp-for="EmailId" maxlength="30" required type="text" class="floating-label-field floating-label-field--s3"  onchange="return chkvalidemail(this);" />
+                                        <input asp-for="EmailId" maxlength="30"  type="text" class="floating-label-field floating-label-field--s3"  onchange="return chkvalidemail(this);" />
                                         <span asp-validation-for="EmailId" class="d-block text-danger field-validation-valid msg1"></span>
 
                                     </td>
                                     <td>
 
-                                        <input asp-for="AadharNo" type="password"  class="floating-label-field floating-label-field--s3 " onchange="return chkvalidAadhar(this);" />
+                                        <input asp-for="AadharNo" type="password" limit="14"  class="floating-label-field floating-label-field--s3 " onchange="return chkvalidAadhar(this);" />
                                         <span asp-validation-for="AadharNo" class="d-block text-danger field-validation-valid msgaadhar"></span>
                                         <br />
-                                        <a id="viewAadharId" asp-action="ViewPersonelInfoAadharFile" class="badge badge-primary px-2" target="_blank" style="display:none;">(View File)</a>
+                                        <a id="viewAadharId" asp-action="ViewPersonelInfoAadharFile" class="badge bg-primary px-2" target="_blank" style="display:none;">(View File)</a>
                                         <input type="hidden" asp-for="AadharNoFilePath" />
 
                                         <input asp-for="Aadhar" maxlength="50" type="file" class="floating-label-field floating-label-field--s3 checkExtension" />
@@ -112,7 +112,8 @@
                                         <input asp-for="PanNo"  type="password" class="floating-label-field floating-label-field--s3" onchange="return chkvalid(this);"/>
                                         <span asp-validation-for="PanNo" class="d-block text-danger field-validation-valid msgpan"></span>
                                         <br />
-                                        <a id="viewPanId" asp-action="ViewPersonelInfoPanFile" class="badge badge-primary px-2" target="_blank" style="display:none;">(View File)</a>
+
+                                        <a id="viewPanId" asp-action="ViewPersonelInfoPanFile" class="badge bg-primary px-2" target="_blank" style="display:none;">(View File)</a>
                                         <input asp-for="Pan" type="file" class="floating-label-field floating-label-field--s3 checkExtension" />
                                         <input type="hidden" asp-for="PanNoFilePath" />
                                         <span asp-validation-for="Pan" class="d-block text-danger field-validation-valid msg4"></span>
@@ -120,14 +121,14 @@
 
                                     </td>
                                     <td>
-                                        <a id="viewPhotoId" asp-action="ViewPersonelInfoPhotoFile" class="badge badge-primary px-2" target="_blank" style="display:none;">(View File)</a>
-                                        <input asp-for="Photograph" type="file" class="floating-label-field floating-label-field--s3 checkExtension" />
+                                        <a id="viewPhotoId" asp-action="ViewPersonelInfoPhotoFile" class="badge bg-primary px-2" target="_blank" style="display: none; text-decoration: none">(View File)</a>
+                                        <input asp-for="Photograph" type="file" class="floating-label-field floating-label-field--s3" onchange="fileCheck(this);" />
                                         <input type="hidden" asp-for="PhotographFilePath" />
                                         <span asp-validation-for="Photograph" class="d-block text-danger field-validation-valid"></span>
 
                                     </td>
                                     <td>
-                                        <a id="viewSignatureId" asp-action="ViewPersonelInfoSignautreFile" class="badge badge-primary px-2" target="_blank" style="display:none;">(View File)</a>
+                                        <a id="viewSignatureId" asp-action="ViewPersonelInfoSignautreFile" class="badge bg-primary px-2" target="_blank" style="display:none;">(View File)</a>
                                         <input asp-for="SignatureFile" type="file" class="floating-label-field floating-label-field--s3 checkExtension" />
                                         <input type="hidden" asp-for="SignatureFilePath" />
                                         <span asp-validation-for="SignatureFile" class="d-block text-danger field-validation-valid"></span>
@@ -222,7 +223,7 @@
 
                                     </td>
                                     <td>
-                                        <a id="viewATSGPAId" asp-action="ViewATSGPAFile" class="badge badge-primary px-2" target="_blank" style="display:none;">(View File)</a>
+                                        <a id="viewATSGPAId" asp-action="ViewATSGPAFile" class="badge bg-primary px-2" target="_blank" style="display:none;">(View File)</a>
                                         <input asp-for="ATSGPA" type="file" class="floating-label-field floating-label-field--s3 checkExtension" />
                                         <input type="hidden" asp-for="ATSGPAFilePath" />
                                         <span asp-validation-for="ATSGPA" class="d-block text-danger field-validation-valid"></span>
@@ -346,7 +347,7 @@
 
                                     <input type="file" placeholder="Property Photo" class="floating-label-field floating-label-field--s3 checkExtension" asp-for="PropertyPhoto" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
                                     <span asp-validation-for="PropertyPhoto" class="d-block text-danger field-validation-valid"></span>
-                                    <a class="badge badge-primary px-2" asp-action="DownloadPropertyPhoto" asp-route-id="@Model.Id" target="_blank">
+                                    <a class="badge bg-primary px-2" asp-action="DownloadPropertyPhoto" asp-route-id="@Model.Id" target="_blank">
                                         View File - (@Model.PropertyPhotoPath.Split('\\')?.LastOrDefault()?.Remove(0, 37))
                                     </a>
                                 }
@@ -547,7 +548,7 @@
                 </div>
             </div>
         </div>
-        <div id="DivDamagePropertyDocs" style="margin-top:-40px;">
+        <div id="DivDamagePropertyDocs">
             <h3 class="my-3 d-flex sub-heading"> Upload documents of damage property </h3>
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
@@ -562,7 +563,7 @@
                             {
 
                                 <input type="file" asp-for="ShowCauseNotice" class="floating-label-field floating-label-field--s3 checkExtension" placeholder="ShowCauseNotice">
-                                <a class="badge badge-primary px-2" asp-action="DownloadShowCauseNotice" asp-route-id="@Model.Id" target="_blank">
+                                <a class="badge bg-primary px-2" asp-action="DownloadShowCauseNotice" asp-route-id="@Model.Id" target="_blank">
                                     View File - (@Model.ShowCauseNoticePath.Split('\\')?.LastOrDefault()?.Remove(0, 37))
                                 </a>
                                 <span asp-validation-for="ShowCauseNotice" class="d-block text-danger field-validation-valid"></span>
@@ -586,7 +587,7 @@
                             {
 
                                 <input type="file" asp-for="Fgform" class="floating-label-field floating-label-field--s3 checkExtension" placeholder="Name">
-                                <a class="badge badge-primary px-2" asp-action="DownloadFgform" asp-route-id="@Model.Id" target="_blank">
+                                <a class="badge bg-primary px-2" asp-action="DownloadFgform" asp-route-id="@Model.Id" target="_blank">
                                     View File - (@Model.FgformPath.Split('\\')?.LastOrDefault()?.Remove(0, 37))
                                 </a>
                                 <span asp-validation-for="Fgform" class="d-block text-danger field-validation-valid"></span>
@@ -648,7 +649,7 @@
                             {
 
                                 <input type="file" asp-for="DocumentForFile" class="floating-label-field floating-label-field--s3 checkExtension" placeholder="Name">
-                                <a class="badge badge-primary px-2" asp-action="DownloadBillfile" asp-route-id="@Model.Id" target="_blank">
+                                <a class="badge bg-primary px-2" asp-action="DownloadBillfile" asp-route-id="@Model.Id" target="_blank">
                                     View File - (@Model.DocumentForFilePath.Split('\\')?.LastOrDefault()?.Remove(0, 37))
                                 </a>
                                 <span asp-validation-for="DocumentForFile" class="d-block text-danger field-validation-valid"></span>
@@ -670,7 +671,7 @@
                             @if (Model.DocumentName != null)
                             {
                                 <input type="file" asp-for="DocumentIFormFile" class="floating-label-field floating-label-field--s3 checkExtension" accept="application/pdf,  image/png, image/jpeg">
-                                <a class="badge badge-primary px-2" asp-action="ViewUploadedDocument" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
+                                <a class="badge bg-primary px-2" asp-action="ViewUploadedDocument" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
                             }
                             else
                             {
@@ -727,7 +728,7 @@
                                     <input asp-for="Amount" type="text" class="floating-label-field floating-label-field--s3" id="txtAmount" />
                                 </td>
                                 <td>
-                                    <a id="viewRecieptId" asp-action="ViewRecieptFile" class="badge badge-primary px-2" target="_blank" style="display:none;">(View File)</a>
+                                    <a id="viewRecieptId" asp-action="ViewRecieptFile" class="badge bg-primary px-2" target="_blank" style="display:none;">(View File)</a>
                                     <input asp-for="Reciept" class="floating-label-field floating-label-field--s3 checkExtension" type="file" />
                                     <input type="hidden" asp-for="RecieptFilePath" />
                                 </td>
@@ -770,14 +771,14 @@
                 <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input asp-for="TotalValueWithInterest" type="text" class="floating-label-field floating-label-field--s3 onlynumbers TotalCalculation" />
-                        <span asp-validation-for="TotalValueWithInterest" id="TotalValueWithInterestMsg" class="text-danger" style="display:none;">Mandatory</span>
+                        <span asp-validation-for="TotalValueWithInterest" id="TotalValueWithInterestMsg" class="text-danger" style="display:none;">Damage Amount is Mandatory</span>
                         <label class="floating-label">Damage Amount<span style="color:red">*</span></label>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input asp-for="InterestDueAmountCompund" type="text" class="floating-label-field floating-label-field--s3 onlynumbers TotalCalculation" />
-                        <span asp-validation-for="InterestDueAmountCompund" id="InterestDueAmountCompundMsg" class="text-danger" style="display:none;">Mandatory</span>
+                        <span asp-validation-for="InterestDueAmountCompund" id="InterestDueAmountCompundMsg" class="text-danger" style="display:none;">Interest Amount is Mandatory</span>
                         <label class="floating-label">Interest Amount<span style="color:red">*</span></label>
                     </div>
                 </div>
@@ -787,14 +788,14 @@
                 <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0 ">
                         <input asp-for="Rebate" type="text" class="floating-label-field floating-label-field--s3 onlynumbers" />
-                        <span asp-validation-for="Rebate" id="RebateMsg" class="text-danger" style="display:none;">Mandatory</span>
+                        <span asp-validation-for="Rebate" id="RebateMsg" class="text-danger" style="display:none;">Rebate is Mandatory</span>
                         <label class="floating-label">Rebate @ViewBag.RebateValue% of total Interest<span style="color:red">*</span></label>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input asp-for="TotalPayable" type="text" class="floating-label-field floating-label-field--s3 onlynumbers" />
-                        <span asp-validation-for="TotalPayable" id="TotalPayableMsg" class="text-danger" style="display:none;">Mandatory</span>
+                        <span asp-validation-for="TotalPayable" id="TotalPayableMsg" class="text-danger" style="display:none;">Total Payable is Mandatory</span>
                         <label class="floating-label">Total Payable<span style="color:red">*</span></label>
                     </div>
                 </div>
@@ -810,17 +811,17 @@
                         <input type="hidden" asp-for="Declaration1" />
 
                         I certify that the particulars filled in this form are true and correct to the best of my knowledge and i am authorized to sign this form. I am aware of the penel provisions of the Delhi Development Authority, 2019 which are attracted on wilful suppression and submission of false and in correct particulars.
-                        <span asp-validation-for="DeclarationStatus1" id="DeclarationStatus1Msg" class="text-danger" style="display:none;">Mandatory</span>
+                        <span asp-validation-for="DeclarationStatus1" id="DeclarationStatus1Msg" class="text-danger" style="display:none;font-weight:700">Checkbox is Mandatory</span>
                         <br />
                         <input asp-for="DeclarationStatus2" type="checkbox" />
                         <input type="hidden" asp-for="Declaration2" />
                         I understand that any of the information supplied by me is found incorrect, my application shall be rejected.
-                        <span asp-validation-for="DeclarationStatus2" id="DeclarationStatus2Msg" class="text-danger" style="display:none;">Mandatory</span>
+                        <span asp-validation-for="DeclarationStatus2" id="DeclarationStatus2Msg" class="text-danger" style="display:none;font-weight:700">Checkbox is Mandatory</span>
                         <br />
                         <input asp-for="DeclarationStatus3" type="checkbox" />
                         <input type="hidden" asp-for="Declaration3" />
                         I understand that any email sent to me on the ID provided by me shall be deemed service of notice to me.
-                        <span asp-validation-for="DeclarationStatus3" id="DeclarationStatus3Msg" class="text-danger" style="display:none;">Mandatory</span>
+                        <span asp-validation-for="DeclarationStatus3" id="DeclarationStatus3Msg" class="text-danger" style="display:none;font-weight:700">Checkbox is Mandatory</span>
                         <br /><br />
                         <b style="color:red;">
                             Note: The compliance of above section will not entitle occupancy rights and super structure claim of the property and all the occupent will continue to be considered as unauthorised occupent of the property.

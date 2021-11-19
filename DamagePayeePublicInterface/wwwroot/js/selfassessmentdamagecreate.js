@@ -830,49 +830,49 @@ function ValidateFileSize(fileid, file) {
 }
 
 
-$("#btnsubmit").click(function () {
-    debugger;
+//$("#btnsubmit").click(function () {
+//    debugger;
 
-    var txtAadhar = document.getElementById("AadharNo").value.trim();
-    var txtPan = document.getElementById("PanNo").value.trim();
+//    var txtAadhar = document.getElementById("AadharNo").value.trim();
+//    var txtPan = document.getElementById("PanNo").value.trim();
 
-    if (txtAadhar == "") {
-        toastr.error('Please Enter Aadhar No', 'Error', { timeOut: 3000, "progressBar": true });
-        return false;
-    }
+//    if (txtAadhar == "") {
+//        toastr.error('Please Enter Aadhar No', 'Error', { timeOut: 3000, "progressBar": true });
+//        return false;
+//    }
 
-    if (txtPan == "") {
-        toastr.error('Please Enter Pan No', 'Error', { timeOut: 3000, "progressBar": true });
-        return false;
-    }
+//    if (txtPan == "") {
+//        toastr.error('Please Enter Pan No', 'Error', { timeOut: 3000, "progressBar": true });
+//        return false;
+//    }
    
-    else {
-        var keyss = document.getElementById("hdnvals").value.trim();
+//    else {
+//        var keyss = document.getElementById("hdnvals").value.trim();
       
-        var key = CryptoJS.enc.Utf8.parse(keyss);
-        var iv = CryptoJS.enc.Utf8.parse(keyss);
+//        var key = CryptoJS.enc.Utf8.parse(keyss);
+//        var iv = CryptoJS.enc.Utf8.parse(keyss);
       
-        var encryptedAadhar = CryptoJS.AES.encrypt(CryptoJS.enc.Utf8.parse(txtAadhar), key,
-            {
-                keySize: 128 / 8,
-                iv: iv,
-                mode: CryptoJS.mode.CBC,
-                padding: CryptoJS.pad.Pkcs7
-            });
+//        var encryptedAadhar = CryptoJS.AES.encrypt(CryptoJS.enc.Utf8.parse(txtAadhar), key,
+//            {
+//                keySize: 128 / 8,
+//                iv: iv,
+//                mode: CryptoJS.mode.CBC,
+//                padding: CryptoJS.pad.Pkcs7
+//            });
 
-        var encryptedPanNo = CryptoJS.AES.encrypt(CryptoJS.enc.Utf8.parse(txtPan), key,
-            {
-                keySize: 128 / 8,
-                iv: iv,
-                mode: CryptoJS.mode.CBC,
-                padding: CryptoJS.pad.Pkcs7
-            });
+//        var encryptedPanNo = CryptoJS.AES.encrypt(CryptoJS.enc.Utf8.parse(txtPan), key,
+//            {
+//                keySize: 128 / 8,
+//                iv: iv,
+//                mode: CryptoJS.mode.CBC,
+//                padding: CryptoJS.pad.Pkcs7
+//            });
      
-        document.getElementById("AadharNo").value = encryptedAadhar;
-        document.getElementById("PanNo").value = encryptedPanNo;
+//        document.getElementById("AadharNo").value = encryptedAadhar;
+//        document.getElementById("PanNo").value = encryptedPanNo;
     
-    }
-});
+//    }
+//});
 
 
 
@@ -925,6 +925,17 @@ function chkvalidemail(input) {
         $(input).focus();
         // alert("Please enter valid Pan card number");
         $(input).nextAll('span:first').empty().html('Please enter valid email id');
+    }
+}
+
+
+
+function fileCheck(obj) {
+
+    var fileExtension = ['jpeg', 'jpg', 'png', 'gif', 'bmp'];
+    if ($.inArray($(obj).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
+        alert("Only '.jpeg','.jpg', '.png', '.gif', '.bmp' formats are allowed.");
+        $(obj).val('');
     }
 }
 
