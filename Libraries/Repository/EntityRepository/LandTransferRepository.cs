@@ -299,6 +299,7 @@ namespace Libraries.Repository.EntityRepository
                                    .Include(x => x.PropertyRegistration.Zone)
                                    .Include(x => x.PropertyRegistration.Division)
                                    .Include(x => x.PropertyRegistration.Locality)
+                                    .Include(x => x.HandedOverDepartment)
                                    .Where(x => (x.HandedOverDepartmentId == (model.reportType == 1 ? x.HandedOverDepartmentId : (model.departmentId == 0 ? x.HandedOverDepartmentId : model.departmentId)))
                                     && (x.TakenOverDepartmentId == (model.reportType == 0 ? x.TakenOverDepartmentId :
                                     (model.departmentId == 0 ? x.TakenOverDepartmentId : model.departmentId)))
