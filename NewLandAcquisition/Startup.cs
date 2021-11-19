@@ -107,12 +107,13 @@ namespace NewLandAcquisition
                 options.DefaultChallengeScheme = "oidc";
                 options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
             })
-             .AddCookie("Cookies", options =>
-             {
-                 options.ExpireTimeSpan = TimeSpan.FromMinutes(Convert.ToInt32(Configuration.GetSection("CookiesSettings:CookiesTimeout").Value));
-                 options.SlidingExpiration = true;
-                 options.Cookie.Name = "Auth-cookie";
-             })
+               // .AddCookie("Cokkies")
+            .AddCookie("Cookies", options =>
+            {
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(Convert.ToInt32(Configuration.GetSection("CookiesSettings:CookiesTimeout").Value));
+                options.SlidingExpiration = true;
+                options.Cookie.Name = "Auth-cookie";
+            })
             .AddOpenIdConnect("oidc", options =>
             {
                 options.SignInScheme = "Cookies";
@@ -155,7 +156,7 @@ namespace NewLandAcquisition
             app.UseCookiePolicy();
             app.UseSession();
             //prevent session hijacking
-            app.preventSessionHijacking();
+          //  app.preventSessionHijacking();
             // 
             app.UseEndpoints(endpoints =>
             {

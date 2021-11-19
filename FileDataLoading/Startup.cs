@@ -157,7 +157,7 @@ namespace FileDataLoading
             app.UseAuthorization();
             app.UseSession();
             //prevent session hijacking
-            app.preventSessionHijacking();
+          //  app.preventSessionHijacking();
             // 
             app.UseEndpoints(endpoints =>
             {

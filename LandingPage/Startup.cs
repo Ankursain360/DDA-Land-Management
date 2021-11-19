@@ -101,6 +101,7 @@ namespace LandingPage
                 options.DefaultChallengeScheme = "oidc";
                 options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
             })
+            //.AddCookie("Cookies")
             .AddCookie("Cookies", options =>
             {
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(Convert.ToInt32(Configuration.GetSection("CookiesSettings:CookiesTimeout").Value));
@@ -157,7 +158,7 @@ namespace LandingPage
             app.UseAuthorization();
             app.UseSession();
             //prevent session hijacking
-            app.preventSessionHijacking();
+           // app.preventSessionHijacking();
             // 
             app.UseEndpoints(endpoints =>
             {

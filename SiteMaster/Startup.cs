@@ -106,7 +106,7 @@ namespace SiteMaster
                 options.DefaultChallengeScheme = "oidc";
                 options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
             })
-           // .AddCookie("Cokkies")
+            // .AddCookie("Cokkies")
             .AddCookie("Cookies", options =>
 
             {
@@ -181,7 +181,7 @@ namespace SiteMaster
             app.UseAuthorization();
             app.UseSession();
             //prevent session hijacking
-            app.preventSessionHijacking();
+           //app.preventSessionHijacking();
             // 
             app.UseEndpoints(endpoints =>
             {
