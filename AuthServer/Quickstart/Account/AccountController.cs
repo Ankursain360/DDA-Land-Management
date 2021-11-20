@@ -319,7 +319,7 @@ namespace IdentityServerHost.Quickstart.UI
             _httpContextAccessor.HttpContext.Response.Cookies.Delete("encryptedSession");
             _httpContextAccessor.HttpContext.Response.Cookies.Delete(".AspNetCore.Session");
             _httpContextAccessor.HttpContext.Response.Cookies.Delete(".AspNetCore.Cookies");
-            _httpContextAccessor.HttpContext.Response.Cookies.Delete("Auth-cookie");
+           // _httpContextAccessor.HttpContext.Response.Cookies.Delete("Auth-cookie");
             // check if we need to trigger sign-out at an upstream identity provider
             if (vm.TriggerExternalSignout)
             {
