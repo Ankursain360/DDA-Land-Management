@@ -364,9 +364,9 @@ namespace Libraries.Repository.EntityRepository
                  .Include(x => x.PropertyRegistration.Department)
                  .Include(x => x.PropertyRegistration.Zone)
                  .Include(x => x.PropertyRegistration.Division)
-                
+                  
                 // .OrderByDescending(x => x.Id)
-                 .Where(x => x.Id == model.KhasraNo && x.IsActive == 1 ).GetPaged<Landtransfer>(model.PageNumber, model.PageSize);
+                 .Where(x => x.PropertyRegistration.Id == model.KhasraNo && x.IsActive == 1 ).GetPaged<Landtransfer>(model.PageNumber, model.PageSize);
 
 
 
@@ -383,7 +383,7 @@ namespace Libraries.Repository.EntityRepository
                  .Include(x => x.PropertyRegistration.Department)
                  .Include(x => x.PropertyRegistration.Zone)
                  .Include(x => x.PropertyRegistration.Division)
-                             .Where(x => x.Id == model.KhasraNo && x.IsActive == 1)
+                             .Where(x => x.PropertyRegistration.Id == model.KhasraNo && x.IsActive == 1)
                              .OrderBy(x => x.PropertyRegistration.Department.Name)
                             .GetPaged<Landtransfer>(model.PageNumber, model.PageSize);
                         break;
@@ -395,7 +395,7 @@ namespace Libraries.Repository.EntityRepository
                  .Include(x => x.PropertyRegistration.Department)
                  .Include(x => x.PropertyRegistration.Zone)
                  .Include(x => x.PropertyRegistration.Division)
-                             .Where(x => x.Id == model.KhasraNo && x.IsActive == 1)
+                             .Where(x => x.PropertyRegistration.Id == model.KhasraNo && x.IsActive == 1)
                              .OrderBy(x => x.PropertyRegistration.Zone.Name)
                             .GetPaged<Landtransfer>(model.PageNumber, model.PageSize);
                         break;
@@ -407,7 +407,7 @@ namespace Libraries.Repository.EntityRepository
                  .Include(x => x.PropertyRegistration.Department)
                  .Include(x => x.PropertyRegistration.Zone)
                  .Include(x => x.PropertyRegistration.Division)
-                             .Where(x => x.Id == model.KhasraNo && x.IsActive == 1)
+                             .Where(x => x.PropertyRegistration.Id == model.KhasraNo && x.IsActive == 1)
                              .OrderBy(x => x.PropertyRegistration.Division.Name)
                             .GetPaged<Landtransfer>(model.PageNumber, model.PageSize);
                         break;
@@ -426,7 +426,7 @@ namespace Libraries.Repository.EntityRepository
                  .Include(x => x.PropertyRegistration.Department)
                  .Include(x => x.PropertyRegistration.Zone)
                  .Include(x => x.PropertyRegistration.Division)
-                             .Where(x => x.Id == model.KhasraNo && x.IsActive == 1)
+                             .Where(x => x.PropertyRegistration.Id == model.KhasraNo && x.IsActive == 1)
                              .OrderByDescending(x => x.PropertyRegistration.Department.Name)
                             .GetPaged<Landtransfer>(model.PageNumber, model.PageSize);
                         break;
@@ -450,7 +450,7 @@ namespace Libraries.Repository.EntityRepository
                  .Include(x => x.PropertyRegistration.Department)
                  .Include(x => x.PropertyRegistration.Zone)
                  .Include(x => x.PropertyRegistration.Division)
-                             .Where(x => x.Id == model.KhasraNo && x.IsActive == 1)
+                             .Where(x => x.PropertyRegistration.Id == model.KhasraNo && x.IsActive == 1)
                              .OrderByDescending(x => x.PropertyRegistration.Division.Name)
                             .GetPaged<Landtransfer>(model.PageNumber, model.PageSize);
                         break;
