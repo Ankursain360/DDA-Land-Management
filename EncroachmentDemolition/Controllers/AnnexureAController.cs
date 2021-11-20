@@ -145,7 +145,7 @@ namespace EncroachmentDemolition.Controllers
                                 {
                                     for (int h = 0; h < UserListRoleBasis.Count; h++)
                                     {
-                                        if (col > 0)
+                                        if (col > 0 && multouserszonewise.Length>0)
                                             multouserszonewise.Append(",");
                                         multouserszonewise.Append(UserListRoleBasis[h].UserId);
                                         col++;

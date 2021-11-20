@@ -755,7 +755,7 @@ namespace EncroachmentDemolition.Controllers
                                                     var UserProfile = await _userProfileService.GetUserByIdZoneConcatedName(Convert.ToInt32(MultiUserId), SiteContext.ZoneId ?? 0);
                                                     if (UserProfile != null)
                                                     {
-                                                        if (col > 0)
+                                                        if (col > 0 && multouserszonewise.Length>0)
                                                             multouserszonewise.Append(",");
                                                         multouserszonewise.Append(UserProfile.UserId);
                                                     }
