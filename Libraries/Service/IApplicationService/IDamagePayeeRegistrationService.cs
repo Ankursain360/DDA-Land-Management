@@ -19,6 +19,7 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Delete(int id);
         Task<bool> CheckUniqueName(int Id, string Name);   // To check Unique Value
         Task<bool> CheckUniqueemail(int id, string emailid);
+        Task<bool> CheckUniquephone(int id, string phonenumber);
         Task<PagedResult<Payeeregistration>> GetPagedDamagePayeeRegistration(DamagePayeeRegistrationSearchDto model);
         Task<bool> UpdateVerification(Payeeregistration payeeregistration);
     }

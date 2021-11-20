@@ -17,7 +17,7 @@ namespace Repository.IEntityRepository
         Task<List<ApplicationRole>> GetRole();
         Task<Userprofile> GetUserById(int userId);
 
-
+       
         Task<List<KycApplicationSearchDto>> KycApplicationDetails(int id);
 
         Task<List<KycDemandPaymentSearchDto>> KycDemandPaymentDetails(int id);
@@ -39,6 +39,10 @@ namespace Repository.IEntityRepository
         Task<List<UserProfileInfoDetailsDto>> UserListSkippingmultiusersConcatedName(int[] nums);
         Task<bool> ValidateUniqueEmail(int id, string email);
         Task<bool> ValidateUniquePhone(int id, string phonenumber);
+        Task<bool> ValidateUniqueEmail1(string email);
+        Task<bool> ValidateUniquePhone1(string phonenumber);
+        Task<bool> ValidateUniqueUserName1(string userName);
+
         //added by ishu 20/7/2021
         Task<List<Userprofile>> GetUserOnRoleBranchBasis(int roleId, int branchId);
         Task<List<Userprofile>> GetUserByIdBranch(int userid, int branchId);

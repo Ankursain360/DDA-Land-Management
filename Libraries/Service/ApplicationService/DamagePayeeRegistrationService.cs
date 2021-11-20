@@ -86,6 +86,11 @@ namespace Libraries.Service.ApplicationService
             bool result = await _damagePayeeRegistrationRepository.Anyemail(id, emailid);
             return result;
         }
+        public async Task<bool> CheckUniquephone(int id, string phonenumber)
+        {
+            bool result = await _damagePayeeRegistrationRepository.Anyphone(id, phonenumber);
+            return result;
+        }
 
         public async Task<PagedResult<Payeeregistration>> GetPagedDamagePayeeRegistration(DamagePayeeRegistrationSearchDto model)
         {

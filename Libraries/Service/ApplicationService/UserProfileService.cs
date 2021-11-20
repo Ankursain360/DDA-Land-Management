@@ -172,6 +172,10 @@ namespace Service.ApplicationService
         {
             return await _userProfileRepository.ValidateUniqueUserName(id, UserName);
         }
+        public async Task<bool> ValidateUniqueUserName1(string Name)
+        {
+            return await _userProfileRepository.ValidateUniqueUserName1(Name);
+        }
 
         public async Task<bool> UpdateUserPersonalDetails(UserPersonalInfoDto model)
         {
@@ -342,10 +346,17 @@ namespace Service.ApplicationService
         {
             return await _userProfileRepository.ValidateUniqueEmail(id, email);
         }
-
+        public async Task<bool> ValidateUniqueEmail1( string email)
+        {
+            return await _userProfileRepository.ValidateUniqueEmail1(email);
+        }
         public async Task<bool> ValidateUniquePhone(int id, string phonenumber)
         {
             return await _userProfileRepository.ValidateUniquePhone(id, phonenumber);
+        }
+        public async Task<bool> ValidateUniquePhone1(string phonenumber)
+        {
+            return await _userProfileRepository.ValidateUniquePhone1(phonenumber);
         }
     }
 }

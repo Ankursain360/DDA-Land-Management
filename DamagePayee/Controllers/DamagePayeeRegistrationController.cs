@@ -365,7 +365,16 @@ namespace DamagePayee.Controllers
             var result = await _damagePayeeRegistrationService.CheckUniqueName(Id, Name);
             if (result == false)
             {
-                return Json(true);
+                
+                var result1 = await _userProfileService.ValidateUniqueUserName1(Name);
+                if (result1 == false)
+                {
+                    return Json(true);
+                }
+                else
+                {
+                    return Json($"This Username is already Linked with Another Account. Kindly use different Username");
+                }
             }
             else
             {
@@ -379,14 +388,50 @@ namespace DamagePayee.Controllers
             var result = await _damagePayeeRegistrationService.CheckUniqueemail(Id, EmailId);
             if (result == false)
             {
-                return Json(true);
+                var result1 = await _userProfileService.ValidateUniqueEmail1(EmailId);
+                if (result1 == false)
+                {
+                    return Json(true);
+                }
+                else
+                {
+                    return Json($"This Email is already Linked with Another Account. Kindly use different Email");
+                }
+                //return Json(true);
             }
             else
             {
                 return Json($"Email Id : {EmailId} already exist");
             }
-        }
 
+           
+        }
+        [AcceptVerbs("Get", "Post")]
+        [AllowAnonymous]
+        public async Task<IActionResult> ExistPhoneNumber(int Id, string MobileNumber)
+        {
+            var result = await _damagePayeeRegistrationService.CheckUniquephone(Id, MobileNumber);
+            if (result == false)
+            {
+                var result1 = await _userProfileService.ValidateUniquePhone1(MobileNumber);
+                if (result1 == false)
+                {
+                    return Json(true);
+                }
+                else
+                {
+                    return Json($"This Mobile Number is already Linked with Another Account. Kindly use different Mobile Number");
+                }
+                
+            }
+            else
+            {
+                return Json($"This Mobile No already exist");
+            }
+
+
+        }
+      
 
         public async Task<IActionResult> View(int id)
         {
