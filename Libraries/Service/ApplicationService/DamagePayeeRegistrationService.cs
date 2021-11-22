@@ -76,6 +76,14 @@ namespace Libraries.Service.ApplicationService
             _damagePayeeRegistrationRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
+        public async Task<bool> Delete1(int id)
+        {
+            var form = await _damagePayeeRegistrationRepository.FindBy(a => a.Id == id);
+            Payeeregistration model = form.FirstOrDefault();
+           // model.IsActive = 0;
+            _damagePayeeRegistrationRepository.Delete(model);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
         public async Task<bool> CheckUniqueName(int Id, string Name)
         {
             bool result = await _damagePayeeRegistrationRepository.Any(Id, Name);

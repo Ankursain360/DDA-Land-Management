@@ -10,7 +10,8 @@
             <th> File No. </th>
             <th> Property No </th>
             <th> Demand Number </th>
-            <th> Penality Charges  </th>
+            @*<th> Penality Charges  </th>*@
+            <th> Demand Amount  </th>
             <th> Damage charges</th>
         </tr>
         
@@ -24,10 +25,12 @@
             <td>@(item.Locality == null ? "" : item.Locality.Name)</td>
             <td>@item.FileNo</td>
             <td>@item.PropertyNo</td>
-            
+
             <td>@item.DemandNo</td>
             <td>@item.DepositDue</td>
-            <td>@item.ReliefAmount</td>
+            @*<td>@item.ReliefAmount</td>*@
+            <td>@item.DamageCharges</td>
+            
         </tr>
             }
         }

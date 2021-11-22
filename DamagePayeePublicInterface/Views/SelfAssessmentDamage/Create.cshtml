@@ -96,7 +96,7 @@
                                     </td>
                                     <td>
 
-                                        <input asp-for="AadharNo" type="password" limit="14"  class="floating-label-field floating-label-field--s3 " onchange="return chkvalidAadhar(this);" />
+                                        <input asp-for="AadharNo" type="password" limit="12"  class="floating-label-field floating-label-field--s3 " onchange="return chkvalidAadhar(this);" />
                                         <span asp-validation-for="AadharNo" class="d-block text-danger field-validation-valid msgaadhar"></span>
                                         <br />
                                         <a id="viewAadharId" asp-action="ViewPersonelInfoAadharFile" class="badge bg-primary px-2" target="_blank" style="display:none;">(View File)</a>
@@ -537,15 +537,15 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <!--<div class="row">
                     <div class="form-group col-md-12">
                         <div class="form-group" id="DivForPayeeNo" style="display:none;">
                             <label class="control-label lb-sm">Apply for mutation/ substitution</label>
-                            <input type="submit" value="Open Substitution Form" class="btn mutationlink" onclick="return CheckToApply();" />
+                            <input type="submit" value="Open Substitution Form" class="btn mutationlink" onclick="return CheckToApply();" />-->
                             @*   <a href="javascript:void(0)" onclick="return CheckToApply();">Open Substitution Form</a> *@
-                        </div>
+                        <!--</div>
                     </div>
-                </div>
+                </div>-->
             </div>
         </div>
         <div id="DivDamagePropertyDocs">
@@ -671,7 +671,9 @@
                             @if (Model.DocumentName != null)
                             {
                                 <input type="file" asp-for="DocumentIFormFile" class="floating-label-field floating-label-field--s3 checkExtension" accept="application/pdf,  image/png, image/jpeg">
-                                <a class="badge bg-primary px-2" asp-action="ViewUploadedDocument" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
+                                <a class="badge bg-primary px-2" asp-action="ViewUploadedDocument" asp-route-id="@Model.Id" target="_blank">
+                                    (View File) - (@Model.DocumentName.Split('\\')?.LastOrDefault()?.Remove(0, 37))
+                                </a>
                             }
                             else
                             {

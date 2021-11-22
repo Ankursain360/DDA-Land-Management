@@ -146,7 +146,9 @@ namespace DamagePayeePublicInterface.Controllers
                                                     {
 
                                                         FileHelper fileHelper = new FileHelper();
-                                                        damagepayeeregistertemp.DocumentName = damagepayeeregistertemp.DocumentIFormFile == null ? damagepayeeregistertemp.DocumentName : fileHelper.SaveFile1(DocumentFilePath, damagepayeeregistertemp.DocumentIFormFile);
+
+                                                        damagepayeeregistertemp.DocumentName = damagepayeeregistertemp.DocumentIFormFile == null ? damagepayeeregistertemp.DocumentName : fileHelper.SaveFile(DocumentFilePath, damagepayeeregistertemp.DocumentIFormFile);
+                                                        
                                                         if (damagepayeeregistertemp.PropertyPhoto != null)
                                                         {
                                                             damagepayeeregistertemp.PropertyPhotoPath = fileHelper.SaveFile(PropertyPhotographLayout, damagepayeeregistertemp.PropertyPhoto);
@@ -269,7 +271,7 @@ namespace DamagePayeePublicInterface.Controllers
                                                                                // DecryptStringAES(model.Password, key);
                                                                                 AadharNo = DecryptStringAES(damagepayeeregistertemp.AadharNo.Count <= i ? string.Empty : damagepayeeregistertemp.AadharNo[i],key),
                                                                                 PanNo = DecryptStringAES(damagepayeeregistertemp.PanNo.Count <= i ? string.Empty : damagepayeeregistertemp.PanNo[i], key),
-
+                                                                                   
 
 
                                                                                 //PanNo = damagepayeeregistertemp.PanNo.Count <= i ? string.Empty : damagepayeeregistertemp.PanNo[i],
@@ -996,13 +998,13 @@ namespace DamagePayeePublicInterface.Controllers
         {
             FileHelper file = new FileHelper();
             Damagepayeeregister Data = await _selfAssessmentDamageService.FetchSingleResult(Id);
-            string filename = DocumentFilePath + Data.DocumentName;
+            //string filename = DocumentFilePath + Data.DocumentName;
+            string filename =  Data.DocumentName;
             byte[] FileBytes = System.IO.File.ReadAllBytes(filename);
             return File(FileBytes, file.GetContentType(filename));
         }
 
-
-
+       
         private string SetEncriptionKey()
         {
             Random random = new Random();
