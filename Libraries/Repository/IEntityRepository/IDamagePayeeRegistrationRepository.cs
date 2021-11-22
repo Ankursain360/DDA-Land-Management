@@ -17,5 +17,6 @@ namespace Libraries.Repository.IEntityRepository
         Task<PagedResult<Payeeregistration>> GetPagedDamagePayeeRegistration(DamagePayeeRegistrationSearchDto model);
         Task<bool> Anyemail(int Id, string emailid);
         Task<bool> Any(int id, string name);
+        Task<bool> Anyphone(int id, string phonenumber);
     }
 }

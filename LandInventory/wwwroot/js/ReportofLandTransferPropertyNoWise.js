@@ -78,7 +78,7 @@ function GetSearchParam(pageNumber, pageSize, sortOrder) {
         sortOrder: parseInt(sortOrder),
         pageSize: pageSize,
         pageNumber: pageNumber,
-        KhasraNo: $('#KhasraNo').val(),
+        KhasraNo: $("#KhasraNo").children("option:selected").val()
        // plannedname: $('#txtUserName').val()
     }
 

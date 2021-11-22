@@ -45,6 +45,9 @@ namespace Service.IApplicationService
         Task<List<UserProfileInfoDetailsDto>> UserListSkippingmultiusersConcatedName(int[] nums);
         Task<bool> ValidateUniqueEmail(int id, string email);
         Task<bool> ValidateUniquePhone(int id, string phonenumber);
+        Task<bool> ValidateUniqueEmail1(string email);
+        Task<bool> ValidateUniquePhone1(string phonenumber);
+        Task<bool> ValidateUniqueUserName1(string Name);
 
         //added by ishu 20/7/2021
         Task<List<UserProfileDto>> GetUserOnRoleBranchBasis(int roleId, int branchId);

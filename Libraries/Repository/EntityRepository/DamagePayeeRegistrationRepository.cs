@@ -27,6 +27,11 @@ namespace Libraries.Repository.EntityRepository
         {
             return await _dbContext.Payeeregistration.AnyAsync(t => t.Id != id && t.EmailId.ToLower() == emailid.ToLower());
         }
+        public async Task<bool> Anyphone(int id, string phonenumber)
+        {
+            return await _dbContext.Payeeregistration.AnyAsync(t => t.Id != id && t.MobileNumber == phonenumber);
+        }
+        
         public async Task<bool> Any(int id, string name)
         {
             return await _dbContext.Payeeregistration.AnyAsync(t => t.Id != id && t.Name.ToLower() == name.ToLower());

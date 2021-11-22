@@ -12,7 +12,9 @@ namespace Libraries.Model.Entity
         [Required]
         [Remote(action: "ExistName", controller: "DamagePayeeRegistration", AdditionalFields = "Id,Name")]
         public string Name { get; set; }
+        [Required]
         [RegularExpression(@"^([0-9]{10})$", ErrorMessage = "Please Enter a Valid 10 digit Mobile Number")]
+        [Remote(action: "ExistPhoneNumber", controller: "DamagePayeeRegistration", AdditionalFields = "Id,MobileNumber")]
         public string MobileNumber { get; set; }
         [Required(ErrorMessage = "The EmailId field is required")]
         [Remote(action: "Existemail", controller: "DamagePayeeRegistration", AdditionalFields = "Id,EmailId")]
