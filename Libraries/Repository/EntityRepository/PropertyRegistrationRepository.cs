@@ -792,7 +792,7 @@ namespace Libraries.Repository.EntityRepository
                                         //        .ThenBy(x => x.ClassificationOfLand.Name)
                                         //        .ThenBy(x => x.Department.Name)
                                         //        .ThenBy(x => x.Zone.Name)
-                                        //        .ThenBy(x => x.Division.Name)
+                                        //         .ThenBy(x => x.Division.Name)
                                             .GetPaged<Propertyregistration>(model.PageNumber, model.PageSize);
 
             int SortOrder = (int)model.SortOrder;
