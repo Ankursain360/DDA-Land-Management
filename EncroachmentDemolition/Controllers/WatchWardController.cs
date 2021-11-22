@@ -83,7 +83,8 @@ namespace EncroachmentDemolition.Controllers
             watchandward.IsActive = 1;
             watchandward.LocalityList = await _watchandwardService.GetAllLocality();
             watchandward.KhasraList = await _watchandwardService.GetAllKhasra();
-            watchandward.PrimaryListNoList = await _watchandwardService.GetAllPrimaryList();
+           // watchandward.PrimaryListNoList = await _watchandwardService.GetAllPrimaryList();
+            watchandward.PrimaryListNoList = await _watchandwardService.GetAllPrimaryListForWatchWard(SiteContext.ZoneId ?? 0, SiteContext.DepartmentId ?? 0);
             return View(watchandward);
         }
 
@@ -96,7 +97,8 @@ namespace EncroachmentDemolition.Controllers
             {
                 watchandward.LocalityList = await _watchandwardService.GetAllLocality();
                 watchandward.KhasraList = await _watchandwardService.GetAllKhasra();
-                watchandward.PrimaryListNoList = await _watchandwardService.GetAllPrimaryList();
+                // watchandward.PrimaryListNoList = await _watchandwardService.GetAllPrimaryList();
+                watchandward.PrimaryListNoList = await _watchandwardService.GetAllPrimaryListForWatchWard(SiteContext.ZoneId ?? 0, SiteContext.DepartmentId ?? 0);
                 watchandward.PrimaryListNoNavigation = await _watchandwardService.FetchSingleResultOnPrimaryList(Convert.ToInt32(watchandward.PrimaryListNo));
                 Random r = new Random();
                 int num = r.Next();
@@ -419,8 +421,8 @@ namespace EncroachmentDemolition.Controllers
 
             Data.LocalityList = await _watchandwardService.GetAllLocality();
             Data.KhasraList = await _watchandwardService.GetAllKhasra();
-            Data.PrimaryListNoList = await _watchandwardService.GetAllPrimaryList();
-
+            // Data.PrimaryListNoList = await _watchandwardService.GetAllPrimaryList();
+            Data.PrimaryListNoList = await _watchandwardService.GetAllPrimaryListForWatchWard(SiteContext.ZoneId ?? 0, SiteContext.DepartmentId ?? 0);
 
             if (Data == null)
             {
@@ -436,8 +438,8 @@ namespace EncroachmentDemolition.Controllers
             var Data = await _watchandwardService.FetchSingleResult(id);
             Data.LocalityList = await _watchandwardService.GetAllLocality();
             Data.KhasraList = await _watchandwardService.GetAllKhasra();
-            Data.PrimaryListNoList = await _watchandwardService.GetAllPrimaryList();
-
+            //Data.PrimaryListNoList = await _watchandwardService.GetAllPrimaryList();
+            Data.PrimaryListNoList = await _watchandwardService.GetAllPrimaryListForWatchWard(SiteContext.ZoneId ?? 0, SiteContext.DepartmentId ?? 0);
             if (ModelState.IsValid)
             {
                 if (watchandward.Encroachment == 0)
@@ -535,7 +537,8 @@ namespace EncroachmentDemolition.Controllers
             var Data = await _watchandwardService.FetchSingleResult(id);
             Data.LocalityList = await _watchandwardService.GetAllLocality();
             Data.KhasraList = await _watchandwardService.GetAllKhasra();
-            Data.PrimaryListNoList = await _watchandwardService.GetAllPrimaryList();
+            //Data.PrimaryListNoList = await _watchandwardService.GetAllPrimaryList();
+            Data.PrimaryListNoList = await _watchandwardService.GetAllPrimaryListForWatchWard(SiteContext.ZoneId ?? 0, SiteContext.DepartmentId ?? 0);
             if (Data == null)
             {
                 return NotFound();

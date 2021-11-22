@@ -33,6 +33,8 @@ namespace Libraries.Repository.IEntityRepository
         Task<bool> DeleteWatchandwardphotofiledetails(int Id);
         Task<bool> DeleteWatchandwardreportfiledetails(int Id);
         Task<List<Propertyregistration>> GetAllPrimaryList();
+
+        Task<List<Propertyregistration>> GetAllPrimaryListForWatchWard(int ZoneId,int DepartmentId);
         Task<Propertyregistration> FetchSingleResultOnPrimaryList(int propertyId);
         Task<bool> RollBackEntryPhoto(int id);
         Task<bool> RollBackEntryReport(int id);
