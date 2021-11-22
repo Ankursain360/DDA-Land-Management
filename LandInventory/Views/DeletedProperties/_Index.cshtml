@@ -17,10 +17,9 @@
             <th rowspan="2">Zone </th>
             <th rowspan="2">Division </th>
             <th rowspan="2">Locality(Village) </th>
-            <th rowspan="2">Khasra No/Plot No</th>
             <th>Address with Landmark</th>
-
             <th rowspan="2">Primary List No </th>
+            <th rowspan="2">Khasra No/Plot No</th>
 
             <th rowspan="2">Reason</th>
             <th rowspan="2"> Deleted On</th>
@@ -33,43 +32,30 @@
         {
             @foreach (var item in Model.Results)
             {
-                <tr>
-                    <td>@(item.InventoriedInId.ToString() == "1" ? "VLMS" : "Used/Allocated" ) </td>
-                    <td>@(item.PlannedUnplannedLand)</td>
-                    <td>@item.ClassificationOfLand.Name</td>
-                    <td>@item.Department.Name</td>
-                    <td>@item.Zone.Name</td>
-                    <td>@item.Division.Name</td>
-                    <td>@(item.LocalityId == null ? "" : item.Locality.Name)</td>
-                    <td>
-                        @if (item.PlannedUnplannedLand == "Planned Land")
-                        {
+        <tr>
+            <td>@(item.InventoriedInId.ToString() == "1" ? "VLMS" : "Used/Allocated" ) </td>
+            <td>@(item.PlannedUnplannedLand)</td>
+            <td>@item.ClassificationOfLand.Name</td>
+            <td>@item.Department.Name</td>
+            <td>@item.Zone.Name</td>
+            <td>@item.Division.Name</td>
+            <td>@(item.LocalityId == null ? "" : item.Locality.Name)</td>
+            <td>@item.Palandmark</td>
+            <td>@item.PrimaryListNo</td>
+            <td>@(item.PlannedUnplannedLand == "Planned Land" ? item.KhasraNo : item.PlotNo)</td>
+            <td>@(item.Reason == null ? "" : item.Deletedproperty.Reason)</td>
+            <td>@(item.Deletedproperty == null ? "" : item.Deletedproperty.DeletedDate.ToString("dd-MMM-yyyy"))</td>
 
-                            @item.KhasraNo}
+            <td>
+                <div class="action-btns">
+                    <a asp-action="View" asp-route-id="@item.Id" title="View" class="view">  <i class="ri-eye-fill"></i> </a>
 
-                        @if (item.PlannedUnplannedLand == "Unplanned Land")
-                        {
+                </div>
 
-                            @item.PlotNo}
-                        else
-                        { @item.KhasraNo}
+            </td>
 
-                    </td>
-                    <td>@item.Palandmark</td>
-                    <td>@item.PrimaryListNo</td>
-                    <td>@(item.Reason == null ? "" : item.Deletedproperty.Reason)</td>
-                    <td>@(item.Deletedproperty == null ? "" : item.Deletedproperty.DeletedDate.ToString("dd-MMM-yyyy"))</td>
-                   
-                    <td>
-                        <div class="action-btns">
-                            <a asp-action="View" asp-route-id="@item.Id" title="View" class="view">  <i class="ri-eye-fill"></i> </a>
 
-                        </div>
-
-                    </td>
-
-                  
-                </tr>
+        </tr>
             }
             @if (Model.Results.Count <= 0)
             {

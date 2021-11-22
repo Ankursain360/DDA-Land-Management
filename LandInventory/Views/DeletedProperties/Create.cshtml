@@ -23,8 +23,8 @@
             <div class="col-md-4">
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3" asp-for="PlannedUnplannedLand">
-                        <option selected="selected" value="0">All</option>
-                        <option value="Planned Land">Planned Land</option>
+                        @*<option  value="0">All</option>*@
+                        <option selected="selected" value="Planned Land">Planned Land</option>
                         <option value="Unplanned Land">Unplanned Land</option>
                     </select>
                     <span asp-validation-for="PlannedUnplannedLand" class="text-danger"></span>
