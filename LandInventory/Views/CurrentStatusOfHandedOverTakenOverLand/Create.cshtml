@@ -237,7 +237,7 @@
                                         <div class="floating-label-wrap mb-3 mb-md-0">
                                             <input asp-for="LandTransfer.Propertyregistration.Encroached" placeholder="Encroched Area(in sq. mt.)"
                                                    class="floating-label-field floating-label-field--s3 numbers" disabled />
-                                            <label class="floating-label">Encroched Area(in sq. mt.)</label>
+                                            <label class="floating-label">Encroached Area(in sq. mt.)</label>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -856,7 +856,7 @@
                             <option value="Yes">Yes</option>
                         </select>
                         <span asp-validation-for="Tsssurvey" class="text-danger"></span>
-                        <label asp-for="LandTransferId" class="floating-label">TSS Survey </label>
+                        <label asp-for="LandTransferId" class="floating-label">TSS Survey <span style="color:red">*</span></label>
                         <label id="PossessionDate-error" style="color:red;display:none;"> TSS Survey is Mandatory</label>
 
                     </div>
@@ -910,7 +910,7 @@
                                 <input type="text" asp-for="EncroachementArea" placeholder="Encroched Area(in sq. mt.)" class="floating-label-field floating-label-field--s3 numbers" />
                                 <span asp-validation-for="EncroachementArea" class="text-danger"></span>
 
-                                <label class="floating-label">Encroched Area(in sq. mt.) </label>
+                                <label class="floating-label">Encroached Area(in sq. mt.) </label>
 
                             </div>
                         </div>
@@ -1101,7 +1101,7 @@
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <textarea asp-for="Remarks" placeholder="Remarks" type="text" class="floating-label-field floating-label-field--s3"></textarea>
                     <span asp-validation-for="Remarks" class="text-danger"></span>
-                    <label class="floating-label">Remarks</label>
+                    <label class="floating-label">Remarks<span style="color:red">*</span></label>
                     <label id="PossessionDate-error1" style="color:red;display:none;"> Remarks is Mandatory</label>
 
 

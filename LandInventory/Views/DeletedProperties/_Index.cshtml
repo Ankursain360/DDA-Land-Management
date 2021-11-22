@@ -47,12 +47,17 @@
 
                             @item.KhasraNo}
 
-                        @if (item.PlannedUnplannedLand == "Unplanned Land")
+                       else 
                         {
 
-                            @item.PlotNo}
-                        else
-                        { @item.KhasraNo}
+                            @item.PlotNo
+                        }
+                        <!--else-->
+                        @*@if (item.PlannedUnplannedLand == "")*@
+                        <!--{
+                     
+
+                    }-->
 
                     </td>
                     <td>@item.Palandmark</td>
