@@ -44,6 +44,8 @@ namespace Libraries.Service.IApplicationService
         Task<bool> DeleteWatchandwardphotofiledetails(int Id);
         Task<bool> DeleteWatchandwardreportfiledetails(int Id);
         Task<List<Propertyregistration>> GetAllPrimaryList();
+
+        Task<List<Propertyregistration>> GetAllPrimaryListForWatchWard(int ZoneId,int DepartmentId);
         Task<Propertyregistration> FetchSingleResultOnPrimaryList(int v);
 
         Task<bool> UpdateBeforeApproval(int id, Watchandward watchandward);

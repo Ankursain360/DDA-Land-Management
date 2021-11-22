@@ -71,7 +71,7 @@ $('#ddlSort').change(function () {
 });
 $("#btnReset").click(function () {
     $('#ReportType').val('0').trigger('change');
-  //  $('#DepartmentId').val('0').trigger('change');
+    location.reload();
     GetReport(currentPageNumber, currentPageSize, sortOrder);
 });
 function GetSearchParam(pageNumber, pageSize, sortOrder) {

@@ -391,6 +391,12 @@ namespace Libraries.Repository.EntityRepository
             return await _dbContext.Propertyregistration.Where(x => x.IsActive == 1 && x.IsDeleted == 1 && x.IsValidate == 1 && x.IsDisposed != 0 && x.PrimaryListNo !=null).ToListAsync();
         }
 
+
+        public async Task<List<Propertyregistration>> GetAllPrimaryListForWatchWard(int ZoneId,int DepartmentId)
+        {
+            return await _dbContext.Propertyregistration.Where(x => x.IsActive == 1 && x.ZoneId==ZoneId && x.DepartmentId==DepartmentId && x.IsDeleted == 1 && x.IsValidate == 1 && x.IsDisposed != 0 && x.PrimaryListNo != null).ToListAsync();
+        }
+
         public async Task<Propertyregistration> FetchSingleResultOnPrimaryList(int propertyId)
         {
             return await _dbContext.Propertyregistration

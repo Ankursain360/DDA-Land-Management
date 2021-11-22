@@ -41,7 +41,14 @@
             <td>@item.KhasraNo</td>
             <td>@item.Palandmark</td>
             <td>@item.PrimaryListNo</td>
-            <td>@(item.PlannedUnplannedLand == "Planned Land" ? item.KhasraNo : item.PlotNo)</td>
+            @if (@item.PlannedUnplannedLand == "Planned Land")
+            {
+                <td>@item.PlotNo</td>
+            }
+            else
+            {
+                <td>@item.KhasraNo</td>
+}
             <td>@item.TotalArea</td>
             <td>@(item.Reason == null ? "" : item.Deletedproperty.Reason)</td>
             <td>@(item.Deletedproperty == null ? "" : item.Deletedproperty.DeletedDate.ToString("dd-MMM-yyyy"))</td>

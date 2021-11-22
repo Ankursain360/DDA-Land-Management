@@ -101,12 +101,15 @@ namespace LandInventory
                 options.DefaultChallengeScheme = "oidc";
                 options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
             })
-            .AddCookie("Cookies", options =>
-            {
-                options.ExpireTimeSpan = TimeSpan.FromMinutes(Convert.ToInt32(Configuration.GetSection("CookiesSettings:CookiesTimeout").Value));
-                options.SlidingExpiration = true;
-                options.Cookie.Name = "Auth-cookie";
-            })
+           
+
+             .AddCookie("Cookies")
+            //.AddCookie("Cookies", options =>
+            //{
+            //    options.ExpireTimeSpan = TimeSpan.FromMinutes(Convert.ToInt32(Configuration.GetSection("CookiesSettings:CookiesTimeout").Value));
+            //    options.SlidingExpiration = true;
+            //    options.Cookie.Name = "Auth-cookie";
+            //})
 
             .AddOpenIdConnect("oidc", options =>
             {
@@ -118,12 +121,12 @@ namespace LandInventory
                 options.ResponseType = "code";
                 options.Scope.Add("api1");
                 options.SaveTokens = true;
-                options.UseTokenLifetime = true;
-                options.Events.OnRedirectToIdentityProvider = context => // <- HERE
-                {                                                        // <- HERE
-                    context.ProtocolMessage.Prompt = "login";            // <- HERE
-                    return Task.CompletedTask;                           // <- HERE
-                };                                                       // <- HERE
+                //options.UseTokenLifetime = true;
+                //options.Events.OnRedirectToIdentityProvider = context => // <- HERE
+                //{                                                        // <- HERE
+                //    context.ProtocolMessage.Prompt = "login";            // <- HERE
+                //    return Task.CompletedTask;                           // <- HERE
+                //};                                                       // <- HERE
             });
         }
 

@@ -169,6 +169,11 @@ namespace Libraries.Service.ApplicationService
             return await _watchandwardRepository.GetAllPrimaryList();
         }
 
+        public async Task<List<Propertyregistration>> GetAllPrimaryListForWatchWard(int ZoneId,int DepartmentId)
+        {
+            return await _watchandwardRepository.GetAllPrimaryListForWatchWard(ZoneId,DepartmentId);
+        }
+
         public async Task<Propertyregistration> FetchSingleResultOnPrimaryList(int propertyId)
         {
             return await _watchandwardRepository.FetchSingleResultOnPrimaryList(propertyId);
