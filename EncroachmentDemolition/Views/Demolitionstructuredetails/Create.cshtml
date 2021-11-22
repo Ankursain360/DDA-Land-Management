@@ -197,7 +197,7 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
                     @{
                         if (Model.Demolitionstructureafterdemolitionphotofiledetails != null && Model.Demolitionstructureafterdemolitionphotofiledetails.Count > 0)
                         {
@@ -220,14 +220,10 @@
                     <label class="floating-label">Photographs After Demolition (<span style="color:red;"> max size: 5 mb</span>)</label>
 
                 </div>
-                @*<div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="AfterPhotoFile" type="file" placeholder="Photographs After Demolition"
-                               class="floating-label-field floating-label-field--s3" id="PhotoFile" multiple />
-                        <span class="d-block text-danger field-validation-valid" asp-validation-for="AfterPhotoFile"></span>
-                        <label class="floating-label">Photographs After Demolition</label>
-                    </div>*@
+                </div>
+
+
             </div>
-        </div>
         <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">

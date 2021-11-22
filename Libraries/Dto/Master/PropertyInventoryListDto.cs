@@ -12,6 +12,10 @@ namespace Dto.Master
         public string Zone { get; set; }
         public string Division { get; set; }
         public string PrimaryListNo { get; set; }
+        public string Area { get; set; }
+        public string EncroachmentStatus { get; set; }
+        public string ProtectionOfLand { get; set; }
+      
       
     }
 }

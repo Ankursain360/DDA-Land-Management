@@ -912,8 +912,12 @@ namespace LandInventory.Controllers
                         Zone = result[i].Zone==null ? " " : result[i].Zone.Name,
                         Division = result[i].Division==null ? " " : result[i].Division.Name,
                         PrimaryListNo = result[i].PrimaryListNo,
+                        Area = result[i].TotalArea.ToString(),
+                        EncroachmentStatus = result[i].EncroachedPartiallyFully.ToString() == "0" ? "Partially Encroached" : "Fully Encroached",
+                        ProtectionOfLand = result[i].Boundary.ToString() == "0" ? "Boundary Wall" : "Fencing",
 
-                    }); ;
+
+                    }); 
                 }
             }
 

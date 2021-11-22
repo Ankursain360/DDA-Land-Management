@@ -784,15 +784,15 @@ namespace Libraries.Repository.EntityRepository
                                         && (x.ZoneId == (model.zoneId == 0 ? x.ZoneId : model.zoneId))
                                         && (x.DivisionId == (model.divisionId == 0 ? x.DivisionId : model.divisionId))
                                         && (x.LocalityId == (model.Id == 0 ? x.LocalityId : model.Id))
-                                        && !(NonDeletedId).Contains(x.Id)
+                                        //&& !(NonDeletedId).Contains(x.Id)
                                         )
-                                        .OrderBy(x => x.InventoriedInId)
-                                                .OrderByDescending(x => x.IsActive)
-                                                .ThenBy(x => x.PlannedUnplannedLand)
-                                                .ThenBy(x => x.ClassificationOfLand.Name)
-                                                .ThenBy(x => x.Department.Name)
-                                                .ThenBy(x => x.Zone.Name)
-                                                .ThenBy(x => x.Division.Name)
+                                        //.OrderBy(x => x.InventoriedInId)
+                                        //        .OrderByDescending(x => x.IsActive)
+                                        //        .ThenBy(x => x.PlannedUnplannedLand)
+                                        //        .ThenBy(x => x.ClassificationOfLand.Name)
+                                        //        .ThenBy(x => x.Department.Name)
+                                        //        .ThenBy(x => x.Zone.Name)
+                                        //         .ThenBy(x => x.Division.Name)
                                             .GetPaged<Propertyregistration>(model.PageNumber, model.PageSize);
 
             int SortOrder = (int)model.SortOrder;
