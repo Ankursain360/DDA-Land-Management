@@ -17,6 +17,7 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Create(Payeeregistration payeeregistration);
         Task<Payeeregistration> FetchSingleResult(int id);
         Task<bool> Delete(int id);
+        Task<bool> Delete1(int id);
         Task<bool> CheckUniqueName(int Id, string Name);   // To check Unique Value
         Task<bool> CheckUniqueemail(int id, string emailid);
         Task<bool> CheckUniquephone(int id, string phonenumber);

@@ -200,7 +200,7 @@ namespace DamagePayee.Controllers
                     // aspnetuser table entry 
                     if (result1)
                     {
-                        
+                         
                         AddUserDto model = new AddUserDto()
                         {
                             Name = result.Name,
@@ -212,7 +212,8 @@ namespace DamagePayee.Controllers
                             RoleId=20
                             
                         };
-                       var result2= await _userProfileService.CreateUser(model);
+                        
+                        var result2= await _userProfileService.CreateUser(model);
                         if (result2)//send login credientials mail
                         {
                            // EncryptionHelper encryptionHelper = new EncryptionHelper();
@@ -264,11 +265,24 @@ namespace DamagePayee.Controllers
                             var sendMailResult = mailG.SendMailWithAttachment(maildto);
                             #endregion
                             #endregion
+
+                            return RedirectToAction("logincredientialsMailSentMsg", "DamagePayeeRegistration", new { username = result.Name });
+
+                        }
+                        else
+                        {
+                            var result3 = await _damagePayeeRegistrationService.Delete1(UniqueId);
+                            ViewBag.Message = Alert.Show("An error occurred while registering,kindly register again", "", AlertType.Error);
+                            return RedirectToAction("Create", "DamagePayeeRegistration");
                         }
                     }
                     //return View("RegistrationConfirmed");
-                    return RedirectToAction("logincredientialsMailSentMsg", "DamagePayeeRegistration", new { username = result.Name });
-
+                    //return RedirectToAction("logincredientialsMailSentMsg", "DamagePayeeRegistration", new { username = result.Name });
+                    else
+                    {
+                        ViewBag.Message = Alert.Show("User Not Found", "", AlertType.Error);
+                        return RedirectToAction("Create", "DamagePayeeRegistration");
+                    }
 
                 }
                 else
