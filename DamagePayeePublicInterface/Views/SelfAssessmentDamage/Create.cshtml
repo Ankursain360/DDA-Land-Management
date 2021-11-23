@@ -96,20 +96,20 @@
                                     </td>
                                     <td>
 
-                                        <input asp-for="AadharNo" type="password" limit="12"  class="floating-label-field floating-label-field--s3 " onchange="return chkvalidAadhar(this);" />
+                                        <input asp-for="AadharNo"  limit="12"  class="floating-label-field floating-label-field--s3 " onchange="return chkvalidAadhar(this);" />
                                         <span asp-validation-for="AadharNo" class="d-block text-danger field-validation-valid msgaadhar"></span>
                                         <br />
                                         <a id="viewAadharId" asp-action="ViewPersonelInfoAadharFile" class="badge bg-primary px-2" target="_blank" style="display:none;">(View File)</a>
                                         <input type="hidden" asp-for="AadharNoFilePath" />
 
-                                        <input asp-for="Aadhar" maxlength="50" type="file" class="floating-label-field floating-label-field--s3 checkExtension" />
+                                        <input asp-for="Aadhar"  type="file" class="floating-label-field floating-label-field--s3 checkExtension" />
                                         <span asp-validation-for="Aadhar" class="d-block text-danger field-validation-valid"></span>
 
 
                                     </td>
                                     <td>
 
-                                        <input asp-for="PanNo"  type="password" class="floating-label-field floating-label-field--s3" onchange="return chkvalid(this);"/>
+                                        <input asp-for="PanNo"   class="floating-label-field floating-label-field--s3" onchange="return chkvalid(this);"/>
                                         <span asp-validation-for="PanNo" class="d-block text-danger field-validation-valid msgpan"></span>
                                         <br />
 

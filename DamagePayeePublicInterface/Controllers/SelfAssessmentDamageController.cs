@@ -73,7 +73,7 @@ namespace DamagePayeePublicInterface.Controllers
             else
                 ViewBag.RebateValue = Math.Round((value.RebatePercentage), 2);
 
-            //Data.EncryptData = SetEncriptionKey();
+           // Data.EncryptData = SetEncriptionKey();
 
             if (Data != null)
             {
@@ -268,12 +268,12 @@ namespace DamagePayeePublicInterface.Controllers
                                                                                 MobileNo = damagepayeeregistertemp.MobileNo.Count <= i ? string.Empty : damagepayeeregistertemp.MobileNo[i],
                                                                                 EmailId = damagepayeeregistertemp.EmailId.Count <= i ? string.Empty : damagepayeeregistertemp.EmailId[i],
                                                                                 DamagePayeeRegisterTempId = damagepayeeregistertemp.Id,
-                                                                               // DecryptStringAES(model.Password, key);
-                                                                                AadharNo = DecryptStringAES(damagepayeeregistertemp.AadharNo.Count <= i ? string.Empty : damagepayeeregistertemp.AadharNo[i],key),
-                                                                                PanNo = DecryptStringAES(damagepayeeregistertemp.PanNo.Count <= i ? string.Empty : damagepayeeregistertemp.PanNo[i], key),
-                                                                                   
+                                                                                // DecryptStringAES(model.Password, key);
+                                                                                //AadharNo = DecryptStringAES(damagepayeeregistertemp.AadharNo.Count <= i ? string.Empty : damagepayeeregistertemp.AadharNo[i],key),
+                                                                                //PanNo = DecryptStringAES(damagepayeeregistertemp.PanNo.Count <= i ? string.Empty : damagepayeeregistertemp.PanNo[i], key),
 
-
+                                                                                AadharNo = damagepayeeregistertemp.AadharNo.Count <= i ? string.Empty : damagepayeeregistertemp.AadharNo[i],
+                                                                                PanNo = damagepayeeregistertemp.PanNo.Count <= i ? string.Empty : damagepayeeregistertemp.PanNo[i],
                                                                                 //PanNo = damagepayeeregistertemp.PanNo.Count <= i ? string.Empty : damagepayeeregistertemp.PanNo[i],
                                                                                 AadharNoFilePath = damagepayeeregistertemp.Aadhar != null ?
                                                                                                         damagepayeeregistertemp.Aadhar.Count <= i ? string.Empty :
@@ -571,6 +571,7 @@ namespace DamagePayeePublicInterface.Controllers
                                                                                                         fileHelper.SaveFile(AadharNoDocument, damagepayeeregistertemp.Aadhar[i]) :
                                                                                                         damagepayeeregistertemp.AadharNoFilePath[i] != null || damagepayeeregistertemp.AadharNoFilePath[i] != "" ?
                                                                                                         damagepayeeregistertemp.AadharNoFilePath[i] : string.Empty,
+
                                                                                 PanNoFilePath = damagepayeeregistertemp.Pan != null ?
                                                                                                         damagepayeeregistertemp.Pan.Count <= i ? string.Empty :
                                                                                                         fileHelper.SaveFile(PanNoDocument, damagepayeeregistertemp.Pan[i]) :
