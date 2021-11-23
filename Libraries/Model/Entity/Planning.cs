@@ -23,8 +23,8 @@ namespace Libraries.Model.Entity
         public List<Division> DivisionList { get; set; }
         [NotMapped]
         public List<Zone> ZoneList { get; set; }
-        
-        [Required(ErrorMessage = "Department Name is Mandatory")]
+
+        [Required(ErrorMessage = "Department is Mandatory", AllowEmptyStrings = false)]
         public int DepartmentId { get; set; }
         [Required(ErrorMessage = "Division Name is Mandatory")]
         public int DivisionId { get; set; }
