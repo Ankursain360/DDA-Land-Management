@@ -304,9 +304,9 @@ namespace LandInventory.Controllers
                     if (result)
                     {
                         Propertyregistration propertyregistration = new Propertyregistration();
-                        propertyregistration.DepartmentId = landtransfer.HandedOverDepartmentId??0;
-                        propertyregistration.ZoneId = landtransfer.HandedOverZoneId;
-                        propertyregistration.DivisionId = landtransfer.HandedOverDivisionId;
+                        propertyregistration.DepartmentId = landtransfer.TakenOverDepartmentId??0;
+                        propertyregistration.ZoneId = landtransfer.TakenOverZoneId;
+                        propertyregistration.DivisionId = landtransfer.TakenOverDivisionId;
                         propertyregistration.ModifiedBy = SiteContext.UserId;
                         result = await _propertyregistrationService.UpdatePropertyRegistrationForLandTransfer(landtransfer.PropertyRegistrationId, propertyregistration);
                     }
