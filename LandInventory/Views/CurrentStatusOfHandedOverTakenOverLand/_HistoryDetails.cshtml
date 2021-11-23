@@ -10,9 +10,9 @@
             <th rowspan="2">Locality(Village)</th>
             <th rowspan="2">Khasra No</th>
             <th colspan="2">TSS Survey</th>
-            <th colspan="4">Encroachment</th>
-            <th colspan="3">Fencing/Boundary Wall</th>
-            <th colspan="3">Area Utilised</th>
+            <th colspan="4" align="center">Encroachment</th>
+            <th colspan="3" align="center">Fencing/Boundary Wall</th>
+            <th colspan="2" align="center">Area Utilised</th>
             <th rowspan="2">Remarks</th>
             <th rowspan="2">Submitted On </th>
         </tr>
@@ -28,7 +28,7 @@
             <th>Dimension (L*B*H)(mtr)</th>
             <th>Area /Plot Utilization</th>
             <th>Area Utilised(Bigha/Biswa/Biswanshi)</th>
-            <th>Balance Area(Bigha/Biswa/Biswanshi)</th>
+            @*<th>Balance Area(Bigha/Biswa/Biswanshi)</th>*@
         </tr>
     </thead>
     <tbody class="tbody">
@@ -116,8 +116,8 @@
         <td>@item.AreaCovered</td>
         <td>@item.Dimension</td>
         <td> @item.PlotUtilization</td>
-        <td>@item.AreaUtilised</td>
-        <td>@item.BalanceArea</td>
+        <td>@item.TotalAreaInBigha/@item.TotalAreaInBiswa/@item.TotalAreaInBiswani</td>
+        @*<td>@item.BalanceArea</td>*@
         <td>@item.Remarks</td>
         <td>@(Convert.ToDateTime(item.CreatedDate).ToString("dd MMM yyyy") )</td>
 

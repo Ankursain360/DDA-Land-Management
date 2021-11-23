@@ -241,10 +241,7 @@ namespace LandInventory.Controllers
             landtransfer.TakenOverZoneList = await _landTransferService.GetAllZone(landtransfer.TakenOverDepartmentId ?? 0);
             landtransfer.TakenOverDivisionList = await _landTransferService.GetAllDivisionList(landtransfer == null ? 0 : landtransfer.TakenOverZoneId);
 
-
-          
-
-
+             
             landtransfer.LandTransferList = await _landTransferService.GetAllLandTransfer(landtransfer.PropertyRegistrationId);
             if (ModelState.IsValid)
             {
@@ -326,12 +323,26 @@ namespace LandInventory.Controllers
                 }
                 else
                 {
+                    Propertyregistration propertyRegistration = new Propertyregistration();
+                    propertyRegistration.ClassificationOfLandList = await _propertyregistrationService.GetClassificationOfLandDropDownListReport();
+                    propertyRegistration.LandUseList = await _propertyregistrationService.GetLandUseDropDownList();
+                    propertyRegistration.DisposalTypeList = await _propertyregistrationService.GetDisposalTypeDropDownList();
+                    propertyRegistration.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
+                    propertyRegistration.KhasraNoList = await _propertyregistrationService.GetKhasraReportList();
+                    landtransfer.Propertyregistration = propertyRegistration;
                     ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                     return View(landtransfer);
                 }
             }
             else
             {
+                Propertyregistration propertyRegistration = new Propertyregistration();
+                propertyRegistration.ClassificationOfLandList = await _propertyregistrationService.GetClassificationOfLandDropDownListReport();
+                propertyRegistration.LandUseList = await _propertyregistrationService.GetLandUseDropDownList();
+                propertyRegistration.DisposalTypeList = await _propertyregistrationService.GetDisposalTypeDropDownList();
+                propertyRegistration.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
+                propertyRegistration.KhasraNoList = await _propertyregistrationService.GetKhasraReportList();
+                landtransfer.Propertyregistration = propertyRegistration;
                 return View(landtransfer);
             }
         }

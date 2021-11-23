@@ -394,6 +394,7 @@ namespace Libraries.Service.ApplicationService
             model.DepartmentId = propertyregistration.DepartmentId;
             model.ZoneId = propertyregistration.ZoneId;
             model.DivisionId = propertyregistration.DivisionId;
+            model.IsDeleted = 0;
             model.ModifiedDate = DateTime.Now;
             _propertyregistrationRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
