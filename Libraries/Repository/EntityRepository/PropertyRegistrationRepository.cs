@@ -752,13 +752,24 @@ namespace Libraries.Repository.EntityRepository
             var NonDeletedId = (from x in _dbContext.Propertyregistration
                                 where x.IsActive == 1 && x.IsDeleted != 0 || x.IsDisposed != 0
                                 select x.Id).ToArray();
-            return await _dbContext.Propertyregistration.Include(x => x.Locality)
+            var data = await _dbContext.Propertyregistration.Include(x => x.Locality)
                                         .Include(x => x.Department)
                                         .Include(x => x.Zone)
                                         .Include(x => x.Division)
                                          .Include(x => x.Deletedproperty)
                                         .Include(x => x.ClassificationOfLand)
-                                        .Where(x => (x.IsDeleted == 0 || x.IsDisposed == 0) && !(NonDeletedId).Contains(x.Id)).ToListAsync();
+                                        .Where(x => (x.IsDeleted == 0 
+                                        //|| x.IsDisposed == 0
+                                        )
+                                        
+                                        &&
+                                        (NonDeletedId)
+                                        .Contains(x.Id)
+                                        )
+                                        .ToListAsync();
+
+            return data;
+        
         }
 
 

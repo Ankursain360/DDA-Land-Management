@@ -143,8 +143,10 @@ namespace Libraries.Repository.EntityRepository
                .Include(x => x.Locality)
 
                .Where(x => x.UptoDate >= defaulterListingReportSearchDto.fromDate
-                   && x.UptoDate <= defaulterListingReportSearchDto.toDate)
-                  .OrderByDescending(x => x.Id)
+                   && x.UptoDate < defaulterListingReportSearchDto.toDate)
+               //.Where(x => x.UptoDate >= defaulterListingReportSearchDto.fromDate
+               //    && x.UptoDate <= defaulterListingReportSearchDto.toDate)
+                   //.OrderByDescending(x => x.Id)
 
                    .GetPaged(defaulterListingReportSearchDto.PageNumber, defaulterListingReportSearchDto.PageSize);
 
@@ -214,7 +216,7 @@ namespace Libraries.Repository.EntityRepository
                                    && (x.LocalityId == (model.Locality == 0 ? x.LocalityId : model.Locality))
                                     && (string.IsNullOrEmpty(model.FileNo) || x.FileNo.Contains(model.FileNo))
                                    
-                                    && (x.CreatedDate >= model.FromDate && x.CreatedDate <= model.ToDate)
+                                    && (x.CreatedDate.Date >= model.FromDate.Date && x.CreatedDate.Date <= model.ToDate.Date)
                                    )
                                    
                                .GetPaged<Demandletters>(model.PageNumber, model.PageSize);
@@ -274,7 +276,7 @@ namespace Libraries.Repository.EntityRepository
                                    .Where(x => (x.IsActive == 1 )
                                    && (x.Id == (model.FileNo == 0 ? x.Id : model.FileNo))
                                    && (x.LocalityId == (model.Locality == 0 ? x.LocalityId : model.Locality))
-                                    && (x.GenerateDate >= model.FromDate && x.GenerateDate <= model.ToDate)
+                                    && (x.GenerateDate.Date >= model.FromDate.Date && x.GenerateDate.Date <= model.ToDate.Date)
                                    )
                                    .OrderByDescending(x => x.Id)
                                .GetPaged<Demandletters>(model.PageNumber, model.PageSize);
@@ -459,7 +461,7 @@ namespace Libraries.Repository.EntityRepository
                                    .Where(x => (x.IsActive == 1)
                                    && (x.Id == (model.FileNo == 0 ? x.Id : model.FileNo))
                                    && (x.LocalityId == (model.Locality == 0 ? x.LocalityId : model.Locality))
-                                    && (x.GenerateDate >= model.FromDate && x.GenerateDate <= model.ToDate)
+                                    && (x.GenerateDate.Date >= model.FromDate.Date && x.GenerateDate.Date <= model.ToDate.Date)
                                    )
                                    .OrderByDescending(x => x.Id)
                                .GetPaged<Demandletters>(model.PageNumber, model.PageSize);

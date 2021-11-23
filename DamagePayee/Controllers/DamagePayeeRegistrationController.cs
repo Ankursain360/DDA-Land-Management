@@ -229,9 +229,10 @@ namespace DamagePayee.Controllers
                             string Action = "Dear " + LoginName + ",  You are succesfully registered with DDA Portal. For verify your email click  below link :-  " + uri;
                             var aburl = Request.GetDisplayUrl().Replace("Create", "RegistrationConfirmed");
                             string url = "https://www.google.com/search?q=yahoo+mail&rlz=1C1CHBF_enIN923IN923&oq=&aqs=chrome.1.69i59i450l5.24765349j0j15&sourceid=chrome&ie=UTF-8#=" + contactno + "&message= " + Action + " Thank you .&priority=11";
-                            string link = "Username="+ result.Name + "and Password="+ model.Password;
-                            //string link = "<a target=\"_blank\" href=\"" + aburl + "?" + encryptionHelper.EncryptString(AesKey, "EmailID") + "=" + encryptionHelper.EncryptString(AesKey, EmailID) + "&" + encryptionHelper.EncryptString(AesKey, "Id") + "=" + encryptionHelper.EncryptString(AesKey, Id) + "\">Click Here</a>";
-                            string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "LoginInfoMailDetails.html");
+                            //string link = "Username="+ result.Name + "and Password="+ model.Password;
+                            string link = "https://damagepayee.managemybusinessess.com/";
+                           // string link = "<a target=\"_blank\" href=\"" + aburl + "?" + encryptionHelper.EncryptString(AesKey, "EmailID") + "=" + encryptionHelper.EncryptString(AesKey, EmailID) + "&" + encryptionHelper.EncryptString(AesKey, "Id") + "=" + encryptionHelper.EncryptString(AesKey, Id) + "\">Click Here</a>";
+                                 string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "LoginInfoMailDetails.html");
                            // string linkhrefregistration = aburl + "?" + encryptionHelper.EncryptString(AesKey, "EmailID") + "=" + encryptionHelper.EncryptString(AesKey, EmailID) + "&" + encryptionHelper.EncryptString(AesKey, "Id") + "=" + encryptionHelper.EncryptString(AesKey, Id);
                             #region Mail Generation Added By Renu
 
@@ -242,8 +243,8 @@ namespace DamagePayee.Controllers
                             bodyDTO.displayName = DisplayName;
                             bodyDTO.loginName = LoginName;
                             bodyDTO.password = "Payee@123";
-                            // bodyDTO.link = link;
-                            bodyDTO.link = "";
+                            bodyDTO.link = link;
+                           // bodyDTO.link = "";
                             bodyDTO.action = Action;
                             bodyDTO.path = path;
                             string strBodyMsg = mailG.PopulateBody(bodyDTO);
