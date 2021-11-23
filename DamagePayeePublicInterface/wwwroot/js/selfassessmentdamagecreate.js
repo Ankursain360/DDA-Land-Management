@@ -599,7 +599,7 @@ $(document).delegate('a.add-recordDamageAssessee', 'click', function (e) {
             size = jQuery('#tbl_DamageAssessee >tbody >tr').length,
             element = null,
             element = content.clone();
-        element.attr('id', 'rec-' + size);
+        element.attr('id', 'rec1-' + size);
         element.find('.delete-recordDamageAssessee').attr('data-id', size);
         element.appendTo('#tbl_DamageAssessee_body');
         element.find('.sn1').html(size);
@@ -622,7 +622,7 @@ $(document).delegate('a.delete-recordDamageAssessee', 'click', function (e) {
     if (didConfirm == true) {
         var id = jQuery(this).attr('data-id');
         var targetDiv = jQuery(this).attr('targetDiv');
-        jQuery('#rec-' + id).remove();
+        jQuery('#rec1-' + id).remove();
         //regnerate index number on table
         $('#tbl_DamageAssessee_body tr').each(function (index) {
             //alert(index);
@@ -652,7 +652,7 @@ $(document).delegate('a.add-recordPayment', 'click', function (e) {
             size = jQuery('#tbl_Payment >tbody >tr').length,
             element = null,
             element = content.clone();
-        element.attr('id', 'rec-' + size);
+        element.attr('id', 'rec2-' + size);
         element.find('.delete-recordPayment').attr('data-id', size);
         element.appendTo('#tbl_Payment_body');
         element.find('.sn2').html(size);
@@ -675,7 +675,7 @@ $(document).delegate('a.delete-recordPayment', 'click', function (e) {
     if (didConfirm == true) {
         var id = jQuery(this).attr('data-id');
         var targetDiv = jQuery(this).attr('targetDiv');
-        jQuery('#rec-' + id).remove();
+        jQuery('#rec2-' + id).remove();
         //regnerate index number on table
         $('#tbl_Payment_body tr').each(function (index) {
             //alert(index);
