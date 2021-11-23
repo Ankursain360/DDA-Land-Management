@@ -30,8 +30,8 @@ namespace Libraries.Repository.EntityRepository
             {
                 var data = await _dbContext.Noticetodamagepayee
                                  .Where(x => x.Id == (model.FileNo == 0 ? x.Id : model.FileNo)
-                                 && x.CreatedDate >= model.FromDate
-                                 && x.CreatedDate <= model.ToDate)
+                                 && x.CreatedDate.Date >= model.FromDate.Date
+                                 && x.CreatedDate.Date <= model.ToDate.Date)
                                 .GetPaged(model.PageNumber, model.PageSize);
 
                 int SortOrder = (int)model.SortOrder;
@@ -44,8 +44,8 @@ namespace Libraries.Repository.EntityRepository
                             data = null;
                             data = await _dbContext.Noticetodamagepayee
                                           .Where(x => x.Id == (model.FileNo == 0 ? x.Id : model.FileNo)
-                                          && x.CreatedDate >= model.FromDate
-                                          && x.CreatedDate <= model.ToDate)
+                                          && x.CreatedDate.Date >= model.FromDate.Date
+                                          && x.CreatedDate.Date <= model.ToDate.Date)
                                           .OrderBy(s => s.FileNo)
                                           .GetPaged(model.PageNumber, model.PageSize);
                             break;
@@ -54,8 +54,8 @@ namespace Libraries.Repository.EntityRepository
                             data = null;
                             data = await _dbContext.Noticetodamagepayee
                                           .Where(x => x.Id == (model.FileNo == 0 ? x.Id : model.FileNo)
-                                          && x.CreatedDate >= model.FromDate
-                                          && x.CreatedDate <= model.ToDate)
+                                          && x.CreatedDate.Date >= model.FromDate.Date
+                                          && x.CreatedDate.Date <= model.ToDate.Date)
                                           .OrderBy(s => s.Name)
                                           .GetPaged(model.PageNumber, model.PageSize);
                             break;
@@ -63,8 +63,8 @@ namespace Libraries.Repository.EntityRepository
                             data = null;
                             data = await _dbContext.Noticetodamagepayee
                                           .Where(x => x.Id == (model.FileNo == 0 ? x.Id : model.FileNo)
-                                          && x.CreatedDate >= model.FromDate
-                                          && x.CreatedDate <= model.ToDate)
+                                          && x.CreatedDate.Date >= model.FromDate.Date
+                                          && x.CreatedDate.Date <= model.ToDate.Date)
                                           .OrderBy(s => s.PropertyDetails)
                                           .GetPaged(model.PageNumber, model.PageSize);
                             break;
@@ -81,8 +81,8 @@ namespace Libraries.Repository.EntityRepository
                             data = null;
                             data = await _dbContext.Noticetodamagepayee
                                           .Where(x => x.Id == (model.FileNo == 0 ? x.Id : model.FileNo)
-                                          && x.CreatedDate >= model.FromDate
-                                          && x.CreatedDate <= model.ToDate)
+                                          && x.CreatedDate.Date >= model.FromDate.Date
+                                          && x.CreatedDate.Date <= model.ToDate.Date)
                                           .OrderByDescending(s => s.FileNo)
                                           .GetPaged(model.PageNumber, model.PageSize);
                             break;
@@ -91,8 +91,8 @@ namespace Libraries.Repository.EntityRepository
                             data = null;
                             data = await _dbContext.Noticetodamagepayee
                                           .Where(x => x.Id == (model.FileNo == 0 ? x.Id : model.FileNo)
-                                          && x.CreatedDate >= model.FromDate
-                                          && x.CreatedDate <= model.ToDate)
+                                          && x.CreatedDate.Date >= model.FromDate.Date
+                                          && x.CreatedDate.Date <= model.ToDate.Date)
                                           .OrderByDescending(s => s.Name)
                                           .GetPaged(model.PageNumber, model.PageSize);
                             break;
@@ -100,8 +100,8 @@ namespace Libraries.Repository.EntityRepository
                             data = null;
                             data = await _dbContext.Noticetodamagepayee
                                           .Where(x => x.Id == (model.FileNo == 0 ? x.Id : model.FileNo)
-                                          && x.CreatedDate >= model.FromDate
-                                          && x.CreatedDate <= model.ToDate)
+                                          && x.CreatedDate.Date >= model.FromDate.Date
+                                          && x.CreatedDate.Date <= model.ToDate.Date)
                                           .OrderByDescending(s => s.PropertyDetails)
                                           .GetPaged(model.PageNumber, model.PageSize);
                             break;

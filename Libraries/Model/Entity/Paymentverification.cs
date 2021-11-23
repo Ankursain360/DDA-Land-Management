@@ -20,7 +20,7 @@ namespace Libraries.Model.Entity
         public string BankName { get; set; }
         public byte? IsVerified { get; set; }
         public int? VerifiedBy { get; set; }
-        public DateTime? VerifiedOn { get; set; }
+        public DateTime VerifiedOn { get; set; }
       
         public byte? IsActive { get; set; }
         [NotMapped]
