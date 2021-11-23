@@ -1,14 +1,13 @@
 ﻿@model Libraries.Model.Entity.Propertyregistration
 @await Component.InvokeAsync("PageHeader", new { pageName = "Restore Property" })
-
+<div class="pt-3">
     <div class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
         <h3 class="mb-3 d-flex">
             Restore Property Details<span style="margin-left:700px"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span>
 
         </h3>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div class="row">
-
+        <div class="row"> 
             <div class="col-md-4">
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3" asp-for="InventoriedInId">
@@ -25,7 +24,7 @@
 
                     <select class="floating-label-field floating-label-field--s3" asp-for="PlannedUnplannedLand">
                         @*<option selected="selected" value="0">All</option>*@
-                        <option  selected="selected" value="Planned Land">Planned Land</option>
+                        <option selected="selected" value="Planned Land">Planned Land</option>
                         <option value="Unplanned Land">Unplanned Land</option>
                     </select>
                     <span asp-validation-for="PlannedUnplannedLand" class="text-danger lb-sm"></span>
@@ -134,6 +133,7 @@
 
         </div>
     </div>
+</div>
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 <environment include="Development">
     <script src="~/js/archivedpropertycreate.js"></script>

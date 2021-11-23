@@ -408,7 +408,8 @@ namespace LandInventory.Controllers
                                 landtransfer.HandedOverFile = file.SaveFile(handedOverFile, landtransfer.HandedOverFiles);
                             }
                             landtransfer.Id = 0;
-                            var result = await _landTransferService.Create(landtransfer);
+                        landtransfer.CreatedBy = SiteContext.UserId;
+                        var result = await _landTransferService.Create(landtransfer);
                             if (result)
                             {
                                 ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
@@ -450,6 +451,9 @@ namespace LandInventory.Controllers
             }
             else
             {
+                  var errors = ModelState.Select(x => x.Value.Errors)
+                           .Where(y => y.Count > 0)
+                           .ToList();
                 return View(landtransfer);
             }
         }
