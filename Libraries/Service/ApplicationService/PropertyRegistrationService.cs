@@ -197,7 +197,7 @@ namespace Libraries.Service.ApplicationService
             var form = await _propertyregistrationRepository.FindBy(a => a.Id == id);
             Propertyregistration model = form.FirstOrDefault();
             model.ModifiedBy = 1;
-
+            model.IsDisposed = 1;
             model.IsDeleted = 1;
             model.ModifiedDate = DateTime.Now;
             _propertyregistrationRepository.Edit(model);
