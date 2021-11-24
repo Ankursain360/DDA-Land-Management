@@ -280,14 +280,4 @@ function validateForm() {
         return false;
     }
 
-
-
-
-
-
-
-
-
-
-
 }

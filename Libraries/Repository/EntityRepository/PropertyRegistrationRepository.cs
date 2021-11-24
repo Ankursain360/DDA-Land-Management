@@ -156,7 +156,7 @@ namespace Libraries.Repository.EntityRepository
         {
             
 
-            return await _dbContext.Propertyregistration.
+           var data =  await _dbContext.Propertyregistration.
                 Include(x => x.Locality)
                                      .Include(x => x.ClassificationOfLand)
                                .Include(x => x.Department)
@@ -172,6 +172,10 @@ namespace Libraries.Repository.EntityRepository
                                .Include(x => x.TakenOverZone)
                                .Include(x => x.TakenOverDivision)
                                         .Where(x => (x.IsDeleted == 1 && x.IsActive==1  && x.IsDisposed != 0 && x.IsValidate==1 )).ToListAsync();
+
+
+            return data;
+        
         }
 
 

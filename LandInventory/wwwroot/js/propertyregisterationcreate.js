@@ -804,14 +804,22 @@ function ValidateFileSize(fileid, file) {
 
 function validateForm() {
 
-    let LitigationStatus = document.forms["kyc-form"]["LitigationStatus"].value;
+    let localityid = document.forms["propert-form"]["LocalityId"].value;
+    let PlannedUnplannedLand = document.forms["propert-form"]["PlannedUnplannedLand"].value;
+  //  alert(PlannedUnplannedLand);
   //  let Letter = document.forms["kyc-form"]["Letter"].value;
-    var status = 1;
-    if (LitigationStatus == "") {
+    if (PlannedUnplannedLand == "Unplanned Land") {
+        var status = 1;
+        if (localityid == "") {
 
-        $("#LitigationStatus-error").show();
-        status = 2;
-        // return false;
+            $("#Locality-error").show();
+            status = 2;
+            // return false;
+        }
+
+        if (status == 2) {
+            return false;
+        }
     }
 
 

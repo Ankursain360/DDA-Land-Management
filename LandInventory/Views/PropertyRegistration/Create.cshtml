@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="pt-3">
-    <form asp-action="Create"  method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data" autocomplete="off">
+ <form asp-action="Create" id="propert-form" onsubmit="return validateForm()"  method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data" autocomplete="off">
         <h3 class="mb-3 d-flex">
             Add Details<span class="ms-auto"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span>
         </h3>@*id="myForm"*@
@@ -104,7 +104,9 @@
                                 <option selected="selected" disabled="disabled" value="">--Select-- </option>
                             </select>
                             <span asp-validation-for="LocalityId" class="text-danger"></span>
-                            <label asp-for="LocalityId" class="floating-label">Locality(Village) </label>
+                            <label asp-for="LocalityId" class="floating-label">Locality(Village)<span style="color:red">*</span> </label>
+                            <label id="Locality-error" style="color:red;display:none;"> Locality is Mandatory</label>
+
                         </div>
                     </div>
                     <div class="col-md-4">

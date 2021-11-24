@@ -37,7 +37,7 @@ namespace Libraries.Model.Entity
 
         [Required(ErrorMessage = "Division is Mandatory Field", AllowEmptyStrings = false)]
         public int DivisionId { get; set; }
-
+      //  [Required(ErrorMessage = "Locality is Mandatory Field", AllowEmptyStrings = false)]
         public int? LocalityId { get; set; }
 
         [StringLength(200)]
