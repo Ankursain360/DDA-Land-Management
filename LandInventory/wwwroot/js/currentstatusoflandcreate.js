@@ -119,7 +119,7 @@
     });
     $('#FencingBoundaryWall').change(function () {
         var value = $("#FencingBoundaryWall option:selected").val();
-        if (value == 'Yes') {
+        if (value == '0' || value == '1') {
             $("#Boundary").show();
 
         }

@@ -197,7 +197,7 @@ namespace Libraries.Service.ApplicationService
             var form = await _propertyregistrationRepository.FindBy(a => a.Id == id);
             Propertyregistration model = form.FirstOrDefault();
             model.ModifiedBy = 1;
-
+            model.IsDisposed = 1;
             model.IsDeleted = 1;
             model.ModifiedDate = DateTime.Now;
             _propertyregistrationRepository.Edit(model);
@@ -394,6 +394,7 @@ namespace Libraries.Service.ApplicationService
             model.DepartmentId = propertyregistration.DepartmentId;
             model.ZoneId = propertyregistration.ZoneId;
             model.DivisionId = propertyregistration.DivisionId;
+            model.IsDeleted = 0;
             model.ModifiedDate = DateTime.Now;
             _propertyregistrationRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;

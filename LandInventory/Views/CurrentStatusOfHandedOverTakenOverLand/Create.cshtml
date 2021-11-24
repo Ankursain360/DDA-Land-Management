@@ -944,7 +944,7 @@
                         </div>
                         <div class="col-md-12 mt-3">
                             <div class="floating-label-wrap mb-3 mb-md-0">
-                                <textarea type="text" placeholder="Action On Encroachment" class="floating-label-field floating-label-field--s3" id="txtTakenOverDate" asp-for="LandTransfer.Propertyregistration.ActionOnEncroachment"></textarea>
+                                <textarea type="text" placeholder="Action On Encroachment" class="floating-label-field floating-label-field--s3" id="txtTakenOverDate" asp-for="ActionOnEncroachment"></textarea>
                                 <label class="floating-label">Action On Encroachment</label>
                             </div>
                         </div>
@@ -965,26 +965,33 @@
                 <div class="col-md-4">
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <select asp-for="FencingBoundaryWall" class="floating-label-field floating-label-field--s3">
-                            <option value="0" selected="selected">Boundary Wall</option>
+                           
+                            <option value="0">Boundary Wall</option>
                             <option value="1">Fencing</option>
-                            <option value="2">None</option>
+                            <option value="2" selected="selected">None</option>
                         </select>
                         <label class="floating-label">Protection of Land</label>
                         @*<span asp-validation-for="DepartmentId" class="text-danger"></span>*@
                     </div>
                 </div>
-                <div class="col-12">
+                <div class="mt-md-3 col-12">
                     <div id="Boundary" class="row" style="display:none;">
                         <div class="col-md-4">
-                            <label class="control-label lb-sm">Area Covered(Sq. mtr)</label>
-                            <input asp-for="AreaCovered" placeholder="Area Covered(Sq. mtr)" type="text" class="form-control" id="txtTakenOverDate" />
+                            <div class="floating-label-wrap mb-3 mb-md-0">
+                                @*<label class="control-label lb-sm">Area Covered(Sq. mtr)</label>*@
+                                <input asp-for="AreaCovered" placeholder="Area Covered(Sq. mtr)" type="text" class="floating-label-field floating-label-field--s3" id="txtTakenOverDate" />
+                                <label class="floating-label">Area Covered(Sq. mtr)</label>
+                            </div>
                         </div>
                         <div class="col-md-4">
-                            <label class="control-label lb-sm">Dimension (L*B*H)(mtr)</label>
-                            <input asp-for="Dimension" placeholder="Dimension (L*B*H)(mtr)" type="text" class="form-control" id="txtTakenOverDate" />
+                            <div class="floating-label-wrap mb-3 mb-md-0">
+                                @*<label class="control-label lb-sm">Dimension (L*B*H)(mtr)</label>*@
+                                <input asp-for="Dimension" placeholder="Dimension (L*B*H)(mtr)" type="text" class="floating-label-field floating-label-field--s3" id="txtTakenOverDate" />
+                                <label class="floating-label">Dimension (L*B*H)(mtr)</label>
+                            </div>
                         </div>
                     </div>
-                </div>
+                    </div>
             </div>
         </div>
         <div id="AreaPlotUtilization">

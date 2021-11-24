@@ -7,6 +7,7 @@ $(document).ready(function () {
 });
 
 $("#btnSearch").click(function () {
+    debugger;
     GetUser(currentPageNumber, currentPageSize, sortOrder);
 });
 
@@ -14,7 +15,11 @@ $("#btnReset").click(function (){
     $('#txtUserName').val('');
     $('#txtName').val('');
     $('#txtPhoneNumber').val('');
-    $('#txtEmail').val('')
+    $('#txtEmail').val('');
+    $('#txtRole').val('');
+    $('#txtZone').val('')
+
+    
     GetUser(currentPageNumber, currentPageSize, sortOrder);
 });
 
@@ -27,11 +32,14 @@ function GetUser(pageNumber, pageSize, order){
 }
 
 function GetSearchParam(pageNumber, pageSize, sortOrder) {
+    debugger;
     var model = {
         userName: $('#txtUserName').val(),
         name: $('#txtName').val(),
         phoneNumber: $('#txtPhoneNumber').val(),
         email: $('#txtEmail').val(),
+        rolename: $('#txtRole').val(),
+        zonename: $('#txtZone').val(),
         sortBy: $("#ddlSort").children("option:selected").val(),
         sortOrder: parseInt(sortOrder),
         pageSize: parseInt(pageSize),

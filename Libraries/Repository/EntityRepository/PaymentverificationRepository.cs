@@ -162,7 +162,7 @@ namespace Libraries.Repository.EntityRepository
                  .Include(x => x.User)
                            // .Where(a => a.IsVerified == 0)
                            .Where(x =>
-                          (model.IsVerified==1 ? (x.VerifiedOn >= model.fromdate && x.VerifiedOn <= model.todate): (x.CreatedDate >= model.fromdate && x.VerifiedOn <= model.todate)) &&
+                          (model.IsVerified==1 ? (x.VerifiedOn.Date >= model.fromdate.Date && x.VerifiedOn.Date <= model.todate.Date): (x.CreatedDate.Date >= model.fromdate.Date && x.VerifiedOn.Date <= model.todate.Date)) &&
                        //    (x.IsVerified == (model.IsVerified == 3 ? x.IsVerified : model.IsVerified))
                           (x.IsVerified == model.IsVerified) 
                            )
