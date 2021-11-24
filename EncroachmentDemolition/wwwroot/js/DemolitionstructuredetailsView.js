@@ -1,32 +1,32 @@
-﻿//$(document).ready(function () {
-    //HttpGet(`/Demolitionstructuredetails/DetailsOfRepeater/?Id=${$("#hdnId").val() == null ? "" : $("#hdnId").val()}`, 'json', function (data) {
-    //    debugger
-    //    for (var i = 0; i < data.length; i++) {
+﻿$(document).ready(function () {
+    HttpAsyncGet(`/Demolitionstructuredetails/DetailsOfRepeater/?Id=${$("#hdnId").val() == null ? "" : $("#hdnId").val()}`, 'json', function (data) {
+        debugger
+        for (var i = 0; i < data.length; i++) {
 
-    //        $("#tbl_posts #add #NoOfStructure").val(data[i].noOfStructure);
-    //        $("#tbl_posts #add #NameOfStructure").val(data[i].nameOfStructure);
-    //        $('#tbl_posts #add #nameOfStructure').trigger('change');
-    //        if (i < data.length - 1) {
-    //            var ConstructionStatus = $("#tbl_posts #add #NameOfStructure").children("option:selected").val();
-    //            var content = jQuery('#tbl_posts #add tr'),
-    //                size = jQuery('#tbl_posts >tbody >tr').length,
-    //                element = null,
-    //                element = content.clone();
-    //            element.attr('id', 'rec-' + size);
-    //            element.find('.delete-record').attr('data-id', size);
-    //            element.appendTo('#tbl_posts_body');
-    //            $('#tbl_posts_body #rec-' + size + ' #NameOfStructure').val(NameOfStructure);
-    //            element.find('.sn').html(size);
-    //            $("#tbl_posts #add .sn").text($('#tbl_posts >tbody >tr').length);
-    //            $("#tbl_posts #add .add").remove();
-    //            $("#tbl_posts #tbl_posts_body .form-control").attr("readonly", true);
-    //            element.find(".add-record").hide();
-    //            element.find(".delete-record").show();
-    //        }
-    //    }
-    //});
+            $("#tbl_posts #add #NoOfStructure").val(data[i].noOfStructure);
+            $("#tbl_posts #add #NameOfStructure").val(data[i].nameOfStructure);
+            $('#tbl_posts #add #nameOfStructure').trigger('change');
+            if (i < data.length - 1) {
+                var ConstructionStatus = $("#tbl_posts #add #NameOfStructure").children("option:selected").val();
+                var content = jQuery('#tbl_posts #add tr'),
+                    size = jQuery('#tbl_posts >tbody >tr').length,
+                    element = null,
+                    element = content.clone();
+                element.attr('id', 'rec-' + size);
+                element.find('.delete-record').attr('data-id', size);
+                element.appendTo('#tbl_posts_body');
+                $('#tbl_posts_body #rec-' + size + ' #NameOfStructure').val(NameOfStructure);
+                element.find('.sn').html(size);
+                $("#tbl_posts #add .sn").text($('#tbl_posts >tbody >tr').length);
+                $("#tbl_posts #add .add").remove();
+                $("#tbl_posts #tbl_posts_body .form-control").attr("readonly", true);
+                element.find(".add-record").hide();
+                element.find(".delete-record").show();
+            }
+        }
+    });
 
-//});
+});
 
 $(document).ready(function () {
     $('#StructureId1').removeAttr('multiple');
@@ -34,29 +34,29 @@ $(document).ready(function () {
     var id = parseInt($('#FixingDemolitionId').val());
     var encroachmentId = parseInt($('#EncroachmentId').val());
     var watchWardId = parseInt($('#WatchWardId').val());
-    //GetWatchWardDetails(watchWardId);
-    //GetEncroachmentDetails(encroachmentId);
-    //GetAnnexureADetails(id);
+    GetWatchWardDetails(watchWardId);
+    GetEncroachmentDetails(encroachmentId);
+    GetAnnexureADetails(id);
 
     FillDemolitionRptAtEdit();
     FillAreaRptAtEdit();
 });
 
 function GetWatchWardDetails(id) {
-    HttpGet(`/Demolitionstructuredetails/WatchWardView/?Id=${id}`, 'html', function (response) {
+    HttpAsyncGet(`/Demolitionstructuredetails/WatchWardView/?Id=${id}`, 'html', function (response) {
         $('#WatchWardDetailsDiv').html("");
         $('#WatchWardDetailsDiv').html(response);
     });
 };
 function GetEncroachmentDetails(id) {
-    HttpGet(`/Demolitionstructuredetails/EncroachmentRegisterView/?Id=${id}`, 'html', function (response) {
+    HttpAsyncGet(`/Demolitionstructuredetails/EncroachmentRegisterView/?Id=${id}`, 'html', function (response) {
         $('#EncroachmentRegisterDetailsDiv').html("");
         $('#EncroachmentRegisterDetailsDiv').html(response);
     });
 };
 
 function GetAnnexureADetails(id) {
-    HttpGet(`/Demolitionstructuredetails/AnnexureADetails/?Id=${id}`, 'html', function (response) {
+    HttpAsyncGet(`/Demolitionstructuredetails/AnnexureADetails/?Id=${id}`, 'html', function (response) {
         $('#AnnexureADetailsDiv').html("");
         $('#AnnexureADetailsDiv').html(response);
     });
