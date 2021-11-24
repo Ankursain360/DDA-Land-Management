@@ -1,17 +1,17 @@
 ﻿@model Dto.Master.UserProfileDto
 
-<div class="dropdown user text-white order-md-4">
+<div class="dropdown user text-white order-md-5">
     <a href="#" role="button" id="profile"
        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
        class="p-2 d-block text-white no-dec">
-        <div class="d-flex align-items-center profile">
+        <div class="d-flex align-items-center ">
             <figure class="m-0 d-none">
                 <img src="~/images/favicon.png" alt="user-image" class="rounded-circle" width="34" height="34" />
             </figure>
             <strong class="text-img rounded-circle d-block">
                 @Model.User.UserName.Substring(0, 1)
             </strong>
-            <span class="ms-2 d-none d-md-block">Hi @Model.User.Name</span>
+            <span class="ms-2 d-none d-md-block">Hi <p style="font-size: 0.9rem; font-weight: 600; ">@Model.User.Name</p></span>
         </div>
     </a>
 
