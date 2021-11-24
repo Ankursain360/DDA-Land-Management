@@ -348,6 +348,7 @@ namespace Libraries.Repository.EntityRepository
                .Include(x => x.Department)
                .Include(x => x.Zone)
                .Include(x => x.Division)
+                .Include(x => x.Areareclaimedrpt)
                .Where(x => (x.DepartmentId == (dto.departmentId == 0 ? x.DepartmentId : dto.departmentId))
                && (x.ZoneId == (dto.zoneId == 0 ? x.ZoneId : dto.zoneId))
                && (x.DivisionId == (dto.divisionId == 0 ? x.DivisionId : dto.divisionId))
