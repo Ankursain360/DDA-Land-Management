@@ -229,7 +229,7 @@ function HttpAsyncGet(url, dataType, callback) {
     $.ajax({
         cache: false,
         type: 'GET',
-        async: true,
+        async: false,
         contentType: "application/json; charset=utf-8",
         dataType: dataType,
         url: url
