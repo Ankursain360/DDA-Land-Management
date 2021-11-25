@@ -5,11 +5,12 @@
     <thead class="text-nowrap">
         <tr>
             <th>Date</th>
-            <th>Locality(Village)</th>
-            <th>Khasra No.</th>
+            <th>Locality(Village)/Colony</th>
+            <th>Khasra No./Plot No</th>
             <th>Primary List No.</th>
             <th>Encroachment</th>
             <th>Status on Ground</th>
+            <th>Created Date</th>
             <th>Operations</th>
         </tr>
     </thead>
@@ -18,27 +19,27 @@
         {
             @foreach (var item in Model.Results)
             {
-                <tr>
+        <tr>
 
-                    <td> @(Convert.ToDateTime(item.Date).ToString("dd-MMM-yyyy"))</td>
-                    <td>@(item.PrimaryListNoNavigation.LocalityId == null ? ""  : item.PrimaryListNoNavigation.Locality.Name)</td>
-                    <td>@item.PrimaryListNoNavigation.KhasraNo</td>
-                    <td>@(item.PrimaryListNoNavigation.PrimaryListNo == null ? "" : item.PrimaryListNoNavigation.PrimaryListNo)</td>
-                    <td>@(item.Encroachment.ToString() == "1" ? "Yes" : "No")</td>
-                    <td>@item.StatusOnGround</td>
+            <td>@(Convert.ToDateTime(item.Date).ToString("dd-MMM-yyyy"))</td>
+            <td>@(item.PrimaryListNoNavigation.LocalityId == null ? item.PrimaryListNoNavigation.Colony : item.PrimaryListNoNavigation.Locality.Name)</td>
+            <td>@(item.PrimaryListNoNavigation.LocalityId == null ? item.PrimaryListNoNavigation.PlotNo: item.PrimaryListNoNavigation.KhasraNo)</td>
+            <td>@(item.PrimaryListNoNavigation.PrimaryListNo == null ? "NA" : item.PrimaryListNoNavigation.PrimaryListNo)</td>
+            <td>@(item.Encroachment.ToString() == "1" ? "Yes" : "No")</td>
+            <td>@item.StatusOnGround</td>
+            <td>@item.CreatedDate.ToString("dd-MMM-yyyy hh:mm:ss tt")</td>
+            <td style="min-width:120px;">
+                <div class="action-btns">
+                    <a asp-action="View" asp-route-id="@item.Id" title="View" class="view"><i class="ri-eye-fill"></i> </a>
+                    @if (item.PendingAt == "0")
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.Id" title="edit" class="edit"><i class="ri-edit-line"></i> </a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" title="delete" class="remove" onclick="return confirm('Are You Sure, You want to Delete this Record?')">  <i class="ri-delete-bin-5-fill"></i></a>
+                    }
 
-                    <td style="min-width:120px;">
-                        <div class="action-btns">
-                            <a asp-action="View" asp-route-id="@item.Id" title="View" class="view"><i class="ri-eye-fill"></i> </a>
-                            @if (item.PendingAt == "0")
-                            {
-                                <a asp-action="Edit" asp-route-id="@item.Id" title="edit" class="edit"><i class="ri-edit-line"></i> </a>
-                                <a asp-action="Delete" asp-route-id="@item.Id" title="delete" class="remove" onclick="return confirm('Are You Sure, You want to Delete this Record?')">  <i class="ri-delete-bin-5-fill"></i></a>
-                            }
-
-                        </div>
-                    </td>
-                </tr>
+                </div>
+            </td>
+        </tr>
             }
         }
         else

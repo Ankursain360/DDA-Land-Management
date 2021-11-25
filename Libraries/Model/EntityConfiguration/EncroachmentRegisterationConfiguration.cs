@@ -101,7 +101,7 @@ namespace Libraries.Model.EntityConfiguration
                 .IsUnicode(false);
 
             builder.Property(e => e.EncroacherName)
-                .IsRequired()
+               // .IsRequired()
                 .HasMaxLength(100)
                 .IsUnicode(false);
 
