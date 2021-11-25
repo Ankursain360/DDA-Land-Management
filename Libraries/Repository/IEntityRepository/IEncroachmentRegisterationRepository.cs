@@ -35,6 +35,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<PagedResult<EncroachmentRegisteration>> GetPagedDemolitionReport(DemolitionReportSearchDto model);//for demolition report -- ishu
 
         Task<List<Khasra>> GetAllKhasraList(int localityId);
+        Task<List<Propertyregistration>> GetAllKhasraListFromPropertyInventory(int ZoneId, int DepartmentId);
         Task<PagedResult<EncroachmentRegisteration>> GetEncroachmentRegisterationReportData(InspectionEncroachmentregistrationSearchDto inspectionEncroachmentregistrationSearchDto);
         Task<PagedResult<EncroachmentRegisteration>> GetEncroachmentReportData(EnchroachmentSearchDto enchroachmentSearchDto);
         Task<bool> RollBackEntryEncroachmentLocationMapFileDetails(int id);

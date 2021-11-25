@@ -109,6 +109,13 @@ namespace Libraries.Service.ApplicationService
         {
             return await _encroachmentRegisterationRepository.GetAllKhasraList(localityId);
         }
+
+
+        public async Task<List<Propertyregistration>> GetAllKhasraListFromPropertyInventory(int ZoneId, int DepartmentId)
+        {
+            return await _encroachmentRegisterationRepository.GetAllKhasraListFromPropertyInventory(ZoneId,DepartmentId);
+        }
+
         public async Task<bool> SaveDetailsOfEncroachment(DetailsOfEncroachment detailsOfEncroachment)
         {
             detailsOfEncroachment.CreatedBy = 1;

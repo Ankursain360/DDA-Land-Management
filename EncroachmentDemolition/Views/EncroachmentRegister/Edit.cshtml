@@ -63,11 +63,11 @@
         <div class="col-md-6">
             <div class="floating-label-wrap">
 
-                <select asp-for="KhasraNo" class="floating-label-field floating-label-field--s3" asp-items="@(new SelectList(Model.KhasraList,"Name","Name"))">
+                <select asp-for="KhasraNo" class="floating-label-field floating-label-field--s3" asp-items="@(new SelectList(Model.PropertyInventoryKhasraList,"Id","KhasraNo"))">
                     <option value="0">Select</option>
                 </select>
-                <label asp-validation-for="KhasraNo" class="error"></label>
-                <label class="floating-label">Khasra No.</label>
+                <span asp-validation-for="KhasraNo" class="text-danger"></span>
+                <label class="floating-label">Khasra No/Plot No.</label>
             </div>
         </div>
         <div class="col-md-6">

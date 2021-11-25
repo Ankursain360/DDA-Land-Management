@@ -121,6 +121,9 @@ namespace Libraries.Model.Entity
         public List<Zone> ZoneList { get; set; }
         [NotMapped]
         public List<Khasra> KhasraList { get; set; }
+
+        [NotMapped]
+        public List<Propertyregistration> PropertyInventoryKhasraList { get; set; }
         [NotMapped]
         public List<string> NameOfStructure { get; set; }
         [NotMapped]

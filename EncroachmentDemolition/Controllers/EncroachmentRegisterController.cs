@@ -97,7 +97,14 @@ namespace EncroachmentDemolition.Controllers
             encroachmentRegisterations.ZoneList = await _encroachmentRegisterationService.GetAllZone(encroachmentRegisterations.DepartmentId);
             encroachmentRegisterations.DivisionList = await _encroachmentRegisterationService.GetAllDivisionList(encroachmentRegisterations.ZoneId);
             encroachmentRegisterations.LocalityList = await _encroachmentRegisterationService.GetAllLocalityList(encroachmentRegisterations.DivisionId);
-            encroachmentRegisterations.KhasraList = await _encroachmentRegisterationService.GetAllKhasraList(encroachmentRegisterations.LocalityId);
+
+            //encroachmentRegisterations.KhasraList = await _encroachmentRegisterationService.GetAllKhasraList(encroachmentRegisterations.LocalityId);
+
+            encroachmentRegisterations.PropertyInventoryKhasraList = await _encroachmentRegisterationService.GetAllKhasraListFromPropertyInventory(SiteContext.ZoneId ?? 0, SiteContext.DepartmentId ?? 0);
+
+
+
+
             return View(encroachmentRegisterations);
         }
 
@@ -133,13 +140,16 @@ namespace EncroachmentDemolition.Controllers
                 encroachmentRegisterations.ZoneList = await _encroachmentRegisterationService.GetAllZone(encroachmentRegisterations.DepartmentId);
                 encroachmentRegisterations.DivisionList = await _encroachmentRegisterationService.GetAllDivisionList(encroachmentRegisterations.ZoneId);
                 encroachmentRegisterations.LocalityList = await _encroachmentRegisterationService.GetAllLocalityList(encroachmentRegisterations.DivisionId);
-                encroachmentRegisterations.KhasraList = await _encroachmentRegisterationService.GetAllKhasraList(encroachmentRegisterations.LocalityId);
+                //encroachmentRegisterations.KhasraList = await _encroachmentRegisterationService.GetAllKhasraList(encroachmentRegisterations.LocalityId);
+
+                encroachmentRegisterations.PropertyInventoryKhasraList = await _encroachmentRegisterationService.GetAllKhasraListFromPropertyInventory(SiteContext.ZoneId ?? 0, SiteContext.DepartmentId ?? 0);
                 encroachmentRegisterations.Zone = await _encroachmentRegisterationService.FetchSingleResultOnZoneList(Convert.ToInt32(encroachmentRegisterations.ZoneId));
                
                 Random r = new Random();
                 int num = r.Next();
                 encroachmentRegisterations.RefNo = DateTime.Now.Year.ToString() + encroachmentRegisterations.Zone.Code + num.ToString();
-
+                //ModelState.Remove("CountOfStructure");
+                //ModelState.Remove("DateOfEncroachment ");
                 if (ModelState.IsValid)
                 {
                     if (IsValidpdf == true)
@@ -520,7 +530,8 @@ namespace EncroachmentDemolition.Controllers
             encroachmentRegisterations.ZoneList = await _encroachmentRegisterationService.GetAllZone(encroachmentRegisterations.DepartmentId);
             encroachmentRegisterations.DivisionList = await _encroachmentRegisterationService.GetAllDivisionList(encroachmentRegisterations.ZoneId);
             encroachmentRegisterations.LocalityList = await _encroachmentRegisterationService.GetAllLocalityList(encroachmentRegisterations.DivisionId);
-            encroachmentRegisterations.KhasraList = await _encroachmentRegisterationService.GetAllKhasraList(encroachmentRegisterations.LocalityId);
+            //encroachmentRegisterations.KhasraList = await _encroachmentRegisterationService.GetAllKhasraList(encroachmentRegisterations.LocalityId);
+            encroachmentRegisterations.PropertyInventoryKhasraList = await _encroachmentRegisterationService.GetAllKhasraListFromPropertyInventory(SiteContext.ZoneId ?? 0, SiteContext.DepartmentId ?? 0);
             if (encroachmentRegisterations == null)
             {
                 return NotFound();
@@ -537,7 +548,8 @@ namespace EncroachmentDemolition.Controllers
             encroachmentRegisterations.ZoneList = await _encroachmentRegisterationService.GetAllZone(encroachmentRegisterations.DepartmentId);
             encroachmentRegisterations.DivisionList = await _encroachmentRegisterationService.GetAllDivisionList(encroachmentRegisterations.ZoneId);
             encroachmentRegisterations.LocalityList = await _encroachmentRegisterationService.GetAllLocalityList(encroachmentRegisterations.DivisionId);
-            encroachmentRegisterations.KhasraList = await _encroachmentRegisterationService.GetAllKhasraList(encroachmentRegisterations.LocalityId);
+            //encroachmentRegisterations.KhasraList = await _encroachmentRegisterationService.GetAllKhasraList(encroachmentRegisterations.LocalityId);
+            encroachmentRegisterations.PropertyInventoryKhasraList = await _encroachmentRegisterationService.GetAllKhasraListFromPropertyInventory(SiteContext.ZoneId ?? 0, SiteContext.DepartmentId ?? 0);
             if (encroachmentRegisterations == null)
             {
                 return NotFound();
@@ -563,7 +575,8 @@ namespace EncroachmentDemolition.Controllers
             Data.ZoneList = await _encroachmentRegisterationService.GetAllZone(Data.DepartmentId);
             Data.DivisionList = await _encroachmentRegisterationService.GetAllDivisionList(Data.ZoneId);
             Data.LocalityList = await _encroachmentRegisterationService.GetAllLocalityList(Data.DivisionId);
-            Data.KhasraList = await _encroachmentRegisterationService.GetAllKhasraList(Data.LocalityId);
+            //Data.KhasraList = await _encroachmentRegisterationService.GetAllKhasraList(Data.LocalityId);
+            Data.PropertyInventoryKhasraList = await _encroachmentRegisterationService.GetAllKhasraListFromPropertyInventory(SiteContext.ZoneId ?? 0, SiteContext.DepartmentId ?? 0);
 
             if (ModelState.IsValid)
             {
