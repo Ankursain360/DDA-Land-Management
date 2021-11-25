@@ -70,10 +70,10 @@ namespace Libraries.Model.Entity
         public string PossessionType { get; set; }
         public int? OtherDepartment { get; set; }
 
-        [Required(ErrorMessage = "Police Station is Mandatory Field")]
+        //[Required(ErrorMessage = "Police Station is Mandatory Field")]
         public string PoliceStation { get; set; }
 
-        [Required(ErrorMessage = "Security Guard on Duty is Mandatory Field")]
+        //[Required(ErrorMessage = "Security Guard on Duty is Mandatory Field")]
         public string SecurityGuardOnDuty { get; set; }
 
         [Required(ErrorMessage = "Remarks is Mandatory Field")]

@@ -4,12 +4,13 @@
         <tr>
 
             <th>Date</th>
-            <th>Locality(Village)</th>
-            <th>Khasra No.</th>
+            <th>Locality(Village)/Colony</th>
+            <th>Khasra No./Plot No</th>
             <th>Primary List No.</th>
             <th>Encroachment</th>
             <th>Status on Ground</th>
             <th>Status</th>
+            <th>Submitted On</th>
             <th>Action</th>
         </tr>
     </thead>
@@ -20,15 +21,16 @@
             {
         <tr>
 
-            <td> @(Convert.ToDateTime(item.Date).ToString("dd MMM yyyy"))</td>
-            <td>@(item.PrimaryListNoNavigation.LocalityId == null ? ""  : item.PrimaryListNoNavigation.Locality.Name)</td>
-            <td>@item.PrimaryListNoNavigation.KhasraNo</td>
-            <td>@(item.PrimaryListNoNavigation.PrimaryListNo == null ? "" : item.PrimaryListNoNavigation.PrimaryListNo)</td>
+            <td> @(Convert.ToDateTime(item.Date).ToString("dd-MMM-yyyy"))</td>
+            <td>@(item.PrimaryListNoNavigation.LocalityId == null ? item.PrimaryListNoNavigation.Colony : item.PrimaryListNoNavigation.Locality.Name)</td>
+            <td>@(item.PrimaryListNoNavigation.LocalityId == null ? item.PrimaryListNoNavigation.PlotNo: item.PrimaryListNoNavigation.KhasraNo)</td>
+            <td>@(item.PrimaryListNoNavigation.PrimaryListNo == null ? "NA" : item.PrimaryListNoNavigation.PrimaryListNo)</td>
             <td>@(item.Encroachment.ToString() == "1" ? "Yes" : "No")</td>
             <td>@item.StatusOnGround</td>
             <td>
                 @(item.ApprovedStatusNavigation == null ? "" : item.ApprovedStatusNavigation.SentStatusName)
             </td>
+            <td>@item.CreatedDate.ToString("dd-MMM-yyyy hh:mm:ss tt")</td>
             @if (ViewBag.IsApproved == 0)
             {
                 <td>
