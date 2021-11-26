@@ -30,17 +30,19 @@
 
 $(document).ready(function () {
     $('#StructureId1').removeAttr('multiple');
-
     var id = parseInt($('#FixingDemolitionId').val());
     var encroachmentId = parseInt($('#EncroachmentId').val());
     var watchWardId = parseInt($('#WatchWardId').val());
-    //GetWatchWardDetails(watchWardId);
-    //GetEncroachmentDetails(encroachmentId);
-    //GetAnnexureADetails(id);
-
+    console.info("encroachmentId:" + encroachmentId + " WatchWardId:" + watchWardId); 
+    GetWatchWardDetails(watchWardId);
+    GetEncroachmentDetails(encroachmentId);
+    GetAnnexureADetails(id);
     FillDemolitionRptAtEdit();
-    FillAreaRptAtEdit();
+    FillAreaRptAtEdit();  
+    
 });
+   
+ 
 
 function GetWatchWardDetails(id) {
     HttpAsyncGet(`/Demolitionstructuredetails/WatchWardView/?Id=${id}`, 'html', function (response) {
