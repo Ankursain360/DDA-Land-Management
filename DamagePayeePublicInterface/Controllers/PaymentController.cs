@@ -29,8 +29,16 @@ namespace DamagePayeePublicInterface.Controllers
         public async Task<IActionResult> Index()
         {
             var Data = await _dPPublicPaymentService.FetchDamagePayeeRegisterDetails(SiteContext.UserId);
-            var data1 = await _dPPublicPaymentService.GetDemandDetails(Data.FileNo);
-            return View(data1);
+            if( Data == null)
+            {
+                return View();
+            }
+            else 
+            {
+                var data1 = await _dPPublicPaymentService.GetDemandDetails(Data.FileNo);
+                return View(data1);
+            }
+            
         }
     }
 }

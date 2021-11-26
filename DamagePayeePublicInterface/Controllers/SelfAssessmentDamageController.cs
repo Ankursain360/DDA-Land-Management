@@ -306,7 +306,7 @@ namespace DamagePayeePublicInterface.Controllers
                                                                         }
                                                                         foreach (var item in damagepayeepersonelinfotemp)
                                                                         {
-                                                                            result = await _selfAssessmentDamageService.SavePayeePersonalInfoTemp(item);
+                                                                         var result1 = await _selfAssessmentDamageService.SavePayeePersonalInfoTemp(item);
                                                                         }
                                                                     }
                                                                 }
@@ -338,7 +338,7 @@ namespace DamagePayeePublicInterface.Controllers
                                                                                                         damagepayeeregistertemp.ATSGPAFilePath[i] : string.Empty
                                                                             });
                                                                         }
-                                                                        result = await _selfAssessmentDamageService.SaveAllotteTypeTemp(allottetypetemp);
+                                                                     var resultpayee = await _selfAssessmentDamageService.SaveAllotteTypeTemp(allottetypetemp);
                                                                     }
                                                                 }
 
@@ -362,23 +362,23 @@ namespace DamagePayeePublicInterface.Controllers
                                                                         List<Damagepaymenthistory> damagepaymenthistorytemp = new List<Damagepaymenthistory>();
                                                                         for (int i = 0; i < damagepayeeregistertemp.payeeName.Count; i++)
                                                                         {
-                                                                            //damagepaymenthistorytemp.Add(new Damagepaymenthistory
-                                                                            //{
-                                                                            //    Name = damagepayeeregistertemp.PaymntName.Count <= i ? string.Empty : damagepayeeregistertemp.PaymntName[i],
-                                                                            //    RecieptNo = damagepayeeregistertemp.RecieptNo.Count <= i ? string.Empty : damagepayeeregistertemp.RecieptNo[i],
-                                                                            //    PaymentMode = damagepayeeregistertemp.PaymentMode.Count <= i ? string.Empty : damagepayeeregistertemp.PaymentMode[i],
-                                                                            //    PaymentDate = damagepayeeregistertemp.PaymentDate.Count <= i ? DateTime.Now : damagepayeeregistertemp.PaymentDate[i],
-                                                                            //    Amount = damagepayeeregistertemp.Amount.Count <= i ? 0 : damagepayeeregistertemp.Amount[i],
-                                                                            //    RecieptDocumentPath = damagepayeeregistertemp.Reciept != null ?
-                                                                            //                            damagepayeeregistertemp.Reciept.Count <= i ? string.Empty :
-                                                                            //                            fileHelper.SaveFile(RecieptDocumentPathLayout, damagepayeeregistertemp.Reciept[i]) :
-                                                                            //                            damagepayeeregistertemp.RecieptFilePath[i] != null || damagepayeeregistertemp.RecieptFilePath[i] != "" ?
-                                                                            //                            damagepayeeregistertemp.RecieptFilePath[i] : string.Empty,
-                                                                            //    DamagePayeeRegisterTempId = damagepayeeregistertemp.Id
-                                                                            //});
-                                                                        }
+                                                                    damagepaymenthistorytemp.Add(new Damagepaymenthistory
+                                                                    {
+                                                                        Name = damagepayeeregistertemp.PaymntName.Count <= i ? string.Empty : damagepayeeregistertemp.PaymntName[i],
+                                                                        RecieptNo = damagepayeeregistertemp.RecieptNo.Count <= i ? string.Empty : damagepayeeregistertemp.RecieptNo[i],
+                                                                        PaymentMode = damagepayeeregistertemp.PaymentMode.Count <= i ? string.Empty : damagepayeeregistertemp.PaymentMode[i],
+                                                                        PaymentDate = damagepayeeregistertemp.PaymentDate.Count <= i ? DateTime.Now : damagepayeeregistertemp.PaymentDate[i],
+                                                                        Amount = damagepayeeregistertemp.Amount.Count <= i ? 0 : damagepayeeregistertemp.Amount[i],
+                                                                        RecieptDocumentPath = damagepayeeregistertemp.Reciept != null ?
+                                                                                                damagepayeeregistertemp.Reciept.Count <= i ? string.Empty :
+                                                                                                fileHelper.SaveFile(RecieptDocumentPathLayout, damagepayeeregistertemp.Reciept[i]) :
+                                                                                                damagepayeeregistertemp.RecieptFilePath[i] != null || damagepayeeregistertemp.RecieptFilePath[i] != "" ?
+                                                                                                damagepayeeregistertemp.RecieptFilePath[i] : string.Empty,
+                                                                        DamagePayeeRegisterTempId = damagepayeeregistertemp.Id
+                                                                    });
+                                                                }
 
-                                                                     //   result = await _selfAssessmentDamageService.SavePaymentHistoryTemp(damagepaymenthistorytemp);
+                                                                      var  resultpaymnt = await _selfAssessmentDamageService.SavePaymentHistoryTemp(damagepaymenthistorytemp);
 
                                                                     }
                                                                 }
@@ -534,7 +534,28 @@ namespace DamagePayeePublicInterface.Controllers
                                                         }
                                                         else
                                                         {
-                                                            damagepayeeregistertemp.ModifiedBy = SiteContext.UserId;
+                                                    if (damagepayeeregistertemp.DocumentIFormFile == null)
+                                                    {
+                                                        damagepayeeregistertemp.DocumentName = damagepayeeregistertemp.DocumentName;
+                                                    }
+                                                    
+                                                    if (damagepayeeregistertemp.PropertyPhoto == null)
+                                                    {
+                                                        damagepayeeregistertemp.PropertyPhotoPath = damagepayeeregistertemp.PropertyPhotoPath;
+                                                    }
+                                                    //if (damagepayeeregistertemp.ShowCauseNotice == null)
+                                                    //{
+                                                    //    damagepayeeregistertemp.ShowCauseNoticePath = damagepayeeregistertemp.ShowCauseNoticePath;
+                                                    //}
+                                                    if (damagepayeeregistertemp.Fgform == null)
+                                                    {
+                                                        damagepayeeregistertemp.FgformPath = damagepayeeregistertemp.FgformPath;
+                                                    }
+                                                    if (damagepayeeregistertemp.DocumentForFile == null)
+                                                    {
+                                                        damagepayeeregistertemp.DocumentForFilePath = damagepayeeregistertemp.DocumentForFilePath;
+                                                    }
+                                                           damagepayeeregistertemp.ModifiedBy = SiteContext.UserId;
                                                             var result = await _selfAssessmentDamageService.Update(damagepayeeregistertemp);
                                                             if (result)
                                                             {
@@ -597,7 +618,7 @@ namespace DamagePayeePublicInterface.Controllers
                                                                         }
                                                                         foreach (var item in damagepayeepersonelinfotemp)
                                                                         {
-                                                                            result = await _selfAssessmentDamageService.SavePayeePersonalInfoTemp(item);
+                                                                           var result1 = await _selfAssessmentDamageService.SavePayeePersonalInfoTemp(item);
                                                                         }
                                                                     }
                                                                 }
@@ -630,7 +651,7 @@ namespace DamagePayeePublicInterface.Controllers
                                                                                                         damagepayeeregistertemp.ATSGPAFilePath[i] : string.Empty
                                                                             });
                                                                         }
-                                                                        result = await _selfAssessmentDamageService.SaveAllotteTypeTemp(allottetypetemp);
+                                                                       var result2 = await _selfAssessmentDamageService.SaveAllotteTypeTemp(allottetypetemp);
                                                                     }
                                                                 }
 
@@ -672,7 +693,7 @@ namespace DamagePayeePublicInterface.Controllers
                                                                             });
                                                                         }
 
-                                                                        result = await _selfAssessmentDamageService.SavePaymentHistoryTemp(damagepaymenthistorytemp);
+                                                                      var  result3 = await _selfAssessmentDamageService.SavePaymentHistoryTemp(damagepaymenthistorytemp);
 
                                                                     }
                                                                 }

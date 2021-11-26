@@ -591,7 +591,7 @@ $(document).delegate('a.add-recordDamageAssessee', 'click', function (e) {
     if ($("#tbl_DamageAssessee #addDamageAssessee #Name").val() != ''
         && $("#tbl_DamageAssessee #addDamageAssessee #FatherName").val() != ''
         && $("#tbl_DamageAssessee #addDamageAssessee #Date").val() != ''
-        && $("#tbl_DamageAssessee #addDamageAssessee #ATSGPA").val() != ''
+       // && $("#tbl_DamageAssessee #addDamageAssessee #ATSGPA").val() != ''
 
     ) {
         e.preventDefault();
