@@ -16,21 +16,21 @@ namespace Libraries.Model.Entity
         }
         public string RefNo { get; set; }
 
-        [Required (ErrorMessage ="Please fill date")]
+        [Required(ErrorMessage = "Date is mandatory")]
         public DateTime? Date { get; set; }
         public int? LocalityId { get; set; }
 
         public int? KhasraId { get; set; }
 
-        [Required(ErrorMessage = "Please select Primary List No.")]
+        [Required(ErrorMessage = "Primary List No. is mandatory")]
         public int PrimaryListNo { get; set; }
 
-        [Required(ErrorMessage = "Please fill Landmark")]
+        [Required(ErrorMessage = "Landmark is mandatory")]
         public string Landmark { get; set; }
 
         public int Encroachment { get; set; }
 
-        [Required(ErrorMessage = "Status On Ground is required")]
+        [Required(ErrorMessage = "Status On Ground is mandatory")]
         public string StatusOnGround { get; set; }
 
         public string PhotoPath { get; set; }
