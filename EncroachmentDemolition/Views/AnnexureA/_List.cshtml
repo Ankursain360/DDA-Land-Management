@@ -3,7 +3,7 @@
     <thead class="text-nowrap">
         <tr>
             <th>Date</th>
-            <th>Locality(Village)</th>
+            <th>Locality(Village)/Colony</th>
             <th>Khasra No/Plot No</th>
             <th>Encroachment</th>
             <th>Police Station</th>
@@ -20,8 +20,10 @@
         <tr>
 
             <td>@(item.EncrochmentDate==null?"Not Available":Convert.ToDateTime(item.EncrochmentDate).ToString("dd MMM yyyy"))</td>
-            <td>@(item.Locality == null ? ""  : item.Locality.Name)</td>
-            <td>@(item.KhasraNo == null ? ""  :item.KhasraNo)</td>
+            @*<td>@(item.Locality == null ? ""  : item.Locality.Name)</td>
+        <td>@(item.KhasraNoNavigation.KhasraNo == null ? ""  :item.KhasraNoNavigation.KhasraNo)</td>*@
+            <td>@(item.KhasraNoNavigation.LocalityId == null ? item.KhasraNoNavigation.Colony : item.KhasraNoNavigation.Locality.Name)</td>
+            <td>@(item.KhasraNoNavigation.LocalityId == null ? item.KhasraNoNavigation.PlotNo: item.KhasraNoNavigation.KhasraNo)</td>
             <td>@(item.IsEncroachment== "" ? "No" : item.IsEncroachment)</td>
             <td>@item.PoliceStation</td>
             <td>@item.SecurityGuardOnDuty</td>

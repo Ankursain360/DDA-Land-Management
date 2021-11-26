@@ -148,8 +148,9 @@ namespace EncroachmentDemolition.Controllers
                 Random r = new Random();
                 int num = r.Next();
                 encroachmentRegisterations.RefNo = DateTime.Now.Year.ToString() + encroachmentRegisterations.Zone.Code + num.ToString();
-                //ModelState.Remove("CountOfStructure");
-                //ModelState.Remove("DateOfEncroachment ");
+                ModelState.Remove("AreaApprox");
+                ModelState.Remove("CountOfStructure");
+                ModelState.Remove("DateOfEncroachment");
                 if (ModelState.IsValid)
                 {
                     if (IsValidpdf == true)
@@ -157,7 +158,6 @@ namespace EncroachmentDemolition.Controllers
 
                         if (IsValidpdf1 == true)
                         {
-
 
                             #region Approval Proccess At 1st level Check Initial Before Creating Record  Added by Renu 21 April 2021
 

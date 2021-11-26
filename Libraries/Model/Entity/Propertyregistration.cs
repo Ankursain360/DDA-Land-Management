@@ -15,10 +15,12 @@ namespace Libraries.Model.Entity
         //}
         public Propertyregistration()
         {
+           
             Landtransfer = new HashSet<Landtransfer>();
             Propertyregistrationhistory = new HashSet<PropertyRegistrationHistory>();
             PlanningProperties = new HashSet<PlanningProperties>();
             Watchandward = new HashSet<Watchandward>();
+            Encroachmentregisteration = new HashSet<EncroachmentRegisteration>();
             AssignedPropertyDailyRoaster = new HashSet<AssignedPropertyDailyRoaster>();
             Dmsfileupload = new HashSet<Dmsfileupload>();
             Vacantlandimage = new HashSet<Vacantlandimage>();
@@ -294,5 +296,6 @@ namespace Libraries.Model.Entity
         public ICollection<Watchandward> Watchandward { get; set; }
         public ICollection<Dmsfileupload> Dmsfileupload { get; set; }
         public ICollection<Vacantlandimage> Vacantlandimage { get; set; }
+        public ICollection<EncroachmentRegisteration> Encroachmentregisteration { get; set; }
     }
 }

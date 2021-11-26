@@ -150,6 +150,7 @@ namespace Libraries.Repository.EntityRepository
                                        .Include(x => x.Locality)
                                        .Include(x => x.WatchWard)
                                        .Include(x => x.Zone)
+                                       .Include(x=>x.KhasraNoNavigation)
                                      .Where(a => (a.IsActive == 1)
                                      && a.EncrochmentDate == (dto.date == "" ? a.EncrochmentDate : Convert.ToDateTime(dto.date))
                                      && (string.IsNullOrEmpty(dto.department) || a.Department.Name.Contains(dto.department))
@@ -157,7 +158,7 @@ namespace Libraries.Repository.EntityRepository
                                      && (string.IsNullOrEmpty(dto.division) || a.Division.Name.Contains(dto.division))
                                      && (string.IsNullOrEmpty(dto.locality) || a.Locality.Name.Contains(dto.locality))
                                      && (string.IsNullOrEmpty(dto.locality) || a.Locality.Name.Contains(dto.locality))
-                                     && (string.IsNullOrEmpty(dto.khasrano) || a.KhasraNo.Contains(dto.khasrano))
+                                     && (string.IsNullOrEmpty(dto.khasrano) || a.KhasraNoNavigation.KhasraNo.Contains(dto.khasrano))
                                     )
                                   .OrderByDescending(a => a.Id)
                                   .ToListAsync();
@@ -175,7 +176,7 @@ namespace Libraries.Repository.EntityRepository
                         ZoneId = Data[i].ZoneId == 0 || Data[i].ZoneId == null ? 0 : Data[i].ZoneId,
                         DivisionId = Data[i].DivisionId == 0 || Data[i].DivisionId == null ? 0 : Data[i].DivisionId,
                         LocalityId = Data[i].LocalityId == 0 || Data[i].LocalityId == null ? 0 : Data[i].LocalityId,
-                        KhasraNo = Data[i].KhasraNo == null || Data[i].KhasraNo == "" ? "NA" : Data[i].KhasraNo,
+                        KhasraNo = Data[i].KhasraNoNavigation.KhasraNo == null || Data[i].KhasraNoNavigation.KhasraNo == "" ? "NA" : Data[i].KhasraNoNavigation.KhasraNo,
                         DepartmentName = Data[i].DepartmentId == 0|| Data[i].DepartmentId == null ? "NA": Data[i].Department.Name,
                         ZoneName = Data[i].ZoneId == 0 || Data[i].ZoneId == null ? "NA" : Data[i].Zone.Name,
                         DivisionName = Data[i].DivisionId == 0 || Data[i].DivisionId == null ? "NA" : Data[i].Division.Name,

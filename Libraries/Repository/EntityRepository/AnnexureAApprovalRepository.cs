@@ -39,6 +39,7 @@ namespace Libraries.Repository.EntityRepository
             var data = await _dbContext.Fixingdemolition
                                         .Include(x => x.Encroachment.Locality)
                                         .Include(x => x.Encroachment)
+                                        .Include(x => x.Encroachment.KhasraNoNavigation)
                                         .Include(x => x.ApprovedStatusNavigation)
                                         .Where(x => x.IsActive == 1
                                             && (model.StatusId == 0 ? (x.Encroachment.ZoneId == x.Encroachment.ZoneId) : (x.Encroachment.ZoneId == (zoneId == 0 ? x.Encroachment.ZoneId : zoneId)))
@@ -60,7 +61,7 @@ namespace Libraries.Repository.EntityRepository
                         data.Results = data.Results.OrderBy(x => x.Encroachment == null ? null : x.Encroachment.Locality == null ? null : x.Encroachment.Locality.Name).ToList();
                         break;
                     case ("KHASRANO"):
-                        data.Results = data.Results.OrderBy(x => x.Encroachment == null ? null : x.Encroachment.KhasraNo).ToList();
+                        data.Results = data.Results.OrderBy(x => x.Encroachment == null ? null : x.Encroachment.KhasraNoNavigation.KhasraNo).ToList();
                         break;
                 }
 
@@ -76,7 +77,7 @@ namespace Libraries.Repository.EntityRepository
                         data.Results = data.Results.OrderByDescending(x => x.Encroachment == null ? null : x.Encroachment.Locality == null ? null : x.Encroachment.Locality.Name).ToList();
                         break;
                     case ("KHASRANO"):
-                        data.Results = data.Results.OrderByDescending(x => x.Encroachment == null ? null : x.Encroachment.KhasraNo).ToList();
+                        data.Results = data.Results.OrderByDescending(x => x.Encroachment == null ? null : x.Encroachment.KhasraNoNavigation.KhasraNo).ToList();
                         break;
                 }
             }

@@ -349,6 +349,7 @@ namespace Libraries.Repository.EntityRepository
                .Include(x => x.Zone)
                .Include(x => x.Division)
                 .Include(x => x.Areareclaimedrpt)
+                .Include(x => x.FixingDemolition.Encroachment.KhasraNoNavigation)
                .Where(x => (x.DepartmentId == (dto.departmentId == 0 ? x.DepartmentId : dto.departmentId))
                && (x.ZoneId == (dto.zoneId == 0 ? x.ZoneId : dto.zoneId))
                && (x.DivisionId == (dto.divisionId == 0 ? x.DivisionId : dto.divisionId))
@@ -461,6 +462,7 @@ namespace Libraries.Repository.EntityRepository
         public async Task<PagedResult<Fixingdemolition>> GetPagedDemolitiondiary(DemolitionstructuredetailsDto1 model, int userId, int approved)
         {
             var InDemolitionPoliceAssistenceTable = (from x in _dbContext.Demolitionpoliceassistenceletter
+                                                     .Include(x=> x.FixingDemolition.Encroachment.KhasraNoNavigation)
                                                      where x.FixingDemolitionId == x.FixingDemolition.Id && x.FixingDemolition.IsActive == 1
                                                      select x.FixingDemolitionId).ToArray();
 
@@ -470,6 +472,7 @@ namespace Libraries.Repository.EntityRepository
                                         .Include(x => x.Encroachment)
                                          //.Include(x => x.Demolitionpoliceassistenceletter)
                                         .Include(x => x.ApprovedStatusNavigation)
+                                        .Include(x => x.Encroachment.KhasraNoNavigation)
                                         .Where(x => x.IsActive == 1 && x.ApprovedStatusNavigation.StatusCode == approved
                                         //  && (model.StatusId == 0 ? x.PendingAt == userId : x.PendingAt == 0)
                                         // && !(InDemolitionPoliceAssistenceTable).Contains(x.Id)

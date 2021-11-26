@@ -4,8 +4,8 @@
         <tr>
            
             <th>Inspection Date</th>
-            <th>Locality(Village)</th>
-            <th>Khasra No.</th>
+            <th>Locality(Village)/Colony</th>
+            <th>Khasra No./PlotNo</th>
             <th>Status</th>
             <th>Action</th>
         </tr>
@@ -15,30 +15,32 @@
         {
             @foreach (var item in Model.Results)
             {
-                <tr>
-                   
+        <tr>
 
-                    <td> @(Convert.ToDateTime(item.FixingDemolition.Encroachment.EncrochmentDate).ToString("dd-MMM-yyyy"))</td>
-                    <td>@(item.FixingDemolition.Encroachment.Locality == null ? ""  : item.FixingDemolition.Encroachment.Locality.Name)</td>
-                    <td>@(item.FixingDemolition.Encroachment.KhasraNo == null ? ""  :item.FixingDemolition.Encroachment.KhasraNo)</td>
-                    <td>@(item.FixingDemolition.ApprovedStatus == 0 ?  "Pending" : "Approved")</td>
-                    @if (ViewBag.IsApproved == 1)
-                    {
-                        <td>
 
-                            <a asp-action="Create" asp-route-id="@item.Id" title="create" class="edit"><i class="ri-edit-line"></i> </a>
+            <td> @(Convert.ToDateTime(item.FixingDemolition.Encroachment.EncrochmentDate).ToString("dd-MMM-yyyy"))</td>
+            <td>@(item.FixingDemolition.Encroachment.KhasraNoNavigation.LocalityId == null ? item.FixingDemolition.Encroachment.KhasraNoNavigation.Colony : item.FixingDemolition.Encroachment.KhasraNoNavigation.Locality.Name)</td>
+            <td>@(item.FixingDemolition.Encroachment.KhasraNoNavigation.LocalityId == null ? item.FixingDemolition.Encroachment.KhasraNoNavigation.PlotNo: item.FixingDemolition.Encroachment.KhasraNoNavigation.KhasraNo)</td>
+            @*<td>@(item.FixingDemolition.Encroachment.Locality == null ? ""  : item.FixingDemolition.Encroachment.Locality.Name)</td>
+        <td>@(item.FixingDemolition.Encroachment.KhasraNoNavigation.KhasraNo == null ? ""  :item.FixingDemolition.Encroachment.KhasraNoNavigation.KhasraNo)</td>*@
+            <td>@(item.FixingDemolition.ApprovedStatus == 0 ?  "Pending" : "Approved")</td>
+            @if (ViewBag.IsApproved == 1)
+            {
+                <td>
 
-                        </td>
-                    }
-                    else
-                    {
-                        <td>
+                    <a asp-action="Create" asp-route-id="@item.Id" title="create" class="edit"><i class="ri-edit-line"></i> </a>
 
-                            <a asp-action="Edit" asp-route-id="@item.Id" title="edit" class="edit"><i class="ri-edit-line"></i> </a>
+                </td>
+            }
+            else
+            {
+                <td>
 
-                        </td>
-                    }
-                </tr>
+                    <a asp-action="Edit" asp-route-id="@item.Id" title="edit" class="edit"><i class="ri-edit-line"></i> </a>
+
+                </td>
+            }
+        </tr>
             }
         }
         else

@@ -84,9 +84,9 @@ namespace Libraries.Repository.EntityRepository
         }
 
 
-        public async Task<List<Propertyregistration>> GetAllKhasraListFromPropertyInventory(int ZoneId,int DepartmentId)
+        public async Task<List<Propertyregistration>> GetAllKhasraListFromPropertyInventory(int ZoneId, int DepartmentId)
         {
-            var data= await _dbContext.Propertyregistration.Where(x => x.IsActive == 1 && x.ZoneId == ZoneId && x.DepartmentId == DepartmentId && x.IsDeleted == 1 && x.IsValidate == 1 && x.IsDisposed != 0).Select(x=>new Propertyregistration { Id=x.Id,KhasraNo=x.PlannedUnplannedLand== "Planned Land" ? x.PlotNo:x.KhasraNo}).ToListAsync();
+            var data = await _dbContext.Propertyregistration.Where(x => x.IsActive == 1 && x.ZoneId == ZoneId && x.DepartmentId == DepartmentId && x.IsDeleted == 1 && x.IsValidate == 1 && x.IsDisposed != 0).Select(x => new Propertyregistration { Id = x.Id, KhasraNo = x.PlannedUnplannedLand == "Planned Land" ? x.PlotNo : x.KhasraNo }).ToListAsync();
             return data;
         }
 
@@ -388,6 +388,7 @@ namespace Libraries.Repository.EntityRepository
                 .Include(x => x.Department)
                 .Include(x => x.Zone)
                 .Include(x => x.Division)
+                 .Include(x => x.KhasraNoNavigation)
                 .Where(x => (x.DepartmentId == (dto.departmentId == 0 ? x.DepartmentId : dto.departmentId))
                 && (x.ZoneId == (dto.zoneId == 0 ? x.ZoneId : dto.zoneId))
                 && (x.DivisionId == (dto.divisionId == 0 ? x.DivisionId : dto.divisionId))
@@ -456,6 +457,7 @@ namespace Libraries.Repository.EntityRepository
                                        .Include(x => x.Department)
                                        .Include(x => x.Zone)
                                        .Include(x => x.Division)
+                                       .Include(x => x.KhasraNoNavigation)
                                        .Where(x => (x.DepartmentId == (dto.departmentId == 0 ? x.DepartmentId : dto.departmentId))
                                         && (x.ZoneId == (dto.zoneId == 0 ? x.ZoneId : dto.zoneId))
                                          && (x.DivisionId == (dto.divisionId == 0 ? x.DivisionId : dto.divisionId))
@@ -476,6 +478,7 @@ namespace Libraries.Repository.EntityRepository
                                                 .Include(x => x.Department)
                                                 .Include(x => x.Zone)
                                                 .Include(x => x.Division)
+                                                .Include(x => x.KhasraNoNavigation)
                                                 .Where(x => (x.DepartmentId == (dto.departmentId == 0 ? x.DepartmentId : dto.departmentId))
                                                 && (x.ZoneId == (dto.zoneId == 0 ? x.ZoneId : dto.zoneId))
                                                 && (x.DivisionId == (dto.divisionId == 0 ? x.DivisionId : dto.divisionId))
@@ -495,6 +498,7 @@ namespace Libraries.Repository.EntityRepository
                                                .Include(x => x.Department)
                                                .Include(x => x.Zone)
                                                .Include(x => x.Division)
+                                               .Include(x => x.KhasraNoNavigation)
                                                .Where(x => (x.DepartmentId == (dto.departmentId == 0 ? x.DepartmentId : dto.departmentId))
                                                && (x.ZoneId == (dto.zoneId == 0 ? x.ZoneId : dto.zoneId))
                                                && (x.DivisionId == (dto.divisionId == 0 ? x.DivisionId : dto.divisionId))
@@ -514,6 +518,7 @@ namespace Libraries.Repository.EntityRepository
                                                .Include(x => x.Department)
                                                .Include(x => x.Zone)
                                                .Include(x => x.Division)
+                                               .Include(x => x.KhasraNoNavigation)
                                                .Where(x => (x.DepartmentId == (dto.departmentId == 0 ? x.DepartmentId : dto.departmentId))
                                                && (x.ZoneId == (dto.zoneId == 0 ? x.ZoneId : dto.zoneId))
                                                && (x.DivisionId == (dto.divisionId == 0 ? x.DivisionId : dto.divisionId))
@@ -533,6 +538,7 @@ namespace Libraries.Repository.EntityRepository
                                                .Include(x => x.Department)
                                                .Include(x => x.Zone)
                                                .Include(x => x.Division)
+                                               .Include(x => x.KhasraNoNavigation)
                                                .Where(x => (x.DepartmentId == (dto.departmentId == 0 ? x.DepartmentId : dto.departmentId))
                                                && (x.ZoneId == (dto.zoneId == 0 ? x.ZoneId : dto.zoneId))
                                                && (x.DivisionId == (dto.divisionId == 0 ? x.DivisionId : dto.divisionId))
@@ -552,6 +558,7 @@ namespace Libraries.Repository.EntityRepository
                                                .Include(x => x.Department)
                                                .Include(x => x.Zone)
                                                .Include(x => x.Division)
+                                               .Include(x => x.KhasraNoNavigation)
                                                .Where(x => (x.DepartmentId == (dto.departmentId == 0 ? x.DepartmentId : dto.departmentId))
                                                && (x.ZoneId == (dto.zoneId == 0 ? x.ZoneId : dto.zoneId))
                                                && (x.DivisionId == (dto.divisionId == 0 ? x.DivisionId : dto.divisionId))
@@ -571,6 +578,7 @@ namespace Libraries.Repository.EntityRepository
                                                .Include(x => x.Department)
                                                .Include(x => x.Zone)
                                                .Include(x => x.Division)
+                                               .Include(x => x.KhasraNoNavigation)
                                                .Where(x => (x.DepartmentId == (dto.departmentId == 0 ? x.DepartmentId : dto.departmentId))
                                                && (x.ZoneId == (dto.zoneId == 0 ? x.ZoneId : dto.zoneId))
                                                && (x.DivisionId == (dto.divisionId == 0 ? x.DivisionId : dto.divisionId))
@@ -598,6 +606,7 @@ namespace Libraries.Repository.EntityRepository
                                                 .Include(x => x.Department)
                                                 .Include(x => x.Zone)
                                                 .Include(x => x.Division)
+                                                .Include(x => x.KhasraNoNavigation)
                                                 .Where(x => (x.DepartmentId == (dto.departmentId == 0 ? x.DepartmentId : dto.departmentId))
                                                 && (x.ZoneId == (dto.zoneId == 0 ? x.ZoneId : dto.zoneId))
                                                 && (x.DivisionId == (dto.divisionId == 0 ? x.DivisionId : dto.divisionId))
@@ -617,6 +626,7 @@ namespace Libraries.Repository.EntityRepository
                                                .Include(x => x.Department)
                                                .Include(x => x.Zone)
                                                .Include(x => x.Division)
+                                               .Include(x => x.KhasraNoNavigation)
                                                .Where(x => (x.DepartmentId == (dto.departmentId == 0 ? x.DepartmentId : dto.departmentId))
                                                && (x.ZoneId == (dto.zoneId == 0 ? x.ZoneId : dto.zoneId))
                                                && (x.DivisionId == (dto.divisionId == 0 ? x.DivisionId : dto.divisionId))
@@ -636,6 +646,7 @@ namespace Libraries.Repository.EntityRepository
                                                .Include(x => x.Department)
                                                .Include(x => x.Zone)
                                                .Include(x => x.Division)
+                                               .Include(x => x.KhasraNoNavigation)
                                                .Where(x => (x.DepartmentId == (dto.departmentId == 0 ? x.DepartmentId : dto.departmentId))
                                                && (x.ZoneId == (dto.zoneId == 0 ? x.ZoneId : dto.zoneId))
                                                && (x.DivisionId == (dto.divisionId == 0 ? x.DivisionId : dto.divisionId))
@@ -655,6 +666,7 @@ namespace Libraries.Repository.EntityRepository
                                                .Include(x => x.Department)
                                                .Include(x => x.Zone)
                                                .Include(x => x.Division)
+                                               .Include(x => x.KhasraNoNavigation)
                                                .Where(x => (x.DepartmentId == (dto.departmentId == 0 ? x.DepartmentId : dto.departmentId))
                                                && (x.ZoneId == (dto.zoneId == 0 ? x.ZoneId : dto.zoneId))
                                                && (x.DivisionId == (dto.divisionId == 0 ? x.DivisionId : dto.divisionId))
@@ -674,6 +686,7 @@ namespace Libraries.Repository.EntityRepository
                                                .Include(x => x.Department)
                                                .Include(x => x.Zone)
                                                .Include(x => x.Division)
+                                               .Include(x => x.KhasraNoNavigation)
                                                .Where(x => (x.DepartmentId == (dto.departmentId == 0 ? x.DepartmentId : dto.departmentId))
                                                && (x.ZoneId == (dto.zoneId == 0 ? x.ZoneId : dto.zoneId))
                                                && (x.DivisionId == (dto.divisionId == 0 ? x.DivisionId : dto.divisionId))
@@ -722,7 +735,9 @@ namespace Libraries.Repository.EntityRepository
             //    .GetPaged<EncroachmentRegisteration>(model.PageNumber, model.PageSize);
             var data = await _dbContext.EncroachmentRegisteration
                   .Include(x => x.Locality)
-
+                   .Include(x => x.Department)
+                   .Include(x => x.Zone)
+                    .Include(x => x.KhasraNoNavigation)
                   .Where(x => (x.LocalityId == (model.localityId == 0 ? x.LocalityId : model.localityId))
                  && x.EncrochmentDate >= model.fromDate
                  && x.EncrochmentDate <= model.toDate)

@@ -3,8 +3,8 @@
     <thead class="text-nowrap">
         <tr>
             <th>Date</th>
-            <th>Locality(Village)</th>
-            <th>Khasra No.</th>
+            <th>Locality(Village)/Colony</th>
+             <th>Khasra No./Plot No</th>
             <th>Status</th>
             <th>Action</th>
         </tr>
@@ -17,8 +17,9 @@
         <tr>
 
             <td> @(Convert.ToDateTime(item.EncrochmentDate).ToString("dd-MMM-yyyy"))</td>
-            <td>@(item.Locality == null ? ""  : item.Locality.Name)</td>
-            <td>@(item.KhasraNo == null ? ""  :item.KhasraNo)</td>
+            <td>@(item.KhasraNoNavigation.LocalityId == null ? item.KhasraNoNavigation.Colony : item.KhasraNoNavigation.Locality.Name)</td>
+            <td>@(item.KhasraNoNavigation.LocalityId == null ? item.KhasraNoNavigation.PlotNo: item.KhasraNoNavigation.KhasraNo)</td>
+            @*<td>@(item.KhasraNoNavigation.KhasraNo == null ? ""  :item.KhasraNoNavigation.KhasraNo)</td>*@
             <td>
                 @(item.ApprovedStatusNavigation == null ? "" : item.ApprovedStatusNavigation.SentStatusName)
             </td>
