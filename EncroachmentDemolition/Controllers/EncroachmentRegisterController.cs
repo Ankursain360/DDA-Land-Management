@@ -159,7 +159,6 @@ namespace EncroachmentDemolition.Controllers
                         if (IsValidpdf1 == true)
                         {
 
-
                             #region Approval Proccess At 1st level Check Initial Before Creating Record  Added by Renu 21 April 2021
 
                             Approvalproccess approvalproccess = new Approvalproccess();
