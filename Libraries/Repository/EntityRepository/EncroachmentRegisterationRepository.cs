@@ -83,6 +83,13 @@ namespace Libraries.Repository.EntityRepository
             return await _dbContext.Khasra.Where(x =>/*x.VillageId==localityId &&*/ x.IsActive == 1).ToListAsync();
         }
 
+
+        public async Task<List<Propertyregistration>> GetAllKhasraListFromPropertyInventory(int ZoneId,int DepartmentId)
+        {
+            var data= await _dbContext.Propertyregistration.Where(x => x.IsActive == 1 && x.ZoneId == ZoneId && x.DepartmentId == DepartmentId && x.IsDeleted == 1 && x.IsValidate == 1 && x.IsDisposed != 0).Select(x=>new Propertyregistration { Id=x.Id,KhasraNo=x.PlannedUnplannedLand== "Planned Land" ? x.PlotNo:x.KhasraNo}).ToListAsync();
+            return data;
+        }
+
         public async Task<List<Locality>> GetAllLocalityList(int divisionId)
         {
             return await _dbContext.Locality.Where(x => x.DivisionId == divisionId && x.IsActive == 1).ToListAsync();

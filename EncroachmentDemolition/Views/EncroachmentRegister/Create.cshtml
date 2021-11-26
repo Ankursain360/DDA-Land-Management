@@ -64,11 +64,11 @@
         <div class="col-md-6">
             <div class="floating-label-wrap">
 
-                <select asp-for="KhasraNo" class="floating-label-field floating-label-field--s3" asp-items="@(new SelectList(Model.KhasraList,"Name","Name"))">
+                <select asp-for="KhasraNo" class="floating-label-field floating-label-field--s3" asp-items="@(new SelectList(Model.PropertyInventoryKhasraList,"Id","KhasraNo"))">
                     <option value="0">Select</option>
                 </select>
                 <span asp-validation-for="KhasraNo" class="text-danger"></span>
-                <label class="floating-label">Khasra No.</label>
+                <label class="floating-label">Khasra No/Plot No.</label>
             </div>
         </div>
         <div class="col-md-6">
@@ -184,7 +184,8 @@
             <span asp-validation-for="IsEncroachment" class="text-danger"></span>
         </div>
     </div>
-    <div id="Divclsification">
+    @*Start of Encorchment details*@
+    <div id="Divclsification" style="display:none">
         <h2 class="my-3 sub-heading">Details Of Encroachment</h2>
         <div class="row mt-md-3 mb-md-3">
             <div class="col-md-6">
@@ -278,7 +279,40 @@
                 </table>
             </div>
         </div>
+
+
+
+
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input type="file" asp-for="Firfile" id="Firfile" placeholder="FIR Details" class="floating-label-field floating-label-field--s3 checkExtension" multiple />
+                    <span asp-validation-for="Firfile" class="text-danger"></span>
+                    <label class="floating-label">FIR Details<span style="color:red">(.pdf only)</span></label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input type="text" asp-for="PoliceStation" limit="100" placeholder="Police Station" class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="PoliceStation" class="text-danger"></span>
+                    <label class="floating-label">Police Station@*<span style="color:red">*</span>*@</label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input type="text" placeholder="Security Guard on Duty" limit="100" asp-for="SecurityGuardOnDuty" class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="SecurityGuardOnDuty" class="text-danger"></span>
+                    <label class="floating-label">Officer on Duty@*<span style="color:red">*</span>*@</label>
+                </div>
+            </div>
+        </div>
     </div>
+    @*End of Encorchment details*@
 
     <div class="row mt-md-3">
         <div class="col-md-6">
@@ -346,52 +380,21 @@
             </div>
         </div>
     </div>
-
     <div class="row mt-md-3">
         <div class="col-md-6">
             <div class="floating-label-wrap mb-3 mb-md-0">
 
-                <input type="file" asp-for="Firfile" id="Firfile" placeholder="FIR Details" class="floating-label-field floating-label-field--s3 checkExtension" multiple />
-                <span asp-validation-for="Firfile" class="text-danger"></span>
-                <label class="floating-label">FIR Details<span style="color:red">(.pdf only)</span></label>
+                <input type="file" class="floating-label-field floating-label-field--s3 checkExtension" asp-for="PhotoFile" id="PhotoFile" multiple />
+                <span asp-validation-for="PhotoFile" class="text-danger"></span>
+                <label class="floating-label">Photo (<span style="color:red;"> max size 5 mb</span>)</label>
             </div>
         </div>
-        <div class="col-md-6">
-            <div class="floating-label-wrap mb-3 mb-md-0">
-
-                <input type="text" asp-for="PoliceStation" limit="100" placeholder="Police Station" class="floating-label-field floating-label-field--s3" />
-                <span asp-validation-for="PoliceStation" class="text-danger"></span>
-                <label class="floating-label">Police Station<span style="color:red">*</span></label>
-            </div>
-        </div>
-    </div>
-    <div class="row mt-md-3">
-        <div class="col-md-6">
-            <div class="floating-label-wrap mb-3 mb-md-0">
-
-                <input type="text" placeholder="Security Guard on Duty" limit="100" asp-for="SecurityGuardOnDuty" class="floating-label-field floating-label-field--s3" />
-                <span asp-validation-for="SecurityGuardOnDuty" class="text-danger"></span>
-                <label class="floating-label">Officer on Duty<span style="color:red">*</span></label>
-            </div>
-        </div>
-
         <div class="col-md-6">
             <div class="floating-label-wrap mb-3 mb-md-0">
 
                 <input type="file" placeholder="Location Map" asp-for="LocationMapFile" id="LocationMapFile" class="floating-label-field floating-label-field--s3 checkExtension" multiple />
                 <span asp-validation-for="LocationMapFile" class="text-danger"></span>
                 <label class="floating-label">Location Map<span style="color:red">(.pdf only)</span></label>
-            </div>
-        </div>
-    </div>
-
-    <div class="row mt-md-3">
-        <div class="col-md-6">
-            <div class="floating-label-wrap mb-3 mb-md-0">
-
-                <input type="file" class="floating-label-field floating-label-field--s3" asp-for="PhotoFile" id="PhotoFile" multiple />
-                <span asp-validation-for="PhotoFile" class="text-danger"></span>
-                <label class="floating-label">Photo (<span style="color:red;"> max size 5 mb</span>)</label>
             </div>
         </div>
 

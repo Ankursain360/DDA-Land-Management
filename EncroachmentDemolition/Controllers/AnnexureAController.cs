@@ -90,7 +90,8 @@ namespace EncroachmentDemolition.Controllers
             Data.ZoneList = await _encroachmentRegisterationService.GetAllZone(Data.DepartmentId);
             Data.DivisionList = await _encroachmentRegisterationService.GetAllDivisionList(Data.ZoneId);
             Data.LocalityList = await _encroachmentRegisterationService.GetAllLocalityList(Data.ZoneId);
-            Data.KhasraList = await _encroachmentRegisterationService.GetAllKhasraList(Data.LocalityId);
+          // Data.KhasraList = await _encroachmentRegisterationService.GetAllKhasraList(Data.LocalityId);
+            Data.PropertyInventoryKhasraList = await _encroachmentRegisterationService.GetAllKhasraListFromPropertyInventory(SiteContext.ZoneId ?? 0, SiteContext.DepartmentId ?? 0);
             Model.Demolitionchecklist = await _annexureAService.GetDemolitionchecklist();
             Model.Demolitionprogram = await _annexureAService.GetDemolitionprogram();
             Model.Demolitiondocument = await _annexureAService.GetDemolitiondocument();
@@ -445,8 +446,8 @@ namespace EncroachmentDemolition.Controllers
             encroachmentRegisterations.ZoneList = await _encroachmentRegisterationService.GetAllZone(encroachmentRegisterations.DepartmentId);
             encroachmentRegisterations.DivisionList = await _encroachmentRegisterationService.GetAllDivisionList(encroachmentRegisterations.ZoneId);
             encroachmentRegisterations.LocalityList = await _encroachmentRegisterationService.GetAllLocalityList(encroachmentRegisterations.DivisionId);
-            encroachmentRegisterations.KhasraList = await _encroachmentRegisterationService.GetAllKhasraList(encroachmentRegisterations.LocalityId);
-
+            //encroachmentRegisterations.KhasraList = await _encroachmentRegisterationService.GetAllKhasraList(encroachmentRegisterations.LocalityId);
+            encroachmentRegisterations.PropertyInventoryKhasraList= await _encroachmentRegisterationService.GetAllKhasraListFromPropertyInventory(SiteContext.ZoneId ?? 0, SiteContext.DepartmentId ?? 0);
             return PartialView("_EncroachmentRegisterView", encroachmentRegisterations);
         }
        
