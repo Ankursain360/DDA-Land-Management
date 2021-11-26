@@ -20,7 +20,7 @@
 
                     <td> @(Convert.ToDateTime(item.FixingDemolition.Encroachment.EncrochmentDate).ToString("dd-MMM-yyyy"))</td>
                     <td>@(item.FixingDemolition.Encroachment.Locality == null ? ""  : item.FixingDemolition.Encroachment.Locality.Name)</td>
-                    <td>@(item.FixingDemolition.Encroachment.KhasraNo == null ? ""  :item.FixingDemolition.Encroachment.KhasraNo)</td>
+                    <td>@(item.FixingDemolition.Encroachment.KhasraNoNavigation.KhasraNo == null ? ""  :item.FixingDemolition.Encroachment.KhasraNoNavigation.KhasraNo)</td>
                     <td>@(item.FixingDemolition.ApprovedStatus == 0 ?  "Pending" : "Approved")</td>
                     @if (ViewBag.IsApproved == 1)
                     {

@@ -18,7 +18,7 @@
         <tr>
             <td> @(Convert.ToDateTime(item.Encroachment.EncrochmentDate).ToString("dd-MMM-yyyy"))</td>
             <td>@(item.Encroachment.Locality == null ? ""  : item.Encroachment.Locality.Name)</td>
-            <td>@(item.Encroachment.KhasraNo == null ? ""  :item.Encroachment.KhasraNo)</td>
+            <td>@(item.Encroachment.KhasraNoNavigation.KhasraNo == null ? ""  :item.Encroachment.KhasraNoNavigation.KhasraNo)</td>
             <td>
                 @(item.ApprovedStatusNavigation == null ? "" : item.ApprovedStatusNavigation.SentStatusName)
             </td>

@@ -507,7 +507,7 @@ namespace EncroachmentDemolition.Controllers
                         Date = Convert.ToDateTime(result[i].EncrochmentDate).ToString("dd-MMM-yyyy") == null ? "" : Convert.ToDateTime(result[i].EncrochmentDate).ToString("dd-MMM-yyyy"),
 
                         Loaclity = result[i].Locality == null ? "" :  result[i].Locality.Name,
-                        KhasraNo = result[i].KhasraNo == null ? "" : result[i].KhasraNo,
+                        KhasraNo = result[i].KhasraNoNavigation.KhasraNo == null ? "" : result[i].KhasraNoNavigation.KhasraNo,
                         PoliceStation = result[i].PoliceStation,
                         SecurityGuardOnDuty = result[i].SecurityGuardOnDuty,
                         Status = result[i].ApprovedStatusNavigation == null ? "" : result[i].ApprovedStatusNavigation.SentStatusName.ToString(),

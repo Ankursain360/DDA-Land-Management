@@ -41,7 +41,10 @@ namespace Libraries.Model.Entity
         public DateTime EncrochmentDate { get; set; }
 
         [Required(ErrorMessage = "Khasra No is Mandatory Field")]
-        public string KhasraNo { get; set; }
+       // public string KhasraNo { get; set; }
+
+
+        public int KhasraNo { get; set; }
 
         [Required(ErrorMessage = "Area Unit is Mandatory Field", AllowEmptyStrings = false)]
         public int AreaUnit { get; set; }
@@ -89,6 +92,8 @@ namespace Libraries.Model.Entity
         public virtual Department Department { get; set; }
         public virtual Department OtherDepartmentNavigation { get; set; }
         public virtual Division Division { get; set; }
+
+        public Propertyregistration KhasraNoNavigation { get; set; }
         public virtual Locality Locality { get; set; }
         public Watchandward WatchWard { get; set; }
         public virtual Zone Zone { get; set; }

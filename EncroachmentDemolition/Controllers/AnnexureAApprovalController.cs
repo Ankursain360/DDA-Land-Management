@@ -871,7 +871,7 @@ namespace EncroachmentDemolition.Controllers
                         Id = result[i].Id,
                         InspectionDate = Convert.ToDateTime(result[i].Encroachment.EncrochmentDate).ToString("dd-MMM-yyyy"),
                         LocalityVillage = result[i].Encroachment.Locality == null ? "" : result[i].Encroachment.Locality.Name,
-                        KhasraNo = result[i].Encroachment.KhasraNo == null ? "" : result[i].Encroachment.KhasraNo,
+                        KhasraNo = result[i].Encroachment.KhasraNoNavigation.KhasraNo == null ? "" : result[i].Encroachment.KhasraNoNavigation.KhasraNo,
                         Status = result[i].ApprovedStatusNavigation == null ? "" : result[i].ApprovedStatusNavigation.SentStatusName,
 
                     }); ;

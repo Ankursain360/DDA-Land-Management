@@ -12,10 +12,10 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<EncroachmentRegisteration> builder)
         {
-                //builder.ToTable("encroachmentregisteration");
+            //builder.ToTable("encroachmentregisteration");
 
             builder.HasIndex(e => e.ApprovedStatus)
-                .HasName("fk_ApprovedStatusEncroachmentregistration_idx");
+                     .HasName("fk_ApprovedStatusEncroachmentregistration_idx");
 
             builder.HasIndex(e => e.DepartmentId)
                 .HasName("EncroachmentDeptId_idx");
@@ -23,14 +23,17 @@ namespace Libraries.Model.EntityConfiguration
             builder.HasIndex(e => e.DivisionId)
                 .HasName("EncroachmentDivisionId_idx");
 
-            builder.HasIndex(e => e.WatchWardId)
-                    .HasName("fk_watchwardid_idx");
+            builder.HasIndex(e => e.KhasraNo)
+                .HasName("fk_EncroachmentKhasra_idx");
 
             builder.HasIndex(e => e.LocalityId)
                 .HasName("EncroachmentLocality_idx");
 
             builder.HasIndex(e => e.OtherDepartment)
                 .HasName("EncroachmentDeptId_idx1");
+
+            builder.HasIndex(e => e.WatchWardId)
+                .HasName("fk_watchwardid_idx");
 
             builder.HasIndex(e => e.ZoneId)
                 .HasName("EncroachmentZonetId_idx");
@@ -41,9 +44,9 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.ApprovedStatus).HasColumnType("int(11)");
 
-            builder.Property(e => e.AreaUnit).HasColumnType("int(11)");
-
             builder.Property(e => e.Area).HasColumnType("decimal(18,3)");
+
+            builder.Property(e => e.AreaUnit).HasColumnType("int(11)");
 
             builder.Property(e => e.CreatedBy).HasColumnType("int(11)");
 
@@ -51,25 +54,32 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.DivisionId).HasColumnType("int(11)");
 
+            builder.Property(e => e.EncroacherName)
+                .HasMaxLength(100)
+                .IsUnicode(false);
+
             builder.Property(e => e.EncrochmentDate).HasColumnType("date");
 
             builder.Property(e => e.IsActive).HasColumnType("tinyint(4)");
+
+            builder.Property(e => e.IsEncroachment)
+                .IsRequired()
+                .HasMaxLength(10)
+                .IsUnicode(false);
 
             builder.Property(e => e.IsPossession)
                 .IsRequired()
                 .HasMaxLength(45)
                 .IsUnicode(false);
 
-            builder.Property(e => e.IsEncroachment)
-                .HasMaxLength(10)
-                .IsUnicode(false);
-
-            builder.Property(e => e.KhasraNo)
-                .IsRequired()
-                .HasMaxLength(100)
-                .IsUnicode(false);
+            builder.Property(e => e.KhasraNo).HasColumnType("int(11)");
 
             builder.Property(e => e.LocalityId).HasColumnType("int(11)");
+
+            builder.Property(e => e.LocationAddressWithLandMark)
+                .HasMaxLength(1000)
+                .IsUnicode(false);
+
             builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
 
             builder.Property(e => e.OtherDepartment).HasColumnType("int(11)");
@@ -86,23 +96,13 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(45)
                 .IsUnicode(false);
 
-            builder.Property(e => e.Remarks)
-                .IsRequired()
-                .HasMaxLength(1000)
-                .IsUnicode(false);
-
             builder.Property(e => e.RefNo)
                 .HasMaxLength(45)
                 .IsUnicode(false);
 
-            builder.Property(e => e.LocationAddressWithLandMark)
+            builder.Property(e => e.Remarks)
                 .IsRequired()
                 .HasMaxLength(1000)
-                .IsUnicode(false);
-
-            builder.Property(e => e.EncroacherName)
-               // .IsRequired()
-                .HasMaxLength(100)
                 .IsUnicode(false);
 
             builder.Property(e => e.SecurityGuardOnDuty)
@@ -114,13 +114,15 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(100)
                 .IsUnicode(false);
 
-            builder.Property(e => e.TotalAreaInSqAcreHt).HasColumnType("decimal(18,3)");
-
             builder.Property(e => e.TotalAreaInBighaInspection).HasColumnType("int(11)");
 
             builder.Property(e => e.TotalAreaInBiswaInspection).HasColumnType("int(11)");
 
             builder.Property(e => e.TotalAreaInBiswaniInspection).HasColumnType("int(11)");
+
+            builder.Property(e => e.TotalAreaInSqAcreHt).HasColumnType("decimal(18,3)");
+
+            builder.Property(e => e.WatchWardId).HasColumnType("int(11)");
 
             builder.Property(e => e.ZoneId).HasColumnType("int(11)");
 
@@ -128,7 +130,6 @@ namespace Libraries.Model.EntityConfiguration
                 .WithMany(p => p.EncroachmentRegisteration)
                 .HasForeignKey(d => d.ApprovedStatus)
                 .HasConstraintName("fk_ApprovedStatusEncroachmentregistration");
-
 
             builder.HasOne(d => d.Department)
                 .WithMany(p => p.EncroachmentregisterationDepartment)
@@ -141,6 +142,12 @@ namespace Libraries.Model.EntityConfiguration
                 .HasForeignKey(d => d.DivisionId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("EncroachmentDivisionId");
+
+            builder.HasOne(d => d.KhasraNoNavigation)
+                .WithMany(p => p.Encroachmentregisteration)
+                .HasForeignKey(d => d.KhasraNo)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_EncroachmentKhasraNo");
 
             builder.HasOne(d => d.Locality)
                 .WithMany(p => p.EncroachmentRegisteration)
@@ -157,7 +164,6 @@ namespace Libraries.Model.EntityConfiguration
                 .WithMany(p => p.EncroachmentRegisteration)
                 .HasForeignKey(d => d.WatchWardId)
                 .HasConstraintName("fk_watchwardid");
-
 
             builder.HasOne(d => d.Zone)
                 .WithMany(p => p.EncroachmentRegisteration)

@@ -43,7 +43,7 @@ namespace Libraries.Service.ApplicationService
             model.DivisionId = dto.DivisionId;
             model.LocalityId = dto.LocalityId;
             model.EncrochmentDate = dto.EncrochmentDate;
-            model.KhasraNo = dto.KhasraNo;
+            model.KhasraNo =Convert.ToInt32(dto.KhasraNo);
             model.AreaUnit = dto.AreaUnit;
             model.TotalAreaInBighaInspection = dto.TotalAreaInBighaInspection;
             model.TotalAreaInBiswaInspection = dto.TotalAreaInBiswaInspection;

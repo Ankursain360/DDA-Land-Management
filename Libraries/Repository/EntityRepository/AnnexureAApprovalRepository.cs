@@ -60,7 +60,7 @@ namespace Libraries.Repository.EntityRepository
                         data.Results = data.Results.OrderBy(x => x.Encroachment == null ? null : x.Encroachment.Locality == null ? null : x.Encroachment.Locality.Name).ToList();
                         break;
                     case ("KHASRANO"):
-                        data.Results = data.Results.OrderBy(x => x.Encroachment == null ? null : x.Encroachment.KhasraNo).ToList();
+                        data.Results = data.Results.OrderBy(x => x.Encroachment == null ? null : x.Encroachment.KhasraNoNavigation.KhasraNo).ToList();
                         break;
                 }
 
@@ -76,7 +76,7 @@ namespace Libraries.Repository.EntityRepository
                         data.Results = data.Results.OrderByDescending(x => x.Encroachment == null ? null : x.Encroachment.Locality == null ? null : x.Encroachment.Locality.Name).ToList();
                         break;
                     case ("KHASRANO"):
-                        data.Results = data.Results.OrderByDescending(x => x.Encroachment == null ? null : x.Encroachment.KhasraNo).ToList();
+                        data.Results = data.Results.OrderByDescending(x => x.Encroachment == null ? null : x.Encroachment.KhasraNoNavigation.KhasraNo).ToList();
                         break;
                 }
             }
