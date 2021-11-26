@@ -25,7 +25,7 @@ namespace Repository.EntityRepository
                                    .Include(x => x.FixingDemolition)
                                   .Include(x => x.FixingDemolition.Encroachment)
                                   .Include(x => x.FixingDemolition.Encroachment.Locality)
-                                  .Where(x=> x.Id == id)
+                                  .Where(x => x.Id == id)
                                   .FirstOrDefaultAsync();
         }
 
@@ -75,8 +75,9 @@ namespace Repository.EntityRepository
 
             if (model.StatusId == 1)
             {
-                var data= await _dbContext.Fixingdemolition.Include(x => x.Encroachment.Locality)
+                var data = await _dbContext.Fixingdemolition.Include(x => x.Encroachment.Locality)
                                         .Include(x => x.Encroachment)
+                                          .Include(x => x.Encroachment.KhasraNoNavigation)
                                          .Include(x => x.Demolitionpoliceassistenceletter)
                                         .Include(x => x.ApprovedStatusNavigation)
                                         .Where(x => x.IsActive == 1 && x.ApprovedStatusNavigation.StatusCode == approved
@@ -101,7 +102,7 @@ namespace Repository.EntityRepository
                         case ("KHASRA"):
                             data.Results = data.Results.OrderBy(x => x.Encroachment.KhasraNo).ToList();
                             break;
-                    
+
 
                     }
                 }
@@ -131,10 +132,10 @@ namespace Repository.EntityRepository
             {
 
                 return await _dbContext.Fixingdemolition
-                                       .Include(x => x.Encroachment).Include(x => x.Encroachment.Locality)
+                                       .Include(x => x.Encroachment).Include(x => x.Encroachment.KhasraNoNavigation).Include(x => x.Encroachment.Locality)
                                        .Include(x => x.Demolitionpoliceassistenceletter)
                                        .Where(x => x.IsActive == 1 && x.ApprovedStatus == model.StatusId
-                                      // && (model.StatusId == 0 ? x.PendingAt == userId : x.PendingAt == 0)
+                                       // && (model.StatusId == 0 ? x.PendingAt == userId : x.PendingAt == 0)
                                        && !(InDemolitionPoliceAssistenceTable).Contains(x.Id))
                                        .GetPaged<Fixingdemolition>(model.PageNumber, model.PageSize);
             }

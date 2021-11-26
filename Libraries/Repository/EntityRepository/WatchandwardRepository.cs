@@ -241,7 +241,8 @@ namespace Libraries.Repository.EntityRepository
         public async Task<PagedResult<Watchandward>> GetWatchandwardReportData(WatchAndWardPeriodReportSearchDto watchAndWardPeriodReportSearchDto)
         {
             var data = await _dbContext.Watchandward
-                                        .Include(x => x.Locality)
+                                        .Include(x => x.PrimaryListNoNavigation)
+                                        .Include(x => x.PrimaryListNoNavigation.Locality)
                                         .Where(x => (x.LocalityId == (watchAndWardPeriodReportSearchDto.localityId == 0 ? x.LocalityId : watchAndWardPeriodReportSearchDto.localityId))
                                          && x.Date >= watchAndWardPeriodReportSearchDto.fromDate
                                          && x.Date <= watchAndWardPeriodReportSearchDto.toDate)
@@ -257,7 +258,8 @@ namespace Libraries.Repository.EntityRepository
                     case ("LOCALITY"):
                         data = null;
                         data = await _dbContext.Watchandward
-                                        .Include(x => x.Locality)
+                                       .Include(x => x.PrimaryListNoNavigation)
+                                        .Include(x => x.PrimaryListNoNavigation.Locality)
                                         .Where(x => (x.LocalityId == (watchAndWardPeriodReportSearchDto.localityId == 0 ? x.LocalityId : watchAndWardPeriodReportSearchDto.localityId))
                                          && x.Date >= watchAndWardPeriodReportSearchDto.fromDate
                                          && x.Date <= watchAndWardPeriodReportSearchDto.toDate)
@@ -270,7 +272,8 @@ namespace Libraries.Repository.EntityRepository
                     case ("DATE"):
                         data = null;
                         data = await _dbContext.Watchandward
-                                        .Include(x => x.Locality)
+                                       .Include(x => x.PrimaryListNoNavigation)
+                                        .Include(x => x.PrimaryListNoNavigation.Locality)
                                         .Where(x => (x.LocalityId == (watchAndWardPeriodReportSearchDto.localityId == 0 ? x.LocalityId : watchAndWardPeriodReportSearchDto.localityId))
                                          && x.Date >= watchAndWardPeriodReportSearchDto.fromDate
                                          && x.Date <= watchAndWardPeriodReportSearchDto.toDate)
@@ -283,7 +286,8 @@ namespace Libraries.Repository.EntityRepository
                     case ("LANDMARK"):
                         data = null;
                         data = await _dbContext.Watchandward
-                                        .Include(x => x.Locality)
+                                       .Include(x => x.PrimaryListNoNavigation)
+                                        .Include(x => x.PrimaryListNoNavigation.Locality)
                                         .Where(x => (x.LocalityId == (watchAndWardPeriodReportSearchDto.localityId == 0 ? x.LocalityId : watchAndWardPeriodReportSearchDto.localityId))
                                          && x.Date >= watchAndWardPeriodReportSearchDto.fromDate
                                          && x.Date <= watchAndWardPeriodReportSearchDto.toDate)
@@ -305,7 +309,8 @@ namespace Libraries.Repository.EntityRepository
                     case ("LOCALITY"):
                         data = null;
                         data = await _dbContext.Watchandward
-                                        .Include(x => x.Locality)
+                                        .Include(x => x.PrimaryListNoNavigation)
+                                        .Include(x => x.PrimaryListNoNavigation.Locality)
                                         .Where(x => (x.LocalityId == (watchAndWardPeriodReportSearchDto.localityId == 0 ? x.LocalityId : watchAndWardPeriodReportSearchDto.localityId))
                                          && x.Date >= watchAndWardPeriodReportSearchDto.fromDate
                                          && x.Date <= watchAndWardPeriodReportSearchDto.toDate)
@@ -318,7 +323,8 @@ namespace Libraries.Repository.EntityRepository
                     case ("DATE"):
                         data = null;
                         data = await _dbContext.Watchandward
-                                        .Include(x => x.Locality)
+                                        .Include(x => x.PrimaryListNoNavigation)
+                                        .Include(x => x.PrimaryListNoNavigation.Locality)
                                         .Where(x => (x.LocalityId == (watchAndWardPeriodReportSearchDto.localityId == 0 ? x.LocalityId : watchAndWardPeriodReportSearchDto.localityId))
                                          && x.Date >= watchAndWardPeriodReportSearchDto.fromDate
                                          && x.Date <= watchAndWardPeriodReportSearchDto.toDate)
@@ -331,7 +337,8 @@ namespace Libraries.Repository.EntityRepository
                     case ("LANDMARK"):
                         data = null;
                         data = await _dbContext.Watchandward
-                                        .Include(x => x.Locality)
+                                        .Include(x => x.PrimaryListNoNavigation)
+                                        .Include(x => x.PrimaryListNoNavigation.Locality)
                                         .Where(x => (x.LocalityId == (watchAndWardPeriodReportSearchDto.localityId == 0 ? x.LocalityId : watchAndWardPeriodReportSearchDto.localityId))
                                          && x.Date >= watchAndWardPeriodReportSearchDto.fromDate
                                          && x.Date <= watchAndWardPeriodReportSearchDto.toDate)

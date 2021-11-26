@@ -39,6 +39,7 @@ namespace Libraries.Repository.EntityRepository
             var data = await _dbContext.Fixingdemolition
                                         .Include(x => x.Encroachment.Locality)
                                         .Include(x => x.Encroachment)
+                                        .Include(x => x.Encroachment.KhasraNoNavigation)
                                         .Include(x => x.ApprovedStatusNavigation)
                                         .Where(x => x.IsActive == 1
                                             && (model.StatusId == 0 ? (x.Encroachment.ZoneId == x.Encroachment.ZoneId) : (x.Encroachment.ZoneId == (zoneId == 0 ? x.Encroachment.ZoneId : zoneId)))

@@ -30,6 +30,7 @@ namespace Libraries.Repository.EntityRepository
             var data = await _dbContext.EncroachmentRegisteration
                                         .Include(x => x.Locality)
                                         .Include(x => x.ApprovedStatusNavigation)
+                                        .Include(x => x.KhasraNoNavigation)
                                         .Where(x => x.IsActive == 1
                                             && (model.StatusId == 0 ? (x.ZoneId == x.ZoneId) : (x.ZoneId == (zoneId == 0 ? x.ZoneId : zoneId)))
                                             && (model.StatusId == 0 ? x.PendingAt != "0" : x.PendingAt == "0")

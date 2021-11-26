@@ -4,8 +4,8 @@
         <tr>
 
             <th>Inspection Date</th>
-            <th>Locality(Village)</th>
-            <th>Khasra No.</th>
+            <th>Locality(Village)/Colony</th>
+            <th>Khasra No./Plot No.</th>
             <th>Status</th>
             @*<th>Letter Status</th>*@
             <th>Action</th>
@@ -19,13 +19,13 @@
                 <tr>
 
                     <td> @(Convert.ToDateTime(item.Encroachment.EncrochmentDate).ToString("dd-MMM-yyyy"))</td>
-                    <td>@(item.Encroachment.Locality == null ? ""  : item.Encroachment.Locality.Name)</td>
-                    <td>@(item.Encroachment.KhasraNoNavigation.KhasraNo == null ? ""  :item.Encroachment.KhasraNoNavigation.KhasraNo)</td>
+                    <td>@(item.Encroachment.KhasraNoNavigation.LocalityId == null ? item.Encroachment.KhasraNoNavigation.Colony : item.Encroachment.KhasraNoNavigation.Locality.Name)</td>
+                    <td>@(item.Encroachment.KhasraNoNavigation.LocalityId == null ? item.Encroachment.KhasraNoNavigation.PlotNo : item.Encroachment.KhasraNoNavigation.PlotNo)</td>
                     <td>@(item.ApprovedStatus == 0 ?  "Pending" : "Approved")</td>
                     @*<td>@(item.Demolitionpoliceassistenceletter.Count != 0 ?  "Generated" : "Not Generated")</td>*@
-                   
+
                     <td> <a asp-action="Create" asp-route-id="@item.Id" title="edit" class="edit"><i class="ri-edit-line"></i> </a></td>
-                  
+
                 </tr>
             }
         }

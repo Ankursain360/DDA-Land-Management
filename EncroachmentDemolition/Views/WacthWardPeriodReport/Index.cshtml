@@ -6,8 +6,9 @@
         <tr>
 
             <th rowspan="2">Date</th>
-            <th rowspan="2">Locality Name (Village) </th>
-
+            <th rowspan="2">Locality Name (Village)/Colony </th>
+            <th rowspan="2">khasra No./Plot No. </th>
+            <th rowspan="2">Primary List No. </th>
             <th rowspan="2">Land Mark</th>
             <th>Encroachment</th>
             <th rowspan="2">Status on Ground</th>
@@ -24,7 +25,10 @@
             <td>@(item.Date == null ? "" : Convert.ToDateTime(item.Date).ToString("dd-MMM-yyyy"))</td>
 
             @*<td>@item.Date</td>*@
-            <td>@(item.Locality == null ? "" : item.Locality.Name == null ? "" : item.Locality.Name)</td>
+            <td>@(item.PrimaryListNoNavigation?.LocalityId == null ? item.PrimaryListNoNavigation.Colony : item.PrimaryListNoNavigation.Locality.Name)</td>
+            <td>@(item.PrimaryListNoNavigation?.LocalityId == null ? item.PrimaryListNoNavigation.PlotNo: item.PrimaryListNoNavigation.KhasraNo)</td>
+            <td>@(item.PrimaryListNoNavigation?.PrimaryListNo == null ? "NA" : item.PrimaryListNoNavigation.PrimaryListNo)</td>
+            @*<td>@(item.Locality == null ? "" : item.Locality.Name == null ? "" : item.Locality.Name)</td>*@
 
             @*<td>@item.Locality.Name</td>*@
 

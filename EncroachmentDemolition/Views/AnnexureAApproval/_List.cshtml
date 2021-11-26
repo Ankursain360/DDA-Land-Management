@@ -17,8 +17,10 @@
             {
         <tr>
             <td> @(Convert.ToDateTime(item.Encroachment.EncrochmentDate).ToString("dd-MMM-yyyy"))</td>
-            <td>@(item.Encroachment.Locality == null ? ""  : item.Encroachment.Locality.Name)</td>
-            <td>@(item.Encroachment.KhasraNoNavigation.KhasraNo == null ? ""  :item.Encroachment.KhasraNoNavigation.KhasraNo)</td>
+            <td>@(item.Encroachment.KhasraNoNavigation.LocalityId == null ? item.Encroachment.KhasraNoNavigation.Colony : item.Encroachment.KhasraNoNavigation.Locality.Name)</td>
+            <td>@(item.Encroachment.KhasraNoNavigation.LocalityId == null ? item.Encroachment.KhasraNoNavigation.PlotNo: item.Encroachment.KhasraNoNavigation.KhasraNo)</td>
+            @*<td>@(item.Encroachment.Locality == null ? ""  : item.Encroachment.Locality.Name)</td>
+        <td>@(item.Encroachment.KhasraNoNavigation.KhasraNo == null ? ""  :item.Encroachment.KhasraNoNavigation.KhasraNo)</td>*@
             <td>
                 @(item.ApprovedStatusNavigation == null ? "" : item.ApprovedStatusNavigation.SentStatusName)
             </td>

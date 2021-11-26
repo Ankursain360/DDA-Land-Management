@@ -7,7 +7,7 @@
         <tr>
 
             <th>Date</th>
-            <th>Locality(Village)</th>
+            <th>Locality(Village)/Colony</th>
             <th>Primary List No.</th>
             <th>Khasra No/Plot No.</th>
             <th>Encroachment</th>
@@ -24,9 +24,9 @@
             {
         <tr>
             <td> @(Convert.ToDateTime(item.Date).ToString("dd-MMM-yyyy"))</td>
-            <td>@(item.PrimaryListNoNavigation.LocalityId == null ? ""  : item.PrimaryListNoNavigation.Locality.Name)</td>
-            <td>@(item.PrimaryListNoNavigation.PrimaryListNo == null ? "" : item.PrimaryListNoNavigation.PrimaryListNo)</td>
-            <td>@item.PrimaryListNoNavigation.KhasraNo</td>
+            <td>@(item.PrimaryListNoNavigation.LocalityId == null ? item.PrimaryListNoNavigation.Colony : item.PrimaryListNoNavigation.Locality.Name)</td>
+            <td>@(item.PrimaryListNoNavigation.PrimaryListNo == null ? "NA" : item.PrimaryListNoNavigation.PrimaryListNo)</td>
+            <td>@(item.PrimaryListNoNavigation.LocalityId == null ? item.PrimaryListNoNavigation.PlotNo : item.PrimaryListNoNavigation.KhasraNo)</td>
             <td>@(item.Encroachment.ToString() == "1" ? "Yes" : "No")</td>
             <td>@item.StatusOnGround</td>
             <td>

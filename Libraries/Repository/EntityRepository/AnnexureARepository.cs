@@ -98,6 +98,7 @@ namespace Libraries.Repository.EntityRepository
             var data = await _dbContext.EncroachmentRegisteration
                                         .Include(x => x.Locality)
                                         .Include(x => x.ApprovedStatusNavigation)
+                                        .Include(x => x.KhasraNoNavigation)
                                          .Where(x => x.IsActive == 1 && x.ApprovedStatusNavigation.StatusCode == approved
                                             && (x.ZoneId == (zoneId == 0 ? x.ZoneId : zoneId))
                                             && !(InInspectionId).Contains(x.Id)

@@ -3,13 +3,14 @@
     <thead class="text-nowrap">
 
         <tr>
-           
+            <th>Department</th>
+            <th>Zone</th>
             <th>Locality (Village) Name</th>
             <th>Khasra No.</th>
             <th>Area</th>
             <th>Encroachment On</th>
             <th>Demolition Start</th>
-          
+
             <th>Reason of Demolition</th>
 
         </tr>
@@ -21,15 +22,17 @@
         {
             @foreach (var item in Model.Results)
             {
-        <tr>
-            <td>@item.Locality.Name</td>
-            <td>@item.KhasraNo </td>
-            <td>@item.Area </td>
-            <td>@(item.EncrochmentDate != null ? Convert.ToDateTime(item.EncrochmentDate).ToString("dd MMM yyyy") : "Not Available")</td>
-            <td>@(item.EncrochmentDate != null ? Convert.ToDateTime(item.EncrochmentDate).ToString("dd MMM yyyy") : "Not Available")</td>
-          
-            <td>@item.Remarks</td>
-        </tr>
+                <tr>
+                    <td>@item.Department.Name</td>
+                    <td>@item.Zone.Name</td>
+                    <td>@item.Locality.Name</td>
+                    <td>@(item.KhasraNoNavigation.LocalityId == null ? item.KhasraNoNavigation.PlotNo: item.KhasraNoNavigation.KhasraNo)</td>
+                    <td>@item.Area </td>
+                    <td>@(item.EncrochmentDate != null ? Convert.ToDateTime(item.EncrochmentDate).ToString("dd MMM yyyy") : "Not Available")</td>
+                    <td>@(item.EncrochmentDate != null ? Convert.ToDateTime(item.EncrochmentDate).ToString("dd MMM yyyy") : "Not Available")</td>
+
+                    <td>@item.Remarks</td>
+                </tr>
             }
         }
         else
