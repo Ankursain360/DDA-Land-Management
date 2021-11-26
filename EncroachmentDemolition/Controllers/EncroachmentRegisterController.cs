@@ -148,8 +148,9 @@ namespace EncroachmentDemolition.Controllers
                 Random r = new Random();
                 int num = r.Next();
                 encroachmentRegisterations.RefNo = DateTime.Now.Year.ToString() + encroachmentRegisterations.Zone.Code + num.ToString();
-                //ModelState.Remove("CountOfStructure");
-                //ModelState.Remove("DateOfEncroachment ");
+                ModelState.Remove("AreaApprox");
+                ModelState.Remove("CountOfStructure");
+                ModelState.Remove("DateOfEncroachment");
                 if (ModelState.IsValid)
                 {
                     if (IsValidpdf == true)
