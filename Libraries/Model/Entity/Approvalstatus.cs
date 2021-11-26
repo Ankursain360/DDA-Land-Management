@@ -38,7 +38,7 @@ namespace Libraries.Model.Entity
         public ICollection<Approvalproccess> Approvalproccess { get; set; }
         public ICollection<Damagepayeeregister> Damagepayeeregister { get; set; }
         public ICollection<EncroachmentRegisteration> EncroachmentRegisteration { get; set; }
-        public object Encroachmentregisteration { get; internal set; }
+        //public object Encroachmentregisteration { get; internal set; }
         public ICollection<Extension> Extension { get; set; }
         public ICollection<Fixingdemolition> Fixingdemolition { get; set; }
         public ICollection<Leaseapplication> Leaseapplication { get; set; }
