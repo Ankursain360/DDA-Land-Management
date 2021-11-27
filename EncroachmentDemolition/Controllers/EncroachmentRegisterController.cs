@@ -785,13 +785,15 @@ namespace EncroachmentDemolition.Controllers
                 for (int i = 0; i < result.Count; i++)
                 {
                     data.Add(new EncroachmentRegisterListDto()
-                    {
+                    { 
                         Id = result[i].Id,
                         Date = Convert.ToDateTime(result[i].Date).ToString("dd-MMM-yyyy") == null ? "" : Convert.ToDateTime(result[i].Date).ToString("dd-MMM-yyyy"),
 
                         Loaclity = result[i].PrimaryListNoNavigation.LocalityId == null ? "" : result[i].PrimaryListNoNavigation.Locality.Name == null ? "" : result[i].PrimaryListNoNavigation.Locality.Name,
-                        KhasraNo = result[i].PrimaryListNoNavigation.KhasraNo == null ? "" : result[i].PrimaryListNoNavigation.KhasraNo.ToString(),
                         PrimaryListNo = result[i].PrimaryListNoNavigation.PrimaryListNo == null ? "" : result[i].PrimaryListNoNavigation.PrimaryListNo,
+
+                        KhasraNo = result[i].PrimaryListNoNavigation.KhasraNo == null ? "" : result[i].PrimaryListNoNavigation.KhasraNo.ToString(),
+                        Encroachment = result[i].Encroachment.ToString() == "1" ? "Yes" : "No",
                         StatusOnGround = result[i].StatusOnGround.ToString(),
                         Status = result[i].ApprovedStatusNavigation == null ? "" : result[i].ApprovedStatusNavigation.SentStatusName.ToString(),
 
