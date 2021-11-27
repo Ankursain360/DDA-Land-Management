@@ -579,11 +579,6 @@ namespace LandInventory.Controllers
                         Division = result[i].Division == null ? " " : result[i].Division.Name,
                         PrimaryListNo = result[i].PrimaryListNo,
 
-                       
-
-
-
-
                     KhasraNo = result[i].PlannedUnplannedLand== "Planned Land" ? result[i].KhasraNo: result[i].PlotNo,
                         AddressWithLandmark = result[i].Palandmark,
                       
