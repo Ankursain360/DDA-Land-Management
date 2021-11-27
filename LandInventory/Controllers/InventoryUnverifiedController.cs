@@ -585,6 +585,7 @@ namespace LandInventory.Controllers
                         Zone = result[i].Zone == null ? " " : result[i].Zone.Name,
                         Division = result[i].Division == null ? " " : result[i].Division.Name,
                         PrimaryListNo = result[i].PrimaryListNo,
+                        KhasraNo = result[i].KhasraNo,
 
                     }); ;
                 }

@@ -139,13 +139,16 @@ namespace LandInventory.Controllers
                         Zone = result[i].Zone == null ? " " : result[i].Zone.Name,
                         Division = result[i].Division == null ? " " : result[i].Division.Name,
                         Locality = result[i].LocalityId == null ? " " : result[i].Locality.Name,
-                        KhasraNo = result[i].KhasraNo,
-                        AddressWithLandmark=result[i].Palandmark,
+                        AddressWithLandmark = result[i].Palandmark,
                         PrimaryListNo = result[i].PrimaryListNo,
+                        KhasraNo = result[i].KhasraNo,
                         Reason = result[i].Reason == null ? " " : result[i].Deletedproperty.Reason,
                         DeletedOn = result[i].Deletedproperty == null ? " " : result[i].Deletedproperty.DeletedDate.ToString("dd-MMM-yyyy"),
 
-                    }); ;
+
+                      //  KhasraNo = result[i].KhasraNo,
+                      
+                    }); 
                 }
             }
 

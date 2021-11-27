@@ -448,7 +448,7 @@ namespace Libraries.Repository.EntityRepository
         public async Task<List<Propertyregistration>> GetAllPropertInventorylist(int UserId)
         {
             var badCodes = new[] { 3, 5 };
-            return await _dbContext.Propertyregistration
+          var data = await _dbContext.Propertyregistration
        .Include(x => x.ClassificationOfLand)
                             .Include(x => x.Department)
                             .Include(x => x.Division)
@@ -458,6 +458,7 @@ namespace Libraries.Repository.EntityRepository
                             .Include(x => x.Locality)
                                     .Where(x => x.IsDeleted == 1 && !badCodes.Contains(x.ClassificationOfLand.Id) && x.IsValidate == 1 && x.IsDisposed != 0)
                  .ToListAsync();
+            return data;
         }
 
 
