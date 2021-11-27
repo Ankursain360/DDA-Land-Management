@@ -110,6 +110,10 @@ Color: #ffffff
 Font-size: 0.80rem
 Font-Family: Open Sans Regular*/
 
+
+.hideUnderline {
+   border-style:none;
+}
 .container {
     position: relative;
 }
