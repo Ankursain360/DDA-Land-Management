@@ -78,7 +78,7 @@
                     <td>@item.PlotNo</td>
                     <td>@item.PrimaryListNo</td>
                     <td>@item.Palandmark</td>
-                    <td>@(item.AreaUnit == 0 ? "bigha-biswa-bishwani" : item.AreaUnit == 1 ? "Sq Yd." : item.AreaUnit == 2 ? "Acre" : "Hectare" )</td>
+                    <td>@(item.AreaUnit == 0 ? "bigha-biswa-bishwani" : item.AreaUnit == 1 ? "Sq Yd." : item.AreaUnit == 2 ? "Acre" : item.AreaUnit==3 ?"Hectare" : "Sq. Mt." )</td>
                     @if ((item.AreaUnit == 0))
                     {
                         <td>@(Convert.ToString(item.TotalAreaInBigha)+" - "+ Convert.ToString(item.TotalAreaInBiswa)+ " - " + Convert.ToString(item.TotalAreaInBiswani) )</td>

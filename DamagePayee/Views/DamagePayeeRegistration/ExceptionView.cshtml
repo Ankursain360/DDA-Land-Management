@@ -20,13 +20,14 @@
                 </div>
                 <form asp-action="MailSentMsg" class="d-block px-2" id="form">
                     <p class="text-danger">
-                        Dear @ViewBag.name,
+                        @*Dear @ViewBag.name,*@
+                        Dear User,
                     </p>
                     <p class="text-danger">
-                        To complete your registration process & Login details,
-                        kindly click over the verification link sent on your registered email Id.
+                        @ViewBag.Message .
+                        @*Some error occurred while verifying email, kindly try to register again.*@
                     </p>
-                    <a href="https://damagepayee.managemybusinessess.com/" target="_blank" class="btn btn-theme">Back</a>
+                    @*<a href="https://damagepayee.managemybusinessess.com/" target="_blank" class="btn btn-theme">Back</a>*@
                 </form>
 
             </div>

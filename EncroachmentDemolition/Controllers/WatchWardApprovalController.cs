@@ -822,8 +822,10 @@ namespace EncroachmentDemolition.Controllers
                         Loaclity = result[i].PrimaryListNoNavigation.LocalityId == null ? "" : result[i].PrimaryListNoNavigation.Locality.Name == null ? "" : result[i].PrimaryListNoNavigation.Locality.Name,
                         KhasraNo = result[i].PrimaryListNoNavigation.KhasraNo == null ? "" : result[i].PrimaryListNoNavigation.KhasraNo.ToString(),
                         PrimaryListNo = result[i].PrimaryListNoNavigation.PrimaryListNo == null ? "" : result[i].PrimaryListNoNavigation.PrimaryListNo,
+                        Encroachment = result[i].Encroachment.ToString() == "1" ? "Yes" : "No",
                         StatusOnGround = result[i].StatusOnGround.ToString(),
                         Status = result[i].ApprovedStatusNavigation == null ? "" : result[i].ApprovedStatusNavigation.SentStatusName.ToString(),
+                        SubmittedOn = Convert.ToDateTime(result[i].CreatedDate).ToString("dd-MMM-yyyy hh:mm:ss tt") == null ? "" : Convert.ToDateTime(result[i].CreatedDate).ToString("dd-MMM-yyyy hh:mm:ss tt"),
 
                     });
                 }

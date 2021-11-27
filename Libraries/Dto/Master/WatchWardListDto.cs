@@ -1,4 +1,5 @@
 ﻿using Dto.Common;
+using System;
 
 namespace Dto.Master
 {
@@ -9,8 +10,9 @@ namespace Dto.Master
         public string Loaclity { get; set; }
         public string KhasraNo { get; set; }
         public string PrimaryListNo { get; set; }
+        public string Encroachment { get; set; }
         public string StatusOnGround{ get; set; }
-     
+        public string CreatedDate { get; set; }
 
     }
 }
