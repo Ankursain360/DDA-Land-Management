@@ -729,7 +729,7 @@ namespace EncroachmentDemolition.Controllers
 
 
 
-
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> WatchWardList()
         {
             var result = await _watchandwardService.GetAllWatchandward();
@@ -740,17 +740,16 @@ namespace EncroachmentDemolition.Controllers
                 {
                     data.Add(new WatchWardListDto()
                     {
-                        Id = result[i].Id,
+                        Id = i + 1,
                         Date = Convert.ToDateTime(result[i].Date).ToString("dd-MMM-yyyy") == null ? "" : Convert.ToDateTime(result[i].Date).ToString("dd-MMM-yyyy"),
-
-                        Loaclity = result[i].PrimaryListNoNavigation.LocalityId == null ? "" : result[i].PrimaryListNoNavigation.Locality.Name == null ? "" : result[i].PrimaryListNoNavigation.Locality.Name,
-                        KhasraNo = result[i].PrimaryListNoNavigation.KhasraNo == null ? "" : result[i].PrimaryListNoNavigation.KhasraNo.ToString(),
-                        PrimaryListNo = result[i].PrimaryListNoNavigation.PrimaryListNo == null ? "" : result[i].PrimaryListNoNavigation.PrimaryListNo,
+                        Loaclity = result[i].PrimaryListNoNavigation.LocalityId == null ? result[i].PrimaryListNoNavigation.Colony : result[i].PrimaryListNoNavigation.Locality.Name == null ? "" : result[i].PrimaryListNoNavigation.Locality.Name,
+                        KhasraNo = result[i].PrimaryListNoNavigation.KhasraNo == null ? result[i].PrimaryListNoNavigation.PlotNo : result[i].PrimaryListNoNavigation.KhasraNo.ToString(),
+                        PrimaryListNo = result[i].PrimaryListNoNavigation.PrimaryListNo == null ? "NA" : result[i].PrimaryListNoNavigation.PrimaryListNo,
+                        LandMark = result[i].Landmark,
                         Encroachment = result[i].Encroachment.ToString() == "1" ? "Yes" : "No",
                         StatusOnGround = result[i].StatusOnGround.ToString(),
-                        
+                        Remarks = result[i].Remarks,
                         CreatedDate = Convert.ToDateTime(result[i].CreatedDate).ToString("dd-MMM-yyyy") == null ? "" : Convert.ToDateTime(result[i].CreatedDate).ToString("dd-MMM-yyyy"),
-
                         //IsActive = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
                     }); ;
                 }

@@ -11,6 +11,9 @@ using Notification.Constants;
 using Notification.OptionEnums;
 using EncroachmentDemolition.Filters;
 using Core.Enum;
+using Dto.Master;
+using Utility.Helper;
+
 namespace EncroachmentDemolition.Controllers
 {
     public class WacthWardPeriodReportController : Controller
@@ -46,6 +49,36 @@ namespace EncroachmentDemolition.Controllers
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                 return PartialView();
             }
+        }
+        [AuthorizeContext(ViewAction.Download)]
+        public async Task<IActionResult> Download()
+        {
+            var result = await _watchandwardService.GetAllWatchandward();
+            List<WatchWardListDto> data = new List<WatchWardListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new WatchWardListDto()
+                    {
+                        Id = i + 1,
+                        Date = Convert.ToDateTime(result[i].Date).ToString("dd-MMM-yyyy") == null ? "" : Convert.ToDateTime(result[i].Date).ToString("dd-MMM-yyyy"),
+                        Loaclity = result[i].PrimaryListNoNavigation.LocalityId == null ? result[i].PrimaryListNoNavigation.Colony : result[i].PrimaryListNoNavigation.Locality.Name == null ? "" : result[i].PrimaryListNoNavigation.Locality.Name,
+                        KhasraNo = result[i].PrimaryListNoNavigation.KhasraNo == null ? result[i].PrimaryListNoNavigation.PlotNo : result[i].PrimaryListNoNavigation.KhasraNo.ToString(),
+                        PrimaryListNo = result[i].PrimaryListNoNavigation.PrimaryListNo == null ? "NA" : result[i].PrimaryListNoNavigation.PrimaryListNo,
+                        LandMark= result[i].Landmark,
+                        Encroachment = result[i].Encroachment.ToString() == "1" ? "Yes" : "No",
+                        StatusOnGround = result[i].StatusOnGround.ToString(),
+                        Remarks = result[i].Remarks,                        
+                        CreatedDate = Convert.ToDateTime(result[i].CreatedDate).ToString("dd-MMM-yyyy") == null ? "" : Convert.ToDateTime(result[i].CreatedDate).ToString("dd-MMM-yyyy"),
+
+                        //IsActive = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
     }
 }

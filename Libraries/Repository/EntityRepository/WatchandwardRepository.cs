@@ -401,7 +401,8 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<Propertyregistration>> GetAllPrimaryListForWatchWard(int ZoneId,int DepartmentId)
         {
-            return await _dbContext.Propertyregistration.Where(x => x.IsActive == 1 && x.ZoneId==ZoneId && x.DepartmentId==DepartmentId && x.IsDeleted == 1 && x.IsValidate == 1 && x.IsDisposed != 0 && x.PrimaryListNo != null).ToListAsync();
+            return await _dbContext.Propertyregistration.Where(x => x.IsActive == 1 && x.ZoneId == ZoneId && x.DepartmentId == DepartmentId && x.IsDeleted == 1 && x.IsValidate == 1 && x.IsDisposed != 0).Select(x => new Propertyregistration { Id = x.Id, KhasraNo = x.PlannedUnplannedLand == "Planned Land" ? x.PlotNo : x.KhasraNo }).ToListAsync();
+            //return await _dbContext.Propertyregistration.Where(x => x.IsActive == 1 && x.ZoneId==ZoneId && x.DepartmentId==DepartmentId && x.IsDeleted == 1 && x.IsValidate == 1 && x.IsDisposed != 0).ToListAsync();
         }
 
         public async Task<Propertyregistration> FetchSingleResultOnPrimaryList(int propertyId)

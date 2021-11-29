@@ -131,15 +131,31 @@ namespace Libraries.Repository.EntityRepository
             return await _dbContext.Watchandward
         .Include(x => x.PrimaryListNoNavigation)
                 .Include(x => x.PrimaryListNoNavigation.Locality)
+                .Include(x => x.PrimaryListNoNavigation.Department)
+                .Include(x => x.PrimaryListNoNavigation.Zone)
+                .Include(x => x.PrimaryListNoNavigation.Division)
                 .Include(x => x.Locality)
-                .Include(x => x.Khasra)
+                .Include(x => x.EncroachmentRegisteration)
                 .Include(x => x.ApprovedStatusNavigation)
                                     .Where(x => x.ApprovedStatusNavigation.StatusCode == approved && x.IsActive == 1
                  && !(InInspectionId).Contains(x.Id))
                  .ToListAsync();
         }
 
+        public async Task<List<EncroachmentRegisteration>> GetAllEncroachmentRegisterlistForDownload()
+        {
 
+
+            var data = await _dbContext.EncroachmentRegisteration
+                                       .Include(x => x.Locality)
+                                       .Include(x => x.Department)
+                                       .Include(x => x.Zone)
+                                       .Include(x => x.Division)
+                                       .Include(x => x.KhasraNoNavigation)
+                                       .Include(x => x.WatchWard)
+                                       .Where(x => (x.IsActive == 1)).ToListAsync();
+            return data;
+        }
 
         public async Task<PagedResult<Watchandward>> GetPagedEncroachmentRegisteration(EncroachmentRegisterationDto model, int approved, int zoneId)
         {

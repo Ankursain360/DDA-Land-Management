@@ -23,8 +23,8 @@ namespace Libraries.Service.IApplicationService
         Task<List<Division>> GetAllDivisionList(int zone);
         Task<List<EncroachmentRegisteration>> GetAllEncroachmentRegisteration();
         Task<List<Watchandward>> GetAllEncroachmentRegisterlist(int approved);
-      
-        Task<List<Khasra>> GetAllKhasraList(int localityId);
+        Task<List<EncroachmentRegisteration>> GetAllEncroachmentRegisterlistForDownload(); 
+          Task<List<Khasra>> GetAllKhasraList(int localityId);
 
 
         Task<List<Propertyregistration>> GetAllKhasraListFromPropertyInventory(int ZoneId,int DepartmentId);

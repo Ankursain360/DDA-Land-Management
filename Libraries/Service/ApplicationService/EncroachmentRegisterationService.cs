@@ -68,6 +68,10 @@ namespace Libraries.Service.ApplicationService
         {
             return await _encroachmentRegisterationRepository.GetAllEncroachmentRegisterlist(approved);
         }
+        public async Task<List<EncroachmentRegisteration>> GetAllEncroachmentRegisterlistForDownload()
+        {
+            return await _encroachmentRegisterationRepository.GetAllEncroachmentRegisterlistForDownload();
+        }
         public async Task<PagedResult<Watchandward>> GetPagedEncroachmentRegisteration(EncroachmentRegisterationDto model, int approved, int zoneId)
         {
             return await _encroachmentRegisterationRepository.GetPagedEncroachmentRegisteration(model, approved, zoneId);
