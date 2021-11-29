@@ -381,6 +381,20 @@ namespace Libraries.Repository.EntityRepository
             var Result = await _dbContext.SaveChangesAsync();
             return Result > 0 ? true : false;
         }
+
+
+        public async Task<List<EncroachmentRegisteration>> GetAllDownloadEncroachment()
+        {
+            return await _dbContext.EncroachmentRegisteration
+                  .Include(x => x.Locality)
+                .Include(x => x.Department)
+                .Include(x => x.Zone)
+                .Include(x => x.Division)
+                 .Include(x => x.KhasraNoNavigation)
+
+
+                .Where(x => x.IsActive == 1).ToListAsync();
+        }
         public async Task<PagedResult<EncroachmentRegisteration>> GetEncroachmentReportData(EnchroachmentSearchDto dto)//added by shalini
         {
             var data = await _dbContext.EncroachmentRegisteration
