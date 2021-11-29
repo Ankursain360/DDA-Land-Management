@@ -172,6 +172,7 @@ $(function () {
             $("#tbl_posts #add #ConstructionStatus").val(data[i].constructionStatus);
             $('#tbl_posts #add #ConstructionStatus').trigger('change');
             $('#tbl_posts #add #ReligiousStructure').trigger('change');
+            
             if (i < data.length - 1) {
                 var ConstructionStatus = $("#tbl_posts #add #ConstructionStatus").children("option:selected").val();
                 var ReligiousStructure = $("#tbl_posts #add #ReligiousStructure").children("option:selected").val();

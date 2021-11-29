@@ -1,45 +1,16 @@
-﻿////$(document).ready(function () {
-////    HttpAsyncGet(`/Demolitionstructuredetails/DetailsOfRepeater/?Id=${$("#hdnId").val() == null ? "" : $("#hdnId").val()}`, 'json', function (data) {
-////        debugger
-////        for (var i = 0; i < data.length; i++) {
-
-////            $("#tbl_posts #add #NoOfStructure").val(data[i].noOfStructure);
-////            $("#tbl_posts #add #NameOfStructure").val(data[i].nameOfStructure);
-////            $('#tbl_posts #add #nameOfStructure').trigger('change');
-////            if (i < data.length - 1) {
-////                var ConstructionStatus = $("#tbl_posts #add #NameOfStructure").children("option:selected").val();
-////                var content = jQuery('#tbl_posts #add tr'),
-////                    size = jQuery('#tbl_posts >tbody >tr').length,
-////                    element = null,
-////                    element = content.clone();
-////                element.attr('id', 'rec-' + size);
-////                element.find('.delete-record').attr('data-id', size);
-////                element.appendTo('#tbl_posts_body');
-////                $('#tbl_posts_body #rec-' + size + ' #NameOfStructure').val(NameOfStructure);
-////                element.find('.sn').html(size);
-////                $("#tbl_posts #add .sn").text($('#tbl_posts >tbody >tr').length);
-////                $("#tbl_posts #add .add").remove();
-////                $("#tbl_posts #tbl_posts_body .form-control").attr("readonly", true);
-////                element.find(".add-record").hide();
-////                element.find(".delete-record").show();
-////            }
-////        }
-////    });
-
-////});
-
+﻿ 
 $(document).ready(function () {
     $('#StructureId1').removeAttr('multiple');
     var id = parseInt($('#FixingDemolitionId').val());
     var encroachmentId = parseInt($('#EncroachmentId').val());
     var watchWardId = parseInt($('#WatchWardId').val());
     console.info("encroachmentId:" + encroachmentId + " WatchWardId:" + watchWardId); 
+   
+    FillDemolitionRptAtEdit();
+    FillAreaRptAtEdit();  
     GetWatchWardDetails(watchWardId);
     GetEncroachmentDetails(encroachmentId);
     GetAnnexureADetails(id);
-    FillDemolitionRptAtEdit();
-    FillAreaRptAtEdit();  
-    
 });
    
  
@@ -136,50 +107,7 @@ function onChangeDivision1(id) {
     });
 };
 
-//$(document).delegate('a.add-record', 'click', function (e) {
-//    debugger
-//    if($("#tbl_posts #add #NameOfStructure").children("option:selected").val() != '' && $("#tbl_posts #add #NameOfStructure").children("option:selected").val() != undefined && $("#tbl_posts #add #NoOfStructure").val() != ''
-
-//    ) {
-//        e.preventDefault();
-//        var content = jQuery('#tbl_posts #add tr'),
-//            size = jQuery('#tbl_posts >tbody >tr').length,
-//            element = null,
-//            element = content.clone();
-//        element.attr('id', 'rec-' + size);
-//        element.find('.delete-record').attr('data-id', size);
-//        element.appendTo('#tbl_posts_body');
-//        element.find('.sn').html(size);
-//        $("#tbl_posts #add .sn").text($('#tbl_posts >tbody >tr').length);
-//        $("#tbl_posts #add .add").remove();
-//        $("#tbl_posts #tbl_posts_body .form-control").attr("readonly", true);
-//        element.find(".add-record").hide();
-//        element.find(".delete-record").show();
-//        debugger
-//        $("#tbl_posts #add .form-control").val('');
-//    }
-//    else {
-//        alert('Please fill record before add new record ');
-//    }
-//});
-//$(document).delegate('a.delete-record', 'click', function (e) {
-//    e.preventDefault();
-//    var didConfirm = confirm("Are you sure You want to delete");
-//    if (didConfirm == true) {
-//        var id = jQuery(this).attr('data-id');
-//        var targetDiv = jQuery(this).attr('targetDiv');
-//        jQuery('#rec-' + id).remove();
-//        //regnerate index number on table
-//        $('#tbl_posts_body tr').each(function (index) {
-//            //alert(index);
-//            $(this).find('span.sn').html(index + 1);
-//        });
-//        $("#tbl_posts #add .sn").text($('#tbl_posts >tbody >tr').length);
-//        return true;
-//    } else {
-//        return false;
-//    }
-//});
+ 
 
 $('#DemolitionReportFile1').change(function () {
     var fileInput = document.getElementById('DemolitionReportFile');
@@ -217,27 +145,27 @@ function FillDemolitionRptAtEdit() {
     HttpGet(`/Demolitionstructuredetails/GetDetailsDemolitionRpt/?Id=${$("#Id").val() == null ? "" : $("#Id").val()}`, 'json', function (data) {
         debugger;
         for (var i = 0; i < data.length; i++) {
-            $("#tbl_posts #add #Date1").val(data[i].date);
+            $("#tbl_posts_struct #adds #Date1").val(data[i].date);
             //$("#tbl_posts #add #StructureId1").val(data[i].Structname.split('/').slice(1)); 
-            $("#tbl_posts #add #StructureId1").val(data[i].structureId); 
-            $("#tbl_posts #add #StructureId1").trigger('change');
-            $("#tbl_posts #add #NoOfStructureDemolished").val(data[i].noOfStructureDemolished); 
-            $("#tbl_posts #add #NoOfStructureRemaining").val(data[i].noOfStructureRemaining); 
+            $("#tbl_posts_struct #adds #StructureId1").val(data[i].structureId); 
+            $("#tbl_posts_struct #adds #StructureId1").trigger('change');
+            $("#tbl_posts_struct #adds #NoOfStructureDemolished").val(data[i].noOfStructureDemolished); 
+            $("#tbl_posts_struct #adds #NoOfStructureRemaining").val(data[i].noOfStructureRemaining); 
          
             if (i < data.length - 1) {
-                var content = jQuery('#tbl_posts #add tr'),
-                    size = jQuery('#tbl_posts >tbody >tr').length,
+                var content = jQuery('#tbl_posts_struct #adds tr'),
+                    size = jQuery('#tbl_posts_struct >tbody >tr').length,
                     element = null,
                     element = content.clone();
-                element.attr('id', 'rec-' + size);
+                element.attr('id', 'rec__-' + size);
                 element.find('.delete-record').attr('data-id', size);
-                element.appendTo('#tbl_posts_body');
+                element.appendTo('#tbl_posts_bodys');
 
-                element.find('.sn').html(size);
-                $("#tbl_posts #add .sn").text($('#tbl_posts >tbody >tr').length);
-                $("#tbl_posts #add .add").remove();
-                $("#tbl_posts #tbl_posts_body .floating-label-field").attr("readonly", true);
-                element.find(".add-record").hide();
+                element.find('.sns').html(size);
+                $("#tbl_posts_struct #adds .sns").text($('#tbl_posts_struct >tbody >tr').length);
+                $("#tbl_posts_struct #adds .add").remove();
+                $("#tbl_posts_struct #tbl_posts_bodys .floating-label-field").attr("readonly", true);
+                element.find(".add-records").hide();
                 element.find(".delete-record").show();
             }
         }
@@ -246,31 +174,30 @@ function FillDemolitionRptAtEdit() {
 
 }
 
-$(document).delegate('a.add-record', 'click', function (e) {
+$(document).delegate('a.add-records', 'click', function (e) {
     debugger
 
-    if ($("#tbl_posts #add #Date1").val() != ''
-        && $("#tbl_posts #add #StructureId1").children("option:selected").val() != undefined) {
-        var struct = $("#tbl_posts #add #StructureId1").children("option:selected").val();
+    if ($("#tbl_posts_struct #adds #Date1").val() != ''&& $("#tbl_posts_struct #adds #StructureId1").children("option:selected").val() != undefined) {
+        var struct = $("#tbl_posts_struct #adds #StructureId1").children("option:selected").val();
         e.preventDefault();
-        var content = jQuery('#tbl_posts #add tr'),
-            size = jQuery('#tbl_posts >tbody >tr').length,
+        var content = jQuery('#tbl_posts_struct #adds tr'),
+            size = jQuery('#tbl_posts_struct >tbody >tr').length,
             element = null,
             element = content.clone();
-        element.attr('id', 'rec-' + size);
+        element.attr('id', 'rec__-' + size);
         element.find('.delete-record').attr('data-id', size);
-        element.appendTo('#tbl_posts_body');
+        element.appendTo('#tbl_posts_bodys');
         // $('#tbl_posts_body #rec-' + size + ' #Gender').val(Gender);
-        $('#tbl_posts_body #rec-' + size + ' #StructureId1').val(struct);
-        element.find('.sn').html(size);
-        $("#tbl_posts #add .sn").text($('#tbl_posts >tbody >tr').length);
-        $("#tbl_posts #add .add").remove();
-        $("#tbl_posts #tbl_posts_body .floating-label-field").attr("readonly", true);
-        element.find(".add-record").hide();
+        $('#tbl_posts_bodys #rec__-' + size + ' #StructureId1').val(struct);
+        element.find('.sns').html(size);
+        $("#tbl_posts_struct #adds .sns").text($('#tbl_posts_struct >tbody >tr').length);
+        $("#tbl_posts_struct #adds .add").remove();
+        $("#tbl_posts_struct #tbl_posts_bodys .floating-label-field").attr("readonly", true);
+        element.find(".add-records").hide();
         element.find(".delete-record").show();
         debugger
 
-        $("#tbl_posts #add .floating-label-field").val('');
+        $("#tbl_posts_struct #adds .floating-label-field").val('');
     }
     else {
         alert('Please fill record before add new record ');
@@ -286,11 +213,11 @@ $(document).delegate('a.delete-record', 'click', function (e) {
         var targetDiv = jQuery(this).attr('targetDiv');
         jQuery('#rec-' + id).remove();
         //regnerate index number on table
-        $('#tbl_posts_body tr').each(function (index) {
+        $('#tbl_posts_bodys tr').each(function (index) {
             //alert(index);
-            $(this).find('span.sn').html(index + 1);
+            $(this).find('span.sns').html(index + 1);
         });
-        $("#tbl_posts #add .sn").text($('#tbl_posts >tbody >tr').length);
+        $("#tbl_posts_struct #adds .sns").text($('#tbl_posts_struct >tbody >tr').length);
         return true;
     } else {
         return false;
@@ -309,13 +236,13 @@ function FillAreaRptAtEdit() {
     HttpGet(`/Demolitionstructuredetails/GetDetailsAreaRpt/?Id=${$("#Id").val() == null ? "" : $("#Id").val()}`, 'json', function (data) {
         debugger
         for (var i = 0; i < data.length; i++) {
-            $("#tbl_posts1 #add1 #Date2").val(data[i].date);
-            $("#tbl_posts1 #add1 #Area1").val(data[i].areaReclaimed);
-            $("#tbl_posts1 #add1 #AreaToBeReclaimed").val(data[i].areaToBeReclaimed);
+            $("#tbl_posts1 #adddata1 #Date2").val(data[i].date);
+            $("#tbl_posts1 #adddata1 #Area1").val(data[i].areaReclaimed);
+            $("#tbl_posts1 #adddata1 #AreaToBeReclaimed").val(data[i].areaToBeReclaimed);
            
 
             if (i < data.length - 1) {
-                var content = jQuery('#tbl_posts1 #add1 tr'),
+                var content = jQuery('#tbl_posts1 #adddata1 tr'),
                     size = jQuery('#tbl_posts1 >tbody >tr').length,
                     element = null,
                     element = content.clone();
@@ -324,8 +251,8 @@ function FillAreaRptAtEdit() {
                 element.appendTo('#tbl_posts1_body');
 
                 element.find('.sn1').html(size);
-                $("#tbl_posts1 #add1 .sn1").text($('#tbl_posts1 >tbody >tr').length);
-                $("#tbl_posts1 #add1 .add").remove();
+                $("#tbl_posts1 #adddata1 .sn1").text($('#tbl_posts1 >tbody >tr').length);
+                $("#tbl_posts1 #adddata1 .add").remove();
                 $("#tbl_posts1 #tbl_posts1_body .floating-label-field").attr("readonly", true);
                 element.find(".add-record1").hide();
                 element.find(".delete-record1").show();
@@ -339,11 +266,11 @@ function FillAreaRptAtEdit() {
 $(document).delegate('a.add-record1', 'click', function (e) {
     debugger
 
-    if ($("#tbl_posts1 #add1 #Date2").val() != ''
-        && $("#tbl_posts1 #add1 #Area1").val() != '') {
+    if ($("#tbl_posts1 #adddata1 #Date2").val() != ''
+        && $("#tbl_posts1 #adddata1 #Area1").val() != '') {
 
         e.preventDefault();
-        var content = jQuery('#tbl_posts1 #add1 tr'),
+        var content = jQuery('#tbl_posts1 #adddata1 tr'),
             size = jQuery('#tbl_posts1 >tbody >tr').length,
             element = null,
             element = content.clone();
@@ -353,14 +280,14 @@ $(document).delegate('a.add-record1', 'click', function (e) {
         // $('#tbl_posts_body #rec-' + size + ' #Gender').val(Gender);
 
         element.find('.sn1').html(size);
-        $("#tbl_posts1 #add1 .sn1").text($('#tbl_posts1 >tbody >tr').length);
-        $("#tbl_posts1 #add1 .add").remove();
+        $("#tbl_posts1 #adddata1 .sn1").text($('#tbl_posts1 >tbody >tr').length);
+        $("#tbl_posts1 #adddata1 .add").remove();
         $("#tbl_posts1 #tbl_posts1_body .floating-label-field").attr("readonly", true);
         element.find(".add-record1").hide();
         element.find(".delete-record1").show();
         debugger
 
-        $("#tbl_posts1 #add1 .floating-label-field").val('');
+        $("#tbl_posts1 #adddata1 .floating-label-field").val('');
     }
     else {
         alert('Please fill record before add new record ');
@@ -379,7 +306,7 @@ $(document).delegate('a.delete-record1', 'click', function (e) {
             //alert(index);
             $(this).find('span.sn1').html(index + 1);
         });
-        $("#tbl_posts1 #add1 .sn1").text($('#tbl_posts1 >tbody >tr').length);
+        $("#tbl_posts1 #adddata1 .sn1").text($('#tbl_posts1 >tbody >tr').length);
         return true;
     } else {
         return false;
@@ -425,7 +352,7 @@ $('.checkExtension').on('change', function (e) {
                 flag = false;
         }
       
-        alert("test1");
+      //  alert("test1");
         if (flag == true) {
 
             var FileID = $(this).attr('id');
@@ -437,7 +364,7 @@ $('.checkExtension').on('change', function (e) {
                 $(this).val('');
             }
             else {
-                alert("test11");
+              //  alert("test11");
                 filecontrol = $(this);
                 
                 var myformData = new FormData();
