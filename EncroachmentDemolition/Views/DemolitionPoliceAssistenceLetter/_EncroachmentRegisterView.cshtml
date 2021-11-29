@@ -61,7 +61,7 @@
                     <div class="col-md-6">
                         <div class="floating-label-wrap">
 
-                            <select asp-for="KhasraNo" disabled class="floating-label-field floating-label-field--s3" asp-items="@(new SelectList(Model.KhasraList,"Name","Name"))">
+                            <select asp-for="KhasraNo" disabled class="floating-label-field floating-label-field--s3" asp-items="@(new SelectList(Model.PropertyInventoryKhasraList,"Id","KhasraNo"))">
                                 <option value="0">Select</option>
                             </select>
                             <label asp-validation-for="KhasraNo" class="error"></label>

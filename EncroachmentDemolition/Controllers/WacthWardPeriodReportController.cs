@@ -50,6 +50,8 @@ namespace EncroachmentDemolition.Controllers
                 return PartialView();
             }
         }
+
+
         [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> Download()
         {
