@@ -794,7 +794,7 @@ namespace EncroachmentDemolition.Controllers
 
                         KhasraNo = result[i].PrimaryListNoNavigation.KhasraNo == null ? "" : result[i].PrimaryListNoNavigation.KhasraNo.ToString(),
                         Encroachment = result[i].Encroachment.ToString() == "1" ? "Yes" : "No",
-                        StatusOnGround = result[i].StatusOnGround.ToString(),
+                        StatusOfLand = result[i].StatusOnGround.ToString(),
                         Status = result[i].ApprovedStatusNavigation == null ? "" : result[i].ApprovedStatusNavigation.SentStatusName.ToString(),
 
                     }); ;

@@ -12,7 +12,7 @@ namespace Libraries.Repository.IEntityRepository
     {
         Task<List<EncroachmentRegisteration>> GetAllEncroachmentRegisteration();
         Task<List<Watchandward>> GetAllEncroachmentRegisterlist(int approved);
-
+        Task<List<EncroachmentRegisteration>> GetAllEncroachmentRegisterlistForDownload();
         Task<List<Zone>> GetAllZone(int departmentId);
         Task<List<DetailsOfEncroachment>> GetDetailsOfEncroachment(int encroachmentId);
         Task<EncroachmentPhotoFileDetails> GetEncroachmentPhotoFileDetails(int encroachmentId);

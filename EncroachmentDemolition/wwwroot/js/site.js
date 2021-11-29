@@ -130,7 +130,7 @@ $('.numbers').keyup(function (e) {
     this.value = this.value.replace(/[^0-9\.]/g, '');
 });
 
-
+ 
 function numericDecimal(elementRef) {
     var keyCodeEntered = (event.which) ? event.which : (window.event.keyCode) ? window.event.keyCode : -1;
     if ((keyCodeEntered >= 48) && (keyCodeEntered <= 57)) {

@@ -11,6 +11,8 @@ using Notification.Constants;
 using Notification.OptionEnums;
 using EncroachmentDemolition.Filters;
 using Core.Enum;
+using Dto.Master;
+using Utility.Helper;
 
 namespace EncroachmentDemolition.Controllers
 {
@@ -66,6 +68,40 @@ namespace EncroachmentDemolition.Controllers
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                 return PartialView();
             }
+        }
+        [AuthorizeContext(ViewAction.Download)]
+        public async Task<IActionResult> Download()
+        {
+            var result = await _encroachmentregistrationService.GetAllEncroachmentRegisterlistForDownload();
+            List<EncroachmentRegisterListDto> data = new List<EncroachmentRegisterListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new EncroachmentRegisterListDto()
+                    {
+                        Id = i + 1,
+                        Date = Convert.ToDateTime(result[i].EncrochmentDate).ToString("dd-MMM-yyyy") == null ? "" : Convert.ToDateTime(result[i].EncrochmentDate).ToString("dd-MMM-yyyy"),
+                        Department = result[i].Department.Name,
+                        Zone = result[i].Zone.Name,
+                        Division = result[i].Division.Name,
+                        Loaclity = result[i].Locality.Name,
+                        PrimaryListNo = result[i].KhasraNoNavigation.PrimaryListNo,
+                        KhasraNo = result[i].KhasraNoNavigation.KhasraNo == null ? result[i].KhasraNoNavigation.PlotNo : result[i].KhasraNoNavigation.KhasraNo.ToString(),
+                        Encroachment = result[i].IsEncroachment.ToString(),
+                        StatusOfLand = result[i].StatusOfLand.ToString(),
+                        Status = result[i].ApprovedStatusNavigation == null ? "NA" : result[i].ApprovedStatusNavigation.SentStatusName.ToString(),
+                        Area = result[i].Area.ToString(),
+                        Remarks = result[i].Remarks,
+                        PoliceStation = result[i].PoliceStation,
+                        OfficerOnDuty = result[i].SecurityGuardOnDuty
+
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
     }
 }

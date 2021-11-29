@@ -11,6 +11,7 @@ function GetOtherDetails(id) {
     HttpGet(`/WatchWardApproval/WatchWardView/?Id=${id}`, 'html', function (response) {
         $('#WatchWardDetailsDiv').html("");
         $('#WatchWardDetailsDiv').html(response);
+        callSelect2();
     });
 };
 

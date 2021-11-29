@@ -61,7 +61,7 @@
                     <div class="col-md-6">
                         <div class="floating-label-wrap">
 
-                            <select asp-for="KhasraNo" disabled class="floating-label-field floating-label-field--s3" asp-items="@(new SelectList(Model.KhasraList,"Name","Name"))">
+                            <select asp-for="KhasraNo" disabled class="floating-label-field floating-label-field--s3" asp-items="@(new SelectList(Model.PropertyInventoryKhasraList,"Id","KhasraNo"))">
                                 <option value="0">Select</option>
                             </select>
                             <label asp-validation-for="KhasraNo" class="error"></label>
@@ -101,7 +101,7 @@
                             <div class="col-md-4">
                                 <div class="floating-label-wrap mb-3 mb-md-0">
 
-                                    <input limit="4" asp-for="TotalAreaInBighaInspection" type="text" disabled class="floating-label-field floating-label-field--s3 onlynumbers inspectionbbbcalculation" placeholder="Bigha" onkeypress="return numericDecimal(this);" onpaste="return false;">
+                                    <input @*limit="4"*@ asp-for="TotalAreaInBighaInspection" type="text" disabled class="floating-label-field floating-label-field--s3 onlynumbers inspectionbbbcalculation" placeholder="Bigha" onkeypress="return numericDecimal(this);" onpaste="return false;">
                                     <span asp-validation-for="TotalAreaInBighaInspection" class="text-danger"></span>
                                     <label class="floating-label">Bigha</label>
                                 </div>
@@ -109,7 +109,7 @@
                             <div class="col-md-4">
                                 <div class="floating-label-wrap mb-3 mb-md-0">
 
-                                    <input limit="2" asp-for="TotalAreaInBiswaInspection" type="text" disabled class="floating-label-field floating-label-field--s3 onlynumbers inspectionbbbcalculation" placeholder="Biswa" onkeypress="return numericDecimal(this);" onpaste="return false;">
+                                    <input @*limit="2"*@ asp-for="TotalAreaInBiswaInspection" type="text" disabled class="floating-label-field floating-label-field--s3 onlynumbers inspectionbbbcalculation" placeholder="Biswa" onkeypress="return numericDecimal(this);" onpaste="return false;">
                                     <span asp-validation-for="TotalAreaInBiswaInspection" class="text-danger"></span>
                                     <label class="floating-label">Biswa</label>
                                 </div>
@@ -117,7 +117,7 @@
                             <div class="col-md-4">
                                 <div class="floating-label-wrap mb-3 mb-md-0">
 
-                                    <input limit="2" asp-for="TotalAreaInBiswaniInspection" type="text" disabled class="floating-label-field floating-label-field--s3 onlynumbers inspectionbbbcalculation" placeholder="Biswani" onkeypress="return numericDecimal(this);" onpaste="return false;">
+                                    <input @*limit="2"*@ asp-for="TotalAreaInBiswaniInspection" type="text" disabled class="floating-label-field floating-label-field--s3 onlynumbers inspectionbbbcalculation" placeholder="Biswani" onkeypress="return numericDecimal(this);" onpaste="return false;">
                                     <span asp-validation-for="TotalAreaInBiswaniInspection" class="text-danger"></span>
                                     <label class="floating-label">Biswansi</label>
                                 </div>
@@ -198,7 +198,7 @@
                             <table id="tbl_posts" class="table table-sm table-bordered mb-0 table-striped">
                                 <thead class="text-nowrap">
                                     <tr>
-                                        <th>Sr.No</th>
+                                        @*<th>Sr.No</th>*@
                                         <th>Name of Structure</th>
                                         <th>Construction Status</th>
                                         <th>Area[Approx.]</th>
@@ -214,7 +214,7 @@
                                 </tbody>
                                 <tbody id="add">
                                     <tr id="">
-                                        <td style="text-align:center;"><span class="sn">1</span></td>
+                                        @*<td style="text-align:center;"><span class="sn">1</span></td>*@
                                         <td>
                                             <div class="floating-label-wrap mb-3 mb-md-0">
                                                 <input type="text" asp-for="NameOfStructure" disabled class="floating-label-field floating-label-field--s3" id="NameOfStructure" />
@@ -222,7 +222,7 @@
                                         </td>
                                         <td>
                                             <div class="floating-label-wrap">
-                                                <select asp-for="ConstructionStatus" disabled class="floating-label-field floating-label-field--s3">
+                                                <select asp-for="ConstructionStatus" class="floating-label-field floating-label-field--s3">
                                                     <option value="Select">Select</option>
                                                     <option value="Kachcha">Kachcha</option>
                                                     <option value="Pakka">Pakka</option>
@@ -242,7 +242,7 @@
                                         </td>
                                         <td>
                                             <div class="floating-label-wrap">
-                                                <select asp-for="ReligiousStructure" disabled class="floating-label-field floating-label-field--s3">
+                                                <select asp-for="ReligiousStructure"  class="floating-label-field floating-label-field--s3">
                                                     <option value="No">No</option>
                                                     <option value="Yes">Yes</option>
                                                 </select>
