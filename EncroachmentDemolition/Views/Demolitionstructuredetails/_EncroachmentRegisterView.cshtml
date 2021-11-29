@@ -85,7 +85,7 @@
                             <div class="floating-label-wrap">
                                 <select class="floating-label-field floating-label-field--s3" asp-for="AreaUnit" disabled id="inspectionAreaUnit">
                                     <option value="">--Select--</option>
-                                    <option value="0">bigha-biswa-biswansi</option>
+                                    <option value="0">Bigha-Biswa-Biswansi</option>
                                     <option value="1">Sq Yd.</option>
                                     <option value="2">Acre</option>
                                     <option value="3">Hectare</option>
@@ -119,7 +119,7 @@
 
                                     <input limit="2" asp-for="TotalAreaInBiswaniInspection" type="text" disabled class="floating-label-field floating-label-field--s3 onlynumbers inspectionbbbcalculation" placeholder="Biswani" onkeypress="return numericDecimal(this);" onpaste="return false;">
                                     <span asp-validation-for="TotalAreaInBiswaniInspection" class="text-danger"></span>
-                                    <label class="floating-label">biswansi</label>
+                                    <label class="floating-label">Biswansi</label>
                                 </div>
                             </div>
                         </div>
@@ -140,7 +140,7 @@
                     <div class="row mt-md-3">
                         <div class="col-md-6">
                             <div class="floating-label-wrap mb-3 mb-md-0">
-                                <input type="text" id="inspectionArea" class="floating-label-field floating-label-field--s3 numbers" disabled placeholder="Area" asp-for="Area" />
+                                <input type="text" id="inspectionArea" class="floating-label-field floating-label-field--s3 numbers" placeholder="Area" asp-for="Area" />
                                 <span asp-validation-for="Area" class="text-danger"></span>
                                 <label class="floating-label">Area(in sq. mt.)</label>
                             </div>
@@ -153,7 +153,7 @@
                     <div class="col-md-6">
                         <div class="floating-label-wrap mb-3 mb-md-0">
 
-                            <textarea class="floating-label-field floating-label-field--s3" limit="1000" placeholder="Location/Address with land mark" asp-for="LocationAddressWithLandMark"></textarea>
+                            <textarea class="floating-label-field floating-label-field--s3" placeholder="Location/Address with land mark" asp-for="LocationAddressWithLandMark"></textarea>
                             <span asp-validation-for="LocationAddressWithLandMark" class="text-danger"></span>
                             <label class="floating-label">Location/Address with land mark</label>
                         </div>
@@ -187,7 +187,7 @@
                     <div class="row mt-md-3 mb-md-3">
                         <div class="col-md-6">
                             <div class="floating-label-wrap mb-3 mb-md-0">
-                                <input type="text" placeholder="Name of Encroacher" limit="100" class="floating-label-field floating-label-field--s3" asp-for="EncroacherName" />
+                                <input type="text" placeholder="Name of Encroacher" @*limit="100"*@ class="floating-label-field floating-label-field--s3" asp-for="EncroacherName" />
                                 <span asp-validation-for="EncroacherName" class="text-danger"></span>
                                 <label class="floating-label">Name of Encroacher</label>
                             </div>
@@ -300,26 +300,26 @@
 
                     <div class="row pt-3">
                         @*<div class="col-md-6" id="divPossessionGroup" style="display:block;">
-                    <div class="row mt-md-3">
-                        <div class="col-md-6">
-                            <input type="hidden" asp-for="PossessionType" id="PossessionType" value="Formal Possession" />
-                            <input type="hidden" asp-for="Id" id="hdnId" />
-                            <input type="hidden" asp-for="IsActive" value="1" />
-                            <div class="form-check theme">
+                                <div class="row mt-md-3">
+                                    <div class="col-md-6">
+                                        <input type="hidden" asp-for="PossessionType" id="PossessionType" value="Formal Possession" />
+                                        <input type="hidden" asp-for="Id" id="hdnId" />
+                                        <input type="hidden" asp-for="IsActive" value="1" />
+                                        <div class="form-check theme">
 
-                                <input type="radio" name="grpPossession" id="rdbFormal" checked disabled>
-                                <label class="radio-inline">Formal Possession </label>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-check theme">
+                                            <input type="radio" name="grpPossession" id="rdbFormal" checked disabled>
+                                            <label class="radio-inline">Formal Possession </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-check theme">
 
-                                <input type="radio" name="grpPossession" id="rdbFlexible" disabled>
-                                <label class="radio-inline">Physical Possession </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>*@
+                                            <input type="radio" name="grpPossession" id="rdbFlexible" disabled>
+                                            <label class="radio-inline">Physical Possession </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>*@
                         <div class="form-group col-md-6" id="divDepartment" style="display:block;">
                             <div class="floating-label-wrap">
                                 <select asp-for="OtherDepartment" disabled class="floating-label-field floating-label-field--s3" asp-items="@(new SelectList(Model.DepartmentList,"Id","Name"))">

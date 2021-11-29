@@ -470,7 +470,9 @@ namespace Libraries.Repository.EntityRepository
             {
                 var data = await _dbContext.Fixingdemolition.Include(x => x.Encroachment.Locality)
                                         .Include(x => x.Encroachment)
-                                         //.Include(x => x.Demolitionpoliceassistenceletter)
+                                        .Include(x => x.Encroachment.Department)
+                                        .Include(x => x.Encroachment.Zone)
+                                        //.Include(x => x.Demolitionpoliceassistenceletter)
                                         .Include(x => x.ApprovedStatusNavigation)
                                         .Include(x => x.Encroachment.KhasraNoNavigation)
                                         .Where(x => x.IsActive == 1 && x.ApprovedStatusNavigation.StatusCode == approved

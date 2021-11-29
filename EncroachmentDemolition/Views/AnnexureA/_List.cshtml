@@ -2,12 +2,15 @@
 <table class="table table-sm table-bordered mb-0 table-striped">
     <thead class="text-nowrap">
         <tr>
+
+            <th>Department</th>
+            <th>Zone</th>
             <th>Date</th>
             <th>Locality(Village)/Colony</th>
             <th>Khasra No/Plot No</th>
             <th>Encroachment</th>
-            <th>Police Station</th>
-            <th>Officer on duty</th>
+            @*<th>Police Station</th>
+            <th>Officer on duty</th>*@
             <th>Status</th>
             <th>Operation</th>
         </tr>
@@ -18,15 +21,16 @@
             @foreach (var item in Model.Results)
             {
         <tr>
-
+            <td>@item.Department.Name</td>
+            <td>@item.Zone.Name</td>
             <td>@(item.EncrochmentDate==null?"Not Available":Convert.ToDateTime(item.EncrochmentDate).ToString("dd MMM yyyy"))</td>
             @*<td>@(item.Locality == null ? ""  : item.Locality.Name)</td>
         <td>@(item.KhasraNoNavigation.KhasraNo == null ? ""  :item.KhasraNoNavigation.KhasraNo)</td>*@
             <td>@(item.KhasraNoNavigation.LocalityId == null ? item.KhasraNoNavigation.Colony : item.KhasraNoNavigation.Locality.Name)</td>
             <td>@(item.KhasraNoNavigation.LocalityId == null ? item.KhasraNoNavigation.PlotNo: item.KhasraNoNavigation.KhasraNo)</td>
             <td>@(item.IsEncroachment== "" ? "No" : item.IsEncroachment)</td>
-            <td>@item.PoliceStation</td>
-            <td>@item.SecurityGuardOnDuty</td>
+            @*<td>@item.PoliceStation</td>
+            <td>@item.SecurityGuardOnDuty</td>*@
             <td>
                 @(item.ApprovedStatusNavigation == null ? "" : item.ApprovedStatusNavigation.SentStatusName)
             </td>

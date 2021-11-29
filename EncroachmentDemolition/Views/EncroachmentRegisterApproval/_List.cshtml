@@ -2,9 +2,11 @@
 <table class="table table-sm table-bordered mb-0 table-striped">
     <thead class="text-nowrap">
         <tr>
-            <th>Date</th>
+            <th>Department</th>
+            <th>Zone</th>
+            <th>Encrochment Date</th>
             <th>Locality(Village)/Colony</th>
-             <th>Khasra No./Plot No</th>
+            <th>Khasra No./Plot No</th>
             <th>Status</th>
             <th>Action</th>
         </tr>
@@ -14,28 +16,29 @@
         {
             @foreach (var item in Model.Results)
             {
-        <tr>
-
-            <td> @(Convert.ToDateTime(item.EncrochmentDate).ToString("dd-MMM-yyyy"))</td>
-            <td>@(item.KhasraNoNavigation.LocalityId == null ? item.KhasraNoNavigation.Colony : item.KhasraNoNavigation.Locality.Name)</td>
-            <td>@(item.KhasraNoNavigation.LocalityId == null ? item.KhasraNoNavigation.PlotNo: item.KhasraNoNavigation.KhasraNo)</td>
-            @*<td>@(item.KhasraNoNavigation.KhasraNo == null ? ""  :item.KhasraNoNavigation.KhasraNo)</td>*@
-            <td>
-                @(item.ApprovedStatusNavigation == null ? "" : item.ApprovedStatusNavigation.SentStatusName)
-            </td>
-            @if (ViewBag.IsApproved == 0)
-            {
-                <td>
-                    <a asp-action="Create" asp-route-id="@item.Id" title="edit" class="edit"><i class="ri-edit-line"></i> </a>
-                </td>
-            }
-            else
-            {
-                <td>
-                    <a asp-action="View" asp-route-id="@item.Id" title="View" class="view"><i class="ri-eye-line"></i> </a>
-                </td>
-            }
-        </tr>
+                <tr>
+                    <td>@item.Department.Name</td>
+                    <td>@item.Zone.Name</td>
+                    <td> @(Convert.ToDateTime(item.EncrochmentDate).ToString("dd-MMM-yyyy"))</td>
+                    <td>@(item.KhasraNoNavigation.LocalityId == null ? item.KhasraNoNavigation.Colony : item.KhasraNoNavigation.Locality.Name)</td>
+                    <td>@(item.KhasraNoNavigation.LocalityId == null ? item.KhasraNoNavigation.PlotNo: item.KhasraNoNavigation.KhasraNo)</td>
+                    @*<td>@(item.KhasraNoNavigation.KhasraNo == null ? ""  :item.KhasraNoNavigation.KhasraNo)</td>*@
+                    <td>
+                        @(item.ApprovedStatusNavigation == null ? "" : item.ApprovedStatusNavigation.SentStatusName)
+                    </td>
+                    @if (ViewBag.IsApproved == 0)
+                    {
+                        <td>
+                            <a asp-action="Create" asp-route-id="@item.Id" title="edit" class="edit"><i class="ri-edit-line"></i> </a>
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            <a asp-action="View" asp-route-id="@item.Id" title="View" class="view"><i class="ri-eye-line"></i> </a>
+                        </td>
+                    }
+                </tr>
             }
         }
         else

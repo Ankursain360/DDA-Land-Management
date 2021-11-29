@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Libraries.Repository.EntityRepository
 {
-   public class AnnexureARepository : GenericRepository<Fixingdemolition>, IAnnexureARepository
+    public class AnnexureARepository : GenericRepository<Fixingdemolition>, IAnnexureARepository
     {
         public AnnexureARepository(DataContext dbContext) : base(dbContext)
         {
@@ -76,10 +76,10 @@ namespace Libraries.Repository.EntityRepository
                                   select x.EncroachmentId).ToArray();
 
             return await _dbContext.EncroachmentRegisteration
-    
-                
+
+
                 .Include(x => x.Locality)
-               
+
                 .Include(x => x.ApprovedStatusNavigation)
                                     .Where(x => x.IsActive == 1 && x.ApprovedStatusNavigation.StatusCode == approved
                                           && !(InInspectionId).Contains(x.Id))
@@ -92,10 +92,12 @@ namespace Libraries.Repository.EntityRepository
         public async Task<PagedResult<EncroachmentRegisteration>> GetPagedDetails(AnnexureASearchDto model, int approved, int zoneId)
         {
             var InInspectionId = (from x in _dbContext.Fixingdemolition
-                                  where  x.IsActive == 1
+                                  where x.IsActive == 1
                                   select x.EncroachmentId).ToArray();
 
             var data = await _dbContext.EncroachmentRegisteration
+                                        .Include(x => x.Department)
+                                        .Include(x => x.Zone)
                                         .Include(x => x.Locality)
                                         .Include(x => x.ApprovedStatusNavigation)
                                         .Include(x => x.KhasraNoNavigation)

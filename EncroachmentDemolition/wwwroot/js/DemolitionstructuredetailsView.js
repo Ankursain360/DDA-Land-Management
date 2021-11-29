@@ -111,9 +111,9 @@ function onChangeDepartment1(id) {
         for (var i = 0; i < response.length; i++) {
             html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
         }
-        $("#ZoneId").html(html);
-        $("#DivisionId").html('<option value="">Select</option>');
-        $("#LocalityId").html('<option value="">Select</option>');
+        $("#ddlZone").html(html);
+        $("#ddlDivision").html('<option value="">Select</option>');
+        $("#ddlLocality").html('<option value="">Select</option>');
     });
 };
 function onChangeZone1(id) {
@@ -122,8 +122,8 @@ function onChangeZone1(id) {
         for (var i = 0; i < response.length; i++) {
             html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
         }
-        $("#DivisionId").html(html);
-        $("#LocalityId").html('<option value="">Select</option>');
+        $("#ddlDivision").html(html);
+        $("#ddlLocality").html('<option value="">Select</option>');
     });
 };
 function onChangeDivision1(id) {
@@ -132,7 +132,7 @@ function onChangeDivision1(id) {
         for (var i = 0; i < response.length; i++) {
             html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
         }
-        $("#LocalityId").html(html);
+        $("#ddlLocality").html(html);
     });
 };
 

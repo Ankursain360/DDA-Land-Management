@@ -38,6 +38,8 @@ namespace Libraries.Repository.EntityRepository
 
             var data = await _dbContext.Fixingdemolition
                                         .Include(x => x.Encroachment.Locality)
+                                        .Include(x => x.Encroachment.Department)
+                                        .Include(x => x.Encroachment.Zone)
                                         .Include(x => x.Encroachment)
                                         .Include(x => x.Encroachment.KhasraNoNavigation)
                                         .Include(x => x.ApprovedStatusNavigation)

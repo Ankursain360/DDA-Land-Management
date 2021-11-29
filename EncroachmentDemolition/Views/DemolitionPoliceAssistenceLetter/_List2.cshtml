@@ -2,8 +2,10 @@
 <table class="table table-sm table-bordered mb-0 table-striped">
     <thead class="text-nowrap">
         <tr>
-           
+
             <th>Inspection Date</th>
+            <th>Department</th>
+            <th>Zone</th>
             <th>Locality(Village)/Colony</th>
             <th>Khasra No./PlotNo</th>
             <th>Status</th>
@@ -19,6 +21,8 @@
 
 
             <td> @(Convert.ToDateTime(item.FixingDemolition.Encroachment.EncrochmentDate).ToString("dd-MMM-yyyy"))</td>
+            <td>@item.FixingDemolition.Encroachment.Department.Name</td>
+            <td>@item.FixingDemolition.Encroachment.Zone.Name</td>
             <td>@(item.FixingDemolition.Encroachment.KhasraNoNavigation.LocalityId == null ? item.FixingDemolition.Encroachment.KhasraNoNavigation.Colony : item.FixingDemolition.Encroachment.KhasraNoNavigation.Locality.Name)</td>
             <td>@(item.FixingDemolition.Encroachment.KhasraNoNavigation.LocalityId == null ? item.FixingDemolition.Encroachment.KhasraNoNavigation.PlotNo: item.FixingDemolition.Encroachment.KhasraNoNavigation.KhasraNo)</td>
             @*<td>@(item.FixingDemolition.Encroachment.Locality == null ? ""  : item.FixingDemolition.Encroachment.Locality.Name)</td>
