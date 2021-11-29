@@ -2,7 +2,16 @@
 $(document).ready(function () {
     $('#Gender').removeAttr('multiple');
 
-
+    if ($("#rSubsequent").is(":checked")) {
+        $("#DivForSubsequentPurchaser").show();
+    } else {
+        $("#DivForSubsequentPurchaser").hide();
+    }
+    if ($("#rbdYesLitigation").is(":checked")) {
+        $("#DivForLitigationStatus").show();
+    } else {
+        $("#DivForLitigationStatus").hide();
+    }
 });
 
 
