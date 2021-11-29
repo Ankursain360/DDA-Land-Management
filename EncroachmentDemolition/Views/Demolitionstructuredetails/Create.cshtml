@@ -251,46 +251,12 @@
             </div>
         </div>
 
-        @*<div class="row pt-3">
-                <div class="col-md-12">
-                    <div class="table-section bg-white border shadow rounded">
-                        <div class="table-responsive ">
-                            <table id="tbl_posts" class="table table-sm table-bordered mb-0 table-striped">
-                                <thead class="text-nowrap">
-                                    <tr>
-                                        <th>Sr.No</th>
-                                        <th>Name of Structure</th>
-                                        <th>No of Structure</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach (var item in Model.Structure)
-                                    {
-                                        <tr>
-                                            <td>@(recNo += 1)</td>
-                                            <td>@(item.Name)</td>
-                                            <td>
-                                                <div class="floating-label-wrap mb-3 mb-md-0">
-                                                    <input asp-for="NoOfStructrure" type="text" placeholder="No Of Structrure"
-                                                           class="floating-label-field floating-label-field--s3" />
-                                                    <input type="hidden" asp-for="StructrureId" value="@(item.Id)" />
-                                                </div>
-
-                                            </td>
-                                        </tr>
-                                    }
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>*@
+         
         <h3 class="my-3 d-flex sub-heading pt-4"> Demolished Structure  </h3>
         <div class="table-section bg-white border shadow rounded">
             <div class="table-responsive">
-                <table class="table table-sm table-bordered mb-0 table-striped" id="tbl_posts">
-                    <thead class="text-nowrap">
-
+                <table class="table table-sm table-bordered mb-0 table-striped" id="tbl_posts_struct">
+                    <thead class="text-nowrap"> 
                         <tr>
                             <th>Sr.No</th>
                             <th>Demolition Date</th>
@@ -300,11 +266,11 @@
                             <th>Action</th>
                         </tr>
                     </thead>
-                    <tbody id="tbl_posts_body">
+                    <tbody id="tbl_posts_bodys">
                     </tbody>
-                    <tbody class="tbody" id="add">
+                    <tbody class="tbody" id="adds">
                         <tr id="">
-                            <td style="text-align:center;"><span class="sn">1</span></td>
+                            <td style="text-align:center;"><span class="sns">1</span></td>
                             <td>
                                 <input asp-for="Date1" type="date" class="floating-label-field floating-label-field--s3" />
                                 <span asp-validation-for="Date1" class="d-block text-danger field-validation-valid msg"></span>
@@ -334,7 +300,7 @@
                             <td>
                                 <div class="action-btns">
                                     <a class="remove delete-record " title="delete" data-id="0" style="display:none;font-size:30px;"><i class="ri-delete-bin-fill"></i></a>
-                                    <a class="view add-record" data-added="0" title="Add" style="font-size:30px;"><i class="ri-add-circle-fill"></i></a>
+                                    <a class="view add-records" data-added="0" title="Add" style="font-size:30px;"><i class="ri-add-circle-fill"></i></a>
                                 </div>
                             </td>
                         </tr>
@@ -362,7 +328,7 @@
 
                     <tbody id="tbl_posts1_body">
                     </tbody>
-                    <tbody class="tbody" id="add1">
+                    <tbody class="tbody" id="adddata1">
                         <tr id="">
                             <td style="text-align:center;"><span class="sn1">1</span></td>
                             <td>
