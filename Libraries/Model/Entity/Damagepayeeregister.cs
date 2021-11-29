@@ -242,7 +242,7 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public List<IFormFile> SignatureFile { get; set; }
-        [Required(ErrorMessage = "Signature is mandatory")]
+       // [Required(ErrorMessage = "Signature is mandatory")]
 
         //[NotMapped]
         //public IFormFile SignatureFile1 { get; set; }

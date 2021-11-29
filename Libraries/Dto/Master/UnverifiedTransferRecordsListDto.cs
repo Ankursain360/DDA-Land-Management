@@ -13,6 +13,7 @@ namespace Dto.Master
         public string Zone { get; set; }
         public string Division { get; set; }
         public string PrimaryListNo { get; set; }
+        public string KhasraNo { get; set; }
         public string AddressWithLandmark { get; set; }
     }
 }

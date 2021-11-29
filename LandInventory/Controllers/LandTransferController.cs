@@ -529,15 +529,22 @@ namespace LandInventory.Controllers
                     {
                         Id = result[i].Id,
                         InventoriedIn = result[i].InventoriedInId.ToString() == "1" ? "VLMS" : "Used",
-                        ClassificationofLand = result[i].ClassificationOfLand == null ? " " : result[i].ClassificationOfLand.Name,
                         PlannedUnplannedLand = result[i].PlannedUnplannedLand,
+                        ClassificationofLand = result[i].ClassificationOfLand == null ? " " : result[i].ClassificationOfLand.Name,
+                      
 
 
                         Department = result[i].Department == null ? " " : result[i].Department.Name,
                         Zone = result[i].Zone == null ? " " : result[i].Zone.Name,
                         Division = result[i].Division == null ? " " : result[i].Division.Name,
                         PrimaryListNo = result[i].PrimaryListNo,
-                        AddressWithLandmark = result[i].Palandmark,
+                        KhasraNo = result[i].KhasraNo,
+                        Area = result[i].TotalArea.ToString(),
+                        EncroachmentStatus = result[i].EncroachedPartiallyFully.ToString() == "0" ? "Partially Encroached" : "Fully Encroached",
+                        ProtectionOfLand = result[i].Boundary.ToString() == "0" ? "Boundary Wall" : result[i].Boundary ==1? "Fencing" : "None",
+
+                            
+
 
 
                     }); ;
@@ -571,7 +578,10 @@ namespace LandInventory.Controllers
                         Zone = result[i].Zone == null ? " " : result[i].Zone.Name,
                         Division = result[i].Division == null ? " " : result[i].Division.Name,
                         PrimaryListNo = result[i].PrimaryListNo,
+
+                    KhasraNo = result[i].PlannedUnplannedLand== "Planned Land" ? result[i].KhasraNo: result[i].PlotNo,
                         AddressWithLandmark = result[i].Palandmark,
+                      
 
 
                     }); ;

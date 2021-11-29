@@ -80,9 +80,16 @@ namespace Libraries.Service.ApplicationService
         {
             var form = await _damagePayeeRegistrationRepository.FindBy(a => a.Id == id);
             Payeeregistration model = form.FirstOrDefault();
-           // model.IsActive = 0;
-            _damagePayeeRegistrationRepository.Delete(model);
-            return await _unitOfWork.CommitAsync() > 0;
+            // model.IsActive = 0;
+            if (model != null)
+            {
+                _damagePayeeRegistrationRepository.Delete(model);
+                return await _unitOfWork.CommitAsync() > 0;
+            }
+            else
+            {
+                return false;
+            }
         }
         public async Task<bool> CheckUniqueName(int Id, string Name)
         {

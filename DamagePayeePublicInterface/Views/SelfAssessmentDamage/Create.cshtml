@@ -58,17 +58,17 @@
                                 <tr id="">
                                     <td style="text-align:center;"><span class="sn">1</span></td>
                                     <td>
-                                        <input asp-for="payeeName" maxlength="45"  type="text" class="floating-label-field floating-label-field--s3" />
+                                        <input asp-for="payeeName" maxlength="45" type="text" class="floating-label-field floating-label-field--s3" />
                                         <span asp-validation-for="payeeName" class="d-block text-danger field-validation-valid msg"></span>
                                     </td>
                                     <td>
-                                        <input asp-for="payeeFatherName" maxlength="45"  type="text" class="floating-label-field floating-label-field--s3" />
+                                        <input asp-for="payeeFatherName" maxlength="45" type="text" class="floating-label-field floating-label-field--s3" />
                                         <span asp-validation-for="payeeFatherName" class="d-block text-danger field-validation-valid"></span>
 
                                     </td>
                                     <td>
 
-                                        <select asp-for="Gender"   class="floating-label-field floating-label-field--s3">
+                                        <select asp-for="Gender" class="floating-label-field floating-label-field--s3">
                                             <option value="">---Select---</option>
                                             <option value="1">Male</option>
                                             <option value="2">Female</option>
@@ -78,38 +78,38 @@
 
                                     </td>
                                     <td>
-                                        <textarea asp-for="Address" maxlength="100"  type="text" class="floating-label-field floating-label-field--s3"></textarea>
+                                        <textarea asp-for="Address" maxlength="100" type="text" class="floating-label-field floating-label-field--s3"></textarea>
 
                                         @*<input asp-for="Address" maxlength="100" required type="text" class="floating-label-field floating-label-field--s3" />*@
                                         <span asp-validation-for="Address" class="d-block text-danger field-validation-valid"></span>
 
                                     </td>
                                     <td>
-                                        <input asp-for="MobileNo"  limit="10"    type="text" class="floating-label-field floating-label-field--s3 numbers" onchange="return chkvalidmobile(this);" />
+                                        <input asp-for="MobileNo" limit="10" type="text" class="floating-label-field floating-label-field--s3 numbers" onchange="return chkvalidmobile(this);" />
                                         <span asp-validation-for="MobileNo" class="d-block text-danger field-validation-valid msg2"></span>
 
                                     </td>
                                     <td>
-                                        <input asp-for="EmailId" maxlength="30"  type="text" class="floating-label-field floating-label-field--s3"  onchange="return chkvalidemail(this);" />
+                                        <input asp-for="EmailId" maxlength="30" type="text" class="floating-label-field floating-label-field--s3" onchange="return chkvalidemail(this);" />
                                         <span asp-validation-for="EmailId" class="d-block text-danger field-validation-valid msg1"></span>
 
                                     </td>
                                     <td>
 
-                                        <input asp-for="AadharNo"  limit="12"  class="floating-label-field floating-label-field--s3 " onchange="return chkvalidAadhar(this);" />
+                                        <input asp-for="AadharNo" limit="12" class="floating-label-field floating-label-field--s3 " onchange="return chkvalidAadhar(this);" />
                                         <span asp-validation-for="AadharNo" class="d-block text-danger field-validation-valid msgaadhar"></span>
                                         <br />
                                         <a id="viewAadharId" asp-action="ViewPersonelInfoAadharFile" class="badge bg-primary px-2" target="_blank" style="display:none;">(View File)</a>
                                         <input type="hidden" asp-for="AadharNoFilePath" />
 
-                                        <input asp-for="Aadhar"  type="file" class="floating-label-field floating-label-field--s3 checkExtension" />
+                                        <input asp-for="Aadhar" type="file" class="floating-label-field floating-label-field--s3 checkExtension" />
                                         <span asp-validation-for="Aadhar" class="d-block text-danger field-validation-valid"></span>
 
 
                                     </td>
                                     <td>
 
-                                        <input asp-for="PanNo"   class="floating-label-field floating-label-field--s3" onchange="return chkvalid(this);"/>
+                                        <input asp-for="PanNo" class="floating-label-field floating-label-field--s3" onchange="return chkvalid(this);" />
                                         <span asp-validation-for="PanNo" class="d-block text-danger field-validation-valid msgpan"></span>
                                         <br />
 
@@ -127,6 +127,8 @@
                                         <span asp-validation-for="Photograph" class="d-block text-danger field-validation-valid"></span>
 
                                     </td>
+
+                                  
                                     <td>
                                         <a id="viewSignatureId" asp-action="ViewPersonelInfoSignautreFile" class="badge bg-primary px-2" target="_blank" style="display:none;">(View File)</a>
                                         <input asp-for="SignatureFile" type="file" class="floating-label-field floating-label-field--s3 checkExtension" />
@@ -135,12 +137,12 @@
 
                                     </td>
                                     @*<td>
-                                            <a id="viewOtherDocId" asp-action="ViewOtherDocumentFile" class="badge badge-primary px-2" target="_blank" style="display:none;">(View File)</a>
-                                            <input type="hidden" asp-for="OtherDocFilePath" />
-                                            <input  asp-for="OtherDocFile" type="file" class="floating-label-field floating-label-field--s3" />
-                                            <span asp-validation-for="OtherDocFile" class="d-block text-danger field-validation-valid"></span>
+            <a id="viewOtherDocId" asp-action="ViewOtherDocumentFile" class="badge badge-primary px-2" target="_blank" style="display:none;">(View File)</a>
+            <input type="hidden" asp-for="OtherDocFilePath" />
+            <input  asp-for="OtherDocFile" type="file" class="floating-label-field floating-label-field--s3" />
+            <span asp-validation-for="OtherDocFile" class="d-block text-danger field-validation-valid"></span>
 
-                                        </td>*@
+        </td>*@
                                     <td>
                                         <div class="floating-label-wrap mb-3 mb-md-0">
                                             <a class="delete-record" data-id="0" style="display: none; font-size: 40px;"><i class="ri-indeterminate-circle-fill"></i></a>
@@ -752,7 +754,7 @@
 
         <div id="DivMainContentForm">
             <h3 class="my-3 d-flex sub-heading">Online Payment</h3>
-            <a class="btn btn-theme" asp-action="Index" asp-controller="DamageCalculator" asp-route-id="@Model.LocalityId" onclick="return CheckToApply();">Damage Calculator</a>
+            <a class="btn btn-theme" target="_blank" asp-action="Index" asp-controller="DamageCalculator" asp-route-id="@Model.LocalityId" onclick="return CheckToApply();">Damage Calculator</a>
         </div>
         <br />
         <b style="color:red;">

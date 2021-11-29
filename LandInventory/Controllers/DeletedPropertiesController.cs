@@ -130,18 +130,17 @@ namespace LandInventory.Controllers
                 {
                     data.Add(new DeletedPropertyListDto()
                     {
-                        Id = result[i].Id,
+                       /// Id = result[i].Id,
                         InventoriedIn = result[i].InventoriedInId.ToString() == "1" ? "VLMS" : "Used",
                         PlannedUnplannedLand = result[i].PlannedUnplannedLand,
-
                         ClassificationofLand = result[i].ClassificationOfLand == null ? " " : result[i].ClassificationOfLand.Name,
                         Department = result[i].Department == null ? " " : result[i].Department.Name,
                         Zone = result[i].Zone == null ? " " : result[i].Zone.Name,
                         Division = result[i].Division == null ? " " : result[i].Division.Name,
-                        Locality = result[i].LocalityId == null ? " " : result[i].Locality.Name,
-                        KhasraNo = result[i].KhasraNo,
+                        Locality = result[i].LocalityId == null ? " " : result[i].Locality.Name,                     
                         AddressWithLandmark=result[i].Palandmark,
                         PrimaryListNo = result[i].PrimaryListNo,
+                        KhasraNo = result[i].KhasraNo,
                         Reason = result[i].Reason == null ? " " : result[i].Deletedproperty.Reason,
                         DeletedOn = result[i].Deletedproperty == null ? " " : result[i].Deletedproperty.DeletedDate.ToString("dd-MMM-yyyy"),
 

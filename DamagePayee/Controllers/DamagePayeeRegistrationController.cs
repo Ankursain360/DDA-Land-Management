@@ -175,130 +175,145 @@ namespace DamagePayee.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> RegistrationConfirmed()
         {
-            
-            EncryptionHelper encryptionHelper = new EncryptionHelper();
-            var AesKey = _configuration.GetSection("EncryptionKey").Value.ToString();
-            Payeeregistration payeeregistration = new Payeeregistration();
-            var EncryptedEmailId = HttpContext.Request.Query[encryptionHelper.EncryptString(AesKey, "EmailID")];
-            var EncryptedId = HttpContext.Request.Query[encryptionHelper.EncryptString(AesKey, "Id")];
-            var UniqueId = Convert.ToInt32(encryptionHelper.DecryptString(AesKey, Convert.ToString(EncryptedId)).Replace(" ", "+"));
-            var EmailId = encryptionHelper.DecryptString(AesKey, EncryptedEmailId).Replace(" ", "+");
-            var id = Request.QueryString.Value;
+            try
+            {
+                EncryptionHelper encryptionHelper = new EncryptionHelper();
+                var AesKey = _configuration.GetSection("EncryptionKey").Value.ToString();
+                Payeeregistration payeeregistration = new Payeeregistration();
+                var EncryptedEmailId = HttpContext.Request.Query[encryptionHelper.EncryptString(AesKey, "EmailID")];
+                var EncryptedId = HttpContext.Request.Query[encryptionHelper.EncryptString(AesKey, "Id")];
+                var UniqueId = Convert.ToInt32(encryptionHelper.DecryptString(AesKey, Convert.ToString(EncryptedId)).Replace(" ", "+"));
+                var EmailId = encryptionHelper.DecryptString(AesKey, EncryptedEmailId).Replace(" ", "+");
+                var id = Request.QueryString.Value;
 
-            if (id == null)
-            {
-                id = "0";
-            }
-            if (ModelState.IsValid)
-            {
-                payeeregistration.IsVerified = "T";
-                var result = await _damagePayeeRegistrationService.FetchSingleResult(UniqueId);
-                if (result != null)
+                if (id == null)
                 {
-                    payeeregistration.Id = UniqueId;
-                    var result1 = await _damagePayeeRegistrationService.UpdateVerification(payeeregistration);
-                    // aspnetuser table entry 
-                    if (result1)
+                    id = "0";
+                }
+                if (ModelState.IsValid)
+                {
+                    payeeregistration.IsVerified = "T";
+                    var result = await _damagePayeeRegistrationService.FetchSingleResult(UniqueId);
+                    if (result != null)
                     {
-                         
-                        AddUserDto model = new AddUserDto()
+                        payeeregistration.Id = UniqueId;
+                        var result1 = await _damagePayeeRegistrationService.UpdateVerification(payeeregistration);
+                        // aspnetuser table entry 
+                        if (result1)
                         {
-                            Name = result.Name,
-                            UserName = result.Name,
-                            Email = result.EmailId,
-                            PhoneNumber = result.MobileNumber,
-                            Password ="Payee@123",
-                            ConfirmPassword = "Payee@123",
-                            RoleId=20
-                            
-                        };
-                        
-                        var result2= await _userProfileService.CreateUser(model);
-                        if (result2)//send login credientials mail
-                        {
-                           // EncryptionHelper encryptionHelper = new EncryptionHelper();
-                          //  ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                            //At successfull completion send mail and sms
-                            string DisplayName = result.Name.ToString();
-                            string EmailID = result.EmailId.ToString();
-                            string Id = result.Id.ToString().Unidecode();
-                            string LoginName = result.Name.ToString();
-                            string contactno = result.MobileNumber.ToString();
 
-                            Uri uri = new Uri("http://localhost:1011/DamagePayeeRegistration");
-                            string Action = "Dear " + LoginName + ",  You are succesfully registered with DDA Portal. For verify your email click  below link :-  " + uri;
-                            var aburl = Request.GetDisplayUrl().Replace("Create", "RegistrationConfirmed");
-                            string url = "https://www.google.com/search?q=yahoo+mail&rlz=1C1CHBF_enIN923IN923&oq=&aqs=chrome.1.69i59i450l5.24765349j0j15&sourceid=chrome&ie=UTF-8#=" + contactno + "&message= " + Action + " Thank you .&priority=11";
-                            //string link = "Username="+ result.Name + "and Password="+ model.Password;
-                            string link = "https://damagepayee.managemybusinessess.com/";
-                           // string link = "<a target=\"_blank\" href=\"" + aburl + "?" + encryptionHelper.EncryptString(AesKey, "EmailID") + "=" + encryptionHelper.EncryptString(AesKey, EmailID) + "&" + encryptionHelper.EncryptString(AesKey, "Id") + "=" + encryptionHelper.EncryptString(AesKey, Id) + "\">Click Here</a>";
-                                 string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "LoginInfoMailDetails.html");
-                           // string linkhrefregistration = aburl + "?" + encryptionHelper.EncryptString(AesKey, "EmailID") + "=" + encryptionHelper.EncryptString(AesKey, EmailID) + "&" + encryptionHelper.EncryptString(AesKey, "Id") + "=" + encryptionHelper.EncryptString(AesKey, Id);
-                            #region Mail Generation Added By Renu
+                            AddUserDto model = new AddUserDto()
+                            {
+                                Name = result.Name,
+                                UserName = result.Name,
+                                Email = result.EmailId,
+                                PhoneNumber = result.MobileNumber,
+                                Password = "Payee@123",
+                                ConfirmPassword = "Payee@123",
+                                RoleId = 20
 
-                            MailSMSHelper mailG = new MailSMSHelper();
+                            };
 
-                            #region HTML Body Generation
-                            RegisterationBodyDTO bodyDTO = new RegisterationBodyDTO();
-                            bodyDTO.displayName = DisplayName;
-                            bodyDTO.loginName = LoginName;
-                            bodyDTO.password = "Payee@123";
-                            bodyDTO.link = link;
-                           // bodyDTO.link = "";
-                            bodyDTO.action = Action;
-                            bodyDTO.path = path;
-                            string strBodyMsg = mailG.PopulateBody(bodyDTO);
-                            #endregion
+                            var result2 = await _userProfileService.CreateUser(model);
+                            if (result2)//send login credientials mail
+                            {
+                                // EncryptionHelper encryptionHelper = new EncryptionHelper();
+                                //  ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+                                //At successfull completion send mail and sms
+                                string DisplayName = result.Name.ToString();
+                                string EmailID = result.EmailId.ToString();
+                                string Id = result.Id.ToString().Unidecode();
+                                string LoginName = result.Name.ToString();
+                                string contactno = result.MobileNumber.ToString();
 
-                            // var sendMailResult = mailG.SendMailWithAttachment(strMailSubject, strBodyMsg, EmailID, strMailCC, strMailBCC, strAttachPath);
-                            #region Common Mail Genration
-                            SentMailGenerationDto maildto = new SentMailGenerationDto();
-                            maildto.strMailSubject = "User Login Details ";
-                            maildto.strMailCC = ""; maildto.strMailBCC = ""; maildto.strAttachPath = "";
-                            maildto.strBodyMsg = strBodyMsg;
-                            maildto.defaultPswd = (_configuration.GetSection("EmailConfiguration:defaultPswd").Value).ToString();
-                            maildto.fromMail = (_configuration.GetSection("EmailConfiguration:fromMail").Value).ToString();
-                            maildto.fromMailPwd = (_configuration.GetSection("EmailConfiguration:fromMailPwd").Value).ToString();
-                            maildto.mailHost = (_configuration.GetSection("EmailConfiguration:mailHost").Value).ToString();
-                            maildto.port = Convert.ToInt32(_configuration.GetSection("EmailConfiguration:port").Value);
+                                Uri uri = new Uri("http://localhost:1011/DamagePayeeRegistration");
+                                string Action = "Dear " + LoginName + ",  You are succesfully registered with DDA Portal. For verify your email click  below link :-  " + uri;
+                                var aburl = Request.GetDisplayUrl().Replace("Create", "RegistrationConfirmed");
+                                string url = "https://www.google.com/search?q=yahoo+mail&rlz=1C1CHBF_enIN923IN923&oq=&aqs=chrome.1.69i59i450l5.24765349j0j15&sourceid=chrome&ie=UTF-8#=" + contactno + "&message= " + Action + " Thank you .&priority=11";
+                                //string link = "Username="+ result.Name + "and Password="+ model.Password;
+                                string link = "https://damagepayee.managemybusinessess.com/";
+                                // string link = "<a target=\"_blank\" href=\"" + aburl + "?" + encryptionHelper.EncryptString(AesKey, "EmailID") + "=" + encryptionHelper.EncryptString(AesKey, EmailID) + "&" + encryptionHelper.EncryptString(AesKey, "Id") + "=" + encryptionHelper.EncryptString(AesKey, Id) + "\">Click Here</a>";
+                                string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "LoginInfoMailDetails.html");
+                                // string linkhrefregistration = aburl + "?" + encryptionHelper.EncryptString(AesKey, "EmailID") + "=" + encryptionHelper.EncryptString(AesKey, EmailID) + "&" + encryptionHelper.EncryptString(AesKey, "Id") + "=" + encryptionHelper.EncryptString(AesKey, Id);
+                                #region Mail Generation Added By Renu
 
-                            maildto.strMailTo = EmailID;
-                            var sendMailResult = mailG.SendMailWithAttachment(maildto);
-                            #endregion
-                            #endregion
+                                MailSMSHelper mailG = new MailSMSHelper();
 
-                            return RedirectToAction("logincredientialsMailSentMsg", "DamagePayeeRegistration", new { username = result.Name });
+                                #region HTML Body Generation
+                                RegisterationBodyDTO bodyDTO = new RegisterationBodyDTO();
+                                bodyDTO.displayName = DisplayName;
+                                bodyDTO.loginName = LoginName;
+                                bodyDTO.password = "Payee@123";
+                                bodyDTO.link = link;
+                                // bodyDTO.link = "";
+                                bodyDTO.action = Action;
+                                bodyDTO.path = path;
+                                string strBodyMsg = mailG.PopulateBody(bodyDTO);
+                                #endregion
 
+                                // var sendMailResult = mailG.SendMailWithAttachment(strMailSubject, strBodyMsg, EmailID, strMailCC, strMailBCC, strAttachPath);
+                                #region Common Mail Genration
+                                SentMailGenerationDto maildto = new SentMailGenerationDto();
+                                maildto.strMailSubject = "User Login Details ";
+                                maildto.strMailCC = ""; maildto.strMailBCC = ""; maildto.strAttachPath = "";
+                                maildto.strBodyMsg = strBodyMsg;
+                                maildto.defaultPswd = (_configuration.GetSection("EmailConfiguration:defaultPswd").Value).ToString();
+                                maildto.fromMail = (_configuration.GetSection("EmailConfiguration:fromMail").Value).ToString();
+                                maildto.fromMailPwd = (_configuration.GetSection("EmailConfiguration:fromMailPwd").Value).ToString();
+                                maildto.mailHost = (_configuration.GetSection("EmailConfiguration:mailHost").Value).ToString();
+                                maildto.port = Convert.ToInt32(_configuration.GetSection("EmailConfiguration:port").Value);
+
+                                maildto.strMailTo = EmailID;
+                                var sendMailResult = mailG.SendMailWithAttachment(maildto);
+                                #endregion
+                                #endregion
+
+                                return RedirectToAction("logincredientialsMailSentMsg", "DamagePayeeRegistration", new { username = result.Name });
+
+                            }
+                            else
+                            {
+                                var result3 = await _damagePayeeRegistrationService.Delete1(UniqueId);
+                                var Message1 = "An error occurred while registering,kindly register again";
+                                return RedirectToAction("ExceptionView", "DamagePayeeRegistration", new { Message = Message1 });
+                            }
                         }
+                        //return View("RegistrationConfirmed");
+                        //return RedirectToAction("logincredientialsMailSentMsg", "DamagePayeeRegistration", new { username = result.Name });
                         else
                         {
-                            var result3 = await _damagePayeeRegistrationService.Delete1(UniqueId);
-                            ViewBag.Message = Alert.Show("An error occurred while registering,kindly register again", "", AlertType.Error);
-                            return RedirectToAction("Create", "DamagePayeeRegistration");
+                           var Message2 = "Some error occurred while verifying email, kindly try to register again.";
+                            return RedirectToAction("ExceptionView", "DamagePayeeRegistration", new { Message = Message2 });
+                           // return View("Create", "DamagePayeeRegistration");
                         }
+
                     }
-                    //return View("RegistrationConfirmed");
-                    //return RedirectToAction("logincredientialsMailSentMsg", "DamagePayeeRegistration", new { username = result.Name });
                     else
                     {
-                        ViewBag.Message = Alert.Show("User Not Found", "", AlertType.Error);
-                        return RedirectToAction("Create", "DamagePayeeRegistration");
+                        var Message3 = "User Not Found,Kindly register again";
+                         return RedirectToAction("ExceptionView", "DamagePayeeRegistration", new { Message = Message3 });
+                        
                     }
+
 
                 }
                 else
                 {
-                    ViewBag.Message = Alert.Show("User Not Found", "", AlertType.Error);
-                    return RedirectToAction("Create", "DamagePayeeRegistration");
+                    var Message4 = "Some error occurred while verifying email, kindly try to register again.";
+                    return RedirectToAction("ExceptionView", "DamagePayeeRegistration", new { Message = Message4 });
                 }
-
-
-            }
-            else
-            {
-                return View("Create", "DamagePayeeRegistration");
-            }
         }
+            catch (Exception ex)
+            {
+                EncryptionHelper encryptionHelper = new EncryptionHelper();
+                var AesKey = _configuration.GetSection("EncryptionKey").Value.ToString();
+                var EncryptedId = HttpContext.Request.Query[encryptionHelper.EncryptString(AesKey, "Id")];
+                var UniqueId = Convert.ToInt32(encryptionHelper.DecryptString(AesKey, Convert.ToString(EncryptedId)).Replace(" ", "+"));
+                var result = await _damagePayeeRegistrationService.Delete1(UniqueId);
+                var Message5 = "Some error occurred while verifying email, kindly try to register again.";
+                return RedirectToAction("ExceptionView", "DamagePayeeRegistration", new { Message = Message5 });
+    }
+}
 
 
         [Route("get-captcha-image")]
@@ -466,6 +481,11 @@ namespace DamagePayee.Controllers
         public IActionResult logincredientialsMailSentMsg(string username)
         {
             ViewBag.name = username;
+            return View();
+        }
+        public IActionResult ExceptionView(string Message)
+        {
+            ViewBag.Message = Message;
             return View();
         }
     }
