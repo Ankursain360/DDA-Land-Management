@@ -30,7 +30,7 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap">
 
-                    <select class="floating-label-field floating-label-field--s3" asp-for="PrimaryListNo" asp-items="@(new SelectList(Model.PrimaryListNoList, "Id","PrimaryListNo"))" onchange="return GetOtherDetails(this.options[this.selectedIndex].value);">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="PrimaryListNo" asp-items="@(new SelectList(Model.PrimaryListNoList, "Id","KhasraNo"))" onchange="return GetOtherDetails(this.options[this.selectedIndex].value);">
                         <option value="">--Select--</option>
                     </select>
                     <label asp-validation-for="PrimaryListNo" class="error"></label>
