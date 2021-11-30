@@ -83,16 +83,18 @@ namespace EncroachmentDemolition.Controllers
                     data.Add(new EncroachmentListDto()
                     {
                         Department = result[i].Department == null ? "" : result[i].Department.Name.ToString(),
-                        
                         Zone = result[i].Zone == null ? "" : result[i].Zone.Name.ToString(),
-                        Division = result[i].Division == null ? "" : result[i].Division.Name.ToString(),                      
-                          DateofDemolition = Convert.ToDateTime(result[i].EncrochmentDate).ToString("dd-MMM-yyyy") == null ? "" : Convert.ToDateTime(result[i].EncrochmentDate).ToString("dd-MMM-yyyy"),
+                        Division = result[i].Division == null ? "" : result[i].Division.Name.ToString(),
+                        KhasraNo = result[i].KhasraNoNavigation == null ? "" : result[i].KhasraNoNavigation.KhasraNo.ToString(),
+                        VillageName = result[i].Locality == null ? "" : result[i].Locality.Name.ToString(),
+                        DateofDemolition = Convert.ToDateTime(result[i].EncrochmentDate).ToString("dd-MMM-yyyy") == null ? "" : Convert.ToDateTime(result[i].EncrochmentDate).ToString("dd-MMM-yyyy"),
                         Encroachment = result[i].IsEncroachment == "" ? "No" : result[i].IsEncroachment.ToString(),
 
 
 
 
-                    }); ;
+
+                    }) ; ;
                 }
             }
 
