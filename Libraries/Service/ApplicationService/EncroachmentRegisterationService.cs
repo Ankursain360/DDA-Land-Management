@@ -37,9 +37,16 @@ namespace Libraries.Service.ApplicationService
         {
             return await _encroachmentRegisterationRepository.FetchSingleResult(id);
         }
+        //
+        //Task<List<EncroachmentRegisteration>> GetAllDownloadEncroachment();
         public async Task<List<Department>> GetAllDepartment()
         {
             return await _encroachmentRegisterationRepository.GetAllDepartment();
+        }
+
+        public async Task<List<EncroachmentRegisteration>> GetAllDownloadEncroachment()
+        {
+            return await _encroachmentRegisterationRepository.GetAllDownloadEncroachment();
         }
 
         public async Task<List<Locality>> GetAllLocalityList()//for demolition report -- ishu

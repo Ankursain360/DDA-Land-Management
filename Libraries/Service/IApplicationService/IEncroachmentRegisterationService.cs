@@ -26,7 +26,7 @@ namespace Libraries.Service.IApplicationService
         Task<List<EncroachmentRegisteration>> GetAllEncroachmentRegisterlistForDownload(); 
           Task<List<Khasra>> GetAllKhasraList(int localityId);
 
-
+        Task<List<EncroachmentRegisteration>> GetAllDownloadEncroachment();
         Task<List<Propertyregistration>> GetAllKhasraListFromPropertyInventory(int ZoneId,int DepartmentId);
         Task<bool> SaveDetailsOfEncroachment(DetailsOfEncroachment detailsOfEncroachment);
         Task<bool> DeleteDetailsOfEncroachment(int Id);

@@ -29,6 +29,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<bool> DeleteEncroachmentLocationMapFileDetails(int Id);
         Task<List<Division>> GetAllDivision(int zoneId);
         Task<List<Department>> GetAllDepartment();
+        Task<List<EncroachmentRegisteration>> GetAllDownloadEncroachment();
         Task<PagedResult<Watchandward>> GetPagedEncroachmentRegisteration(EncroachmentRegisterationDto model, int approved, int zoneId);
         Task<List<Locality>> GetAllLocalityList(int divisionId);
         Task<List<Locality>> GetAllLocalityList();//for demolition report -- ishu
