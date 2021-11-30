@@ -89,7 +89,7 @@ namespace EncroachmentDemolition.Controllers
             Data.DepartmentList = await _encroachmentRegisterationService.GetAllDepartment();
             Data.ZoneList = await _encroachmentRegisterationService.GetAllZone(Data.DepartmentId);
             Data.DivisionList = await _encroachmentRegisterationService.GetAllDivisionList(Data.ZoneId);
-            Data.LocalityList = await _encroachmentRegisterationService.GetAllLocalityList(Data.ZoneId);
+            Data.LocalityList = await _encroachmentRegisterationService.GetAllLocalityList(Data.DivisionId);
           // Data.KhasraList = await _encroachmentRegisterationService.GetAllKhasraList(Data.LocalityId);
             Data.PropertyInventoryKhasraList = await _encroachmentRegisterationService.GetAllKhasraListFromPropertyInventory(SiteContext.ZoneId ?? 0, SiteContext.DepartmentId ?? 0);
             Model.Demolitionchecklist = await _annexureAService.GetDemolitionchecklist();
@@ -104,7 +104,7 @@ namespace EncroachmentDemolition.Controllers
 
         [HttpPost]
         [AuthorizeContext(ViewAction.Add)]
-        public async Task<IActionResult> Create(int id, Fixingdemolition fixingdemolition)
+        public async Task<IActionResult> Create(int id, Fixingdemolition fixingdemolition)      
         {
             try
             {
@@ -236,13 +236,16 @@ namespace EncroachmentDemolition.Controllers
                 {
                     string FilePath = null;
                     if (fixingdemolition.DocumentDetails != null && fixingdemolition.DocumentDetails.Count > 0)
-                        FilePath = fileHelper.SaveFile1(DocumentFilePath, fixingdemolition.DocumentDetails[i]);
-                    fixingdocument.Add(new Fixingdocument
-                    {
-                        DemolitionDocumentId = (int)fixingdemolition.DemolitionDocumentId[i],
-                        DocumentDetails = FilePath,
-                        FixingdemolitionId = fixingdemolition.Id
-                    });
+                        if (fixingdemolition.DocumentDetails.Count-1 >= i)
+                        {
+                            FilePath = fileHelper.SaveFile1(DocumentFilePath, fixingdemolition.DocumentDetails[i]);
+                            fixingdocument.Add(new Fixingdocument
+                            {
+                                DemolitionDocumentId = (int)fixingdemolition.DemolitionDocumentId[i],
+                                DocumentDetails = FilePath,
+                                FixingdemolitionId = fixingdemolition.Id
+                            });
+                        }
                 }
                 foreach (var item in fixingdocument)
                 {
