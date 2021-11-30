@@ -204,7 +204,21 @@ namespace Libraries.Repository.EntityRepository
                                     .ToListAsync();
             return list;
         }
+        public async Task<List<Demandletters>> GetDemandLetterReportList(DownloadDemandLetterReportDto model)
+        {
+             return await _dbContext.Demandletters
+                                    .Include(x => x.Locality)
+                                    .Where(x => (x.IsActive == 1)
+                                   && (x.Id == (model.PropertyNo == 0 ? x.Id : model.PropertyNo))
 
+                                   && (x.LocalityId == (model.Locality == 0 ? x.LocalityId : model.Locality))
+                                    && (string.IsNullOrEmpty(model.FileNo) || x.FileNo.Contains(model.FileNo))
+
+                                    && (x.CreatedDate.Date >= model.FromDate.Date && x.CreatedDate.Date <= model.ToDate.Date)
+                                   )
+                                   .ToListAsync();
+            
+        }
 
         public async Task<PagedResult<Demandletters>> GetPagedDemandletterReport(DemandletterreportSearchDto model)
         {

@@ -13,7 +13,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<PagedResult<Demandletters>> GetPagedDuplicateDemandletter(DuplicateDemandLetterSearchDto model);
         Task<List<Demandletters>> GetAllDemandletter();
         Task<PagedResult<Demandletters>> GetDefaultListingReportData(DefaulterListingReportSearchDto defaulterListingReportSearchDto);
-        
+        Task<List<Demandletters>> GetDemandLetterReportList(DownloadDemandLetterReportDto report);
         Task<List<Demandletters>> BindPropertyNoList();
         Task<PagedResult<Demandletters>> GetPagedDemandletterReport(DemandletterreportSearchDto model);
         /*-----------------Relief Report Start------------------*/

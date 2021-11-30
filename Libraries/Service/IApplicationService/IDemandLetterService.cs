@@ -14,7 +14,7 @@ namespace Libraries.Service.IApplicationService
         Task<PagedResult<Demandletters>> GetPagedDuplicateDemandletter(DuplicateDemandLetterSearchDto model);
         Task<List<Demandletters>> GetAllDemandletter();
         Task<PagedResult<Demandletters>> GetDefaultListingReportData(DefaulterListingReportSearchDto defaulterListingReportSearchDto);
-
+        Task<List<Demandletters>> GetDemandLetterReportList(DownloadDemandLetterReportDto report);
         Task<bool> Update(int id, Demandletters demandletter);
         Task<bool> Create(Demandletters demandletter);
         Task <Demandletters> FetchSingleResult(int id);

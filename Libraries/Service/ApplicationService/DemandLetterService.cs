@@ -95,7 +95,12 @@ namespace Service.ApplicationService
         {
             return await _demandLetterRepository.GetPagedDemandletterReport(model);
         }
+        
 
+        public async Task<List<Demandletters>> GetDemandLetterReportList(DownloadDemandLetterReportDto report)
+        {
+            return await _demandLetterRepository.GetDemandLetterReportList(report);
+        }
 
         /*-----------------Relief Report Start------------------*/
         public async Task<PagedResult<Demandletters>> GetPagedReliefReport(ReliefReportSearchDto model)
