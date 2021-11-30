@@ -12,6 +12,8 @@ using Notification.OptionEnums;
 using EncroachmentDemolition.Filters;
 using Core.Enum;
 using Utility.Helper;
+using Dto.Master;
+
 namespace EncroachmentDemolition.Controllers
 {
     public class EncroachmentReportController : Controller
@@ -91,6 +93,38 @@ namespace EncroachmentDemolition.Controllers
 
 
                     }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        }
+
+
+
+
+
+        public async Task<IActionResult> Encroachmentreporlist()
+        {
+
+            var result = await _encroachmentregistrationService.GetAllDownloadEncroachment();
+            List<EncroachmentReportListDto> data = new List<EncroachmentReportListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new EncroachmentReportListDto()
+                    {
+                        Id = result[i].Id,
+                        Department = result[i].Department == null ? "" : result[i].Department.Name,
+                        Zone = result[i].Zone == null ? "" : result[i].Zone.Name,
+                        Division = result[i].Division == null ? "" : result[i].Division.Name,
+                        VillageName = result[i].Locality == null ? "" : result[i].Locality.Name,
+                        KhasraNo = result[i].KhasraNoNavigation.LocalityId == null ? "" : result[i].KhasraNoNavigation.KhasraNo,
+                        Encroachment = result[i].IsEncroachment == null ? "No" : result[i].IsEncroachment,
+
+                        DateofDemolition = Convert.ToDateTime(result[i].EncrochmentDate).ToString("dd-MMM-yyyy"),
+                    });
                 }
             }
 
