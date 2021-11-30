@@ -137,3 +137,30 @@ $("#descId").click(function () {
     $("#sortdesc").val(1);
     GetDetails(currentPageNumber, currentPageSize);
 });
+
+
+function GetSearchParamDownload() {
+    var model = {
+        PropertyNo: parseInt($('#PropertyNo option:selected').val()),
+        FileNo: $('#FileNo').val(),
+        Locality: parseInt($('#LocalityId option:selected').val()),
+        FromDate: $('#FromDate').val(),
+        ToDate: $('#ToDate').val()
+
+    }
+    return model;
+}
+
+$("#btnDownload").click(function () {
+   
+    var param = GetSearchParamDownload();
+    var IsValid = ValidCheck();//$("#frmReliefReport").valid();
+    if (IsValid) {
+        HttpPost(`/DemandsletterReport/DemandLetterReportList`, 'html', param, function (response) {
+           // return response;
+            //$('#LoadReportView').html("");
+            //$('#LoadReportView').html(response);
+        });
+    }
+  
+});

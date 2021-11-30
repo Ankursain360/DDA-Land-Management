@@ -12,7 +12,7 @@ using Notification.OptionEnums;
 using Dto.Master;
 using DamagePayee.Filters;
 using Core.Enum;
-
+using Utility.Helper;
 
 namespace DamagePayee.Controllers
 {
@@ -51,6 +51,37 @@ namespace DamagePayee.Controllers
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                 return PartialView();
             }
+        }
+        // [AuthorizeContext(ViewAction.Download)]
+        [HttpPost]
+        public async Task<IActionResult> DemandLetterReportList([FromBody] DownloadDemandLetterReportDto report)
+        {
+            var result = await _demandLetterService.GetDemandLetterReportList(report);
+            List<DemandLetterReportListDto> data = new List<DemandLetterReportListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new DemandLetterReportListDto()
+                    {
+                  
+                        Id = i + 1,
+                        Loaclity = result[i].Locality.Name == null ? "" : result[i].Locality.Name,
+                        FileNo = result[i].FileNo == null ? "" : result[i].FileNo,
+                        PayeeName = result[i].Name == null ? "" : result[i].Name,
+                        PropertyNumber = result[i].PropertyNo == null ? "NA" : result[i].PropertyNo,
+                        DemandNo = result[i].DemandNo,
+                        DemandDate = Convert.ToDateTime(result[i].CreatedDate).ToString("dd-MMM-yyyy") == null ? "" : Convert.ToDateTime(result[i].CreatedDate).ToString("dd-MMM-yyyy"),
+                        DemandPeriodFromDate = Convert.ToDateTime(result[i].DemandPeriodFromDate).ToString("dd-MMM-yyyy") == null ? "" : Convert.ToDateTime(result[i].DemandPeriodFromDate).ToString("dd-MMM-yyyy"),
+                        DemandPeriodToDate = Convert.ToDateTime(result[i].DemandPeriodToDate).ToString("dd-MMM-yyyy") == null ? "" : Convert.ToDateTime(result[i].DemandPeriodToDate).ToString("dd-MMM-yyyy"),
+                        DemandAmount = result[i].DepositDue,
+                       
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
 
     }
