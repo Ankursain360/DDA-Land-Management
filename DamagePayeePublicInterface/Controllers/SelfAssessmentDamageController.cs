@@ -556,8 +556,8 @@ namespace DamagePayeePublicInterface.Controllers
                                                         damagepayeeregistertemp.DocumentForFilePath = damagepayeeregistertemp.DocumentForFilePath;
                                                     }
                                                            damagepayeeregistertemp.ModifiedBy = SiteContext.UserId;
-                                                            var result = await _selfAssessmentDamageService.Update(damagepayeeregistertemp);
-                                                            if (result)
+                                                            var resultup = await _selfAssessmentDamageService.Update(damagepayeeregistertemp);
+                                                            if (resultup)
                                                             {
                                                                 //****** code for saving  Damage payee personal info *****
 
@@ -573,7 +573,7 @@ namespace DamagePayeePublicInterface.Controllers
 
                                                                     {
                                                                         List<Damagepayeepersonelinfo> damagepayeepersonelinfotemp = new List<Damagepayeepersonelinfo>();
-                                                                        result = await _selfAssessmentDamageService.DeletePayeePersonalInfoTemp(damagepayeeregistertemp.Id);
+                                                                       var resultdelpi = await _selfAssessmentDamageService.DeletePayeePersonalInfoTemp(damagepayeeregistertemp.Id);
                                                                         for (int i = 0; i < damagepayeeregistertemp.payeeName.Count; i++)
                                                                         {
                                                                             damagepayeepersonelinfotemp.Add(new Damagepayeepersonelinfo
@@ -587,12 +587,12 @@ namespace DamagePayeePublicInterface.Controllers
                                                                                 DamagePayeeRegisterTempId = damagepayeeregistertemp.Id,
                                                                                 AadharNo = damagepayeeregistertemp.AadharNo.Count <= i ? string.Empty : damagepayeeregistertemp.AadharNo[i],
                                                                                 PanNo = damagepayeeregistertemp.PanNo.Count <= i ? string.Empty : damagepayeeregistertemp.PanNo[i],
+
                                                                                 AadharNoFilePath = damagepayeeregistertemp.Aadhar != null ?
                                                                                                         damagepayeeregistertemp.Aadhar.Count <= i ? string.Empty :
                                                                                                         fileHelper.SaveFile(AadharNoDocument, damagepayeeregistertemp.Aadhar[i]) :
                                                                                                         damagepayeeregistertemp.AadharNoFilePath[i] != null || damagepayeeregistertemp.AadharNoFilePath[i] != "" ?
                                                                                                         damagepayeeregistertemp.AadharNoFilePath[i] : string.Empty,
-
                                                                                 PanNoFilePath = damagepayeeregistertemp.Pan != null ?
                                                                                                         damagepayeeregistertemp.Pan.Count <= i ? string.Empty :
                                                                                                         fileHelper.SaveFile(PanNoDocument, damagepayeeregistertemp.Pan[i]) :
@@ -635,7 +635,7 @@ namespace DamagePayeePublicInterface.Controllers
                                                                      )
                                                                     {
                                                                         List<Allottetype> allottetypetemp = new List<Allottetype>();
-                                                                        result = await _selfAssessmentDamageService.DeleteAllotteTypeTemp(damagepayeeregistertemp.Id);
+                                                                       var resultdelallottee = await _selfAssessmentDamageService.DeleteAllotteTypeTemp(damagepayeeregistertemp.Id);
                                                                         for (int i = 0; i < damagepayeeregistertemp.Name.Count; i++)
                                                                         {
                                                                             allottetypetemp.Add(new Allottetype
@@ -673,7 +673,7 @@ namespace DamagePayeePublicInterface.Controllers
 
                                                                     {
                                                                         List<Damagepaymenthistory> damagepaymenthistorytemp = new List<Damagepaymenthistory>();
-                                                                        result = await _selfAssessmentDamageService.DeletePaymentHistoryTemp(damagepayeeregistertemp.Id);
+                                                                       var resultdelpayment = await _selfAssessmentDamageService.DeletePaymentHistoryTemp(damagepayeeregistertemp.Id);
 
                                                                         for (int i = 0; i < damagepayeeregistertemp.PaymntName.Count; i++)
                                                                         {
@@ -697,43 +697,43 @@ namespace DamagePayeePublicInterface.Controllers
 
                                                                     }
                                                                 }
-                                                                if (result)
-                                                                {
-                                                                    var isApprovalStart = _approvalproccessService.CheckIsApprovalStart((_configuration.GetSection("workflowPreccessIdDamagePayee").Value), damagepayeeregistertemp.Id);
-                                                                    if (isApprovalStart == 0 && damagepayeeregistertemp.ApprovedStatus != 1)
-                                                                    {
-                                                                        //#region Approval Proccess At 1st level start Added by Renu 26 Nov 2020
-                                                                        //var DataFlow = await dataAsync();
-                                                                        //for (int i = 0; i < DataFlow.Count; i++)
-                                                                        //{
-                                                                        //    if (!DataFlow[i].parameterSkip)
-                                                                        //    {
-                                                                        //        damagepayeeregistertemp.ApprovedStatus = 0;
-                                                                        //        damagepayeeregistertemp.PendingAt = Convert.ToInt32(DataFlow[i].parameterName);
-                                                                        //        damagepayeeregistertemp.ModifiedBy = SiteContext.UserId;
-                                                                        //        result = await _selfAssessmentDamageService.UpdateBeforeApproval(damagepayeeregistertemp.Id, damagepayeeregistertemp);  //Update Table details 
-                                                                        //        if (result)
-                                                                        //        {
-                                                                        //            Approvalproccess approvalproccess = new Approvalproccess();
-                                                                        //            approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
-                                                                        //            approvalproccess.ProccessID = Convert.ToInt32(_configuration.GetSection("workflowPreccessIdDamagePayee").Value);
-                                                                        //            approvalproccess.ServiceId = damagepayeeregistertemp.Id;
-                                                                        //            approvalproccess.SendFrom = SiteContext.UserId;
-                                                                        //            approvalproccess.SendTo = Convert.ToInt32(DataFlow[i].parameterName);
-                                                                        //            approvalproccess.PendingStatus = 1;   //1
-                                                                        //            approvalproccess.Status = null;   //1
-                                                                        //            approvalproccess.Remarks = "Record Added and Send for Approval";///May be Uncomment
-                                                                        //            result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
-                                                                        //        }
+                                                                //if (result)
+                                                                //{
+                                                                //    var isApprovalStart = _approvalproccessService.CheckIsApprovalStart((_configuration.GetSection("workflowPreccessIdDamagePayee").Value), damagepayeeregistertemp.Id);
+                                                                //    if (isApprovalStart == 0 && damagepayeeregistertemp.ApprovedStatus != 1)
+                                                                //    {
+                                                                //        //#region Approval Proccess At 1st level start Added by Renu 26 Nov 2020
+                                                                //        //var DataFlow = await dataAsync();
+                                                                //        //for (int i = 0; i < DataFlow.Count; i++)
+                                                                //        //{
+                                                                //        //    if (!DataFlow[i].parameterSkip)
+                                                                //        //    {
+                                                                //        //        damagepayeeregistertemp.ApprovedStatus = 0;
+                                                                //        //        damagepayeeregistertemp.PendingAt = Convert.ToInt32(DataFlow[i].parameterName);
+                                                                //        //        damagepayeeregistertemp.ModifiedBy = SiteContext.UserId;
+                                                                //        //        result = await _selfAssessmentDamageService.UpdateBeforeApproval(damagepayeeregistertemp.Id, damagepayeeregistertemp);  //Update Table details 
+                                                                //        //        if (result)
+                                                                //        //        {
+                                                                //        //            Approvalproccess approvalproccess = new Approvalproccess();
+                                                                //        //            approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
+                                                                //        //            approvalproccess.ProccessID = Convert.ToInt32(_configuration.GetSection("workflowPreccessIdDamagePayee").Value);
+                                                                //        //            approvalproccess.ServiceId = damagepayeeregistertemp.Id;
+                                                                //        //            approvalproccess.SendFrom = SiteContext.UserId;
+                                                                //        //            approvalproccess.SendTo = Convert.ToInt32(DataFlow[i].parameterName);
+                                                                //        //            approvalproccess.PendingStatus = 1;   //1
+                                                                //        //            approvalproccess.Status = null;   //1
+                                                                //        //            approvalproccess.Remarks = "Record Added and Send for Approval";///May be Uncomment
+                                                                //        //            result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
+                                                                //        //        }
 
-                                                                        //        break;
-                                                                        //    }
-                                                                        //}
+                                                                //        //        break;
+                                                                //        //    }
+                                                                //        //}
 
-                                                                        //#endregion
-                                                                    }
+                                                                //        //#endregion
+                                                                //    }
 
-                                                                }
+                                                                //}
                                                                 ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
                                                             }
                                                             else

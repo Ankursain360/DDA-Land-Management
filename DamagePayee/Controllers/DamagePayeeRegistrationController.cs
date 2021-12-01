@@ -79,14 +79,18 @@ namespace DamagePayee.Controllers
         {
             try
             {
+                if (!Captcha.ValidateCaptchaCode(payeeregistration.CaptchaCode, HttpContext))
+                {
+                    ModelState.AddModelError("captcha", "Invalid Captcha.");
+                }
                 if (ModelState.IsValid)
                 {
                     //    // Validate Captcha Code
-                    if (!Captcha.ValidateCaptchaCode(payeeregistration.CaptchaCode, HttpContext))
-                    {
-                        ViewBag.Message = Alert.Show("Invalid Catacha.", "", AlertType.Error);
-                        return View(payeeregistration);
-                    }
+                    //if (!Captcha.ValidateCaptchaCode(payeeregistration.CaptchaCode, HttpContext))
+                    //{
+                    //    ViewBag.Message = Alert.Show("Invalid Catacha.", "", AlertType.Error);
+                    //    return View(payeeregistration);
+                    //}
                     var AesKey = _configuration.GetSection("EncryptionKey").Value.ToString();
                     payeeregistration.IsVerified = "F";
                     var result = await _damagePayeeRegistrationService.Create(payeeregistration);
@@ -161,6 +165,7 @@ namespace DamagePayee.Controllers
                 }
                 else
                 {
+                   // ViewBag.Message = Alert.Show("Invalid Captcha.", "", AlertType.Warning);
                     return View(payeeregistration);
                 }
             }
@@ -274,7 +279,7 @@ namespace DamagePayee.Controllers
                             else
                             {
                                 var result3 = await _damagePayeeRegistrationService.Delete1(UniqueId);
-                                var Message1 = "An error occurred while registering,kindly register again";
+                                var Message1 = "Some problem occurred while registering,kindly register again";
                                 return RedirectToAction("ExceptionView", "DamagePayeeRegistration", new { Message = Message1 });
                             }
                         }
@@ -282,7 +287,7 @@ namespace DamagePayee.Controllers
                         //return RedirectToAction("logincredientialsMailSentMsg", "DamagePayeeRegistration", new { username = result.Name });
                         else
                         {
-                           var Message2 = "Some error occurred while verifying email, kindly try to register again.";
+                           var Message2 = "Some problem occurred while verifying email, kindly try to register again.";
                             return RedirectToAction("ExceptionView", "DamagePayeeRegistration", new { Message = Message2 });
                            // return View("Create", "DamagePayeeRegistration");
                         }
@@ -290,7 +295,7 @@ namespace DamagePayee.Controllers
                     }
                     else
                     {
-                        var Message3 = "User Not Found,Kindly register again";
+                        var Message3 = "Some problem occurred while verifying email,Kindly register again";
                          return RedirectToAction("ExceptionView", "DamagePayeeRegistration", new { Message = Message3 });
                         
                     }
@@ -299,21 +304,22 @@ namespace DamagePayee.Controllers
                 }
                 else
                 {
-                    var Message4 = "Some error occurred while verifying email, kindly try to register again.";
+                    var Message4 = "Some problem occurred while verifying email, kindly try to register again.";
                     return RedirectToAction("ExceptionView", "DamagePayeeRegistration", new { Message = Message4 });
                 }
-        }
+            }
             catch (Exception ex)
             {
                 EncryptionHelper encryptionHelper = new EncryptionHelper();
                 var AesKey = _configuration.GetSection("EncryptionKey").Value.ToString();
                 var EncryptedId = HttpContext.Request.Query[encryptionHelper.EncryptString(AesKey, "Id")];
                 var UniqueId = Convert.ToInt32(encryptionHelper.DecryptString(AesKey, Convert.ToString(EncryptedId)).Replace(" ", "+"));
+
                 var result = await _damagePayeeRegistrationService.Delete1(UniqueId);
-                var Message5 = "Some error occurred while verifying email, kindly try to register again.";
+                var Message5 = "Some problem occurred while verifying email, kindly try to register again.";
                 return RedirectToAction("ExceptionView", "DamagePayeeRegistration", new { Message = Message5 });
-    }
-}
+            }
+        }
 
 
         [Route("get-captcha-image")]

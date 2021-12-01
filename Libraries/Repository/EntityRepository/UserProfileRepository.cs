@@ -442,7 +442,7 @@ namespace Repository.EntityRepository
         }
         public async Task<bool> ValidateUniqueUserName1(string userName)
         {
-            return await _dbContext.Users.AnyAsync(t =>t.UserName.ToLower() == userName.ToLower());
+            return await _dbContext.Users.AnyAsync(t =>t.UserName.ToLower() == userName.ToLower() || t.NormalizedUserName == userName.ToUpper());
         }
 
         public async Task<List<Zone>> GetAllZone(int departmentId)
@@ -895,7 +895,7 @@ namespace Repository.EntityRepository
         }
         public async Task<bool> ValidateUniqueEmail1(string email)
         {
-            return await _dbContext.Users.AnyAsync(t => t.Email.ToLower() == email.ToLower());
+            return await _dbContext.Users.AnyAsync(t => t.Email.ToLower() == email.ToLower() || t.NormalizedEmail == email.ToUpper());
         }
 
         public async Task<bool> ValidateUniquePhone(int id, string phonenumber)
