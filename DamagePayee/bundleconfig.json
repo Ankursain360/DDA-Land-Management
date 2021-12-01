@@ -202,5 +202,11 @@
     "inputFiles": [
       "wwwroot/js/Doortodoor.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/VerifyDamagePaymentDetails.min.js",
+    "inputFiles": [
+      "wwwroot/js/VerifyDamagePaymentDetails.js"
+    ]
   }
 ]

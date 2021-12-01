@@ -1,0 +1,139 @@
+﻿@model Dto.Master.ApiResponseVerifyPaymentApiStatus
+@{int rowNo = 0; }
+
+@await Component.InvokeAsync("PageHeader", new { pageName = "Verify Damage Payment Status" })
+
+<div class="pt-3">
+    <div class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+        <h3 class="mb-3 d-flex">Search</h3>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="text" id="txtFileNo" class="floating-label-field floating-label-field--s3" placeholder="File No" />
+                    <label for="txtFileNo" class="floating-label">File No</label>
+                </div>
+            </div>
+
+        </div>
+        <div class="row mt-md-3">
+        <div class="col-md-12 col-xl-3">
+            <div class="row">
+                <div class="col-6 col-md-5 col-xl-6">
+                    <button id="btnReset" class="btn btn-link btn-block d-flex align-items-center justify-content-center" type="reset">
+                        <i class="ri-refresh-line me-2"></i>Reset
+                    </button>
+                </div>
+                <div class="col-6 col-md-7 col-xl-6">
+                    <button id="btnSearch" class="btn btn-theme btn-block" type="submit">Search</button>
+                </div>
+            </div>
+        </div>
+    </div>
+       
+    </div>
+
+    <form asp-action="Index" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+        <h3 class="mb-3 d-flex">Details </h3>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>     
+
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="table-section bg-white border shadow rounded">
+                    <div class="table-responsive ">
+
+                        <table class="table table-sm table-bordered mb-0 table-striped">
+                            <thead class="text-nowrap">
+                                <tr>
+
+                                    <th>Sr.No</th>
+                                    <th>File No</th>
+                                    <th>Challan No</th>
+                                    <th>Applicant Name Payment</th>
+                                    <th>Payment Mode</th>
+                                    <th>Amount Received</th>
+                                    <th>Payment Date</th>
+                                    <th>BANK TRANSACTIONID</th>
+                                    <th>PG TRANSACTIONID</th>
+                                    <th>Bank</th>
+                                    <th>ACCNT NO</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model != null)
+                                {
+                                    @foreach (var item in Model.cargo)
+                                    {
+
+                                        <tr>
+
+                                            <td>@(rowNo += 1)</td>
+                                            <td>@item.FILENO</td>
+                                            <td>@item.CHALLAN_NO</td>
+                                            <td>@item.APPLICANT_NAME_PAYMENT.ToUpper()</td>
+                                            <td>@item.PAYMENT_MODE</td>
+                                            <td>@item.AMOUNT_RECIEVED</td>
+                                            <td>@item.PAYMENT_DATE</td>
+                                            <td>@item.BANK_TRANSACTIONID</td>
+                                            <td>@item.PG_TRANSACTIONID</td>
+                                            <td>@item.BANK</td>
+                                            <td>@item.ACCNT_NO</td>
+
+                                        </tr>
+                                    } }
+                                else
+                                {
+                                    <tr>
+                                        <th colspan="6" style="text-align:center"> No Record Available! </th>
+                                    </tr>
+                                }
+                            </tbody>
+                            <tfoot>
+                                @if (Model != null)
+                                {
+                                    <tr>
+                                        @*<td colspan="3" align="right" style="font-weight:bolder"><b>Grand Total</b></td>
+                                        <td style="font-weight:bolder">@Model.cargo.Sum(x => x.ISSUED)</td>
+                                        <td style="font-weight:bolder">@Model.cargo.Sum(x => x.UNISSUED)</td>
+                                        <td style="font-weight:bolder">@Model.cargo.Sum(x => x.TOTAL)</td>*@
+                                    </tr>
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="3" align="right" style="font-weight:bolder"><b>Total</b></td>
+                                        <td style="font-weight:bolder">0</td>
+                                        <td style="font-weight:bolder">0</td>
+                                        <td style="font-weight:bolder">0</td>
+                                    </tr>
+                                }
+                            </tfoot>
+
+                        </table>
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+          
+                <div class="row mt-md-3">
+                    <div class=" col-md-12">
+                        <button class="btn btn-theme " type="submit">Submit</button>
+                      
+                    </div>
+              
+            </div>
+            </div>
+    </form>
+    <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+    <environment include="Development">
+
+        <script src="~/js/VerifyDamagePaymentDetails.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/VerifyDamagePaymentDetails.min.js" asp-append-version="true"></script>
+    </environment>
