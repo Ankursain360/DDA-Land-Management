@@ -21,7 +21,9 @@
                         </button>
                     </div>
                     <div class="col-6 col-md-7 col-xl-6">
-                        <button class="btn btn-theme btn-block" id="btnSearch" type="submit">Submit</button>
+                       
+                        <button class="btn btn-theme btn-block" id="btnGenerate" type="submit">Generate</button>
+                        @*<button class="btn btn-theme btn-block" id="btnSearch" type="submit">Submit</button>*@
                     </div>
                 </div>
             </div>
@@ -32,18 +34,20 @@
             <div class="p-3 d-flex align-items-end me-auto">
                 <div class="floating-label-wrap">
                     <select id="ddlSort" class="floating-label-field floating-label-field--s3">
-                        <option value="0" selected="selected" disabled="disabled">Select One</option>
+                        @*<option value="0" selected="selected" disabled="disabled">Select One</option>*@
                         <option value="Name">Payee Name</option>
                         <option value="Status">Status</option>
                     </select>
                     <label for="field-1" class="floating-label">Sort by</label>
                 </div>
                 <div class="short-btn d-flex align-items-center">
-                    <span class="btn slow active" id="btnDescending" onclick="Descending();" title="Descending order"><i class="ri-sort-desc"></i></span>
-                    <span class="btn slow" id="btnAscending" onclick="Ascending();" title="Ascending order"><i class="ri-sort-asc"></i></span>
+                    @*<span class="btn slow active" id="btnDescending" onclick="Descending();" title="Descending order"><i class="ri-sort-desc"></i></span>
+                    <span class="btn slow" id="btnAscending" onclick="Ascending();" title="Ascending order"><i class="ri-sort-asc"></i></span>*@
+                    <span class="btn slow active" id="btnAscending" title="Ascending order"><i class="ri-sort-asc"></i></span>
+                    <span class="btn slow" id="btnDescending" title="Descending order"><i class="ri-sort-desc"></i></span>
                 </div>
             </div>
-            P0ss
+            
 
             <div class="download-table d-flex align-items-center px-3 mb-3 mb-md-0">
                 @*<a href="/Paymentverification/Index" class="d-flex align-items-center btn btn-primary me-2">

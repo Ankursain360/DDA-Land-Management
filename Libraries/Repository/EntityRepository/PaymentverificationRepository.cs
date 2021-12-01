@@ -30,9 +30,9 @@ namespace Libraries.Repository.EntityRepository
         {
             var data = await _dbContext.Paymentverification
                            // .Where(a => a.IsVerified == 0)
-                          .Where(x => (string.IsNullOrEmpty(model.name) || x.PayeeName.Contains(model.name)) && (x.IsVerified == 0))
-                            .OrderByDescending(s => s.IsActive)
-                            .GetPaged<Paymentverification>(model.PageNumber, model.PageSize);
+                                      .Where(x => (string.IsNullOrEmpty(model.name) || x.PayeeName.Contains(model.name)) && (x.IsVerified == 0 ))
+                            
+                                      .GetPaged<Paymentverification>(model.PageNumber, model.PageSize);
 
             int SortOrder = (int)model.SortOrder;
             if (SortOrder == 1)
@@ -40,10 +40,24 @@ namespace Libraries.Repository.EntityRepository
                 switch (model.SortBy.ToUpper())
                 {
                     case ("NAME"):
-                        data.Results = data.Results.OrderBy(x => x.PayeeName).ToList();
+                        data = null;
+                        data = await _dbContext.Paymentverification
+                                               .Where(x => (string.IsNullOrEmpty(model.name) || x.PayeeName.Contains(model.name)) && (x.IsVerified == 0))
+                                               .OrderBy(x => x.PayeeName)
+                                               .GetPaged<Paymentverification>(model.PageNumber, model.PageSize);
+                        
+
+                        
                         break;
                     case ("STATUS"):
-                        data.Results = data.Results.OrderBy(x => x.IsActive).ToList();
+                        data = null;
+                        data = await _dbContext.Paymentverification
+                                               .Where(x => (string.IsNullOrEmpty(model.name) || x.PayeeName.Contains(model.name)) && (x.IsVerified == 0))
+                                               .OrderBy(x => x.IsActive)
+                                               .GetPaged<Paymentverification>(model.PageNumber, model.PageSize);
+
+
+                       
                         break;
 
                 }
@@ -53,10 +67,23 @@ namespace Libraries.Repository.EntityRepository
                 switch (model.SortBy.ToUpper())
                 {
                     case ("NAME"):
-                        data.Results = data.Results.OrderByDescending(x => x.PayeeName).ToList();
+                        data = null;
+                        data = await _dbContext.Paymentverification
+                                               .Where(x => (string.IsNullOrEmpty(model.name) || x.PayeeName.Contains(model.name)) && (x.IsVerified == 0))
+                                               .OrderByDescending(x => x.PayeeName)
+                                               .GetPaged<Paymentverification>(model.PageNumber, model.PageSize);
+
+                        
                         break;
                     case ("STATUS"):
-                        data.Results = data.Results.OrderByDescending(x => x.IsActive).ToList();
+
+                        data = null;
+                        data = await _dbContext.Paymentverification
+                                               .Where(x => (string.IsNullOrEmpty(model.name) || x.PayeeName.Contains(model.name)) && (x.IsVerified == 0))
+                                               .OrderByDescending(x => x.IsActive)
+                                               .GetPaged<Paymentverification>(model.PageNumber, model.PageSize);
+
+                      
                         break;
                 }
             }
@@ -66,12 +93,71 @@ namespace Libraries.Repository.EntityRepository
         public async Task<PagedResult<Paymentverification>> GetPagedPaymentListVerified(PaymentverificationSearchDto model)
         {
             var data = await _dbContext.Paymentverification
-                           .Include(x => x.User)
-                           .Where(x => (string.IsNullOrEmpty(model.name) || x.PayeeName.Contains(model.name)) && (x.IsVerified == 1))
+                                       .Include(x => x.User)
+                                       .Where(x => (string.IsNullOrEmpty(model.name) || x.PayeeName.Contains(model.name)) && (x.IsVerified == 1))
+                                       .GetPaged<Paymentverification>(model.PageNumber, model.PageSize);
 
-                            .OrderByDescending(s => s.IsActive)
-                            .GetPaged<Paymentverification>(model.PageNumber, model.PageSize);
-         
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("NAME"):
+                        data = null;
+                        data = await _dbContext.Paymentverification
+                                               .Include(x => x.User)
+                                               .Where(x => (string.IsNullOrEmpty(model.name) || x.PayeeName.Contains(model.name)) && (x.IsVerified == 1))
+                                               .OrderBy(x => x.PayeeName)
+                                               .GetPaged<Paymentverification>(model.PageNumber, model.PageSize);
+                       
+
+
+                        break;
+                    case ("STATUS"):
+                       
+                        data = null;
+                        data = await _dbContext.Paymentverification
+                                               .Include(x => x.User)
+                                               .Where(x => (string.IsNullOrEmpty(model.name) || x.PayeeName.Contains(model.name)) && (x.IsVerified == 1))
+                                               .OrderBy(x => x.IsActive)
+                                               .GetPaged<Paymentverification>(model.PageNumber, model.PageSize);
+
+                       
+
+                        break;
+
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("NAME"):
+                        data = null;
+                        data = await _dbContext.Paymentverification
+                                               .Include(x => x.User)
+                                               .Where(x => (string.IsNullOrEmpty(model.name) || x.PayeeName.Contains(model.name)) && (x.IsVerified == 1))
+                                               .OrderBy(x => x.PayeeName)
+                                               .GetPaged<Paymentverification>(model.PageNumber, model.PageSize);
+
+
+                        
+
+                        break;
+                    case ("STATUS"):
+
+                        data = null;
+                        data = await _dbContext.Paymentverification
+                                              .Include(x => x.User)
+                                              .Where(x => (string.IsNullOrEmpty(model.name) || x.PayeeName.Contains(model.name)) && (x.IsVerified == 1))
+                                              .OrderBy(x => x.IsActive)
+                                              .GetPaged<Paymentverification>(model.PageNumber, model.PageSize);
+
+                       
+
+                        break;
+                }
+            }
             return data;
 
         }

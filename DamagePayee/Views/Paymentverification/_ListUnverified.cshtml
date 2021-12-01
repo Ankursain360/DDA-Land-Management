@@ -3,7 +3,7 @@
 <table class="table table-sm table-bordered mb-0 table-striped">
     <thead class="text-nowrap">
         <tr>
-
+            <th>VerifiedOn</th>
             <th> File No  </th>
             <th> Payee Name </th>
             <th> Property No</th>
@@ -26,46 +26,51 @@
         {
             @foreach (var item in Model.Results)
             {
-                <tr>
+       
+        <tr>
+            @if(item.VerifiedOn == null)
+            {
+               
+            }
+            <td style="display:none">@item.VerifiedOn == null || "" ? "":@(Convert.ToDateTime(item.VerifiedOn).ToString("dd MMM yyyy")) </td>
+            <td>@item.FileNo </td>
+            <td>@item.PayeeName  </td>
+            <td>@item.PropertyNo </td>
+            <td>@item.AmountPaid </td>
+            <td>@item.InterestPaid </td>
+            <td>@item.TotalAmount </td>
+            <td>@item.TransactionId </td>
+            <td>@item.BankTransactionId </td>
+            <td>@item.PaymentMode </td>
+            <td>@item.BankName </td>
 
-                    <td>@item.FileNo </td>
-                    <td>@item.PayeeName  </td>
-                    <td>@item.PropertyNo </td>
-                    <td>@item.AmountPaid </td>
-                    <td>@item.InterestPaid </td>
-                    <td>@item.TotalAmount </td>
-                    <td>@item.TransactionId </td>
-                    <td>@item.BankTransactionId </td>
-                    <td>@item.PaymentMode </td>
-                    <td>@item.BankName </td>
+            <td>
+                @if (item.IsVerified == 0)
+                {
+                    <span class="badge bg-danger px-2 py-1">No</span> }
+                else
+                {
+                    <span class="badge bg-primary px-2 py-1">Yes</span>}
+            </td>
 
-                    <td>
-                        @if (item.IsVerified == 0)
-                        {
-                            <span class="badge bg-danger px-2 py-1">No</span> }
-                        else
-                        {
-                            <span class="badge bg-primary px-2 py-1">Yes</span>}
-                    </td>
+            <td>
+                @if (item.IsActive == 1)
+                {
+                    <span class="badge bg-primary px-2 py-1">Active</span> }
+                else
+                {
+                    <span class="badge bg-danger px-2 py-1">Inactive</span>}
+            </td>
+            <td style="min-width:100px;">
+                <div class="form-check">
 
-                    <td>
-                        @if (item.IsActive == 1)
-                        {
-                            <span class="badge bg-primary px-2 py-1">Active</span> }
-                        else
-                        {
-                            <span class="badge bg-danger px-2 py-1">Inactive</span>}
-                    </td>
-                    <td style="min-width:100px;">
-                        <div class="form-check">
+                    <a asp-action="Verify" asp-route-id="@item.Id" onclick="return confirm('Are you sure, you want to verify this record?')"><input id="btnverify" value="Verify" type="submit" class="btn btn-theme" /></a>
 
-                            <a asp-action="Verify" asp-route-id="@item.Id" onclick="return confirm('Are you sure, you want to verify this record?')"><input id="btnverify" value="Verify" type="submit" class="btn btn-theme" /></a>
-
-                        </div>
-                    </td>
+                </div>
+            </td>
 
 
-                </tr>
+        </tr>
             }
         }
         else
