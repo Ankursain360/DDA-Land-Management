@@ -413,7 +413,7 @@ namespace DamagePayeePublicInterface.Controllers
                                                                                         string[] multiTo = approvalproccess.SendTo.Split(',');
                                                                                         foreach (string MultiUserId in multiTo)
                                                                                         {
-                                                                                            if (col > 0)
+                                                                                            if (col > 0 && multouserprofileid.Length>0)
                                                                                                 multouserprofileid.Append(",");
                                                                                             var UserProfile = await _userProfileService.GetUserById(Convert.ToInt32(MultiUserId));
                                                                                             multouserprofileid.Append(UserProfile.Id);
