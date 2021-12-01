@@ -75,9 +75,11 @@ namespace EncroachmentDemolition.Controllers
                     });
                 }
             }
-
             var memory = ExcelHelper.CreateExcel(data);
-            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+             
+           
+             return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
+
     }
 }

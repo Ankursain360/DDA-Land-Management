@@ -9,7 +9,7 @@ namespace Libraries.Model.Entity
 {
     public class Payeeregistration : AuditableEntity<int>
     {
-        [Required]
+        [Required] 
         [Remote(action: "ExistName", controller: "DamagePayeeRegistration", AdditionalFields = "Id,Name")]
         public string Name { get; set; }
         [Required]
@@ -23,6 +23,7 @@ namespace Libraries.Model.Entity
         public byte? IsActive { get; set; }
         
         [NotMapped]
+        [Required(ErrorMessage = "Captcha is required")]
         [StringLength(4)]
         public string CaptchaCode { get; set; }
 
