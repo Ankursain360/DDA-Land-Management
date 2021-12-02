@@ -14,5 +14,6 @@ namespace Dto.Search
         public string PaidAmount { get; set; }
         public string DemandNo { get; set; }
         public DateTime DemandDate { get; set; }
+        public double BalanceAmount { get; set; }
     }
 }

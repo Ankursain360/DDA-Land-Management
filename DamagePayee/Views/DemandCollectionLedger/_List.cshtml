@@ -14,7 +14,7 @@
             <th> Payee Name </th>
             <th> Demand Amount  </th>
             <th> Paid Amount  </th>
-
+            <th> Balance Amount  </th>
         </tr>
 
     </thead>
@@ -23,16 +23,17 @@
         {
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>@item.FileNo</td>
-                    <td>@(item.LocalityName)</td>
-                    <td>@item.PropertyNo</td>
-                    <td>@item.DemandNo</td>
-                    <td>@item.DemandDate.ToString("dd/MMM/yyyy")</td>
-                    <td>@item.PayeeName</td>
-                    <td style="text-align:right;">@item.DemandAmount</td>
-                    <td style="text-align:right;">@item.PaidAmount</td>
-                </tr>
+        <tr>
+            <td>@item.FileNo</td>
+            <td>@(item.LocalityName)</td>
+            <td>@item.PropertyNo</td>
+            <td>@item.DemandNo</td>
+            <td>@item.DemandDate.ToString("dd/MMM/yyyy")</td>
+            <td>@item.PayeeName</td>
+            <td style="text-align:right;">@item.DemandAmount</td>
+            <td style="text-align:right;">@item.PaidAmount</td>
+            <td style="text-align:right;">@item.BalanceAmount</td>
+        </tr>
             }
         }
         else
