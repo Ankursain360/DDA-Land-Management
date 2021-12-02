@@ -8,6 +8,6 @@ namespace Dto.Master
 {
     public  class VerifyPaymentStatusForFileNoDto
     {
-        public string FileNo { get; set; }
+        public string fileNo { get; set; }
     }
 }

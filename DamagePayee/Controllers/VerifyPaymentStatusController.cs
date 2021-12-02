@@ -37,7 +37,6 @@ namespace DamagePayee.Controllers
         {
             _configuration = configuration;
             _paymentverificationService = paymentverificationService;
-
         }
 
         public async Task<IActionResult> Index()
@@ -46,13 +45,13 @@ namespace DamagePayee.Controllers
         }
 
         [HttpPost]
-        public async Task<PartialViewResult> GetVerifyPayment(string fileNo)
+        public async Task<PartialViewResult> GetVerifyPayment([FromBody] VerifyPaymentStatusForFileNoDto model)
         {
-           
-
             using (var httpClient = new HttpClient())
             {
-                string url = _configuration.GetSection("VerifyPaymentStatusApi").Value + fileNo;
+                var fileno = model.fileNo;
+                List<VerifyPaymentApiStatusDto> damagecalculation = new List<VerifyPaymentApiStatusDto>();
+                string url = _configuration.GetSection("VerifyPaymentStatusApi").Value + fileno;
                 using (var response = await httpClient.GetAsync(url))
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
@@ -65,7 +64,7 @@ namespace DamagePayee.Controllers
         }
 
 
-        
+        //public async Task<PartialViewResult> DamageCalculate([FromBody] DamageCalculationDto dto)
 
     }
 }
