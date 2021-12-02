@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Dto.Master;
 
 namespace Libraries.Service.IApplicationService
 {
@@ -25,5 +26,7 @@ namespace Libraries.Service.IApplicationService
         Task<List<Paymentverification>> BindFileNoList();
         Task<PagedResult<Paymentverification>> GetPagedPaymentVerificationDoneByAcc(PaymentVerificationAccountSection model);
         Task<List<Locality>> BindLoclityList();
+
+        Task<bool> Create(VerifyPaymentApiStatusDto paymentApiStatusDto);
     }
 }

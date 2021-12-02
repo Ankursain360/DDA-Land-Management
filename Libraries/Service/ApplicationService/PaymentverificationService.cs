@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Dto.Master;
 
 namespace Service.ApplicationService
 {
@@ -104,5 +105,13 @@ namespace Service.ApplicationService
         {
             return await _paymentverificationRepository.GetPagedPaidReportData(model);
         }
+        public async Task<bool> Create(VerifyPaymentApiStatusDto paymentApiStatusDto)
+        {
+            paymentApiStatusDto.CreatedBy = 1;
+            paymentApiStatusDto.CreatedDate = DateTime.Now;
+            //_paymentverificationRepository.Add(paymentApiStatusDto);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
+
     }
 }

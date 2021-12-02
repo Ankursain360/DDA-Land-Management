@@ -1,19 +1,19 @@
 ﻿
-$("#btnReset").click(function () {
 
+$("#btnReset").click(function () {
     $('#txtFileNo').val('');
-    $("#divVerifyDetails").hide();
+   
 });
 
 
-
-$("#btnDownload").click(function () {
+$("#btnSearch").click(function () {
     debugger;    
     var filno = $('#txtFileNo').val();
-    if (filno != null) {
-        $("#divVerifyDetails").show();
-        HttpPost(`/VerifyPaymentStatus/Index/?Id=${$('#txtFileNo').val()}`, 'html', function (response) {
-
+    $('#txtName').val('')
+    if (filno != "") {      
+        HttpPost(`/VerifyPaymentStatus/GetVerifyPayment/?fileNo=${$('#txtFileNo').val()}`, 'html', function (response) {
+            $('#divVerifyDetails').html("");
+            $('#divVerifyDetails').html(response);
         });
     }
     else

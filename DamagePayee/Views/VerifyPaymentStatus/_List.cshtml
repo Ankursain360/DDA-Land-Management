@@ -1,0 +1,63 @@
+﻿@model Dto.Master.ApiResponseVerifyPaymentApiStatus
+
+
+<div id="details">
+    <div class="table-section bg-white border shadow rounded">
+        @{int rowNo = 0; }
+        <table class="table table-sm table-bordered mb-0 table-striped">
+            <thead class="text-nowrap">
+                <tr>
+
+                    <th>Sr.No</th>
+                    <th>File No</th>
+                    <th>Challan No</th>
+                    <th>Applicant Name Payment</th>
+                    <th>Payment Mode</th>
+                    <th>Amount Received</th>
+                    <th>Payment Date</th>
+                    <th>BANK TRANSACTIONID</th>
+                    <th>PG TRANSACTIONID</th>
+                    <th>Bank</th>
+                    <th>ACCNT NO</th>
+                    <th>Operation</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null)
+                {
+                    @foreach (var item in Model.cargo)
+                    {
+
+                        <tr>
+
+                            <td>@(rowNo += 1)</td>
+                            <td>@item.FILENO</td>
+                            <td>@item.CHALLAN_NO</td>
+                            <td>@item.APPLICANT_NAME_PAYMENT.ToUpper()</td>
+                            <td>@item.PAYMENT_MODE</td>
+                            <td>@item.AMOUNT_RECIEVED</td>
+                            <td>@item.PAYMENT_DATE</td>
+                            <td>@item.BANK_TRANSACTIONID</td>
+                            <td>@item.PG_TRANSACTIONID</td>
+                            <td>@item.BANK</td>
+                            <td>@item.ACCNT_NO</td>
+                            <td>Submit</td>
+
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                  
+                        <th colspan="11" style="text-align:center"> No Record Available! </th>
+                   
+                    </tr>
+                }
+            </tbody>       
+
+
+        </table>
+    </div>
+</div>
+
