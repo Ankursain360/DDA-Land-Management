@@ -10,6 +10,7 @@ function GetSearchParam() {
 
 $("#btnReset").click(function () {
     $('#txtFileNo').val('');
+    location.reload();
    
 });
 
@@ -19,15 +20,16 @@ $("#btnSearch").click(function () {
     var filno = $('#txtFileNo').val();
     $('#txtName').val('')
     if (filno != "") {    
-        var param = GetSearchParam();
-        //HttpPost(`/VerifyPaymentStatus/GetVerifyPayment/?fileNo=${$('#txtFileNo').val()}`, 'html', function (response) {
+        var param = GetSearchParam();       
         HttpPost(`/VerifyPaymentStatus/GetVerifyPayment`, 'html', param, function (response) {
             $('#divVerifyDetails').html("");
             $('#divVerifyDetails').html(response);
         });
+        $("#btnSubmit").show();
     }
     else
     {
+        $("#btnSubmit").Hide();
         alert('Please Enter the File No');
     }
  

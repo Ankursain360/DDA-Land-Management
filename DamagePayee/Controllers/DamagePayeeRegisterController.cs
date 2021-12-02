@@ -139,7 +139,7 @@ namespace DamagePayee.Controllers
 
 
                                         FileHelper fileHelper = new FileHelper();
-                                        damagepayeeregister.DocumentName = damagepayeeregister.DocumentIFormFile == null ? damagepayeeregister.DocumentName : fileHelper.SaveFile1(DocumentFilePath, damagepayeeregister.DocumentIFormFile);
+                                        damagepayeeregister.DocumentName = damagepayeeregister.DocumentIFormFile == null ? damagepayeeregister.DocumentName : fileHelper.SaveFile(DocumentFilePath, damagepayeeregister.DocumentIFormFile);
 
                                         if (damagepayeeregister.PropertyPhoto != null)
                                         {
@@ -776,7 +776,7 @@ namespace DamagePayee.Controllers
                                 {
 
                                     FileHelper fileHelper = new FileHelper();
-                                damagepayeeregister.DocumentName = damagepayeeregister.DocumentIFormFile == null ? damagepayeeregister.DocumentName : fileHelper.SaveFile1(DocumentFilePath, damagepayeeregister.DocumentIFormFile);
+                                damagepayeeregister.DocumentName = damagepayeeregister.DocumentIFormFile == null ? damagepayeeregister.DocumentName : fileHelper.SaveFile(DocumentFilePath, damagepayeeregister.DocumentIFormFile);
 
                                 if (damagepayeeregister.PropertyPhoto != null)
                                 {
@@ -1244,9 +1244,14 @@ namespace DamagePayee.Controllers
         {
             FileHelper file = new FileHelper();
             Damagepayeeregister Data = await _damagepayeeregisterService.FetchSingleResult(Id);
-            string filename = DocumentFilePath + Data.DocumentName;
-            byte[] FileBytes = System.IO.File.ReadAllBytes(filename);
-            return File(FileBytes, file.GetContentType(filename));
+            string path = Data.DocumentName;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(path);
+            return File(FileBytes, file.GetContentType(path));
+
+            //FileHelper file = new FileHelper();
+            //Damagepayeeregister Data = await _damagepayeeregisterService.FetchSingleResult(Id);
+            //string filename = Data.DocumentName;
+            //return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
         }
 
         [HttpPost]
