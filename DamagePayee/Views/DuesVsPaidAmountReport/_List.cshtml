@@ -4,16 +4,18 @@
     <thead class="text-nowrap">
 
         <tr>
-
+            <th>Locality Name</th>
             <th>File No</th>
             <th>Payee Name</th>
             <th>Address</th>
             <th>Demand No</th>
-            <th>Interest Amount</th>
-            <th>Deposit Due</th>
 
+            <th>Damage Charge</th>
+            <th>Penalty </th>
+            <th>Interest Amount</th>
             <th>Relief Amount</th>
             <th>Demand Amount</th>
+            <th>Paid  Amount</th>
             <th>Balance Amount</th>
 
         </tr>
@@ -23,31 +25,32 @@
         {
             @foreach (var item in Model)
             {
-                <tr>
+        <tr>
+            <td>@item.LocalityName</td>
+            <td>@item.FileNo</td>
+            <td>@item.Name</td>
+            <td>@item.Address</td>
+            <td>@item.DemandNo</td>
+            <td>@item.DamageCharges</td>
+            <td>@item.Penalty</td>
+            <td>@item.InterestAmount</td>
+            <td>@item.ReliefAmount</td>
+            <td>@item.DemandAmount</td>
+            <td>@item.PaidAmount</td>
+            <td>@item.BalanceAmount</td>
+            @*<td>
+            @if (item.IsActive == 1)
+            {
+                <span class="badge bg-primary px-2 py-1">Active</span> }
+            else
+            {
+                <span class="badge bg-danger px-2 py-1">Inactive</span>}
+        </td>*@
 
-                    <td>@item.FileNo</td>
-                    <td>@item.Name</td>
-                    <td>@item.Address</td>
-                    <td>@item.DemandNo</td>
-                    <td>@item.InterestAmount</td>
-                    <td>@item.DepositDue</td>
-                    <td>@item.ReliefAmount</td>
-                    <td>@item.demand_amount</td>
-                    <td>@item.balance_amt</td>
-
-                    @*<td>
-                        @if (item.IsActive == 1)
-                        {
-                            <span class="badge bg-primary px-2 py-1">Active</span> }
-                        else
-                        {
-                            <span class="badge bg-danger px-2 py-1">Inactive</span>}
-                    </td>*@
 
 
 
-
-                </tr>
+        </tr>
             }}
         else
         {
