@@ -24,7 +24,7 @@
                     </button>
                 </div>
                 <div class="col-6 col-md-7 col-xl-6">
-                    <button id="btnSearch" class="btn btn-theme btn-block" type="submit">Search</button>
+                    <button id="btnDownload" class="btn btn-theme btn-block" type="submit">Search</button>
                 </div>
             </div>
         </div>
@@ -36,7 +36,7 @@
         <h3 class="mb-3 d-flex">Details </h3>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>     
 
-        <div class="row">
+        <div id="divVerifyDetails" style="display:none" class="row">
             <div class="col-md-12">
 
                 <div class="table-section bg-white border shadow rounded">
@@ -85,30 +85,11 @@
                                 else
                                 {
                                     <tr>
-                                        <th colspan="6" style="text-align:center"> No Record Available! </th>
+                                        <th colspan="11" style="text-align:center"> No Record Available! </th>
                                     </tr>
                                 }
                             </tbody>
-                            <tfoot>
-                                @if (Model != null)
-                                {
-                                    <tr>
-                                        @*<td colspan="3" align="right" style="font-weight:bolder"><b>Grand Total</b></td>
-                                        <td style="font-weight:bolder">@Model.cargo.Sum(x => x.ISSUED)</td>
-                                        <td style="font-weight:bolder">@Model.cargo.Sum(x => x.UNISSUED)</td>
-                                        <td style="font-weight:bolder">@Model.cargo.Sum(x => x.TOTAL)</td>*@
-                                    </tr>
-                                }
-                                else
-                                {
-                                    <tr>
-                                        <td colspan="3" align="right" style="font-weight:bolder"><b>Total</b></td>
-                                        <td style="font-weight:bolder">0</td>
-                                        <td style="font-weight:bolder">0</td>
-                                        <td style="font-weight:bolder">0</td>
-                                    </tr>
-                                }
-                            </tfoot>
+                          
 
                         </table>
                     </div>
