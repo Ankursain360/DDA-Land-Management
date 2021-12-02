@@ -3,7 +3,7 @@
 <table class="table table-sm table-bordered mb-0 table-striped">
     <thead class="text-nowrap">
         <tr>
-            <th>VerifiedOn</th>
+            
             <th> File No  </th>
             <th> Payee Name </th>
             <th> Property No</th>
@@ -28,12 +28,8 @@
             {
        
         <tr>
-            @if(item.VerifiedOn == null)
-            {
-               
-            }
-            <td style="display:none">@item.VerifiedOn == null || "" ? "":@(Convert.ToDateTime(item.VerifiedOn).ToString("dd MMM yyyy")) </td>
-            <td>@item.FileNo </td>
+           
+           <td>@item.FileNo </td>
             <td>@item.PayeeName  </td>
             <td>@item.PropertyNo </td>
             <td>@item.AmountPaid </td>
