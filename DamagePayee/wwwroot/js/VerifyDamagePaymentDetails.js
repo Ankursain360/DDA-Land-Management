@@ -36,3 +36,14 @@ $("#btnSearch").click(function () {
 
 });
 
+$("#btnSubmit").click(function () {
+    debugger;
+
+    var param = GetSearchParam();
+    HttpPost(`/VerifyPaymentStatus/Index`, 'html', param, function (response) {
+       
+    });
+
+});
+
+

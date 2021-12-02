@@ -37,6 +37,8 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public DateTime ToDateMsg { get; set; }
+        [NotMapped]
+        public string ChallanNo { get; set; }
 
     }
 }

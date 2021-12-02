@@ -327,5 +327,11 @@ namespace Service.ApplicationService
             return await _unitOfWork.CommitAsync() > 0;
         }
 
+
+        public String GetPropertyNo(string FileNo)
+        {
+            return _damagepayeeregisterRepository.GetPropertyNo(FileNo);
         }
+
+    }
 }

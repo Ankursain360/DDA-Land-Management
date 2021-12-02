@@ -105,13 +105,12 @@ namespace Service.ApplicationService
         {
             return await _paymentverificationRepository.GetPagedPaidReportData(model);
         }
-        public async Task<bool> Create(VerifyPaymentApiStatusDto paymentApiStatusDto)
+       
+
+        public async Task<bool> SaveDemandPaymentAPIDetails(Paymentverification paymentverification)
         {
-            paymentApiStatusDto.CreatedBy = 1;
-            paymentApiStatusDto.CreatedDate = DateTime.Now;
-            //_paymentverificationRepository.Add(paymentApiStatusDto);
+            _paymentverificationRepository.Add(paymentverification);
             return await _unitOfWork.CommitAsync() > 0;
         }
-
     }
 }

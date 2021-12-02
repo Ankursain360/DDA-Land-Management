@@ -258,7 +258,15 @@ namespace Libraries.Repository.EntityRepository
             return Result > 0 ? true : false;
         }
 
+        public string GetPropertyNo(string File)
+        {
 
+            var FileNo = (from f in _dbContext.Damagepayeeregister
+                          where (f.FileNo==File)
+                          select f.PropertyNo).First();
+
+            return FileNo;
+        }
 
     }
 }

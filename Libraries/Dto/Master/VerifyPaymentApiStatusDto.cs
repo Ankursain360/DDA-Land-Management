@@ -5,7 +5,7 @@ using System.Text;
 using System.ComponentModel.DataAnnotations;
 namespace Dto.Master
 {
-    public class VerifyPaymentApiStatusDto 
+    public class VerifyPaymentApiStatusDto
     {
         public int CHALLAN_NO { get; set; }
         public string APPLICANT_NAME_PAYMENT { get; set; }
@@ -20,8 +20,8 @@ namespace Dto.Master
         public string InputFILENO { get; set; }
         public int CreatedBy { get; set; }
         public DateTime CreatedDate { get; set; }
-        
 
+        public bool chkPaymentverify {get;set;}
             
     }
 

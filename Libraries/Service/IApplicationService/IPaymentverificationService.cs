@@ -27,6 +27,9 @@ namespace Libraries.Service.IApplicationService
         Task<PagedResult<Paymentverification>> GetPagedPaymentVerificationDoneByAcc(PaymentVerificationAccountSection model);
         Task<List<Locality>> BindLoclityList();
 
-        Task<bool> Create(VerifyPaymentApiStatusDto paymentApiStatusDto);
+  
+
+        Task<bool> SaveDemandPaymentAPIDetails(Paymentverification paymentverification);
+
     }
 }

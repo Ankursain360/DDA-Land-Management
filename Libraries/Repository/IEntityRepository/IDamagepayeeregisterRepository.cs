@@ -50,6 +50,6 @@ namespace Libraries.Repository.IEntityRepository
         Task<Damagepaymenthistory> GetReceiptFilePath(int Id);
         Task<bool> CreateApprovedDamagepayeeRegister(Damagepayeeregister model);
         Task<bool> SavePersonelInfo(List<Damagepayeepersonelinfo> data);
-       
+        string GetPropertyNo(string FileNo);
     }
 }
