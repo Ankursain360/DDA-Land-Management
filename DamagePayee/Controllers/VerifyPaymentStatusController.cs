@@ -87,13 +87,13 @@ namespace DamagePayee.Controllers
                             {
                                 paymentverifications.Add(new Paymentverification()
                                 {
-                                    PayeeName = result2.cargo[i].APPLICANT_NAME_PAYMENT.ToString(),
-                                    PaymentMode = result2.cargo[i].PAYMENT_MODE.ToString(),
-                                    BankTransactionId = result2.cargo[i].BANK_TRANSACTIONID.ToString(),
+                                    PayeeName = result2.cargo[i].APPLICANT_NAME_PAYMENT == null ? "N/A" : result2.cargo[i].APPLICANT_NAME_PAYMENT,
+                                    PaymentMode = result2.cargo[i].PAYMENT_MODE == null ? "N/A" : result2.cargo[i].PAYMENT_MODE,
+                                    BankTransactionId = result2.cargo[i].BANK_TRANSACTIONID == null ? "N/A" : result2.cargo[i].BANK_TRANSACTIONID,
                                     AmountPaid =Convert.ToDecimal(result2.cargo[i].AMOUNT_RECIEVED),
-                                    BankName = result2.cargo[i].BANK.ToString(),
-                                    FileNo= result2.cargo[i].FILENO.ToString(),
-                                    TransactionId = result2.cargo[i].PG_TRANSACTIONID.ToString(),
+                                    BankName = result2.cargo[i].BANK.ToString() == null ? "N/A" : result2.cargo[i].BANK.ToString(),
+                                    FileNo = result2.cargo[i].FILENO == null ? "N/A" : result2.cargo[i].FILENO,
+                                    TransactionId = result2.cargo[i].PG_TRANSACTIONID == null ? "N/A" : result2.cargo[i].PG_TRANSACTIONID,
                                     PropertyNo = Propertyno,
                                     InterestPaid=0,
                                     TotalAmount= Convert.ToDecimal(result2.cargo[i].AMOUNT_RECIEVED)+ 0,
