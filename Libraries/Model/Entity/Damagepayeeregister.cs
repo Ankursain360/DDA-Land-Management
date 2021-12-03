@@ -26,8 +26,11 @@ namespace Libraries.Model.Entity
         public string PropertyNo { get; set; }
         [Required(ErrorMessage = "Locality is mandatory")]
         public int? LocalityId { get; set; }
+        //[Required(ErrorMessage = "Floor No is mandatory")]
         [StringLength(45,ErrorMessage = "Maximum 45 characters allowed ")]
+        
         public string FloorNo { get; set; }
+       // [Required(ErrorMessage = "Street No is mandatory")]
         [StringLength(45,ErrorMessage = "Maximum 45 characters allowed ")]
         public string StreetNo { get; set; }
         [StringLength(45,ErrorMessage = "Maximum 45 characters allowed ")]

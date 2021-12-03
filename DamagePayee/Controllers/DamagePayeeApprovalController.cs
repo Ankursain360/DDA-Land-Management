@@ -674,7 +674,45 @@ namespace DamagePayee.Controllers
             byte[] FileBytes = System.IO.File.ReadAllBytes(path);
             return File(FileBytes, file.GetContentType(path));
         }
+        public async Task<IActionResult> DownloadWill(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Damagepayeeregister Data = await _damagepayeeregisterService.FetchSingleResult(Id);
+            string filename = Data.WillFilePath;
+            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+        }
 
+        public async Task<IActionResult> DownloadGPA(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Damagepayeeregister Data = await _damagepayeeregisterService.FetchSingleResult(Id);
+            string filename = Data.GpafilePath;
+            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+        }
+        public async Task<IActionResult> DownloadATS(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Damagepayeeregister Data = await _damagepayeeregisterService.FetchSingleResult(Id);
+            string filename = Data.AtsfilePath;
+            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+        }
+        public async Task<IActionResult> DownloadMutation(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Damagepayeeregister Data = await _damagepayeeregisterService.FetchSingleResult(Id);
+            string filename = Data.MutationFilePath;
+            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+        }
+        public async Task<IActionResult> ViewUploadedDocument(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Damagepayeeregister Data = await _damagepayeeregisterService.FetchSingleResult(Id);
+            string path = Data.DocumentName;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(path);
+            return File(FileBytes, file.GetContentType(path));
+
+           
+        }
         #endregion
 
         #region History Details Only For Approval Page Added By Renu 26 April  2021
