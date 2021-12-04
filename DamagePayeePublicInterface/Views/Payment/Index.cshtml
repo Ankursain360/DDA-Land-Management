@@ -1,60 +1,64 @@
 ﻿@model IEnumerable<Libraries.Model.Entity.Demandletters>
 @await Component.InvokeAsync("PageHeader", new { pageName = "Payment" })
-<div class="pt-3">
+
+<div class="pt-2">
    
     <div class="table-section bg-white border shadow rounded">
 
-      
-       
-        <table class="table table-sm table-bordered mb-0 table-striped">
-            <thead class="text-nowrap">
-                <tr>
-                    <th>File No</th>
-                    <th> Demand No</th>
-                    <th> Payee Name</th>
-                    <th> Demand Amount</th>
-                    <th>Relief Amount</th>
-                    <th>Interest Amount</th>
-                    <th>Total Amount</th>
-                    <th> Due Date</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @if (Model != null && Model.Count() > 0)
-                {
-                    @foreach (var item in Model)
-                    {
-                <tr>
 
-                    <td>@item.FileNo</td>
-                    <td>@item.DemandNo</td>
-                    <td>@item.Name</td>
-                    <td>@item.DepositDue</td>
-                    <td>@item.ReliefAmount</td>
-                    <td>@item.InterestAmount</td>
-                    <td>@item.DepositDue</td>
+        <div class="table-responsive">
+            <table class="table table-sm table-bordered mb-0 table-striped">
 
-                    <td> @(Convert.ToDateTime(item.UptoDate).ToString("dd-MMM-yyyy"))</td>
 
-                    <td>  <a href="https://online.dda.org.in/onlinepmt/Forms/landspmt.aspx?FileNo=@item.FileNo&Locality=@item.Locality.Name&Amount=@item.DepositDue&Interest=@item.InterestAmount" target="_blank" class="btn btn-theme">Pay Now </a> </td>
-                   </tr>
-                    }
-                }
-                else
-                {
+                <thead class="text-nowrap">
                     <tr>
-                        <th colspan="14" style="text-align:center"> No Record Available! </th>
+                        <th>File No</th>
+                        <th> Demand No</th>
+                        <th> Payee Name</th>
+                        <th> Demand Amount</th>
+                        <th>Relief Amount</th>
+                        <th>Interest Amount</th>
+                        <th>Total Amount</th>
+                        <th> Due Date</th>
+                        <th>Action</th>
                     </tr>
-                }
-            </tbody>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Count() > 0)
+                    {
+                        @foreach (var item in Model)
+                        {
+                            <tr>
 
-        </table>
+                                <td>@item.FileNo</td>
+                                <td>@item.DemandNo</td>
+                                <td>@item.Name</td>
+                                <td>@item.DepositDue</td>
+                                <td>@item.ReliefAmount</td>
+                                <td>@item.InterestAmount</td>
+                                <td>@item.DepositDue</td>
 
-      
+                                <td> @(Convert.ToDateTime(item.UptoDate).ToString("dd-MMM-yyyy"))</td>
+
+                                <td>  <a href="https://online.dda.org.in/onlinepmt/Forms/landspmt.aspx?FileNo=@item.FileNo&Locality=@item.Locality.Name&Amount=@item.DepositDue&Interest=@item.InterestAmount" target="_blank" class="btn btn-theme">Pay Now </a> </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <th colspan="14" style="text-align:center"> No Record Available! </th>
+                        </tr>
+                    }
+                </tbody>
+
+
+            </table>
+
+        </div>
 
     </div>
-
 </div>
+
 
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />

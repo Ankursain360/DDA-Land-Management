@@ -422,16 +422,17 @@ $(function () {
 
 function chkvalidAadhar(input) {
     var value = $(input).val();
-    // var re = /^ ([2-9]{ 1}[0-9]{3}\s[0-9]{4}\s[0-9]{4})$/;
-    var re = /^([2-9]{1}[0-9]{3}\s{1}[0-9]{4}\s{1}[0-9]{4})$/;
-    var is_valid = re.test(value);
-    if (!is_valid) {
-        $(input).val('');
-        $(input).focus();
-        // alert("Please enter valid Pan card number");
-        $(input).nextAll('span:first').empty().html('Please enter valid Aadhar card number');
+    
+        var re = /^([2-9]{1}[0-9]{3}[0-9]{4}[0-9]{4})$/;
+        var is_valid = re.test(value);
+        if (!is_valid) {
+            $(input).val('');
+            $(input).focus();
+            // alert("Please enter valid Pan card number");
+            $(input).nextAll('span:first').empty().html('Please enter valid Aadhar card number');
+        }
     }
-}
+
 
 function chkvalid(input) {
     var value = $(input).val();

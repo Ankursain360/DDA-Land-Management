@@ -90,7 +90,7 @@
                                     </td>
                                     <td>
 
-                                        <input asp-for="AadharNo"   type="text" maxlength="15" class="floating-label-field floating-label-field--s3" onchange="return chkvalidAadhar(this);" />
+                                        <input asp-for="AadharNo"   type="text" limit="12" class="floating-label-field floating-label-field--s3" onchange="return chkvalidAadhar(this);" />
                                         <span asp-validation-for="AadharNo" class="d-block text-danger field-validation-valid msg3"></span>
 
                                         <input type="hidden" asp-for="AadharNoFilePath" />
@@ -592,7 +592,8 @@
             <div class="row mt-3">
                 <div class="form-group col-md-3">
                     <div class="form-check theme">
-                        <input asp-for="IsDocumentFor" class="form-check-input" type="radio" name="Bill" id="HouseBill" checked value="HouseTax Bill">
+                        <input type="hidden" asp-for="IsDocumentFor" value="HouseTax Bill" />
+                        <input asp-for="IsDocumentFor" class="form-check-input" type="radio" name="Bill"  value="HouseTax Bill">
                         <label class="form-check-label" for="radio">
                             HouseTax Bill
                         </label>
@@ -600,7 +601,7 @@
                 </div>
                 <div class="form-group col-md-3">
                     <div class="form-check theme">
-                        <input asp-for="IsDocumentFor" class="form-check-input" type="radio" name="Bill" id="ElectricityBill" value="Electricity Bill">
+                        <input asp-for="IsDocumentFor" class="form-check-input" type="radio" name="Bill"  value="Electricity Bill">
                         <label class="form-check-label" for="radio">
                             Electricity Bill
                         </label>
@@ -608,7 +609,7 @@
                 </div>
                 <div class="form-group col-md-3">
                     <div class="form-check theme">
-                        <input asp-for="IsDocumentFor" class="form-check-input" type="radio" name="Bill" id="WaterBill" value="Water Bill">
+                        <input asp-for="IsDocumentFor" class="form-check-input" type="radio" name="Bill"  value="Water Bill">
                         <label class="form-check-label" for="radio">
                             Water Bill
                         </label>
@@ -616,7 +617,7 @@
                 </div>
                 <div class="form-group col-md-3">
                     <div class="form-check theme">
-                        <input asp-for="IsDocumentFor" class="form-check-input" type="radio" name="Bill" id="Other" value=" Any Other">
+                        <input asp-for="IsDocumentFor" class="form-check-input" type="radio" name="Bill"  value=" Any Other">
                         <label class="form-check-label" for="radio">
                             Any Other
                         </label>
