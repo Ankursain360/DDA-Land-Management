@@ -16,6 +16,8 @@ namespace Libraries.Service.IApplicationService
     public interface IDPPublicPaymentService : IEntityService<Demandletters>
     {
         Task<Damagepayeeregister> FetchDamagePayeeRegisterDetails(int userId);
+
+        Task<Demandletters> FatchDemandPaymentDetails(string FileNo);
         // Task<PagedResult<Damagepayeeregister>> GetPagedDamagepayeeregister(DamagepayeeregistertempSearchDto model);
         Task<List<Demandletters>> GetDemandDetails(string FileNo);
 

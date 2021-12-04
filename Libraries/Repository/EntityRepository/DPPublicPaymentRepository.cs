@@ -123,6 +123,14 @@ namespace Libraries.Repository.EntityRepository
                                     .Where(x => x.UserId == userId)
                                     .FirstOrDefaultAsync();
         }
+
+        public async Task<Demandletters> FatchDemandPaymentDetails(string fileno)
+        {
+            return await _dbContext.Demandletters
+                  .Include(x => x.Locality)
+                  .Where(x => x.FileNo == fileno)
+                  .FirstOrDefaultAsync();
+        }
         public async Task<List<Demandletters>> GetDemandDetails(string FileNo)
         {
             return await _dbContext.Demandletters

@@ -333,5 +333,9 @@ namespace Service.ApplicationService
             return _damagepayeeregisterRepository.GetPropertyNo(FileNo);
         }
 
+        public String GetFileNo(int UserId)
+        {
+            return _damagepayeeregisterRepository.GetFileNo(UserId);
+        }
     }
 }

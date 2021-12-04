@@ -268,5 +268,14 @@ namespace Libraries.Repository.EntityRepository
             return FileNo;
         }
 
+        public string GetFileNo(int UserId)
+        {
+
+            var FileNo = (from f in _dbContext.Damagepayeeregister
+                          where (f.UserId == UserId)
+                          select f.FileNo).First();
+
+            return FileNo;
+        }
     }
 }

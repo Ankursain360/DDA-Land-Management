@@ -61,6 +61,7 @@ namespace Libraries.Service.IApplicationService
         Task<string> CreateUser(Damagepayeeregister model);
 
         string GetPropertyNo(string FileNo);
+        string GetFileNo(int userid);
 
     }
 }

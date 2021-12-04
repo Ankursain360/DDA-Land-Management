@@ -51,5 +51,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<bool> CreateApprovedDamagepayeeRegister(Damagepayeeregister model);
         Task<bool> SavePersonelInfo(List<Damagepayeepersonelinfo> data);
         string GetPropertyNo(string FileNo);
+
+        string GetFileNo(int UserId);
     }
 }

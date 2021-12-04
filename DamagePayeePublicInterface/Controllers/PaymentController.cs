@@ -19,17 +19,22 @@ namespace DamagePayeePublicInterface.Controllers
 
         private readonly IDPPublicPaymentService _dPPublicPaymentService;
         public IConfiguration _configuration;
-      
-        public PaymentController(IDPPublicPaymentService dPPublicPaymentService)
+        private readonly IDamagepayeeregisterService _damagepayeeregisterService;
+        public PaymentController(IDPPublicPaymentService dPPublicPaymentService, IDamagepayeeregisterService damagepayeeregisterService)
         {
            
             _dPPublicPaymentService = dPPublicPaymentService;
-           
+            _damagepayeeregisterService = damagepayeeregisterService;
+
         }
         public async Task<IActionResult> Index()
         {
-            var Data = await _dPPublicPaymentService.FetchDamagePayeeRegisterDetails(SiteContext.UserId);
-            if( Data == null)
+            string FileNo = _damagepayeeregisterService.GetFileNo(SiteContext.UserId);
+
+            //var Data = await _dPPublicPaymentService.FetchDamagePayeeRegisterDetails(SiteContext.UserId);
+            // Get Payment Details of Payment Details By Pankaj
+            var Data = await _dPPublicPaymentService.FatchDemandPaymentDetails(FileNo);
+            if ( Data == null)
             {
                 return View();
             }

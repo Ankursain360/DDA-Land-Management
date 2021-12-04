@@ -31,6 +31,12 @@ namespace Service.ApplicationService
         {
             return await _dPPublicPaymentRepository.FetchDamagePayeeRegisterDetails(userId);
         }
+
+
+        public async Task<Demandletters> FatchDemandPaymentDetails(string  FileNo)
+        {
+            return await _dPPublicPaymentRepository.FatchDemandPaymentDetails(FileNo);
+        }
         public async Task<List<Demandletters>> GetDemandDetails(string FileNo)
         {
             return await _dPPublicPaymentRepository.GetDemandDetails(FileNo);
