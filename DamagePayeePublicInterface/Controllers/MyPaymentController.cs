@@ -34,13 +34,11 @@ namespace DamagePayeePublicInterface.Controllers
         public IConfiguration _configuration;
       
         private readonly IDamagepayeeregisterService _damagepayeeregisterService;
-        private readonly IDPPublicPaymentService _dPPublicPaymentService;
+       
 
-
-        public MyPaymentController(IDPPublicPaymentService dPPublicPaymentService, IConfiguration configuration,IDamagepayeeregisterService damagepayeeregisterService)
+        public MyPaymentController(IConfiguration configuration,IDamagepayeeregisterService damagepayeeregisterService)
         {
-            _configuration = configuration;
-            _dPPublicPaymentService = dPPublicPaymentService;         
+            _configuration = configuration;           
             _damagepayeeregisterService = damagepayeeregisterService;
         }
 
