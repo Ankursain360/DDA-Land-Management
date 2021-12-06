@@ -80,6 +80,11 @@ namespace Service.ApplicationService
             model.DemandPeriodFromDate = demandletter.DemandPeriodFromDate;
             model.DemandPeriodToDate = demandletter.DemandPeriodToDate;
             model.LocalityId = demandletter.LocalityId;
+            model.PropertyNo = demandletter.PropertyNo;
+            model.DamageCharges = demandletter.DamageCharges;
+            model.Penalty = demandletter.Penalty;
+            model.InterestAmount = demandletter.InterestAmount;
+            model.ReliefAmount = demandletter.ReliefAmount;
             model.ModifiedBy = 1;
             _demandLetterRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
