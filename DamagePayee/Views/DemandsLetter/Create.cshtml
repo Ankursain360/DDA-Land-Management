@@ -94,7 +94,7 @@
                 <div class="form-group col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input placeholder="Date of Encroachment" type="text"
-                               class="floating-label-field floating-label-field--s3 numbers" asp-for="DamageCharges" limit="15" />
+                               class="floating-label-field floating-label-field--s3 numbers" value="0" asp-for="DamageCharges" limit="15" />
                         <span asp-validation-for="DamageCharges" class="text-danger"></span>
                         <label class="floating-label">Damage Charges(Principle Amount)<span style="color:red">*</span></label>
                     </div>
@@ -103,7 +103,7 @@
                 <div class="form-group col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input placeholder="Date of Encroachment" type="text"
-                               class="floating-label-field floating-label-field--s3 numbers" asp-for="Penalty" limit="15" />
+                               class="floating-label-field floating-label-field--s3 numbers" value="0" asp-for="Penalty" limit="15" />
                         <span asp-validation-for="Penalty" class="text-danger"></span>
                         <label class="floating-label">Penalty <span style="color:red">*</span></label>
                     </div>
@@ -117,7 +117,7 @@
                 <div class="form-group col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input placeholder="Date of Encroachment" type="text"
-                               class="floating-label-field floating-label-field--s3 numbers" asp-for="InterestAmount" limit="15" />
+                               class="floating-label-field floating-label-field--s3 numbers" value="0" asp-for="InterestAmount" limit="15" />
                         <span asp-validation-for="InterestAmount" class="text-danger"></span>
                         <label class="floating-label">Interest Amount <span style="color:red">*</span></label>
                     </div>
@@ -126,7 +126,7 @@
                 <div class="form-group col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input placeholder="Date of Encroachment" type="text"
-                               class="floating-label-field floating-label-field--s3 numbers" asp-for="ReliefAmount" limit="15" />
+                               class="floating-label-field floating-label-field--s3 numbers" value="0" asp-for="ReliefAmount" limit="15" />
                         <span asp-validation-for="ReliefAmount" class="text-danger"></span>
 
                         <label class="floating-label"> Relief Amount <span style="color:red">*</span></label>
@@ -183,10 +183,9 @@
             </div>
 
             <div class="row mt-md-3">
-
                 <div class="form-group col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input placeholder="Date of Encroachment" type="text"
+                        <input placeholder="Date of Encroachment" type="text" value="0"
                                class="floating-label-field floating-label-field--s3" asp-for="DepositDue" />
                         <span asp-validation-for="DepositDue" class="text-danger"></span>
                         <label class="floating-label"> Total Amount Due <span style="color:red">*</span></label>

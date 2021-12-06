@@ -45,9 +45,6 @@ namespace DamagePayee.Controllers
         }
 
 
-
-
-
         [HttpPost]
         [ValidateAntiForgeryToken]
 

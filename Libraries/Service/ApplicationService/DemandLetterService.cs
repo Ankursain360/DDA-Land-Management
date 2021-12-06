@@ -79,6 +79,7 @@ namespace Service.ApplicationService
             model.UptoDate = demandletter.UptoDate;
             model.DemandPeriodFromDate = demandletter.DemandPeriodFromDate;
             model.DemandPeriodToDate = demandletter.DemandPeriodToDate;
+            model.LocalityId = demandletter.LocalityId;
             model.ModifiedBy = 1;
             _demandLetterRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
