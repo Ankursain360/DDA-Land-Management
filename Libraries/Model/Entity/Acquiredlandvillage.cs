@@ -37,7 +37,7 @@ namespace Libraries.Model.Entity
         public int? DistrictId { get; set; }
         [Required(ErrorMessage = "Tehsil name is mandatory", AllowEmptyStrings = false)]
         public int? TehsilId { get; set; }
-        public int? YearofConsolidation { get; set; }
+        public string YearofConsolidation { get; set; }
         public int? TotalNoOfSheet { get; set; }
         [Required(ErrorMessage = "Zone name is mandatory", AllowEmptyStrings = false)]
         public int? ZoneId { get; set; }

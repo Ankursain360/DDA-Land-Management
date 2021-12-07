@@ -32,8 +32,8 @@ namespace AcquiredLandInformationManagement.Controllers
         [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
         {
-            var list = await _undersection4PlotService.GetAllUndersection4Plot();
-            return View(list);
+           // var list = await _undersection4PlotService.GetAllUndersection4Plot();
+            return View();
         }
 
 
