@@ -32,12 +32,12 @@ namespace DamagePayeePublicInterface.Controllers
         private readonly IUserProfileService _userProfileService;
         private readonly IUserNotificationService _userNotificationService;
         private readonly IHostingEnvironment _hostingEnvironment;
-
+        private readonly IDamagepayeeregisterService _damagepayeeregisterService;
         public object JsonRequestBehavior { get; private set; }
         public SelfAssessmentDamageController(ISelfAssessmentDamageService selfAssessmentDamageService,
             IConfiguration configuration, IHostingEnvironment en, IApprovalProccessService approvalproccessService,
             IWorkflowTemplateService workflowtemplateService, IUserProfileService userProfileService,
-            IUserNotificationService userNotificationService)
+            IUserNotificationService userNotificationService,IDamagepayeeregisterService damagepayeeregister)
         {
             _configuration = configuration;
             _selfAssessmentDamageService = selfAssessmentDamageService;
@@ -46,6 +46,7 @@ namespace DamagePayeePublicInterface.Controllers
             _userProfileService = userProfileService;
             _userNotificationService = userNotificationService;
             _hostingEnvironment = en;
+            _damagepayeeregisterService = damagepayeeregister;
             DocumentFilePath = _configuration.GetSection("FilePaths:SA:DocumentFIlePath").Value.ToString();
         }
         public IActionResult Index()
@@ -66,6 +67,9 @@ namespace DamagePayeePublicInterface.Controllers
         public async Task<IActionResult> Create()
         {
             Damagepayeeregister damagepayeeregistertemp = new Damagepayeeregister();
+            // For Print Button and Payment Button Show approval only  By Pankaj
+
+            ViewBag.ApprovedStatus = _damagepayeeregisterService.GetApprovedStatus(SiteContext.UserId);
             var Data = await _selfAssessmentDamageService.FetchSelfAssessmentUserId(SiteContext.UserId);
             var value = await _selfAssessmentDamageService.GetRebateValue();
             if (value == null)
@@ -89,6 +93,10 @@ namespace DamagePayeePublicInterface.Controllers
                 await BindDropDown(damagepayeeregistertemp);
                 return View(damagepayeeregistertemp);
             }
+
+         
+         
+          
 
         }
 

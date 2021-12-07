@@ -53,5 +53,7 @@ namespace Libraries.Repository.IEntityRepository
         string GetPropertyNo(string FileNo);
 
         string GetFileNo(int UserId);
+
+        string GetApprovedStatus(int UserId);
     }
 }

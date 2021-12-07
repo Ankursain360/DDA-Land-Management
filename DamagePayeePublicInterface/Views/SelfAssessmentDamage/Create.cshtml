@@ -838,9 +838,17 @@
 
         <div class="row mt-md-3">
             <div class="col-md-12">
-                <input type="submit" value="Submit" class="btn btn-theme" id="btnsubmit" onclick="return PageValidation();" />
-                <a class="btn btn-theme" asp-action="Print" asp-controller="SelfAssessmentDamage" target="_blank">Print</a>
-                <input type="submit" value="Click Here For Payment" class="btn btn-theme" onclick="return CheckPaymentValidation();" />
+                @*// For Print Button and Payment Button Show approval only  By Pankaj*@
+
+                @if (ViewBag.ApprovedStatus != "3")  @*3 For Approved*@ 
+                {
+                    <input type="submit" value="Submit" class="btn btn-theme" id="btnsubmit" onclick="return PageValidation();" />
+                }
+                else
+                {
+                    <a class="btn btn-theme" asp-action="Print" asp-controller="SelfAssessmentDamage" target="_blank">Print</a>
+                    <input type="submit" value="Click Here For Payment" class="btn btn-theme" onclick="return CheckPaymentValidation();" />
+                }
             </div>
         </div>
     </form>

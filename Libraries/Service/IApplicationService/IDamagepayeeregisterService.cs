@@ -63,5 +63,7 @@ namespace Libraries.Service.IApplicationService
         string GetPropertyNo(string FileNo);
         string GetFileNo(int userid);
 
+        string GetApprovedStatus(int userid);
+
     }
 }

@@ -277,5 +277,16 @@ namespace Libraries.Repository.EntityRepository
 
             return FileNo;
         }
+
+
+        public string GetApprovedStatus(int userId)
+        {
+
+            var approvedStatus = (from f in _dbContext.Damagepayeeregister
+                          where (f.UserId == userId)
+                          select f.ApprovedStatus).First();
+
+            return approvedStatus.ToString();
+        }
     }
 }

@@ -337,5 +337,10 @@ namespace Service.ApplicationService
         {
             return _damagepayeeregisterRepository.GetFileNo(UserId);
         }
+
+        public string GetApprovedStatus(int UserId)
+        {
+            return _damagepayeeregisterRepository.GetApprovedStatus(UserId);
+        }
     }
 }
