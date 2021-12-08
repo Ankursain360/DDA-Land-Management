@@ -112,5 +112,37 @@ namespace Service.ApplicationService
             _paymentverificationRepository.Add(paymentverification);
             return await _unitOfWork.CommitAsync() > 0;
         }
+        public async Task<bool> Create(Paymentverification paymentverification)
+        {
+            paymentverification.CreatedBy = 1;
+            paymentverification.CreatedDate = DateTime.Now;
+            paymentverification.IsActive = 1;
+            paymentverification.IsVerified = 0;
+            _paymentverificationRepository.Add(paymentverification);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
+
+        public async Task<PagedResult<Paymentverification>> GetPagedPaymentverification(ManualPaymentSearchDto model)
+        {
+            return await _paymentverificationRepository.GetPagedPaymentVerification(model);
+        }
+
+        public async Task<bool> Update(int id, Paymentverification paymentverification)
+        {
+            var result = await _paymentverificationRepository.FindBy(a => a.Id == id);
+            Paymentverification model = result.FirstOrDefault();
+            model.FileNo = paymentverification.FileNo;
+            model.PayeeName = paymentverification.PayeeName;
+            model.PropertyNo = paymentverification.PropertyNo;
+            model.TotalAmount = paymentverification.TotalAmount;
+            model.BankName = paymentverification.BankName;
+            model.PaymentMode = paymentverification.PaymentMode;
+            model.ModifiedDate = DateTime.Now;
+            model.IsActive = paymentverification.IsActive;
+            model.ModifiedBy = 1;
+            _paymentverificationRepository.Edit(model);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
+
     }
 }

@@ -208,5 +208,17 @@
     "inputFiles": [
       "wwwroot/js/VerifyDamagePaymentDetails.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/PaymentManualEntry.min.js",
+    "inputFiles": [
+      "wwwroot/js/PaymentManualEntry.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/paymenttransactionreportindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/paymenttransactionreportindex.js"
+    ]
   }
 ]

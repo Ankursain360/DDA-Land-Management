@@ -313,13 +313,57 @@ namespace Libraries.Repository.EntityRepository
 
         }
 
-      //  model.stat===1? ():
+        //  model.stat===1? ():
 
 
 
 
 
+    
+        public async Task<PagedResult<Paymentverification>> GetPagedPaymentVerification(ManualPaymentSearchDto model)
+        {
+            var data = await _dbContext.Paymentverification
+                  .Where(x => x.IsActive == 1 && x.IsVerified==0 
+                  && (string.IsNullOrEmpty(model.fileno) || x.FileNo.Contains(model.fileno))
+                   && (x.PayeeName == (model.payeeName == "" ? x.PayeeName : model.payeeName)))
+                  .GetPaged<Paymentverification>(model.PageNumber, model.PageSize);
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
 
+                data = null;
+                data = await _dbContext.Paymentverification
+             .Where(x => x.IsActive == 1 && x.IsVerified == 0
+              && (string.IsNullOrEmpty(model.fileno) || x.FileNo.Contains(model.fileno)) 
+              && (x.PayeeName == (model.payeeName == "" ? x.PayeeName : model.payeeName)))
+              .OrderBy(s =>
+                        (
+                          model.SortBy.ToUpper() == "FILENO" ? (s.FileNo != null ? s.FileNo : null)
+                        : model.SortBy.ToUpper() == "PAYEENAME" ? (s.PayeeName != null ? s.PayeeName : null) : s.PayeeName)
+                        )
+               .GetPaged<Paymentverification>(model.PageNumber, model.PageSize);
+            }
+            else if (SortOrder == 2)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("NAME"):
+                        data = null;
+                        data = await _dbContext.Paymentverification
+                  .Where(x => x.IsActive == 1 && x.IsVerified == 0
+                  && (string.IsNullOrEmpty(model.fileno) || x.FileNo.Contains(model.fileno))
+                   && (x.PayeeName == (model.payeeName == "" ? x.PayeeName : model.payeeName)))
+                    .OrderByDescending(s =>
+                        (
+                          model.SortBy.ToUpper() == "FILENO" ? (s.FileNo != null ? s.FileNo : null)
+                        : model.SortBy.ToUpper() == "PAYEENAME" ? (s.PayeeName != null ? s.PayeeName : null) : s.PayeeName)
+                        )
+                  .GetPaged<Paymentverification>(model.PageNumber, model.PageSize);
+                        break;
+                }
+            }
+            return data;
+        }
 
     }
 }

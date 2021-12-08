@@ -20,5 +20,8 @@ namespace Libraries.Repository.IEntityRepository
 
         Task<List<Paymentverification>> BindFileNoList();
         Task<List<Locality>> BindLoclityList();
+
+        Task<PagedResult<Paymentverification>> GetPagedPaymentVerification(ManualPaymentSearchDto model);
+
     }
 }

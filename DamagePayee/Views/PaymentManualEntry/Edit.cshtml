@@ -1,0 +1,103 @@
+﻿@model Libraries.Model.Entity.Paymentverification
+@await Component.InvokeAsync("PageHeader", new { pageName = "Column" })
+
+<div class="pt-3">
+
+    <form asp-action="Edit" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+        <h3 class="mb-3 d-flex">Edit Details<span class="ms-auto"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span></h3>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="Id" />
+
+        <div class="row mt-md-3">
+            <div class="form-group col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input placeholder="Date of Encroachment" type="text"
+                           class="floating-label-field floating-label-field--s3" asp-for="FileNo" />
+                    <span asp-validation-for="FileNo" class="text-danger"></span>
+                    <label class="floating-label"> File No</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-md-3">
+
+
+            <div class="form-group col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input placeholder="Date of Encroachment" type="text"
+                           class="floating-label-field floating-label-field--s3" asp-for="PropertyNo" />
+                    <span asp-validation-for="PropertyNo" class="text-danger"></span>
+                    <label class="floating-label"> Property No </label>
+                </div>
+            </div>
+
+            <div class="form-group col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input placeholder="Date of Encroachment" type="text"
+                           class="floating-label-field floating-label-field--s3" asp-for="PayeeName" />
+                    <span asp-validation-for="PayeeName" class="text-danger"></span>
+                    <label class="floating-label"> Payee Name</label>
+                </div>
+            </div>
+
+        </div>
+
+
+
+        <div class="row mt-md-3">
+
+            <div class="form-group col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input placeholder="Date of Encroachment" type="text"
+                           class="floating-label-field floating-label-field--s3 numbers" value="0" asp-for="TotalAmount" />
+                    <span asp-validation-for="TotalAmount" class="text-danger"></span>
+                    <label class="floating-label">Total Amount</label>
+                </div>
+            </div>
+
+            <div class="form-group col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input placeholder="Date of Encroachment" type="text"
+                           class="floating-label-field floating-label-field--s3" asp-for="PaymentMode" />
+                    <span asp-validation-for="PaymentMode" class="text-danger"></span>
+                    <label class="floating-label">Payment Mode</label>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="row mt-md-3">
+
+            <div class="form-group col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input placeholder="Date of Encroachment" type="text"
+                           class="floating-label-field floating-label-field--s3" asp-for="BankName" />
+                    <span asp-validation-for="BankName" class="text-danger"></span>
+                    <label class="floating-label">Bank Name</label>
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input placeholder="DDNo/ChequeNo" type="text"
+                           class="floating-label-field floating-label-field--s3 numbers" asp-for="ChallanNo" />
+                    <span asp-validation-for="ChallanNo" class="text-danger"></span>
+                    <label class="floating-label">DDNo/ChequeNo</label>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="row mt-md-3">
+            <div class=" col-md-12">
+                <button class="btn btn-theme " type="submit">Update</button>
+                @Html.ActionLink("Back", "Index", "PaymentManualEntry", null, new { @class = "btn btn-theme " })
+
+            </div>
+        </div>
+
+    </form>
+
+</div>
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
