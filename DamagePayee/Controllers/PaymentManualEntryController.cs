@@ -26,12 +26,12 @@ namespace DamagePayee.Controllers
         {
             _paymentverificationService = paymentverification;
         }
-
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
         }
-
+        [AuthorizeContext(ViewAction.Add)]
         public IActionResult Create()
         {
             return View();
@@ -88,6 +88,7 @@ namespace DamagePayee.Controllers
 
         }
 
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
 
@@ -100,6 +101,7 @@ namespace DamagePayee.Controllers
         }
 
         [HttpPost]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Paymentverification paymentverification)
         {
 
@@ -120,6 +122,7 @@ namespace DamagePayee.Controllers
             }
             return View(paymentverification);
         }
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
 
@@ -130,7 +133,7 @@ namespace DamagePayee.Controllers
             }
             return View(Data);
         }
-
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> PaymentManaulEntryList()
         {
             var result = await _paymentverificationService.GetAllPaymentList();
