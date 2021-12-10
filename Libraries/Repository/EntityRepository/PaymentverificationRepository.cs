@@ -323,7 +323,7 @@ namespace Libraries.Repository.EntityRepository
         public async Task<PagedResult<Paymentverification>> GetPagedPaymentVerification(ManualPaymentSearchDto model)
         {
             var data = await _dbContext.Paymentverification
-                  .Where(x => x.IsActive == 1 && x.IsVerified==0 
+                  .Where(x => x.IsVerified==0 
                   && (string.IsNullOrEmpty(model.fileno) || x.FileNo.Contains(model.fileno))
                    && (x.PayeeName == (model.payeeName == "" ? x.PayeeName : model.payeeName)))
                   .GetPaged<Paymentverification>(model.PageNumber, model.PageSize);
@@ -333,7 +333,7 @@ namespace Libraries.Repository.EntityRepository
 
                 data = null;
                 data = await _dbContext.Paymentverification
-             .Where(x => x.IsActive == 1 && x.IsVerified == 0
+              .Where(x => x.IsVerified == 0
               && (string.IsNullOrEmpty(model.fileno) || x.FileNo.Contains(model.fileno)) 
               && (x.PayeeName == (model.payeeName == "" ? x.PayeeName : model.payeeName)))
               .OrderBy(s =>
@@ -350,7 +350,7 @@ namespace Libraries.Repository.EntityRepository
                     case ("NAME"):
                         data = null;
                         data = await _dbContext.Paymentverification
-                  .Where(x => x.IsActive == 1 && x.IsVerified == 0
+                   .Where(x => x.IsVerified == 0
                   && (string.IsNullOrEmpty(model.fileno) || x.FileNo.Contains(model.fileno))
                    && (x.PayeeName == (model.payeeName == "" ? x.PayeeName : model.payeeName)))
                     .OrderByDescending(s =>

@@ -139,7 +139,10 @@ namespace Service.ApplicationService
             model.PaymentMode = paymentverification.PaymentMode;
             model.ModifiedDate = DateTime.Now;
             model.IsActive = paymentverification.IsActive;
+            model.PaymentDate = paymentverification.PaymentDate;
+            model.ChallanNo = paymentverification.ChallanNo;
             model.ModifiedBy = 1;
+            model.IsActive = paymentverification.IsActive;
             _paymentverificationRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }

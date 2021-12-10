@@ -72,7 +72,7 @@
 
             <div class="form-group col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input placeholder="Date of Encroachment" type="text" disabled="disabled"
+                    <input placeholder="Date of Encroachment" type="text" required disabled="disabled"
                            class="floating-label-field floating-label-field--s3" asp-for="BankName" />
                     <span asp-validation-for="BankName" class="text-danger"></span>
                     <label class="floating-label">Bank Name</label>
@@ -80,13 +80,33 @@
             </div>
             <div class="form-group col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input placeholder="DDNo/ChequeNo" type="text" disabled="disabled"
+
+                    <input placeholder="Payment Date" type="date"  disabled="disabled"
+                           class="floating-label-field floating-label-field--s3" asp-for="PaymentDate" />
+                    <span asp-validation-for="PaymentDate" class="text-danger"></span>
+                    <label class="floating-label">Payment Date</label>
+                </div>
+            </div>
+
+
+
+        </div>
+        <div class="row mt-md-3">
+            <div class="form-group col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input placeholder="DDNo/ChequeNo" type="text"  disabled="disabled"
                            class="floating-label-field floating-label-field--s3 numbers" asp-for="ChallanNo" />
                     <span asp-validation-for="ChallanNo" class="text-danger"></span>
                     <label class="floating-label">DDNo/ChequeNo</label>
                 </div>
             </div>
-
+            <div class="form-group col-md-6">
+                <label class="control-label lb-sm">Status</label>
+                <select asp-for="IsActive" class="form-control dda-dropdown" disabled>
+                    <option value="1">Active</option>
+                    <option value="0">Inactive</option>
+                </select>
+            </div>
         </div>
 
 
