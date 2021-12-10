@@ -81,6 +81,7 @@ namespace Libraries.Service.ApplicationService
             model.GazetteNotificationFilePath = newlandnotification.GazetteNotificationFilePath;
             model.IsActive = newlandnotification.IsActive;
             model.ModifiedDate = DateTime.Now;
+            model.Remarks = newlandnotification.Remarks;
             model.ModifiedBy = 1;
             _newlandnotificationRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;

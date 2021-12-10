@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Utility.Helper;
+using Dto.Master;
 
 
 
@@ -195,7 +196,28 @@ namespace NewLandAcquisition.Controllers
         }
 
 
+        public async Task<IActionResult> NewLandNotificationList()
+        {
+            var result = await _newlandnotificationService.GetAllNewlandNotification();
+            List<NewLandNotificationListDto> data = new List<NewLandNotificationListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new NewLandNotificationListDto()
+                    {
+                        Id = result[i].Id,
+                        NotificationNo = result[i].NotificationNo,
+                        notificationDate = result[i].Date.ToString(),
+                        Remarks = result[i].Remarks,                     
 
+                        IsActive = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    }); ;
+                }
+            }
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        }
 
 
 

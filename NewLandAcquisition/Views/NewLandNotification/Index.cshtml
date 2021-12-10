@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<Libraries.Model.Entity.Newlandnotification>
-@await Component.InvokeAsync("PageHeader", new { pageName = "New land Notification" })
+@await Component.InvokeAsync("PageHeader", new { pageName = "Notification Master" })
 <div class="pt-3">
 
     <div class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
@@ -52,12 +52,13 @@
                     <i class="ri-add-fill me-2 mr-lg-1"></i>
                     <small>Add More</small>
                 </a>
-                <a href="javascript:void(0)" class="d-flex align-items-center btn btn-success">
-                    <i class="ri-download-2-line me-2 mr-lg-1"></i>
+                <a href="/NewlandNotification/NewLandNotificationList" class="d-flex align-items-center btn btn-primary me-2">
+                    <i class="ri-add-fill me-2 mr-lg-1"></i>
                     <small>Download</small>
                 </a>
             </div>
         </div>
+        
 
         <div class="table-responsive px-2" id="divNotificationMasterTable">
 

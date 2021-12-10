@@ -10,6 +10,7 @@ $(document).ready(function () {
 
 
 function GetWatchandward(pageNumber, pageSize, StatusId) {
+    debugger;
     var param = GetSearchParam(pageNumber, pageSize, StatusId);
     HttpPost(`/RequestApprovalProcess/List`, 'html', param, function (response) {
         console.log(response);
