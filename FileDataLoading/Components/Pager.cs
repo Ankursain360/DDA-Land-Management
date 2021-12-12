@@ -9,6 +9,7 @@ namespace FileDataLoading.Components
 {
     public class PagerViewComponent : ViewComponent
     {
+
 		public async Task<IViewComponentResult> InvokeAsync(int totalCount, int pageNumber, int pageSize = 10)
 		{
 
