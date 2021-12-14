@@ -38,7 +38,6 @@ namespace NewLandAcquisition.Controllers
         public async Task<PartialViewResult> NotificationView([FromBody] NewLandNotification4ListSearchDto model)
         {
             var Data = await _newlandus4plotService.GetAllFetchNotificationDetails(model);
-
             return PartialView("_ListNotification", Data);
         }
 
@@ -53,8 +52,7 @@ namespace NewLandAcquisition.Controllers
             return View(us4plot);
         }
 
-        [HttpPost]
-       
+        [HttpPost]       
       [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Newlandus4plot us4plot)
         {
@@ -71,6 +69,7 @@ namespace NewLandAcquisition.Controllers
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
                         var list = await _newlandus4plotService.GetAllUS4Plot();
+
                         return View("Create", us4plot);
                     }
                     else
