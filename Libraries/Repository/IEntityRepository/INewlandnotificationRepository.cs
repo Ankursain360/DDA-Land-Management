@@ -23,5 +23,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Newlandnotificationfilepath>> GetAllfiledetails(int Id);
         Task<bool> SaveNewlandNotification(Newlandnotification newlandnotification);
         Task<bool> Savefiledetails(Newlandnotificationfilepath newlandnotificationfilepath);
+        Task<Newlandnotification> NewLandNotificationFile(int Id);
+
     }
 }

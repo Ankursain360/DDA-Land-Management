@@ -52,6 +52,13 @@ namespace Libraries.Service.ApplicationService
         {
             return await _newlandnotificationRepository.GetAllNewlandNotification();
         }
+
+        public async Task<Newlandnotification> NewLandNotificationFile(int Id)
+        {
+            return await _newlandnotificationRepository.NewLandNotificationFile(Id);
+        }
+
+
         public async Task<List<NewlandNotificationtype>> GetAllNotificationType()
         {
             return await _newlandnotificationRepository.GetAllNotificationType();

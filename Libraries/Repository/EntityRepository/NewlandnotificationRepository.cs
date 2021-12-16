@@ -49,6 +49,14 @@ namespace Libraries.Repository.EntityRepository
         {
             return await _dbContext.Newlandnotification.Where(x => x.IsActive == 1).ToListAsync();
         }
+
+
+        public async Task<Newlandnotification> NewLandNotificationFile(int Id)
+        {
+            return await _dbContext.Newlandnotification.Where(x => x.Id == Id && x.IsActive == 1).FirstOrDefaultAsync();
+        }
+
+
         public async Task<List<NewlandNotificationtype>> GetAllNotificationType()
         {
             return await _dbContext.NewlandNotificationtype.Where(x => x.IsActive == 1).ToListAsync();

@@ -187,10 +187,9 @@ namespace NewLandAcquisition.Controllers
 
         public async Task<IActionResult> ViewDocumenbtsdG(int Id)
         {
-            FileHelper fileHelper = new FileHelper();
-            Newlandnotification Data = await _newlandnotificationService.FetchSingleResult1(Id);
-        
-            string filename = NewlandNotificationFilePath + Data.GazetteNotificationFilePath;
+            FileHelper fileHelper = new FileHelper();         
+            Newlandnotification Data = await _newlandnotificationService.NewLandNotificationFile(Id);
+            string filename = Data.GazetteNotificationFilePath;
             byte[] FileBytes = System.IO.File.ReadAllBytes(filename);
             return File(FileBytes, fileHelper.GetContentType(filename));
         }
