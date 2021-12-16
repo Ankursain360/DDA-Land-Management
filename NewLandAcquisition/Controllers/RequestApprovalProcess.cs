@@ -309,7 +309,7 @@ namespace NewLandAcquisition.Controllers
                                             var notificationtemplate = await _approvalproccessService.FetchSingleNotificationTemplate(_configuration.GetSection("userNotificationGuidRequestService").Value);
                                             var user = await _userProfileService.GetUserById(SiteContext.UserId);
                                             Usernotification usernotification = new Usernotification();
-                                            var replacement = notificationtemplate.Template.Replace("{proccess name}", "Identification of land").Replace("{from user}", user.User.UserName).Replace("{datetime}", DateTime.Now.ToString());
+                                             var replacement = notificationtemplate.Template.Replace("{proccess name}", "Identification of land").Replace("{from user}", user.User.UserName).Replace("{datetime}", DateTime.Now.ToString());
                                             usernotification.Message = replacement;
                                             usernotification.UserNotificationGuid = (_configuration.GetSection("userNotificationGuidRequestService").Value);
                                             usernotification.ProcessGuid = approvalproccess.ProcessGuid;
