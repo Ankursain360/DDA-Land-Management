@@ -52,6 +52,7 @@ namespace NewLandAcquisition.Controllers
             _userProfileService = userProfileService;
             _hostingEnvironment = hostingEnvironment;
             _userNotificationService = userNotificationService;
+            documentPhotoPathLayout = _configuration.GetSection("FilePaths:RequestPhoto:Photo").Value.ToString();
         }
 
         [AuthorizeContext(ViewAction.View)]
@@ -101,7 +102,7 @@ namespace NewLandAcquisition.Controllers
                         FileHelper file = new FileHelper();
                         if (request.RequestPhotos != null)
                         {
-                            request.LayoutPlan = file.SaveFile(documentPhotoPathLayout, request.RequestPhotos);
+                            request.LayoutPlan = file.SaveFile1(documentPhotoPathLayout, request.RequestPhotos);
                         }
 
 
@@ -384,7 +385,7 @@ namespace NewLandAcquisition.Controllers
                     FileHelper file = new FileHelper();
                     if (scheme.RequestPhotos != null)
                     {
-                        scheme.LayoutPlan = file.SaveFile(documentPhotoPathLayout, scheme.RequestPhotos);
+                        scheme.LayoutPlan = file.SaveFile1(documentPhotoPathLayout, scheme.RequestPhotos);
                     }
 
                     try
@@ -462,7 +463,7 @@ namespace NewLandAcquisition.Controllers
             {
                 FileHelper file = new FileHelper();
                 var Data = await _requestService.FetchSingleResult(Id);
-                string targetPhotoPathLayout = Data.LayoutPlan;
+                string targetPhotoPathLayout = documentPhotoPathLayout + Data.LayoutPlan;
                 byte[] FileBytes = System.IO.File.ReadAllBytes(targetPhotoPathLayout);
                 return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
             }
