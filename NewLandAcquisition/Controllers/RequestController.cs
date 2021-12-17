@@ -462,7 +462,7 @@ namespace NewLandAcquisition.Controllers
             try
             {
                 FileHelper file = new FileHelper();
-                var Data = await _requestService.FetchSingleResult(Id);
+                Request Data = await _requestService.FetchSingleResult(Id);
                 string targetPhotoPathLayout = documentPhotoPathLayout + Data.LayoutPlan;
                 byte[] FileBytes = System.IO.File.ReadAllBytes(targetPhotoPathLayout);
                 return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
