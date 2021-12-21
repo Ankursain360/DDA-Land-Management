@@ -520,5 +520,17 @@
     "inputFiles": [
       "wwwroot/js/kycpaymentapprovalcalculation.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/kycformcreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/kycformcreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/kycformindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/kycformindex.js"
+    ]
   }
 ]

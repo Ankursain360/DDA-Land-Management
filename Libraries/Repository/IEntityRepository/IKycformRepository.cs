@@ -22,6 +22,9 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Kycform>> GetAllKycform();
         Task<Kycform> FetchKYCSingleResult(int id);
         Task<PagedResult<Kycform>> GetPagedKycform(KycformSearchDto model);
+
+        //For Internal User
+        Task<PagedResult<Kycform>> GetPagedKycformForInternalUser(KycformSearchDto model);
         Task<bool> Saveleasepayment(Kycleasepaymentrpt payment);
         Task<bool> Savelicensepayment(Kyclicensepaymentrpt payment);
 

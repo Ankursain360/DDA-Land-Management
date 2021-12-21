@@ -150,6 +150,14 @@ namespace Service.ApplicationService
             return await _kycformRepository.GetPagedKycform(model);
            
         }
+        // For InternalUser
+        public async Task<PagedResult<Kycform>> GetPagedKycformForInternalUser(KycformSearchDto model)
+        {
+
+            return await _kycformRepository.GetPagedKycformForInternalUser(model);
+
+        }
+
 
         public async Task<bool> Delete(int id)
         {

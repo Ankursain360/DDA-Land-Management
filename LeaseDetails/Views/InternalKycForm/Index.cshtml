@@ -1,0 +1,118 @@
+﻿<div class="pt-3">
+
+
+    @model IEnumerable<Libraries.Model.Entity.Kycform>
+
+    @await Component.InvokeAsync("PageHeader", new { pageName = "Lessee/Licensee KYC Details" })
+
+
+    <div class="pt-3">
+        <div class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+            <h3 class="mb-3 d-flex">Search</h3>
+
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input type="text" id="txtId" class="floating-label-field floating-label-field--s3" placeholder="Name" />
+                        <label for="txtId" class="floating-label"> Reference No </label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input type="text" id="txtPlot" class="floating-label-field floating-label-field--s3" placeholder="Name" />
+                        <label for="txtPlot" class="floating-label"> Plot No </label>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input type="text" id="txtName" class="floating-label-field floating-label-field--s3" placeholder="Name" />
+                        <label for="txtName" class="floating-label">Property Type</label>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input type="text" id="txtFileNo" class="floating-label-field floating-label-field--s3" placeholder="Name" />
+                        <label for="txtFileNo" class="floating-label"> File No </label>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row mt-md-3">
+                <div class="col-md-3">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input type="text" id="txtZone" class="floating-label-field floating-label-field--s3" placeholder="Name" />
+                        <label for="txtZone" class="floating-label"> Zone </label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input type="text" id="txtLocality" class="floating-label-field floating-label-field--s3" placeholder="Name" />
+                        <label for="txtLocality" class="floating-label"> Locality </label>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row mt-md-3">
+                <div class="col-md-12 col-xl-3">
+                    <div class="row">
+                        <div class="col-6 col-md-5 col-xl-6">
+                            <button class="btn btn-link btn-block d-flex align-items-center justify-content-center" id="btnReset" type="reset">
+                                <i class="ri-refresh-line me-2"></i>Reset
+                            </button>
+                        </div>
+                        <div class="col-6 col-md-7 col-xl-6">
+                            <button class="btn btn-theme btn-block" id="btnSearch" type="submit">Search</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="table-section bg-white border shadow rounded">
+            <div class="short-section d-md-flex align-items-center">
+                <div class="p-3 d-flex align-items-end me-auto">
+                    <div class="floating-label-wrap">
+                        <select id="ddlSort" class="floating-label-field floating-label-field--s3">
+                            <option value="Name">Property Type</option>
+                            @*<option value="Status">Status</option>*@
+                        </select>
+                        <label for="field-1" class="floating-label">Sort by</label>
+                    </div>
+                    <div class="short-btn d-flex align-items-center">
+                        <span class="btn slow active" id="btnAscending" title="Ascending order"><i class="ri-sort-asc"></i></span>
+                        <span class="btn slow" id="btnDescending" title="Descending order"><i class="ri-sort-desc"></i></span>
+                    </div>
+                </div>
+
+
+                <div class="download-table d-flex align-items-center px-3 mb-3 mb-md-0">
+                    <a href="/InternalKycForm/create" class="d-flex align-items-center btn btn-primary me-2">
+                        <i class="ri-add-fill me-2 me-lg-1"></i>
+                        <small>Add More</small>
+                    </a>
+                    <a href="/InternalKycForm/KycFormDetailsList" class="d-flex align-items-center btn btn-success">
+                        <i class="ri-download-2-line me-2 me-lg-1"></i>
+                        <small>Download</small>
+                    </a>
+                </div>
+            </div>
+            @*@if(Model=null)*@
+            @*@if (Model != null && Model.Count() > 0)
+                {*@
+            <div class="table-responsive px-2">
+                <div id="divkycTable"></div>
+            </div>
+            @*}*@
+
+        </div>
+
+    </div>
+</div>
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/kycformindex.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/kycformindex.min.js" asp-append-version="true"></script>
+</environment>
