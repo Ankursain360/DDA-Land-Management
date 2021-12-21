@@ -57,16 +57,16 @@
                     <td>
                         <div class="action-btns">
                             <a asp-action="View" asp-route-id="@item.Id" title="View" class="view">  <i class="ri-eye-fill"></i> </a>
-                            @if (item.ApprovedStatus == 18 && item.PendingAt == "0")
-                            {
+                        
+                           
                                 <a asp-action="Edit" asp-route-id="@item.Id" title="resubmit application" class="edit"> <i class="ri-edit-line"></i> </a>
-                            }
-                            else if (item.KycStatus == "T" && item.ApprovedStatus == 3)
+                          
+                            @*else if (item.KycStatus == "T" && item.ApprovedStatus == 3)
                             {
                                 <a asp-action="Create" asp-controller="DemandDetails" asp-route-Id="@item.Id" title="pay"> <span class="badge bg-primary">Pay Dues</span> </a>
 
                             }
-                            else { }
+                            else { }*@
                         </div>
 
                     </td>
