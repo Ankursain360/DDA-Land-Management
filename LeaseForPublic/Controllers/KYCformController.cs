@@ -134,9 +134,9 @@ namespace LeaseForPublic.Controllers
         //[AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Kycform kyc)
         {
-            bool IsValidpdf = CheckMimeTypeAAdharDocument(kyc);
-            bool IsValidpdf1 = CheckMimeTypeLetter(kyc);
-            bool IsValidpdf2 = CheckMimeTypeApplicantPan(kyc);
+            //bool IsValidpdf = CheckMimeTypeAAdharDocument(kyc);
+            //bool IsValidpdf1 = CheckMimeTypeLetter(kyc);
+            //bool IsValidpdf2 = CheckMimeTypeApplicantPan(kyc);
             try
             {
                 
@@ -160,12 +160,12 @@ namespace LeaseForPublic.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    if (IsValidpdf == true)
-                    {
-                        if (IsValidpdf1 == true)
-                        {
-                            if (IsValidpdf2 == true)
-                            {
+                    //if (IsValidpdf == true)
+                    //{
+                    //    if (IsValidpdf1 == true)
+                    //    {
+                    //        if (IsValidpdf2 == true)
+                    //        {
 
                                 #region Approval Proccess At 1st level Check Initial Before Creating Record
 
@@ -469,24 +469,24 @@ namespace LeaseForPublic.Controllers
                                     return View(kyc);
 
                                 }
-                            }
-                            else
-                            {
-                                ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
-                                return View(kyc);
-                            }
-                        }
-                        else 
-                        {
-                            ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
-                            return View(kyc);
-                        }
-                    }
-                    else
-                    {
-                        ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
-                        return View(kyc);
-                    }
+                    //        }
+                    //        else
+                    //        {
+                    //            ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
+                    //            return View(kyc);
+                    //        }
+                    //    }
+                    //    else 
+                    //    {
+                    //        ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
+                    //        return View(kyc);
+                    //    }
+                    //}
+                    //else
+                    //{
+                    //    ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
+                    //    return View(kyc);
+                    //}
                 }
                 else
                 {
