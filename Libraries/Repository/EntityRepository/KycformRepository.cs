@@ -222,6 +222,137 @@ namespace Libraries.Repository.EntityRepository
             }
         }
 
+
+        //For Internal Users
+        public async Task<PagedResult<Kycform>> GetPagedKycformForInternalUser(KycformSearchDto model)
+        {
+
+            try
+            {
+                var data = await _dbContext.Kycform
+                                       .Include(x => x.Branch)
+                                       .Include(x => x.LeaseType)
+                                       .Include(x => x.Locality)
+                                       .Include(x => x.PropertyType)
+                                       .Include(x => x.Zone)
+                                       .Include(x => x.ApprovedStatusNavigation)
+                                       .Where(x => x.IsActive == 1
+                                       && (string.IsNullOrEmpty(model.Id) || x.Id.ToString().Contains(model.Id))
+                                       && (string.IsNullOrEmpty(model.property) || x.Property.Contains(model.property))
+                                       && (string.IsNullOrEmpty(model.Fileno) || x.FileNo.Contains(model.Fileno))
+                                       && (string.IsNullOrEmpty(model.zone) || x.Zone.Name.Contains(model.zone))
+                                       && (string.IsNullOrEmpty(model.locality) || x.Locality.Name.Contains(model.locality))
+                                       && (string.IsNullOrEmpty(model.PlotNo) || x.PlotNo.Contains(model.PlotNo))
+                                       )
+                                       .GetPaged<Kycform>(model.PageNumber, model.PageSize);
+
+
+
+
+                int SortOrder = (int)model.SortOrder;
+                if (SortOrder == 1)
+                {
+                    switch (model.SortBy.ToUpper())
+                    {
+                        case ("NAME"):
+                            data = null;
+                            data = await _dbContext.Kycform
+                                                   .Include(x => x.Branch)
+                                                   .Include(x => x.LeaseType)
+                                                   .Include(x => x.Locality)
+                                                   .Include(x => x.PropertyType)
+                                                   .Include(x => x.Zone)
+                                                   .Include(x => x.ApprovedStatusNavigation)
+                                                   .Where(x => x.IsActive == 1
+                                                    && (string.IsNullOrEmpty(model.Id) || x.Id.ToString().Contains(model.Id))
+                                                   && (string.IsNullOrEmpty(model.property) || x.Property.Contains(model.property))
+                                                   && (string.IsNullOrEmpty(model.Fileno) || x.FileNo.Contains(model.Fileno))
+                                                   && (string.IsNullOrEmpty(model.zone) || x.Zone.Name.Contains(model.zone))
+                                                   && (string.IsNullOrEmpty(model.locality) || x.Locality.Name.Contains(model.locality))
+                                                   && (string.IsNullOrEmpty(model.PlotNo) || x.PlotNo.Contains(model.PlotNo))
+                                                   ).OrderBy(x => x.Property)
+                                                   .GetPaged<Kycform>(model.PageNumber, model.PageSize);
+                            break;
+                        case ("STATUS"):
+                            data = null;
+                            data = await _dbContext.Kycform
+                                                   .Include(x => x.Branch)
+                                                   .Include(x => x.LeaseType)
+                                                   .Include(x => x.Locality)
+                                                   .Include(x => x.PropertyType)
+                                                   .Include(x => x.Zone)
+                                                   .Include(x => x.ApprovedStatusNavigation)
+                                                   .Where(x => x.IsActive == 1 
+                                                    && (string.IsNullOrEmpty(model.Id) || x.Id.ToString().Contains(model.Id))
+                                                   && (string.IsNullOrEmpty(model.property) || x.Property.Contains(model.property))
+                                                   && (string.IsNullOrEmpty(model.Fileno) || x.FileNo.Contains(model.Fileno))
+                                                   && (string.IsNullOrEmpty(model.zone) || x.Zone.Name.Contains(model.zone))
+                                                   && (string.IsNullOrEmpty(model.locality) || x.Locality.Name.Contains(model.locality))
+                                                   && (string.IsNullOrEmpty(model.PlotNo) || x.PlotNo.Contains(model.PlotNo))
+                                                   ).OrderByDescending(x => x.ApprovedStatus)
+                                                   .GetPaged<Kycform>(model.PageNumber, model.PageSize);
+                            break;
+
+                    }
+                }
+                else if (SortOrder == 2)
+                {
+                    switch (model.SortBy.ToUpper())
+                    {
+                        case ("NAME"):
+                            data = null;
+                            data = await _dbContext.Kycform
+                                                   .Include(x => x.Branch)
+                                                   .Include(x => x.LeaseType)
+                                                   .Include(x => x.Locality)
+                                                   .Include(x => x.PropertyType)
+                                                   .Include(x => x.Zone)
+                                                   .Include(x => x.ApprovedStatusNavigation)
+                                                   .Where(x => x.IsActive == 1
+                                                    && (string.IsNullOrEmpty(model.Id) || x.Id.ToString().Contains(model.Id))
+                                                   && (string.IsNullOrEmpty(model.property) || x.Property.Contains(model.property))
+                                                   && (string.IsNullOrEmpty(model.Fileno) || x.FileNo.Contains(model.Fileno))
+                                                   && (string.IsNullOrEmpty(model.zone) || x.Zone.Name.Contains(model.zone))
+                                                   && (string.IsNullOrEmpty(model.locality) || x.Locality.Name.Contains(model.locality))
+                                                   && (string.IsNullOrEmpty(model.PlotNo) || x.PlotNo.Contains(model.PlotNo))
+                                                   ).OrderByDescending(x => x.Property)
+                                                   .GetPaged<Kycform>(model.PageNumber, model.PageSize);
+                            break;
+                        case ("STATUS"):
+                            data = null;
+                            data = await _dbContext.Kycform
+                                                   .Include(x => x.Branch)
+                                                   .Include(x => x.LeaseType)
+                                                   .Include(x => x.Locality)
+                                                   .Include(x => x.PropertyType)
+                                                   .Include(x => x.Zone)
+                                                   .Include(x => x.ApprovedStatusNavigation)
+                                                   .Where(x => x.IsActive == 1
+                                                    && (string.IsNullOrEmpty(model.Id) || x.Id.ToString().Contains(model.Id))
+                                                   && (string.IsNullOrEmpty(model.property) || x.Property.Contains(model.property))
+                                                   && (string.IsNullOrEmpty(model.Fileno) || x.FileNo.Contains(model.Fileno))
+                                                   && (string.IsNullOrEmpty(model.zone) || x.Zone.Name.Contains(model.zone))
+                                                   && (string.IsNullOrEmpty(model.locality) || x.Locality.Name.Contains(model.locality))
+                                                   && (string.IsNullOrEmpty(model.PlotNo) || x.PlotNo.Contains(model.PlotNo))
+                                                   ).OrderBy(x => x.ApprovedStatus)
+                                                   .GetPaged<Kycform>(model.PageNumber, model.PageSize);
+                            break;
+                    }
+                }
+                return data;
+
+
+
+
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+
+            }
+        }
+
         //********* rpt ! Kycleasepaymentrpt Details **********
         public async Task<bool> Saveleasepayment(Kycleasepaymentrpt payment)
         {

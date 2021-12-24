@@ -35,7 +35,7 @@ namespace NewLandAcquisition.Controllers
         {
             _newlandnotificationService = newlandnotificationService;
             _configuration = configuration;
-             NewlandNotificationFilePath = _configuration.GetSection("FilePaths:NewlandNotificationMasterFiles:NewlandNotificationFilePath").Value.ToString();
+            NewlandNotificationFilePath = _configuration.GetSection("FilePaths:NewlandNotificationMasterFiles:NewlandNotificationFilePath").Value.ToString();
 
 
         }
@@ -52,7 +52,7 @@ namespace NewLandAcquisition.Controllers
 
             return PartialView("_List", result);
         }
-         [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Newlandnotification newlandnotification = new Newlandnotification();
@@ -74,36 +74,36 @@ namespace NewLandAcquisition.Controllers
                 if (ModelState.IsValid)
                 {
                     if (IsValidpdf == true)
-                    { 
+                    {
 
                         FileHelper fileHelper = new FileHelper();
 
-                    if (newlandnotification.NewlandNotificationFile != null)
-                    {
-                        newlandnotification.GazetteNotificationFilePath = fileHelper.SaveFile1(NewlandNotificationFilePath, newlandnotification.NewlandNotificationFile);
+                        if (newlandnotification.NewlandNotificationFile != null)
+                        {
+                            newlandnotification.GazetteNotificationFilePath = fileHelper.SaveFile1(NewlandNotificationFilePath, newlandnotification.NewlandNotificationFile);
 
-                    }
+                        }
 
-                    newlandnotification.CreatedBy = SiteContext.UserId;
-                    var result = await _newlandnotificationService.Create(newlandnotification);
-                    if (result)
-                    {
-                        ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        var list = await _newlandnotificationService.GetAllNewlandNotification();
+                        newlandnotification.CreatedBy = SiteContext.UserId;
+                        var result = await _newlandnotificationService.Create(newlandnotification);
+                        if (result)
+                        {
+                            ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+                            var list = await _newlandnotificationService.GetAllNewlandNotification();
 
-                        return View("Index", list);
+                            return View("Index", list);
+                        }
+                        else
+                        {
+                            ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                            return View(newlandnotification);
+                        }
                     }
                     else
                     {
-                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                        ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
                         return View(newlandnotification);
                     }
-                }
-                else 
-                {
-                    ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
-                    return View(newlandnotification);
-                }
                 }
                 else
                 {
@@ -118,12 +118,12 @@ namespace NewLandAcquisition.Controllers
         }
 
 
-       
+
 
 
         public async Task<IActionResult> Edit(int id)
         {
-            var Data = await _newlandnotificationService.FetchSingleResult1(id);          
+            var Data = await _newlandnotificationService.FetchSingleResult1(id);
             Data.notificationtypeList = await _newlandnotificationService.GetAllNotificationType();
 
             if (Data == null)
@@ -132,11 +132,11 @@ namespace NewLandAcquisition.Controllers
             }
             return View(Data);
         }
-        
 
 
-       [HttpPost]
-       
+
+        [HttpPost]
+
         public async Task<IActionResult> Edit(int id, Newlandnotification newlandnotification)
         {
             newlandnotification.notificationtypeList = await _newlandnotificationService.GetAllNotificationType();
@@ -182,14 +182,15 @@ namespace NewLandAcquisition.Controllers
             }
             return View(Data);
         }
-        
+
 
 
         public async Task<IActionResult> ViewDocumenbtsdG(int Id)
         {
-            FileHelper fileHelper = new FileHelper();         
-            Newlandnotification Data = await _newlandnotificationService.NewLandNotificationFile(Id);
-            string filename = Data.GazetteNotificationFilePath;
+            FileHelper fileHelper = new FileHelper();
+            Newlandnotification Data = await _newlandnotificationService.FetchSingleResult1(Id);
+
+            string filename = NewlandNotificationFilePath + Data.GazetteNotificationFilePath;
             byte[] FileBytes = System.IO.File.ReadAllBytes(filename);
             return File(FileBytes, fileHelper.GetContentType(filename));
         }
@@ -208,7 +209,7 @@ namespace NewLandAcquisition.Controllers
                         Id = result[i].Id,
                         NotificationNo = result[i].NotificationNo,
                         notificationDate = result[i].Date.ToString(),
-                        Remarks = result[i].Remarks,                     
+                        Remarks = result[i].Remarks,
 
                         IsActive = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
                     }); ;
@@ -295,7 +296,7 @@ namespace NewLandAcquisition.Controllers
 
 
 
-      
+
         public bool CheckMimeType(Newlandnotification data)
         {
             bool Flag = true;
@@ -363,7 +364,7 @@ namespace NewLandAcquisition.Controllers
                             {
                             }
                         }
-                      
+
                     }
 
                 }

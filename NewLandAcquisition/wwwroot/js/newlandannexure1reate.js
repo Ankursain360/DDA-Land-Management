@@ -125,5 +125,23 @@ function GetRequestData(id) {
         $('#RequestView').html("");
         $('#RequestView').html(response);
     });
+
+
+
+    $(function () {
+        debugger;
+        $("input[name='grpunit']").click(function () {
+            if ($("#rdbHA").is(":checked")) {
+                $('#AreaUnit').val('HA');
+            }
+            else if ($("#rdbAcre").is(":checked")) {
+                $('#AreaUnit').val('Acre');
+            }
+            else 
+                $('#AreaUnit').val('Sq Meters');
+           
+        });
+    });
+
    
 };

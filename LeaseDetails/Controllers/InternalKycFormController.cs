@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Core.Enum;
-using LeaseForPublic.Filters;
+using LeaseDetails.Filters;
 using Libraries.Service.IApplicationService;
 using Libraries.Model.Entity;
 using Notification;
@@ -21,14 +21,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Hosting;
 
 
-namespace LeaseForPublic.Controllers
+namespace LeaseDetails.Controllers
 {
-    
-
-    public class KYCformController : BaseController
+    public class InternalKycFormController : BaseController
     {
-        public object JsonRequestBehavior { get; private set; }
-
         private readonly IKycformService _kycformService;
         public IConfiguration _configuration;
         private readonly IUserProfileService _userProfileService;
@@ -38,12 +34,15 @@ namespace LeaseForPublic.Controllers
         string AadharDoc = "";
         string LetterDoc = "";
         string ApplicantDoc = "";
-        public KYCformController(IConfiguration configuration,
-             IUserNotificationService userNotificationService,
-            IKycformService KycformService,
-            IUserProfileService userProfileService,
-             IApprovalProccessService approvalproccessService,
-             IHostingEnvironment hostingEnvironment)
+
+        public object JsonRequestBehavior { get; private set; }
+
+        public InternalKycFormController(IConfiguration configuration,
+            IUserNotificationService userNotificationService,
+           IKycformService KycformService,
+           IUserProfileService userProfileService,
+            IApprovalProccessService approvalproccessService,
+            IHostingEnvironment hostingEnvironment)
 
         {
             _hostingEnvironment = hostingEnvironment;
@@ -51,82 +50,39 @@ namespace LeaseForPublic.Controllers
             _kycformService = KycformService;
             _userNotificationService = userNotificationService;
             AadharDoc = _configuration.GetSection("FilePaths:KycFiles:AadharDocument").Value.ToString();
-             LetterDoc = _configuration.GetSection("FilePaths:KycFiles:LetterDocument").Value.ToString();
-             ApplicantDoc = _configuration.GetSection("FilePaths:KycFiles:ApplicantDocument").Value.ToString();
+            LetterDoc = _configuration.GetSection("FilePaths:KycFiles:LetterDocument").Value.ToString();
+            ApplicantDoc = _configuration.GetSection("FilePaths:KycFiles:ApplicantDocument").Value.ToString();
             _userProfileService = userProfileService;
             _approvalproccessService = approvalproccessService;
         }
-
-      
         public IActionResult Index()
         {
-            
-            
-            var mobile = HttpContext.Session.GetString("Mobile");
-            var email = HttpContext.Session.GetString("Email");
-            var name = HttpContext.Session.GetString("Name");
-            ViewBag.Title = name;
-            ViewBag.Title1 = email;
-
-            if (mobile != "" && mobile != null)
-            {
-
-                return View();
-            }
-            else
-            {
-               
-                return RedirectToAction("Create", "SignupForm");
-            }
-               
+            return View();
         }
 
-        [ServiceFilter(typeof(AuditFilterAttribute))]
+        
+
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] KycformSearchDto model)
         {
-           
-            var mobile = HttpContext.Session.GetString("Mobile");
-
-                model.Mobileno = mobile.ToString();
-                var result = await _kycformService.GetPagedKycform(model);
-                return PartialView("_List", result);
-           
+            var result = await _kycformService.GetPagedKycformForInternalUser(model);
+            return PartialView("_List", result);
 
         }
 
-        // [AuthorizeContext(ViewAction.Add)]
+      
         public async Task<IActionResult> Create()
         {
-            var mobile = HttpContext.Session.GetString("Mobile");
-            var email = HttpContext.Session.GetString("Email");
-            var name = HttpContext.Session.GetString("Name");
+                Kycform kyc = new Kycform();
+              
+                kyc.LeasetypeList = await _kycformService.GetAllLeasetypeList();
 
-
-         
-            ViewBag.Title = name;
-            ViewBag.Title1 = email;
-
-
-
-            if (mobile != null ) { 
-            Kycform kyc = new Kycform();
-            kyc.MobileNo = mobile;
-            kyc.EmailId = email;
-            kyc.Name = name;
-            kyc.LeasetypeList = await _kycformService.GetAllLeasetypeList();
-            
-            kyc.PropertyTypeList = await _kycformService.GetAllPropertyTypeList();
-            // kyc.BranchList = await _kycformService.GetAllBranchList();
-            kyc.BranchList = await _kycformService.GetAllBranch(kyc.PropertyTypeId);
-            kyc.ZoneList = await _kycformService.GetAllZoneList();
-            kyc.LocalityList = await _kycformService.GetLocalityList(kyc.ZoneId);
-            return View(kyc);
-            }
-            else
-            {
-                return RedirectToAction("Create", "SignupForm");
-            }
+                kyc.PropertyTypeList = await _kycformService.GetAllPropertyTypeList();
+                // kyc.BranchList = await _kycformService.GetAllBranchList();
+                kyc.BranchList = await _kycformService.GetAllBranch(kyc.PropertyTypeId);
+                kyc.ZoneList = await _kycformService.GetAllZoneList();
+                kyc.LocalityList = await _kycformService.GetLocalityList(kyc.ZoneId);
+                return View(kyc);         
 
         }
         [HttpPost]
@@ -134,38 +90,20 @@ namespace LeaseForPublic.Controllers
         //[AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Kycform kyc)
         {
-            //bool IsValidpdf = CheckMimeTypeAAdharDocument(kyc);
-            //bool IsValidpdf1 = CheckMimeTypeLetter(kyc);
-            //bool IsValidpdf2 = CheckMimeTypeApplicantPan(kyc);
             try
             {
-                
+
                 kyc.LeasetypeList = await _kycformService.GetAllLeasetypeList();
                 //kyc.BranchList = await _kycformService.GetAllBranchList();
                 kyc.PropertyTypeList = await _kycformService.GetAllPropertyTypeList();
                 kyc.BranchList = await _kycformService.GetAllBranch(kyc.PropertyTypeId);
                 kyc.ZoneList = await _kycformService.GetAllZoneList();
                 kyc.LocalityList = await _kycformService.GetLocalityList(kyc.ZoneId);
-
-                var email = HttpContext.Session.GetString("Email");
-                var name = HttpContext.Session.GetString("Name");
-                ViewBag.Title = name;
-                ViewBag.Title1 = email;
-
-                var id = HttpContext.Session.GetString("ID");
                 string AadharDoc = _configuration.GetSection("FilePaths:KycFiles:AadharDocument").Value.ToString();
                 string LetterDoc = _configuration.GetSection("FilePaths:KycFiles:LetterDocument").Value.ToString();
                 string ApplicantDoc = _configuration.GetSection("FilePaths:KycFiles:ApplicantDocument").Value.ToString();
-
-
                 if (ModelState.IsValid)
                 {
-                    //if (IsValidpdf == true)
-                    //{
-                    //    if (IsValidpdf1 == true)
-                    //    {
-                    //        if (IsValidpdf2 == true)
-                    //        {
 
                                 #region Approval Proccess At 1st level Check Initial Before Creating Record
 
@@ -264,7 +202,7 @@ namespace LeaseForPublic.Controllers
                                     kyc.AadhaarPanapplicantPath = fileHelper.SaveFile1(ApplicantDoc, kyc.ApplicantPan);
                                 }
 
-                                kyc.CreatedBy = Convert.ToInt32(id);
+                             kyc.CreatedBy = SiteContext.UserId;
                                 kyc.IsActive = 1;
                                 kyc.KycStatus = "F";
                                 var result = await _kycformService.Create(kyc);
@@ -468,25 +406,9 @@ namespace LeaseForPublic.Controllers
                                     ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                                     return View(kyc);
 
-                                }
-                    //        }
-                    //        else
-                    //        {
-                    //            ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
-                    //            return View(kyc);
-                    //        }
-                    //    }
-                    //    else 
-                    //    {
-                    //        ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
-                    //        return View(kyc);
-                    //    }
-                    //}
-                    //else
-                    //{
-                    //    ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
-                    //    return View(kyc);
-                    //}
+                                }                       
+                        
+                  
                 }
                 else
                 {
@@ -499,7 +421,7 @@ namespace LeaseForPublic.Controllers
                 var deleteResult = false;
                 if (kyc.Id != 0)
                 {
-                   
+
                     deleteResult = await _userNotificationService.RollBackEntry((_configuration.GetSection("workflowProccessGuidKYCForm").Value), kyc.Id);
                     deleteResult = await _approvalproccessService.KycRollBackEntry((_configuration.GetSection("workflowProccessGuidKYCForm").Value), kyc.Id);
                     deleteResult = await _kycformService.RollBackEntry(kyc.Id);
@@ -511,13 +433,13 @@ namespace LeaseForPublic.Controllers
 
         }
 
-       
+
         //[AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _kycformService.FetchSingleResult(id);
             Data.LeasetypeList = await _kycformService.GetAllLeasetypeList();
-           // Data.BranchList = await _kycformService.GetAllBranchList();
+            // Data.BranchList = await _kycformService.GetAllBranchList();
             Data.PropertyTypeList = await _kycformService.GetAllPropertyTypeList();
             Data.ZoneList = await _kycformService.GetAllZoneList();
             Data.LocalityList = await _kycformService.GetLocalityList(Data.ZoneId);
@@ -539,16 +461,13 @@ namespace LeaseForPublic.Controllers
         //[AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Kycform kyc)
         {
-            bool IsValidpdf = CheckMimeTypeAAdharDocument(kyc);
-            bool IsValidpdf1 = CheckMimeTypeLetter(kyc);
-            bool IsValidpdf2 = CheckMimeTypeApplicantPan(kyc);
+         
             var email = HttpContext.Session.GetString("Email");
             var name = HttpContext.Session.GetString("Name");
             ViewBag.Title = name;
             ViewBag.Title1 = email;
             var Data = await _kycformService.FetchSingleResult(id);
-            kyc.LeasetypeList = await _kycformService.GetAllLeasetypeList();
-           // kyc.BranchList = await _kycformService.GetAllBranchList();
+            kyc.LeasetypeList = await _kycformService.GetAllLeasetypeList();         
             kyc.PropertyTypeList = await _kycformService.GetAllPropertyTypeList();
             kyc.BranchList = await _kycformService.GetAllBranch(kyc.PropertyTypeId);
             kyc.ZoneList = await _kycformService.GetAllZoneList();
@@ -560,13 +479,7 @@ namespace LeaseForPublic.Controllers
 
             if (ModelState.IsValid)
             {
-                if (IsValidpdf == true)
-                {
-                    if (IsValidpdf1 == true)
-                    {
-                        if (IsValidpdf2 == true)
-                        {
-
+                
                             FileHelper fileHelper = new FileHelper();
 
                             if (kyc.Aadhar != null)
@@ -695,37 +608,19 @@ namespace LeaseForPublic.Controllers
                                 var list = await _kycformService.GetAllKycform();
                                 return View("Index", list);
                             }
-                        }
-                        else
-                        {
-                            ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
-                            return View(kyc);
+               
+            }
+            else
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                return View(kyc);
 
-                        }
-                    }
-                    else 
-                    {
-                        ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
-                        return View(kyc);
-                    }
-                }
-                else
-                {
-                    ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
-                    return View(kyc);
-                }
-                }
-                else
-                {
-                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                    return View(kyc);
+            }
 
-                }
-            
-              return View(kyc);
+            return View(kyc);
         }
 
-        //[AuthorizeContext(ViewAction.Delete)]
+       
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var result = await _kycformService.Delete(id);
@@ -743,7 +638,6 @@ namespace LeaseForPublic.Controllers
             }
         }
 
-        //[AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var email = HttpContext.Session.GetString("Email");
@@ -765,7 +659,7 @@ namespace LeaseForPublic.Controllers
         }
 
         //***************** Download Files  ********************
-       
+
         public async Task<IActionResult> DownloadAadharNo(int Id)
         {
             FileHelper file = new FileHelper();
@@ -828,7 +722,7 @@ namespace LeaseForPublic.Controllers
                         FileNo = result[i].FileNo,
                         Branch = result[i].Branch == null ? "" : result[i].Branch.Name.ToString(),
                         Zone = result[i].Zone == null ? "" : result[i].Zone.Name.ToString(),
-                   
+
                         DateofAllotmentLetter = Convert.ToDateTime(result[i].AllotmentLetterDate).ToString("dd-MMM-yyyy"),
                         DateofPossession = Convert.ToDateTime(result[i].PossessionDate).ToString("dd-MMM-yyyy"),
                         //Status = result[i].ApprovedStatus == 1 ? se : "Inactive",
@@ -844,8 +738,8 @@ namespace LeaseForPublic.Controllers
 
         public IActionResult Logout()
         {
-        HttpContext.Session.SetString("Mobile", "");
-        HttpContext.Session.SetString("Email", "");
+            HttpContext.Session.SetString("Mobile", "");
+            HttpContext.Session.SetString("Email", "");
 
             ViewBag.Message = Alert.Show("Logout Successfully", "", AlertType.Warning);
 
@@ -863,305 +757,7 @@ namespace LeaseForPublic.Controllers
 
 
 
-        [HttpPost]
-        public JsonResult CheckFile()
-        {
-            bool IsImg = true;
-            string fullpath = string.Empty;
-            //   string fullpath = string.Empty;
-            string extension = string.Empty;
-            AadharDoc = _configuration.GetSection("FilePaths:KycFiles:AadharDocument").Value.ToString();
-            IFormFile files = Request.Form.Files["file"];
-            if (files != null)
-            {
-                extension = System.IO.Path.GetExtension(files.FileName);
-                string FileName = Guid.NewGuid().ToString() + "_" + files.FileName;
-                AadharDoc = _configuration.GetSection("FilePaths:KycFiles:AadharDocument").Value.ToString();
-                string FilePath = Path.Combine(AadharDoc, FileName);
-                if (files.Length > 0)
-                {
-                    if (!Directory.Exists(AadharDoc))
-                    {
-                        DirectoryInfo di = Directory.CreateDirectory(AadharDoc);// Try to create the directory.
-                    }
-                    try
-                    {
-                        if (extension.ToLower() == ".pdf")
-                        {
-                            try
-                            {
-                                using (var stream = new FileStream(FilePath, FileMode.Create))
-                                {
-                                    files.CopyTo(stream);
-
-                                }
-
-                                iTextSharp.text.pdf.PdfReader oPdfReader = new iTextSharp.text.pdf.PdfReader(FilePath);
-                                oPdfReader.Close();
-                                fullpath = _configuration.GetSection("FilePaths:KycFiles:AadharDocument").Value.ToString();
-                                FileInfo doc = new FileInfo(fullpath);
-                                if (doc.Exists)
-                                {
-                                    doc.Delete();
-                                }
-                            }
-                            catch (iTextSharp.text.exceptions.InvalidPdfException)
-                            {
-                                IsImg = false;
-                            }
-
-                        }
-                    }
-                    catch (OutOfMemoryException ex)
-                    {
-                        IsImg = false;
-
-                        if (System.IO.File.Exists(fullpath))
-                        {
-                            try
-                            {
-                                System.IO.File.Delete(fullpath);
-                            }
-                            catch (Exception exs)
-                            {
-                            }
-                        }
-                        // Image.FromFile will throw this if file is invalid.  
-                    }
-
-                }
-            }
-
-            return Json(IsImg, JsonRequestBehavior);
-        }
-
-
-
       
-
-        public bool CheckMimeTypeAAdharDocument(Kycform kycform)
-        {
-            bool Flag = true;
-            string fullpath = string.Empty;
-            //   string fullpath = string.Empty;
-            string extension = string.Empty;
-            AadharDoc = _configuration.GetSection("FilePaths:KycFiles:AadharDocument").Value.ToString();
-            IFormFile files = kycform.Aadhar;
-            if (files != null)
-            {
-                extension = System.IO.Path.GetExtension(files.FileName);
-                string FileName = Guid.NewGuid().ToString() + "_" + files.FileName;
-                AadharDoc = _configuration.GetSection("FilePaths:KycFiles:AadharDocument").Value.ToString();
-                string FilePath = Path.Combine(AadharDoc, FileName);
-                if (files.Length > 0)
-                {
-                    if (!Directory.Exists(AadharDoc))
-                    {
-                        DirectoryInfo di = Directory.CreateDirectory(AadharDoc);// Try to create the directory.
-                    }
-                    try
-                    {
-                        if (extension.ToLower() == ".pdf")
-                        {
-                            try
-                            {
-                                using (var stream = new FileStream(FilePath, FileMode.Create))
-                                {
-                                    files.CopyTo(stream);
-
-                                }
-
-                                iTextSharp.text.pdf.PdfReader oPdfReader = new iTextSharp.text.pdf.PdfReader(FilePath);
-                                oPdfReader.Close();
-                                fullpath = _configuration.GetSection("FilePaths:KycFiles:AadharDocument").Value.ToString();
-                                FileInfo doc = new FileInfo(fullpath);
-                                if (doc.Exists)
-                                {
-                                    doc.Delete();
-                                }
-                            }
-                            catch (iTextSharp.text.exceptions.InvalidPdfException)
-                            {
-                                Flag = false;
-                            }
-
-                        }
-                        else
-                        {
-                            Flag = false;
-                        }
-                    }
-                    catch (OutOfMemoryException ex)
-                    {
-                        Flag = false;
-
-                        if (System.IO.File.Exists(fullpath))
-                        {
-                            try
-                            {
-                                System.IO.File.Delete(fullpath);
-                            }
-                            catch (Exception exs)
-                            {
-                            }
-                        }
-                        // Image.FromFile will throw this if file is invalid.  
-                    }
-
-                }
-            }
-
-            return Flag;
-        }
-        public bool CheckMimeTypeLetter(Kycform kycform)
-        {
-            bool Flag = true;
-            string fullpath = string.Empty;
-            //   string fullpath = string.Empty;
-            string extension = string.Empty;
-            AadharDoc = _configuration.GetSection("FilePaths:KycFiles:Letter").Value.ToString();
-            IFormFile files = kycform.Aadhar;
-            if (files != null)
-            {
-                extension = System.IO.Path.GetExtension(files.FileName);
-                string FileName = Guid.NewGuid().ToString() + "_" + files.FileName;
-                AadharDoc = _configuration.GetSection("FilePaths:KycFiles:Letter").Value.ToString();
-                string FilePath = Path.Combine(AadharDoc, FileName);
-                if (files.Length > 0)
-                {
-                    if (!Directory.Exists(AadharDoc))
-                    {
-                        DirectoryInfo di = Directory.CreateDirectory(AadharDoc);// Try to create the directory.
-                    }
-                    try
-                    {
-                        if (extension.ToLower() == ".pdf")
-                        {
-                            try
-                            {
-                                using (var stream = new FileStream(FilePath, FileMode.Create))
-                                {
-                                    files.CopyTo(stream);
-
-                                }
-
-                                iTextSharp.text.pdf.PdfReader oPdfReader = new iTextSharp.text.pdf.PdfReader(FilePath);
-                                oPdfReader.Close();
-                                fullpath = _configuration.GetSection("FilePaths:KycFiles:Letter").Value.ToString();
-                                FileInfo doc = new FileInfo(fullpath);
-                                if (doc.Exists)
-                                {
-                                    doc.Delete();
-                                }
-                            }
-                            catch (iTextSharp.text.exceptions.InvalidPdfException)
-                            {
-                                Flag = false;
-                            }
-
-                        }
-                        else
-                        {
-                            Flag = false;
-                        }
-                    }
-                    catch (OutOfMemoryException ex)
-                    {
-                        Flag = false;
-
-                        if (System.IO.File.Exists(fullpath))
-                        {
-                            try
-                            {
-                                System.IO.File.Delete(fullpath);
-                            }
-                            catch (Exception exs)
-                            {
-                            }
-                        }
-                        // Image.FromFile will throw this if file is invalid.  
-                    }
-
-                }
-            }
-
-            return Flag;
-        }
-
-        public bool CheckMimeTypeApplicantPan(Kycform kycform)
-        {
-            bool Flag = true;
-            string fullpath = string.Empty;
-            //   string fullpath = string.Empty;
-            string extension = string.Empty;
-            AadharDoc = _configuration.GetSection("FilePaths:KycFiles:ApplicantPan").Value.ToString();
-            IFormFile files = kycform.Aadhar;
-            if (files != null)
-            {
-                extension = System.IO.Path.GetExtension(files.FileName);
-                string FileName = Guid.NewGuid().ToString() + "_" + files.FileName;
-                AadharDoc = _configuration.GetSection("FilePaths:KycFiles:ApplicantPan").Value.ToString();
-                string FilePath = Path.Combine(AadharDoc, FileName);
-                if (files.Length > 0)
-                {
-                    if (!Directory.Exists(AadharDoc))
-                    {
-                        DirectoryInfo di = Directory.CreateDirectory(AadharDoc);// Try to create the directory.
-                    }
-                    try
-                    {
-                        if (extension.ToLower() == ".pdf")
-                        {
-                            try
-                            {
-                                using (var stream = new FileStream(FilePath, FileMode.Create))
-                                {
-                                    files.CopyTo(stream);
-
-                                }
-
-                                iTextSharp.text.pdf.PdfReader oPdfReader = new iTextSharp.text.pdf.PdfReader(FilePath);
-                                oPdfReader.Close();
-                                fullpath = _configuration.GetSection("FilePaths:KycFiles:ApplicantPan").Value.ToString();
-                                FileInfo doc = new FileInfo(fullpath);
-                                if (doc.Exists)
-                                {
-                                    doc.Delete();
-                                }
-                            }
-                            catch (iTextSharp.text.exceptions.InvalidPdfException)
-                            {
-                                Flag = false;
-                            }
-
-                        }
-                        else
-                        {
-                            Flag = false;
-                        }
-                    }
-                    catch (OutOfMemoryException ex)
-                    {
-                        Flag = false;
-
-                        if (System.IO.File.Exists(fullpath))
-                        {
-                            try
-                            {
-                                System.IO.File.Delete(fullpath);
-                            }
-                            catch (Exception exs)
-                            {
-                            }
-                        }
-                        // Image.FromFile will throw this if file is invalid.  
-                    }
-
-                }
-            }
-
-            return Flag;
-        }
 
     }
 }

@@ -52,6 +52,7 @@ namespace NewLandAcquisition.Controllers
             _userProfileService = userProfileService;
             _hostingEnvironment = hostingEnvironment;
             _userNotificationService = userNotificationService;
+            documentPhotoPathLayout = _configuration.GetSection("FilePaths:RequestPhoto:Photo").Value.ToString();
         }
 
         [AuthorizeContext(ViewAction.View)]
@@ -101,7 +102,7 @@ namespace NewLandAcquisition.Controllers
                         FileHelper file = new FileHelper();
                         if (request.RequestPhotos != null)
                         {
-                            request.LayoutPlan = file.SaveFile(documentPhotoPathLayout, request.RequestPhotos);
+                            request.LayoutPlan = file.SaveFile1(documentPhotoPathLayout, request.RequestPhotos);
                         }
 
 
@@ -233,8 +234,8 @@ namespace NewLandAcquisition.Controllers
                                             var notificationtemplate = await _approvalproccessService.FetchSingleNotificationTemplate(_configuration.GetSection("userNotificationGuidRequestService").Value);
                                             var user = await _userProfileService.GetUserById(SiteContext.UserId);
                                             Usernotification usernotification = new Usernotification();
-                                            //var replacement = notificationtemplate.Template.Replace("{proccess name}", "Identification of land").Replace("{from user}", user.User.UserName).Replace("{datetime}", DateTime.Now.ToString());
-                                            //usernotification.Message = replacement;
+                                            var replacement = notificationtemplate.Template.Replace("{proccess name}", "Identification of land").Replace("{from user}", user.User.UserName).Replace("{datetime}", DateTime.Now.ToString());
+                                            usernotification.Message = replacement;
                                             usernotification.UserNotificationGuid = (_configuration.GetSection("userNotificationGuidRequestService").Value);
                                             usernotification.ProcessGuid = approvalproccess.ProcessGuid;
                                             usernotification.ServiceId = approvalproccess.ServiceId;
@@ -384,7 +385,7 @@ namespace NewLandAcquisition.Controllers
                     FileHelper file = new FileHelper();
                     if (scheme.RequestPhotos != null)
                     {
-                        scheme.LayoutPlan = file.SaveFile(documentPhotoPathLayout, scheme.RequestPhotos);
+                        scheme.LayoutPlan = file.SaveFile1(documentPhotoPathLayout, scheme.RequestPhotos);
                     }
 
                     try
@@ -461,8 +462,8 @@ namespace NewLandAcquisition.Controllers
             try
             {
                 FileHelper file = new FileHelper();
-                var Data = await _requestService.FetchSingleResult(Id);
-                string targetPhotoPathLayout = Data.LayoutPlan;
+                Request Data = await _requestService.FetchSingleResult(Id);
+                string targetPhotoPathLayout = documentPhotoPathLayout + Data.LayoutPlan.Trim();
                 byte[] FileBytes = System.IO.File.ReadAllBytes(targetPhotoPathLayout);
                 return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
             }

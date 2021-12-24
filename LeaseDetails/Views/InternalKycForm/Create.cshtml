@@ -1,0 +1,560 @@
+﻿<div class="pt-3">
+
+    @model Libraries.Model.Entity.Kycform
+    @await Component.InvokeAsync("PageHeader", new { pageName = "Lessee/Licensee KYC Details" })
+
+    <form onsubmit="return validateForm()" id="kyc-form" asp-action="Create" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
+
+        <h3 class="mb-3 d-flex">KYC (Know your Customer) Form<span class="ms-auto"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span></h3>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+        <div class="row">
+            <div class="col-md-4">
+            </div>
+            <div class="col-md-4">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="Property">
+                        <option disabled="disabled" selected value="">Select</option>
+                        <option value="Lease">Lease Property</option>
+                        <option value="License">License Property</option>
+                    </select>
+                    <span asp-validation-for="Property" class="text-danger"></span>
+                    <label for="field-1" class="floating-label">Choose Property <span style="color:red">*</span></label>
+                </div>
+            </div>
+            <div class="col-md-4">
+            </div>
+        </div>
+        <br />
+
+        @*<div id="divLeaseproperty">*@
+        <h3 class="my-3 sub-heading">Details of Property </h3>
+        <div class="row mt-md-3">
+            <div class="col-md-4">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="PropertyTypeId"
+                            asp-items="@(new SelectList(Model.PropertyTypeList, "Id","Name"))"
+                            onchange="return onChange(this.options[this.selectedIndex].value);">
+                        <option disabled="disabled" selected value="0">Select</option>
+
+                    </select>
+                    <span asp-validation-for="PropertyTypeId" class="text-danger"></span>
+                    <label for="field-1" class="floating-label">Nature of Property <span style="color:red">*</span></label>
+                    <label id="propertytype-error" style="color:red;display:none;"> Nature of Property is Mandatory</label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="text" class="floating-label-field floating-label-field--s3" asp-for="FileNo" placeholder="Name" limit="100">
+                    <span asp-validation-for="FileNo" class="text-danger"></span>
+                    <label for="field-1" class="floating-label">File No.<span style="color:red">*</span></label>
+                    <label id="file-error" style="color:red;display:none;"> File No is Mandatory</label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="BranchId"
+                            asp-items="@(new SelectList(Model.BranchList, "Id","Name"))">
+                        <option disabled="disabled" selected value="">Select</option>
+
+                    </select>
+                    <span asp-validation-for="BranchId" class="text-danger"></span>
+                    <label for="field-1" class="floating-label">Branch Pertaining To <span style="color:red">*</span></label>
+                </div>
+            </div>
+
+        </div>
+        <div id="LeaseType">
+            <div class="row mt-md-3">
+                <div class="col-md-4">
+
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <select class="floating-label-field floating-label-field--s3" asp-for="LeaseTypeId" style="width:100%;">
+
+                            <option disabled="disabled" selected value="">Select</option>
+
+                            @foreach (var item in Model.LeasetypeList)
+                            {
+                                <option value="@item.Id"> @item.Type </option>
+                            }
+                        </select>
+                        <span asp-validation-for="LeaseTypeId" class="text-danger"></span>
+                        <label for="field-1" class="floating-label">Lease Type <span style="color:red">*</span></label>
+                        <label id="LeaseType-error" style="color:red;display:none;"> Lease Type is Mandatory</label>
+                    </div>
+
+                </div>
+                <div class="col-md-4">
+
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <select class="floating-label-field floating-label-field--s3" asp-for="LeaseGroundRentDepositFrequency" style="width:100%;">
+
+                            <option disabled="disabled" selected value="">Select</option>
+
+                            <option value="Half Yearly">Half Yearly</option>
+                            <option value="Yearly">Yearly  </option>
+
+                        </select>
+                        <span asp-validation-for="LeaseGroundRentDepositFrequency" class="text-danger"></span>
+                        <label for="field-1" class="floating-label">Lease Ground Rent Deposit Frequency <span style="color:red">*</span></label>
+                        <label id="LeaseGroundRent-error" style="color:red;display:none;"> Lease Ground Rent Deposit is Mandatory</label>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div id="LicenseFrequency1">
+            <div class="row mt-md-3">
+                <div class="col-md-4">
+
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <select class="floating-label-field floating-label-field--s3" asp-for="LicenseFrequency" style="width:100%;">
+
+                            <option disabled="disabled" selected value="">Select</option>
+
+                            <option value="Monthly">Monthly  </option>
+                            <option value="Quarterly">Quarterly  </option>
+                            <option value="Half Yearly">Half Yearly</option>
+                            <option value="Yearly">Yearly  </option>
+
+                        </select>
+                        <span asp-validation-for="LicenseFrequency" class="text-danger"></span>
+                        <label for="field-1" class="floating-label">License Frequency <span style="color:red">*</span></label>
+                        <label id="LicenseFrequency-error" style="color:red;display:none;"> License Frequency is Mandatory</label>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- if Lease type is tenure -->
+        <div id="divTenure">
+            <h3 class="my-3 sub-heading">Tenure Details </h3>
+            <div class="row mt-md-3">
+                <div class=" col-md-4">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input type="date" id="tenurefrom" asp-for="TenureFrom" class="floating-label-field floating-label-field--s3" placeholder="Period From">
+                        <span asp-validation-for="TenureFrom" class="text-danger"></span>
+                        <label for="field-1" class="floating-label">Tenure Period From </label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input type="date" id="tenureto" asp-for="TenureTo" class="floating-label-field floating-label-field--s3" placeholder="Period to">
+                        <span asp-validation-for="TenureTo" class="text-danger"></span>
+                        <label for="field-1" class="floating-label">Tenure Period To </label>
+                        <span id="tenurefrom1-error" style="color:red" class=""></span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <div id="divLicense">
+            <h3 class="my-3 sub-heading">License Period Details </h3>
+            <div class="row mt-md-3">
+                <div class=" col-md-4">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input id="fromlicense" type="date" asp-for="LicenseFrom" class="floating-label-field floating-label-field--s3" placeholder="Period From">
+                        <span asp-validation-for="LicenseFrom" class="text-danger"></span>
+                        <label for="field-1" class="floating-label">License Period From </label>
+                        <span id="tolicense1-error" style="color:red" class=""></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input id="tolicense" type="date" asp-for="LicenseTo" class="floating-label-field floating-label-field--s3" placeholder="Period to">
+                        <span asp-validation-for="LicenseTo" class="text-danger"></span>
+                        <label for="field-1" class="floating-label">License Period To </label>
+                        <span id="fromlicense1-error" style="color:red" class=""></span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <!-- Start of Property Details -->
+        <div id="divPropertyDetails">
+            @*<h3 class="my-3 sub-heading">Plot Details </h3>*@
+            <div class="row mt-md-3">
+                <div class="col-md-4">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input type="text" asp-for="PlotNo" limit="100" class="floating-label-field floating-label-field--s3" placeholder="Period to">
+                        <span asp-validation-for="PlotNo" class="text-danger"></span>
+                        <label for="field-1" class="floating-label">Plot No/ Khasra No </label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <textarea type="text" asp-for="PlotDescription" limit="500" class="floating-label-field floating-label-field--s3" placeholder="PlotDescription"></textarea>
+                        <span asp-validation-for="PlotDescription" class="text-danger"></span>
+                        <label for="field-1" class="floating-label">Plot Description </label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <select class="floating-label-field floating-label-field--s3" asp-for="ZoneId"
+                                asp-items="@(new SelectList(Model.ZoneList, "Id","Name"))" onchange="return">
+                            <option disabled="disabled" selected value="">Select</option>
+
+                        </select>
+                        <span asp-validation-for="ZoneId" class="text-danger"></span>
+                        <label for="field-1" class="floating-label">Zone <span style="color:red">*</span></label>
+                        <span id="ZoneId-error" style="color:red" class=""></span>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row mt-md-3">
+                <div class="col-md-3">
+                    <div class="floating-label-wrap">
+                        <select asp-for="LocalityId" class="floating-label-field floating-label-field--s3"
+                                asp-items="@(new SelectList(Model.LocalityList,"Id","Name"))">
+                            <option value="">---Select---</option>
+
+                        </select>
+                        <span asp-validation-for="LocalityId" class="text-danger "></span>
+                        <label class="floating-label">Locality <span style="color:red">*</span></label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input type="text" asp-for="Phase" limit="45" class="floating-label-field floating-label-field--s3" placeholder="Phase">
+                        <span asp-validation-for="Phase" class="text-danger"></span>
+                        <label for="field-1" class="floating-label">Phase</label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input type="text" asp-for="Sector" limit="45" class="floating-label-field floating-label-field--s3" placeholder="Sector">
+                        <span asp-validation-for="Sector" class="text-danger"></span>
+                        <label for="field-1" class="floating-label">Sector </label>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="row mt-md-3">
+
+                <div class="col-md-4">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input type="text" asp-for="Block" limit="100" class="floating-label-field floating-label-field--s3" placeholder="Block">
+                        <span asp-validation-for="Block" class="text-danger"></span>
+                        <label for="field-1" class="floating-label">Block </label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input type="text" asp-for="Pocket" limit="45" class="floating-label-field floating-label-field--s3" placeholder="Pocket">
+                        <span asp-validation-for="Pocket" class="text-danger"></span>
+                        <label for="field-1" class="floating-label">Pocket</label>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+        <!-- End of Property details -->
+        <div id="divPlotDetails">
+            <h3 class="my-3 sub-heading">Applicant Details </h3>
+
+            <div class="row mt-md-3">
+                <div class="col-md-4">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input type="text" id="name1" value="@Model.Name" asp-for="Name" limit="100" class="floating-label-field floating-label-field--s3" placeholder="First Name">
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                        <label for="field-1" class="floating-label"> Name <span style="color:red">*</span></label>
+                        <label style="color:red;display:none; font-size:13px" id="err-name">Please Enter Valid Name</label>
+                        <label id="name1-error" style="color:red;display:none;">Name is Mandatory</label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input type="text" id="FatherName" asp-for="FatherName" limit="100" class="floating-label-field floating-label-field--s3" placeholder="Middle Name">
+                        <span asp-validation-for="FatherName" class="text-danger"></span>
+                        <label for="field-1" class="floating-label">Father Name</label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <select class="floating-label-field floating-label-field--s3" asp-for="Gender">
+                            @*<option selected value="">--Select--</option>*@
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        <span asp-validation-for="Gender" class="text-danger"></span>
+                        <label for="field-1" class="floating-label">Gender </label>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="row mt-md-3">
+                <div class="col-md-4">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input type="Email" asp-for="EmailId" limit="50" class="floating-label-field floating-label-field--s3" placeholder="Email Id">
+                        <span asp-validation-for="EmailId" class="text-danger"></span>
+                        <label for="field-1" class="floating-label">Email ID<span style="color:red">*</span></label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input asp-for="MobileNo" type="text" limit="10"  class="floating-label-field floating-label-field--s3 numbers" placeholder="mobileno">
+                        <span asp-validation-for="MobileNo" class="text-danger"></span>
+                        <label for="field-1" class="floating-label">Mobile No.[Not add +91]<span style="color:red">*</span></label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <textarea type="text" asp-for="Address" limit="500" class="floating-label-field floating-label-field--s3" placeholder="address"></textarea>
+                        <span asp-validation-for="Address" class="text-danger"></span>
+                        <label for="field-1" class="floating-label">Correspondence Address<span style="color:red">*</span></label>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-md-3">
+
+                <div class="col-md-4">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input type="text" asp-for="AadhaarNo" limit="12" class="floating-label-field floating-label-field--s3 numbers" placeholder="AadharNo">
+                        <span asp-validation-for="AadhaarNo" class="text-danger"></span>
+                        <label for="field-1" class="floating-label">Aadhaar No.</label>
+                        <label style="color:red;display:none; font-size:13px" id="err-aadhar">Please Enter Valid Aadhaar No</label>
+
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <select class="floating-label-field floating-label-field--s3" asp-for="Relationship">
+                            <option disabled="disabled" selected value="">Select</option>
+                            <option value="Son">Son</option>
+                            <option value="Daughter">Daughter</option>
+                            <option value="Wife">Wife</option>
+                            <option value="Father">Father</option>
+                            <option value="GPA/ATS/SPA Holder">GPA/ATS/SPA Holder</option>
+
+                        </select>
+                        <span asp-validation-for="Relationship" class="text-danger"></span>
+                        <label for="field-1" class="floating-label">Relationship with Allottee</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Lessee details -->
+        <div id="divLesseeDetails">
+            <h3 id="licenseheading" class="my-3 sub-heading">Details of Lessee as per Allotment Letter/Lease deed</h3>
+
+            <input type="hidden" asp-for="AllotteeApplicantDetailsSame" />
+            <div class="form-check theme">
+                <input class="form-check-input" name="chksame" type="checkbox" id="chk1">
+                <label class="form-check-label" id="chk2">
+                    If the Allottee Details are same as Applicant Details then tick the checkbox
+                </label>
+            </div>
+
+            <div class="row mt-md-3">
+                <div class="col-md-4">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input type="text" value="@Model.Name" limit="100" asp-for="AllotteeLicenseeName" class="floating-label-field floating-label-field--s3" placeholder="Name">
+                        <span asp-validation-for="AllotteeLicenseeName" class="text-danger"></span>
+                        <label id="NameLB" for="field-1" class="floating-label">Name of the Allottee/Lessee</label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <textarea limit="500" class="floating-label-field floating-label-field--s3" asp-for="AllotteeLicenseeAddress" placeholder="Address"> </textarea>
+                        <span asp-validation-for="AllotteeLicenseeAddress" class="text-danger"></span>
+                        <label for="field-1" class="floating-label">Correspondence Address </label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input type="text" limit="10" asp-for="AllotteeLicenseeMobileNo" value="@Model.MobileNo" class="floating-label-field floating-label-field--s3 numbers" placeholder="PIN Code">
+                        <span asp-validation-for="AllotteeLicenseeMobileNo" class="text-danger"></span>
+                        <label for="field-1" class="floating-label">Mobile No.[Not add +91]</label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input type="email" limit="50" value="@Model.EmailId" asp-for="AllotteeLicenseeEmailId" class="floating-label-field floating-label-field--s3" placeholder="Email ID">
+                        <span asp-validation-for="AllotteeLicenseeEmailId" class="text-danger"></span>
+                        <label for="field-1" class="floating-label">Email ID</label>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- End of Lessee Details -->
+        <!-- Plot details -->
+        <div id="divPlotDetails">
+            <h3 class="my-3 sub-heading">Plot Details </h3>
+
+            <div class="row mt-md-3">
+                <div class="col-md-4">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input type="text" asp-for="Area" class="floating-label-field floating-label-field--s3 numbers" placeholder="Address">
+                        <span asp-validation-for="Area" class="text-danger"></span>
+                        <label for="field-1" class="floating-label">Area </label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <select class="floating-label-field floating-label-field--s3" asp-for="AreaUnit">
+                            <option disabled="disabled" selected value="">Select</option>
+                            <option value="SQMT">SQMT </option>
+                            <option value="HA">HA</option>
+                            <option value="Acre">Acre </option>
+                            <option value="SQYard">SQ.Yard </option>
+                            <option value="SQFT">SQFT </option>
+                        </select>
+                        <span asp-validation-for="AreaUnit" class="text-danger"></span>
+                        <label for="field-1" class="floating-label">AreaUnit </label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input type="date" asp-for="AllotmentLetterDate" class="floating-label-field floating-label-field--s3" placeholder="Email ID">
+                        <span asp-validation-for="AllotmentLetterDate" class="text-danger msg1"></span>
+                        <label for="field-1" class="floating-label">Date of Allotment Letter  </label>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row mt-md-3">
+                <div class="col-md-4">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input type="date" asp-for="PossessionDate" class="floating-label-field floating-label-field--s3" placeholder="PIN Code">
+                        <span asp-validation-for="PossessionDate" class="text-danger msg2"></span>
+                        <label for="field-1" class="floating-label">Date of Possession <span style="color:red">*</span></label>
+                        <label id="PossessionDate-error" style="color:red;display:none;"> Possession Date is Mandatory</label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input type="date" asp-for="LeaseLicenseExecutionDate" class="floating-label-field floating-label-field--s3" placeholder="Address">
+                        <span asp-validation-for="LeaseLicenseExecutionDate" class="text-danger msg3"></span>
+                        <label id="labellease" for="field-1" class="floating-label">Date of Lease Execution </label>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+        <div id="LeaseAmount">
+
+            <div class="row mt-md-3">
+                <div class=" col-md-4">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input type="text" asp-for="LandPremiumAmount" class="floating-label-field floating-label-field--s3 numbers" placeholder="Period From">
+                        <span asp-validation-for="LandPremiumAmount" class="text-danger"></span>
+                        <label for="field-1" class="floating-label">Land Premium Amount (Rs.)<span style="color:red">*</span></label>
+                        <label id="LandPremiumamount-error" style="color:red;display:none;">Land Premium Amount is Mandatory</label>
+
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input type="text" asp-for="GroundRentAmount" readonly class="floating-label-field floating-label-field--s3 numbers" placeholder="Period to">
+                        <span asp-validation-for="GroundRentAmount" class="text-danger"></span>
+                        <label for="field-1" class="floating-label">Ground Rent Amount per annum (Rs.)<span style="color:red">*</span> </label>
+                        @*<label id="GroundRentAmount-error" style="color:red;display:none;">Ground Rent Amount per annum is Mandatory</label>*@
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <div id="LicenseAmount">
+
+            <div class="row mt-md-3">
+
+                <div class="col-md-4">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input type="text" asp-for="LicenseFeePayable" class="floating-label-field floating-label-field--s3 numbers" placeholder="Period to">
+                        <span asp-validation-for="LicenseFeePayable" class="text-danger"></span>
+                        <label for="field-1" class="floating-label">License Fee Payable (Rs.) <span style="color:red">*</span></label>
+                        <label id="LicenseFeePayable-error" style="color:red;display:none;">License Fee Payable is Mandatory</label>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- End Of Plot Details -->
+        <div id="divDocDetails">
+            <h3 class="my-3 sub-heading"> Document Required </h3>
+            <div class="row mt-md-3">
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input type="file" asp-for="Aadhar" class="floating-label-field floating-label-field--s3" placeholder="file">
+                        <span asp-validation-for="Aadhar" class="text-danger"></span>
+                        <label id="aadharlb" for="field-1" class="floating-label">Aadhaar No. /Pan of Allottee/Lessee (<span style="color:red">Max. Size-10 Mb</span>) <span style="color:red">*</span></label>
+                        <label id="Aadhar-error" style="color:red;display:none;">This field is Mandatory</label>
+
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input type="file" asp-for="Letter" class="floating-label-field floating-label-field--s3" placeholder="file">
+                        <span asp-validation-for="Letter" class="text-danger"></span>
+                        <label id="letterlb" for="field-1" class="floating-label">Possession Letter /Allotment Letter /Executed Lease deed (Any One ) (<span style="color:red">Max. Size-10 Mb</span>)<span style="color:red">*</span></label>
+                        <label id="Letter-error" style="color:red;display:none;">This field is Mandatory</label>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="divApplicantDoc">
+
+            <div class="row mt-md-3">
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input type="file" asp-for="ApplicantPan" class="floating-label-field floating-label-field--s3" placeholder="file">
+                        <span asp-validation-for="ApplicantPan" class="text-danger"></span>
+                        <label for="field-1" class="floating-label">Aadhaar No. /Pan of Applicant (<span style="color:red">Max. Size-10 Mb</span>) <span style="color:red">*</span></label>
+                        <label id="ApplicantPan-error" style="color:red;display:none;">This field is Mandatory</label>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+
+
+        <div class="row mt-md-3">
+            <div class=" col-md-12">
+                <button class="btn btn-theme" type="submit"
+                        onclick="return confirm('Are you sure? You wants to submit the form, Once form is submitted it will go for approval and that time you can not change the form values. Kindly Re-verify the existing form values before submission.')">
+                    Submit
+                </button>
+                @Html.ActionLink("Back", "Index", "InternalkycForm", null, new { @class = "btn btn-theme " })
+
+            </div>
+        </div>
+
+    </form>
+
+</div>
+
+
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+
+<environment include="Development">
+    <script src="~/js/kycformcreate.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/kycformcreate.min.js" asp-append-version="true"></script>
+</environment>
