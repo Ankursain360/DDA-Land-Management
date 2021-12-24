@@ -43,15 +43,15 @@
                             </figure>
                         </a>
                     </div>
-                 
+
 
                     @*@await Component.InvokeAsync("SignInProfile")*@
 
 
 
 
-                    
-                    
+
+
                     <div class="dropdown user text-white order-md-4">
                         <a href="#" role="button" id="profile"
                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
@@ -61,7 +61,10 @@
                                     <img src="~/images/favicon.png" alt="user-image" class="rounded-circle" width="34" height="34" />
                                 </figure>
                                 <strong class="text-img rounded-circle d-block">
-                                    @ViewBag.Title.Substring(0, 1)
+                                    @if (ViewBag.Title != null)
+                                    {
+                                        @ViewBag.Title.Substring(0, 1)
+                                    }
 
                                 </strong>
                                 <span class="ms-2 d-none d-md-block">Hi @ViewBag.Title</span>
@@ -75,7 +78,7 @@
                                 </figure>
                                 <h3>@ViewBag.Title</h3>
                                 @*<p class="text-muted px-3">@Model.User.UserName</p>*@
-                            <p class="text-muted px-3">@ViewBag.Title1</p>
+                                <p class="text-muted px-3">@ViewBag.Title1</p>
                                 <ul class="list-unstyled m-0 p-0">
                                     <li>
                                         <a href="javascript:void(0)" class="d-flex align-items-center">
@@ -95,8 +98,8 @@
 
                         @*@await Component.InvokeAsync("SignInProfile")*@
                     </div>
-                    </div>
                 </div>
+            </div>
         </header>
     </div>
     <aside class="left-menu small slow" id="leftMenu">
