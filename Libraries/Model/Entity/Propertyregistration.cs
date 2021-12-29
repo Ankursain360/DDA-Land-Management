@@ -51,7 +51,9 @@ namespace Libraries.Model.Entity
         public string Pocket { get; set; }
         public string PlotNo { get; set; }
 
+        
         [StringLength(200)]
+        [Required(ErrorMessage = "Primary List No is Mandatory Field", AllowEmptyStrings = false)]
         public string PrimaryListNo { get; set; }
 
         [StringLength(4000)]
