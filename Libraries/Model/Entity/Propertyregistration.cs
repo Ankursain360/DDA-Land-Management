@@ -280,6 +280,9 @@ namespace Libraries.Model.Entity
         public string Reason { get; set; }
 
         [NotMapped]
+        public string Otp { get; set; }
+
+        [NotMapped]
         public string RestoreReason { get; set; }
         public Restoreproperty Restoreproperty { get; set; }
         //public ICollection<Deletedproperty> Deletedproperty { get; set; }
@@ -299,5 +302,7 @@ namespace Libraries.Model.Entity
         public ICollection<Dmsfileupload> Dmsfileupload { get; set; }
         public ICollection<Vacantlandimage> Vacantlandimage { get; set; }
         public ICollection<EncroachmentRegisteration> Encroachmentregisteration { get; set; }
+
+       
     }
 }

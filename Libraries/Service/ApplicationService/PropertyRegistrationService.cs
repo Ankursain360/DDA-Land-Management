@@ -174,6 +174,17 @@ namespace Libraries.Service.ApplicationService
             return await _unitOfWork.CommitAsync() > 0;
         }
 
+
+        public async Task<bool> Update1(int id, Propertyregistration propertyregistration)
+        {
+            var result = await _propertyregistrationRepository.FindBy(a => a.Id == id);
+            Propertyregistration model = result.FirstOrDefault();         
+            model.IsValidate = propertyregistration.IsValidate;          
+            model.ModifiedDate = DateTime.Now;
+            _propertyregistrationRepository.Edit(model);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
+
         public async Task<bool> Create(Propertyregistration propertyregistration)
         {
 
@@ -410,6 +421,11 @@ namespace Libraries.Service.ApplicationService
         {
 
             return await _propertyregistrationRepository.GetPrimaryListForAPI( deptid,  zoneid,  divisionid);
+        }
+
+        public String GetMobileNo(int MobileNo)
+        {
+            return _propertyregistrationRepository.GetMobileNo(MobileNo);
         }
     }
 }

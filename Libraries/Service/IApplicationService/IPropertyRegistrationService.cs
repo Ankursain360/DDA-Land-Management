@@ -22,6 +22,8 @@ namespace Libraries.Service.IApplicationService
 
         Task<bool> Update(int id, Propertyregistration propertyregistration); // To Upadte Particular data added by renu
 
+        Task<bool> Update1(int id, Propertyregistration propertyregistration); // To Upadte Particular data added by Pankaj
+
         Task<bool> Create(Propertyregistration propertyregistration);
 
         Task<Propertyregistration> FetchSingleResult(int id);  // To fetch Particular data added by renu
@@ -61,5 +63,8 @@ namespace Libraries.Service.IApplicationService
         Task<List<Propertyregistration>> GetAllRestorePropertyReportList();
         Task<List<Propertyregistration>> GetAllPropertyRegistrationMORlist(int UserId);
         Task<List<Propertyregistration>> GetPrimaryListForAPI(int deptid, int zoneid, int divisionid); // for api added by renu
+
+        string GetMobileNo(int UserId);
+
     }
 }
