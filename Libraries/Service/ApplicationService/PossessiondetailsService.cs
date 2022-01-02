@@ -139,6 +139,9 @@ namespace Libraries.Service.ApplicationService
         {
             return await _possessiondetailsRepository.GetPagedvillageAndKhasradetailsList(model);
         }
-
+        public async Task<List<AcquiredLandVillageListSearchDto>> GetPagedKhasraDetails(VillageAndKhasraDetailsSearchDto model)
+        {
+            return await _possessiondetailsRepository.GetPagedKhasraDetails(model);
+        }
     }
 }

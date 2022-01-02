@@ -203,8 +203,7 @@ namespace Libraries.Repository.IEntityRepository
 
 
         public async Task<List<VillageAndKhasraDetailListDto>> GetPagedvillageAndKhasradetailsList(VillageAndKhasraDetailsSearchDto model)
-
-        {
+         {
             try
             {
 
@@ -224,7 +223,24 @@ namespace Libraries.Repository.IEntityRepository
                 throw;
             }
         }
+        public async Task<List<AcquiredLandVillageListSearchDto>> GetPagedKhasraDetails(VillageAndKhasraDetailsSearchDto model)
+        {
+            try
+            {
 
+
+                var data = await _dbContext.LoadStoredProcedure("villageandkhasradetails")
+                                            .WithSqlParams(("P_khasraId", model.Khasraid))
+                                            .ExecuteStoredProcedureAsync<AcquiredLandVillageListSearchDto>();
+
+                return (List<AcquiredLandVillageListSearchDto>)data;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
 
 
 
