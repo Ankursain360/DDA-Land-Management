@@ -367,6 +367,27 @@ namespace Libraries.Repository.EntityRepository
             }
         }
 
+        public async Task<List<AcquiredLandVillageListSearchDto>> GetPagedvillagedetailsListByVillageId(VillageReportDetailsSearchDto model)
+        {
+            try
+            {
+
+
+                var data = await _dbContext.LoadStoredProcedure("villageDetailsbyVillageId")
+                                            .WithSqlParams(("P_villageId", model.VillageId))
+
+
+
+                                            .ExecuteStoredProcedureAsync<AcquiredLandVillageListSearchDto>();
+
+                return (List<AcquiredLandVillageListSearchDto>)data;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
 
     }
 }

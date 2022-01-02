@@ -93,5 +93,63 @@ namespace Libraries.Model.Entity
         public ICollection<Courtcasesmapping> Courtcasesmapping { get; set; }
 
         public ICollection<Gramsabhaland> Gramsabhaland { get; set; }
+
+        [NotMapped]
+        public string KhasraName { get; set; }
+        [NotMapped]
+        public string VillageName { get; set; }
+        [NotMapped]
+        public string um4Date { get; set; }
+        [NotMapped]
+        public string un6Date { get; set; }
+        [NotMapped]
+        public string um17Date { get; set; }
+        [NotMapped]
+        public string AwardDate { get; set; }
+        [NotMapped]
+        public string PossDate { get; set; }
+        [NotMapped]
+        public string LBRefDate { get; set; }
+        [NotMapped]
+        public string un22Date { get; set; }
+        [NotMapped]
+
+        public Int32 Bigha { get; set; }
+        [NotMapped]
+        public Int32 Biswa { get; set; }
+        [NotMapped]
+        public Int32 Biswanshi { get; set; }
+        [NotMapped]
+
+        public string un4Number { get; set; }
+        [NotMapped]
+        public string un6Number { get; set; }
+        [NotMapped]
+        public string un17Number { get; set; }
+        [NotMapped]
+        public string un22Number { get; set; }
+        [NotMapped]
+        public string AwardNumber { get; set; }
+        [NotMapped]
+        public string DemandListNo { get; set; }
+        [NotMapped]
+        public string LACNo { get; set; }
+        [NotMapped]
+        public string RFANo { get; set; }
+        [NotMapped]
+        public string SLPNo { get; set; }
+        [NotMapped]
+        public string CourtInvolves { get; set; }
+        [NotMapped]
+        public string PartyName { get; set; }
+        [NotMapped]
+        public string PayableAmt { get; set; }
+
+
+        [NotMapped]
+        public string ApealableAmt { get; set; }
+        [NotMapped]
+        public int VillageId { get; set; }
+        
     }
 }

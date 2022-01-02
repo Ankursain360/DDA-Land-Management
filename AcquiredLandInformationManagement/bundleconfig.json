@@ -538,5 +538,11 @@
     "inputFiles": [
       "wwwroot/js/gramsabhalandindex.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/VillageDetailsReport.min.js",
+    "inputFiles": [
+      "wwwroot/js/VillageDetailsReport.js"
+    ]
   }
 ]
