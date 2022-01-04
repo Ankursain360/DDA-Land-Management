@@ -371,8 +371,6 @@ namespace Libraries.Repository.EntityRepository
         {
             try
             {
-
-
                 var data = await _dbContext.LoadStoredProcedure("villageDetailsbyVillageId")
                                             .WithSqlParams(("P_villageId", model.VillageId))
 

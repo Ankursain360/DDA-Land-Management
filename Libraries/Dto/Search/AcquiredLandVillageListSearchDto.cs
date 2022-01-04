@@ -59,7 +59,15 @@ namespace Dto.Search
 
         
         public string ApealableAmt { get; set; }
+
+        public string KhasraArea { get; set; }
         
-        public int VillageId { get; set; }
+        public string US4NoWithDate { get; set; }
+        public string US6NoWithDate { get; set; }
+        public string US17NoWithDate { get; set; }
+        public string AwardnoWithDate { get; set; }
+        public string US22NoWithDate { get; set; }
+        public string PossessionDate { get; set; }
+        
     }
 }
