@@ -1264,6 +1264,18 @@ namespace Libraries.Repository.EntityRepository
                                   )
                                   .ToListAsync();
         }
+
+        public string GetMobileNo(int Uid)
+        {
+
+            var MobileNo = (from f in _dbContext.Users
+                          where (f.Id == Uid)
+                          select f.PhoneNumber).First();
+
+            return MobileNo;
+        }
+
+
     }
 
 

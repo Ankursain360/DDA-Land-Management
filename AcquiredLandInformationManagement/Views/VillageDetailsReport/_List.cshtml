@@ -1,0 +1,54 @@
+﻿
+@model IEnumerable<Dto.Search.AcquiredLandVillageListSearchDto>
+<table class="table table-sm table-bordered mb-0 table-striped">
+    <thead class="text-nowrap">
+        <tr>
+
+
+            <th>Village Name</th>
+            <th>Khasra No</th>
+            <th>Area (Bhigha-Biswa-Biswana)</th>
+            <th>Notification(s) US-4 </th>
+            <th>Notification(s) US-6 </th>
+            <th>Notification(s) US-17 </th>
+            <th>Notification(s) US-22 </th>
+            <th>Award(s)</th>
+            <th>Date of Possesion</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+
+            @if (Model != null && Model.Count() > 0)
+            {
+                @foreach (var item in Model)
+                {
+                    {
+                        <tr>
+
+                            <td>@item.VillageName</td>
+                            <td>@item.KhasraName</td>
+                            <td>@item.KhasraArea</td>
+                            <td>@(item.US4NoWithDate == null ? "-" : item.US4NoWithDate)</td>
+                            <td>@(item.US6NoWithDate == null ? "-" : item.US6NoWithDate)</td>
+                            <td>@(item.US17NoWithDate == null ? "-" : item.US17NoWithDate)</td>
+                            <td>@(item.US22NoWithDate == null ? "-" : item.US22NoWithDate)</td>
+                            <td>@(item.AwardnoWithDate == null ? "-" : item.AwardnoWithDate)</td>
+                            <td>@(item.PossessionDate == null ? "-" : item.PossessionDate)</td>
+                        </tr>
+                    }
+                }
+            }
+            else
+            {
+                <tr>
+                    <th colspan="14" style="text-align:center"> No Record Available! </th>
+                </tr>
+            }
+
+
+        }
+    </tbody>
+</table>
+
+

@@ -22,6 +22,7 @@ using LandInventory.Filters;
 using Core.Enum;
 using Utility.Helper;
 using Dto.Master;
+using Dto.Common;
 
 namespace LandInventory.Controllers
 {
@@ -353,10 +354,29 @@ namespace LandInventory.Controllers
                     var result = await _propertyregistrationService.Update(id, propertyregistration);
                     if (result == true)
                     {
-                        ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                        TempData["Message"] = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-
-                        return RedirectToAction("Create");
+                      //For OTP Sent 
+                        Random random = new Random();
+                        var otp = random.Next(111111, 999999);
+                        string Action = otp.ToString();
+                        string Mobile = _propertyregistrationService.GetMobileNo(SiteContext.UserId);
+                        if (Mobile != null || Mobile != "" || Mobile != string.Empty)
+                        {
+                            SendSMSDto SMS = new SendSMSDto();
+                            SMS.GenerateSendSMS(Action, Mobile);
+                            HttpContext.Session.SetString("InventoryId", id.ToString());
+                            HttpContext.Session.SetString("Mobile", Mobile);
+                            HttpContext.Session.SetString("OTP", otp.ToString());
+                       //end OTP
+                            ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
+                            TempData["Message"] = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
+                            return RedirectToAction("OTP");
+                        }
+                        else
+                        {
+                            ViewBag.Message = Alert.Show("Please Update Your Mobile No", "", AlertType.Error);
+                            TempData["Message"] = Alert.Show("Incorrect OTP, Please Enter Correct OTP", "", AlertType.Error);
+                            return RedirectToAction("Create");
+                        }
                     }
                     else
                     {
@@ -378,6 +398,50 @@ namespace LandInventory.Controllers
                     await BindDropDown(propertyregistration);
                     return View(propertyregistration);
                 }
+            }
+            return View(propertyregistration);
+        }
+
+        public async Task<IActionResult> OTP()
+        {
+
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> OTP(Propertyregistration propertyregistration)
+        {
+            if (HttpContext.Session.GetString("OTP") != null && HttpContext.Session.GetString("InventoryId") != null)
+            {
+                string otp = HttpContext.Session.GetString("OTP").ToString();
+                string Id= HttpContext.Session.GetString("InventoryId").ToString(); 
+                if (propertyregistration.Otp == otp)
+                {
+                    //for Validate
+                    propertyregistration.IsValidate = 1;
+                    int id=Convert.ToInt32(Id);
+                    var result = await _propertyregistrationService.Update1(id,propertyregistration);
+                    if (result == true)
+                    {
+                        ViewBag.Message = Alert.Show("Property Successfully Updated", "", AlertType.Success);
+                        TempData["Message"] = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
+                        return RedirectToAction("Create");
+                    }
+                    else
+                    {
+                       
+                        ViewBag.Message = Alert.Show("Property Not Verify", "", AlertType.Error);
+                        TempData["Message"] = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Error);
+                        return RedirectToAction("Create");
+                    }
+                }
+                else
+                {
+                    ViewBag.Message = Alert.Show("Incorrect OTP, Please Enter Correct OTP", "", AlertType.Warning);
+                    TempData["Message"] = Alert.Show("Incorrect OTP, Please Enter Correct OTP", "", AlertType.Error);
+                    return RedirectToAction("Create");
+                }
+
             }
             return View(propertyregistration);
         }
@@ -669,8 +733,7 @@ namespace LandInventory.Controllers
             return Json(IsImg, JsonRequestBehavior);
         }
 
-
-
+    
 
         public bool CheckMimeType(Propertyregistration propertyregistration)
         {
@@ -748,8 +811,7 @@ namespace LandInventory.Controllers
         }
 
 
-
-
+      
 
     }
 }

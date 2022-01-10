@@ -17,15 +17,14 @@ namespace Libraries.Repository.EntityRepository
         { }
         public async Task<PagedResult<Awardmasterdetail>> GetPagedawardmasterdetails(AwardMasterDetailsSearchDto model)
         {
-
             var data = await _dbContext.Awardmasterdetail
                                .Include(x => x.Acquiredlandvillage)
                                   .Include( x => x.Proposal)
-                                 .Where(x => string.IsNullOrEmpty(model.name) || x.AwardNumber.Contains(model.name) && (x.IsActive == 1))
-                              .OrderByDescending(s => s.IsActive)
-                              .ThenBy(s => s.Acquiredlandvillage.Name)
-                             .ThenBy(s => s.Proposal.Name)
-                              .GetPaged<Awardmasterdetail>(model.PageNumber, model.PageSize);
+                                  .Where(x => string.IsNullOrEmpty(model.name) || x.AwardNumber.Contains(model.name) && (x.IsActive == 1))
+                                  .OrderByDescending(s => s.IsActive)
+                                  .ThenBy(s => s.Acquiredlandvillage.Name)
+                                  .ThenBy(s => s.Proposal.Name)
+                                  .GetPaged<Awardmasterdetail>(model.PageNumber, model.PageSize);
             int SortOrder = (int)model.SortOrder;
             if (SortOrder == 1)
             {

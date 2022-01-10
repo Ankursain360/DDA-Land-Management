@@ -79,7 +79,7 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             services.AddScoped<IUndersection17Repository, Undersection17Repository>();
             services.AddScoped<IUndersection22Repository, Undersection22Repository>();
             services.AddScoped<IAuditRepository, AuditRepository>();
-
+            services.AddScoped<IAcquiredlandvillageRepository, AcquiredlandvillageRepository>();
             /* Application Services */
 
             services.AddScoped<ICountryService, CountryService>();
@@ -141,7 +141,7 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             services.AddScoped<IUndersection17Service, Undersection17Service>();
             services.AddScoped<IUndersection22Service, Undersection22Service>();
             services.AddScoped<IAuditService, AuditService>();
-
+            services.AddScoped<IAcquiredlandvillageService, AcquiredlandvillageService>();
         }
     }
 }
