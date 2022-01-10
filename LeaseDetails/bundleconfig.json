@@ -532,5 +532,17 @@
     "inputFiles": [
       "wwwroot/js/kycformindex.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/restorationentryindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/restorationentryindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/restorationentryedit.min.js",
+    "inputFiles": [
+      "wwwroot/js/restorationentryedit.js"
+    ]
   }
 ]

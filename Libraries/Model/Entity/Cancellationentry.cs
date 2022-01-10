@@ -14,6 +14,7 @@ namespace Libraries.Model.Entity
         public Cancellationentry()
         {
             Requestforproceeding = new HashSet<Requestforproceeding>();
+            Restorationentry = new HashSet<Restorationentry>();
         }
 
         [Required(ErrorMessage = "File No is mandatory ")]
@@ -56,5 +57,6 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public IFormFile CancellationPhoto { get; set; }
         public ICollection<Requestforproceeding> Requestforproceeding { get; set; }
+        public ICollection<Restorationentry> Restorationentry { get; set; }
     }
 }

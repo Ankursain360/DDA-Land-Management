@@ -52,6 +52,7 @@ namespace Libraries.Service.ApplicationService
             model.CreatedDate = DateTime.Now;
             model.FileNo = dto.FileNo;
             model.AreaUnit = dto.AreaUnit;
+            model.DamagePaidPast = dto.DamagePaidPast;
             _door2DoorAPIRepository.Add(model); 
             var result = await _unitOfWork.CommitAsync() > 0;
             dto.Id =  model.Id;
@@ -85,6 +86,7 @@ namespace Libraries.Service.ApplicationService
             model.ModifiedDate = DateTime.Now;
             model.FileNo = dto.FileNo;
             model.AreaUnit = dto.AreaUnit;
+            model.DamagePaidPast = dto.DamagePaidPast;
             _door2DoorAPIRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }

@@ -174,7 +174,7 @@ namespace DoorToDoor.Api.Controllers
                     return NotFound(apiResponseDetails);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 List<ApiSaveDoor2DoorSurveyDto> dtoData = new List<ApiSaveDoor2DoorSurveyDto>();
                 apiResponseDetails = new ApiSaveDoor2DoorSurveyResponseDetails

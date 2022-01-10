@@ -8,7 +8,10 @@ namespace Libraries.Model.Entity
 {
     public class Presentuse : AuditableEntity<int>
     {
-
+        public Presentuse()
+        {
+            Doortodoorsurvey = new HashSet<Doortodoorsurvey>();
+        }
 
         public string Name { get; set; }
         public byte IsActive { get; set; }

@@ -343,7 +343,7 @@ namespace Libraries.Model
         public virtual DbSet<Kycdemandpaymentdetails> Kycdemandpaymentdetails { get; set; }
 
         public virtual DbSet<AuditModel> AuditModel { get;set; }
-
+        public virtual DbSet<Restorationentry> Restorationentry { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -616,6 +616,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new KycworkflowtemplateConfiguration());
             modelBuilder.ApplyConfiguration(new KycdemandpaymentdetailsConfiguration());
             modelBuilder.ApplyConfiguration(new PasswordhistoryConfiguration());
+            modelBuilder.ApplyConfiguration(new RestorationentryConfiguration());
             //modelBuilder.ApplyConfiguration(new KyclicensepaymentrptConfiguration());
             modelBuilder.ApplyConfiguration(new RefreshTokenConfiguration());
             base.OnModelCreating(modelBuilder);

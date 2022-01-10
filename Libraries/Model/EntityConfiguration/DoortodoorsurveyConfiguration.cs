@@ -9,9 +9,14 @@ namespace Model.EntityConfiguration
         public void Configure(EntityTypeBuilder<Doortodoorsurvey> builder)
         {
             //builder.ToTable("doortodoorsurvey", "lms");
+            builder.HasIndex(e => e.AreaUnit)
+                    .HasName("fkAreaunit_idx");
 
             builder.HasIndex(e => e.CreatedBy)
                 .HasName("fk_CreatedByDoortoDoorSurvey_idx");
+
+            builder.HasIndex(e => e.NumberOfFloors)
+                .HasName("fkfloorno_idx");
 
             builder.HasIndex(e => e.PresentUseId)
                 .HasName("fkpresentuse_idx");
@@ -19,6 +24,8 @@ namespace Model.EntityConfiguration
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
             builder.Property(e => e.ApproxPropertyArea).HasColumnType("decimal(18,3)");
+
+            builder.Property(e => e.AreaUnit).HasColumnType("int(11)");
 
             builder.Property(e => e.CaelectricityNo)
                 .HasColumnName("CAElectricityNo")
@@ -30,11 +37,15 @@ namespace Model.EntityConfiguration
             builder.Property(e => e.CreatedDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
 
             builder.Property(e => e.DamagePaidPast)
-                .HasMaxLength(45)
+                .HasMaxLength(100)
                 .IsUnicode(false);
 
             builder.Property(e => e.Email)
                 .HasMaxLength(50)
+                .IsUnicode(false);
+
+            builder.Property(e => e.FileNo)
+                .HasMaxLength(100)
                 .IsUnicode(false);
 
             builder.Property(e => e.GeoReferencingLattitude)
@@ -58,11 +69,7 @@ namespace Model.EntityConfiguration
 
             builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
 
-          //  builder.Property(e => e.ModifiedDate).HasColumnType("date");
-
-            builder.Property(e => e.NumberOfFloors)
-                .HasMaxLength(10)
-                .IsUnicode(false);
+            builder.Property(e => e.NumberOfFloors).HasColumnType("int(11)");
 
             builder.Property(e => e.OccupantAadharNo)
                 .HasMaxLength(15)
@@ -98,12 +105,21 @@ namespace Model.EntityConfiguration
                 .HasMaxLength(15)
                 .IsUnicode(false);
 
+            builder.HasOne(d => d.AreaUnitNavigation)
+                .WithMany(p => p.Doortodoorsurvey)
+                .HasForeignKey(d => d.AreaUnit)
+                .HasConstraintName("fkareaunit");
+
             builder.HasOne(d => d.CreatedByNavigation)
                 .WithMany(p => p.Doortodoorsurvey)
                 .HasForeignKey(d => d.CreatedBy)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_CreatedByDoortoDoorSurvey");
 
+            builder.HasOne(d => d.NumberOfFloorsNavigation)
+                .WithMany(p => p.Doortodoorsurvey)
+                .HasForeignKey(d => d.NumberOfFloors)
+                .HasConstraintName("fkfloorno");
 
             builder.HasOne(d => d.PresentUseNavigation)
                 .WithMany(p => p.Doortodoorsurvey)

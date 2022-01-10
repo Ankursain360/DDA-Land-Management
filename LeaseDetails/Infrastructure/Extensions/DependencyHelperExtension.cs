@@ -74,7 +74,7 @@ namespace LeaseDetails.Infrastructure.Extensions
             services.AddScoped<IKycdemandpaymentdetailstableaRespository, KycdemandpaymentdetailstableaRepository>();
             services.AddScoped<IKycdemandpaymentdetailstablecRepository, KycdemandpaymentdetailstablecRepository>();
             services.AddScoped<IAuditRepository, AuditRepository>();
-
+            services.AddScoped<IRestorationEntryRepository, RestorationEntryRepository>();
             /* Application Services */
 
 
@@ -112,7 +112,8 @@ namespace LeaseDetails.Infrastructure.Extensions
             services.AddScoped<IApplyForServicesService, ApplyForServicesService>();
             services.AddScoped<IHearingdetailsService, HearingdetailsService>();
             services.AddScoped<ICancellationEntryService, CancellationEntryService>();
-            
+            services.AddScoped<IRestorationEntryService, RestorationEntryService>();
+
             services.AddScoped<ILeasedeedService, LeasedeedService>();
             services.AddScoped<IActiontakenbyddaService, ActiontakenbyddaService>();
             

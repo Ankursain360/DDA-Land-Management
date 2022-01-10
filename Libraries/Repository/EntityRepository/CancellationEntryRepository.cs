@@ -53,12 +53,16 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<PagedResult<Cancellationentry>> GetPagedCancellationEntry(CancellationEntrySearchDto model)
         {
+            var restoredid = (from x in _dbContext.Restorationentry
+                                 
+                                select x.Cancellationid).ToArray();
+
             var data = await _dbContext.Cancellationentry
                                          .Include(x => x.Allotment)
                                          .Include(x => x.Allotment.Application)
                                          .Where(x =>  (x.Allotment.Application.RefNo != null ? x.Allotment.Application.RefNo.Contains(model.refno == "" ? x.Allotment.Application.RefNo : model.refno) : true)
                                          && (x.Allotment.Application.Name != null ? x.Allotment.Application.Name.Contains(model.name == "" ? x.Allotment.Application.Name : model.name) : true)
-                                        )
+                                       && !(restoredid.Contains(x.Id))) 
                                          .GetPaged<Cancellationentry>(model.PageNumber, model.PageSize);
             int SortOrder = (int)model.SortOrder;
             if (SortOrder == 1)
@@ -71,7 +75,7 @@ namespace Libraries.Repository.EntityRepository
                                          .Include(x => x.Allotment.Application)
                                          .Where(x => (x.Allotment.Application.RefNo != null ? x.Allotment.Application.RefNo.Contains(model.refno == "" ? x.Allotment.Application.RefNo : model.refno) : true)
                                          && (x.Allotment.Application.Name != null ? x.Allotment.Application.Name.Contains(model.name == "" ? x.Allotment.Application.Name : model.name) : true)
-                                        )
+                                       && !(restoredid.Contains(x.Id)))
                                         .OrderByDescending(s => s.IsActive)                                        
                                          .GetPaged<Cancellationentry>(model.PageNumber, model.PageSize);
                 }
@@ -83,7 +87,7 @@ namespace Libraries.Repository.EntityRepository
                                         .Include(x => x.Allotment.Application)
                                         .Where(x => (x.Allotment.Application.RefNo != null ? x.Allotment.Application.RefNo.Contains(model.refno == "" ? x.Allotment.Application.RefNo : model.refno) : true)
                                          && (x.Allotment.Application.Name != null ? x.Allotment.Application.Name.Contains(model.name == "" ? x.Allotment.Application.Name : model.name) : true)
-                                        )
+                                          && !(restoredid.Contains(x.Id)))
                                        .OrderBy(s =>
                                        (model.SortBy.ToUpper() == "REFNO" ? (s.Allotment == null ? null : s.Allotment.Application == null ? null : s.Allotment.Application.RefNo)
                                        : model.SortBy.ToUpper() == "SOCIETYNAME" ? (s.Allotment == null ? null : s.Allotment.Application == null ? null : s.Allotment.Application.Name)
@@ -102,7 +106,7 @@ namespace Libraries.Repository.EntityRepository
                                          .Include(x => x.Allotment.Application)
                                          .Where(x => (x.Allotment.Application.RefNo != null ? x.Allotment.Application.RefNo.Contains(model.refno == "" ? x.Allotment.Application.RefNo : model.refno) : true)
                                          && (x.Allotment.Application.Name != null ? x.Allotment.Application.Name.Contains(model.name == "" ? x.Allotment.Application.Name : model.name) : true)
-                                        )
+                                          && !(restoredid.Contains(x.Id)))
                                         .OrderBy(s => s.IsActive)
                                          .GetPaged<Cancellationentry>(model.PageNumber, model.PageSize);
                 }
@@ -114,7 +118,7 @@ namespace Libraries.Repository.EntityRepository
                                         .Include(x => x.Allotment.Application)
                                         .Where(x => (x.Allotment.Application.RefNo != null ? x.Allotment.Application.RefNo.Contains(model.refno == "" ? x.Allotment.Application.RefNo : model.refno) : true)
                                          && (x.Allotment.Application.Name != null ? x.Allotment.Application.Name.Contains(model.name == "" ? x.Allotment.Application.Name : model.name) : true)
-                                        )
+                                           && !(restoredid.Contains(x.Id)))
                                        .OrderByDescending(s =>
                                        (model.SortBy.ToUpper() == "REFNO" ? (s.Allotment == null ? null : s.Allotment.Application == null ? null : s.Allotment.Application.RefNo)
                                        : model.SortBy.ToUpper() == "SOCIETYNAME" ? (s.Allotment == null ? null : s.Allotment.Application == null ? null : s.Allotment.Application.Name)

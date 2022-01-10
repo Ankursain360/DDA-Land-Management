@@ -21,6 +21,7 @@ namespace Libraries.Model.Entity
             Mortgage = new HashSet<Mortgage>();
             Extensionservice = new HashSet<Extension>();
             Payment = new HashSet<Payment>();
+            Restorationentry = new HashSet<Restorationentry>();
         }
         [Required(ErrorMessage = "Society Name is Mandatory")]
         public int ApplicationId { get; set; }
@@ -81,6 +82,7 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public DateTime Date { get; set; }
         public ICollection<Cancellationentry> Cancellationentry { get; set; }
+        public ICollection<Restorationentry> Restorationentry { get; set; }
         public ICollection<Possesionplan> Possesionplan { get; set; }
         public Leaseapplication Application { get; set; }
 

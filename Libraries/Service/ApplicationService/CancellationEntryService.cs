@@ -20,8 +20,7 @@ namespace Libraries.Service.ApplicationService
         private readonly IUnitOfWork _unitOfWork;
         private readonly ICancellationEntryRepository _cancellationEntryRepository;
 
-        public CancellationEntryService(IUnitOfWork unitOfWork, ICancellationEntryRepository cancellationEntryRepository)
-     : base(unitOfWork, cancellationEntryRepository)
+        public CancellationEntryService(IUnitOfWork unitOfWork, ICancellationEntryRepository cancellationEntryRepository) : base(unitOfWork, cancellationEntryRepository)
         {
             _unitOfWork = unitOfWork;
             _cancellationEntryRepository = cancellationEntryRepository;
