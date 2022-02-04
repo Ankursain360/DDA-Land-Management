@@ -814,13 +814,15 @@ function showDisBoundariesRectWithKhasraNo(response, villageid) {
         mapLabel.set('position', new google.maps.LatLng(parseFloat(rectkhasrano[ak].ycoordinate), parseFloat(rectkhasrano[ak].xcoordinate)));
         var khasradata = rectkhasrano[ak].label.split('//');
         if (khasradata.length > 1) {
-            mapLabel.khasrano = khasradata[1];
+            mapLabel.khasrano = rectkhasrano[ak].label;
+            //mapLabel.khasrano = khasradata[1];
             mapLabel.Rectno = khasradata[0];
         }
         else {
 
-            mapLabel.khasrano = khasradata[0];
-            mapLabel.Rectno = "";
+            //mapLabel.khasrano = khasradata[0];
+            mapLabel.khasrano = rectkhasrano[ak].label;
+            mapLabel.Rectno = "0";
         }
         mapLabel.villageid = rectkhasrano[ak].villageId;
 
@@ -1834,12 +1836,14 @@ function ShowKhasraNo(id) {
                 });
                 var khasradata = khasrano[aj].label.split("//");
                 if (khasradata.length > 1) {
-                    marker.khasrano = khasradata[1];
+                    //marker.khasrano = khasradata[1];
+                    marker.khasrano = khasrano[aj].label;
                     marker.Rectno = khasradata[0]|0;
                 }
                 else {
 
-                    marker.khasrano = khasradata[0];
+                    //marker.khasrano = khasradata[0];
+                    marker.khasrano = khasrano[aj].label;
                     marker.Rectno = "0";
                 } 
                 marker.villageid = khasrano[aj].villageId;

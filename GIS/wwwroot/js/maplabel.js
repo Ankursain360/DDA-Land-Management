@@ -107,8 +107,8 @@ MapLabel.prototype.drawCanvas_ = function() {
 MapLabel.prototype.onAdd = function() {
   var canvas = this.canvas_ = document.createElement('canvas');
   var style = canvas.style;
-  style.position = 'absolute';
-
+  /*style.position = 'absolute';*/
+    style.position = 'fixed';
   var ctx = canvas.getContext('2d');
   ctx.lineJoin = 'round';
   ctx.textBaseline = 'top';
@@ -174,6 +174,25 @@ MapLabel.prototype.draw = function() {
   var pos = projection.fromLatLngToDivPixel(latLng);
 
   var style = this.canvas_.style;
+
+
+    //switch (this.get('align')) {
+    //    case 'left':
+    //        style.left = pos.x - (this.canvas_.width / (window.devicePixelRatio ? window.devicePixelRatio : 1))+'px';
+    //        style['margin-left'] = '-1em';
+    //        style['margin-top'] = '-0.4em';
+    //        break;
+    //    case 'right':
+    //        style.left = `${pos.x}px`;
+    //        style['margin-left'] = '1em';
+    //        style['margin-top'] = '-0.4em';
+    //        break;
+    //    default:
+    //        style.left =pos.x - (this.canvas_.width / (window.devicePixelRatio ? window.devicePixelRatio : 1)) / 2+'px';
+    //        style['margin-left'] = 0;
+    //        style['margin-top'] = '1em';
+    //}
+
 
   style['top'] = pos.y + 'px';
   style['left'] = pos.x + 'px';
