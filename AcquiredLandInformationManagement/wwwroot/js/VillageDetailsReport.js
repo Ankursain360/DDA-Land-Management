@@ -13,10 +13,23 @@ $("#btnGenerate").click(function () {
         alert("Please Select Village");
         window.location.reload();    
     }
-    else {
+    else {        
         GetDetails(parseInt(currentPageNumber), parseInt(currentPageSize));
+        //Download(parseInt(currentPageNumber), parseInt(currentPageSize));
     }
 
+});
+
+$("#btndownload").click(function () {
+    debugger;
+    var VillageId = $("#VillageId").val();
+    if (VillageId == 0 || VillageId == null) {
+        alert("Please Select Village");
+        window.location.reload();
+    } 
+    else {         
+    Download(parseInt(currentPageNumber), parseInt(currentPageSize));
+    }
 });
 function GetDetails(pageNumber, pageSize) {
     debugger;
@@ -28,19 +41,23 @@ function GetDetails(pageNumber, pageSize) {
 
 }
 
+function Download(pageNumber, pageSize) {
+    debugger;
+    var param = GetSearchParam(pageNumber, pageSize);
+    let a = document.createElement('a');
+    a.target = '_blank';
+    a.href = "../VillageDetailsReport/Download/" + param.VillageId ;
+    a.click();
+}
+
 
 $("#btnReset").click(function () {
-    document.getElementById("VillageId").selectedIndex = "";
-
-    location.reload();
-
-
-
+    document.getElementById("VillageId").selectedIndex = ""; 
+    location.reload(); 
 });
 
 
-function GetSearchParam(pageNumber, pageSize) {
-
+function GetSearchParam(pageNumber, pageSize) { 
     debugger;
 
     var VillageId = $('#VillageId option:selected').val();

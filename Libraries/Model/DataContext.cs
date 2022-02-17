@@ -281,6 +281,7 @@ namespace Libraries.Model
 
         public virtual DbSet<Gislayer> Gislayer { get; set; }
         public virtual DbSet<Gisdata> Gisdata { get; set; }
+        public virtual DbSet<gisdatahistory> gisdatahistory { get; set; }
         public virtual DbSet<Newlandnotificationdetails> Newlandnotificationdetails { get; set; }
 
         public virtual DbSet<Newlandannexure2> Newlandannexure2 { get; set; }
@@ -542,6 +543,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new GisZeroConfiguration());
             modelBuilder.ApplyConfiguration(new StateConfiguration());
             modelBuilder.ApplyConfiguration(new CourtCasesMappingConfiguration());
+            modelBuilder.ApplyConfiguration(new gisdatahistoryConfiguartion());
 
             //**********  GIS End**********
 

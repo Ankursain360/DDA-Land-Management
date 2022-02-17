@@ -245,7 +245,8 @@
                 </div>
                 <div class="card-body p-1">
                     @*<ul class="list-unstyled small">
-        <li>*@
+                        <li>*@
+                    <input type="hidden" id="hdnkhasraid" />
                     <table style="border-collapse: collapse; font-size:13px !important; margin-bottom: 0px;" class="table table-bordererd table-primary table-responsive">
                         <tbody>
                             <tr> <td> <p class="m-0">Village Name : <strong id="tagVillageName"></strong></p></td> </tr>
@@ -276,15 +277,45 @@
                     </div>
                     @*</li>
 
-            <li>
-                <div class="accordion" id="CourtCaseData">
-                </div>
-            </li>
-        </ul>*@
+                            <li>
+                                <div class="accordion" id="CourtCaseData">
+                                </div>
+                            </li>
+                        </ul>*@
                 </div>
             </div>
 
         </div>
+
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="display:none" id="btnedit">
+            Edit
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Edit Rectangle//Khasra No</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="mb-3">
+                                <label for="recipient-name" class="col-form-label">Rectangle//Khasra No:</label>
+                                <input type="text" class="form-control" id="txtKhasrano" maxlength="20">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="btnclose">Close</button>
+                        <button type="button" class="btn btn-primary btnupdate">Update</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </section>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS , any custom js-->

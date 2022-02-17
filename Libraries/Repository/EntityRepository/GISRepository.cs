@@ -41,7 +41,7 @@ namespace Libraries.Repository.EntityRepository
                                        .Where(x => x.VillageId == villageId && x.IsActive == 1)
                                        .ToListAsync();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return null;
             }
@@ -129,9 +129,9 @@ namespace Libraries.Repository.EntityRepository
                 return data;
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-               return  null;
+                return null;
             }
         }
 
@@ -154,7 +154,7 @@ namespace Libraries.Repository.EntityRepository
             try
             {
                 var data = await _dbContext.LoadStoredProcedure("GISInfrastructureColorCodeBind")
-                                            .WithSqlParams( ("p_villageid", villageId)
+                                            .WithSqlParams(("p_villageid", villageId)
                                             )
                                             .ExecuteStoredProcedureAsync<gisDataTemp>();
 
@@ -169,7 +169,7 @@ namespace Libraries.Repository.EntityRepository
         public async Task<List<State>> GetInitiallyStateDetails()
         {
             return await _dbContext.State
-                                 .Where(x =>  x.IsActive == 1)
+                                 .Where(x => x.IsActive == 1)
                                  .ToListAsync();
         }
 
@@ -252,7 +252,7 @@ namespace Libraries.Repository.EntityRepository
         public async Task<List<Gisdata>> GetKhasraNoPolygon(int gisDataId)
         {
             return await _dbContext.Gisdata
-                                     .Where(x => x.Id == gisDataId )
+                                     .Where(x => x.Id == gisDataId)
                                      .ToListAsync();
         }
 
@@ -305,7 +305,7 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<Gistext>> GetTextDetails(int villageId)
         {
-            
+
             var data = await _dbContext.Gistext
                                 .Where(x => x.VillageId == villageId && x.IsActive == 1)
                                 .ToListAsync();
@@ -336,13 +336,13 @@ namespace Libraries.Repository.EntityRepository
         public async Task<List<Village>> GetVillageDetails(int villageId)
         {
             return await _dbContext.Village
-                                    .Where(x =>  x.IsActive == 1 && x.Id == villageId).OrderBy(p => p.Name)
+                                    .Where(x => x.IsActive == 1 && x.Id == villageId).OrderBy(p => p.Name)
                                     .ToListAsync();
         }
 
         public async Task<List<Village>> GetVillageList(int ZoneId)
         {
-            return await _dbContext.Village.Where(x => x.ZoneId == ZoneId && x.IsActive == 1).OrderBy(p=> p.Name).ToListAsync();
+            return await _dbContext.Village.Where(x => x.ZoneId == ZoneId && x.IsActive == 1).OrderBy(p => p.Name).ToListAsync();
         }
 
         public async Task<List<Gisvillagetext>> GetVillageTextDetails(int villageId)
@@ -366,13 +366,66 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<Zone>> GetZoneList()
         {
-                        
-            var data= await _dbContext.Zone.Include(x => x.Village)
-                                        .Where(x => x.IsActive == 1 
-                                                 && x.Xcoordinate !=null).OrderBy(z => z.Name)
-                                                                         .ToListAsync(); 
+
+            var data = await _dbContext.Zone.Include(x => x.Village)
+                                        .Where(x => x.IsActive == 1
+                                                 && x.Xcoordinate != null).OrderBy(z => z.Name)
+                                                                         .ToListAsync();
             data.ForEach(t => t.Village = t.Village.OrderBy(n => n.Name).ToList());
             return data;
         }
+
+        public async Task<GISKhasraUpdateResponseDto> UpdatekhasraNo(int khasraid, string khasraNo, int Userid)
+        {
+            GISKhasraUpdateResponseDto _obj = new GISKhasraUpdateResponseDto();
+            gisdatahistory _objhistory = new gisdatahistory();
+            var data = await _dbContext.Gisdata
+                                        .Where(x => x.Id == khasraid && x.GisLayerId == 30).AsNoTracking()
+                                        .FirstOrDefaultAsync();
+
+
+            //update history
+            _objhistory.Id = 0;
+            _objhistory.VillageId = data.VillageId;
+            _objhistory.GisLayerId = data.GisLayerId;
+            _objhistory.Xcoordinate = data.Xcoordinate;
+            _objhistory.Ycoordinate = data.Ycoordinate;
+            _objhistory.Polygon = data.Polygon;
+            _objhistory.OldLabel = data.Label;
+            _objhistory.NewLabel = khasraNo;
+            _objhistory.LabelXcoordinate = data.LabelXcoordinate;
+            _objhistory.LabelYcoordinate = data.LabelYcoordinate;
+            _objhistory.CreatedBy = Userid;
+            _objhistory.CreatedDate = DateTime.Now;
+            _dbContext.Add(_objhistory);
+            var Historyresult = _dbContext.SaveChangesAsync();
+            //end history
+            if (Historyresult.Result > 0)
+            {
+
+                data.Label = khasraNo;
+                data.ModifiedDate = DateTime.Now;
+                data.ModifiedBy = Userid;
+                _dbContext.Update(data);
+                var result = await _dbContext.SaveChangesAsync();
+                if (result > 0)
+                {
+                    _obj.status = "1";
+                    _obj.responseMessage = "Khasra No Successfully Updated.Kindly refresh the page to see the changes done by you.";
+                }
+                else
+                {
+                    _obj.status = "0";
+                    _obj.responseMessage = " System is unable to update Khasra No.try again";
+                }
+            }
+            else
+            {
+                _obj.status = "0";
+                _obj.responseMessage = " System is unable to update Khasra No, because there is some issue with data history records.";
+            }
+            return _obj;
+        }
+
     }
 }

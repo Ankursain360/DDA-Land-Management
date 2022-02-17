@@ -50,5 +50,6 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<GISKhasraBasisOtherDetailsDto>> GetKhasraBasisOtherDetailsForCourtCases(int villageId, string khasraNo, string RectNo);
         Task<List<Gisdata>> GetKhasraList(int villageId);
         Task<List<Gisdata>> GetKhasraNoPolygon(int gisDataId);
+        Task<GISKhasraUpdateResponseDto> UpdatekhasraNo(int khasraid, string khasraNo,int Userid);
     }
 }

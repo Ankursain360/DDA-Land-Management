@@ -245,5 +245,13 @@ namespace GIS.Controllers
             return View();
         }
         //
+
+        //update khasrano
+        public async Task<JsonResult> UpdatekhasraNo(int khasraid, string KhasraNo)
+        {
+            var data = await _GISService.UpdatekhasraNo(khasraid, KhasraNo, _siteContext.UserId);
+            return Json(data);
+        }
+        //
     }
 }

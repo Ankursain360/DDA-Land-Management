@@ -236,5 +236,12 @@ namespace Libraries.Service.ApplicationService
         {
             return await _iGISSRepository.GetZoneList();
         }
+
+        public async Task<GISKhasraUpdateResponseDto> UpdatekhasraNo(int khasraid, string KhasraNo,int Userid)
+        {
+            var result = await _iGISSRepository.UpdatekhasraNo(khasraid, KhasraNo, Userid); 
+             
+            return result;
+        }
     }
 }

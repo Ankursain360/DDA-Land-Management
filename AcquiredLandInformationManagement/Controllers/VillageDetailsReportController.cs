@@ -32,9 +32,9 @@ namespace AcquiredLandInformationManagement.Controllers
             _acquiredlandvillageService = acquiredlandvillageService;
         }
         public async Task<IActionResult> Index()
-        {           
+        {
             VillageReportDetailsSearchDto dto = new VillageReportDetailsSearchDto();
-            ViewBag.VillageList = await _acquiredlandvillageService.GetAllVillageList();          
+            ViewBag.VillageList = await _acquiredlandvillageService.GetAllVillageList();
             return View(dto);
         }
 
@@ -51,6 +51,39 @@ namespace AcquiredLandInformationManagement.Controllers
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                 return PartialView();
             }
+        }
+
+        [AuthorizeContext(ViewAction.Download)]
+        public async Task<IActionResult> Download(int id)
+        {
+            VillageReportDetailsSearchDto model = new VillageReportDetailsSearchDto();
+            model.VillageId = id;
+            var result = await _acquiredlandvillageService.GetPagedvillagedetailsListByVillageId(model);
+            List<VillDetailsReportDto> data = new List<VillDetailsReportDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new VillDetailsReportDto()
+                    {
+                        VillageName = result[i].VillageName,
+                        KhasraName = result[i].KhasraName,
+                        KhasraArea = result[i].KhasraArea,
+                        US4NoWithDate = result[i].US4NoWithDate == null ? "-" : result[i].US4NoWithDate,
+                        US6NoWithDate = result[i].US6NoWithDate == null ? "-" : result[i].US6NoWithDate,
+                        US17NoWithDate = result[i].US17NoWithDate == null ? "-" : result[i].US17NoWithDate,
+                        US22NoWithDate = result[i].US22NoWithDate == null ? "-" : result[i].US22NoWithDate,
+                        AwardnoWithDate = result[i].AwardnoWithDate == null ? "-" : result[i].AwardnoWithDate,
+                        PossessionDate = result[i].PossessionDate == null ? "-" : result[i].PossessionDate
+
+                    });
+                }
+
+            }
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "VillageDetails.xlsx");
+
+
         }
     }
 }

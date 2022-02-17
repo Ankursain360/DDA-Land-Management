@@ -1,4 +1,5 @@
-﻿
+﻿ 
+
 
 var zoomZone = [];
 var map;
@@ -817,17 +818,20 @@ function showDisBoundariesRectWithKhasraNo(response, villageid) {
             mapLabel.khasrano = rectkhasrano[ak].label;
             //mapLabel.khasrano = khasradata[1];
             mapLabel.Rectno = khasradata[0];
+           
         }
         else {
 
             //mapLabel.khasrano = khasradata[0];
             mapLabel.khasrano = rectkhasrano[ak].label;
             mapLabel.Rectno = "0";
+            
         }
+        mapLabel.id = rectkhasrano[ak].id;
         mapLabel.villageid = rectkhasrano[ak].villageId;
 
         google.maps.event.addListener(mapLabel, 'dblclick', function () {
-            getInfo(this.villageid, this.khasrano, this.Rectno);
+            getInfo(this.villageid, this.khasrano, this.Rectno,this.id);
         });
 
         RECTWITHKHASRANO_LAYER.push({ "villageid": rectkhasrano[ak].villageId, "layer": mapLabel }); 
@@ -849,10 +853,10 @@ function showDisBoundariesWell(response, villageid) {
 
 /*Village Boundary End*/
 
-function getInfo(villageid, khasrano,RectNo) {
+function getInfo(villageid, khasrano,RectNo,khasraid) {
 
     HttpGet("/GIS/GetKhasraBasisOtherDetails?VillageId=" + parseInt(villageid) + "&KhasraNo=" + khasrano + "&RectNo=" + RectNo, 'json', function (response) {
-        showKhasraBasisOtherDetails(response);
+        showKhasraBasisOtherDetails(response, khasraid, khasrano);
     });
 
     HttpGet("/GIS/GetKhasraBasisOtherDetailsForCourtCases?VillageId=" + parseInt(villageid) + "&KhasraNo=" + khasrano + "&RectNo=" + RectNo, 'json', function (response) {
@@ -860,41 +864,19 @@ function getInfo(villageid, khasrano,RectNo) {
     });
 }
 
-function showKhasraBasisOtherDetails(resp) {
+function showKhasraBasisOtherDetails(resp, khasraid, khasrano) {
     debugger;
     var tbl = $('#RouteDetailShow table').empty();
     tbl.empty();
 
     if (resp.length > 0) {
-
+        $('#hdnkhasraid').empty().val(khasraid);
+        $('#txtKhasrano').empty().val(khasrano);
         $.each(resp[0], function (indx, itm) {
             if (itm != null && itm != "")
                 tbl.append('<tr><td> <p class="m-0">' + itm.split(",")[0] + ' : <strong id="' + indx + '">' + itm.split(",")[1] + '</strong></p></td> </tr>');
 
-        });
-
-        //$('#tagVillageName').empty().append(resp[0].villageName);
-        //$('#tagKhasra').empty().append(resp[0].khasraNo);
-        //$('#tagArea').empty().append(resp[0].area);
-        //$('#tagUs4').empty().append(resp[0].us4);
-        //$('#tagUs6').empty().append(resp[0].us6);
-        //$('#tagUs17').empty().append(resp[0].us17);
-        //$('#tagUs22').empty().append(resp[0].us22);
-        //$('#tagAward').empty().append(resp[0].award);
-        //$('#tagPossessionDate').empty().append(resp[0].possessionDate);
-        //$('#tagAllotmentDate').empty().append(resp[0].allotmentDate);
-        //$('#tagTransferDepartment').empty().append(resp[0].transferDepartment);
-        //$('#tagSchemeTransfer').empty().append(resp[0].schemeTransfer);
-        //$('#tagRemarks').empty().append(resp[0].remarks);
-        //$('#tagPartyName').empty().append(resp[0].partyName);
-        //$('#tagDemandListNo').empty().append(resp[0].demandListNo);
-        //$('#tagLBDate').empty().append(resp[0].lBNo);
-        //$('#tagLACNo').empty().append(resp[0].lACNo);
-        //$('#tagRFANo').empty().append(resp[0].rFANo);
-        //$('#tagSLANo').empty().append(resp[0].sLPNo);
-        //$('#tagCourt').empty().append(resp[0].court);
-        //$('#tagPayableAmt').empty().append(resp[0].payableAmt);
-        //$('#tagAppealableAmt').empty().append(resp[0].appealableAmt);
+        }); 
         $('#RouteDetailShow').show();
     }
     else {
@@ -903,6 +885,34 @@ function showKhasraBasisOtherDetails(resp) {
     }
 
 }
+
+/*edit khasra no*/
+function editKhasra() {
+    $('#btnedit').click();
+}
+/*update khasra no*/
+$(".btnupdate").click(function () {
+    var khasraid=$('#hdnkhasraid').val();
+    var khasrano = $('#txtKhasrano').val();
+    if (khasraid != "") {
+        if (khasrano != "") {
+            HttpGet("/GIS/UpdatekhasraNo?khasraid=" + parseInt(khasraid) + "&KhasraNo=" + khasrano, 'json', function (response) {
+                  
+                alert(response.responseMessage);
+                $('#txtKhasrano').val('');
+                $('#btnclose').click();
+            
+            });
+        }
+        else {
+            alert("Please enter khasra no.");
+        }
+    }
+    else {
+        alert("Unable to process your request.Kindly refresh this page and try again.");
+    }
+    
+});
 
 function showKhasraBasisOtherDetailsForCourtCases(resp) {
     debugger;
