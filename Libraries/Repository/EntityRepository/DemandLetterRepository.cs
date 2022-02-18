@@ -727,8 +727,7 @@ namespace Libraries.Repository.EntityRepository
 
 
         public async Task<List<DuesVsPaidAmountDto>> GetDuesVsPaidAmountListDto(DuesVsPaidAmountSearchDto model)
-
-        {
+   {
             try
             {
 

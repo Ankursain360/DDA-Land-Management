@@ -38,18 +38,38 @@ namespace DamagePayee.Controllers
         }
 
 
-        [HttpPost]
-        public async Task<PartialViewResult> List([FromBody] ManualPaymentSearchDto model)
-        {
-            try
-            {
-                var result = await _paymentverificationService.GetPagedPaymentverification(model);
+        //[HttpPost]
+        //public async Task<PartialViewResult> GetDetails([FromBody] ManualPaymentSearchDto model)
+        //{
+        //    try
+        //    {
+        //        var result = await _paymentverificationService.GetPagedPaymentverification(model);
+        //        if (result != null)
+        //        {
+        //            return PartialView("_List", result);
+        //        }
+               
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return PartialView(ex);
+        //    }
+        //}
 
+
+        [HttpPost]
+        public async Task<PartialViewResult> GetDetails([FromBody] ManualPaymentSearchDto model)
+        {
+            var result = await _paymentverificationService.GetPagedPaymentverification(model);
+
+            if (result != null)
+            {
                 return PartialView("_List", result);
             }
-            catch (Exception ex)
+            else
             {
-                return PartialView(ex);
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                return PartialView();
             }
         }
 

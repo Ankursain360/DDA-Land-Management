@@ -40,7 +40,7 @@ $("#btnReset").click(function () {
 function GetDetails(pageNumber, pageSize) {
     debugger;
     var param = GetSearchParam(pageNumber, pageSize, sortOrder);
-    HttpPost(`/PaymentManualEntry/List`, 'html', param, function (response) {
+    HttpPost(`/PaymentManualEntry/GetDetails`, 'html', param, function (response) {
         $('#divForManualPayment').html("");
         $('#divForManualPayment').html(response);
     });

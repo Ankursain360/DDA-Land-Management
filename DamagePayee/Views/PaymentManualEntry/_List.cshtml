@@ -7,7 +7,7 @@
             <th>File No</th>
             <th>Payee Name</th>
             <th>Total Payment</th>
-            <th>Payment Date</th>
+            @*<th>Payment Date</th>*@
             <th>Bank Name</th>
             <th>Payment Mode</th>
             <th>Status</th>
@@ -27,7 +27,7 @@
                     <td>@item.FileNo</td>
                     <td>@item.PayeeName</td>
                     <td>@item.TotalAmount</td>
-                    <td>@(Convert.ToDateTime(item.PaymentDate).ToString("dd-MMM-yyyy"))</td>
+                    @*<td>@(Convert.ToDateTime(item.PaymentDate).ToString("dd-MMM-yyyy"))</td>*@
                     <td>@item.BankName</td>
                     <td>@item.PaymentMode</td>
                     
