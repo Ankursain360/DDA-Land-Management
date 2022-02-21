@@ -20,6 +20,7 @@ using Service.IApplicationService;
 using Dto.Master;
 using System.Text;
 using System.IO;
+using Dto.Common;     
 using Microsoft.AspNetCore.Hosting;
 
 namespace EncroachmentDemolition.Controllers
@@ -35,7 +36,7 @@ namespace EncroachmentDemolition.Controllers
         private readonly IUserProfileService _userProfileService;
         private readonly IHostingEnvironment _hostingEnvironment;
         private readonly IUserNotificationService _userNotificationService;
-
+        private readonly IPropertyRegistrationService _propertyRegistrationService;
         string targetPhotoPathLayout = "";
         string targetReportfilePathLayout = "";
         string PhotoFilePath = "";
@@ -47,7 +48,7 @@ namespace EncroachmentDemolition.Controllers
             IAnnexureAService annexureAService, IWatchandwardService watchandwardService, IConfiguration configuration,
             IWorkflowTemplateService workflowtemplateService, IApprovalProccessService approvalproccessService,
             IUserProfileService userProfileService, IHostingEnvironment hostingEnvironment,
-            IUserNotificationService userNotificationService)
+            IUserNotificationService userNotificationService, IPropertyRegistrationService propertyRegistrationService)
         {
             _encroachmentRegisterationService = encroachmentRegisterationService;
             _annexureAService = annexureAService;
@@ -58,6 +59,7 @@ namespace EncroachmentDemolition.Controllers
             _userProfileService = userProfileService;
             _hostingEnvironment = hostingEnvironment;
             _userNotificationService = userNotificationService;
+            _propertyRegistrationService = propertyRegistrationService;
             targetPhotoPathLayout = _configuration.GetSection("FilePaths:WatchAndWard:Photo").Value.ToString();
             targetReportfilePathLayout = _configuration.GetSection("FilePaths:WatchAndWard:ReportFile").Value.ToString();
             PhotoFilePath = _configuration.GetSection("FilePaths:EncroachmentRegisterationFiles:PhotoFilePath").Value.ToString();
@@ -385,6 +387,12 @@ namespace EncroachmentDemolition.Controllers
 
                         #endregion
                     }
+                    #endregion
+                    #region Mobile SMS
+                    SendSMSDto SMS = new SendSMSDto();
+                    // Add SMS 
+                    string Mobile = _propertyRegistrationService.GetMobileNo(SiteContext.UserId);
+                    SMS.GenerateSendSMSForSaveDemolation(fixingdemolition.RefNo, Mobile);
                     #endregion
                     ViewBag.Message = Alert.Show(Messages.AddAndApprovalRecordSuccess, "", AlertType.Success);
                     return View("Index");

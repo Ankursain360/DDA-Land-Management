@@ -107,5 +107,21 @@ namespace Dto.Common
             }
 
         }
+        public void GenerateSendSMSForSaveDemolation(string RefNo, string Mobile)
+        {
+
+            string url = "http://gateway.leewaysoftech.com/xml-transconnect-api.php?username=Ddauth&password=m1kw6vu2&mobile=" + Mobile + "&message=Your%20encroachment%20removal%2Fdemolition%20request%20vide%20Reference%20no%20"+RefNo+ "%20has%20been%20successfully%20submitted%20and%20forwarded%20for%20approval%20to%20your%20reporting%20officer.%20Land%20Management%20DDA&senderid=DDASVY&peid=1201159308150125712&contentid=1607100000000189087";
+            HttpWebRequest httpreq = (HttpWebRequest)WebRequest.Create(url);
+            try
+            {
+                HttpWebResponse httpres = (HttpWebResponse)httpreq.GetResponse();
+
+            }
+            catch (Exception e)
+            {
+
+            }
+
+        }
     }
 }
