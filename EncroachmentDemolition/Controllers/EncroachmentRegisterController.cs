@@ -19,7 +19,7 @@ using Dto.Master;
 using Service.IApplicationService;
 using System.Text;
 using Microsoft.AspNetCore.Hosting;
-
+using Dto.Common;
 using Microsoft.AspNetCore.Http;
 
 
@@ -43,6 +43,7 @@ namespace EncroachmentDemolition.Controllers
         private readonly IUserProfileService _userProfileService;
         private readonly IHostingEnvironment _hostingEnvironment;
         private readonly IUserNotificationService _userNotificationService;
+        private readonly IPropertyRegistrationService _propertyRegistrationService;
 
         string targetPhotoPathLayout = "";
         string targetReportfilePathLayout = "";
@@ -57,7 +58,7 @@ namespace EncroachmentDemolition.Controllers
             IConfiguration configuration, IWatchandwardService watchandwardService,
             IApprovalProccessService approvalproccessService, IWorkflowTemplateService workflowtemplateService,
             IUserProfileService userProfileService, IHostingEnvironment hostingEnvironment,
-            IUserNotificationService userNotificationService)
+            IUserNotificationService userNotificationService,IPropertyRegistrationService propertyRegistrationService)
         {
             _encroachmentRegisterationService = encroachmentRegisterationService;
             _configuration = configuration;
@@ -67,6 +68,8 @@ namespace EncroachmentDemolition.Controllers
             _userProfileService = userProfileService;
             _hostingEnvironment = hostingEnvironment;
             _userNotificationService = userNotificationService;
+            _propertyRegistrationService = propertyRegistrationService;
+
             targetPhotoPathLayout = _configuration.GetSection("FilePaths:WatchAndWard:Photo").Value.ToString();
             targetReportfilePathLayout = _configuration.GetSection("FilePaths:WatchAndWard:ReportFile").Value.ToString();
             PhotoFilePath = _configuration.GetSection("FilePaths:EncroachmentRegisterationFiles:PhotoFilePath").Value.ToString();
@@ -462,6 +465,13 @@ namespace EncroachmentDemolition.Controllers
 
                                         #endregion
                                     }
+                                    #endregion
+
+                                    #region Mobile SMS
+                                    SendSMSDto SMS = new SendSMSDto();
+                                    // Add SMS 
+                                    string Mobile = _propertyRegistrationService.GetMobileNo(SiteContext.UserId);
+                                    SMS.GenerateSendSMSForSaveEncroachmentRegistration(encroachmentRegisterations.RefNo, Mobile);
                                     #endregion
                                     ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
                                     var result1 = await _encroachmentRegisterationService.GetAllEncroachmentRegisteration();

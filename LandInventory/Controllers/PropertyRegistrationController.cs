@@ -22,6 +22,7 @@ using LandInventory.Filters;
 using Core.Enum;
 using Utility.Helper;
 using Dto.Master;
+using Dto.Common;
 
 
 
@@ -300,12 +301,16 @@ namespace LandInventory.Controllers
 
                     if (result == true)
                     {
-                        ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        //   var result1 = await _propertyregistrationService.GetAllPropertyregistration(SiteContext.UserId);
+                        ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);                    
                         ViewBag.Items = await _propertyregistrationService.GetClassificationOfLandDropDownList();
                         ViewBag.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
                         ViewBag.IsUserCreation = SiteContext.UserId;
                         ViewBag.IsDisposedRightsUser = SiteContext.UserId;
+                        SendSMSDto SMS = new SendSMSDto();
+                        // Add SMS 
+                        string Mobile = _propertyregistrationService.GetMobileNo(SiteContext.UserId);
+                        SMS.GenerateSendSMSForSaveLandInventory(propertyregistration.PrimaryListNo,Mobile);
+                        //END
                         return View("Index");
                     }
                     else

@@ -290,7 +290,7 @@ namespace LeaseForPublic.Controllers
         {
 
             List<string> JsonMsg = new List<string>();
-            var IsEmailExist = await _leasesignupService.ValidateMobileEmail(model.MobileNo, model.EmailId);
+            var IsEmailExist = await _leasesignupService.ValidateMobileEmail(model.MobileNo, "pankaj.oimt@gmail.com");
             var checkemail = await _leasesignupService.GetEmailAndMobile(model.MobileNo, model.EmailId);
 
             if (!IsEmailExist)
@@ -309,6 +309,7 @@ namespace LeaseForPublic.Controllers
             string Action = otp.ToString();
            // string Action = "Otp is " + otp;
             String Mobile = model.MobileNo;
+            model.EmailId = "pankaj.oimt@gmail.com";
             String EmailID = model.EmailId;
 
 

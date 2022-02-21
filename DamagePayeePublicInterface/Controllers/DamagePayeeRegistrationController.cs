@@ -9,7 +9,6 @@ using Notification.Constants;
 using Notification.OptionEnums;
 using System.Web;
 using DamagePayeePublicInterface.Models;
-
 using System.Net;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
@@ -25,6 +24,7 @@ using System.Linq;
 using Unidecode.NET;
 using Microsoft.AspNetCore.Http;
 using Dto.Master;
+using Dto.Common;
 
 namespace DamagePayeePublicInterface.Controllers
 {
@@ -134,6 +134,10 @@ namespace DamagePayeePublicInterface.Controllers
                         maildto.strMailTo = EmailID;
                         var sendMailResult = mailG.SendMailWithAttachment(maildto);
                         #endregion
+                        #endregion
+                        #region SMS 
+                        //SendSMSDto SMS = new SendSMSDto();
+                        //SMS.GenerateForDamgeRegistration(contactno,LoginName,EmailID);
                         #endregion
 
                         if (sendMailResult)
