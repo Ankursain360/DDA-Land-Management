@@ -111,6 +111,7 @@ namespace EncroachmentDemolition.Controllers
             return View(encroachmentRegisterations);
         }
 
+
         public async Task<PartialViewResult> WatchWardView(int id)
         {
             var Data = await _watchandwardService.FetchSingleResult(id);
