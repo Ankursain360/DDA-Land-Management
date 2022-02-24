@@ -12,13 +12,13 @@ namespace Libraries.Model.Entity
         [Required]
         public int IsRebateOn { get; set; }
 
-        [Required(ErrorMessage = "The From Date field is required")]
+        [Required(ErrorMessage = "From Date Field Is Mandatory")]
         public DateTime FromDate { get; set; }
 
-        [Required(ErrorMessage = "The To Date field is required")]
+        [Required(ErrorMessage = "To Date Field Is Mandatory")]
         public DateTime ToDate { get; set; }
 
-        [Required(ErrorMessage = "The Rebate Percentage field is required")]
+        [Required(ErrorMessage = "Rebate Percentage Field Is Mandatory")]
         [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
         [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Rebate Percentage; Max 18 digits")]
         public decimal RebatePercentage { get; set; }

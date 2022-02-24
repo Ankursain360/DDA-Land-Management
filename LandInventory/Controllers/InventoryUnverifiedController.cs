@@ -366,7 +366,8 @@ namespace LandInventory.Controllers
                             HttpContext.Session.SetString("InventoryId", id.ToString());
                             HttpContext.Session.SetString("Mobile", Mobile);
                             HttpContext.Session.SetString("OTP", otp.ToString());
-                       //end OTP
+                            HttpContext.Session.SetString("PrimaryNo", (propertyregistration.PrimaryListNo));
+                            //end OTP
                             ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
                             TempData["Message"] = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
                             return RedirectToAction("OTP");
@@ -415,6 +416,7 @@ namespace LandInventory.Controllers
             {
                 string otp = HttpContext.Session.GetString("OTP").ToString();
                 string Id= HttpContext.Session.GetString("InventoryId").ToString(); 
+                string PrimaryListNo = HttpContext.Session.GetString("PrimaryNo").ToString();
                 if (propertyregistration.Otp == otp)
                 {
                     //for Validate
@@ -424,8 +426,9 @@ namespace LandInventory.Controllers
                     if (result == true)
                     {
                         string Mobile = _propertyregistrationService.GetMobileNo(SiteContext.UserId);
-                        SendSMSDto SMS = new SendSMSDto();                        
-                        SMS.GenerateSendSMSForVerifyProperty(propertyregistration.PrimaryListNo, Mobile);
+                        SendSMSDto SMS = new SendSMSDto(); 
+                        
+                        SMS.GenerateSendSMSForVerifyProperty(PrimaryListNo, Mobile);
                         ViewBag.Message = Alert.Show("Property Successfully Updated", "", AlertType.Success);
                         TempData["Message"] = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
                         return RedirectToAction("Create");
