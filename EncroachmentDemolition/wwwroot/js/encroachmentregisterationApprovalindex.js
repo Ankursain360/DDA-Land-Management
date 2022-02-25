@@ -8,6 +8,7 @@ $(document).ready(function () {
 });
 
 function GetEncroachmentRegisterApproval(pageNumber, pageSize, StatusId, order) {
+    debugger;
     var param = GetSearchParam(pageNumber, pageSize, StatusId, order);
     HttpPost(`/EncroachmentRegisterApproval/List`, 'html', param, function (response) {
         $('#divEncroachmentRegisterApprovalTable').html("");

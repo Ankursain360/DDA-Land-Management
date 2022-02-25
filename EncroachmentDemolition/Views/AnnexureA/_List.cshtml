@@ -26,11 +26,12 @@
             <td>@(item.EncrochmentDate==null?"Not Available":Convert.ToDateTime(item.EncrochmentDate).ToString("dd MMM yyyy"))</td>
             @*<td>@(item.Locality == null ? ""  : item.Locality.Name)</td>
         <td>@(item.KhasraNoNavigation.KhasraNo == null ? ""  :item.KhasraNoNavigation.KhasraNo)</td>*@
-            <td>@(item.KhasraNoNavigation.LocalityId == null ? item.KhasraNoNavigation.Colony : item.KhasraNoNavigation.Locality.Name)</td>
+            @*<td>@(item.KhasraNoNavigation.LocalityId == null ? item.KhasraNoNavigation.Colony : item.KhasraNoNavigation.Locality.Name)</td>*@
+            <td>@(item.KhasraNoNavigation.LocalityId == null ? item.KhasraNoNavigation.Colony : item.KhasraNoNavigation.Locality==null? item.Locality.Name: item.KhasraNoNavigation.Locality.Name)</td>
             <td>@(item.KhasraNoNavigation.LocalityId == null ? item.KhasraNoNavigation.PlotNo: item.KhasraNoNavigation.KhasraNo)</td>
             <td>@(item.IsEncroachment== "" ? "No" : item.IsEncroachment)</td>
             @*<td>@item.PoliceStation</td>
-            <td>@item.SecurityGuardOnDuty</td>*@
+        <td>@item.SecurityGuardOnDuty</td>*@
             <td>
                 @(item.ApprovedStatusNavigation == null ? "" : item.ApprovedStatusNavigation.SentStatusName)
             </td>
