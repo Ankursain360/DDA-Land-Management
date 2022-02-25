@@ -121,7 +121,7 @@ namespace EncroachmentDemolition.Controllers
                 { 
                     var Data = await _watchAndWardApprovalService.FetchSingleResult(id);
                 Data.LocalityList = await _watchandwardService.GetAllLocality();
-                Data.KhasraList = await _watchandwardService.GetAllKhasra();
+                //Data.KhasraList = await _watchandwardService.GetAllKhasra();
                 Data.PrimaryListNoList = await _watchandwardService.GetAllPrimaryList();
                 FileHelper fileHelper = new FileHelper();
                 var Msgddl = watchandward.ApprovalStatus;
