@@ -76,8 +76,7 @@ namespace LandInventory.Controllers
             propertyregistration.DisposalTypeList = await _propertyregistrationService.GetDisposalTypeDropDownList();
             propertyregistration.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
             propertyregistration.TakenOverDepartmentList = await _propertyregistrationService.GetTakenDepartmentDropDownList();
-            propertyregistration.HandOverDepartmentList = await _propertyregistrationService.GetHandedDepartmentDropDownList();
-         
+            propertyregistration.HandOverDepartmentList = await _propertyregistrationService.GetHandedDepartmentDropDownList();         
         }
         [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
