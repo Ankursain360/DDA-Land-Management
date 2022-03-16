@@ -253,7 +253,7 @@
                             </td>
                             <td>
                                 <div class="floating-label-wrap mb-3 mb-md-0">
-                                    <input asp-for="DateOfEncroachment" class="floating-label-field floating-label-field--s3 onlynumbers" id="DateOfEncroachment" />
+                                    <input asp-for="DateOfEncroachment" class="floating-label-field floating-label-field--s3" maxlength="100" id="DateOfEncroachment" />
                                 </div>
                             </td>
                             <td>
@@ -289,7 +289,7 @@
 
                     <input type="file" asp-for="Firfile" id="Firfile" placeholder="FIR Details" class="floating-label-field floating-label-field--s3 checkExtension" multiple />
                     <span asp-validation-for="Firfile" class="text-danger"></span>
-                    <label class="floating-label">FIR Details<span style="color:red">(.pdf only)</span></label>
+                    <label class="floating-label">FIR/Police Complaint Details<span style="color:red">(.pdf only)</span></label>
                 </div>
             </div>
             <div class="col-md-6">

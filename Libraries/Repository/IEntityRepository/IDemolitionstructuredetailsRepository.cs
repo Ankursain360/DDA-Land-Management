@@ -53,6 +53,9 @@ namespace Libraries.Repository.IEntityRepository
         //added by ishu 17 june 2021
         Task<PagedResult<Fixingdemolition>> GetPagedDemolitiondiary(DemolitionstructuredetailsDto1 model, int userId, int approved);
         Task<Demolitionstructuredetails> FetchSingleResultonId(int id);
-        Task<Fixingdemolition> FetchSingleResultOfFixingDemolition(int id);
+        Task<Fixingdemolition> FetchSingleResultOfFixingDemolition(int id); 
+        Task<List<DemolitionDashboardDto>> GetDashboardData(int userId, int roleId);
+        Task<PagedResult<Fixingdemolition>> GetDashboardListData(DemolitionDasboardDataDto model);
+       
     }
 }

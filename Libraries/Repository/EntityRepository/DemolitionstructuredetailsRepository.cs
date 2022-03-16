@@ -5,6 +5,7 @@ using Libraries.Repository.Common;
 using Libraries.Repository.IEntityRepository;
 using Microsoft.EntityFrameworkCore;
 using Model.Entity;
+using Repository.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +28,7 @@ namespace Libraries.Repository.EntityRepository
             return Result > 0 ? true : false;
         }
 
-        
+
 
         public async Task<bool> DeleteDemolitionstructureafterdemolitionphotofiledetails(int Id)
         {
@@ -100,7 +101,7 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<Demolitionstructureafterdemolitionphotofiledetails> GetAfterphotofile(int Id)
         {
-            var data= await _dbContext.Demolitionstructureafterdemolitionphotofiledetails.Where(x => x.Id == Id && x.IsActive == 1).FirstOrDefaultAsync();
+            var data = await _dbContext.Demolitionstructureafterdemolitionphotofiledetails.Where(x => x.Id == Id && x.IsActive == 1).FirstOrDefaultAsync();
             return data;
         }
         public async Task<Demolitionstructurebeforedemolitionphotofiledetails> GetBeforephotofile(int Id)
@@ -110,7 +111,7 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<PagedResult<Demolitionstructuredetails>> GetPagedDemolitionstructuredetails(DemolitionstructuredetailsDto model)
         {
-            var data= await _dbContext.Demolitionstructuredetails
+            var data = await _dbContext.Demolitionstructuredetails
                                    .Include(x => x.Department)
                                    .Include(x => x.Zone)
                                    .Include(x => x.Division)
@@ -199,7 +200,7 @@ namespace Libraries.Repository.EntityRepository
                 switch (model.SortBy.ToUpper())
                 {
 
-                    
+
                     case ("DEP"):
                         data = null;
                         data = await _dbContext.Demolitionstructuredetails
@@ -321,7 +322,7 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<Demolitionstructure>> GetStructure()
         {
-            return await _dbContext.Demolitionstructure.Include(x=>x.Structure).Where(x => x.IsActive == 1).ToListAsync();
+            return await _dbContext.Demolitionstructure.Include(x => x.Structure).Where(x => x.IsActive == 1).ToListAsync();
         }
         public async Task<List<Demolitionstructure>> GetDemolitionstructure(int demostructuredId)
         {
@@ -372,8 +373,8 @@ namespace Libraries.Repository.EntityRepository
                     case ("LOCALITY"):
                         data.Results = data.Results.OrderBy(x => x.Locality.Name).ToList();
                         break;
-                   
-                   
+
+
 
                 }
             }
@@ -393,7 +394,7 @@ namespace Libraries.Repository.EntityRepository
                     case ("LOCALITY"):
                         data.Results = data.Results.OrderByDescending(x => x.Locality.Name).ToList();
                         break;
-                    
+
 
                 }
             }
@@ -419,7 +420,7 @@ namespace Libraries.Repository.EntityRepository
         //********* rpt 1 Details **********added by ishu
 
 
-      
+
         public async Task<bool> SaveDemolishedstructurerpt(Demolishedstructurerpt rpt)
         {
             _dbContext.Demolishedstructurerpt.Add(rpt);
@@ -428,7 +429,7 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<List<Demolishedstructurerpt>> GetAlldemolitionrptdetails(int id)
         {
-            return await _dbContext.Demolishedstructurerpt.Include(x=>x.Structure)
+            return await _dbContext.Demolishedstructurerpt.Include(x => x.Structure)
                 .Where(x => x.DemolitionStructureDetailsId == id && x.IsActive == 1).ToListAsync();
         }
 
@@ -462,7 +463,7 @@ namespace Libraries.Repository.EntityRepository
         public async Task<PagedResult<Fixingdemolition>> GetPagedDemolitiondiary(DemolitionstructuredetailsDto1 model, int userId, int approved)
         {
             var InDemolitionPoliceAssistenceTable = (from x in _dbContext.Demolitionpoliceassistenceletter
-                                                     .Include(x=> x.FixingDemolition.Encroachment.KhasraNoNavigation)
+                                                     .Include(x => x.FixingDemolition.Encroachment.KhasraNoNavigation)
                                                      where x.FixingDemolitionId == x.FixingDemolition.Id && x.FixingDemolition.IsActive == 1
                                                      select x.FixingDemolitionId).ToArray();
 
@@ -474,6 +475,7 @@ namespace Libraries.Repository.EntityRepository
                                         .Include(x => x.Encroachment.Zone)
                                         //.Include(x => x.Demolitionpoliceassistenceletter)
                                         .Include(x => x.ApprovedStatusNavigation)
+                                        .Include(x => x.Demolitionstructuredetails)
                                         .Include(x => x.Encroachment.KhasraNoNavigation)
                                         .Where(x => x.IsActive == 1 && x.ApprovedStatusNavigation.StatusCode == approved
                                         //  && (model.StatusId == 0 ? x.PendingAt == userId : x.PendingAt == 0)
@@ -536,7 +538,7 @@ namespace Libraries.Repository.EntityRepository
             }
 
         }
-        
+
         public async Task<Demolitionstructuredetails> FetchSingleResultonId(int id)
         {
             return await _dbContext.Demolitionstructuredetails
@@ -557,6 +559,41 @@ namespace Libraries.Repository.EntityRepository
                                      .Include(x => x.Encroachment.WatchWard)
                                      .Where(x => x.Id == id)
                                      .FirstOrDefaultAsync();
+        }
+
+        public async Task<List<DemolitionDashboardDto>> GetDashboardData(int userId, int roleId)
+        {
+            var data = await _dbContext.LoadStoredProcedure("PendancyDashboard")
+                                            .WithSqlParams(("P_UserId", userId), ("P_RoleId", roleId)
+                                            )
+                                            .ExecuteStoredProcedureAsync<DemolitionDashboardDto>();
+
+            return (List<DemolitionDashboardDto>)data;
+        }
+
+
+        public async Task<PagedResult<Fixingdemolition>> GetDashboardListData(DemolitionDasboardDataDto model)
+        {
+            var PendingatYoustatus = new[] { 3, 4 };
+            var data = await _dbContext.Fixingdemolition.Include(x => x.Encroachment.Locality)
+                                          .Include(x => x.Encroachment)
+                                          .Include(x => x.Encroachment.Department)
+                                          .Include(x => x.Encroachment.Zone)
+                                          .Include(x => x.ApprovedStatusNavigation)
+                                          .Include(x => x.Demolitionstructuredetails)
+                                          .Include(x => x.Encroachment.KhasraNoNavigation)
+                                          .Where(x => x.IsActive == 1
+                                          && (model.filter == "TotalReceived" ? x.ApprovedStatusNavigation.StatusCode == x.ApprovedStatusNavigation.StatusCode
+                                              : model.filter == "TotalApproved" ? (x.ApprovedStatusNavigation.StatusCode == 3)
+                                              : model.filter == "PendingAtyou" ? (!PendingatYoustatus.Contains(x.ApprovedStatusNavigation.StatusCode) && x.PendingAt == model.userId.ToString())
+                                              : model.filter == "TotalPending" ? (!PendingatYoustatus.Contains(x.ApprovedStatusNavigation.StatusCode))
+                                              : model.filter == "TotalRejected" ? (x.ApprovedStatusNavigation.StatusCode == 4)
+                                              : (x.ApprovedStatusNavigation.StatusCode == x.ApprovedStatusNavigation.StatusCode)
+                                              )
+                                          ).GetPaged<Fixingdemolition>(model.PageNumber, model.PageSize);
+
+
+            return data;
         }
     }
 }

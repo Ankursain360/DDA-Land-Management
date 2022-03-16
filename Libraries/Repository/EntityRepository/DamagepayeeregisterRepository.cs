@@ -284,7 +284,7 @@ namespace Libraries.Repository.EntityRepository
 
             var approvedStatus = (from f in _dbContext.Damagepayeeregister
                           where (f.UserId == userId)
-                          select f.ApprovedStatus).First();
+                          select f.ApprovedStatus).FirstOrDefault();
 
             return approvedStatus.ToString();
         }

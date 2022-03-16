@@ -509,7 +509,7 @@ namespace Vacant.Land.Api.Controllers
                                 {
                                     Area = dto.AreaApprox.Count <= i ? 0 : dto.AreaApprox[i],
                                     CountOfStructure = dto.CountOfStructure.Count <= i ? 0 : dto.CountOfStructure[i],
-                                    DateOfEncroachment = dto.DateOfEncroachment.Count <= i ? 0 : dto.DateOfEncroachment[i],
+                                    DateOfEncroachment = dto.DateOfEncroachment.Count <= i ? "0" : dto.DateOfEncroachment[i],
                                     ReligiousStructure = dto.ReligiousStructure.Count <= i ? "" : dto.ReligiousStructure[i],
                                     ConstructionStatus = dto.ConstructionStatus.Count <= i ? "" : dto.ConstructionStatus[i],
                                     NameOfStructure = dto.NameOfStructure.Count <= i ? "" : dto.NameOfStructure[i],

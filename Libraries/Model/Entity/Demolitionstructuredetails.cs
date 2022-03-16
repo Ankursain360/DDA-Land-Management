@@ -5,10 +5,10 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 namespace Libraries.Model.Entity
-{ 
+{
 
 
-    public partial class Demolitionstructuredetails:AuditableEntity<int>
+    public partial class Demolitionstructuredetails : AuditableEntity<int>
     {
         public Demolitionstructuredetails()
         {
@@ -41,11 +41,15 @@ namespace Libraries.Model.Entity
         public string NameOfEncroacherIfAny { get; set; }
         public DateTime? StartOfDemolitionActionDate { get; set; }
         public DateTime? EndOfDemolitionActionDate { get; set; }
-       // [Required(ErrorMessage = " Area is mandatory")]
+        // [Required(ErrorMessage = " Area is mandatory")]
         public decimal? AreaReclaimed { get; set; }
         public string DemilitionReportPath { get; set; }
         public string Remarks { get; set; }
         public byte? IsActive { get; set; }
+
+        [Required(ErrorMessage = "Demolition Status is mandatory")]
+        public string DemolitionStatus { get; set; }
+        public string DemolitionRemarks { get; set; }
         public Department Department { get; set; }
         public Division Division { get; set; }
         public Locality Locality { get; set; }
@@ -53,7 +57,7 @@ namespace Libraries.Model.Entity
         public Fixingdemolition FixingDemolition { get; set; }
         [NotMapped]
         public List<Locality> LocalityList { get; set; }
-       
+
         [NotMapped]
         public List<Zone> ZoneList { get; set; }
         [NotMapped]
@@ -88,12 +92,12 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public List<int?> NoOfStructureRemaining { get; set; }
 
-       
+
 
         //*************  Areareclaimedrpt ***************
         [NotMapped]
         public List<DateTime?> Date2 { get; set; }
-       
+
         [NotMapped]
         public List<decimal?> Area1 { get; set; }
         [NotMapped]

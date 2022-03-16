@@ -1,9 +1,9 @@
 ﻿$(document).ready(function () {
     $("#Area").attr("readonly", "readonly");
     var id = parseInt($('#WatchWardId').val());
-   
+
     GetOtherDetails(id);
-   
+
     var value = $('#inspectionAreaUnit option:selected').val();
     if (value == 0) {
         $("#inspectionAreainSqAcreHec").hide();
@@ -53,7 +53,7 @@
     else {
         $("#divForLandStatus").hide();
     }
-   
+
 
 });
 function GetOtherDetails(id) {
@@ -168,17 +168,17 @@ $(function () {
     HttpGet(`/EncroachmentRegister/DetailsOfRepeater/?Id=${$("#hdnId").val() == null ? "" : $("#hdnId").val()}`, 'json', function (data) {
         debugger
         for (var i = 0; i < data.length; i++) {
-            $("#tbl_posts #add #NameOfStructure").val(data[i].nameOfStructure); 
-            $("#tbl_posts #add #AreaApprox").val(data[i].area);
-            $("#tbl_posts #add #Type").val(data[i].type);
-            $("#tbl_posts #add #ReligiousStructure").val(data[i].religiousStructure);
-            $("#tbl_posts #add #DateOfEncroachment").val(data[i].dateOfEncroachment);
-            $("#tbl_posts #add #ReferenceNoOnLocation").val(data[i].referenceNoOnLocation);
-            $("#tbl_posts #add #CountOfStructure").val(data[i].countOfStructure);
-            $("#tbl_posts #add #ConstructionStatus").val(data[i].constructionStatus);
+            $("#tbl_posts #add #NameOfStructure").text(data[i].nameOfStructure); 
+            $("#tbl_posts #add #AreaApprox").text(data[i].area);
+            $("#tbl_posts #add #Type").text(data[i].type);
+            $("#tbl_posts #add #ReligiousStructure").text(data[i].religiousStructure);
+            $("#tbl_posts #add #DateOfEncroachment").text(data[i].dateOfEncroachment);
+            $("#tbl_posts #add #ReferenceNoOnLocation").text(data[i].referenceNoOnLocation);
+            $("#tbl_posts #add #CountOfStructure").text(data[i].countOfStructure);
+            $("#tbl_posts #add #ConstructionStatus").text(data[i].constructionStatus);
             $('#tbl_posts #add #ConstructionStatus').trigger('change');
             $('#tbl_posts #add #ReligiousStructure').trigger('change');
-            
+
             if (i < data.length - 1) {
                 var ConstructionStatus = $("#tbl_posts #add #ConstructionStatus").children("option:selected").val();
                 var ReligiousStructure = $("#tbl_posts #add #ReligiousStructure").children("option:selected").val();

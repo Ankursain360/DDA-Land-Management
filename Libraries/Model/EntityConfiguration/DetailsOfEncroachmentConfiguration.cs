@@ -24,7 +24,9 @@ namespace Model.EntityConfiguration
 
             builder.Property(e => e.CreatedBy).HasColumnType("int(11)");
 
-            builder.Property(e => e.DateOfEncroachment).HasColumnType("int");
+            builder.Property(e => e.DateOfEncroachment)
+                                   .HasMaxLength(100)
+                                   .IsUnicode(false); 
 
             builder.Property(e => e.EncroachmentRegisterationId).HasColumnType("int(11)");
 

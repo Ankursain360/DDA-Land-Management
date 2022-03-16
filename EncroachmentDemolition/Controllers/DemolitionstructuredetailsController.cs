@@ -1212,7 +1212,25 @@ namespace EncroachmentDemolition.Controllers
         }
 
 
+        //Demolistion Dashboard
 
+        public async Task<PartialViewResult> GetDashboard(int userId, int roleId)
+        {  
+           
+            var results = await _demolitionstructuredetailsService.GetDashboardData(userId, roleId);
+              
+            return PartialView("_dashboard", results);
+        }
+
+        public async Task<PartialViewResult> GetDashboardListData([FromBody] DemolitionDasboardDataDto model)
+        {
+
+            var results = await _demolitionstructuredetailsService.GetDashboardListData(model);
+
+            return PartialView("_ModelDashboardData", results);
+        }
+
+        //
 
 
     }

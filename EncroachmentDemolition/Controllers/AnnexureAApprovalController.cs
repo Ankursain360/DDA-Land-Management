@@ -882,11 +882,7 @@ namespace EncroachmentDemolition.Controllers
             return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
 
         }
-
-
-
-
-
+         
 
         [HttpPost]
         public JsonResult CheckFile()
@@ -960,10 +956,7 @@ namespace EncroachmentDemolition.Controllers
             return Json(IsImg, JsonRequestBehavior);
         }
 
-
-
-
-
+         
         public bool CheckMimeType(Fixingdemolition fixingdemolition)
         {
             bool Flag = true;
@@ -1040,7 +1033,45 @@ namespace EncroachmentDemolition.Controllers
             return Flag;
         }
 
+        #region Print File
+        //View PDF File
+        public async Task<IActionResult> PrintFile(int id)
+        {
+            var Data = await _annexureAApprovalService.FetchSingleResult(id);
+            if (Data == null)
+            {
+                return NotFound();
+            }
+            return View(Data);
+        }
+        public async Task<PartialViewResult> EncroachmentRegisterprint(int id)
+        {
+            var encroachmentRegisterations = await _encroachmentRegisterationService.FetchSingleResult(id);
+            encroachmentRegisterations.DepartmentList = await _encroachmentRegisterationService.GetAllDepartment();
+            encroachmentRegisterations.ZoneList = await _encroachmentRegisterationService.GetAllZone(encroachmentRegisterations.DepartmentId);
+            encroachmentRegisterations.DivisionList = await _encroachmentRegisterationService.GetAllDivisionList(encroachmentRegisterations.ZoneId);
+            encroachmentRegisterations.LocalityList = await _encroachmentRegisterationService.GetAllLocalityList(encroachmentRegisterations.DivisionId);
+            //encroachmentRegisterations.KhasraList = await _encroachmentRegisterationService.GetAllKhasraList(encroachmentRegisterations.LocalityId);
+            encroachmentRegisterations.PropertyInventoryKhasraList = await _encroachmentRegisterationService.GetAllKhasraListFromPropertyInventory(encroachmentRegisterations.ZoneId, encroachmentRegisterations.DepartmentId);
+            return PartialView("_EncroachmentRegisterPrint", encroachmentRegisterations);
+        }
 
+        public async Task<PartialViewResult> PrintAnnexureADetails(int id)
+        {
+            var Data = await _annexureAService.FetchSingleResult(id);
+            Data.Demolitionchecklist = await _annexureAService.GetDemolitionchecklist();
+            Data.Demolitionprogram = await _annexureAService.GetDemolitionprogram();
+            Data.Demolitiondocument = await _annexureAService.GetDemolitiondocument();
+            return PartialView("_AnnexureAPrint", Data);
+        }
+
+        public async Task<PartialViewResult> HistoryPrintDetails(int id)
+        {
+            var Data = await _approvalproccessService.GetHistoryDetails((_configuration.GetSection("workflowPreccessGuidRequestDemolition").Value), id);
+
+            return PartialView("_HistoryPrintDetails", Data);
+        }
+        #endregion
 
     }
 }

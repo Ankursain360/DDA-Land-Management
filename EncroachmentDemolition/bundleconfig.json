@@ -334,5 +334,11 @@
     "inputFiles": [
       "wwwroot/js/demolitiondiaryindex.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/encroachmentregisterationviewpdf.min.js",
+    "inputFiles": [
+      "wwwroot/js/encroachmentregisterationviewpdf.js"
+    ]
   }
 ]

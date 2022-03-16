@@ -1,0 +1,108 @@
+﻿@model Libraries.Model.Entity.Fixingdemolition
+<html>
+<body class="bg-gray">
+    <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="EncroachmentId" />
+    <input type="hidden" asp-for="Encroachment.WatchWardId" />
+    <input type="hidden" asp-for="EncroachmentId" id="hdnId" />
+    <section class="slow bg-gray">
+        <div class="container-fluid">
+            <div class="section-wraper">
+                <div class="content bg-white mx-auto p-3" id="MainContentForm" style="max-width: 780px;">
+                    <div class="card">
+                        <table class="table table-bordered" border="0" style="vertical-align: middle;margin: -1px;width: calc(100% + 2px);">
+                            <tr>
+                                <td style="vertical-align: middle" align="center">
+                                    <img src="https://res.cloudinary.com/deb9cwxor/image/upload/v1596010902/ow9sj5vbbpymed9eydrl.png" style="height:100px" class="img-responsive" alt="">
+                                </td>
+                                <td style="vertical-align: middle">
+                                    <h5 class="mb-2 text-primary">
+                                        <u> <b> DELHI DEVELOPMENT AUTHORITY</b></u>
+                                    </h5>
+                                    <p class="m-0">
+                                        <strong style="line-height: 1.6;">
+                                            VIKAS SADAN INA, NEW DELHI -110023
+                                        </strong>
+                                    </p>
+                                </td>
+                                <td style="vertical-align: middle" align="center">
+                                    <img src="https://res.cloudinary.com/deb9cwxor/image/upload/v1596882092/dupx7btfcqjequcgsb00.jpg" style="height:100px" class="img-responsive" alt="">
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="card-header">
+                            <b> Inspection/Encroachment Register Details</b>
+                        </div>
+                        <div class="card-body" style="font-size: .65rem;">
+                            <div id="divEncroachemntRegisterprint">
+
+                            </div>
+                        </div>
+                        <div class="card-header">
+                            <b> Request For Fixing of Demolition Programme Details</b>
+                        </div>
+                        <div class="card-body" style="font-size: .65rem;">
+                            <div id="divDemolitionprint">
+
+                            </div>
+                        </div>
+                        <div class="card-header">
+                            <b> Approval History</b>
+                        </div>
+                        <div class="card-body" style="font-size: .65rem;">
+                            <div id="divHistoryDetails">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-header text-center">
+                        <b> Application is approved. </b>
+                    </div>
+                </div>
+
+                <div class="row mt-md-3">
+                    <div class="col-md-12 text-center">
+
+                        <button class="btn btn-theme px-5 printpdf" type="button">Print</button>
+                        @Html.ActionLink("Back", "Index", "AnnexureAApproval", null, new { @class = "btn btn-theme" })
+
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer slow">
+        <div class="container-fluid">
+            <p class="my-0 py-2">
+            </p>
+        </div>
+    </footer>
+
+    <script src="https://master.managemybusinessess.com/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="https://master.managemybusinessess.com/lib/chart.js/dist/Chart.min.js"></script>
+    <script src="https://master.managemybusinessess.com/lib/toaster/toastr.min.js"></script>
+
+
+
+    <script src="https://master.managemybusinessess.com/js/site.min.js?v=vWVFonNvAoCNljRoLxgUMRUjqGJWFtfjinr9jBuIAtE"></script>
+
+
+
+</body>
+
+</html>
+
+
+ 
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+ 
+<environment include="Development">
+        <script src="~/js/annexureaapprovalcreate.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/annexureaapprovalcreate.min.js" asp-append-version="true"></script>
+    </environment>
+<script src="~/js/annexureaapprovalprintfile.js"></script>

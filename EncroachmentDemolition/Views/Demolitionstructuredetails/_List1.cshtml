@@ -8,7 +8,7 @@
             <th>Zone</th>
             @*<th>Locality(Village)/Colony</th>*@
             <th>Khasra No./Plot No.</th>
-            <th>Status</th>
+            <th>Demolition Status</th>
             @*<th>Letter Status</th>*@
             <th>Action</th>
         </tr>
@@ -24,8 +24,9 @@
             <td>@item.Encroachment.Department.Name</td>
             <td>@item.Encroachment.Zone.Name</td>
             @*<td>@(item.Encroachment.KhasraNoNavigation.LocalityId == null ? item.Encroachment.KhasraNoNavigation.Colony : item.Encroachment.KhasraNoNavigation.Locality.Name)</td>*@
-            <td>@(item.Encroachment.KhasraNoNavigation.LocalityId == null ? item.Encroachment.KhasraNoNavigation.PlotNo : item.Encroachment.KhasraNoNavigation.PlotNo)</td>
-            <td>@(item.ApprovedStatus == 0 ?  "Pending" : "Approved")</td>
+            <td>@(item.Encroachment.KhasraNoNavigation.LocalityId == null ? item.Encroachment.KhasraNoNavigation.PlotNo : item.Encroachment.KhasraNoNavigation.KhasraNo)</td>
+            <td>@(item.Demolitionstructuredetails.Count>0?item.Demolitionstructuredetails.Select(x=>x.DemolitionStatus).FirstOrDefault().Replace("_"," "):"-")</td>
+            @*<td>@(item.ApprovedStatus == 0 ?  "Pending" : "Approved")</td>*@
             @*<td>@(item.Demolitionpoliceassistenceletter.Count != 0 ?  "Generated" : "Not Generated")</td>*@
 
             <td> <a asp-action="Create" asp-route-id="@item.Id" title="edit" class="edit"><i class="ri-edit-line"></i> </a></td>

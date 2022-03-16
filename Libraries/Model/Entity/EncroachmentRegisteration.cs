@@ -138,7 +138,7 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public List<string> Type { get; set; }
         [NotMapped]
-        public List<int> DateOfEncroachment { get; set; }
+        public List<string> DateOfEncroachment { get; set; }
 
         [NotMapped]
         public List<string> ReligiousStructure { get; set; }

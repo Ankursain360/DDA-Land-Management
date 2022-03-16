@@ -56,7 +56,7 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.Name)
                 .IsRequired()
-                .HasMaxLength(100)
+                .HasMaxLength(500)
                 .IsUnicode(false);
 
             builder.Property(e => e.ZoneId).HasColumnType("int(11)");

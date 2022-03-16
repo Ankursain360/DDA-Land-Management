@@ -37,7 +37,7 @@ namespace Libraries.Service.ApplicationService
         {
             return await _demolitionstructuredetailsRepository.FetchSingleResult(id);
         }
-        
+
         public async Task<List<Department>> GetAllDepartment()
         {
             return await _demolitionstructuredetailsRepository.GetAllDepartment();
@@ -101,8 +101,10 @@ namespace Libraries.Service.ApplicationService
             model.EndOfDemolitionActionDate = demolitionstructuredetails.EndOfDemolitionActionDate;
             model.AreaReclaimed = demolitionstructuredetails.AreaReclaimed;
             model.DemilitionReportPath = demolitionstructuredetails.DemilitionReportPath;
+            model.DemolitionStatus = demolitionstructuredetails.DemolitionStatus;
+            model.DemolitionRemarks = demolitionstructuredetails.DemolitionRemarks;
             model.ModifiedDate = DateTime.Now;
-            model.ModifiedBy = demolitionstructuredetails.ModifiedBy; 
+            model.ModifiedBy = demolitionstructuredetails.ModifiedBy;
             model.IsActive = 1;
             _demolitionstructuredetailsRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
@@ -129,7 +131,7 @@ namespace Libraries.Service.ApplicationService
         {
             return await _demolitionstructuredetailsRepository.DeleteDemolitionstructure(Id);
         }
-      
+
 
         public async Task<bool> SaveDemolitionstructureafterdemolitionphotofiledetails(Demolitionstructureafterdemolitionphotofiledetails demolitionstructureafterdemolitionphotofiledetails)
         {
@@ -156,15 +158,15 @@ namespace Libraries.Service.ApplicationService
             return await _demolitionstructuredetailsRepository.DeleteDemolitionstructurebeforedemolitionphotofiledetails(Id);
         }
 
-       
+
 
         public async Task<List<Demolitionstructure>> GetDemolitionstructure(int Id)
         {
             return await _demolitionstructuredetailsRepository.GetDemolitionstructure(Id);
         }
-       
 
-        
+
+
         public async Task<Demolitionstructureafterdemolitionphotofiledetails> GetAfterphotofile(int Id)
         {
             return await _demolitionstructuredetailsRepository.GetAfterphotofile(Id);
@@ -186,8 +188,8 @@ namespace Libraries.Service.ApplicationService
 
         //********* rpt  Details **********added by ishu
 
-        
-      
+
+
         public async Task<bool> SaveDemolishedstructurerpt(Demolishedstructurerpt rpt)
         {
             rpt.CreatedBy = rpt.CreatedBy;
@@ -233,6 +235,14 @@ namespace Libraries.Service.ApplicationService
         {
             return await _demolitionstructuredetailsRepository.FetchSingleResultOfFixingDemolition(id);
         }
+        public async Task<List<DemolitionDashboardDto>> GetDashboardData(int userId, int roleId)
+        {
+            return await _demolitionstructuredetailsRepository.GetDashboardData(userId, roleId);
+        }
+        public async Task<PagedResult<Fixingdemolition>> GetDashboardListData(DemolitionDasboardDataDto model)
+        {
+            return await _demolitionstructuredetailsRepository.GetDashboardListData(model);
+        }
     }
-   
+
 }

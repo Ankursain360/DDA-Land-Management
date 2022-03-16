@@ -45,6 +45,14 @@ namespace Model.EntityConfiguration
 
             builder.Property(e => e.EndOfDemolitionActionDate).HasColumnType("date");
 
+            builder.Property(e => e.DemolitionStatus)
+                .HasMaxLength(200)
+                .IsUnicode(false);
+
+            builder.Property(e => e.DemolitionRemarks)
+                .HasMaxLength(1000)
+                .IsUnicode(false);
+
             builder.Property(e => e.FileNo)
                 .HasMaxLength(500)
                 .IsUnicode(false);

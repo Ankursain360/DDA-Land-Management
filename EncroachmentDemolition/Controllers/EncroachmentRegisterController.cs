@@ -21,9 +21,6 @@ using System.Text;
 using Microsoft.AspNetCore.Hosting;
 using Dto.Common;
 using Microsoft.AspNetCore.Http;
-
-
-
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -268,7 +265,7 @@ namespace EncroachmentDemolition.Controllers
                                         {
                                             Area = encroachmentRegisterations.AreaApprox.Count <= i ? 0 : encroachmentRegisterations.AreaApprox[i],
                                             CountOfStructure = encroachmentRegisterations.CountOfStructure.Count <= i ? 0 : encroachmentRegisterations.CountOfStructure[i],
-                                            DateOfEncroachment = encroachmentRegisterations.DateOfEncroachment.Count <= i ? 0 : encroachmentRegisterations.DateOfEncroachment[i],
+                                            DateOfEncroachment = encroachmentRegisterations.DateOfEncroachment.Count <= i ? "0" : encroachmentRegisterations.DateOfEncroachment[i],
                                             ReligiousStructure = encroachmentRegisterations.ReligiousStructure.Count <= i ? "" : encroachmentRegisterations.ReligiousStructure[i],
                                             ConstructionStatus = encroachmentRegisterations.ConstructionStatus.Count <= i ? "" : encroachmentRegisterations.ConstructionStatus[i],
                                             NameOfStructure = encroachmentRegisterations.NameOfStructure.Count <= i ? "" : encroachmentRegisterations.NameOfStructure[i],

@@ -1,0 +1,120 @@
+﻿
+@model List<Dto.Search.DemolitionDashboardDto>
+<div class="card text-white bg-secondary  mb-3">
+    <div class="card-header">
+        <h5>Demolition Dashboard</h5>
+    </div>
+    <div class="card-body bg-light" style="text-decoration:none!important;outline:none!important">
+        <div class="widget p-4 p-md-5">
+            <div class="row g-md-5">
+                <div class="col-md-4 col-sm-6">
+                    <a href="#" onclick="showdata('TotalReceived')" title="Total Received">
+                        <div class="card text-white bg-primary mb-3">
+                            <div class="card-header">
+                                <b>Total Received</b>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">@Model.Select(x => x.TotalRequest).FirstOrDefault()</h5>
+                                <p class="card-text"> Total Application</p>
+                            </div>
+                            <div class="card-footer text-end">
+                                @*<a href="#" class="btn btn-group-sm bg-primary">show</a>*@
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <a href="#" onclick="showdata('TotalPending')" title="Total Pending">
+                        <div class="card text-white bg-secondary  mb-3">
+                            <div class="card-header">
+                                <b> Total Pending</b>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">@Model.Select(x => x.TotalPending).FirstOrDefault() </h5>
+                                <p class="card-text">Pedning</p>
+                            </div>
+                            <div class="card-footer text-end">
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <a href="#" onclick="showdata('PendingAtyou')" title="Total Pending at you">
+                        <div class="card text-white bg-warning mb-3">
+                            <div class="card-header">
+                                <b>Pending At you</b>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">@Model.Select(x => x.PendingAtYou).FirstOrDefault() </h5>
+                                <p class="card-text">Pending At you</p>
+                                @*<a href="#" class="btn btn-primary">Go#</a>*@
+                            </div>
+                            <div class="card-footer text-end">
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <a href="#" onclick="showdata('TotalApproved')" title="Total Approved">
+                        <div class="card text-white bg-success   mb-3">
+                            <div class="card-header">
+                                <b> Approved</b>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">@Model.Select(x => x.TotalApproved).FirstOrDefault() </h5>
+                                <p class="card-text">Approved</p>
+                            </div>
+                            <div class="card-footer text-end">
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <a href="#" onclick="showdata('TotalRejected')" title="Total Rejected">
+                        <div class="card text-white bg-danger mb-3">
+                            <div class="card-header">
+                                <b>Rejected</b>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">@Model.Select(x => x.TotalRejected).FirstOrDefault() </h5>
+                                <p class="card-text">Rejected</p>
+                            </div>
+                            <div class="card-footer text-end">
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="card-footer">
+        <small class="text-white">Last updated 3 mins ago</small>
+    </div>
+</div>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" style="display:none" id="btnShowModel" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+    #
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Dashboard Data</h5><h5 id="hfiltertext"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" onclick="resetModel()" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="divModelContent">
+                    @*show data Here*@
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="resetModel()" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

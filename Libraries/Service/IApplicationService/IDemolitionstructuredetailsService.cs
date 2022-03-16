@@ -56,5 +56,9 @@ namespace Libraries.Service.IApplicationService
         Task<PagedResult<Fixingdemolition>> GetPagedDemolitiondiary(DemolitionstructuredetailsDto1 model, int userId, int approved);
         Task<Demolitionstructuredetails> FetchSingleResultonId(int id);
         Task<Fixingdemolition> FetchSingleResultOfFixingDemolition(int id);
+
+        Task<List<DemolitionDashboardDto>> GetDashboardData(int userId,int roleId);
+
+        Task<PagedResult<Fixingdemolition>> GetDashboardListData(DemolitionDasboardDataDto model);
     }
 }

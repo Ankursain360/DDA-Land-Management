@@ -62,7 +62,7 @@ namespace Dto.Master
         public List<string> NameOfStructure { get; set; }
         public List<decimal> AreaApprox { get; set; }
         public List<string> Type { get; set; }
-        public List<int> DateOfEncroachment { get; set; }
+        public List<string> DateOfEncroachment { get; set; }
         public List<decimal> CountOfStructure { get; set; }
         public List<string> ReferenceNoOnLocation { get; set; }
         public List<string> ConstructionStatus { get; set; }

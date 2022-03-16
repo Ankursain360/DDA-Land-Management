@@ -1,0 +1,270 @@
+﻿@model Libraries.Model.Entity.EncroachmentRegisteration 
+
+<div class="list-unstyled m-0 ps-2 pe-1 ps-md-4 pe-md-3 " id="collapseApprroval">
+    <div id="allDetails">
+        @*<input type="hidden" asp-for="Id" id="hdnId" />*@
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <label class="label me-5" style="color:black; font-weight:700;">Department:</label>
+                    <label class="control-label">@Model.Department.Name</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+
+                    <label class="label me-5" style="color:black; font-weight:700;">Zone:</label>
+                    <label class="control-label">@Model.Zone.Name</label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <label class="label me-5" style="color:black; font-weight:700;">Division:</label>
+                    <label class="control-label">@Model.Division.Name</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <label class="label me-5" style="color:black; font-weight:700;">Locality(Village):</label>
+                    <label class="control-label">@Model.Locality.Name</label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <label class="label me-5" style="color:black; font-weight:700;">Khasra No.:</label>
+                    <label class="control-label">@Model.KhasraNo</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <label class="label me-5" style="color:black; font-weight:700;">Inspection Date:</label>
+                    <label class="control-label">@Model.EncrochmentDate.ToString("dd/MMM/yyyy")</label>
+                </div>
+            </div>
+        </div>
+        <div id="DivArea">
+            <h2 class="my-3 sub-heading card-header">Site Details</h2>
+            <div class="row mt-md-3">
+                <div class="col-md-4">
+                    <div class="floating-label-wrap">
+                        <label class="label me-5" style="color:black; font-weight:700;">Area Unit:</label>
+                        <select class="floating-label-field floating-label-field--s3" asp-for="AreaUnit" disabled id="inspectionAreaUnit">
+                            <option value="">--Select--</option>
+                            <option value="0">Bigha-Biswa-Biswansi</option>
+                            <option value="1">Sq Yd.</option>
+                            <option value="2">Acre</option>
+                            <option value="3">Hectare</option>
+                            <option value="4">Sq. Mt.</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div id="inspectionbighabis">
+                <div class="row mt-md-3">
+                    <div class="col-md-4">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <label class="label me-5" style="color:black; font-weight:700;">Bigha:</label>
+                            <label class="control-label">@Model.TotalAreaInBighaInspection</label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <label class="label me-5" style="color:black; font-weight:700;">Biswa:</label>
+                            <label class="control-label">@Model.TotalAreaInBiswaInspection</label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <label class="label me-5" style="color:black; font-weight:700;">Biswansi:</label>
+                            <label class="control-label">@Model.TotalAreaInBiswaniInspection</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="inspectionAreainSqAcreHec" style="display:none;">
+                <div class="row mt-md-3">
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <label class="label me-5" style="color:black; font-weight:700;">Total Area(Sq Yd./Acre/Hectare):</label>
+                            <label class="control-label">@Model.TotalAreaInSqAcreHt</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-md-3">
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <label class="label me-5" style="color:black; font-weight:700;">Area(in sq. mt.):</label>
+                        <label class="control-label">@Model.Area</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-12">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <label class="label me-5" style="color:black; font-weight:700;">Location/Address with land mark:</label>
+                    <label class="control-label">@Model.LocationAddressWithLandMark</label>
+                </div>
+            </div>
+            <div class="row mt-md-3">
+                <div class="col-md-12"> 
+                    <label class="label me-5" style="color:black; font-weight:700;">Encroachment:</label>
+                    <label class="control-label">@Model.IsEncroachment</label>
+                </div>
+            </div>
+        </div>
+        <div id="Divclsification">
+            <h2 class="my-3 sub-heading card-header">Details Of Encroachment</h2>
+            <div class="row mt-md-3 mb-md-3">
+                <div class="col-md-12">
+                    <div class="floating-label-wrap mb-3 mb-md-0"> 
+                        <label class="label me-5" style="color:black; font-weight:700;">Name of Encroacher</label>
+                        <label class="control-label">@Model.EncroacherName</label> 
+                    </div>
+                </div>
+            </div>
+            <div class="table-section bg-white border shadow rounded">
+                <div class="table-responsive ">
+                    <table id="tbl_posts" class="table table-sm table-bordered mb-0 table-striped">
+                        <thead class="text-nowrap">
+                            <tr>
+                                <th>Sr.No</th>
+                                <th>Name of Structure</th>
+                                <th>Construction Status</th>
+                                <th>Area[Approx.]</th>
+                                <th>Type[residential/religious/compercial]</th>
+                                <th>Religious Structure</th>
+                                <th>Age of Encroachment</th>
+                                <th>Reference No. on  Location</th>
+                                <th>Count of Structure</th>
+
+                            </tr>
+                        </thead>
+                        <tbody id="tbl_posts_body">
+                        </tbody>
+                        <tbody id="add">
+                            <tr id="">
+                                <td style="text-align:center;"><span class="sn">1</span></td>
+                                <td>
+                                    <div class="floating-label-wrap mb-3 mb-md-0">
+                                        <label class="control-label" id="NameOfStructure">@Model.NameOfStructure</label>                                        
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="floating-label-wrap">
+                                        <label class="control-label" id="ConstructionStatus">@Model.ConstructionStatus</label> 
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="floating-label-wrap mb-3 mb-md-0">
+                                        <label class="control-label" id="AreaApprox">@Model.AreaApprox</label>                                        
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="floating-label-wrap mb-3 mb-md-0">
+                                        <label class="control-label" id="Type">@Model.Type</label> 
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="floating-label-wrap">
+                                        <label class="control-label" id="ReligiousStructure">@Model.ReligiousStructure</label> 
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="floating-label-wrap mb-3 mb-md-0">
+                                        <label class="control-label" id="DateOfEncroachment">@Model.DateOfEncroachment</label> 
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="floating-label-wrap mb-3 mb-md-0">
+                                        <label class="control-label" id="ReferenceNoOnLocation">@Model.ReferenceNoOnLocation</label> 
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="floating-label-wrap mb-3 mb-md-0">
+                                        <label class="control-label" id="CountOfStructure">@Model.CountOfStructure</label> 
+                                    </div>
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="row pt-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap"> 
+                    <select asp-for="StatusOfLand" class="floating-label-field floating-label-field--s3" disabled onchange="onChangeLandStatus(this.value)">
+                        <option value="DDA Land">DDA Land</option>
+                        <option value="Other Govt. Land">Other Govt. Land</option>
+                        <option vlaue="Private Land">Private Land</option>
+                    </select>
+                    <label class="floating-label">Land Ownership</label>
+                </div>
+            </div>
+        </div>
+        <div id="divForLandStatus">
+            <div class="row pt-3">
+                <div class="col-md-6">
+                    <div class="floating-label-wrap">
+                        <label class="label me-5" style="color:black; font-weight:700;">Possession with DDA</label>
+                        <label class="control-label">@Model.IsPossession</label> 
+                    </div>
+                </div>
+            </div>
+
+            <div class="row pt-3">
+                <div class="col-md-6" id="divDepartment" style="display:block;">
+                    <div class="floating-label-wrap">
+                        <select asp-for="OtherDepartment" disabled class="floating-label-field floating-label-field--s3" asp-items="@(new SelectList(Model.DepartmentList, "Id", "Name"))">
+                            <option value="0">Select</option>
+                        </select>
+                        <label asp-validation-for="OtherDepartment" class="error"></label>
+                        <label class="floating-label">Other Department </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row pt-3"> 
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <label class="label me-5" style="color:black; font-weight:700;">Police Station:</label>
+                    <label class="control-label">@Model.PoliceStation</label> 
+                </div>
+            </div>
+        </div>
+        <div class="row pt-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <label class="label me-5" style="color:black; font-weight:700;">Officer on Duty:</label>
+                    <label class="control-label">@Model.SecurityGuardOnDuty</label> 
+                </div>
+            </div>  
+        </div>
+         
+        <div class="row pt-3">
+            <div class="col-md-12">
+                <div class="floating-label-wrap">
+                    <label class="label me-5" style="color:black; font-weight:700;">Remarks:</label>
+                    <label class="control-label">@Model.Remarks</label> 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/encroachmentregisterationviewpdf.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/encroachmentregisterationviewpdf.min.js" asp-append-version="true"></script>
+</environment>

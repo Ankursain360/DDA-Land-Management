@@ -227,41 +227,31 @@
                     <label class="floating-label">Demolition Report</label>
                 </div>
             </div>
-        </div>
-
-        @*<div class="row pt-3">
-            <div class="col-md-12">
-                <div class="table-section bg-white border shadow rounded">
-                    <div class="table-responsive ">
-                        <table id="tbl_posts" class="table table-sm table-bordered mb-0 table-striped">
-                            <thead class="text-nowrap">
-                                <tr>
-                                    <th>Sr.No</th>
-                                    <th>Name of Structure</th>
-                                    <th>No of Structure</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var item in Model.Demolitionstructure)
-                                {
-                                    <tr>
-                                        <td>@(recNo += 1)</td>
-                                        <td>@(item.Structure.Name)</td>
-                                        <td>
-                                            <div class="floating-label-wrap mb-3 mb-md-0">
-                                                <input disabled type="text" asp-for="NoOfStructrure" value="@(item.NoOfStructrure)" class="floating-label-field floating-label-field--s3" readonly="readonly" />
-                                                <input type="hidden" asp-for="Id" value="@(item.Id)" />
-                                                <input type="hidden" asp-for="StructrureId" value="@(item.StructureId)" />
-                                            </div>
-                                        </td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                    </div>
+            <div class=" col-md-6">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" disabled id="ddldemolitionstatus"
+                            asp-for="DemolitionStatus">
+                        <option value="">--Select--</option>
+                        <option value="Partially Successful">Partially Successful</option>
+                        <option value="Successful">Successful</option>
+                        <option value="Not_Successful">Not Successful</option>
+                    </select>
+                    <span class="d-block text-danger field-validation-valid" asp-validation-for="DemolitionStatus"></span>
+                    <label class="floating-label">Demolition Status<span style="color:red">*</span></label>
                 </div>
             </div>
-        </div>*@
+        </div>
+        <div class="row mt-md-3">
+            <div class="form-group col-md-12">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <textarea asp-for="DemolitionRemarks" type="text" disabled placeholder="Demolition Remarks"
+                              class="floating-label-field floating-label-field--s3"></textarea>
+                    <span class="d-block text-danger field-validation-valid" asp-validation-for="DemolitionRemarks"></span>
+                    <label class="floating-label">Demolition Remarks, If Any</label>
+                </div>
+            </div>
+        </div>
+
         <h3 class="my-3 d-flex sub-heading pt-4"> Demolished Structure  </h3>
         <div class="table-section bg-white border shadow rounded">
             <div class="table-responsive">
