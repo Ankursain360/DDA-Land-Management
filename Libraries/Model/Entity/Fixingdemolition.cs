@@ -32,6 +32,8 @@ namespace Libraries.Model.Entity
         public Approvalstatus ApprovedStatusNavigation { get; set; }
 
         [NotMapped]
+        public string Otp { get; set; }
+        [NotMapped]
         public List<Demolitionchecklist> Demolitionchecklist { get; set; }
         [NotMapped]
         public List<Demolitionprogram> Demolitionprogram { get; set; }
