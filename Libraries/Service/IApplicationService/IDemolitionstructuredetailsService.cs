@@ -25,8 +25,8 @@ namespace Libraries.Service.IApplicationService
 
         Task<bool> SaveDemolitionstructure(Demolitionstructure demolitionstructure);
         Task<bool> DeleteDemolitionstructure(int Id);
-        
-       
+
+
         Task<bool> SaveDemolitionstructureafterdemolitionphotofiledetails(Demolitionstructureafterdemolitionphotofiledetails demolitionstructureafterdemolitionphotofiledetails);
         Task<bool> DeleteDemolitionstructureafterdemolitionphotofiledetails(int Id);
         Task<bool> SaveDemolitionstructurebeforedemolitionphotofiledetails(Demolitionstructurebeforedemolitionphotofiledetails demolitionstructurebeforedemolitionphotofiledetails);
@@ -44,7 +44,7 @@ namespace Libraries.Service.IApplicationService
 
         //added by ishu 11june2021
 
-        
+
         Task<bool> SaveDemolishedstructurerpt(Demolishedstructurerpt rpt);
         Task<bool> SaveAreareclaimedrpt(Areareclaimedrpt rpt);
         Task<List<Demolishedstructurerpt>> GetAlldemolitionrptdetails(int id);
@@ -57,8 +57,10 @@ namespace Libraries.Service.IApplicationService
         Task<Demolitionstructuredetails> FetchSingleResultonId(int id);
         Task<Fixingdemolition> FetchSingleResultOfFixingDemolition(int id);
 
-        Task<List<DemolitionDashboardDto>> GetDashboardData(int userId,int roleId);
+        Task<List<DemolitionDashboardDto>> GetDashboardData(int userId, int roleId);
 
         Task<PagedResult<Fixingdemolition>> GetDashboardListData(DemolitionDasboardDataDto model);
+        Task<List<Fixingdemolition>> DownloadDasboarddata(string filter, int Userid);
+
     }
 }

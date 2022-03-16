@@ -49,6 +49,26 @@ function GetSearchParam(pageNumber, pageSize, sortOrder, filterdata) {
     return model;
 }
 
+// Download Funcationlity
+
+$(document).on("click", "#btndownloadlink", function () {
+/*$("#btndownloadlink").click(function () {  */
+    if (filterdata == '' || filterdata == null) {
+        alert("Please refresh the page and try again");
+        window.location.reload();
+    }
+    else {
+        Download(filterdata);
+    }
+});
+function Download(filter) {  
+    let a = document.createElement('a');
+    a.target = '_blank';
+    a.href = `../Demolitionstructuredetails/DwnloadDashboard/?filter=${filter}`;
+    a.click();
+}
+
+
 function onPaging(pageNo) {
     Pagewisedata(parseInt(pageNo), parseInt(currentPageSize), sortOrder, filterdata);
     currentPageNumber = pageNo;

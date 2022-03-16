@@ -243,6 +243,11 @@ namespace Libraries.Service.ApplicationService
         {
             return await _demolitionstructuredetailsRepository.GetDashboardListData(model);
         }
+        public async Task<List<Fixingdemolition>> DownloadDasboarddata(string filter, int Userid)
+        {
+            return await _demolitionstructuredetailsRepository.DownloadDasboarddata(filter, Userid);
+        }
+        
     }
 
 }

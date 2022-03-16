@@ -340,5 +340,17 @@
     "inputFiles": [
       "wwwroot/js/encroachmentregisterationviewpdf.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/annexureaapprovalprintfile.min.js",
+    "inputFiles": [
+      "wwwroot/js/annexureaapprovalprintfile.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/HomeIndex.min.js",
+    "inputFiles": [
+      "wwwroot/js/HomeIndex.js"
+    ]
   }
 ]

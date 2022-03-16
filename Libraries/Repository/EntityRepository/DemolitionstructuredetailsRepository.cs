@@ -595,5 +595,29 @@ namespace Libraries.Repository.EntityRepository
 
             return data;
         }
+        public async Task<List<Fixingdemolition>> DownloadDasboarddata(string filter, int Userid)
+        {
+            var PendingatYoustatus = new[] { 3, 4 };
+            var data = await _dbContext.Fixingdemolition.Include(x => x.Encroachment.Locality)
+                                          .Include(x => x.Encroachment)
+                                          .Include(x => x.Encroachment.Department)
+                                          .Include(x => x.Encroachment.Zone)
+                                          .Include(x => x.ApprovedStatusNavigation)
+                                          .Include(x => x.Demolitionstructuredetails)
+                                          .Include(x => x.Encroachment.KhasraNoNavigation)
+                                          .Where(x => x.IsActive == 1
+                                          && (filter == "TotalReceived" ? x.ApprovedStatusNavigation.StatusCode == x.ApprovedStatusNavigation.StatusCode
+                                              : filter == "TotalApproved" ? (x.ApprovedStatusNavigation.StatusCode == 3)
+                                              : filter == "PendingAtyou" ? (!PendingatYoustatus.Contains(x.ApprovedStatusNavigation.StatusCode) && x.PendingAt == Userid.ToString())
+                                              : filter == "TotalPending" ? (!PendingatYoustatus.Contains(x.ApprovedStatusNavigation.StatusCode))
+                                              : filter == "TotalRejected" ? (x.ApprovedStatusNavigation.StatusCode == 4)
+                                              : (x.ApprovedStatusNavigation.StatusCode == x.ApprovedStatusNavigation.StatusCode)
+                                              )
+                                          ).ToListAsync();
+
+
+            return data;
+        }
+        
     }
 }

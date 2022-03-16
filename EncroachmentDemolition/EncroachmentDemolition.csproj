@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\js\annexureaapprovalprintfile.min.js" />
     <Content Remove="wwwroot\js\demolitionreportindex.min.js" />
     <Content Remove="wwwroot\js\EncroachmentRegisterCreate.js~RF20e51f21.TMP" />
     <Content Remove="wwwroot\js\onlinecomplaintapprovalprocessindex.min.js" />
@@ -16,11 +17,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\js\annexureaapprovalprintfile.min.js" />
     <_ContentIncludedByDefault Remove="wwwroot\js\demolitionreportindex.min.js" />
     <_ContentIncludedByDefault Remove="wwwroot\js\onlinecomplaintapprovalprocessindex.min.js" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\js\annexureaapprovalprintfile.min.js" />
     <None Include="wwwroot\js\demolitionreportindex.min.js" />
     <None Include="wwwroot\js\onlinecomplaintapprovalprocessindex.min.js" />
   </ItemGroup>
