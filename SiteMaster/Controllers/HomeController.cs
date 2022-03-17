@@ -52,7 +52,7 @@ namespace SiteMaster.Controllers
             {
                 _httpContextAccessor.HttpContext.Response.Cookies.Delete(cookie, new CookieOptions()
                 {
-                    Domain = "auth.managemybusinessess.com"
+                    Domain = "auth.ddalmis.org.in"
                 });
             }
             //

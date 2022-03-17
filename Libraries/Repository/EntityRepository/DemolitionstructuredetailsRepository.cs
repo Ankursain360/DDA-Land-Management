@@ -618,6 +618,20 @@ namespace Libraries.Repository.EntityRepository
 
             return data;
         }
+        public async Task<string> Getusername(int Userid)
+        {
+         var data=   await _dbContext.Userprofile
+                                    .Include(a => a.User)
+                                    .Include(a => a.Role)
+                                    .Include(a => a.Department)
+                                    .Include(a => a.Zone)
+                                    .Include(a => a.District)
+                                    .Where(a =>a.User.Id == Userid)
+                                    .FirstOrDefaultAsync();
+            string name = data.User.UserName + "(" + data.Role.Name + ")";
+            return name;
+        }
         
+
     }
 }

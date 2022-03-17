@@ -247,7 +247,11 @@ namespace Libraries.Service.ApplicationService
         {
             return await _demolitionstructuredetailsRepository.DownloadDasboarddata(filter, Userid);
         }
-        
+        public async Task<string> Getusername(int Userid)
+        {
+            return await _demolitionstructuredetailsRepository.Getusername(Userid);
+        }
+
     }
 
 }

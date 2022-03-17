@@ -1226,7 +1226,7 @@ namespace EncroachmentDemolition.Controllers
         {
 
             var results = await _demolitionstructuredetailsService.GetDashboardListData(model);
-
+             
             return PartialView("_ModelDashboardData", results);
         }
 
@@ -1247,8 +1247,9 @@ namespace EncroachmentDemolition.Controllers
                         KhasraNo = result[i].Encroachment.KhasraNoNavigation.LocalityId == null ? result[i].Encroachment.KhasraNoNavigation.PlotNo : result[i].Encroachment.KhasraNoNavigation.KhasraNo,
                         DemolitionStatus = result[i].Demolitionstructuredetails.Count > 0 ? result[i].Demolitionstructuredetails.Select(x => x.DemolitionStatus).FirstOrDefault().Replace("_", " ") : "-",
                         ApplicationDate = result[i].CreatedDate.ToString("dd/MMM/yyyy"),
-                        ApplicationStatus = result[i].ApprovedStatusNavigation.SentStatusName
-                    }); ;
+                        ApplicationStatus = result[i].ApprovedStatusNavigation.SentStatusName,
+                        PendingAt = result[i].PendingAt == "0" ? "NA" : await _demolitionstructuredetailsService.Getusername(result[i].PendingAt == null ? 0 : Convert.ToInt32(result[i].PendingAt))
+                    });
                 }
             }
 

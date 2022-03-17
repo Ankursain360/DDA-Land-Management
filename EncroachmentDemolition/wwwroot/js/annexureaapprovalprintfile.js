@@ -1,8 +1,8 @@
-﻿$(document).ready(function () { 
+﻿$(document).ready(function () {
     var id = parseInt($('#Id').val());
     var encroachmentId = parseInt($('#EncroachmentId').val());
     var watchWardId = parseInt($('#Encroachment_WatchWardId').val());
-   // GetWatchWardDetails(watchWardId);
+    // GetWatchWardDetails(watchWardId);
     GetEncroachmentDetails(encroachmentId);
     GetHistoryDetails(id);
     GetAnnexureADetails(id);
@@ -354,7 +354,7 @@ $(".printpdf").click(function () {
     //    '}' +
     //    '</style>';
     var printContents = '<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">';
-     printContents += document.getElementById("MainContentForm").innerHTML;
+    printContents += document.getElementById("MainContentForm").innerHTML;
     // doc.write(document.getElementById("divPrintRef").innerHTML);  // _Layout page div id (Mandatory)
     doc.write(printContents);
     doc.close();

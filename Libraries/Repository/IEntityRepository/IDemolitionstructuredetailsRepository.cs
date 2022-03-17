@@ -57,6 +57,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<DemolitionDashboardDto>> GetDashboardData(int userId, int roleId);
         Task<PagedResult<Fixingdemolition>> GetDashboardListData(DemolitionDasboardDataDto model);
         Task<List<Fixingdemolition>> DownloadDasboarddata(string filter, int Userid);
+        Task<string> Getusername(int Userid);
         
 
     }

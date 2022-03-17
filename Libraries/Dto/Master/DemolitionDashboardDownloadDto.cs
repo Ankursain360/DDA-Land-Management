@@ -16,5 +16,6 @@ namespace Dto.Master
         public string DemolitionStatus { get; set; }        
         public string ApplicationDate { get; set; }
         public string ApplicationStatus { get; set; }
+        public string PendingAt { get; set; }
     }
 }
