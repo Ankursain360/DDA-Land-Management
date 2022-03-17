@@ -37,6 +37,27 @@ namespace Dto.Common
 
         }
 
+        public void GenerateOTP(string Message, string Mobile)
+        {
+           
+            string url = "http://gateway.leewaysoftech.com/xml-transconnect-api.php?username=Ddauth&password=m1kw6vu2&mobile=" + Mobile + "&message=Dear%20User%2C%20Your%20OTP%20is%20"+Message+ ".%20This%20OTP%20is%20valid%20for%205%20minutes.%20Land%20Management%20.DDASVY%0A&senderid=DDASVY&peid=1201159308150125712&contentid=1607100000000200000";
+
+            HttpWebRequest httpreq = (HttpWebRequest)WebRequest.Create(url);
+            try
+            {
+                HttpWebResponse httpres = (HttpWebResponse)httpreq.GetResponse();
+             
+            }
+            catch (Exception e)
+            {
+                //  results = "0";
+            }
+
+
+
+        }
+
+
         public void GenerateSendOTPForVerifyProperty(string Message, string Mobile)
         {
            
@@ -59,7 +80,6 @@ namespace Dto.Common
         //For Save Property Registration 
         public void GenerateSendSMSForSaveLandInventory(string PrimaryListNo, string Mobile)
         {
-            
             string url = "http://gateway.leewaysoftech.com/xml-transconnect-api.php?username=Ddauth&password=m1kw6vu2&mobile=" + Mobile + "&message=You%20have%20successfully%20entered%20the%20Land%20Inventory%20Record%20having%20Primary%20List%20no%20"+PrimaryListNo+ "%20and%20forwarded%20for%20verification%2Fapproval%20to%20your%20reporting%20officer.%20Land%20Management%20DDA&senderid=DDASVY&peid=1201159308150125712&contentid=1607100000000189078";
             HttpWebRequest httpreq = (HttpWebRequest)WebRequest.Create(url);
             try

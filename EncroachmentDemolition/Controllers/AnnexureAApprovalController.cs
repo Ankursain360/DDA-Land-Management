@@ -20,6 +20,7 @@ using Service.IApplicationService;
 using Microsoft.AspNetCore.Hosting;
 using System.Text;
 using Dto.Master;
+using Dto.Common;
 
 using Microsoft.AspNetCore.Http;
 
@@ -38,6 +39,7 @@ namespace EncroachmentDemolition.Controllers
         private readonly IUserProfileService _userProfileService;
         private readonly IHostingEnvironment _hostingEnvironment;
         private readonly IUserNotificationService _userNotificationService;
+        private readonly IPropertyRegistrationService _propertyRegistrationService;
 
         string targetPhotoPathLayout = "";
         string targetReportfilePathLayout = "";
@@ -54,7 +56,7 @@ namespace EncroachmentDemolition.Controllers
             IApprovalProccessService approvalproccessService, IWorkflowTemplateService workflowtemplateService,
             IAnnexureAService annexureAService, IAnnexureAApprovalService annexureAApprovalService,
             IUserProfileService userProfileService, IHostingEnvironment hostingEnvironment,
-            IUserNotificationService userNotificationService)
+            IUserNotificationService userNotificationService, IPropertyRegistrationService propertyRegistrationService)
         {
             _encroachmentRegisterationService = encroachmentRegisterationService;
             _configuration = configuration;
@@ -66,6 +68,7 @@ namespace EncroachmentDemolition.Controllers
             _userProfileService = userProfileService;
             _hostingEnvironment = hostingEnvironment;
             _userNotificationService = userNotificationService;
+            _propertyRegistrationService = propertyRegistrationService;
             targetPhotoPathLayout = _configuration.GetSection("FilePaths:WatchAndWard:Photo").Value.ToString();
             targetReportfilePathLayout = _configuration.GetSection("FilePaths:WatchAndWard:ReportFile").Value.ToString();
             PhotoFilePath = _configuration.GetSection("FilePaths:EncroachmentRegisterationFiles:PhotoFilePath").Value.ToString();
@@ -471,8 +474,24 @@ namespace EncroachmentDemolition.Controllers
                         var dropdownValue = await GetApprovalStatusDropdownListAtIndex();
                         int[] actions = Array.ConvertAll(dropdownValue, int.Parse);
                         data.ApprovalStatusList = await _approvalproccessService.BindDropdownApprovalStatus(actions.Distinct().ToArray());
-
-                        return View("Index", data);
+                            data.ApprovalStatusList = await _approvalproccessService.BindDropdownApprovalStatus(actions.Distinct().ToArray());
+                            // For Approval Status
+                            if (fixingdemolition.ApprovalStatus == "3" && SiteContext.UserId == 58) // 58 For CLM and 3 For Approved
+                            {
+                                Random random = new Random();
+                                var otp = random.Next(111111, 999999);
+                                string Action = otp.ToString();
+                                string Mobile = _propertyRegistrationService.GetMobileNo(SiteContext.UserId);
+                                HttpContext.Session.SetString("OTP", otp.ToString());
+                                SendSMSDto SMS = new SendSMSDto();
+                                SMS.GenerateSendSMS(Action, Mobile);
+                                return RedirectToAction("OTP");
+                            }
+                            else
+                            {
+                                return View("Index", data);
+                            }
+                          
                     }
                     else
                     {
@@ -504,6 +523,45 @@ namespace EncroachmentDemolition.Controllers
                 return RedirectToAction("Index");
             }
         }
+        #region For OTP
+        public async Task<IActionResult> OTP()
+        {
+
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> OTP(Fixingdemolition fixingdemolition)
+        {
+            if (HttpContext.Session.GetString("OTP") != null)
+            {
+                string otp = HttpContext.Session.GetString("OTP").ToString();
+
+
+                if (fixingdemolition.Otp == otp)
+                {
+
+                    ViewBag.Message = Alert.Show("Approved Successfully Updated", "", AlertType.Success);
+                    TempData["Message"] = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+
+                    ViewBag.Message = Alert.Show("Incorrect OTP, Please Enter Correct OTP", "", AlertType.Warning);
+                    TempData["Message"] = Alert.Show("Incorrect OTP, Please Enter Correct OTP", "", AlertType.Error);
+                    return RedirectToAction("OTP");
+                }
+            }
+            else
+            {
+                ViewBag.Message = Alert.Show("Incorrect OTP, Please Enter Correct OTP", "", AlertType.Warning);
+                TempData["Message"] = Alert.Show("Incorrect OTP, Please Enter Correct OTP", "", AlertType.Error);
+                return RedirectToAction("Create");
+            }
+            return RedirectToAction("Index");
+        }
+        #endregion
 
         #region Watch & Ward  Details
         public async Task<PartialViewResult> WatchWardView(int id)
