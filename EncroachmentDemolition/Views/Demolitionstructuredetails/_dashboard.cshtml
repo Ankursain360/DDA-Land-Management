@@ -15,7 +15,7 @@
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title">@Model.Select(x => x.TotalRequest).FirstOrDefault()</h5>
-                                <p class="card-text"> Total Application</p>
+                                <p class="card-text">Click here to see Total Received Application</p>
                             </div>
                             <div class="card-footer text-end">
                                 @*<a href="#" class="btn btn-group-sm bg-primary">show</a>*@
@@ -39,10 +39,10 @@
                     </a>
                 </div>
                 <div class="col-md-4 col-sm-6">
-                    <a href="#" onclick="showdata('PendingAtyou')" title="Total Pending at you">
+                    <a href="#" onclick="showdata('PendingAtyou')" title="Total Pending at User Level">
                         <div class="card text-white bg-warning mb-3">
                             <div class="card-header">
-                                <b>Pending At you</b>
+                                <b>Pending At User Level</b>
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title">@Model.Select(x => x.PendingAtYou).FirstOrDefault() </h5>
