@@ -25,7 +25,8 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<List<Locality>> GetLocalities()
         {
-            var localityList = await _dbContext.Locality.Where(x => x.IsActive == 1).ToListAsync();
+            //Zone id 59 only select damage payee locality list
+            var localityList = await _dbContext.Locality.Where(x => x.IsActive == 1 && x.ZoneId==59).ToListAsync();
             return localityList;
         }
 

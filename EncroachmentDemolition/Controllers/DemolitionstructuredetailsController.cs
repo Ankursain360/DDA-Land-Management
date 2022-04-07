@@ -1211,7 +1211,7 @@ namespace EncroachmentDemolition.Controllers
             return Flag;
         }
 
-
+        #region Demolistion Dashboard
         //Demolistion Dashboard
 
         public async Task<PartialViewResult> GetDashboard(int userId, int roleId)
@@ -1259,6 +1259,46 @@ namespace EncroachmentDemolition.Controllers
         }
 
         //
+        #endregion
+        #region Demolistion Diary pdf
+        public async Task<IActionResult> print(int id)
+        {
+            var Data = await _demolitionstructuredetailsService.FetchSingleResultonId(id);
+            if (Data == null)
+            {
+                Demolitionstructuredetails Data1 = new Demolitionstructuredetails();
+
+                var Data2 = await _demolitionstructuredetailsService.FetchSingleResultOfFixingDemolition(id);
+                Data1.FixingDemolitionId = id;
+                ViewBag.PrimaryId = 0;
+                ViewBag.EncroachmentId = Data2.EncroachmentId;
+                ViewBag.WatchWardId = Data2.Encroachment.WatchWardId;
+                Data1.DepartmentList = await _demolitionstructuredetailsService.GetAllDepartment();
+                Data1.ZoneList = await _demolitionstructuredetailsService.GetAllZone(Convert.ToInt32(Data1.DepartmentId ?? 0));
+                Data1.DivisionList = await _demolitionstructuredetailsService.GetAllDivisionList(Convert.ToInt32(Data1.ZoneId ?? 0));
+                Data1.LocalityList = await _demolitionstructuredetailsService.GetAllLocalityList(Convert.ToInt32(Data1.DivisionId ?? 0));
+                Data1.Structure = await _demolitionstructuredetailsService.GetMasterStructure();
+                Data1.DemolitionStructure = await _demolitionstructuredetailsService.GetStructure();
+
+                return View(Data1);
+            }
+            else
+            {
+                Data.FixingDemolitionId = id;
+                ViewBag.PrimaryId = Data.Id;
+                ViewBag.EncroachmentId = Data.FixingDemolition.EncroachmentId;
+                ViewBag.WatchWardId = Data.FixingDemolition.Encroachment.WatchWardId;
+                Data.DepartmentList = await _demolitionstructuredetailsService.GetAllDepartment();
+                Data.ZoneList = await _demolitionstructuredetailsService.GetAllZone(Convert.ToInt32(Data.DepartmentId ?? 0));
+                Data.DivisionList = await _demolitionstructuredetailsService.GetAllDivisionList(Convert.ToInt32(Data.ZoneId ?? 0));
+                Data.LocalityList = await _demolitionstructuredetailsService.GetAllLocalityList(Convert.ToInt32(Data.DivisionId ?? 0));
+                Data.Structure = await _demolitionstructuredetailsService.GetMasterStructure();
+                Data.DemolitionStructure = await _demolitionstructuredetailsService.GetStructure();
+
+                return View(Data);
+            }
+        }
+        #endregion
 
 
     }

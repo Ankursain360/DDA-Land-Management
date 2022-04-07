@@ -13,7 +13,7 @@
                         <table class="table table-bordered" border="0" style="vertical-align: middle;margin: -1px;width: calc(100% + 2px);">
                             <tr>
                                 <td style="vertical-align: middle" align="center">
-                                    <img src="https://res.cloudinary.com/deb9cwxor/image/upload/v1596010902/ow9sj5vbbpymed9eydrl.png" style="height:100px" class="img-responsive" alt="">
+                                    <img src="https://res.cloudinary.com/deb9cwxor/image/upload/v1596010902/ow9sj5vbbpymed9eydrl.png" style="height:100px" class="img-responsive" alt="" />
                                 </td>
                                 <td style="vertical-align: middle">
                                     <h5 class="mb-2 text-primary">
@@ -62,8 +62,11 @@
 
                 <div class="row mt-md-3">
                     <div class="col-md-12 text-center">
-
-                        <button class="btn btn-theme px-5 printpdf" type="button">Print</button>
+                        <button class="btn btn-theme px-5 printpdf" type="button"><span class="btn-label"><i class="ri-printer-fill" aria-hidden="true"> </i></span> Print</button>
+                        <form asp-action="Export" method="post">
+                            <input type="hidden" name="htmlstring" id="htmlstring" />
+                            <button class="btn btn-theme btn-labeled px-5 downloadpdf" type="submit">  <span class="btn-label"><i class="ri-mail-download-fill" aria-hidden="true"></i></span> Download</button>
+                        </form>
                         @Html.ActionLink("Back", "Index", "AnnexureAApproval", null, new { @class = "btn btn-theme" })
 
 
@@ -112,4 +115,3 @@
 <environment exclude="Development">
     <script src="~/js/annexureaapprovalprintfile.min.js" asp-append-version="true"></script>
 </environment>
- 

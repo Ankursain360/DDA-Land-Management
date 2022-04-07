@@ -1,38 +1,37 @@
 ﻿@model Libraries.Model.Entity.EncroachmentRegisteration 
 
 <div class="list-unstyled m-0 ps-2 pe-1 ps-md-4 pe-md-3 " id="collapseApprroval">
-    <div id="allDetails">
+    <div id="allDetails1">
         @*<input type="hidden" asp-for="Id" id="hdnId" />*@
-        <div class="row mt-md-3">
-            <div class="col-md-6">
+        <div class="row mt-md-3 mt-sm-3 mt-lg-3">
+            <div class="col-md-6 col-sm-6 col-lg-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <label class="label me-5" style="color:black; font-weight:700;">Department:</label>
                     <label class="control-label">@Model.Department.Name</label>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="floating-label-wrap">
-
+            <div class="col-md-6 col-sm-6 col-lg-6">
+                <div class="floating-label-wrap"> 
                     <label class="label me-5" style="color:black; font-weight:700;">Zone:</label>
                     <label class="control-label">@Model.Zone.Name</label>
                 </div>
             </div>
         </div>
-        <div class="row mt-md-3">
-            <div class="col-md-6">
+        <div class="row mt-md-3 mt-sm-3 mt-lg-3">
+            <div class="col-md-6 col-sm-6 col-lg-6">
                 <div class="floating-label-wrap">
                     <label class="label me-5" style="color:black; font-weight:700;">Division:</label>
                     <label class="control-label">@Model.Division.Name</label>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 col-sm-6 col-lg-6">
                 <div class="floating-label-wrap">
                     <label class="label me-5" style="color:black; font-weight:700;">Locality(Village):</label>
                     <label class="control-label">@Model.Locality.Name</label>
                 </div>
             </div>
         </div>
-        <div class="row mt-md-3">
+        <div class="row mt-md-3 mt-sm-3 mt-lg-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap">
                     <label class="label me-5" style="color:black; font-weight:700;">Khasra No.:</label>
@@ -204,7 +203,7 @@
                     <select asp-for="StatusOfLand" class="floating-label-field floating-label-field--s3" disabled onchange="onChangeLandStatus(this.value)">
                         <option value="DDA Land">DDA Land</option>
                         <option value="Other Govt. Land">Other Govt. Land</option>
-                        <option vlaue="Private Land">Private Land</option>
+                        <option value="Private Land">Private Land</option>
                     </select>
                     <label class="floating-label">Land Ownership</label>
                 </div>

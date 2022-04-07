@@ -77,7 +77,16 @@ namespace DamagePayee.Controllers
             {
                 int yr = 0;
                 yr = CalculateYearBetweenTwoDates(dto);
-                SetInitialRowBetweenTwoDates(yr, dto, damagecalculation);
+                try
+                { 
+                
+                 SetInitialRowBetweenTwoDates(yr, dto, damagecalculation);
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
             }
 
             return PartialView("_DamageCalculate", damagecalculation);
@@ -117,7 +126,7 @@ namespace DamagePayee.Controllers
             return YrRes;
 
         }
-
+        
         private async void SetInitialRowBetweenTwoDates(int year, DamageCalculationDto dto, List<DamageChargesCalculation> damagecalculation)
         {
 

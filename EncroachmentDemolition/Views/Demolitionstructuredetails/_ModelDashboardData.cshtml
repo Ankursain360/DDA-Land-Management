@@ -1,11 +1,11 @@
 ﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Fixingdemolition>
 
-    <div class="pt-3">
-        <div class="table-section bg-white border shadow rounded">
-            <div class="short-section d-md-flex align-items-center">
-                <div class="p-3 d-flex align-items-end me-auto">
-                    <div class="floating-label-wrap">
-                        @*<select id="ddlSort" class="floating-label-field floating-label-field--s3">
+<div class="pt-3">
+    <div class="table-section bg-white border shadow rounded">
+        <div class="short-section d-md-flex align-items-center">
+            <div class="p-3 d-flex align-items-end me-auto">
+                <div class="floating-label-wrap">
+                    @*<select id="ddlSort" class="floating-label-field floating-label-field--s3">
 
                             <option value="Dep">Department</option>
                             <option value="Zone">Zone</option>
@@ -16,73 +16,88 @@
                         </select>
 
                         <label for="field-1" class="floating-label">Sort by</label>*@
-                    </div>
-                    <div class="short-btn d-flex align-items-center">
-                        @*<span class="btn slow active" id="btnAscending" title="Ascending order"><i class="ri-sort-asc"></i></span>
+                </div>
+                <div class="short-btn d-flex align-items-center">
+                    @*<span class="btn slow active" id="btnAscending" title="Ascending order"><i class="ri-sort-asc"></i></span>
                         <span class="btn slow" id="btnDescending" title="Descending order"><i class="ri-sort-desc"></i></span>*@
 
-                    </div>
                 </div>
+            </div>
 
-                <div class="download-table d-flex align-items-center px-3 mb-3 mb-md-0">
-                    @*<a href="/Demolitionstructuredetails/Create" class="d-flex align-items-center btn btn-primary me-2">
+            <div class="download-table d-flex align-items-center px-3 mb-3 mb-md-0">
+                @*<a href="/Demolitionstructuredetails/Create" class="d-flex align-items-center btn btn-primary me-2">
                         <i class="ri-add-fill me-2 me-lg-1"></i>
                         <small>Add More</small>
                     </a>*@
-                    <a href="javascript:void(0)" class="d-flex align-items-center btn btn-success" id="btndownloadlink">
-                        <i class="ri-download-2-line me-2 me-lg-1"></i>
-                        <small>Download</small>
-                    </a>
-                </div>
+                <a href="javascript:void(0)" class="d-flex align-items-center btn btn-success" id="btndownloadlink">
+                    <i class="ri-download-2-line me-2 me-lg-1"></i>
+                    <small>Download</small>
+                </a>
             </div>
+        </div>
 
-            <div class="table-responsive px-2">
-                <table class="table table-sm table-bordered mb-0 table-striped">
-                    <thead class="text-nowrap">
-                        <tr>
-                            <th>Inspection Date</th>
-                            <th>Department</th>
-                            <th>Zone</th>
-                            <th>Khasra No./Plot No.</th>
-                            <th>Demolition Status</th>
-                            <th>Application Submission Date</th>
-                            <th>Application Status</th>
-                            <th>View Data</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @if (Model != null && Model.Results.Count() > 0)
-                        {
-                            @foreach (var item in Model.Results)
-                            {
-                                <tr>
-
-                                    <td> @(Convert.ToDateTime(item.Encroachment.EncrochmentDate).ToString("dd-MMM-yyyy"))</td>
-                                    <td>@item.Encroachment.Department.Name</td>
-                                    <td>@item.Encroachment.Zone.Name</td>
-                                    @*<td>@(item.Encroachment.KhasraNoNavigation.LocalityId == null ? item.Encroachment.KhasraNoNavigation.Colony : item.Encroachment.KhasraNoNavigation.Locality.Name)</td>*@
-                                    <td>@(item.Encroachment.KhasraNoNavigation.LocalityId == null ? item.Encroachment.KhasraNoNavigation.PlotNo : item.Encroachment.KhasraNoNavigation.KhasraNo)</td>
-                                    <td>@(item.Demolitionstructuredetails.Count>0?item.Demolitionstructuredetails.Select(x=>x.DemolitionStatus).FirstOrDefault().Replace("_"," "):"-")</td>
-                                    <td>@(item.CreatedDate.ToString("dd/MMM/yyyy"))</td>
-                                    <td>@(item.ApprovedStatusNavigation.SentStatusName)</td>
-
-                                    <td valign="middle"> <a asp-action="View" asp-controller="AnnexureAApproval" target="_blank" asp-route-id="@item.Id" title="View" class="edit"><i class="ri-eye-fill"></i> </a></td>
-
-                                </tr>
-                            }
-                        }
-                        else
+        <div class="table-responsive px-2">
+            <table class="table table-sm table-bordered mb-0 table-striped">
+                <thead class="text-nowrap">
+                    <tr>
+                        <th>Inspection Date</th>
+                        <th>Department</th>
+                        <th>Zone</th>
+                        <th>Khasra No./Plot No.</th>
+                        <th>Demolition Status</th>
+                        <th>Application Submission Date</th>
+                        <th>Application Status</th>
+                        <th>View Data</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Results.Count() > 0)
+                    {
+                        @foreach (var item in Model.Results)
                         {
                             <tr>
-                                <th colspan="14" style="text-align:center"> No Record Available! </th>
+
+                                <td> @(Convert.ToDateTime(item.Encroachment.EncrochmentDate).ToString("dd-MMM-yyyy"))</td>
+                                <td>@item.Encroachment.Department.Name</td>
+                                <td>@item.Encroachment.Zone.Name</td>
+                                @*<td>@(item.Encroachment.KhasraNoNavigation.LocalityId == null ? item.Encroachment.KhasraNoNavigation.Colony : item.Encroachment.KhasraNoNavigation.Locality.Name)</td>*@
+                                <td>@(item.Encroachment.KhasraNoNavigation.LocalityId == null ? item.Encroachment.KhasraNoNavigation.PlotNo : item.Encroachment.KhasraNoNavigation.KhasraNo)</td>
+                                <td>@(item.Demolitionstructuredetails.Count>0?item.Demolitionstructuredetails.Select(x=>x.DemolitionStatus).FirstOrDefault().Replace("_"," "):"-")</td>
+                                <td>@(item.CreatedDate.ToString("dd/MMM/yyyy"))</td>
+                                <td>
+                                    @if (item.ApprovedStatusNavigation.SentStatusName == "Submitted")
+                                    {
+                                        <span class="badge bg-danger px-2 py-1"> @(item.ApprovedStatusNavigation.SentStatusName== "Submitted"?"Pending": item.ApprovedStatusNavigation.SentStatusName)</span>
+                                    }
+                                    else if (item.ApprovedStatusNavigation.SentStatusName == "Approved")
+                                    {
+                                        <span class="badge bg-success px-2 py-1"> @(item.ApprovedStatusNavigation.SentStatusName)</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-secondary px-2 py-1"> @(item.ApprovedStatusNavigation.SentStatusName)</span>
+                                    }
+
+
+                                </td>
+
+                                <td valign="middle"> <a asp-action="View" asp-controller="AnnexureAApproval" target="_blank" asp-route-id="@item.Id" title="View" class="edit"><i class="ri-eye-fill"></i> </a></td>
+
                             </tr>
                         }
-                    </tbody>
-                </table>
+                    }
+                    else
+                    {
+                        <tr>
+                            <th colspan="14" style="text-align:center"> No Record Available! </th>
+                        </tr>
+                    }
+                </tbody>
+            </table>
 
-                @await Component.InvokeAsync("Pager", new { totalCount = Model.RowCount, pageNumber = Model.CurrentPage, pageSize = Model.PazeSize })
-            </div>
-
-
+            @await Component.InvokeAsync("Pager", new { totalCount = Model.RowCount, pageNumber = Model.CurrentPage, pageSize = Model.PazeSize })
         </div>
+
+
     </div>
+</div>

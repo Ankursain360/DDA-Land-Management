@@ -338,23 +338,23 @@ $(".printpdf").click(function () {
     //var printContents = '' +
     //    '<style type="text/css">' +
     //    'table {'+
-    //'border - collapse: collapse;'+
-    //'table - layout: fixed;'+
-    //    'width: 100 %;}' +
+    //'border-collapse: collapse;'+
+    //'table-layout: fixed;'+
+    //    'width: 100%;}' +
     //    'th,td {'+
     //        'border: 1px solid #ddd;'+
-    //        'padding: 8px;'+'}'       
+    //        'padding: 8px;'+'}'+      
     //'</style>';
 
-    //var printContents = '' +
-    //    '<style type="text/css">' +
-    //    'table th, table td {' +
-    //    'border:1px solid #000;' +
-    //    'padding:0.5em;' +
-    //    '}' +
-    //    '</style>';
-    var printContents = '<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">';
-    printContents += document.getElementById("MainContentForm").innerHTML;
+    var printContents = '' +
+        '<style type="text/css">' +
+        'table th, table td {' +
+        'border:1px solid #000;' +
+        'padding:0.5em;' +
+        '}' +
+        '</style>';
+   // var printContents += '<link href="https://encroachment.ddalmis.org.in/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">';
+       printContents += document.getElementById("MainContentForm").innerHTML;
     // doc.write(document.getElementById("divPrintRef").innerHTML);  // _Layout page div id (Mandatory)
     doc.write(printContents);
     doc.close();
@@ -369,3 +369,55 @@ $(".printpdf").click(function () {
     };
     show();
 });
+
+$(".downloadpdf").click(function () {
+     
+    var htmlstring = document.getElementById("MainContentForm").innerHTML;
+  
+    var printContents = '' +
+        '<style type="text/css">' +
+        'table th, table td {' +
+        'border:1px solid #000;' +
+        'padding:0.5em;' +
+        '}' +
+        '</style>';
+    printContents += '<link href="https://encroachment.ddalmis.org.in/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">';
+    printContents += htmlstring;
+    $('#htmlstring').val(printContents);
+    
+
+    //$.ajax({
+    //    async: false,
+    //    type: "POST",
+    //    url: "/AnnexureAApproval/Export",
+    //    contentType: false,
+    //    processData: false,
+    //    data: myformData,
+
+    //    failure: function (response) {
+    //        //alert(response.d);
+    //        return false;
+    //    }
+    //}); 
+    //$.ajax({
+    //    async: false,
+    //    type: "POST",
+    //    url: "/AnnexureAApproval/Export",
+    //    contentType: false,
+    //    processData: false,
+    //    data: myformData,
+    //    success: function (response) {
+
+    //      //  showResult(response, filecontrol)
+
+    //    },
+    //    failure: function (response) {
+    //        //alert(response.d);
+    //        return false;
+    //    }
+    //});
+
+});
+
+ 
+ 
