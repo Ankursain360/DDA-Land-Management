@@ -252,7 +252,7 @@ function FillAreaRptAtEdit() {
                     element = content.clone();
                 element.attr('id', 'rec1-' + size);
                 element.find('.delete-record1').attr('data-id', size);
-                element.appendTo('#tbl_posts1_body');
+                //element.appendTo('#tbl_posts1_body');
 
                 element.find('.sn1').html(size);
                 $("#tbl_posts1 #adddata1 .sn1").text($('#tbl_posts1 >tbody >tr').length);
@@ -273,16 +273,18 @@ $(".printpdf").click(function () {
     //getPDF();
     var printWindow = window.open('', '');
     var doc = printWindow.document;
-    //var printContents = '' +
-    //    '<style type="text/css">' +
-    //    'table {'+
-    //'border-collapse: collapse;'+
-    //'table-layout: fixed;'+
-    //    'width: 100%;}' +
-    //    'th,td {'+
-    //        'border: 1px solid #ddd;'+
-    //        'padding: 8px;'+'}'+      
-    //'</style>';
+    var printContents="<title>Demolition Diary</title>"
+      printContents += '' +
+        '<style type="text/css">' +
+        'table {'+
+    'border-collapse: collapse;'+
+    'table-layout: fixed;'+
+        'width: 100%;}' +
+        'th,td {'+
+          'border-bottom: 1px solid #808080;' +
+          'word-wrap: break-word;'+
+            'padding: 8px;'+'}'+      
+    '</style>';
 
     //var printContents = '' +
     //    '<style type="text/css">' +
@@ -291,8 +293,8 @@ $(".printpdf").click(function () {
     //    'padding:0.5em;' +
     //    '}' +
     //    '</style>';
-    // var printContents += '<link href="https://encroachment.ddalmis.org.in/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">';
-   var printContents = document.getElementById("MainContentForm").innerHTML;
+    //  var printContents = '<link href="https://encroachment.ddalmis.org.in/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">';
+     printContents += document.getElementById("MainContentForm").innerHTML;
     // doc.write(document.getElementById("divPrintRef").innerHTML);  // _Layout page div id (Mandatory)
     doc.write(printContents);
     doc.close();
@@ -305,6 +307,9 @@ $(".printpdf").click(function () {
             setTimeout(show, 100);
         }
     };
-    show();
+    printWindow.focus();
+    printWindow.print();
+   // printWindow.close();
+   // show();
 });
 

@@ -352,5 +352,11 @@
     "inputFiles": [
       "wwwroot/js/HomeIndex.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/DemolitionstructuredetailsPrint.min.js",
+    "inputFiles": [
+      "wwwroot/js/DemolitionstructuredetailsPrint.js"
+    ]
   }
 ]

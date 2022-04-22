@@ -12,6 +12,13 @@
             $("#IsFileDocument").val("0");
         }
     });
+    $("input[name='A']").click(function () {
+        if ($("#rDocument").is(":checked")) {
+            $("#IsFileDocument").val("1");
+        } else {
+            $("#IsFileDocument").val("0");
+        }
+    });
 });
 $(document).delegate('a.add-record', 'click', function (e) {
     debugger

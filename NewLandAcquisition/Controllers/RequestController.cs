@@ -319,8 +319,8 @@ namespace NewLandAcquisition.Controllers
                             }
                             #endregion
                             ViewBag.Message = Alert.Show(Messages.AddAndApprovalRecordSuccess, "", AlertType.Success);
-                            var list = await _requestService.GetAllRequest();
-                            return View("Index", list);
+                           // var list = await _requestService.GetAllRequest();
+                            return View("Index");
                         }
                         else
                         {

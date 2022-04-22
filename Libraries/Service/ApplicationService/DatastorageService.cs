@@ -221,6 +221,7 @@ namespace Libraries.Service.ApplicationService
         {
             var result = await _datastoragedetailRepository.FindBy(a => a.Id == id);
             Datastoragedetails model = result.FirstOrDefault();
+            model.IsFileDocument = dataStorageDetails.IsFileDocument;
             model.AlmirahId = dataStorageDetails.AlmirahId;
             model.RowId = dataStorageDetails.RowId;
             model.BundleId = dataStorageDetails.BundleId;

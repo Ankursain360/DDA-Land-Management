@@ -8,261 +8,247 @@
 
     @*<form asp-action="Create" enctype="multipart/form-data" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">*@
     <center><h3 class="mb-3"><u>Demolition Diary Details</u></h3></center>
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <input type="hidden" asp-for="FixingDemolitionId" />
-        <input type="hidden" asp-for="Id" value="@ViewBag.PrimaryId" />
-        <input type="hidden" id="EncroachmentId" value="@ViewBag.EncroachmentId" />
-        <input type="hidden" id="WatchWardId" value="@ViewBag.WatchWardId" />
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="FixingDemolitionId" />
+    <input type="hidden" asp-for="Id" value="@ViewBag.PrimaryId" />
+    <input type="hidden" id="EncroachmentId" value="@ViewBag.EncroachmentId" />
+    <input type="hidden" id="WatchWardId" value="@ViewBag.WatchWardId" />
+     
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table">
+                <tr>
+                    <td align="right"><b>Department:</b></td>
+                    <td> <label class="text-black">@Model.Department.Name</label></td>
 
+                    <td align="right"> <b>Zone:</b></td>
+                    <td> <label class="text-black">@Model.Zone.Name</label></td>
 
-        @*<div id="WatchWardDetailsDiv"></div>
-            <div id="EncroachmentRegisterDetailsDiv"></div>
-            <div id="AnnexureADetailsDiv"></div>
-            <br />*@
-        <div class="row">
-            <div class="col-md-12">
-                <table class="table">
-                    <tr>
-                        <td align="right"><b>Department:</b></td>
-                        <td> <label class="text-black">@Model.Department.Name</label></td>
+                    <td align="right"> <b>Division:</b></td>
+                    <td colspan="2"> <label class="text-black text-break">@Model.Division.Name</label></td>
+                </tr>
+                <tr>
+                    <td align="right"> <b>Locality(Village) Name:</b></td>
+                    <td> <label class="text-black">@Model.Locality.Name</label></td>
 
-                        <td align="right"> <b>Zone:</b></td>
-                        <td> <label class="text-black">@Model.Zone.Name</label></td>
+                    <td align="right"> <b>File No.:</b></td>
+                    <td> <label class="text-black">@Model.FileNo</label></td>
 
-                        <td align="right"> <b>Division:</b></td>
-                        <td> <label class="text-black text-break">@Model.Division.Name</label></td>
-                    </tr>
-                    <tr>
-                        <td align="right"> <b>Locality(Village) Name:</b></td>
-                        <td> <label class="text-black">@Model.Locality.Name</label></td>
+                    <td align="right"> <b>Date:</b></td>
+                    <td colspan="2"> <label class="text-black">@Model.Date</label></td>
+                </tr>
+                <tr>
+                    <td align="right"> <b>Area (sq.meter):</b></td>
+                    <td> <label class="text-black">@Model.Area</label></td>
 
-                        <td align="right"> <b>File No.:</b></td>
-                        <td> <label class="text-black">@Model.FileNo</label></td>
+                    <td align="right"> <b>Police Station:</b></td>
+                    <td> <label class="text-black">@Model.PoliceStation</label></td>
 
-                        <td align="right"> <b>Date:</b></td>
-                        <td> <label class="text-black">@Model.Date</label></td>
-                    </tr>
-                    <tr>
-                        <td align="right"> <b>Area (sq.meter):</b></td>
-                        <td> <label class="text-black">@Model.Area</label></td>
+                    <td align="right"> <b>Name of the Area/Site:</b></td>
+                    <td colspan="2"> <label class="text-black">@Model.NameOfAreaSite</label></td>
+                </tr>
+                <tr>
+                    <td align="right"> <b>Encroachment Since:</b></td>
+                    <td> <label class="text-black">@Model.EncroachmentSinceDate</label></td>
 
-                        <td align="right"> <b>Police Station:</b></td>
-                        <td> <label class="text-black">@Model.PoliceStation</label></td>
+                    <td align="right"> <b>Date of Approval of Demolition:</b></td>
+                    <td> <label class="text-black">@Model.DateOfApprovalDemolition</label></td>
 
-                        <td align="right"> <b>Name of the Area/Site:</b></td>
-                        <td> <label class="text-black">@Model.NameOfAreaSite</label></td>
-                    </tr>
-                    <tr>
-                        <td align="right"> <b>Encroachment Since:</b></td>
-                        <td> <label class="text-black">@Model.EncroachmentSinceDate</label></td>
+                    <td align="right"> <b>Name of Encroacher, if any:</b></td>
+                    <td colspan="2"> <label class="text-black">@Model.NameOfEncroacherIfAny</label></td>
+                </tr>
+                <tr>
+                    <td align="right"> <b>Start of Demolition Action:</b></td>
+                    <td> <label class="text-black">@Model.StartOfDemolitionActionDate</label></td>
 
-                        <td align="right"> <b>Date of Approval of Demolition:</b></td>
-                        <td> <label class="text-black">@Model.DateOfApprovalDemolition</label></td>
+                    <td align="right"> <b>End of Demolition Action:</b></td>
+                    <td> <label class="text-black">@Model.EndOfDemolitionActionDate</label></td>
 
-                        <td align="right"> <b>Name of Encroacher, if any:</b></td>
-                        <td> <label class="text-black">@Model.NameOfEncroacherIfAny</label></td>
-                    </tr>
-                    <tr>
-                        <td align="right"> <b>Start of Demolition Action:</b></td>
-                        <td> <label class="text-black">@Model.StartOfDemolitionActionDate</label></td>
+                    <td align="right"> <b>Demolition Status:</b></td>
+                    <td colspan="2"> <label class="text-black">@Model.DemolitionStatus.ToString().Replace("_", " ")</label></td>
+                </tr>
+                <tr>
+                    <td align="right"> <b>Demolition Remarks, If Any:</b></td>
+                    <td colspan="6"> <label class="text-black">@Model.DemolitionRemarks</label></td>
 
-                        <td align="right"> <b>End of Demolition Action:</b></td>
-                        <td> <label class="text-black">@Model.EndOfDemolitionActionDate</label></td>
-
-                        <td align="right"> <b>Demolition Status:</b></td>
-                        <td> <label class="text-black">@Model.DemolitionStatus.ToString().Replace("_", " ")</label></td>
-                    </tr>
-                    <tr>
-                        <td align="right"> <b>Demolition Remarks, If Any:</b></td>
-                        <td colspan="6"> <label class="text-black">@Model.DemolitionRemarks</label></td>
-
-                    </tr>
-                    <tr>
-                        <td align="right"> <b>Photographs Before Demolition:</b></td>
-                        <td colspan="6">
-                            @{
-                                if (Model.Demolitionstructurebeforedemolitionphotofiledetails != null && Model.Demolitionstructurebeforedemolitionphotofiledetails.Count > 0)
+                </tr>
+                <tr>
+                    <td align="right"> <b>Photographs Before Demolition:</b></td>
+                    <td colspan="6">
+                        @{
+                            if (Model.Demolitionstructurebeforedemolitionphotofiledetails != null && Model.Demolitionstructurebeforedemolitionphotofiledetails.Count > 0)
+                            {
+                                foreach (var item in Model.Demolitionstructurebeforedemolitionphotofiledetails)
                                 {
-                                    foreach (var item in Model.Demolitionstructurebeforedemolitionphotofiledetails)
-                                    {
-                                        <a asp-action="DownloadBeforePhotoFile" target="_blank" asp-route-id="@item.Id" class="badge bg-primary px-2"> (View Existing Document @(BeforePhotoFile += 1 ))</a>
-                                        @*<embed src="@Url.Action("DownloadBeforePhotoFile", "Demolitionstructuredetails", new { id = item.Id })" />*@
-                                        @*@Html.Raw(new System.Net.WebClient().DownloadString("https://localhost:1007/Demolitionstructuredetails/DownloadBeforePhotoFile/" + @item.Id));*@
-
-                                    }
-                                }
-                                else
-                                {
-                                    <label class="text-black">No File attached</label>
-                                }
-                            }
-                        </td>
-
-
-                    </tr>
-                    <tr>
-                        <td align="right"> <b>Photographs After Demolition:</b></td>
-                        <td colspan="6">
-                            @{
-                                if (Model.Demolitionstructureafterdemolitionphotofiledetails != null && Model.Demolitionstructureafterdemolitionphotofiledetails.Count > 0)
-                                {
-
-                                    foreach (var item in Model.Demolitionstructureafterdemolitionphotofiledetails)
-                                    {
-                                        <a asp-action="DownloadAfterPhotoFile" target="_blank" asp-route-id="@item.Id" class="badge bg-primary px-2"> (View Existing Document @(AfterPhotoFile += 1 ))</a>
-
-                                    }
-
-                                }
-                                else
-                                {
-                                    <label class="text-black">No File attached</label>
-                                }
-                            }
-                        </td>
-
-
-                    </tr>
-                    <tr>
-                        <td align="right"> <b>Demolition Report:</b></td>
-                        <td colspan="6">
-                            @{
-                                @if (Model.DemilitionReportPath != null)
-                                {
-
-                                    <a class="badge bg-primary px-2" target="_blank" asp-action="ViewDemolitionReport" asp-route-id="@Model.Id" target="_blank"> (View Report)</a>
-                                }
-                                else
-                                {
-                                    <label class="text-black">No File attached</label>
+                                    <a asp-action="DownloadBeforePhotoFile" target="_blank" asp-route-id="@item.Id" class="badge bg-primary px-2"> (View Existing Document @(BeforePhotoFile += 1 ))</a>                                
 
                                 }
                             }
+                            else
+                            {
+                                <label class="text-black">No File attached</label>
+                            }
+                        }
+                    </td>
+
+
+                </tr>
+                <tr>
+                    <td align="right"> <b>Photographs After Demolition:</b></td>
+                    <td colspan="6">
+                        @{
+                            if (Model.Demolitionstructureafterdemolitionphotofiledetails != null && Model.Demolitionstructureafterdemolitionphotofiledetails.Count > 0)
+                            {
+
+                                foreach (var item in Model.Demolitionstructureafterdemolitionphotofiledetails)
+                                {
+                                    <a asp-action="DownloadAfterPhotoFile" target="_blank" asp-route-id="@item.Id" class="badge bg-primary px-2"> (View Existing Document @(AfterPhotoFile += 1 ))</a>
+
+                                }
+
+                            }
+                            else
+                            {
+                                <label class="text-black">No File attached</label>
+                            }
+                        }
+                    </td>
+
+
+                </tr>
+                <tr>
+                    <td align="right"> <b>Demolition Report:</b></td>
+                    <td colspan="6">
+                        @{
+                            @if (Model.DemilitionReportPath != null)
+                            {
+
+                                <a class="badge bg-primary px-2" target="_blank" asp-action="ViewDemolitionReport" asp-route-id="@Model.Id" target="_blank"> (View Report)</a>
+                            }
+                            else
+                            {
+                                <label class="text-black">No File attached</label>
+
+                            }
+                        }
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <h3 class="my-3 d-flex sub-heading pt-4"> Demolished Structure  </h3>
+    <div class="table-section bg-white border shadow rounded">
+        <div class="table-responsive">
+            <table class="table table-sm table-bordered mb-0 table-striped" id="tbl_posts_struct">
+                <thead class="text-nowrap">
+                    <tr>
+                        <th>Sr.No</th>
+                        <th>Demolition Date</th>
+                        <th>Structure Name  </th>
+                        <th>No Of Structure Demolished</th>
+                        <th>No Of Structure Remaining</th>
+                        <th style="display:none">Action</th>
+                    </tr>
+                </thead>
+                <tbody id="tbl_posts_bodys">
+                </tbody>
+                <tbody class="tbody" id="adds">
+                    <tr id="">
+                        <td style="text-align:center;"><span class="sns">1</span></td>
+                        <td>
+                            <label class="text-black" id="Date1">@Model.Date1</label> 
+                        </td>
+                        <td>
+                            <label class="text-black" id="StructureId12"></label>
+                            <select class="floating-label-field floating-label-field--s3" style="display:none"
+                                    asp-for="StructureId1">
+                                asp-items="@(new SelectList(Model.Structure,"Id","Name"))"
+                                <option value="">--Select--</option>
+                                @foreach (var item in Model.Structure)
+                                {
+                                    <option value="@item.Id">  @item.Name </option>
+                                }
+                            </select>
+                            <span asp-validation-for="StructureId1" class="d-block text-danger field-validation-valid"></span>
+                        </td>
+
+                        <td>
+                            <label class="text-black" id="NoOfStructureDemolished">@Model.NoOfStructureDemolished</label>
+                        </td>
+                        <td>
+                            <label class="text-black" id="NoOfStructureRemaining">@Model.NoOfStructureRemaining</label>
+                            @*<input asp-for="NoOfStructureRemaining" type="text" class="floating-label-field floating-label-field--s3 onlynumbers" />
+                                <span asp-validation-for="NoOfStructureRemaining" class="d-block text-danger field-validation-valid"></span>*@
+                        </td>
+                        <td style="display:none">
+                            <div class="action-btns">
+                                <a class="remove delete-record " title="delete" data-id="0" style="display:none;font-size:30px;"><i class="ri-delete-bin-fill"></i></a>
+                                <a class="view add-records" data-added="0" title="Add" style="font-size:30px;"><i class="ri-add-circle-fill"></i></a>
+                            </div>
+                        </td>
+                    </tr> 
+                </tbody>
+            </table>
+        </div>
+    </div> 
+    <h3 class="my-3 d-flex sub-heading pt-4"> Area Reclaimed</h3>
+    <div class="table-section bg-white border shadow rounded">
+        <div class="table-responsive">
+            <table class="table table-sm table-bordered mb-0 table-striped" id="tbl_posts1">
+                <thead class="text-nowrap">
+
+                    <tr>
+                        <th>Sr.No</th>
+                        <th>Demolition Date</th>
+                        <th>Area Reclaimed(In Sqr mtr.) </th>
+                        <th>Area To Be Reclaimed (In Sqr mtr.)</th>
+                        <th style="display:none">Action</th>
+                    </tr>
+                </thead>
+
+                <tbody id="tbl_posts1_body">
+                </tbody>
+                <tbody class="tbody" id="adddata1">
+                    <tr id="">
+                        <td style="text-align:center;"><span class="sn1">1</span></td>
+                        <td>
+                            <label class="text-black" id="Date2"></label>
+                        </td>
+                        <td>
+                            <label class="text-black" id="Area1"></label>
+                        </td>
+                        <td>
+                            <label class="text-black" id="AreaToBeReclaimed"></label>
+                        </td>
+                        <td style="display:none">
+                            <div class="action-btns">
+                                <a class="remove delete-record1 " title="delete" data-id="0" style="display:none;font-size:30px;"><i class="ri-delete-bin-fill"></i></a>
+                                <a class="view add-record1" data-added1="0" title="Add" style="font-size:30px;"><i class="ri-add-circle-fill"></i></a>
+                            </div>
                         </td>
                     </tr>
-                </table>
+                </tbody>
+            </table>
+        </div>
+    </div> 
+    <div class="row pt-4"> 
+        <div class="form-group col-md-12">
+            <div class="floating-label-wrap mb-3 mb-md-0"> 
+                <br/>
+                <b>Remarks, If Any: </b><label class="text-black">@Model.Remarks</label> 
             </div>
         </div>
-        <h3 class="my-3 d-flex sub-heading pt-4"> Demolished Structure  </h3>
-        <div class="table-section bg-white border shadow rounded">
-            <div class="table-responsive">
-                <table class="table table-sm table-bordered mb-0 table-striped" id="tbl_posts_struct">
-                    <thead class="text-nowrap">
-                        <tr>
-                            <th>Sr.No</th>
-                            <th>Demolition Date</th>
-                            <th>Structure Name  </th>
-                            <th>No Of Structure Demolished</th>
-                            <th>No Of Structure Remaining</th>
-                            <th style="display:none">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tbl_posts_bodys">
-                    </tbody>
-                    <tbody class="tbody" id="adds">
-                        <tr id="">
-                            <td style="text-align:center;"><span class="sns">1</span></td>
-                            <td>
-                                <label class="text-black" id="Date1">@Model.Date1</label>
-                                @*<input asp-for="Date1" type="date" class="floating-label-field floating-label-field--s3" />
-                                    <span asp-validation-for="Date1" class="d-block text-danger field-validation-valid msg"></span>*@
-                            </td>
-                            <td>
-                                <label class="text-black" id="StructureId12"></label>
-                                <select class="floating-label-field floating-label-field--s3" style="display:none"
-                                        asp-for="StructureId1">
-                                    asp-items="@(new SelectList(Model.Structure,"Id","Name"))"
-                                    <option value="">--Select--</option>
-                                    @foreach (var item in Model.Structure)
-                                    {
-                                        <option value="@item.Id">  @item.Name </option>
-                                    }
-                                </select>
-                                <span asp-validation-for="StructureId1" class="d-block text-danger field-validation-valid"></span>
-                            </td>
-
-                            <td>
-                                <label class="text-black" id="NoOfStructureDemolished">@Model.NoOfStructureDemolished</label>
-                            </td>
-                            <td>
-                                <label class="text-black" id="NoOfStructureRemaining">@Model.NoOfStructureRemaining</label>
-                                @*<input asp-for="NoOfStructureRemaining" type="text" class="floating-label-field floating-label-field--s3 onlynumbers" />
-                                    <span asp-validation-for="NoOfStructureRemaining" class="d-block text-danger field-validation-valid"></span>*@
-                            </td>
-                            <td style="display:none">
-                                <div class="action-btns">
-                                    <a class="remove delete-record " title="delete" data-id="0" style="display:none;font-size:30px;"><i class="ri-delete-bin-fill"></i></a>
-                                    <a class="view add-records" data-added="0" title="Add" style="font-size:30px;"><i class="ri-add-circle-fill"></i></a>
-                                </div>
-                            </td>
-                        </tr>
-
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-
-        <h3 class="my-3 d-flex sub-heading pt-4"> Area Reclaimed</h3>
-        <div class="table-section bg-white border shadow rounded">
-            <div class="table-responsive">
-                <table class="table table-sm table-bordered mb-0 table-striped" id="tbl_posts1">
-                    <thead class="text-nowrap">
-
-                        <tr>
-                            <th>Sr.No</th>
-                            <th>Demolition Date</th>
-                            <th>Area Reclaimed(In Sqr mtr.) </th>
-                            <th>Area To Be Reclaimed (In Sqr mtr.)</th>
-                            <th style="display:none">Action</th>
-                        </tr>
-                    </thead>
-
-                    <tbody id="tbl_posts1_body">
-                    </tbody>
-                    <tbody class="tbody" id="adddata1">
-                        <tr id="">
-                            <td style="text-align:center;"><span class="sn1">1</span></td>
-                            <td>
-                                <label class="text-black" id="Date2"></label>
-                            </td>
-                            <td>
-                                <label class="text-black" id="Area1"></label>
-                            </td>
-                            <td>
-                                <label class="text-black" id="AreaToBeReclaimed"></label>
-                            </td>
-                            <td style="display:none">
-                                <div class="action-btns">
-                                    <a class="remove delete-record1 " title="delete" data-id="0" style="display:none;font-size:30px;"><i class="ri-delete-bin-fill"></i></a>
-                                    <a class="view add-record1" data-added1="0" title="Add" style="font-size:30px;"><i class="ri-add-circle-fill"></i></a>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <div class="row pt-4">
-
-            <div class="form-group col-md-12">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-
-                    <b>Remarks, If Any: </b><label class="text-black">@Model.Remarks</label>
-
-                </div>
-            </div>
-        </div>
-        <div class="row mt-md-4">
-            <div class="col-md-12">
-                @*<input type="submit" value="Submit" class="btn btn-theme" />*@
-                <button class="btn btn-dark printpdf">Print</button>
-                @Html.ActionLink("Back", "Index1", "Demolitionstructuredetails", null, new { @class = "btn btn-theme" })
-            </div>
-        </div>
-    
+    </div>
 </div>
+<div class="row mt-md-4">
+    <div class="col-md-12">
+        @*<input type="submit" value="Submit" class="btn btn-theme" />*@
+        <button class="btn btn-success printpdf">Print</button>
+        @Html.ActionLink("Back", "Index1", "Demolitionstructuredetails", null, new { @class = "btn btn-theme" })
+    </div>
+</div>
+
+
 
 <environment include="Development">
     <script src="~/js/DemolitionstructuredetailsPrint.js"></script>

@@ -5,6 +5,8 @@
     GetOtherDetails(id);
 
     var value = $('#inspectionAreaUnit option:selected').val();
+    var areaunittext = $('#inspectionAreaUnit option:selected').text();
+    $("#lblareaunit").text(areaunittext);
     if (value == 0) {
         $("#inspectionAreainSqAcreHec").hide();
         $("#inspectionbighabis").show();

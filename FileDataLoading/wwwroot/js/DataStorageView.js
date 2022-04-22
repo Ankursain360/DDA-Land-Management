@@ -1,4 +1,27 @@
-﻿$(document).delegate('a.add-record', 'click', function (e) {
+﻿$(document).ready(function () {
+    $('#SchemeDptBranch').removeAttr('multiple');
+    $('#LocalityIdForPartFile').removeAttr('multiple');
+
+
+    $('#SchemeDptBranch').removeAttr('multiple');
+    $('#LocalityIdForPartFile').removeAttr('multiple');
+    $("input[name='grpSearchby']").click(function () {
+        if ($("#rdbDocumentname").is(":checked")) {
+            $("#IsFileDocument").val("1");
+        } else {
+            $("#IsFileDocument").val("0");
+        }
+    });
+
+    $("input[name='A']").click(function () {
+        var selected = $("input[type='radio'][name='A']:checked");
+        $("#IsFileDocument").val(selected.val());
+
+    });
+     
+});
+
+$(document).delegate('a.add-record', 'click', function (e) {
     debugger
     if ($("#tbl_posts #add #Category").val() != '' && $("#tbl_posts #add #Header").val() != '' && $("#tbl_posts #add #SequenceNo").val() != ''
         && $("#tbl_posts #add #Year").val() != '' && $("#tbl_posts #add #Subject").val() != ''

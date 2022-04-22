@@ -37,7 +37,6 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.IsActive).HasColumnType("tinyint(4)");
 
             builder.Property(e => e.LayoutPlan)
-                .IsRequired()
                 .HasMaxLength(1000)
                 .IsUnicode(false);
 

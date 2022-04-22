@@ -1,53 +1,70 @@
-﻿@model Libraries.Model.Entity.EncroachmentRegisteration 
+﻿@model Libraries.Model.Entity.EncroachmentRegisteration
 
 <div class="list-unstyled m-0 ps-2 pe-1 ps-md-4 pe-md-3 " id="collapseApprroval">
     <div id="allDetails1">
         @*<input type="hidden" asp-for="Id" id="hdnId" />*@
-        <div class="row mt-md-3 mt-sm-3 mt-lg-3">
-            <div class="col-md-6 col-sm-6 col-lg-6">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-                    <label class="label me-5" style="color:black; font-weight:700;">Department:</label>
-                    <label class="control-label">@Model.Department.Name</label>
-                </div>
-            </div>
-            <div class="col-md-6 col-sm-6 col-lg-6">
-                <div class="floating-label-wrap"> 
-                    <label class="label me-5" style="color:black; font-weight:700;">Zone:</label>
-                    <label class="control-label">@Model.Zone.Name</label>
-                </div>
-            </div>
+
+
+        <div class="col-md-12">
+            <table class="table">
+                <tr>
+                    <td align="right"><b>Department:</b></td>
+                    <td> <label class="text-black">@Model.Department.Name</label></td>
+
+                    <td align="right"> <b>Zone:</b></td>
+                    <td> <label class="text-black">@Model.Zone.Name</label></td>
+
+                    <td align="right"> <b>Division:</b></td>
+                    <td colspan="2"> <label class="text-black text-break">@Model.Division.Name</label></td>
+                </tr>
+                <tr>
+                    <td align="right"> <b>Locality(Village) Name:</b></td>
+                    <td> <label class="text-black">@Model.Locality.Name</label></td>
+
+                    <td align="right"> <b>Khasra No.:</b></td>
+                    <td> <label class="text-black">@Model.KhasraNo</label></td>
+
+                    <td align="right"> <b>Inspection Date:</b></td>
+                    <td colspan="2"> <label class="text-black">@Model.EncrochmentDate.ToString("dd/MMM/yyyy")</label></td>
+                </tr>
+            </table>
         </div>
-        <div class="row mt-md-3 mt-sm-3 mt-lg-3">
-            <div class="col-md-6 col-sm-6 col-lg-6">
-                <div class="floating-label-wrap">
-                    <label class="label me-5" style="color:black; font-weight:700;">Division:</label>
-                    <label class="control-label">@Model.Division.Name</label>
-                </div>
-            </div>
-            <div class="col-md-6 col-sm-6 col-lg-6">
-                <div class="floating-label-wrap">
-                    <label class="label me-5" style="color:black; font-weight:700;">Locality(Village):</label>
-                    <label class="control-label">@Model.Locality.Name</label>
-                </div>
-            </div>
-        </div>
-        <div class="row mt-md-3 mt-sm-3 mt-lg-3">
-            <div class="col-md-6">
-                <div class="floating-label-wrap">
-                    <label class="label me-5" style="color:black; font-weight:700;">Khasra No.:</label>
-                    <label class="control-label">@Model.KhasraNo</label>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-                    <label class="label me-5" style="color:black; font-weight:700;">Inspection Date:</label>
-                    <label class="control-label">@Model.EncrochmentDate.ToString("dd/MMM/yyyy")</label>
-                </div>
-            </div>
-        </div>
+
         <div id="DivArea">
             <h2 class="my-3 sub-heading card-header">Site Details</h2>
-            <div class="row mt-md-3">
+            <div class="row mt-md-3 col-md-12">
+                <table class="table">
+                    <tr>
+                        <td align="right"><b>Area Unit:</b></td>
+                        <td>
+                            <select class="floating-label-field floating-label-field--s3" style="display:none" asp-for="AreaUnit" disabled id="inspectionAreaUnit">
+                                <option value="">--Select--</option>
+                                <option value="0">Bigha-Biswa-Biswansi</option>
+                                <option value="1">Sq Yd.</option>
+                                <option value="2">Acre</option>
+                                <option value="3">Hectare</option>
+                                <option value="4">Sq. Mt.</option>
+                            </select>
+                            <label class="text-black" id="lblareaunit"></label>
+                        </td>
+                        <td colspan="6">
+                            <div id="inspectionbighabis">
+                                <b>Bigha:</b><label class="text-black">@Model.TotalAreaInBighaInspection</label>&nbsp;
+                                <b>Biswa:</b><label class="text-black">@Model.TotalAreaInBiswaInspection</label>&nbsp;
+                                <b>Biswansi:</b><label class="text-black">@Model.TotalAreaInBiswaniInspection</label>&nbsp;
+                            </div>
+                            <div id="inspectionAreainSqAcreHec" style="display:none;">
+                                <b>Total Area(Sq Yd./Acre/Hectare):</b><label class="text-black">@Model.TotalAreaInSqAcreHt</label>
+                            </div>
+                        </td>
+                        <td>
+                            <b>Total Area(Sq Yd./Acre/Hectare):</b><label class="text-black">@Model.Area</label>
+                        </td>
+
+                    </tr>
+                </table>
+            </div>
+            @*<div class="row mt-md-3">
                 <div class="col-md-4">
                     <div class="floating-label-wrap">
                         <label class="label me-5" style="color:black; font-weight:700;">Area Unit:</label>
@@ -101,7 +118,7 @@
                         <label class="control-label">@Model.Area</label>
                     </div>
                 </div>
-            </div>
+            </div>*@
         </div>
         <div class="row mt-md-3">
             <div class="col-md-12">
@@ -111,7 +128,7 @@
                 </div>
             </div>
             <div class="row mt-md-3">
-                <div class="col-md-12"> 
+                <div class="col-md-12">
                     <label class="label me-5" style="color:black; font-weight:700;">Encroachment:</label>
                     <label class="control-label">@Model.IsEncroachment</label>
                 </div>
@@ -121,9 +138,9 @@
             <h2 class="my-3 sub-heading card-header">Details Of Encroachment</h2>
             <div class="row mt-md-3 mb-md-3">
                 <div class="col-md-12">
-                    <div class="floating-label-wrap mb-3 mb-md-0"> 
+                    <div class="floating-label-wrap mb-3 mb-md-0">
                         <label class="label me-5" style="color:black; font-weight:700;">Name of Encroacher</label>
-                        <label class="control-label">@Model.EncroacherName</label> 
+                        <label class="control-label">@Model.EncroacherName</label>
                     </div>
                 </div>
             </div>
@@ -151,42 +168,42 @@
                                 <td style="text-align:center;"><span class="sn">1</span></td>
                                 <td>
                                     <div class="floating-label-wrap mb-3 mb-md-0">
-                                        <label class="control-label" id="NameOfStructure">@Model.NameOfStructure</label>                                        
+                                        <label class="control-label" id="NameOfStructure">@Model.NameOfStructure</label>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="floating-label-wrap">
-                                        <label class="control-label" id="ConstructionStatus">@Model.ConstructionStatus</label> 
+                                        <label class="control-label" id="ConstructionStatus">@Model.ConstructionStatus</label>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="floating-label-wrap mb-3 mb-md-0">
-                                        <label class="control-label" id="AreaApprox">@Model.AreaApprox</label>                                        
+                                        <label class="control-label" id="AreaApprox">@Model.AreaApprox</label>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="floating-label-wrap mb-3 mb-md-0">
-                                        <label class="control-label" id="Type">@Model.Type</label> 
+                                        <label class="control-label" id="Type">@Model.Type</label>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="floating-label-wrap">
-                                        <label class="control-label" id="ReligiousStructure">@Model.ReligiousStructure</label> 
+                                        <label class="control-label" id="ReligiousStructure">@Model.ReligiousStructure</label>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="floating-label-wrap mb-3 mb-md-0">
-                                        <label class="control-label" id="DateOfEncroachment">@Model.DateOfEncroachment</label> 
+                                        <label class="control-label" id="DateOfEncroachment">@Model.DateOfEncroachment</label>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="floating-label-wrap mb-3 mb-md-0">
-                                        <label class="control-label" id="ReferenceNoOnLocation">@Model.ReferenceNoOnLocation</label> 
+                                        <label class="control-label" id="ReferenceNoOnLocation">@Model.ReferenceNoOnLocation</label>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="floating-label-wrap mb-3 mb-md-0">
-                                        <label class="control-label" id="CountOfStructure">@Model.CountOfStructure</label> 
+                                        <label class="control-label" id="CountOfStructure">@Model.CountOfStructure</label>
                                     </div>
                                 </td>
 
@@ -199,7 +216,7 @@
 
         <div class="row pt-3">
             <div class="col-md-6">
-                <div class="floating-label-wrap"> 
+                <div class="floating-label-wrap">
                     <select asp-for="StatusOfLand" class="floating-label-field floating-label-field--s3" disabled onchange="onChangeLandStatus(this.value)">
                         <option value="DDA Land">DDA Land</option>
                         <option value="Other Govt. Land">Other Govt. Land</option>
@@ -214,7 +231,7 @@
                 <div class="col-md-6">
                     <div class="floating-label-wrap">
                         <label class="label me-5" style="color:black; font-weight:700;">Possession with DDA</label>
-                        <label class="control-label">@Model.IsPossession</label> 
+                        <label class="control-label">@Model.IsPossession</label>
                     </div>
                 </div>
             </div>
@@ -231,11 +248,11 @@
                 </div>
             </div>
         </div>
-        <div class="row pt-3"> 
+        <div class="row pt-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap">
                     <label class="label me-5" style="color:black; font-weight:700;">Police Station:</label>
-                    <label class="control-label">@Model.PoliceStation</label> 
+                    <label class="control-label">@Model.PoliceStation</label>
                 </div>
             </div>
         </div>
@@ -243,16 +260,16 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap">
                     <label class="label me-5" style="color:black; font-weight:700;">Officer on Duty:</label>
-                    <label class="control-label">@Model.SecurityGuardOnDuty</label> 
+                    <label class="control-label">@Model.SecurityGuardOnDuty</label>
                 </div>
-            </div>  
+            </div>
         </div>
-         
+
         <div class="row pt-3">
             <div class="col-md-12">
                 <div class="floating-label-wrap">
                     <label class="label me-5" style="color:black; font-weight:700;">Remarks:</label>
-                    <label class="control-label">@Model.Remarks</label> 
+                    <label class="control-label">@Model.Remarks</label>
                 </div>
             </div>
         </div>
