@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Libraries.Repository.EntityRepository
 {
-   public class LegalmanagementsystemRepository : GenericRepository<Legalmanagementsystem>, ILegalmanagementsystemRepository
+    public class LegalmanagementsystemRepository : GenericRepository<Legalmanagementsystem>, ILegalmanagementsystemRepository
     {
         public LegalmanagementsystemRepository(DataContext dbContext) : base(dbContext)
         {
@@ -23,7 +23,7 @@ namespace Libraries.Repository.EntityRepository
             var zoneList = await _dbContext.Zone.Where(x => x.IsActive == 1).ToListAsync();
             return zoneList;
         }
-        
+
         public async Task<List<Casestatus>> GetCasestatusList()
         {
             var casestatusList = await _dbContext.Casestatus.Where(x => x.IsActive == 1).ToListAsync();
@@ -45,7 +45,7 @@ namespace Libraries.Repository.EntityRepository
 
             return localityList;
         }
-       
+
         public async Task<List<Legalmanagementsystem>> GetFileNoList()
         {
             var fileNoList = await _dbContext.Legalmanagementsystem.Where(x => x.IsActive == 1).ToListAsync();
@@ -89,32 +89,55 @@ namespace Libraries.Repository.EntityRepository
         //}
         public async Task<PagedResult<Legalmanagementsystem>> GetPagedLegalReport(LegalReportSearchDto model)
         {
-          
-                var data = await _dbContext.Legalmanagementsystem
-                                            .Include(x => x.CaseStatus)
-                                            .Include(x => x.CourtType)
-                                            .Include(x => x.Locality)
-                                            .Include(x => x.Zone)
-                    .Where(x => (x.Id == (model.FileNo == 0 ? x.Id : model.FileNo))
-                    && (x.Id == (model.CaseNo == 0 ? x.Id : model.CaseNo))
-                    && (x.ContemptOfCourt == (model.ContemptOfCourt == 0 ? x.ContemptOfCourt : model.ContemptOfCourt))
-                    && (x.CourtTypeId == (model.CourtType == 0 ? x.CourtTypeId : model.CourtType))
-                    && (x.CaseStatusId == (model.CaseStatus == 0 ? x.CaseStatusId : model.CaseStatus))
-                    && (x.ZoneId == (model.Zone == 0 ? x.ZoneId : model.Zone))
-                    && (x.LocalityId == (model.Locality == 0 ? x.LocalityId : model.Locality))
-                    && (x.StayInterimGranted == (model.StayInterimGranted == 0 ? x.StayInterimGranted : model.StayInterimGranted))
-                    && (x.Judgement == (model.Judgement == 0 ? x.Judgement : model.Judgement))
-                    && x.CreatedDate >= model.FromDate
-                    && x.CreatedDate <= model.ToDate)
-                    .OrderByDescending(x => x.Id)
 
-                    .GetPaged(model.PageNumber, model.PageSize);
+            var data = await _dbContext.Legalmanagementsystem
+                                        .Include(x => x.CaseStatus)
+                                        .Include(x => x.CourtType)
+                                        .Include(x => x.Locality)
+                                        .Include(x => x.Zone)
+                .Where(x => (x.Id == (model.FileNo == 0 ? x.Id : model.FileNo))
+                && (x.Id == (model.CaseNo == 0 ? x.Id : model.CaseNo))
+                && (x.ContemptOfCourt == (model.ContemptOfCourt == 0 ? x.ContemptOfCourt : model.ContemptOfCourt))
+                && (x.CourtTypeId == (model.CourtType == 0 ? x.CourtTypeId : model.CourtType))
+                && (x.CaseStatusId == (model.CaseStatus == 0 ? x.CaseStatusId : model.CaseStatus))
+                && (x.ZoneId == (model.Zone == 0 ? x.ZoneId : model.Zone))
+                && (x.LocalityId == (model.Locality == 0 ? x.LocalityId : model.Locality))
+                && (x.StayInterimGranted == (model.StayInterimGranted == 0 ? x.StayInterimGranted : model.StayInterimGranted))
+                && (x.Judgement == (model.Judgement == 0 ? x.Judgement : model.Judgement))
+                && x.CreatedDate >= (model.FromDate == null ? x.CreatedDate : model.FromDate)
+                && x.CreatedDate <= (model.ToDate == null ? x.CreatedDate : model.ToDate))
+                .OrderByDescending(x => x.Id)
 
-            
+                .GetPaged(model.PageNumber, model.PageSize);
 
-                return data;
-                                 
 
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("DATE"):
+                        data.Results = data.Results.OrderBy(x => x.HearingDate).ToList();
+                        break;
+                    case ("FILE"):
+                        data.Results = data.Results.OrderBy(x => x.FileNo).ToList();
+                        break;
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("DATE"):
+                        data.Results = data.Results.OrderByDescending(x => x.HearingDate).ToList();
+                        break;
+                    case ("FILE"):
+                        data.Results = data.Results.OrderByDescending(x => x.FileNo).ToList();
+                        break;
+                }
+            }
+
+            return data;
         }
         public async Task<List<Legalmanagementsystem>> GetLegalmanagementsystemList()
         {
@@ -124,11 +147,37 @@ namespace Libraries.Repository.EntityRepository
         public async Task<PagedResult<Legalmanagementsystem>> GetLegalmanagementsystemReportData(HearingReportSearchDto hearingReportSearchDto)
         {
             var data = await _dbContext.Legalmanagementsystem
-                    .Where(x => x.HearingDate >= hearingReportSearchDto.hearingDate
-                    && x.NextHearingDate <= hearingReportSearchDto.nextHearingDate)
+                    .Where(x => x.HearingDate >= (hearingReportSearchDto.hearingDate.HasValue ? hearingReportSearchDto.hearingDate : x.HearingDate)
+                    && x.HearingDate <= (hearingReportSearchDto.nextHearingDate.HasValue ? hearingReportSearchDto.nextHearingDate : x.HearingDate))
                     .OrderByDescending(x => x.Id)
-
                     .GetPaged(hearingReportSearchDto.PageNumber, hearingReportSearchDto.PageSize);
+
+
+            int SortOrder = (int)hearingReportSearchDto.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (hearingReportSearchDto.SortBy.ToUpper())
+                {
+                    case ("HEARINGDATE"):
+                        data.Results = data.Results.OrderBy(x => x.HearingDate).ToList();
+                        break;
+                    case ("FILENO"):
+                        data.Results = data.Results.OrderBy(x => x.FileNo).ToList();
+                        break;
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (hearingReportSearchDto.SortBy.ToUpper())
+                {
+                    case ("HEARINGDATE"):
+                        data.Results = data.Results.OrderByDescending(x => x.HearingDate).ToList();
+                        break;
+                    case ("FILENO"):
+                        data.Results = data.Results.OrderByDescending(x => x.FileNo).ToList();
+                        break;
+                }
+            }
 
             return data;
         }
@@ -161,7 +210,7 @@ namespace Libraries.Repository.EntityRepository
                      .Where(x => ((string.IsNullOrEmpty(model.name) || x.FileNo.Contains(model.name))))
                       .OrderBy(x => x.FileNo)
                       .GetPaged<Legalmanagementsystem>(model.PageNumber, model.PageSize);
-                       
+
 
                         break;
                     case ("STATUS"):

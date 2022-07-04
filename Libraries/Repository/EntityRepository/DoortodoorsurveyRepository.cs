@@ -282,6 +282,7 @@ namespace Libraries.Repository.EntityRepository
         public async Task<Doortodoorsurvey> FetchSingleResult(int id)
         {
             return await _dbContext.Doortodoorsurvey
+                                    .Include(x=> x.NumberOfFloorsNavigation)
                                     .Include(x => x.Doortodoorsurveyidentityproof)
                                     .Include(x => x.Doortodoorsurveypropertyproof)
                                     .Where(x => x.Id == id && x.IsActive == 1)

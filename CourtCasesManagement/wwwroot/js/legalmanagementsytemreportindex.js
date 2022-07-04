@@ -1,20 +1,15 @@
 ﻿var currentPageNumber = 1;
-var currentPageSize = 10;
+var currentPageSize = 5;
+var sortby = 1;
 $(document).ready(function () {
     $("#btnGenerate").click(function () {
         debugger;
         var result = ValidateForm();
         var hearingDate = $('#txtHearingDate').val();
-        var nextHearingDate = $('#txtNextHearingDate').val();
-
-        //if (localityid != '' && localityid != undefined && fromDate != '' && toDate != '' && localityid != null && fromDate != null && toDate != null) {
+        var nextHearingDate = $('#txtNextHearingDate').val();      
         if (result) {
-            GetDetails(currentPageNumber, currentPageSize);
+            GetDetails(currentPageNumber, currentPageSize, sortby);
         }
-        //}
-        //else {
-        //    alert('Please Fill All Fields');
-        //}
     });
 
     $(".linkdisabled").click(function () {
@@ -22,8 +17,27 @@ $(document).ready(function () {
     });
 });
 
-function GetDetails(pageNumber, pageSize) {
-    var param = GetSearchParam(pageNumber, pageSize);
+$("#btnAscending").click(function () {
+    $("#btnDescending").removeClass("active");
+    $("#btnAscending").addClass("active");
+    sortby = 1;//for Ascending
+    GetDetails(currentPageNumber, currentPageSize, sortby);
+});
+
+$("#btnDescending").click(function () {
+    $("#btnAscending").removeClass("active");
+    $("#btnDescending").addClass("active");
+    sortby = 2;//for Descending
+    GetDetails(currentPageNumber, currentPageSize, sortby);
+});
+
+$('#ddlSort').change(function () {
+    GetDetails(currentPageNumber, currentPageSize, sortby);
+});
+
+
+function GetDetails(pageNumber, pageSize, sortby) {
+    var param = GetSearchParam(pageNumber, pageSize, sortby);
     debugger
     HttpPost(`/CaseHearingReport/GetDetails`, 'html', param, function (response) {
         $('#LoadReportView').html("");
@@ -31,7 +45,7 @@ function GetDetails(pageNumber, pageSize) {
     });
 }
 
-function GetSearchParam(pageNumber, pageSize) {
+function GetSearchParam(pageNumber, pageSize, sortby) {
     debugger;
    
     var HearingDate = $('#txtHearingDate').val();
@@ -39,19 +53,20 @@ function GetSearchParam(pageNumber, pageSize) {
     var model = {
         name: "test",
         pageSize: parseInt(pageSize),
-        pageNumber: parseInt(pageNumber),
-       
+        pageNumber: parseInt(pageNumber), 
         hearingDate: HearingDate,
-        nextHearingDate: NextHearingDate
+        nextHearingDate: NextHearingDate,
+        sortBy: $("#ddlSort").children("option:selected").val(),
+        sortOrder: parseInt(sortby)
     }
     return model;
 }
 function onPaging(pageNo) {
-    GetDetails(parseInt(pageNo), parseInt(currentPageSize));
+    GetDetails(parseInt(pageNo), parseInt(currentPageSize), sortby);
     currentPageNumber = pageNo;
 }
 
 function onChangePageSize(pageSize) {
-    GetDetails(parseInt(currentPageNumber), parseInt(pageSize));
+    GetDetails(parseInt(currentPageNumber), parseInt(pageSize), sortby);
     currentPageSize = pageSize;
 }

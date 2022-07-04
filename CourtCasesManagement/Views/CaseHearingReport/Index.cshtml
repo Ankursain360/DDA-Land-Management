@@ -20,42 +20,32 @@
                     <span class="d-block text-danger field-validation-valid" asp-validation-for="NextHearingDate"></span>
                     <label class="floating-label"> Hearing To Date</label>
                 </div>
-
             </div>
         </div>
-       
         <div class="row mt-md-3">
             <div class="col-md-12 ">
                 <input type="submit" value="Generate" id="btnGenerate" class="btn btn-theme" />
-                <input type="button" value="Refresh" onclick="location.reload(true);" class="btn btn-theme" />
-
+                <input type="button" value="Reset" onclick="location.reload(true);" class="btn btn-theme" />
             </div>
         </div>
-
     </div>
-
-
     <div class="table-section bg-white border shadow rounded">
         <div class="short-section d-md-flex align-items-center">
             <div class="p-3 d-flex align-items-end me-auto">
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3">
+                    <select class="floating-label-field floating-label-field--s3" id="ddlSort">
                         <option selected="selected" disabled="disabled">Select One</option>
-                        <option>Hearing Date</option>
-                        <option>Hearing Next date</option>
-
+                        <option value="HearingDate">Hearing Date</option>
+                        <option value="FileNo">File No.</option>
                     </select>
                     <label for="field-1" class="floating-label">Sort by</label>
                 </div>
                 <div class="short-btn d-flex align-items-center">
-                    <span class="btn slow active" title="Descending order"><i class="ri-sort-desc"></i></span>
-                    <span class="btn slow" title="Ascending order"><i class="ri-sort-asc"></i></span>
+                    <span class="btn slow active"   id="btnDescending"  title="Descending order"><i class="ri-sort-desc"></i></span>
+                    <span class="btn slow" title="Ascending order" id="btnAscending"><i class="ri-sort-asc"></i></span>
                 </div>
             </div>
-
-
             <div class="download-table d-flex align-items-center px-3 mb-3 mb-md-0">
-               
                 <a href="javascript:void(0)" class="d-flex align-items-center btn btn-success">
                     <i class="ri-download-2-line me-2 me-lg-1"></i>
                     <small>Download</small>

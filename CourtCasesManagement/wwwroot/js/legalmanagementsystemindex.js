@@ -1,7 +1,7 @@
 ﻿var currentPageNumber = 1;
-var currentPageSize = 10;
+var currentPageSize = 5;
 var sortby = 1;
-$(document).ready(function () {
+$(document).ready(function () { 
     GetLms(currentPageNumber, currentPageSize, sortby);
 });
 
@@ -33,12 +33,12 @@ $("#btnSearch").click(function () {
 
 function Descending() {
     $("#btnAscending").removeClass("active");
-    $("#btnDescending").addClass("active");
+    $("#btndescending").addClass("active");
     sortby = 2;     //for Descending
     GetLms(currentPageNumber, currentPageSize, sortby);
 };
 function Ascending() {
-    $("#btnDescending").removeClass("active");
+    $("#btndescending").removeClass("active");
     $("#btnAscending").addClass("active");
     sortby = 1;    //for Asc
     GetLms(currentPageNumber, currentPageSize, sortby);

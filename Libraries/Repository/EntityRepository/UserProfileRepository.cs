@@ -31,7 +31,7 @@ namespace Repository.EntityRepository
                                     .Include(a => a.Role)
                                     .Include(a => a.Department)
                                     .Include(a => a.Zone)
-                                    .Include(a => a.District)                                    
+                                    .Include(a => a.District)
                                     .ToListAsync();
         }
         public async Task<PagedResult<Userprofile>> GetPagedUser(UserManagementSearchDto model)
@@ -43,9 +43,10 @@ namespace Repository.EntityRepository
                                     .Include(a => a.Department)
                                     .Include(a => a.Zone)
                                     .Include(a => a.District)
+                                    .Include(a => a.Branch)
                                     .Where(a => (string.IsNullOrEmpty(model.UserName) || a.User.UserName.Contains(model.UserName))
                                         && (string.IsNullOrEmpty(model.Name) || a.User.Name.Contains(model.Name))
-                                        && (string.IsNullOrEmpty(model.Email) || a.User.Email.Contains(model.Email))                                
+                                        && (string.IsNullOrEmpty(model.Email) || a.User.Email.Contains(model.Email))
                                         && (string.IsNullOrEmpty(model.RoleName) || a.Role.Name.Contains(model.RoleName))
                                         && (string.IsNullOrEmpty(model.ZoneName) || a.Zone.Name.Contains(model.ZoneName))
                                         && (string.IsNullOrEmpty(model.PhoneNumber) || a.User.PhoneNumber.Contains(model.PhoneNumber))
@@ -59,121 +60,26 @@ namespace Repository.EntityRepository
                 switch (model.SortBy.ToUpper())
                 {
                     case ("USERNAME"):
-                        data = null;
-                        data = await _dbContext.Userprofile
-                                    .Include(a => a.User)
-                                    .Include(a => a.Role)
-                                    .Include(a => a.Department)
-                                    .Include(a => a.Zone)
-                                    .Include(a => a.District)
-                                    .Where(a => (string.IsNullOrEmpty(model.UserName) || a.User.UserName.Contains(model.UserName))
-                                        && (string.IsNullOrEmpty(model.Name) || a.User.Name.Contains(model.Name))
-                                        && (string.IsNullOrEmpty(model.Email) || a.User.Email.Contains(model.Email))
-                                        && (string.IsNullOrEmpty(model.RoleName) || a.Role.Name.Contains(model.RoleName))
-                                          && (string.IsNullOrEmpty(model.ZoneName) || a.Zone.Name.Contains(model.ZoneName))
-                                        && (string.IsNullOrEmpty(model.PhoneNumber) || a.User.PhoneNumber.Contains(model.PhoneNumber))
-                                        && (a.IsActive == 1)
-                                        )
-                                   .OrderBy(x => x.User.UserName)
-                                   .GetPaged<Userprofile>(model.PageNumber, model.PageSize);
+                        data.Results = data.Results.OrderBy(x => x.User.UserName).ToList();
+
                         break;
                     case ("NAME"):
-                        data = null;
-                        data = await _dbContext.Userprofile
-                                    .Include(a => a.User)
-                                    .Include(a => a.Role)
-                                    .Include(a => a.Department)
-                                    .Include(a => a.Zone)
-                                    .Include(a => a.District)
-                                    .Where(a => (string.IsNullOrEmpty(model.UserName) || a.User.UserName.Contains(model.UserName))
-                                        && (string.IsNullOrEmpty(model.Name) || a.User.Name.Contains(model.Name))
-                                        && (string.IsNullOrEmpty(model.Email) || a.User.Email.Contains(model.Email))
-                                       && (string.IsNullOrEmpty(model.RoleName) || a.Role.Name.Contains(model.RoleName))
-                                         && (string.IsNullOrEmpty(model.ZoneName) || a.Zone.Name.Contains(model.ZoneName))
-                                        && (string.IsNullOrEmpty(model.PhoneNumber) || a.User.PhoneNumber.Contains(model.PhoneNumber))
-                                        && (a.IsActive == 1)
-                                        )
-                                   .OrderBy(x => x.User.Name)
-                                   .GetPaged<Userprofile>(model.PageNumber, model.PageSize);
+                        data.Results = data.Results.OrderBy(x => x.User.Name).ToList();
                         break;
 
                     case ("ROLE"):
-                        data = null;
-                        data = await _dbContext.Userprofile
-                                    .Include(a => a.User)
-                                    .Include(a => a.Role)
-                                    .Include(a => a.Department)
-                                    .Include(a => a.Zone)
-                                    .Include(a => a.District)
-                                    .Where(a => (string.IsNullOrEmpty(model.UserName) || a.User.UserName.Contains(model.UserName))
-                                        && (string.IsNullOrEmpty(model.Name) || a.User.Name.Contains(model.Name))
-                                        && (string.IsNullOrEmpty(model.Email) || a.User.Email.Contains(model.Email))
-                                          && (string.IsNullOrEmpty(model.RoleName) || a.Role.Name.Contains(model.RoleName))
-                                            && (string.IsNullOrEmpty(model.ZoneName) || a.Zone.Name.Contains(model.ZoneName))
-                                        && (string.IsNullOrEmpty(model.PhoneNumber) || a.User.PhoneNumber.Contains(model.PhoneNumber))
-                                        && (a.IsActive == 1)
-                                        )
-                                   .OrderBy(x => x.Role.Name)
-                                   .GetPaged<Userprofile>(model.PageNumber, model.PageSize);
+                        data.Results = data.Results.OrderBy(x => x.Role.Name).ToList();
                         break;
 
                     case ("PHONENUMBER"):
-                        data = null;
-                        data = await _dbContext.Userprofile
-                                    .Include(a => a.User)
-                                    .Include(a => a.Role)
-                                    .Include(a => a.Department)
-                                    .Include(a => a.Zone)
-                                    .Include(a => a.District)
-                                    .Where(a => (string.IsNullOrEmpty(model.UserName) || a.User.UserName.Contains(model.UserName))
-                                        && (string.IsNullOrEmpty(model.Name) || a.User.Name.Contains(model.Name))
-                                        && (string.IsNullOrEmpty(model.Email) || a.User.Email.Contains(model.Email))
-                                        && (string.IsNullOrEmpty(model.RoleName) || a.Role.Name.Contains(model.RoleName))
-                                          && (string.IsNullOrEmpty(model.ZoneName) || a.Zone.Name.Contains(model.ZoneName))
-                                        && (string.IsNullOrEmpty(model.PhoneNumber) || a.User.PhoneNumber.Contains(model.PhoneNumber))
-                                        && (a.IsActive == 1)
-                                        )
-                                   .OrderBy(x => x.User.PhoneNumber)
-                                   .GetPaged<Userprofile>(model.PageNumber, model.PageSize);
+                        data.Results = data.Results.OrderBy(x => x.User.PhoneNumber).ToList();
                         break;
                     case ("EMAIL"):
-                        data = null;
-                        data = await _dbContext.Userprofile
-                                    .Include(a => a.User)
-                                    .Include(a => a.Role)
-                                    .Include(a => a.Department)
-                                    .Include(a => a.Zone)
-                                    .Include(a => a.District)
-                                    .Where(a => (string.IsNullOrEmpty(model.UserName) || a.User.UserName.Contains(model.UserName))
-                                        && (string.IsNullOrEmpty(model.Name) || a.User.Name.Contains(model.Name))
-                                        && (string.IsNullOrEmpty(model.Email) || a.User.Email.Contains(model.Email))
-                                         && (string.IsNullOrEmpty(model.RoleName) || a.Role.Name.Contains(model.RoleName))
-                                           && (string.IsNullOrEmpty(model.ZoneName) || a.Zone.Name.Contains(model.ZoneName))
-                                        && (string.IsNullOrEmpty(model.PhoneNumber) || a.User.PhoneNumber.Contains(model.PhoneNumber))
-                                        && (a.IsActive == 1)
-                                        )
-                                   .OrderBy(x => x.User.Email)
-                                   .GetPaged<Userprofile>(model.PageNumber, model.PageSize);
+                        data.Results = data.Results.OrderBy(x => x.User.Email).ToList();
                         break;
 
                     case ("STATUS"):
-                        data = null;
-                        data = await _dbContext.Userprofile
-                                    .Include(a => a.User)
-                                    .Include(a => a.Role)
-                                    .Include(a => a.Department)
-                                    .Include(a => a.Zone)
-                                    .Include(a => a.District)
-                                    .Where(a => (string.IsNullOrEmpty(model.UserName) || a.User.UserName.Contains(model.UserName))
-                                        && (string.IsNullOrEmpty(model.Name) || a.User.Name.Contains(model.Name))
-                                        && (string.IsNullOrEmpty(model.Email) || a.User.Email.Contains(model.Email))
-                                       && (string.IsNullOrEmpty(model.RoleName) || a.Role.Name.Contains(model.RoleName))
-                                         && (string.IsNullOrEmpty(model.ZoneName) || a.Zone.Name.Contains(model.ZoneName))
-                                        && (string.IsNullOrEmpty(model.PhoneNumber) || a.User.PhoneNumber.Contains(model.PhoneNumber))
-                                        && (a.IsActive == 1)
-                                        )
-                                   .OrderByDescending(x => x.IsActive)
-                                   .GetPaged<Userprofile>(model.PageNumber, model.PageSize);
+                        data.Results = data.Results.OrderByDescending(x => x.IsActive).ToList();
                         break;
                 }
             }
@@ -182,121 +88,26 @@ namespace Repository.EntityRepository
                 switch (model.SortBy.ToUpper())
                 {
                     case ("USERNAME"):
-                        data = null;
-                        data = await _dbContext.Userprofile
-                                    .Include(a => a.User)
-                                    .Include(a => a.Role)
-                                    .Include(a => a.Department)
-                                    .Include(a => a.Zone)
-                                    .Include(a => a.District)
-                                    .Where(a => (string.IsNullOrEmpty(model.UserName) || a.User.UserName.Contains(model.UserName))
-                                        && (string.IsNullOrEmpty(model.Name) || a.User.Name.Contains(model.Name))
-                                        && (string.IsNullOrEmpty(model.Email) || a.User.Email.Contains(model.Email))
-                                         && (string.IsNullOrEmpty(model.RoleName) || a.Role.Name.Contains(model.RoleName))
-                                           && (string.IsNullOrEmpty(model.ZoneName) || a.Zone.Name.Contains(model.ZoneName))
-                                        && (string.IsNullOrEmpty(model.PhoneNumber) || a.User.PhoneNumber.Contains(model.PhoneNumber))
-                                        && (a.IsActive == 1)
-                                        )
-                                   .OrderByDescending(x => x.User.UserName)
-                                   .GetPaged<Userprofile>(model.PageNumber, model.PageSize);
+                        data.Results = data.Results.OrderByDescending(x => x.User.UserName).ToList();
+
                         break;
                     case ("NAME"):
-                        data = null;
-                        data = await _dbContext.Userprofile
-                                    .Include(a => a.User)
-                                    .Include(a => a.Role)
-                                    .Include(a => a.Department)
-                                    .Include(a => a.Zone)
-                                    .Include(a => a.District)
-                                    .Where(a => (string.IsNullOrEmpty(model.UserName) || a.User.UserName.Contains(model.UserName))
-                                        && (string.IsNullOrEmpty(model.Name) || a.User.Name.Contains(model.Name))
-                                        && (string.IsNullOrEmpty(model.Email) || a.User.Email.Contains(model.Email))
-                                          && (string.IsNullOrEmpty(model.RoleName) || a.Role.Name.Contains(model.RoleName))
-                                            && (string.IsNullOrEmpty(model.ZoneName) || a.Zone.Name.Contains(model.ZoneName))
-                                        && (string.IsNullOrEmpty(model.PhoneNumber) || a.User.PhoneNumber.Contains(model.PhoneNumber))
-                                        && (a.IsActive == 1)
-                                        )
-                                   .OrderByDescending(x => x.User.Name)
-                                   .GetPaged<Userprofile>(model.PageNumber, model.PageSize);
+                        data.Results = data.Results.OrderByDescending(x => x.User.Name).ToList();
                         break;
 
                     case ("ROLE"):
-                        data = null;
-                        data = await _dbContext.Userprofile
-                                    .Include(a => a.User)
-                                    .Include(a => a.Role)
-                                    .Include(a => a.Department)
-                                    .Include(a => a.Zone)
-                                    .Include(a => a.District)
-                                    .Where(a => (string.IsNullOrEmpty(model.UserName) || a.User.UserName.Contains(model.UserName))
-                                        && (string.IsNullOrEmpty(model.Name) || a.User.Name.Contains(model.Name))
-                                        && (string.IsNullOrEmpty(model.Email) || a.User.Email.Contains(model.Email))
-                                      && (string.IsNullOrEmpty(model.RoleName) || a.Role.Name.Contains(model.RoleName))
-                                        && (string.IsNullOrEmpty(model.ZoneName) || a.Zone.Name.Contains(model.ZoneName))
-                                        && (string.IsNullOrEmpty(model.PhoneNumber) || a.User.PhoneNumber.Contains(model.PhoneNumber))
-                                        && (a.IsActive == 1)
-                                        )
-                                   .OrderByDescending(x => x.Role.Name)
-                                   .GetPaged<Userprofile>(model.PageNumber, model.PageSize);
+                        data.Results = data.Results.OrderByDescending(x => x.Role.Name).ToList();
                         break;
 
                     case ("PHONENUMBER"):
-                        data = null;
-                        data = await _dbContext.Userprofile
-                                    .Include(a => a.User)
-                                    .Include(a => a.Role)
-                                    .Include(a => a.Department)
-                                    .Include(a => a.Zone)
-                                    .Include(a => a.District)
-                                    .Where(a => (string.IsNullOrEmpty(model.UserName) || a.User.UserName.Contains(model.UserName))
-                                        && (string.IsNullOrEmpty(model.Name) || a.User.Name.Contains(model.Name))
-                                        && (string.IsNullOrEmpty(model.Email) || a.User.Email.Contains(model.Email))
-                                        && (string.IsNullOrEmpty(model.RoleName) || a.Role.Name.Contains(model.RoleName))
-                                          && (string.IsNullOrEmpty(model.ZoneName) || a.Zone.Name.Contains(model.ZoneName))
-                                        && (string.IsNullOrEmpty(model.PhoneNumber) || a.User.PhoneNumber.Contains(model.PhoneNumber))
-                                        && (a.IsActive == 1)
-                                        )
-                                   .OrderByDescending(x => x.User.PhoneNumber)
-                                   .GetPaged<Userprofile>(model.PageNumber, model.PageSize);
+                        data.Results = data.Results.OrderByDescending(x => x.User.PhoneNumber).ToList();
                         break;
                     case ("EMAIL"):
-                        data = null;
-                        data = await _dbContext.Userprofile
-                                    .Include(a => a.User)
-                                    .Include(a => a.Role)
-                                    .Include(a => a.Department)
-                                    .Include(a => a.Zone)
-                                    .Include(a => a.District)
-                                    .Where(a => (string.IsNullOrEmpty(model.UserName) || a.User.UserName.Contains(model.UserName))
-                                        && (string.IsNullOrEmpty(model.Name) || a.User.Name.Contains(model.Name))
-                                        && (string.IsNullOrEmpty(model.Email) || a.User.Email.Contains(model.Email))
-                                          && (string.IsNullOrEmpty(model.RoleName) || a.Role.Name.Contains(model.RoleName))
-                                            && (string.IsNullOrEmpty(model.ZoneName) || a.Zone.Name.Contains(model.ZoneName))
-                                        && (string.IsNullOrEmpty(model.PhoneNumber) || a.User.PhoneNumber.Contains(model.PhoneNumber))
-                                        && (a.IsActive == 1)
-                                        )
-                                   .OrderByDescending(x => x.User.Email)
-                                   .GetPaged<Userprofile>(model.PageNumber, model.PageSize);
+                        data.Results = data.Results.OrderByDescending(x => x.User.Email).ToList();
                         break;
 
                     case ("STATUS"):
-                        data = null;
-                        data = await _dbContext.Userprofile
-                                    .Include(a => a.User)
-                                    .Include(a => a.Role)
-                                    .Include(a => a.Department)
-                                    .Include(a => a.Zone)
-                                    .Include(a => a.District)
-                                    .Where(a => (string.IsNullOrEmpty(model.UserName) || a.User.UserName.Contains(model.UserName))
-                                        && (string.IsNullOrEmpty(model.Name) || a.User.Name.Contains(model.Name))
-                                        && (string.IsNullOrEmpty(model.Email) || a.User.Email.Contains(model.Email))
-                                         && (string.IsNullOrEmpty(model.RoleName) || a.Role.Name.Contains(model.RoleName))
-                                           && (string.IsNullOrEmpty(model.ZoneName) || a.Zone.Name.Contains(model.ZoneName))
-                                        && (string.IsNullOrEmpty(model.PhoneNumber) || a.User.PhoneNumber.Contains(model.PhoneNumber))
-                                        && (a.IsActive == 1)
-                                        )
-                                   .OrderBy(x => x.IsActive)
-                                   .GetPaged<Userprofile>(model.PageNumber, model.PageSize);
+                        data.Results = data.Results.OrderBy(x => x.IsActive).ToList();
                         break;
                 }
             }
@@ -353,7 +164,7 @@ namespace Repository.EntityRepository
             }
             return data;
         }
-        
+
         public async Task<List<Userprofile>> GetUser()
         {
             return await _dbContext.Userprofile
@@ -393,7 +204,7 @@ namespace Repository.EntityRepository
                                             .WithSqlParams(("User_Id", userId))
                                             .ExecuteStoredProcedureAsync<KycApplicationSearchDto>();
 
-                return (List<KycApplicationSearchDto >)data;
+                return (List<KycApplicationSearchDto>)data;
             }
             catch (Exception ex)
             {
@@ -442,7 +253,7 @@ namespace Repository.EntityRepository
         }
         public async Task<bool> ValidateUniqueUserName1(string userName)
         {
-            return await _dbContext.Users.AnyAsync(t =>t.UserName.ToLower() == userName.ToLower() || t.NormalizedUserName == userName.ToUpper());
+            return await _dbContext.Users.AnyAsync(t => t.UserName.ToLower() == userName.ToLower() || t.NormalizedUserName == userName.ToUpper());
         }
 
         public async Task<List<Zone>> GetAllZone(int departmentId)
@@ -490,7 +301,7 @@ namespace Repository.EntityRepository
             if (Data != null)
             {
                 for (int i = 0; i < Data.Count; i++)
-                {                    
+                {
                     listData.Add(new UserProfileInfoDetailsDto()
                     {
                         Id = Data[i].Id,
@@ -507,9 +318,9 @@ namespace Repository.EntityRepository
 
             return listData;
         }
-        
-        
-        
+
+
+
         public async Task<List<kycUserProfileInfoDetailsDto>> GetkycUserSkippingItsOwnConcatedName(int roleId, int userid)//added by ishu 23/7/2021
         {
             List<kycUserProfileInfoDetailsDto> listData = new List<kycUserProfileInfoDetailsDto>();
@@ -576,7 +387,7 @@ namespace Repository.EntityRepository
                                   .Where(a => a.IsActive == 1 && a.RoleId == roleId && a.BranchId == branchId)
                                   .ToListAsync();
         }
-        
+
         public async Task<List<Userprofile>> GetUserByIdZone(int userid, int zoneId)
         {
             return await _dbContext.Userprofile
@@ -600,7 +411,7 @@ namespace Repository.EntityRepository
                                 .Where(a => a.IsActive == 1 && a.UserId == userid && a.BranchId == branchId)
                                 .ToListAsync();
         }
-        
+
         public async Task<List<Userprofile>> UserListSkippingmultiusers(int[] nums)
         {
             return await _dbContext.Userprofile
@@ -646,7 +457,7 @@ namespace Repository.EntityRepository
 
             return listData;
         }
-        
+
         public async Task<List<kycUserProfileInfoDetailsDto>> kycGetUserOnRoleZoneBasisConcatedName(int roleId, int branchId)//added by ishu 23/7/2021
         {
             List<kycUserProfileInfoDetailsDto> listData = new List<kycUserProfileInfoDetailsDto>();
@@ -715,7 +526,7 @@ namespace Repository.EntityRepository
             return listData;
         }
 
-        
+
         public async Task<List<kycUserProfileInfoDetailsDto>> GetkycUserOnRoleBasisConcatedName(int roleId)//added by ishu 23/7/2021
         {
             List<kycUserProfileInfoDetailsDto> listData = new List<kycUserProfileInfoDetailsDto>();
@@ -819,7 +630,7 @@ namespace Repository.EntityRepository
             return listData;
         }
 
-        
+
         public async Task<List<UserProfileInfoDetailsDto>> UserListSkippingmultiusersConcatedName(int[] nums)
         {
             List<UserProfileInfoDetailsDto> listData = new List<UserProfileInfoDetailsDto>();
@@ -853,7 +664,7 @@ namespace Repository.EntityRepository
 
             return listData;
         }
-        
+
 
         public async Task<List<kycUserProfileInfoDetailsDto>> kycUserListSkippingmultiusersConcatedName(int[] nums)//added by ishu 23/7/2021
         {

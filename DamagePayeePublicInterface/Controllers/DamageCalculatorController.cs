@@ -13,6 +13,8 @@ using Notification.Constants;
 using Notification.OptionEnums;
 using Dto.Master;
 using System.Globalization;
+using System.IO;
+using Newtonsoft.Json;
 
 namespace DamagePayeePublicInterface.Controllers
 {
@@ -74,6 +76,8 @@ namespace DamagePayeePublicInterface.Controllers
             {
                 int yr = 0;
                 yr = CalculateYearBetweenTwoDates(dto);
+                //log
+                this.WriteToFile("year line number 77:" + yr.ToString());
                 SetInitialRowBetweenTwoDates(yr, dto, damagecalculation);
             }
 
@@ -90,8 +94,12 @@ namespace DamagePayeePublicInterface.Controllers
             if (EndDate.Month > 3)
             {
                 string ddtt = "31/03/" + ((EndDate.Year) + 1).ToString();
+                //log
+                this.WriteToFile("year line number 95:" + ddtt.ToString());
                 //  ddtt = Convert.ToDateTime(ddtt).ToString("d/M/yyyy");
                 EndDate = DateTime.ParseExact(ddtt, "d/M/yyyy", CultureInfo.InvariantCulture);
+                //log
+                this.WriteToFile("year line number 79:" + EndDate.ToString());
             }
 
             int years = EndDate.Year - startDate.Year;
@@ -117,318 +125,400 @@ namespace DamagePayeePublicInterface.Controllers
 
         private async void SetInitialRowBetweenTwoDates(int year, DamageCalculationDto dto, List<DamageChargesCalculation> damagecalculation)
         {
-
-            DateTime fromdate = dto.FromDate;
-            DateTime toodate = dto.ToDate;
-            GlobalRow = year;
-            string listFromDate;
-            string listToDate;
-            string listMonth;
-            string listArea;
-            string listRate = "0";
-            string listDamageCharge = "0";
-            string listCompoundAmt = "0";
-            string listRemainAmt = "0";
-            string listCompoundRemainAmt = "0";
-            string listPaidAmt = "0";
-
-            int i = 0;
-            for (i = 0; i < year; i++)
+            try
             {
-                int cnt = 0;
-                string fromDt;
-                string toDt;
-                string rt = "";
-                double ValMonth = 0;
-                int m1 = fromdate.Month;
-                int y1 = fromdate.Year;
-                int m2 = toodate.Month;
 
-                if (DateChk2 == 0)
-                {
-                    if (i == 0)
+
+
+                DateTime fromdate = dto.FromDate;
+                DateTime toodate = dto.ToDate;
+                GlobalRow = year;
+                string listFromDate;
+                string listToDate;
+                string listMonth;
+                string listArea;
+                string listRate = "0";
+                string listDamageCharge = "0";
+                string listCompoundAmt = "0";
+                string listRemainAmt = "0";
+                string listCompoundRemainAmt = "0";
+                string listPaidAmt = "0";
+
+                int i = 0;
+                for (i = 0; i < year; i++)
+                { //log
+                    this.WriteToFile("year and I loop value line number 149:  i:" + i.ToString() + "  year:" + year.ToString());
+                    int cnt = 0;
+                    string fromDt;
+                    string toDt;
+                    string rt = "";
+                    double ValMonth = 0;
+                    //log
+                    this.WriteToFile("fromdate value line number 156:" + fromdate.ToString());
+                    int m1 = fromdate.Month;
+                    int y1 = fromdate.Year;
+                    int m2 = toodate.Month;
+
+                    if (DateChk2 == 0)
                     {
-                        listFromDate = fromdate.ToString();
-                        if (m1 >= 4)
+                        if (i == 0)
                         {
-                            if (i == GlobalRow - 1 && m2 > 3)
+                            listFromDate = fromdate.ToString("dd/MM/yyyy");
+                            //log
+                            this.WriteToFile("listFromDate line number 167:" + listFromDate);
+                            if (m1 >= 4)
                             {
-                                listToDate = toodate.ToString();
-                            }
-                            else
-                            {
-                                listToDate = "31/03/" + (y1 + 1).ToString();
-                            }
-                            fromDt = "31/03/" + (y1 + 1).ToString();
-                        }
-                        else
-                        {
-                            if (i == GlobalRow - 1 && m2 > 3)
-                            {
-                                listToDate = toodate.ToString();
-                            }
-                            else
-                            {
-                                listToDate = "31/03/" + y1.ToString();
-                            }
-
-                            fromDt = "31/03/" + y1.ToString();
-                        }
-
-                    }
-                    else if (i == 1)
-                    {
-                        if (m1 >= 4)
-                        {
-                            listFromDate = "01/04/" + (y1 + 1).ToString();
-                            if (i == GlobalRow - 1 && m2 > 3)
-                            {
-                                listToDate = toodate.ToString();
-                            }
-                            else
-                            {
-                                listToDate = "31/03/" + (fromdate.Year + IndxCounter2 + 1).ToString();
-                            }
-
-                            y1 = y1 + 1;
-                        }
-                        else
-                        {
-                            listFromDate = "01/04/" + y1.ToString();
-                            if (i == GlobalRow - 1 && m2 > 3)
-                            {
-                                listToDate = toodate.ToString();
-                            }
-                            else
-                            {
-                                listToDate = "31/03/" + (fromdate.Year + IndxCounter2).ToString();
-                            }
-
-                            y1 = y1 + 1;
-                        }
-                    }
-                    else
-                    {
-                        if (m1 >= 4)
-                        {
-                            listFromDate = "01/04/" + (y1 + IndxCounter2).ToString();
-                            if (i == GlobalRow - 1 && m2 > 3)
-                            {
-                                listToDate = toodate.ToString();
-                            }
-                            else
-                            {
-                                listToDate = "31/03/" + (fromdate.Year + IndxCounter2 + 1).ToString();
-                            }
-
-                            y1 = y1 + 1;
-                        }
-                        else
-                        {
-                            listFromDate = "01/04/" + (y1 + IndxCounter2 - 1).ToString();
-                            if (i == GlobalRow - 1 && m2 > 3)
-                            {
-                                listToDate = toodate.ToString();
-                            }
-                            else
-                            {
-                                listToDate = "31/03/" + (fromdate.Year + IndxCounter2).ToString();
-                            }
-                            y1 = y1 + 1;
-                        }
-                    }
-                    //----Month----
-                    listMonth = (CalMonth(listFromDate, listToDate)).ToString();
-                    IndxCounter2++;
-                }
-                else
-                {
-                    listFromDate = "22/06/2015";
-                    listToDate = "31/03/2016";
-                    DateChk2 = 0;
-                    listMonth = "9";
-                }
-
-                //------------------------------------ Renu 15 june 2020------------------------
-                if (listFromDate == "01/04/2015" && listToDate == "31/03/2016")
-                {
-                    listFromDate = "01/04/2015";
-                    listToDate = "21/06/2015";
-                    DateChk2 = 1;
-                    //----Month----
-                    listMonth = "3";
-
-                }
-
-                ValMonth = Convert.ToDouble(listMonth) / 12;
-                //------------------------------------ Renu 15 june 2020------------------------
-
-                //----Area-----
-                listArea = dto.Area;
-
-                //----Rate-----
-                if (dto.PropertyTypeId != "0" && dto.EncroachmentDate.ToString() != "" && dto.Area != "")
-                {
-                    if (dto.PropertyTypeId == "1")
-                    {
-                        var dtt = await BindStartAndEndDate(listFromDate, listToDate, dto);
-                        if (dtt.Count > 0)
-                        {
-                            if (dtt.Count > 1)
-                            {
-                                for (int indx = 0; indx < dtt.Count; indx++)
+                                if (i == GlobalRow - 1 && m2 > 3)
                                 {
-                                    rateStr = rateStr + dtt[indx].Rate.ToString() + "/";
-                                }
-
-                                rt = rateStr.Substring(0, rateStr.Length - 1);
-                            }
-                            else
-                            {
-                                rt = dtt[0].Rate.ToString();
-                            }
-                        }
-                    }
-                    else
-                    {
-                        var dtt = await BindStartAndEndDateComm(listFromDate, listToDate, dto);
-                        if (dtt.Count > 0)
-                        {
-                            if (dtt.Count > 1)
-                            {
-                                for (int indx = 0; indx < dtt.Count; indx++)
-                                {
-                                    rateStr = rateStr + dtt[indx].Rate.ToString() + "/";
-                                }
-
-                                rt = rateStr.Substring(0, rateStr.Length - 1);
-                            }
-                            else
-                            {
-                                rt = dtt[0].Rate.ToString();
-                            }
-                        }
-                    }
-
-                    listRate = rt;
-                    //---------------------------------17/02-20----------------------------------------------------
-                    rateStr = "";
-
-                    //--------------Damage Charge------------
-                    if (listRate.IndexOf("/") > 0)
-                    {
-                        string[] rtstr = listRate.Split('/');
-                        listDamageCharge = Math.Round((((Convert.ToDouble(rtstr[0]) * Convert.ToDouble(listArea) * 4) + (Convert.ToDouble(rtstr[1]) * Convert.ToDouble(listArea) * 8))), 2).ToString();
-                        // e.Row.Cells[3].BackColor = System.Drawing.Color.Red;
-                    }
-                    else
-                    {
-                        listDamageCharge = Math.Round((((listRate == "" ? 0 : Convert.ToDouble(listRate)) * Convert.ToDouble(listArea) * Convert.ToDouble(listMonth))), 2).ToString();
-                    }
-                    grdDamageTotal = grdDamageTotal + Convert.ToDouble(listDamageCharge);
-
-                    //--------------Comulative Damage and Interest calculation------------
-
-                    /////////////////////////////////////Renu\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-                    if (i < 0)
-                    {
-                        listCompoundAmt = listDamageCharge;
-                        listRemainAmt = "0";
-                    }
-                    else
-                    {
-
-                        listToDate = Convert.ToDateTime(listToDate).ToString("d/M/yyyy");
-                        if (Convert.ToDateTime("21/06/2015") < Convert.ToDateTime(listToDate))
-                        //if (DateTime.ParseExact("21/06/2015", "d/M/yyyy", CultureInfo.InvariantCulture) < DateTime.ParseExact(listToDate, "d/M/yyyy", CultureInfo.InvariantCulture))
-                        {
-                            if (CIntrst2 == 1)
-                            {
-                                if (i > 0)
-                                {
-                                    listCompoundAmt = Math.Round(((Convert.ToDouble(listDamageCharge) == 0 ? 0 : Convert.ToDouble(listCompoundAmt) + Convert.ToDouble(listDamageCharge) - Convert.ToDouble(listPaidAmt))), 0).ToString();
-                                    listRemainAmt = Math.Round(((Convert.ToDouble(listCompoundAmt) + grdRemainTotal) * 0.07 * ValMonth), 0).ToString();
-
+                                    listToDate = toodate.ToString("dd/MM/yyyy");
+                                    //log
+                                    this.WriteToFile("listToDate line number 174:" + listFromDate);
                                 }
                                 else
                                 {
-                                    listCompoundAmt = Math.Round(((Convert.ToDouble(listDamageCharge) - Convert.ToDouble(listPaidAmt))), 0).ToString();
-                                    listRemainAmt = Math.Round(((Convert.ToDouble(listCompoundAmt) + grdRemainTotal) * 0.07 * ValMonth), 0).ToString();
+                                    listToDate = "31/03/" + (y1 + 1).ToString();
+                                    //log
+                                    this.WriteToFile("listToDate line number 180:" + listFromDate);
                                 }
+                                fromDt = "31/03/" + (y1 + 1).ToString();
+                                //log
+                                this.WriteToFile("fromDt line number 184:" + fromDt);
+                            }
+                            else
+                            {
+                                if (i == GlobalRow - 1 && m2 > 3)
+                                {
+                                    listToDate = toodate.ToString("dd/MM/yyyy");
+                                    //log
+                                    this.WriteToFile("listToDate line number 192:" + listToDate);
+                                }
+                                else
+                                {
+                                    listToDate = "31/03/" + y1.ToString();
+                                    //log
+                                    this.WriteToFile("listToDate line number 198:" + listToDate);
+                                }
+
+                                fromDt = "31/03/" + y1.ToString();
+                                //log
+                                this.WriteToFile("fromDt line number 202:" + fromDt);
+                            }
+
+                        }
+                        else if (i == 1)
+                        {
+                            if (m1 >= 4)
+                            {
+                                listFromDate = "01/04/" + (y1 + 1).ToString();
+                                //log
+                                this.WriteToFile("listFromDate line number 213:" + listFromDate);
+
+                                if (i == GlobalRow - 1 && m2 > 3)
+                                {
+                                    listToDate = toodate.ToString("dd/MM/yyyy");
+                                    //log
+                                    this.WriteToFile("listToDate line number 219:" + listToDate);
+                                }
+                                else
+                                {
+                                    listToDate = "31/03/" + (fromdate.Year + IndxCounter2 + 1).ToString();
+                                    //log
+                                    this.WriteToFile("listToDate line number 225:" + listToDate);
+                                }
+
+                                y1 = y1 + 1;
+                            }
+                            else
+                            {
+                                listFromDate = "01/04/" + y1.ToString();
+                                //log
+                                this.WriteToFile("listFromDate line number 234:" + listFromDate);
+                                if (i == GlobalRow - 1 && m2 > 3)
+                                {
+                                    listToDate = toodate.ToString("dd/MM/yyyy");
+                                    //log
+                                    this.WriteToFile("listToDate line number 239:" + listToDate);
+                                }
+                                else
+                                {
+                                    listToDate = "31/03/" + (fromdate.Year + IndxCounter2).ToString();
+                                    //log
+                                    this.WriteToFile("listToDate line number 245:" + listToDate);
+                                }
+
+                                y1 = y1 + 1;
+                            }
+                        }
+                        else
+                        {
+                            if (m1 >= 4)
+                            {
+                                listFromDate = "01/04/" + (y1 + IndxCounter2).ToString();
+                                //log
+                                this.WriteToFile("listFromDate line number 257:" + listFromDate);
+                                if (i == GlobalRow - 1 && m2 > 3)
+                                {
+                                    listToDate = toodate.ToString("dd/MM/yyyy");
+                                    //log
+                                    this.WriteToFile("listToDate line number 262:" + listToDate);
+                                }
+                                else
+                                {
+                                    listToDate = "31/03/" + (fromdate.Year + IndxCounter2 + 1).ToString();
+                                    //log
+                                    this.WriteToFile("listToDate line number 268:" + listToDate);
+                                }
+
+                                y1 = y1 + 1;
+                            }
+                            else
+                            {
+                                listFromDate = "01/04/" + (y1 + IndxCounter2 - 1).ToString();
+                                //log
+                                this.WriteToFile("listFromDate line number 278:" + listFromDate);
+                                if (i == GlobalRow - 1 && m2 > 3)
+                                {
+                                    listToDate = toodate.ToString("dd/MM/yyyy");
+                                    //log
+                                    this.WriteToFile("listToDate line number 282:" + listToDate);
+                                }
+                                else
+                                {
+                                    listToDate = "31/03/" + (fromdate.Year + IndxCounter2).ToString();
+                                    //log
+                                    this.WriteToFile("listToDate line number 287:" + listToDate);
+                                }
+                                y1 = y1 + 1;
+                            }
+                        }
+                        //----Month----
+                        listMonth = (CalMonth(listFromDate, listToDate)).ToString();
+                        //log
+                        this.WriteToFile("listMonth line number 296:" + listMonth);
+                        IndxCounter2++;
+                    }
+                    else
+                    {
+                        listFromDate = "22/06/2015";
+                        listToDate = "31/03/2016";
+                        DateChk2 = 0;
+                        listMonth = "9";
+                    }
+
+                    //------------------------------------ Renu 15 june 2020------------------------
+                    if (listFromDate == "01/04/2015" && listToDate == "31/03/2016")
+                    {
+                        listFromDate = "01/04/2015";
+                        listToDate = "21/06/2015";
+                        DateChk2 = 1;
+                        //----Month----
+                        listMonth = "3";
+
+                    }
+
+                    ValMonth = Convert.ToDouble(listMonth) / 12;
+                    //------------------------------------ Renu 15 june 2020------------------------
+
+                    //----Area-----
+                    listArea = dto.Area;
+
+                    //----Rate-----
+                    if (dto.PropertyTypeId != "0" && dto.EncroachmentDate.ToString() != "" && dto.Area != "")
+                    {
+                        if (dto.PropertyTypeId == "1")
+                        {
+                            var dtt = await BindStartAndEndDate(listFromDate, listToDate, dto);
+                            if (dtt.Count > 0)
+                            {
+                                if (dtt.Count > 1)
+                                {
+                                    for (int indx = 0; indx < dtt.Count; indx++)
+                                    {
+                                        rateStr = rateStr + dtt[indx].Rate.ToString() + "/";
+                                    }
+
+                                    rt = rateStr.Substring(0, rateStr.Length - 1);
+                                }
+                                else
+                                {
+                                    rt = dtt[0].Rate.ToString();
+                                }
+                            }
+                        }
+                        else
+                        {
+                            var dtt = await BindStartAndEndDateComm(listFromDate, listToDate, dto);
+                            if (dtt.Count > 0)
+                            {
+                                if (dtt.Count > 1)
+                                {
+                                    for (int indx = 0; indx < dtt.Count; indx++)
+                                    {
+                                        rateStr = rateStr + dtt[indx].Rate.ToString() + "/";
+                                    }
+
+                                    rt = rateStr.Substring(0, rateStr.Length - 1);
+                                }
+                                else
+                                {
+                                    rt = dtt[0].Rate.ToString();
+                                }
+                            }
+                        }
+
+                        listRate = rt;
+                        //log
+                        this.WriteToFile("listRate line number 370:" + listRate);
+                        //---------------------------------17/02-20----------------------------------------------------
+                        rateStr = "";
+
+                        //--------------Damage Charge------------
+                        if (listRate.IndexOf("/") > 0)
+                        {
+                            string[] rtstr = listRate.Split('/');
+                            listDamageCharge = Math.Round((((Convert.ToDouble(rtstr[0]) * Convert.ToDouble(listArea) * 4) + (Convert.ToDouble(rtstr[1]) * Convert.ToDouble(listArea) * 8))), 2).ToString();
+                            // e.Row.Cells[3].BackColor = System.Drawing.Color.Red;
+                        }
+                        else
+                        {
+                            listDamageCharge = Math.Round((((listRate == "" ? 0 : Convert.ToDouble(listRate)) * Convert.ToDouble(listArea) * Convert.ToDouble(listMonth))), 2).ToString();
+                        }
+                        grdDamageTotal = grdDamageTotal + Convert.ToDouble(listDamageCharge);
+
+                        //--------------Comulative Damage and Interest calculation------------
+
+                        /////////////////////////////////////Renu\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+                        if (i < 0)
+                        {
+                            listCompoundAmt = listDamageCharge;
+                            listRemainAmt = "0";
+                        }
+                        else
+                        {
+                            listToDate= DateTime.ParseExact(listToDate, "dd/MM/yyyy", CultureInfo.InvariantCulture).ToString("dd/MM/yyyy");
+                          //  listToDate = Convert.ToDateTime(listToDate).ToString("d/M/yyyy");
+                            //log
+                            this.WriteToFile("listToDate line number 400:" + listToDate);
+                          //  if (Convert.ToDateTime("21/06/2015") < Convert.ToDateTime(listToDate))
+                            if (DateTime.ParseExact("21/06/2015", "dd/MM/yyyy", CultureInfo.InvariantCulture) < DateTime.ParseExact(listToDate, "dd/MM/yyyy", CultureInfo.InvariantCulture))
+                            {
+                                if (CIntrst2 == 1)
+                                {
+                                    if (i > 0)
+                                    {
+                                        listCompoundAmt = Math.Round(((Convert.ToDouble(listDamageCharge) == 0 ? 0 : Convert.ToDouble(listCompoundAmt) + Convert.ToDouble(listDamageCharge) - Convert.ToDouble(listPaidAmt))), 0).ToString();
+                                        listRemainAmt = Math.Round(((Convert.ToDouble(listCompoundAmt) + grdRemainTotal) * 0.07 * ValMonth), 0).ToString();
+
+                                    }
+                                    else
+                                    {
+                                        listCompoundAmt = Math.Round(((Convert.ToDouble(listDamageCharge) - Convert.ToDouble(listPaidAmt))), 0).ToString();
+                                        listRemainAmt = Math.Round(((Convert.ToDouble(listCompoundAmt) + grdRemainTotal) * 0.07 * ValMonth), 0).ToString();
+                                    }
+                                }
+                                else
+                                {
+                                    if (i > 0)
+                                    {
+                                        listCompoundAmt = Math.Round(((Convert.ToDouble(listCompoundAmt) + Convert.ToDouble(listDamageCharge) - Convert.ToDouble(listPaidAmt))), 0).ToString();
+                                        listRemainAmt = Math.Round(((Convert.ToDouble(listCompoundAmt) + grdRemainTotal) * 0.07 * ValMonth), 0).ToString();
+                                    }
+                                    else
+                                    {
+                                        listCompoundAmt = Math.Round(((Convert.ToDouble(listDamageCharge) - Convert.ToDouble(listPaidAmt))), 0).ToString();
+                                        listRemainAmt = Math.Round(((Convert.ToDouble(listCompoundAmt) + grdRemainTotal) * 0.07 * ValMonth), 0).ToString();
+                                    }
+                                    CIntrst2 = 1;
+                                }
+                                Rmd2 = 1;
                             }
                             else
                             {
                                 if (i > 0)
                                 {
                                     listCompoundAmt = Math.Round(((Convert.ToDouble(listCompoundAmt) + Convert.ToDouble(listDamageCharge) - Convert.ToDouble(listPaidAmt))), 0).ToString();
-                                    listRemainAmt = Math.Round(((Convert.ToDouble(listCompoundAmt) + grdRemainTotal) * 0.07 * ValMonth), 0).ToString();
+                                    listRemainAmt = Math.Round((Convert.ToDouble(listCompoundAmt) * 0.07 * ValMonth), 0).ToString();
                                 }
                                 else
                                 {
                                     listCompoundAmt = Math.Round(((Convert.ToDouble(listDamageCharge) - Convert.ToDouble(listPaidAmt))), 0).ToString();
-                                    listRemainAmt = Math.Round(((Convert.ToDouble(listCompoundAmt) + grdRemainTotal) * 0.07 * ValMonth), 0).ToString();
+                                    listRemainAmt = Math.Round((Convert.ToDouble(listCompoundAmt) * 0.07 * ValMonth), 0).ToString();
                                 }
-                                CIntrst2 = 1;
-                            }
-                            Rmd2 = 1;
-                        }
-                        else
-                        {
-                            if (i > 0)
-                            {
-                                listCompoundAmt = Math.Round(((Convert.ToDouble(listCompoundAmt) + Convert.ToDouble(listDamageCharge) - Convert.ToDouble(listPaidAmt))), 0).ToString();
-                                listRemainAmt = Math.Round((Convert.ToDouble(listCompoundAmt) * 0.07 * ValMonth), 0).ToString();
-                            }
-                            else
-                            {
-                                listCompoundAmt = Math.Round(((Convert.ToDouble(listDamageCharge) - Convert.ToDouble(listPaidAmt))), 0).ToString();
-                                listRemainAmt = Math.Round((Convert.ToDouble(listCompoundAmt) * 0.07 * ValMonth), 0).ToString();
                             }
                         }
+                        grdCompoundTotal = Convert.ToDouble(listCompoundAmt);
+                        grdRemainTotal = grdRemainTotal + Convert.ToDouble(listRemainAmt);
+                        listCompoundRemainAmt = grdRemainTotal.ToString();
+                        grdRemainTotal_2 = Convert.ToDouble(listRemainAmt);
+                        str_lblCompoundTotal = listCompoundAmt;
+                        str_lblCommrmnAmnt = listCompoundRemainAmt;
                     }
-                    grdCompoundTotal = Convert.ToDouble(listCompoundAmt);
-                    grdRemainTotal = grdRemainTotal + Convert.ToDouble(listRemainAmt);
-                    listCompoundRemainAmt = grdRemainTotal.ToString();
-                    grdRemainTotal_2 = Convert.ToDouble(listRemainAmt);
-                    str_lblCompoundTotal = listCompoundAmt;
-                    str_lblCommrmnAmnt = listCompoundRemainAmt;
-                }
-                else
-                {
-                    ViewBag.Message = Alert.Show("Plz Select Property and Locality and Date!", "", AlertType.Warning);
-                    List<DamageChargesCalculation> damagecalculation1 = new List<DamageChargesCalculation>();
-                }
+                    else
+                    {
+                        ViewBag.Message = Alert.Show("Plz Select Property and Locality and Date!", "", AlertType.Warning);
+                        List<DamageChargesCalculation> damagecalculation1 = new List<DamageChargesCalculation>();
+                    }
+                    //log
+                    this.WriteToFile("listFromDate line number 461:" + listFromDate);
+                //    this.WriteToFile("listFromDate line number 463:" + DateTime.ParseExact(listFromDate, "M/d/yyyy hh:mm:ss tt", CultureInfo.InvariantCulture));
+                    this.WriteToFile("listToDate line number 464:" + listToDate);
+                    damagecalculation.Add(new DamageChargesCalculation
+                    {
+                        StartDate = DateTime.ParseExact(listFromDate, "dd/MM/yyyy", CultureInfo.InvariantCulture), //Convert.ToDateTime(listFromDate),
+                        EndDate = DateTime.ParseExact(listToDate, "dd/MM/yyyy", CultureInfo.InvariantCulture),// Convert.ToDateTime(listToDate),
+                        Area = Convert.ToDecimal(dto.Area),
+                        Months = listMonth,
+                        Rate = (listRate == "" ? "" : listRate),
+                        DamageCharges = (listDamageCharge == "" ? 0 : Convert.ToDecimal(listDamageCharge)),
+                        Compunding = (listCompoundAmt == "" ? 0 : Convert.ToDecimal(listCompoundAmt)),
+                        TotalInterest = (listRate == "" ? 0 : Convert.ToDecimal(listRemainAmt)),
+                        TotalPayAmount = (listRate == "" ? 0 : Convert.ToDecimal(listCompoundRemainAmt))
+                    }) ;
+                    //log
+                    this.WriteToFile("List data at 474:" + JsonConvert.SerializeObject(damagecalculation));
 
-                damagecalculation.Add(new DamageChargesCalculation
-                {
-                    StartDate = Convert.ToDateTime(listFromDate),
-                    EndDate = Convert.ToDateTime(listToDate),
-                    Area = Convert.ToDecimal(dto.Area),
-                    Months = listMonth,
-                    Rate = (listRate == "" ? "" : listRate),
-                    DamageCharges = (listDamageCharge == "" ? 0 : Convert.ToDecimal(listDamageCharge)),
-                    Compunding = (listCompoundAmt == "" ? 0 : Convert.ToDecimal(listCompoundAmt)),
-                    TotalInterest = (listRate == "" ? 0 : Convert.ToDecimal(listRemainAmt)),
-                    TotalPayAmount = (listRate == "" ? 0 : Convert.ToDecimal(listCompoundRemainAmt))
-                });
-
-
-                ViewBag.GrandCompoundInterest = listCompoundRemainAmt;
-            } //For each loop end
-            ViewBag.GrandDamageTotoal = damagecalculation.Sum(x => x.DamageCharges);
-            ViewBag.GrandCompoundInterest = damagecalculation.Sum(x => x.TotalInterest);
+                    ViewBag.GrandCompoundInterest = listCompoundRemainAmt;
+                } //For each loop end
+                ViewBag.GrandDamageTotoal = damagecalculation.Sum(x => x.DamageCharges);
+                ViewBag.GrandCompoundInterest = damagecalculation.Sum(x => x.TotalInterest);
+            }
+            catch (Exception ex)
+            {
+                this.WriteToFile("Error in Damage Calculator ex:  " + ex.Message.ToString());
+                this.WriteToFile("Error in Damage Calculator  Stack details: " + ex.StackTrace.ToString());
+                this.WriteToFile("Error in Damage Calculator  inner exception: " + ex.InnerException.Message.ToString());
+            }
         }
 
         public int CalMonth(string from_dt, string to_dt)
         {
+            //log
+            this.WriteToFile("from_dt, to_dt line number 489: fromdate" + from_dt + "  todate:"+ to_dt);
             int TotalMonths = 0;
-            DateTime startdate = Convert.ToDateTime(from_dt.ToString());
-            DateTime enddate = Convert.ToDateTime(to_dt.ToString());
-
+            DateTime startdate =  DateTime.ParseExact(from_dt, "dd/MM/yyyy", CultureInfo.InvariantCulture); // Convert.ToDateTime(from_dt.ToString());
+            DateTime enddate = DateTime.ParseExact(from_dt, "dd/MM/yyyy", CultureInfo.InvariantCulture); // Convert.ToDateTime(to_dt.ToString());
+            this.WriteToFile("startdate, enddate line number 489: startdate" + startdate.ToString() + "  enddate:" + enddate.ToString());
             TotalMonths = (12 * (startdate.Year - enddate.Year) + (startdate.Month - enddate.Month));
             return (Math.Abs(TotalMonths) + 1);
         }
 
+        private void WriteToFile(string text)
+        {
+            string Short_path = @"C:\Vedang\Applications\Logs";
+            string path = @"C:\Vedang\Applications\Logs\DamageCalculatorLog_" + DateTime.Now.ToString("dd-MM-yyyy") + ".txt";
+            if ((Short_path != "") && Directory.Exists(Short_path))
+            {
+                using (StreamWriter writer = new StreamWriter(path, true))
+                {
+                    writer.WriteLine("------------------ Log Start At " + DateTime.Now.ToString() + " ------------------");
+                    writer.WriteLine(" ");
+                    writer.WriteLine(text);
+                    writer.WriteLine(" ");
+                    writer.WriteLine("------------------------------------");
+                    writer.WriteLine(" ");
+                }
+            }
+        }
 
         public async Task<List<DamageCalculatorRateMappingDto>> BindStartAndEndDate(string s_date, string e_date, DamageCalculationDto dto)
         {
@@ -442,21 +532,23 @@ namespace DamagePayeePublicInterface.Controllers
                 {
                     if (dt.EncroachName == "TYPE_A" && dt.Id.ToString() == "1")
                     {
-                        if (date1 <= Convert.ToDateTime("31/03/1960"))//31/3/1960
+                        if (date1 <= DateTime.ParseExact("31/03/1960", "dd/MM/yyyy", CultureInfo.InvariantCulture))
+                       // if (date1 <= Convert.ToDateTime("31/03/1960"))//31/3/1960
                         {
                             var subEncroachersId = new[] { 1, 4 };
                             result1 = await _damagecalculationService.RateListTypeA(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                             }
-                        else if (date1 >= Convert.ToDateTime("01/04/1960") && date1 <= Convert.ToDateTime("31/03/1981"))//31/3/1981  1/4/1960
+                        }
+                        else if (date1 >= DateTime.ParseExact("01/04/1960", "dd/MM/yyyy", CultureInfo.InvariantCulture) && date1 <= DateTime.ParseExact("31/03/1981", "dd/MM/yyyy", CultureInfo.InvariantCulture))//31/3/1981  1/4/1960)
+                        //else if (date1 >= Convert.ToDateTime("01/04/1960") && date1 <= Convert.ToDateTime("31/03/1981"))//31/3/1981  1/4/1960
                         {
                             var subEncroachersId = new[] { 2, 4 };
                             result1 = await _damagecalculationService.RateListTypeA(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                             }
+                        }
                         else
                         {
                             var subEncroachersId = new[] { 3, 4 };
                             result1 = await _damagecalculationService.RateListTypeA(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                            }
+                        }
                     }
                     else if (dt.EncroachName == "TYPE_B" && dt.Id.ToString() == "2")
                     {
@@ -464,18 +556,18 @@ namespace DamagePayeePublicInterface.Controllers
                         {
                             var subEncroachersId = new[] { 4 };
                             result1 = await _damagecalculationService.RateListTypeBSpecific(Convert.ToDateTime("31/03/2001"), Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                            }
+                        }
                         else
                         {
                             var subEncroachersId = new[] { 4 };
                             result1 = await _damagecalculationService.RateListTypeB(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                             }
+                        }
                     }
                     else if (dt.EncroachName == "TYPE_C" && dt.Id.ToString() == "3")
                     {
                         var subEncroachersId = new[] { 4 };
                         result1 = await _damagecalculationService.RateListTypeC(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                       }
+                    }
                 }
                 else
                 {
@@ -488,12 +580,12 @@ namespace DamagePayeePublicInterface.Controllers
                                 DateTime specificDateTime = Convert.ToDateTime("31/07/2001");
                                 var subEncroachersId = new[] { 1, 4 };
                                 result1 = await _damagecalculationService.RateListTypeASpecific(specificDateTime, Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                                 }
+                            }
                             else
                             {
                                 var subEncroachersId = new[] { 1, 4 };
                                 result1 = await _damagecalculationService.RateListTypeA(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                                }
+                            }
                         }
                         else if (date1 >= Convert.ToDateTime("04/01/1960") && date1 <= Convert.ToDateTime("31/03/1981"))//31/3/1981  1/4/1960
                         {
@@ -502,29 +594,29 @@ namespace DamagePayeePublicInterface.Controllers
                                 DateTime specificDateTime = Convert.ToDateTime("31/07/2001");
                                 var subEncroachersId = new[] { 2, 4 };
                                 result1 = await _damagecalculationService.RateListTypeASpecific(specificDateTime, Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                               }
+                            }
                             else
                             {
                                 var subEncroachersId = new[] { 2, 4 };
                                 result1 = await _damagecalculationService.RateListTypeA(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                               }
+                            }
                         }
                         else
                         {
                             var subEncroachersId = new[] { 3, 4 };
                             result1 = await _damagecalculationService.RateListTypeA(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                          }
+                        }
                     }
                     else if (dt.EncroachName == "TYPE_B" && dt.Id.ToString() == "2")
                     {
                         var subEncroachersId = new[] { 4 };
                         result1 = await _damagecalculationService.RateListTypeB(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                         }
+                    }
                     else if (dt.EncroachName == "TYPE_C" && dt.Id.ToString() == "3")
                     {
                         var subEncroachersId = new[] { 4 };
                         result1 = await _damagecalculationService.RateListTypeC(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                     }
+                    }
                 }
 
             }
@@ -569,37 +661,38 @@ namespace DamagePayeePublicInterface.Controllers
                 {
                     if (dt.EncroachName == "TYPE_A" && dt.Id.ToString() == "1")
                     {
-                        if (date1 <= Convert.ToDateTime("31/03/1960"))//31/3/1960
-                        {
+                      //  if (date1 <= Convert.ToDateTime("31/03/1960"))//31/3/1960 DateTime.ParseExact(from_dt, "M/d/yyyy hh:mm:ss tt", CultureInfo.InvariantCulture)
+                            if (date1 <= DateTime.ParseExact("31/03/1960", "dd/MM/yyyy", CultureInfo.InvariantCulture))
+                            {
                             var subEncroachersId = new[] { 1, 5 };
-                            result1 = await _damagecalculationService.ComRateListTypeA(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                           }
+                            result1 = await _damagecalculationService.ComRateListTypeA(DateTime.ParseExact(e_date, "dd/MM/yyyy", CultureInfo.InvariantCulture), dto.LocalityId, subEncroachersId);
+                        }
                         else if (date1 >= Convert.ToDateTime("01/04/1960") && date1 <= Convert.ToDateTime("31/03/1976"))//31/3/1981  1/4/1960
                         {
                             var subEncroachersId = new[] { 2, 5 };
-                            result1 = await _damagecalculationService.ComRateListTypeA(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                          }
+                            result1 = await _damagecalculationService.ComRateListTypeA(DateTime.ParseExact(e_date, "dd/MM/yyyy", CultureInfo.InvariantCulture), dto.LocalityId, subEncroachersId);
+                        }
                         else if (date1 >= Convert.ToDateTime("01/04/1976") && date1 <= Convert.ToDateTime("31/03/1981"))//31/3/1981  1/4/1960
                         {
                             var subEncroachersId = new[] { 3, 5 };
-                            result1 = await _damagecalculationService.ComRateListTypeA(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                           }
+                            result1 = await _damagecalculationService.ComRateListTypeA(DateTime.ParseExact(e_date, "dd/MM/yyyy", CultureInfo.InvariantCulture), dto.LocalityId, subEncroachersId);
+                        }
                         else
                         {
                             var subEncroachersId = new[] { 4, 5 };
-                            result1 = await _damagecalculationService.ComRateListTypeA(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                           }
+                            result1 = await _damagecalculationService.ComRateListTypeA(DateTime.ParseExact(e_date, "dd/MM/yyyy", CultureInfo.InvariantCulture), dto.LocalityId, subEncroachersId);
+                        }
                     }
                     else if (dt.EncroachName == "TYPE_B" && dt.Id.ToString() == "2")
                     {
                         var subEncroachersId = new[] { 5 };
-                        result1 = await _damagecalculationService.ComRateListTypeB(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                        }
+                        result1 = await _damagecalculationService.ComRateListTypeB(DateTime.ParseExact(e_date, "dd/MM/yyyy", CultureInfo.InvariantCulture), dto.LocalityId, subEncroachersId);
+                    }
                     else if (dt.EncroachName == "TYPE_C" && dt.Id.ToString() == "3")
                     {
                         var subEncroachersId = new[] { 5 };
-                        result1 = await _damagecalculationService.ComRateListTypeC(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                       }
+                        result1 = await _damagecalculationService.ComRateListTypeC(DateTime.ParseExact(e_date, "dd/MM/yyyy", CultureInfo.InvariantCulture), dto.LocalityId, subEncroachersId);
+                    }
                 }
                 else
                 {
@@ -611,14 +704,14 @@ namespace DamagePayeePublicInterface.Controllers
                             {
                                 DateTime specificDateTime = Convert.ToDateTime("31/07/2001");
                                 var subEncroachersId = new[] { 1, 5 };
-                                result1 = await _damagecalculationService.ComRateListTypeASpecific(specificDateTime, Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                              
+                                result1 = await _damagecalculationService.ComRateListTypeASpecific(specificDateTime, DateTime.ParseExact(e_date, "dd/MM/yyyy", CultureInfo.InvariantCulture), dto.LocalityId, subEncroachersId);
+
                             }
                             else
                             {
                                 var subEncroachersId = new[] { 1, 5 };
-                                result1 = await _damagecalculationService.ComRateListTypeA(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                              }
+                                result1 = await _damagecalculationService.ComRateListTypeA(DateTime.ParseExact(e_date, "dd/MM/yyyy", CultureInfo.InvariantCulture), dto.LocalityId, subEncroachersId);
+                            }
                         }
                         else if (date1 >= Convert.ToDateTime("04/01/1960") && date1 <= Convert.ToDateTime("31/03/1976"))//03/31/1981  1/4/1960
                         {
@@ -626,13 +719,13 @@ namespace DamagePayeePublicInterface.Controllers
                             {
                                 DateTime specificDateTime = Convert.ToDateTime("31/07/2001");
                                 var subEncroachersId = new[] { 2, 5 };
-                                result1 = await _damagecalculationService.ComRateListTypeASpecific(specificDateTime, Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                                 }
+                                result1 = await _damagecalculationService.ComRateListTypeASpecific(specificDateTime, DateTime.ParseExact(e_date, "dd/MM/yyyy", CultureInfo.InvariantCulture), dto.LocalityId, subEncroachersId);
+                            }
                             else
                             {
                                 var subEncroachersId = new[] { 2, 5 };
-                                result1 = await _damagecalculationService.ComRateListTypeA(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                                }
+                                result1 = await _damagecalculationService.ComRateListTypeA(DateTime.ParseExact(e_date, "dd/MM/yyyy", CultureInfo.InvariantCulture), dto.LocalityId, subEncroachersId);
+                            }
                         }
                         else if (date1 >= Convert.ToDateTime("04/01/1976") && date1 <= Convert.ToDateTime("31/03/1981"))//03/31/1981  1/4/1960
                         {
@@ -640,13 +733,13 @@ namespace DamagePayeePublicInterface.Controllers
                             {
                                 DateTime specificDateTime = Convert.ToDateTime("31/07/2001");
                                 var subEncroachersId = new[] { 3, 5 };
-                                result1 = await _damagecalculationService.ComRateListTypeASpecific(specificDateTime, Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                               }
+                                result1 = await _damagecalculationService.ComRateListTypeASpecific(specificDateTime, DateTime.ParseExact(e_date, "dd/MM/yyyy", CultureInfo.InvariantCulture), dto.LocalityId, subEncroachersId);
+                            }
                             else
                             {
                                 var subEncroachersId = new[] { 3, 5 };
-                                result1 = await _damagecalculationService.ComRateListTypeA(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                              }
+                                result1 = await _damagecalculationService.ComRateListTypeA(DateTime.ParseExact(e_date, "dd/MM/yyyy", CultureInfo.InvariantCulture), dto.LocalityId, subEncroachersId);
+                            }
                         }
                         else
                         {
@@ -655,25 +748,25 @@ namespace DamagePayeePublicInterface.Controllers
 
                                 DateTime specificDateTime = Convert.ToDateTime("31/07/2001");
                                 var subEncroachersId = new[] { 4, 5 };
-                                result1 = await _damagecalculationService.ComRateListTypeASpecific(specificDateTime, Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                               }
+                                result1 = await _damagecalculationService.ComRateListTypeASpecific(specificDateTime, DateTime.ParseExact(e_date, "dd/MM/yyyy", CultureInfo.InvariantCulture), dto.LocalityId, subEncroachersId);
+                            }
                             else
                             {
                                 var subEncroachersId = new[] { 4, 5 };
-                                result1 = await _damagecalculationService.ComRateListTypeA(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                               }
+                                result1 = await _damagecalculationService.ComRateListTypeA(DateTime.ParseExact(e_date, "dd/MM/yyyy", CultureInfo.InvariantCulture), dto.LocalityId, subEncroachersId);
+                            }
                         }
                     }
                     else if (dt.EncroachName == "TYPE_B" && dt.Id.ToString() == "2")
                     {
                         var subEncroachersId = new[] { 5 };
-                        result1 = await _damagecalculationService.ComRateListTypeB(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                      }
+                        result1 = await _damagecalculationService.ComRateListTypeB(DateTime.ParseExact(e_date, "dd/MM/yyyy", CultureInfo.InvariantCulture), dto.LocalityId, subEncroachersId);
+                    }
                     else if (dt.EncroachName == "TYPE_C" && dt.Id.ToString() == "3")
                     {
                         var subEncroachersId = new[] { 5 };
-                        result1 = await _damagecalculationService.ComRateListTypeC(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                      }
+                        result1 = await _damagecalculationService.ComRateListTypeC(DateTime.ParseExact(e_date, "dd/MM/yyyy", CultureInfo.InvariantCulture), dto.LocalityId, subEncroachersId);
+                    }
                 }
 
             }
@@ -706,7 +799,7 @@ namespace DamagePayeePublicInterface.Controllers
         }
 
 
-       
+
 
     }
 }

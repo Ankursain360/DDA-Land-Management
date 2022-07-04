@@ -214,6 +214,7 @@ $("#btnReset").click(function () {
     $('#MainLandUseId').val('0').trigger('change');
     $('#LitigationStatus').val('0').trigger('change');
     $('#Encroached').val('0').trigger('change');
+    callSelect2();
     debugger;
     GetDetails(currentPageNumber, currentPageSize, sortOrder);
 });

@@ -18,7 +18,7 @@ namespace Dto.Search
         public int? StayInterimGranted { get; set; }
         public int? Judgement { get; set; }
 
-        public DateTime FromDate { get; set; }
-        public DateTime ToDate { get; set; }
+        public DateTime? FromDate { get; set; }
+        public DateTime? ToDate { get; set; }
     }
 }

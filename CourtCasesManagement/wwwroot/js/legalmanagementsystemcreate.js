@@ -40,6 +40,27 @@ $(function () {
             $('#InFavour').val('Against DDA');
         }
     });
+
+    //check
+    var value = $('#ddlJudgement option:selected').val();
+    if (value == 0) {
+        $('#DivJudgement').hide();
+    }
+    else {
+        $('#DivJudgement').show();
+    }
+
+    var value = $('#ddlStayInterim option:selected').val();
+    //$('#si').val() = value;
+    if (value == 0) {
+        $('#DivStayInterim').hide();
+
+
+    }
+    else {
+        $('#DivStayInterim').show();
+
+    }
 });
 
 $("input[name='grpCaseType']").click(function () {

@@ -15,29 +15,29 @@
                         <option value="0">All</option>
                     </select>
                     <span class="d-block text-danger field-validation-valid" asp-validation-for="Id"></span>
-                    <label  class="floating-label">Legal File No </label>
+                    <label class="floating-label">Legal File No </label>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3" asp-for="Id" id="CaseNO">
-                            
+
                         <option value="0">All</option>
                     </select>
                     <span class="d-block text-danger field-validation-valid" asp-validation-for="Id"></span>
-                    <label  class="floating-label">Case No </label>
+                    <label class="floating-label">Case No </label>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3" asp-for="ContemptOfCourt">
-                           
+
                         <option value="0">All</option>
                         <option value="1">Yes</option>
                         <option value="2">No</option>
                     </select>
                     <span class="d-block text-danger field-validation-valid" asp-validation-for="ContemptOfCourt"></span>
-                    <label  class="floating-label">Contempt Of Court  </label>
+                    <label class="floating-label">Contempt Of Court  </label>
                 </div>
             </div>
 
@@ -47,24 +47,24 @@
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3" asp-for="CourtTypeId"
                             asp-items="@(new SelectList(Model.CourttypeList, "Id","CourtType"))">
-                        
+
                         <option value="0">All</option>
 
                     </select>
                     <span class="d-block text-danger field-validation-valid" asp-validation-for="CourtTypeId"></span>
-                    <label  class="floating-label">Court Type</label>
+                    <label class="floating-label">Court Type</label>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3" asp-for="CaseStatusId"
-                             asp-items="@(new SelectList(Model.CasestatusList, "Id","CaseStatus"))">
-                           
+                            asp-items="@(new SelectList(Model.CasestatusList, "Id","CaseStatus"))">
+
                         <option value="0">All</option>
-                      
+
                     </select>
                     <span class="d-block text-danger field-validation-valid" asp-validation-for="CaseStatusId"></span>
-                    <label  class="floating-label">Case Status </label>
+                    <label class="floating-label">Case Status </label>
                 </div>
             </div>
             <div class="col-md-4">
@@ -72,8 +72,8 @@
                     <select class="floating-label-field floating-label-field--s3"
                             asp-for="ZoneId"
                             asp-items="@(new SelectList(Model.ZoneList, "Id","Name"))"
-                             onchange="return GetLocalityList(this.options[this.selectedIndex].value);">
-                            
+                            onchange="return GetLocalityList(this.options[this.selectedIndex].value);">
+
                         <option value="0">All</option>
                     </select>
                     <span class="d-block text-danger field-validation-valid" asp-validation-for="ZoneId"></span>
@@ -85,17 +85,17 @@
         <div class="row mt-md-3">
             <div class="col-md-4">
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3" asp-for="LocalityId" >
+                    <select class="floating-label-field floating-label-field--s3" asp-for="LocalityId">
                         <option value="0">All</option>
                     </select>
                     <span class="d-block text-danger field-validation-valid" asp-validation-for="LocalityId"></span>
-                    <label  class="floating-label">Locality (Village) Name </label>
+                    <label class="floating-label">Locality (Village) Name </label>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3" asp-for="StayInterimGranted">
-                        
+
                         <option value="0">All</option>
                         <option value="1">Yes</option>
                         <option value="2">No</option>
@@ -106,14 +106,14 @@
             </div>
             <div class="col-md-4">
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3"  asp-for="Judgement">
-                           
+                    <select class="floating-label-field floating-label-field--s3" asp-for="Judgement">
+
                         <option value="0">All</option>
                         <option value="1">Yes</option>
                         <option value="2">No</option>
                     </select>
                     <span class="d-block text-danger field-validation-valid" asp-validation-for="Judgement"></span>
-                    <label  class="floating-label">Judgement </label>
+                    <label class="floating-label">Judgement </label>
                 </div>
             </div>
 
@@ -122,14 +122,14 @@
 
             <div class="col-md-4">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="CreatedDate" type="date"  placeholder="Date" id="txtFromDate" class="floating-label-field floating-label-field--s3" value="" />
+                    <input asp-for="CreatedDate" type="date" placeholder="Date" id="txtFromDate" class="floating-label-field floating-label-field--s3" value="" />
                     <span class="d-block text-danger field-validation-valid" asp-validation-for="CreatedDate"></span>
                     <label class="floating-label">From Date</label>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="CreatedDate" type="date"  placeholder="Date" id="txtToDate" class="floating-label-field floating-label-field--s3" value="" />
+                    <input asp-for="CreatedDate" type="date" placeholder="Date" id="txtToDate" class="floating-label-field floating-label-field--s3" value="" />
                     <span class="d-block text-danger field-validation-valid" asp-validation-for="CreatedDate"></span>
                     <label class="floating-label">To Date</label>
                 </div>
@@ -140,7 +140,7 @@
         <div class="row mt-md-3">
             <div class="col-md-12 ">
                 <input type="submit" value="Generate" id="btnGenerate" class="btn btn-theme" />
-                <input type="button" value="Refresh" onclick="location.reload(true);" class="btn btn-theme" />
+                <input type="button" value="Reset" onclick="location.reload(true);" class="btn btn-theme" />
 
             </div>
         </div>
@@ -152,23 +152,22 @@
         <div class="short-section d-md-flex align-items-center">
             <div class="p-3 d-flex align-items-end me-auto">
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3">
+                    <select class="floating-label-field floating-label-field--s3" id="ddlSort">
                         <option selected="selected" disabled="disabled">Select One</option>
-                        <option>Date</option>
-                        <option>Locality Name (Village)</option>
-
+                        <option value="Date">Hearing Date</option>
+                        <option value="File">File No.</option>
                     </select>
                     <label for="field-1" class="floating-label">Sort by</label>
                 </div>
                 <div class="short-btn d-flex align-items-center">
-                    <span class="btn slow active" title="Descending order"><i class="ri-sort-desc"></i></span>
-                    <span class="btn slow" title="Ascending order"><i class="ri-sort-asc"></i></span>
+                    <span class="btn slow active" title="Descending order" id="btnDescending"><i class="ri-sort-desc"></i></span>
+                    <span class="btn slow" title="Ascending order" id="btnAscending"><i class="ri-sort-asc"></i></span>
                 </div>
             </div>
 
 
             <div class="download-table d-flex align-items-center px-3 mb-3 mb-md-0">
-              
+
                 <a href="/LegalReport/LegalReportList" class="d-flex align-items-center btn btn-success">
                     <i class="ri-download-2-line me-2 me-lg-1"></i>
                     <small>Download</small>

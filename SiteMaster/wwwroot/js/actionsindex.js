@@ -33,7 +33,7 @@ $("#btnAscending").click(function () {
 
 });
 
-$("#btnReset").click(function () {
+$("#btnReset").click(function () {    
     $('#txtName').val('');
     $('#txtColor').val('');
     $('#txtIcon').val('');

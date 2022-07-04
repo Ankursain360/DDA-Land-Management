@@ -178,9 +178,11 @@
             </div>
         </div>
         <div class="row mt-md-3">
-            <div class="form-group col-md-12">
-                <label class="control-label lb-sm">Panel Laywer</label>
-                <textarea required type="text" class="form-control" asp-for="PanelLawyer"></textarea>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <textarea type="text" class="floating-label-field floating-label-field--s3" asp-for="PanelLawyer"></textarea>
+                    <label class="floating-label">Panel Laywer</label>
+                </div>
             </div>
             <div class="col-md-6">
                 <div class="floating-label-wrap">
@@ -278,8 +280,10 @@
 
             </div>
             <div class="form-group col-md-6">
-                <label class="control-label lb-sm" asp-for="JudgementRemarks">Judgement Remarks</label>
-                <input type="text" class="form-control " asp-for="JudgementRemarks" />
+                <div class="floating-label-wrap">
+                    <input type="text" class="floating-label-field floating-label-field--s3" asp-for="JudgementRemarks">
+                    <label class="floating-label">Judgement Remarks</label>
+                </div>
             </div>
         </div>
 
@@ -290,8 +294,7 @@
                     <label class="floating-label">Remarks</label>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="col-md-6">
+            <div class="col-md-6"> 
                     <div class="floating-label-wrap">
                         <select class="floating-label-field floating-label-field--s3" asp-for="IsActive">
                             <option value="1" selected="selected">Active</option>
@@ -300,7 +303,7 @@
                         <span class="text-danger"></span>
                         <label class="floating-label">Status</label>
                     </div>
-                </div>
+                 
             </div>
         </div>
 
@@ -315,7 +318,7 @@
 
 
     </form>
-    </div>
+</div>
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 
 <environment include="Development">
