@@ -346,6 +346,16 @@ namespace Libraries.Model
         public virtual DbSet<AuditModel> AuditModel { get;set; }
         public virtual DbSet<Restorationentry> Restorationentry { get; set; }
 
+        public virtual DbSet<NewDamageSelfAssessment> newdamage_selfassessment { get; set; }
+        public virtual DbSet<New_Damage_Colony> new_damage_colony { get; set; }
+        public virtual DbSet<NewDamageSelfAssessmentAtsDetails> newdamage_selfassessment_atsdetail
+        { get; set; }
+
+        public virtual DbSet<NewDamageSelfAssessmentGpaDetails> newdamage_selfassessment_gpadetail
+        { get; set; }
+        public virtual DbSet<NewdamageAddfloor> newdamage_addfloor
+        { get; set; }
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new Undersection17plotdetailConfiguration());
@@ -511,6 +521,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new PlotConfiguration());
             modelBuilder.ApplyConfiguration(new SchemefileloadingConfiguration());
             modelBuilder.ApplyConfiguration(new DepartmenttargetConfiguration());
+           
             //**********  GIS **********
             modelBuilder.ApplyConfiguration(new GisaabadiConfiguration());
             modelBuilder.ApplyConfiguration(new GisburjiConfiguration());
