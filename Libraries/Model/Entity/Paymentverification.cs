@@ -40,7 +40,7 @@ namespace Libraries.Model.Entity
       
         public string ChallanNo { get; set; }
 
-        [NotMapped]
+         
         public DateTime PaymentDate { get; set; }
 
     }

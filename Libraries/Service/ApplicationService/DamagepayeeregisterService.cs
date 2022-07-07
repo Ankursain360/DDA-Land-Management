@@ -129,7 +129,7 @@ namespace Service.ApplicationService
         //********* rpt 1 Persolnal info of damage assesse ***********
         public async Task<bool> SavePayeePersonalInfo(Damagepayeepersonelinfo damagepayeepersonelinfo)
         {
-            damagepayeepersonelinfo.CreatedBy = 1;
+           
             damagepayeepersonelinfo.CreatedDate = DateTime.Now;
             damagepayeepersonelinfo.IsActive = 1;
             return await _damagepayeeregisterRepository.SavePayeePersonalInfo(damagepayeepersonelinfo);
