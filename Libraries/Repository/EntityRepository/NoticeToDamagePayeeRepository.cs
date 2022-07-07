@@ -272,7 +272,7 @@ namespace Libraries.Repository.EntityRepository
 
             var rebate = (from f in _dbContext.Rebate
                           where (f.FromDate <= DateTime.Now && (f.ToDate) >= DateTime.Now)
-                          select f.RebatePercentage).First();
+                          select f.RebatePercentage).FirstOrDefault();
 
             return rebate;
         }

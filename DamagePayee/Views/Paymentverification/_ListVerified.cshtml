@@ -32,11 +32,11 @@
             <td>@item.FileNo </td>
             <td>@item.PayeeName  </td>
             <td>@item.PropertyNo </td>
-            <td>@item.AmountPaid </td>
-            <td>@item.InterestPaid </td>
+            <td>@(item.AmountPaid.HasValue?item.AmountPaid:item.TotalAmount) </td>
+            <td>@(item.InterestPaid.HasValue?item.InterestPaid:0) </td>
             <td>@item.TotalAmount </td>
-            <td>@item.TransactionId </td>
-            <td>@item.BankTransactionId </td>
+            <td>@(item.TransactionId==null?"NA" : @item.TransactionId)</td>
+            <td>@(item.BankTransactionId==null?"NA" :@item.BankTransactionId )</td>
             <td>@item.PaymentMode </td>
             <td>@item.BankName </td>
 

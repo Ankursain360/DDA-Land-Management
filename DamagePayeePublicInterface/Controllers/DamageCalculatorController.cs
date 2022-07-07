@@ -395,11 +395,11 @@ namespace DamagePayeePublicInterface.Controllers
                         }
                         else
                         {
-                            listToDate= DateTime.ParseExact(listToDate, "dd/MM/yyyy", CultureInfo.InvariantCulture).ToString("dd/MM/yyyy");
-                          //  listToDate = Convert.ToDateTime(listToDate).ToString("d/M/yyyy");
+                            listToDate = DateTime.ParseExact(listToDate, "dd/MM/yyyy", CultureInfo.InvariantCulture).ToString("dd/MM/yyyy");
+                            //  listToDate = Convert.ToDateTime(listToDate).ToString("d/M/yyyy");
                             //log
                             this.WriteToFile("listToDate line number 400:" + listToDate);
-                          //  if (Convert.ToDateTime("21/06/2015") < Convert.ToDateTime(listToDate))
+                            //  if (Convert.ToDateTime("21/06/2015") < Convert.ToDateTime(listToDate))
                             if (DateTime.ParseExact("21/06/2015", "dd/MM/yyyy", CultureInfo.InvariantCulture) < DateTime.ParseExact(listToDate, "dd/MM/yyyy", CultureInfo.InvariantCulture))
                             {
                                 if (CIntrst2 == 1)
@@ -460,7 +460,7 @@ namespace DamagePayeePublicInterface.Controllers
                     }
                     //log
                     this.WriteToFile("listFromDate line number 461:" + listFromDate);
-                //    this.WriteToFile("listFromDate line number 463:" + DateTime.ParseExact(listFromDate, "M/d/yyyy hh:mm:ss tt", CultureInfo.InvariantCulture));
+                    //    this.WriteToFile("listFromDate line number 463:" + DateTime.ParseExact(listFromDate, "M/d/yyyy hh:mm:ss tt", CultureInfo.InvariantCulture));
                     this.WriteToFile("listToDate line number 464:" + listToDate);
                     damagecalculation.Add(new DamageChargesCalculation
                     {
@@ -473,7 +473,7 @@ namespace DamagePayeePublicInterface.Controllers
                         Compunding = (listCompoundAmt == "" ? 0 : Convert.ToDecimal(listCompoundAmt)),
                         TotalInterest = (listRate == "" ? 0 : Convert.ToDecimal(listRemainAmt)),
                         TotalPayAmount = (listRate == "" ? 0 : Convert.ToDecimal(listCompoundRemainAmt))
-                    }) ;
+                    });
                     //log
                     this.WriteToFile("List data at 474:" + JsonConvert.SerializeObject(damagecalculation));
 
@@ -493,9 +493,9 @@ namespace DamagePayeePublicInterface.Controllers
         public int CalMonth(string from_dt, string to_dt)
         {
             //log
-            this.WriteToFile("from_dt, to_dt line number 489: fromdate" + from_dt + "  todate:"+ to_dt);
+            this.WriteToFile("from_dt, to_dt line number 489: fromdate" + from_dt + "  todate:" + to_dt);
             int TotalMonths = 0;
-            DateTime startdate =  DateTime.ParseExact(from_dt, "dd/MM/yyyy", CultureInfo.InvariantCulture); // Convert.ToDateTime(from_dt.ToString());
+            DateTime startdate = DateTime.ParseExact(from_dt, "dd/MM/yyyy", CultureInfo.InvariantCulture); // Convert.ToDateTime(from_dt.ToString());
             DateTime enddate = DateTime.ParseExact(from_dt, "dd/MM/yyyy", CultureInfo.InvariantCulture); // Convert.ToDateTime(to_dt.ToString());
             this.WriteToFile("startdate, enddate line number 489: startdate" + startdate.ToString() + "  enddate:" + enddate.ToString());
             TotalMonths = (12 * (startdate.Year - enddate.Year) + (startdate.Month - enddate.Month));
@@ -505,7 +505,7 @@ namespace DamagePayeePublicInterface.Controllers
         private void WriteToFile(string text)
         {
             string Short_path = @"C:\Vedang\Applications\Logs";
-            string path = @"C:\Vedang\Applications\Logs\DamageCalculatorLog_" + DateTime.Now.ToString("dd-MM-yyyy") + ".txt";
+            string path = @"C:\Vedang\Applications\Logs\Public_DamageCalculatorLog_" + DateTime.Now.ToString("dd-MM-yyyy") + ".txt";
             if ((Short_path != "") && Directory.Exists(Short_path))
             {
                 using (StreamWriter writer = new StreamWriter(path, true))
@@ -522,279 +522,339 @@ namespace DamagePayeePublicInterface.Controllers
 
         public async Task<List<DamageCalculatorRateMappingDto>> BindStartAndEndDate(string s_date, string e_date, DamageCalculationDto dto)
         {
-            DateTime date1 = dto.EncroachmentDate;
-            var dt = await _damagecalculationService.FetchResultEncroachmentType(date1);
             List<DamageCalculatorRateMappingDto> damageCalculatorRateMappingDto = new List<DamageCalculatorRateMappingDto>();
-            dynamic result1 = null;
-            if (dt != null)
+            try
             {
-                if (date1.Year > 1992)
+
+                DateTime date1 = dto.EncroachmentDate;
+                var dt = await _damagecalculationService.FetchResultEncroachmentType(date1);
+
+                dynamic result1 = null;
+                if (dt != null)
                 {
-                    if (dt.EncroachName == "TYPE_A" && dt.Id.ToString() == "1")
+                    if (date1.Year > 1992)
                     {
-                        if (date1 <= DateTime.ParseExact("31/03/1960", "dd/MM/yyyy", CultureInfo.InvariantCulture))
-                       // if (date1 <= Convert.ToDateTime("31/03/1960"))//31/3/1960
+                        if (dt.EncroachName == "TYPE_A" && dt.Id.ToString() == "1")
                         {
-                            var subEncroachersId = new[] { 1, 4 };
-                            result1 = await _damagecalculationService.RateListTypeA(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
+                            if (date1 <= DateTime.ParseExact("31/03/1960", "dd/MM/yyyy", CultureInfo.InvariantCulture))
+                            // if (date1 <= Convert.ToDateTime("31/03/1960"))//31/3/1960
+                            {
+                                var subEncroachersId = new[] { 1, 4 };
+                                //result1 = await _damagecalculationService.RateListTypeA(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
+                                result1 = await _damagecalculationService.RateListTypeA(DateTime.ParseExact(e_date, "dd/MM/yyyy", CultureInfo.InvariantCulture), dto.LocalityId, subEncroachersId);
+
+                            }
+                            else if (date1 >= DateTime.ParseExact("01/04/1960", "dd/MM/yyyy", CultureInfo.InvariantCulture) && date1 <= DateTime.ParseExact("31/03/1981", "dd/MM/yyyy", CultureInfo.InvariantCulture))//31/3/1981  1/4/1960)
+                                                                                                                                                                                                                      //else if (date1 >= Convert.ToDateTime("01/04/1960") && date1 <= Convert.ToDateTime("31/03/1981"))//31/3/1981  1/4/1960
+                            {
+                                var subEncroachersId = new[] { 2, 4 };
+                                // result1 = await _damagecalculationService.RateListTypeA(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
+                                result1 = await _damagecalculationService.RateListTypeA(DateTime.ParseExact(e_date, "dd/MM/yyyy", CultureInfo.InvariantCulture), dto.LocalityId, subEncroachersId);
+                            }
+                            else
+                            {
+                                var subEncroachersId = new[] { 3, 4 };
+                                //result1 = await _damagecalculationService.RateListTypeA(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
+                                result1 = await _damagecalculationService.RateListTypeA(DateTime.ParseExact(e_date, "dd/MM/yyyy", CultureInfo.InvariantCulture), dto.LocalityId, subEncroachersId);
+                            }
                         }
-                        else if (date1 >= DateTime.ParseExact("01/04/1960", "dd/MM/yyyy", CultureInfo.InvariantCulture) && date1 <= DateTime.ParseExact("31/03/1981", "dd/MM/yyyy", CultureInfo.InvariantCulture))//31/3/1981  1/4/1960)
-                        //else if (date1 >= Convert.ToDateTime("01/04/1960") && date1 <= Convert.ToDateTime("31/03/1981"))//31/3/1981  1/4/1960
+                        else if (dt.EncroachName == "TYPE_B" && dt.Id.ToString() == "2")
                         {
-                            var subEncroachersId = new[] { 2, 4 };
-                            result1 = await _damagecalculationService.RateListTypeA(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
+                            if (e_date == "31/03/2002")
+                            {
+                                var subEncroachersId = new[] { 4 };
+                                //result1 = await _damagecalculationService.RateListTypeA(DateTime.ParseExact(e_date, "dd/MM/yyyy", CultureInfo.InvariantCulture), dto.LocalityId, subEncroachersId);
+                                result1 = await _damagecalculationService.RateListTypeBSpecific(DateTime.ParseExact("31/03/2001", "dd/MM/yyyy", CultureInfo.InvariantCulture), DateTime.ParseExact(e_date, "dd/MM/yyyy", CultureInfo.InvariantCulture), dto.LocalityId, subEncroachersId);
+                            }
+                            else
+                            {
+                                var subEncroachersId = new[] { 4 };
+                                //result1 = await _damagecalculationService.RateListTypeB(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
+                                result1 = await _damagecalculationService.RateListTypeB(DateTime.ParseExact(e_date, "dd/MM/yyyy", CultureInfo.InvariantCulture), dto.LocalityId, subEncroachersId);
+                            }
                         }
-                        else
-                        {
-                            var subEncroachersId = new[] { 3, 4 };
-                            result1 = await _damagecalculationService.RateListTypeA(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                        }
-                    }
-                    else if (dt.EncroachName == "TYPE_B" && dt.Id.ToString() == "2")
-                    {
-                        if (e_date == "31/03/2002")
+                        else if (dt.EncroachName == "TYPE_C" && dt.Id.ToString() == "3")
                         {
                             var subEncroachersId = new[] { 4 };
-                            result1 = await _damagecalculationService.RateListTypeBSpecific(Convert.ToDateTime("31/03/2001"), Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
+                            // result1 = await _damagecalculationService.RateListTypeC(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
+                            result1 = await _damagecalculationService.RateListTypeC(DateTime.ParseExact(e_date, "dd/MM/yyyy", CultureInfo.InvariantCulture), dto.LocalityId, subEncroachersId);
                         }
-                        else
+                    }
+                    else
+                    {
+                        if (dt.EncroachName == "TYPE_A" && dt.Id.ToString() == "1")
+                        {
+                            ///if (date1 <= Convert.ToDateTime("31/03/1960"))//31/3/1960
+                            if (date1 <= DateTime.ParseExact("31/03/1960", "dd/MM/yyyy", CultureInfo.InvariantCulture))
+                            {
+                                if (s_date == "01/04/2001" && e_date == "31/03/2002")
+                                {
+                                    DateTime specificDateTime = DateTime.ParseExact("31/07/2001", "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                                    var subEncroachersId = new[] { 1, 4 };
+                                    // result1 = await _damagecalculationService.RateListTypeASpecific(specificDateTime, Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
+                                    result1 = await _damagecalculationService.RateListTypeASpecific(specificDateTime, DateTime.ParseExact(e_date, "dd/MM/yyyy", CultureInfo.InvariantCulture), dto.LocalityId, subEncroachersId);
+                                }
+                                else
+                                {
+                                    var subEncroachersId = new[] { 1, 4 };
+                                    // result1 = await _damagecalculationService.RateListTypeA(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
+                                    result1 = await _damagecalculationService.RateListTypeA(DateTime.ParseExact(e_date, "dd/MM/yyyy", CultureInfo.InvariantCulture), dto.LocalityId, subEncroachersId);
+                                }
+                            }
+                            else if (date1 >= DateTime.ParseExact("04/01/1960", "dd/MM/yyyy", CultureInfo.InvariantCulture) && date1 <= DateTime.ParseExact("31/03/1981", "dd/MM/yyyy", CultureInfo.InvariantCulture))//31/3/1981  1/4/1960
+                            {
+                                if (s_date == "01/04/2001" && e_date == "31/03/2002")
+                                {
+                                    DateTime specificDateTime = DateTime.ParseExact("31/07/2001", "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                                    var subEncroachersId = new[] { 2, 4 };
+                                    // result1 = await _damagecalculationService.RateListTypeASpecific(specificDateTime, Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
+                                    result1 = await _damagecalculationService.RateListTypeASpecific(specificDateTime, DateTime.ParseExact(e_date, "dd/MM/yyyy", CultureInfo.InvariantCulture), dto.LocalityId, subEncroachersId);
+                                }
+                                else
+                                {
+                                    var subEncroachersId = new[] { 2, 4 };
+                                    //result1 = await _damagecalculationService.RateListTypeA(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
+                                    result1 = await _damagecalculationService.RateListTypeA(DateTime.ParseExact(e_date, "dd/MM/yyyy", CultureInfo.InvariantCulture), dto.LocalityId, subEncroachersId);
+                                }
+                            }
+                            else
+                            {
+                                var subEncroachersId = new[] { 3, 4 };
+                                result1 = await _damagecalculationService.RateListTypeA(DateTime.ParseExact(e_date, "dd/MM/yyyy", CultureInfo.InvariantCulture), dto.LocalityId, subEncroachersId);
+                            }
+                        }
+                        else if (dt.EncroachName == "TYPE_B" && dt.Id.ToString() == "2")
                         {
                             var subEncroachersId = new[] { 4 };
-                            result1 = await _damagecalculationService.RateListTypeB(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
+                            result1 = await _damagecalculationService.RateListTypeB(DateTime.ParseExact(e_date, "dd/MM/yyyy", CultureInfo.InvariantCulture), dto.LocalityId, subEncroachersId);
+                        }
+                        else if (dt.EncroachName == "TYPE_C" && dt.Id.ToString() == "3")
+                        {
+                            var subEncroachersId = new[] { 4 };
+                            result1 = await _damagecalculationService.RateListTypeC(DateTime.ParseExact(e_date, "dd/MM/yyyy", CultureInfo.InvariantCulture), dto.LocalityId, subEncroachersId);
                         }
                     }
-                    else if (dt.EncroachName == "TYPE_C" && dt.Id.ToString() == "3")
-                    {
-                        var subEncroachersId = new[] { 4 };
-                        result1 = await _damagecalculationService.RateListTypeC(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                    }
+
                 }
                 else
                 {
-                    if (dt.EncroachName == "TYPE_A" && dt.Id.ToString() == "1")
-                    {
-                        if (date1 <= Convert.ToDateTime("31/03/1960"))//31/3/1960
-                        {
-                            if (s_date == "01/04/2001" && e_date == "31/03/2002")
-                            {
-                                DateTime specificDateTime = Convert.ToDateTime("31/07/2001");
-                                var subEncroachersId = new[] { 1, 4 };
-                                result1 = await _damagecalculationService.RateListTypeASpecific(specificDateTime, Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                            }
-                            else
-                            {
-                                var subEncroachersId = new[] { 1, 4 };
-                                result1 = await _damagecalculationService.RateListTypeA(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                            }
-                        }
-                        else if (date1 >= Convert.ToDateTime("04/01/1960") && date1 <= Convert.ToDateTime("31/03/1981"))//31/3/1981  1/4/1960
-                        {
-                            if (s_date == "01/04/2001" && e_date == "31/03/2002")
-                            {
-                                DateTime specificDateTime = Convert.ToDateTime("31/07/2001");
-                                var subEncroachersId = new[] { 2, 4 };
-                                result1 = await _damagecalculationService.RateListTypeASpecific(specificDateTime, Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                            }
-                            else
-                            {
-                                var subEncroachersId = new[] { 2, 4 };
-                                result1 = await _damagecalculationService.RateListTypeA(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                            }
-                        }
-                        else
-                        {
-                            var subEncroachersId = new[] { 3, 4 };
-                            result1 = await _damagecalculationService.RateListTypeA(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                        }
-                    }
-                    else if (dt.EncroachName == "TYPE_B" && dt.Id.ToString() == "2")
-                    {
-                        var subEncroachersId = new[] { 4 };
-                        result1 = await _damagecalculationService.RateListTypeB(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                    }
-                    else if (dt.EncroachName == "TYPE_C" && dt.Id.ToString() == "3")
-                    {
-                        var subEncroachersId = new[] { 4 };
-                        result1 = await _damagecalculationService.RateListTypeC(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                    }
+
+                    ViewBag.Message = Alert.Show("Plz Enter Valid Date!", "", AlertType.Warning);
+                    List<DamageChargesCalculation> damagecalculation1 = new List<DamageChargesCalculation>();
                 }
 
-            }
-            else
-            {
-
-                ViewBag.Message = Alert.Show("Plz Enter Valid Date!", "", AlertType.Warning);
-                List<DamageChargesCalculation> damagecalculation1 = new List<DamageChargesCalculation>();
-            }
-
-            if (result1 != null)
-            {
-                for (int i = 0; i < result1.Count; i++)
+                if (result1 != null)
                 {
-                    damageCalculatorRateMappingDto.Add(new DamageCalculatorRateMappingDto
+                    for (int i = 0; i < result1.Count; i++)
                     {
-                        Id = result1[i].Id,
-                        EncroachId = result1[i].EncroachId,
-                        ColonyId = result1[i].ColonyId,
-                        StartDate = result1[i].StartDate,
-                        EndDate = result1[i].EndDate,
-                        SubEncroachId = result1[i].SubEncroachId,
-                        Rate = result1[i].Rate,
-                        IsActive = result1[i].IsActive
-                    });
+                        damageCalculatorRateMappingDto.Add(new DamageCalculatorRateMappingDto
+                        {
+                            Id = result1[i].Id,
+                            EncroachId = result1[i].EncroachId,
+                            ColonyId = result1[i].ColonyId,
+                            StartDate = result1[i].StartDate,
+                            EndDate = result1[i].EndDate,
+                            SubEncroachId = result1[i].SubEncroachId,
+                            Rate = result1[i].Rate,
+                            IsActive = result1[i].IsActive
+                        });
+                    }
                 }
             }
-
+            catch (Exception ex)
+            {
+                //log
+                this.WriteToFile("BindStartAndEndDate error :" + ex.Message.ToString());
+            }
             return damageCalculatorRateMappingDto;
         }
 
         public async Task<List<DamageCalculatorRateMappingDto>> BindStartAndEndDateComm(string s_date, string e_date, DamageCalculationDto dto)
         {
-            DateTime date1 = dto.EncroachmentDate;
-            var dt = await _damagecalculationService.FetchResultCOMEncroachmentType(date1);
             List<DamageCalculatorRateMappingDto> damageCalculatorRateMappingDto = new List<DamageCalculatorRateMappingDto>();
-            dynamic result1 = null;
-
-            if (dt != null)
+            try
             {
-                if (date1.Year > 1992)
+                //log
+                this.WriteToFile(" line 678 Comm rate function s_date :" + s_date + "  end date: " + e_date);
+
+                DateTime date1 = dto.EncroachmentDate;
+                var dt = await _damagecalculationService.FetchResultCOMEncroachmentType(date1);
+
+                dynamic result1 = null;
+
+                if (dt != null)
                 {
-                    if (dt.EncroachName == "TYPE_A" && dt.Id.ToString() == "1")
-                    {
-                      //  if (date1 <= Convert.ToDateTime("31/03/1960"))//31/3/1960 DateTime.ParseExact(from_dt, "M/d/yyyy hh:mm:ss tt", CultureInfo.InvariantCulture)
+                    if (date1.Year > 1992)
+                    {  //log
+                        this.WriteToFile(" line 689 Comm rate function dt.EncroachName :" + dt.EncroachName + "  Id: " + dt.Id.ToString());
+                        if (dt.EncroachName == "TYPE_A" && dt.Id.ToString() == "1")
+                        {
+                            //  if (date1 <= Convert.ToDateTime("31/03/1960"))//31/3/1960 DateTime.ParseExact(from_dt, "M/d/yyyy hh:mm:ss tt", CultureInfo.InvariantCulture)
                             if (date1 <= DateTime.ParseExact("31/03/1960", "dd/MM/yyyy", CultureInfo.InvariantCulture))
+                            {//log
+                                this.WriteToFile(" line 695 Comm rate function Encroacher id :1,5  and e_date:" + e_date);
+                                var subEncroachersId = new[] { 1, 5 };
+                                result1 = await _damagecalculationService.ComRateListTypeA(DateTime.ParseExact(e_date, "dd/MM/yyyy", CultureInfo.InvariantCulture), dto.LocalityId, subEncroachersId);
+                                //log
+                                this.WriteToFile("List data at 699:" + JsonConvert.SerializeObject(result1));
+                            }
+                            else if (date1 >= DateTime.ParseExact("01/04/1960", "dd/MM/yyyy", CultureInfo.InvariantCulture) && date1 <= DateTime.ParseExact("31/03/1976", "dd/MM/yyyy", CultureInfo.InvariantCulture))//31/3/1981  1/4/1960
                             {
-                            var subEncroachersId = new[] { 1, 5 };
-                            result1 = await _damagecalculationService.ComRateListTypeA(DateTime.ParseExact(e_date, "dd/MM/yyyy", CultureInfo.InvariantCulture), dto.LocalityId, subEncroachersId);
+                                this.WriteToFile(" line 703 Comm rate function Encroacher id :2,5  and e_date:" + e_date);
+                                var subEncroachersId = new[] { 2, 5 };
+                                result1 = await _damagecalculationService.ComRateListTypeA(DateTime.ParseExact(e_date, "dd/MM/yyyy", CultureInfo.InvariantCulture), dto.LocalityId, subEncroachersId);
+                                this.WriteToFile("List data at 706:" + JsonConvert.SerializeObject(result1));
+                            }
+                            else if (date1 >= DateTime.ParseExact("01/04/1976", "dd/MM/yyyy", CultureInfo.InvariantCulture) && date1 <= DateTime.ParseExact("31/03/1981", "dd/MM/yyyy", CultureInfo.InvariantCulture))//31/3/1981  1/4/1960
+                            {
+                                this.WriteToFile(" line 710 Comm rate function Encroacher id :3,5  and e_date:" + e_date);
+                                var subEncroachersId = new[] { 3, 5 };
+                                result1 = await _damagecalculationService.ComRateListTypeA(DateTime.ParseExact(e_date, "dd/MM/yyyy", CultureInfo.InvariantCulture), dto.LocalityId, subEncroachersId);
+                                this.WriteToFile("List data at 713:" + JsonConvert.SerializeObject(result1));
+                            }
+                            else
+                            {
+                                this.WriteToFile(" line 717 Comm rate function Encroacher id :4,5  and e_date:" + e_date);
+                                var subEncroachersId = new[] { 4, 5 };
+                                result1 = await _damagecalculationService.ComRateListTypeA(DateTime.ParseExact(e_date, "dd/MM/yyyy", CultureInfo.InvariantCulture), dto.LocalityId, subEncroachersId);
+                                this.WriteToFile("List data at 720:" + JsonConvert.SerializeObject(result1));
+                            }
                         }
-                        else if (date1 >= Convert.ToDateTime("01/04/1960") && date1 <= Convert.ToDateTime("31/03/1976"))//31/3/1981  1/4/1960
+                        else if (dt.EncroachName == "TYPE_B" && dt.Id.ToString() == "2")
                         {
-                            var subEncroachersId = new[] { 2, 5 };
-                            result1 = await _damagecalculationService.ComRateListTypeA(DateTime.ParseExact(e_date, "dd/MM/yyyy", CultureInfo.InvariantCulture), dto.LocalityId, subEncroachersId);
+                            this.WriteToFile(" line 725 Comm rate function Encroacher id :5  and e_date:" + e_date);
+                            var subEncroachersId = new[] { 5 };
+                            result1 = await _damagecalculationService.ComRateListTypeB(DateTime.ParseExact(e_date, "dd/MM/yyyy", CultureInfo.InvariantCulture), dto.LocalityId, subEncroachersId);
+                            this.WriteToFile("List data at 728:" + JsonConvert.SerializeObject(result1));
                         }
-                        else if (date1 >= Convert.ToDateTime("01/04/1976") && date1 <= Convert.ToDateTime("31/03/1981"))//31/3/1981  1/4/1960
+                        else if (dt.EncroachName == "TYPE_C" && dt.Id.ToString() == "3")
                         {
-                            var subEncroachersId = new[] { 3, 5 };
-                            result1 = await _damagecalculationService.ComRateListTypeA(DateTime.ParseExact(e_date, "dd/MM/yyyy", CultureInfo.InvariantCulture), dto.LocalityId, subEncroachersId);
-                        }
-                        else
-                        {
-                            var subEncroachersId = new[] { 4, 5 };
-                            result1 = await _damagecalculationService.ComRateListTypeA(DateTime.ParseExact(e_date, "dd/MM/yyyy", CultureInfo.InvariantCulture), dto.LocalityId, subEncroachersId);
+                            this.WriteToFile(" line 732 Comm rate function Encroacher id :5  and e_date:" + e_date);
+                            var subEncroachersId = new[] { 5 };
+                            result1 = await _damagecalculationService.ComRateListTypeC(DateTime.ParseExact(e_date, "dd/MM/yyyy", CultureInfo.InvariantCulture), dto.LocalityId, subEncroachersId);
+                            this.WriteToFile("List data at 735:" + JsonConvert.SerializeObject(result1));
                         }
                     }
-                    else if (dt.EncroachName == "TYPE_B" && dt.Id.ToString() == "2")
+                    else
                     {
-                        var subEncroachersId = new[] { 5 };
-                        result1 = await _damagecalculationService.ComRateListTypeB(DateTime.ParseExact(e_date, "dd/MM/yyyy", CultureInfo.InvariantCulture), dto.LocalityId, subEncroachersId);
+                        if (dt.EncroachName == "TYPE_A" && dt.Id.ToString() == "1")
+                        {
+                            if (date1 <= DateTime.ParseExact("31/03/1960", "dd/MM/yyyy", CultureInfo.InvariantCulture))//03/31/1960
+                            {
+                                if (s_date == "01/04/2001" && e_date == "31/03/2002")
+                                {
+                                    this.WriteToFile(" line 746 Comm rate function Encroacher id :5  and e_date:" + e_date);
+                                    DateTime specificDateTime = DateTime.ParseExact("31/07/2001", "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                                    var subEncroachersId = new[] { 1, 5 };
+                                    result1 = await _damagecalculationService.ComRateListTypeASpecific(specificDateTime, DateTime.ParseExact(e_date, "dd/MM/yyyy", CultureInfo.InvariantCulture), dto.LocalityId, subEncroachersId);
+                                    this.WriteToFile("List data at 750:" + JsonConvert.SerializeObject(result1));
+                                }
+                                else
+                                {
+                                    var subEncroachersId = new[] { 1, 5 };
+                                    result1 = await _damagecalculationService.ComRateListTypeA(DateTime.ParseExact(e_date, "dd/MM/yyyy", CultureInfo.InvariantCulture), dto.LocalityId, subEncroachersId);
+                                    this.WriteToFile("List data at 756:" + JsonConvert.SerializeObject(result1));
+                                }
+                            }
+                            else if (date1 >= DateTime.ParseExact("04/01/1960", "dd/MM/yyyy", CultureInfo.InvariantCulture) && date1 <= DateTime.ParseExact("31/03/1976", "dd/MM/yyyy", CultureInfo.InvariantCulture))//03/31/1981  1/4/1960
+                            {
+                                if (s_date == "01/04/2001" && e_date == "31/03/2002")
+                                {
+                                    DateTime specificDateTime = DateTime.ParseExact("31/07/2001", "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                                    var subEncroachersId = new[] { 2, 5 };
+                                    result1 = await _damagecalculationService.ComRateListTypeASpecific(specificDateTime, DateTime.ParseExact(e_date, "dd/MM/yyyy", CultureInfo.InvariantCulture), dto.LocalityId, subEncroachersId);
+                                    this.WriteToFile("List data at 766:" + JsonConvert.SerializeObject(result1));
+                                }
+                                else
+                                {
+                                    var subEncroachersId = new[] { 2, 5 };
+                                    result1 = await _damagecalculationService.ComRateListTypeA(DateTime.ParseExact(e_date, "dd/MM/yyyy", CultureInfo.InvariantCulture), dto.LocalityId, subEncroachersId);
+                                    this.WriteToFile("List data at 772:" + JsonConvert.SerializeObject(result1));
+                                }
+                            }
+                            else if (date1 >= DateTime.ParseExact("04/01/1976", "dd/MM/yyyy", CultureInfo.InvariantCulture) && date1 <= DateTime.ParseExact("31/03/1981", "dd/MM/yyyy", CultureInfo.InvariantCulture))//03/31/1981  1/4/1960
+                            {
+                                if (s_date == "01/04/2001" && e_date == "31/03/2002")
+                                {
+                                    DateTime specificDateTime = DateTime.ParseExact("31/07/2001", "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                                    var subEncroachersId = new[] { 3, 5 };
+                                    result1 = await _damagecalculationService.ComRateListTypeASpecific(specificDateTime, DateTime.ParseExact(e_date, "dd/MM/yyyy", CultureInfo.InvariantCulture), dto.LocalityId, subEncroachersId);
+                                    this.WriteToFile("List data at 782:" + JsonConvert.SerializeObject(result1));
+                                }
+                                else
+                                {
+                                    var subEncroachersId = new[] { 3, 5 };
+                                    result1 = await _damagecalculationService.ComRateListTypeA(DateTime.ParseExact(e_date, "dd/MM/yyyy", CultureInfo.InvariantCulture), dto.LocalityId, subEncroachersId);
+                                    this.WriteToFile("List data at 788:" + JsonConvert.SerializeObject(result1));
+                                }
+                            }
+                            else
+                            {
+                                if (s_date == "01/04/2001" && e_date == "31/03/2002")
+                                {
+
+                                    DateTime specificDateTime = DateTime.ParseExact("31/07/2001", "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                                    var subEncroachersId = new[] { 4, 5 };
+                                    result1 = await _damagecalculationService.ComRateListTypeASpecific(specificDateTime, DateTime.ParseExact(e_date, "dd/MM/yyyy", CultureInfo.InvariantCulture), dto.LocalityId, subEncroachersId);
+                                    this.WriteToFile("List data at 799:" + JsonConvert.SerializeObject(result1));
+                                }
+                                else
+                                {
+                                    var subEncroachersId = new[] { 4, 5 };
+                                    result1 = await _damagecalculationService.ComRateListTypeA(DateTime.ParseExact(e_date, "dd/MM/yyyy", CultureInfo.InvariantCulture), dto.LocalityId, subEncroachersId);
+                                    this.WriteToFile("List data at 805:" + JsonConvert.SerializeObject(result1));
+                                }
+                            }
+                        }
+                        else if (dt.EncroachName == "TYPE_B" && dt.Id.ToString() == "2")
+                        {
+                            var subEncroachersId = new[] { 5 };
+                            result1 = await _damagecalculationService.ComRateListTypeB(DateTime.ParseExact(e_date, "dd/MM/yyyy", CultureInfo.InvariantCulture), dto.LocalityId, subEncroachersId);
+                            this.WriteToFile("List data at 813:" + JsonConvert.SerializeObject(result1));
+                        }
+                        else if (dt.EncroachName == "TYPE_C" && dt.Id.ToString() == "3")
+                        {
+                            var subEncroachersId = new[] { 5 };
+                            result1 = await _damagecalculationService.ComRateListTypeC(DateTime.ParseExact(e_date, "dd/MM/yyyy", CultureInfo.InvariantCulture), dto.LocalityId, subEncroachersId);
+                            this.WriteToFile("List data at 819:" + JsonConvert.SerializeObject(result1));
+                        }
                     }
-                    else if (dt.EncroachName == "TYPE_C" && dt.Id.ToString() == "3")
-                    {
-                        var subEncroachersId = new[] { 5 };
-                        result1 = await _damagecalculationService.ComRateListTypeC(DateTime.ParseExact(e_date, "dd/MM/yyyy", CultureInfo.InvariantCulture), dto.LocalityId, subEncroachersId);
-                    }
+
                 }
                 else
                 {
-                    if (dt.EncroachName == "TYPE_A" && dt.Id.ToString() == "1")
-                    {
-                        if (date1 <= Convert.ToDateTime("31/03/1960"))//03/31/1960
-                        {
-                            if (s_date == "01/04/2001" && e_date == "31/03/2002")
-                            {
-                                DateTime specificDateTime = Convert.ToDateTime("31/07/2001");
-                                var subEncroachersId = new[] { 1, 5 };
-                                result1 = await _damagecalculationService.ComRateListTypeASpecific(specificDateTime, DateTime.ParseExact(e_date, "dd/MM/yyyy", CultureInfo.InvariantCulture), dto.LocalityId, subEncroachersId);
 
-                            }
-                            else
-                            {
-                                var subEncroachersId = new[] { 1, 5 };
-                                result1 = await _damagecalculationService.ComRateListTypeA(DateTime.ParseExact(e_date, "dd/MM/yyyy", CultureInfo.InvariantCulture), dto.LocalityId, subEncroachersId);
-                            }
-                        }
-                        else if (date1 >= Convert.ToDateTime("04/01/1960") && date1 <= Convert.ToDateTime("31/03/1976"))//03/31/1981  1/4/1960
-                        {
-                            if (s_date == "01/04/2001" && e_date == "31/03/2002")
-                            {
-                                DateTime specificDateTime = Convert.ToDateTime("31/07/2001");
-                                var subEncroachersId = new[] { 2, 5 };
-                                result1 = await _damagecalculationService.ComRateListTypeASpecific(specificDateTime, DateTime.ParseExact(e_date, "dd/MM/yyyy", CultureInfo.InvariantCulture), dto.LocalityId, subEncroachersId);
-                            }
-                            else
-                            {
-                                var subEncroachersId = new[] { 2, 5 };
-                                result1 = await _damagecalculationService.ComRateListTypeA(DateTime.ParseExact(e_date, "dd/MM/yyyy", CultureInfo.InvariantCulture), dto.LocalityId, subEncroachersId);
-                            }
-                        }
-                        else if (date1 >= Convert.ToDateTime("04/01/1976") && date1 <= Convert.ToDateTime("31/03/1981"))//03/31/1981  1/4/1960
-                        {
-                            if (s_date == "01/04/2001" && e_date == "31/03/2002")
-                            {
-                                DateTime specificDateTime = Convert.ToDateTime("31/07/2001");
-                                var subEncroachersId = new[] { 3, 5 };
-                                result1 = await _damagecalculationService.ComRateListTypeASpecific(specificDateTime, DateTime.ParseExact(e_date, "dd/MM/yyyy", CultureInfo.InvariantCulture), dto.LocalityId, subEncroachersId);
-                            }
-                            else
-                            {
-                                var subEncroachersId = new[] { 3, 5 };
-                                result1 = await _damagecalculationService.ComRateListTypeA(DateTime.ParseExact(e_date, "dd/MM/yyyy", CultureInfo.InvariantCulture), dto.LocalityId, subEncroachersId);
-                            }
-                        }
-                        else
-                        {
-                            if (s_date == "01/04/2001" && e_date == "31/03/2002")
-                            {
-
-                                DateTime specificDateTime = Convert.ToDateTime("31/07/2001");
-                                var subEncroachersId = new[] { 4, 5 };
-                                result1 = await _damagecalculationService.ComRateListTypeASpecific(specificDateTime, DateTime.ParseExact(e_date, "dd/MM/yyyy", CultureInfo.InvariantCulture), dto.LocalityId, subEncroachersId);
-                            }
-                            else
-                            {
-                                var subEncroachersId = new[] { 4, 5 };
-                                result1 = await _damagecalculationService.ComRateListTypeA(DateTime.ParseExact(e_date, "dd/MM/yyyy", CultureInfo.InvariantCulture), dto.LocalityId, subEncroachersId);
-                            }
-                        }
-                    }
-                    else if (dt.EncroachName == "TYPE_B" && dt.Id.ToString() == "2")
-                    {
-                        var subEncroachersId = new[] { 5 };
-                        result1 = await _damagecalculationService.ComRateListTypeB(DateTime.ParseExact(e_date, "dd/MM/yyyy", CultureInfo.InvariantCulture), dto.LocalityId, subEncroachersId);
-                    }
-                    else if (dt.EncroachName == "TYPE_C" && dt.Id.ToString() == "3")
-                    {
-                        var subEncroachersId = new[] { 5 };
-                        result1 = await _damagecalculationService.ComRateListTypeC(DateTime.ParseExact(e_date, "dd/MM/yyyy", CultureInfo.InvariantCulture), dto.LocalityId, subEncroachersId);
-                    }
+                    ViewBag.Message = Alert.Show("Plz Enter Valid Date!", "", AlertType.Warning);
+                    List<DamageChargesCalculation> damagecalculation1 = new List<DamageChargesCalculation>();
                 }
 
-            }
-            else
-            {
-
-                ViewBag.Message = Alert.Show("Plz Enter Valid Date!", "", AlertType.Warning);
-                List<DamageChargesCalculation> damagecalculation1 = new List<DamageChargesCalculation>();
-            }
-
-            if (result1 != null)
-            {
-                for (int i = 0; i < result1.Count; i++)
+                if (result1 != null)
                 {
-                    damageCalculatorRateMappingDto.Add(new DamageCalculatorRateMappingDto
+                    for (int i = 0; i < result1.Count; i++)
                     {
-                        Id = result1[i].Id,
-                        EncroachId = result1[i].EncroachId,
-                        ColonyId = result1[i].ColonyId,
-                        StartDate = result1[i].StartDate,
-                        EndDate = result1[i].EndDate,
-                        SubEncroachId = result1[i].SubEncroachId,
-                        Rate = result1[i].Rate,
-                        IsActive = result1[i].IsActive
-                    });
+                        damageCalculatorRateMappingDto.Add(new DamageCalculatorRateMappingDto
+                        {
+                            Id = result1[i].Id,
+                            EncroachId = result1[i].EncroachId,
+                            ColonyId = result1[i].ColonyId,
+                            StartDate = result1[i].StartDate,
+                            EndDate = result1[i].EndDate,
+                            SubEncroachId = result1[i].SubEncroachId,
+                            Rate = result1[i].Rate,
+                            IsActive = result1[i].IsActive
+                        });
+                    }
                 }
-            }
 
+
+            }
+            catch (Exception ex)
+            {
+
+                //log
+                this.WriteToFile("BindStartAndEndDateComm error :" + ex.Message.ToString());
+
+            }
             return damageCalculatorRateMappingDto;
         }
 
