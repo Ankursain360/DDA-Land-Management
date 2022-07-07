@@ -144,6 +144,41 @@ namespace Libraries.Model.Entity
         public string ChainDocument { get; set; }
 
         [NotMapped]
+        public IFormFile PhotographarFP { get; set; }
+
+        [NotMapped]
+        public IFormFile PhotographOwnerFP { get; set; }
+
+        [NotMapped]
+        public IFormFile GpaFilePathFP { get; set; }
+
+        [NotMapped]
+        public IFormFile AtsFilePathFP { get; set; }
+
+        [NotMapped]
+        public IFormFile ElectricityBillFP { get; set; }
+        [NotMapped]
+        public IFormFile PaymentDocumentFP { get; set; }
+        [NotMapped]
+        public IFormFile WillDocumentFP { get; set; }
+        [NotMapped]
+        public IFormFile NewDamagePayeeAssmtFP { get; set; }
+
+        [NotMapped]
+        public IFormFile PossessionDocumentFP { get; set; }
+
+        [NotMapped]
+        public IFormFile MutationDocumentFP { get; set; }
+
+        [NotMapped]
+        public IFormFile CoordinateDocumentFP { get; set; }
+
+        [NotMapped]
+        public IFormFile ChainDocumentFP { get; set; }
+
+        
+
+        [NotMapped]
         public List<IFormFile> Document { get; set; }
 
 
@@ -173,6 +208,23 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public string Status { get; set; }
 
+        [NotMapped]
+        public List<string> AFloorName { get; set; }
+
+        [NotMapped]
+        public List<string> ACarpetArea { get; set; }
+
+        [NotMapped]
+        public List<string> AElectricityNumber { get; set; }
+        [NotMapped]
+
+        public List<string> AWaterBill { get; set; }
+        [NotMapped]
+
+        public List<string> ACurrentUse { get; set; }
+        [NotMapped]
+
+        public List<string> AMuncipleTaxId { get; set; }
 
         //***** GPA *****
         [NotMapped]
@@ -190,6 +242,21 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public string AreaOfThePlotAsPerGpa { get; set; }
 
+        [NotMapped]
+        public List<DateTime> ADateOfExecutionOfGpa { get; set; }
+
+        [NotMapped]
+        public List<String> ANameOfTheSeller { get; set; }
+
+        [NotMapped]
+        public List<String> ANameOfThePayer { get; set; }
+
+        [NotMapped]
+        public List<String> AAddressOfThePlotAsPerGpa { get; set; }
+
+        [NotMapped]
+        public List<String> AAreaOfThePlotAsPerGpa { get; set; }
+
         //***** ATS *****
 
         [NotMapped]
@@ -206,6 +273,27 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public string AreaOfThePlotAsPerAts { get; set; }
+
+
+
+        [NotMapped]
+        public List<DateTime> ADateOfExecutionOfAts { get; set; }
+
+        [NotMapped]
+        public List<String> ANameOfTheSellerAts { get; set; }
+
+        [NotMapped]
+        public List<String> ANameOfThePayerAts { get; set; }
+
+        [NotMapped]
+        public List<String> AAddressOfThePlotAsPerAts { get; set; }
+
+        [NotMapped]
+        public List<String> AAreaOfThePlotAsPerAts { get; set; }
+
+
+
+
 
         [NotMapped]
         public List<New_Damage_Colony> New_DamageColonyList { get; set; }

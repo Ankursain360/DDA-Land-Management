@@ -3,7 +3,7 @@
 <div class="pt-3">
     <form asp-action="Create" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <input type="hidden" asp-for="Id" value="@ViewBag.MainDamagePayeeId" />
+        @*<input type="hidden" asp-for="Id" value="@ViewBag.MainDamagePayeeId" />*@
 
         <h3 class="mb-3 d-flex">Add Details <span class="ms-auto"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span> </h3>
         <div id="COLONYDETAILS">
@@ -12,7 +12,7 @@
 
                 <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="RegId" type="text" class="floating-label-field floating-label-field--s3" placeholder="RegNo" readonly />
+                        <input asp-for="RegId" type="text" class="floating-label-field floating-label-field--s3" placeholder="RegNo"/>
                         <span asp-validation-for="RegId" class="d-block text-danger field-validation-valid"></span>
                         <label class="floating-label">Registration No<span style="color:red">*</span></label>
 
@@ -44,20 +44,20 @@
                         <label class="floating-label">Village<span style="color:red">*</span></label>
                     </div>
                 </div>
-            </div>
 
-            <div class="col-md-6">
-                <div class="floating-label-wrap">
-                    <select asp-for="ColonyId" class="floating-label-field floating-label-field--s3"
-                            asp-items="@(new SelectList(Model.New_DamageColonyList,"Id","Name"))">
-                        <option value="">---Select---</option>
-                    </select>
-                    <span asp-validation-for="ColonyId" class="d-block text-danger field-validation-valid"></span>
-                    <label class="floating-label">Colony<span style="color:red">*</span></label>
+
+                <div class="col-md-6">
+                    <div class="floating-label-wrap">
+                        <select asp-for="ColonyId" class="floating-label-field floating-label-field--s3"
+                                asp-items="@(new SelectList(Model.LocalitieList,"Id","Name"))">
+                            <option value="">---Select---</option>
+                        </select>
+                        <span asp-validation-for="ColonyId" class="d-block text-danger field-validation-valid"></span>
+                        <label class="floating-label">Colony<span style="color:red">*</span></label>
+                    </div>
                 </div>
+
             </div>
-
-
 
         </div>
         <div class="row mt-md-3">
@@ -248,7 +248,7 @@
             <div class="table-section bg-white border shadow rounded">
                 <div class="table-responsive">
 
-                    <table class="table table-sm table-bordered mb-0 table-striped" id="tbl_Floor">
+                    <table class="table table-sm table-bordered mb-0 table-striped" id="tbl_posts2">
                         <thead class="text-nowrap">
                             <tr>
                                 <th>Sr.No</th>
@@ -261,9 +261,9 @@
                                 <th>Operation</th>
                             </tr>
                         </thead>
-                        <tbody id="tbl_Floor_body">
+                        <tbody id="tbl_posts2_body">
                         </tbody>
-                        <tbody class="tbody" id="addFloor">
+                        <tbody class="tbody" id="add2">
                             <tr id="">
                                 <td style="text-align:center;"><span class="sn">1</span></td>
                                 <td>
@@ -290,9 +290,8 @@
                                 <td>
                                     <div class="floating-label-wrap mb-3 mb-md-0">
 
-                                        <a class="delete-recordfloor" data-id="0" style="display: none; font-size: 40px;"><i class="ri-indeterminate-circle-fill"></i></a>
-                                        @*<a class="add-recordfloor" data-added="0" style="font-size:40px;"><i class="ri-add-circle-fill"></i></a>*@
-                                        <input type="submit" value="AddFloor" class="btn btn-theme" id="AddFloor" asp-action="AddFloor" formnovalidate />
+                                        <a class="remove delete-record2 " title="delete" data-id="0" style="display:none;font-size:30px;"><i class="ri-delete-bin-fill"></i></a>
+                                        <a class="view add-record2" data-added="0" title="Add" style="font-size:30px;"><i class="ri-add-circle-fill"></i></a>
                                     </div>
 
                                 </td>
@@ -612,21 +611,20 @@
 
                 <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <a id="viewPropertyPhoto" asp-action="PropertyPhoto" class="badge bg-primary px-2" target="_blank" style="display:none;">(View File)</a>
-                        <input asp-for="PhotographProperty" class="floating-label-field floating-label-field--s3 checkExtension" type="file" />
-                        @*<input type="hidden" asp-for="PropertyPhotoDocument" />*@
-                        <span asp-validation-for="PhotographProperty" class="d-block text-danger field-validation-valid"></span>
-                        <label class="floating-label">Photograph of the Property<span style="color:red">*</span></label>
+                        <a id="viewPropertyPhoto" asp-action="PhotographarFP" class="badge bg-primary px-2" target="_blank" style="display:none;">(View File)</a>
+                        <input type="file" asp-for="PhotographarFP" class="floating-label-field floating-label-field--s3 checkExtension" placeholder="Name">
+                        <span asp-validation-for="PhotographarFP" class="d-block text-danger field-validation-valid"></span>
+                        <label for="field-1" class="floating-label"> Photograph of the Property <span style="color:red">(.pdf only)</span></label>
 
                     </div>
                 </div>
 
                 <div class="col-md-6">
                     <div class="floating-label-wrap">
-                        <a id="viewOwnerPhoto" asp-action="OwnerPhoto" class="badge bg-primary px-2" target="_blank" style="display:none;">(View File)</a>
-                        <input asp-for="PhotographOwner" class="floating-label-field floating-label-field--s3 checkExtension" type="file" />
+                        <a id="viewOwnerPhoto" asp-action="PhotographOwnerFP" class="badge bg-primary px-2" target="_blank" style="display:none;">(View File)</a>
+                        <input asp-for="PhotographOwnerFP" class="floating-label-field floating-label-field--s3 checkExtension" type="file" />
                         @*<input type="hidden" asp-for="OwnerPhotoDocument" />*@
-                        <span asp-validation-for="PhotographOwner" class="d-block text-danger field-validation-valid"></span>
+                        <span asp-validation-for="PhotographOwnerFP" class="d-block text-danger field-validation-valid"></span>
                         <label class="floating-label">Photograph of the Owner<span style="color:red">*</span></label>
                     </div>
                 </div>
@@ -637,10 +635,10 @@
 
                 <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <a id="viewGPADocument" asp-action="GPADocument" class="badge bg-primary px-2" target="_blank" style="display:none;">(View File)</a>
-                        <input asp-for="Gpa" class="floating-label-field floating-label-field--s3 checkExtension" type="file" />
+                        <a id="viewGPADocument" asp-action="GpaFilePathFP" class="badge bg-primary px-2" target="_blank" style="display:none;">(View File)</a>
+                        <input asp-for="GpaFilePathFP" class="floating-label-field floating-label-field--s3 checkExtension" type="file" />
                         @*<input type="hidden" asp-for="GPADocument" />*@
-                        <span asp-validation-for="Gpa" class="d-block text-danger field-validation-valid"></span>
+                        <span asp-validation-for="GpaFilePathFP" class="d-block text-danger field-validation-valid"></span>
                         <label class="floating-label">GPA<span style="color:red">*</span></label>
 
                     </div>
@@ -648,10 +646,10 @@
 
                 <div class="col-md-6">
                     <div class="floating-label-wrap">
-                        <a id="viewATSDocument" asp-action="ATSDocument" class="badge bg-primary px-2" target="_blank" style="display:none;">(View File)</a>
-                        <input asp-for="Ats" class="floating-label-field floating-label-field--s3 checkExtension" type="file" />
+                        <a id="viewATSDocument" asp-action="AtsFilePathFP" class="badge bg-primary px-2" target="_blank" style="display:none;">(View File)</a>
+                        <input asp-for="AtsFilePathFP" class="floating-label-field floating-label-field--s3 checkExtension" type="file" />
                         @*<input type="hidden" asp-for="ATSDocument" />*@
-                        <span asp-validation-for="Ats" class="d-block text-danger field-validation-valid"></span>
+                        <span asp-validation-for="AtsFilePathFP" class="d-block text-danger field-validation-valid"></span>
                         <label class="floating-label">ATS<span style="color:red">*</span></label>
                     </div>
                 </div>
@@ -663,10 +661,10 @@
 
                 <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <a id="viewElectricityBill" asp-action="ElectricityBill" class="badge bg-primary px-2" target="_blank" style="display:none;">(View File)</a>
-                        <input asp-for="ElectricityBill" class="floating-label-field floating-label-field--s3 checkExtension" type="file" />
+                        <a id="viewElectricityBill" asp-action="ElectricityBillFP" class="badge bg-primary px-2" target="_blank" style="display:none;">(View File)</a>
+                        <input asp-for="ElectricityBillFP" class="floating-label-field floating-label-field--s3 checkExtension" type="file" />
                         @*<input type="hidden" asp-for="ElectricityBillDocument" />*@
-                        <span asp-validation-for="ElectricityBill" class="d-block text-danger field-validation-valid"></span>
+                        <span asp-validation-for="ElectricityBillFP" class="d-block text-danger field-validation-valid"></span>
                         <label class="floating-label">Electricity Bill<span style="color:red">*</span></label>
 
                     </div>
@@ -674,10 +672,10 @@
 
                 <div class="col-md-6">
                     <div class="floating-label-wrap">
-                        <a id="viewPaymentDocument" asp-action="PaymentDocument" class="badge bg-primary px-2" target="_blank" style="display:none;">(View File)</a>
-                        <input asp-for="PaymentDocument" class="floating-label-field floating-label-field--s3 checkExtension" type="file" />
+                        <a id="viewPaymentDocument" asp-action="PaymentDocumentFP" class="badge bg-primary px-2" target="_blank" style="display:none;">(View File)</a>
+                        <input asp-for="PaymentDocumentFP" class="floating-label-field floating-label-field--s3 checkExtension" type="file" />
                         @*<input type="hidden" asp-for="PaymentDocument" />*@
-                        <span asp-validation-for="PaymentDocument" class="d-block text-danger field-validation-valid"></span>
+                        <span asp-validation-for="PaymentDocumentFP" class="d-block text-danger field-validation-valid"></span>
                         <label class="floating-label">Payment Document<span style="color:red">*</span></label>
                     </div>
                 </div>
@@ -688,10 +686,10 @@
 
                 <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <a id="viewWillDocument" asp-action="WillDocument" class="badge bg-primary px-2" target="_blank" style="display:none;">(View File)</a>
-                        <input asp-for="WillDocument" class="floating-label-field floating-label-field--s3 checkExtension" type="file" />
+                        <a id="viewWillDocument" asp-action="WillDocumentFP" class="badge bg-primary px-2" target="_blank" style="display:none;">(View File)</a>
+                        <input asp-for="WillDocumentFP" class="floating-label-field floating-label-field--s3 checkExtension" type="file" />
                         @*<input type="hidden" asp-for="WillDocument" />*@
-                        <span asp-validation-for="WillDocument" class="d-block text-danger field-validation-valid"></span>
+                        <span asp-validation-for="WillDocumentFP" class="d-block text-danger field-validation-valid"></span>
                         <label class="floating-label">Will<span style="color:red">*</span></label>
 
                     </div>
@@ -700,9 +698,9 @@
                 <div class="col-md-6">
                     <div class="floating-label-wrap">
                         <a id="viewPossessionDocument" asp-action="PossessionDocument" class="badge bg-primary px-2" target="_blank" style="display:none;">(View File)</a>
-                        <input asp-for="PossessionDocument" class="floating-label-field floating-label-field--s3 checkExtension" type="file" />
+                        <input asp-for="PossessionDocumentFP" class="floating-label-field floating-label-field--s3 checkExtension" type="file" />
                         @*<input type="hidden" asp-for="PossessionDocument" />*@
-                        <span asp-validation-for="PossessionDocument" class="d-block text-danger field-validation-valid"></span>
+                        <span asp-validation-for="PossessionDocumentFP" class="d-block text-danger field-validation-valid"></span>
                         <label class="floating-label">Possession Document<span style="color:red">*</span></label>
                     </div>
                 </div>
@@ -714,9 +712,9 @@
                 <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <a id="viewPropertyTaxMutationDocument" asp-action="PropertyTaxMutationDocument" class="badge bg-primary px-2" target="_blank" style="display:none;">(View File)</a>
-                        <input asp-for="MutationDocument" class="floating-label-field floating-label-field--s3 checkExtension" type="file" />
+                        <input asp-for="MutationDocumentFP" class="floating-label-field floating-label-field--s3 checkExtension" type="file" />
                         @*<input type="hidden" asp-for="PropertyTaxMutationDocument" />*@
-                        <span asp-validation-for="MutationDocument" class="d-block text-danger field-validation-valid"></span>
+                        <span asp-validation-for="MutationDocumentFP" class="d-block text-danger field-validation-valid"></span>
                         <label class="floating-label">Property Tax Mutation Document<span style="color:red">*</span></label>
 
                     </div>
@@ -725,9 +723,9 @@
                 <div class="col-md-6">
                     <div class="floating-label-wrap">
                         <a id="viewCoOrdinate" asp-action="CoOrdinate" class="badge bg-primary px-2" target="_blank" style="display:none;">(View File)</a>
-                        <input asp-for="CoordinateDocument" class="floating-label-field floating-label-field--s3 checkExtension" type="file" />
+                        <input asp-for="CoordinateDocumentFP" class="floating-label-field floating-label-field--s3 checkExtension" type="file" />
                         @*<input type="hidden" asp-for="CoOrdinateDocument" />*@
-                        <span asp-validation-for="CoordinateDocument" class="d-block text-danger field-validation-valid"></span>
+                        <span asp-validation-for="CoordinateDocumentFP" class="d-block text-danger field-validation-valid"></span>
                         <label class="floating-label">Co-ordinate of Land<span style="color:red">*</span></label>
                     </div>
                 </div>
@@ -739,9 +737,9 @@
                 <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <a id="viewVerifyChainDocument" asp-action="VerifyChainDocument" class="badge bg-primary px-2" target="_blank" style="display:none;">(View File)</a>
-                        <input asp-for="ChainDocument" class="floating-label-field floating-label-field--s3 checkExtension" type="file" />
+                        <input asp-for="ChainDocumentFP" class="floating-label-field floating-label-field--s3 checkExtension" type="file" />
                         @*<input type="hidden" asp-for="VerifyChainDocument" />*@
-                        <span asp-validation-for="ChainDocument" class="d-block text-danger field-validation-valid"></span>
+                        <span asp-validation-for="ChainDocumentFP" class="d-block text-danger field-validation-valid"></span>
                         <label class="floating-label">Verify Chain Document<span style="color:red">*</span></label>
 
                     </div>
@@ -763,7 +761,7 @@
             <div class="table-section bg-white border shadow rounded">
                 <div class="table-responsive">
 
-                    <table class="table table-sm table-bordered mb-0 table-striped" id="tbl_GPA">
+                    <table class="table table-sm table-bordered mb-0 table-striped" id="tbl_posts3">
                         <thead class="text-nowrap">
                             <tr>
                                 <th>Sr.No</th>
@@ -775,9 +773,9 @@
                                 <th>Operation</th>
                             </tr>
                         </thead>
-                        <tbody id="tbl_GPA_body">
+                        <tbody id="tbl_posts3_body">
                         </tbody>
-                        <tbody class="tbody" id="addGPA">
+                        <tbody class="tbody" id="add3">
                             <tr id="">
                                 <td style="text-align:center;"><span class="sn2">1</span></td>
                                 <td>
@@ -800,8 +798,11 @@
                                 <td>
                                     <div class="floating-label-wrap mb-3 mb-md-0">
 
-                                        <a class="delete-recordGPA" data-id="0" style="display: none; font-size: 40px;"><i class="ri-indeterminate-circle-fill"></i></a>
-                                        <a class="add-recordGPA" data-added="0" style="font-size:40px;"><i class="ri-add-circle-fill"></i></a>
+                                        <div class="floating-label-wrap mb-3 mb-md-0">
+
+                                            <a class="remove delete-record3 " title="delete" data-id="0" style="display:none;font-size:30px;"><i class="ri-delete-bin-fill"></i></a>
+                                            <a class="view add-record3" data-added="0" title="Add" style="font-size:30px;"><i class="ri-add-circle-fill"></i></a>
+                                        </div>
                                     </div>
 
                                 </td>
@@ -819,7 +820,7 @@
             <div class="table-section bg-white border shadow rounded">
                 <div class="table-responsive">
 
-                    <table class="table table-sm table-bordered mb-0 table-striped" id="tbl_ATS">
+                    <table class="table table-sm table-bordered mb-0 table-striped" id="tbl_posts4">
                         <thead class="text-nowrap">
                             <tr>
                                 <th>Sr.No</th>
@@ -831,9 +832,9 @@
                                 <th>Operation</th>
                             </tr>
                         </thead>
-                        <tbody id="tbl_ATS_body">
+                        <tbody id="tbl_posts4_body">
                         </tbody>
-                        <tbody class="tbody" id="addATS">
+                        <tbody class="tbody" id="add4">
                             <tr id="">
                                 <td style="text-align:center;"><span class="sn3">1</span></td>
                                 <td>
@@ -855,9 +856,8 @@
                                 </td>
                                 <td>
                                     <div class="floating-label-wrap mb-3 mb-md-0">
-
-                                        <a class="delete-recordATS" data-id="0" style="display: none; font-size: 40px;"><i class="ri-indeterminate-circle-fill"></i></a>
-                                        <a class="add-recordATS" data-added="0" style="font-size:40px;"><i class="ri-add-circle-fill"></i></a>
+                                        <a class="remove delete-record4 " title="delete" data-id="0" style="display:none;font-size:30px;"><i class="ri-delete-bin-fill"></i></a>
+                                        <a class="view add-record4" data-added="0" title="Add" style="font-size:30px;"><i class="ri-add-circle-fill"></i></a>
                                     </div>
 
                                 </td>

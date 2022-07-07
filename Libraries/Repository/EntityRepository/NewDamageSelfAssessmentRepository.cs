@@ -42,7 +42,7 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<List<New_Damage_Colony>> GetAllColony(int villageId)
         {
-            List<New_Damage_Colony> colonyList = await _dbContext.new_damage_colony.Where(x => x.NewDamageVillageId == villageId ||x.IsActive == 0).ToListAsync();
+            List<New_Damage_Colony> colonyList = await _dbContext.new_damage_colony.Where(x => x.NewDamageVillageId == villageId &&  x.IsActive == 1).ToListAsync();
             return colonyList;
         }
         public async Task<List<NewDamageSelfAssessment>> GetAllDamageSelfAssessments()
@@ -72,12 +72,29 @@ namespace Libraries.Repository.EntityRepository
 
         //********* Gpa Self Assessment Details **********
 
-        public async Task<bool> SaveAttendance(NewDamageSelfAssessmentGpaDetails gpaDetails)
+        public async Task<bool> SaveFloorDetails(NewdamageAddfloor attendance)
+        {
+            _dbContext.newdamage_addfloor.Add(attendance);
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
+
+
+        public async Task<bool> SaveGPADetails(NewDamageSelfAssessmentGpaDetails gpaDetails)
         {
             _dbContext.newdamage_selfassessment_gpadetail.Add(gpaDetails);
             var Result = await _dbContext.SaveChangesAsync();
             return Result > 0 ? true : false;
         }
+
+        public async Task<bool> SaveATSDetails(NewDamageSelfAssessmentAtsDetails atsDetails)
+        {
+            _dbContext.newdamage_selfassessment_atsdetail.Add(atsDetails);
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
+
+
         public async Task<List<NewDamageSelfAssessmentGpaDetails>> GetAllGpaDetails(int id)
         {
             return await _dbContext.newdamage_selfassessment_gpadetail.Where(x => x.NewDamageSelfAssessmentId == id).ToListAsync();

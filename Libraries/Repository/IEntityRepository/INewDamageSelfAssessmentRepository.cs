@@ -21,13 +21,19 @@ namespace Libraries.Repository.IEntityRepository
 
         //********* Ats Self Assessment Details **********
 
-        Task<bool> SaveAttendance(NewDamageSelfAssessmentAtsDetails atsDetails);
+        
+
+        Task<bool> SaveFloorDetails(NewdamageAddfloor attendance);
+
+        Task<bool> SaveGPADetails(NewDamageSelfAssessmentGpaDetails gpaDetails);
+
+        Task<bool> SaveATSDetails(NewDamageSelfAssessmentAtsDetails atsDetails);
         Task<List<NewDamageSelfAssessmentAtsDetails>> GetAllAtsDetails(int id);
         Task<bool> DeleteAts(int Id); 
 
         //********* Gpa Self Assessment Details **********
 
-        Task<bool> SaveAttendance(NewDamageSelfAssessmentGpaDetails gpaDetails); 
+        //Task<bool> SaveAttendance(NewDamageSelfAssessmentGpaDetails gpaDetails); 
         Task<List<NewDamageSelfAssessmentGpaDetails>> GetAllGpaDetails(int id); 
         Task<bool> DeleteGpa(int Id);
 

@@ -157,13 +157,7 @@ namespace Libraries.Service.ApplicationService
 
         //********* Ats Self Assessment Details **********
 
-       public async Task<bool> SaveAttendance(NewDamageSelfAssessmentAtsDetails atsDetails)
-        {
-            atsDetails.CreatedBy = atsDetails.CreatedBy;
-            atsDetails.CreatedDate = DateTime.Now;
-            //atsDetails.IsActive = 1;
-            return await _assessmentRepository.SaveAttendance(atsDetails);
-        }
+      
        public async Task<List<NewDamageSelfAssessmentAtsDetails>> GetAllAtsDetails(int id)
         {
             return await _assessmentRepository.GetAllAtsDetails(id);
@@ -175,13 +169,33 @@ namespace Libraries.Service.ApplicationService
 
         //********* Gpa Self Assessment Details **********
 
-       public async Task<bool> SaveAttendance(NewDamageSelfAssessmentGpaDetails gpaDetails)
+        public async Task<bool> SaveFloorDetails(NewdamageAddfloor attendance)
+        {
+            attendance.CreatedBy = attendance.CreatedBy;
+            attendance.CreatedDate = DateTime.Now;
+          // attendance.IsActive = 1;
+            return await _assessmentRepository.SaveFloorDetails(attendance);
+        }
+
+        public async Task<bool> SaveGPADetails(NewDamageSelfAssessmentGpaDetails gpaDetails)
         {
             gpaDetails.CreatedBy = gpaDetails.CreatedBy;
             gpaDetails.CreatedDate = DateTime.Now;
-            //atsDetails.IsActive = 1;
-            return await _assessmentRepository.SaveAttendance(gpaDetails);
+            // attendance.IsActive = 1;
+            return await _assessmentRepository.SaveGPADetails(gpaDetails);
         }
+
+        public async Task<bool> SaveATSDetails(NewDamageSelfAssessmentAtsDetails gpaDetails)
+        {
+            gpaDetails.CreatedBy = gpaDetails.CreatedBy;
+            gpaDetails.CreatedDate = DateTime.Now;
+            // attendance.IsActive = 1;
+            return await _assessmentRepository.SaveATSDetails(gpaDetails);
+        }
+
+
+
+
         public async Task<List<NewDamageSelfAssessmentGpaDetails>> GetAllGpaDetails(int id)
         {
             return await _assessmentRepository.GetAllGpaDetails(id);
