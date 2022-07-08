@@ -12,14 +12,12 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<NewDamageSelfAssessmentGpaDetails> builder)
         {
-            builder.ToTable("newdamage_selfassessment_gpadetail", "lms");
+           // builder.ToTable("newdamage_selfassessment_gpadetail", "lms");
 
             builder.HasIndex(e => e.NewDamageSelfAssessmentId)
                 .HasName("FkSelfAssissment_idx");
 
-            builder.Property(e => e.Id)
-                .HasColumnType("int(11)")
-                .ValueGeneratedNever();
+            builder.Property(e => e.Id).ValueGeneratedNever();
 
             builder.Property(e => e.AddressOfThePlotAsPerGpa)
                 .HasMaxLength(4000)
@@ -29,11 +27,7 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(45)
                 .IsUnicode(false);
 
-            builder.Property(e => e.CreatedBy).HasColumnType("int(11)");
-
             builder.Property(e => e.DateOfExecutionOfGpa).HasColumnType("date");
-
-            builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
 
             builder.Property(e => e.NameOfThePayer)
                 .HasMaxLength(45)
@@ -43,7 +37,11 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(45)
                 .IsUnicode(false);
 
-            builder.Property(e => e.NewDamageSelfAssessmentId).HasColumnType("int(11)");
+            builder.HasOne(d => d.GetNewDamageSelfAssessment)
+                .WithMany(p => p.NewdamageSelfassessmentGpadetail)
+                .HasForeignKey(d => d.NewDamageSelfAssessmentId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FkSelfAssissment");
         }
     }
 }

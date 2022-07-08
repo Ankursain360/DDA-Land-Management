@@ -26,8 +26,6 @@ namespace Libraries.Model.EntityConfiguration
             builder.HasIndex(e => e.VillageId)
                 .HasName("Fkvillage_idx");
 
-            builder.Property(e => e.Id).HasColumnType("int(11)");
-
             builder.Property(e => e.AadhaarNo)
                 .HasColumnName("Aadhaar_No")
                 .HasMaxLength(45)
@@ -61,15 +59,11 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(45)
                 .IsUnicode(false);
 
-            builder.Property(e => e.ColonyId).HasColumnType("int(11)");
-
             builder.Property(e => e.ConstructedArea)
                 .HasColumnName("Constructed_Area")
                 .HasColumnType("decimal(4,2)");
 
-            builder.Property(e => e.ConstructionYear)
-                .HasColumnName("Construction_Year")
-                .HasColumnType("int(11)");
+            builder.Property(e => e.ConstructionYear).HasColumnName("Construction_Year");
 
             builder.Property(e => e.CoordinateDocument)
                 .HasColumnName("Coordinate_Document")
@@ -113,8 +107,6 @@ namespace Libraries.Model.EntityConfiguration
                 .HasColumnName("Detail_Court_Case")
                 .HasMaxLength(45)
                 .IsUnicode(false);
-
-            builder.Property(e => e.Districtid).HasColumnType("int(11)");
 
             builder.Property(e => e.DoesLandLitigation)
                 .HasColumnName("Does_Land_Litigation")
@@ -183,9 +175,7 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(45)
                 .IsUnicode(false);
 
-            builder.Property(e => e.LocalityId)
-                .HasColumnName("Locality_ID")
-                .HasColumnType("int(11)");
+            builder.Property(e => e.LocalityId).HasColumnName("Locality_ID");
 
             builder.Property(e => e.MiddleName)
                 .HasColumnName("Middle_Name")
@@ -223,9 +213,7 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(45)
                 .IsUnicode(false);
 
-            builder.Property(e => e.NosFloor)
-                .HasColumnName("nos_floor")
-                .HasColumnType("int(11)");
+            builder.Property(e => e.NosFloor).HasColumnName("nos_floor");
 
             builder.Property(e => e.OwnerPhoto)
                 .HasColumnName("Owner_Photo")
@@ -287,9 +275,7 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(45)
                 .IsUnicode(false);
 
-            builder.Property(e => e.RecordStatus)
-                .HasColumnName("Record_Status")
-                .HasColumnType("int(11)");
+            builder.Property(e => e.RecordStatus).HasColumnName("Record_Status");
 
             builder.Property(e => e.RegId)
                 .HasMaxLength(45)
@@ -313,8 +299,6 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(45)
                 .IsUnicode(false);
 
-            builder.Property(e => e.VillageId).HasColumnType("int(11)");
-
             builder.Property(e => e.West)
                 .HasMaxLength(45)
                 .IsUnicode(false);
@@ -323,6 +307,30 @@ namespace Libraries.Model.EntityConfiguration
                 .HasColumnName("Will_Document")
                 .HasMaxLength(100)
                 .IsUnicode(false);
+
+            builder.HasOne(d => d.GetNew_Damage_Colony)
+                .WithMany(p => p.NewDamageSelfAssessment)
+                .HasForeignKey(d => d.ColonyId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("Fkcolony");
+
+            builder.HasOne(d => d.GetDistrict)
+                .WithMany(p => p.NewdamageSelfassessment)
+                .HasForeignKey(d => d.Districtid)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("Fkdistrict");
+
+            builder.HasOne(d => d.GetLocality)
+                .WithMany(p => p.NewdamageSelfassessment)
+                .HasForeignKey(d => d.LocalityId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("Fklocality");
+
+            builder.HasOne(d => d.GetAcquiredLandVillage)
+                .WithMany(p => p.NewdamageSelfassessment)
+                .HasForeignKey(d => d.VillageId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("Fkvillage");
         }
     }
 }

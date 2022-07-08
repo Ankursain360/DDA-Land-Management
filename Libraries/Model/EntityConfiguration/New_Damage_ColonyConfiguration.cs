@@ -12,30 +12,21 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<New_Damage_Colony> builder)
         {
-            builder.ToTable("newdamagecolony", "lms");
+            //builder.ToTable("newdamagecolony", "lms");
 
             builder.HasIndex(e => e.NewDamageVillageId)
-                .HasName("Fkdamageccolony_idx");
-
-            builder.Property(e => e.Id).HasColumnType("int(11)");
+                    .HasName("Fkdamageccolony_idx");
 
             builder.Property(e => e.Code)
                 .IsRequired()
                 .HasMaxLength(10)
                 .IsUnicode(false);
 
-            builder.Property(e => e.CreatedBy).HasColumnType("int(11)");
-
             builder.Property(e => e.CreatedDate).HasColumnType("date");
 
             builder.Property(e => e.DamageColonycol)
-                .HasColumnName("damage_colonycol")
                 .HasMaxLength(45)
                 .IsUnicode(false);
-
-            builder.Property(e => e.IsActive).HasColumnType("tinyint(4)");
-
-            builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
 
             builder.Property(e => e.ModifiedDate).HasColumnType("date");
 
@@ -44,7 +35,11 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(100)
                 .IsUnicode(false);
 
-            builder.Property(e => e.NewDamageVillageId).HasColumnType("int(11)");
+            builder.HasOne(d => d.acquiredlandvillage)
+                .WithMany(p => p.NewDamageColony)
+                .HasForeignKey(d => d.NewDamageVillageId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("Fkdamageccolony");
         }
     }
 }

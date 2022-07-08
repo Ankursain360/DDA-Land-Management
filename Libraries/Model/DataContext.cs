@@ -517,6 +517,11 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new BranchConfiguration());
             modelBuilder.ApplyConfiguration(new DmsFileUploadConfiguration());
             modelBuilder.ApplyConfiguration(new DmsfilerightConfiguration());
+            
+            modelBuilder.ApplyConfiguration(new NewDamageSelfAssessmentConfiguration());
+            modelBuilder.ApplyConfiguration(new NewdamageAddfloorConfiguration());
+            modelBuilder.ApplyConfiguration(new NewDamageSelfAssessmentAtsDetailsConfiguration());
+            modelBuilder.ApplyConfiguration(new NewDamageSelfAssessmentGpaDetailsConfiguration());
             //**********  Damage Payee **********
             modelBuilder.ApplyConfiguration(new PlotConfiguration());
             modelBuilder.ApplyConfiguration(new SchemefileloadingConfiguration());

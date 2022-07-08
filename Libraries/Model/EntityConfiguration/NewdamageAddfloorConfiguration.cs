@@ -12,14 +12,12 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<NewdamageAddfloor> builder)
         {
-            builder.ToTable("newdamage_addfloor", "lms");
+            //builder.ToTable("newdamage_addfloor", "lms");
 
             builder.HasIndex(e => e.NewDamageSelfAssessmentId)
                 .HasName("FkNewSelf_AssessmentAddFloor_idx");
 
-            builder.Property(e => e.Id)
-                .HasColumnName("id")
-                .HasColumnType("int(11)");
+            builder.Property(e => e.Id).HasColumnName("id");
 
             builder.Property(e => e.CarpetArea)
                 .HasColumnName("carpet_area")
@@ -53,8 +51,6 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(45)
                 .IsUnicode(false);
 
-            builder.Property(e => e.NewDamageSelfAssessmentId).HasColumnType("int(11)");
-
             builder.Property(e => e.Status)
                 .HasMaxLength(45)
                 .IsUnicode(false);
@@ -63,6 +59,12 @@ namespace Libraries.Model.EntityConfiguration
                 .HasColumnName("water_bill")
                 .HasMaxLength(45)
                 .IsUnicode(false);
+
+            builder.HasOne(d => d.GetDamageSelfAssessment)
+                .WithMany(p => p.NewdamageAddfloor)
+                .HasForeignKey(d => d.NewDamageSelfAssessmentId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FkNewSelf_AssessmentAddFloor");
         }
     }
 }

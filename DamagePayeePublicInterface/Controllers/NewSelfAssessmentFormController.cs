@@ -259,6 +259,9 @@ namespace DamagePayeePublicInterface.Controllers
                 }
                 else
                 {
+                    string messages = string.Join("; ", ModelState.Values
+                                        .SelectMany(x => x.Errors)
+                                        .Select(x => x.ErrorMessage));
                     return View(selfAssessment);
                 }
             }

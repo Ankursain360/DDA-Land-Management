@@ -7,41 +7,39 @@
 
         <h3 class="mb-3 d-flex">Add Details <span class="ms-auto"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span> </h3>
         <div id="COLONYDETAILS">
-            <h3 class="my-3 d-flex sub-heading">COLONY DETAILS</h3>
             <div class="row">
-
-                <div class="col-md-6">
-                    <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="RegId" type="text" class="floating-label-field floating-label-field--s3" placeholder="RegNo"/>
-                        <span asp-validation-for="RegId" class="d-block text-danger field-validation-valid"></span>
-                        <label class="floating-label">Registration No<span style="color:red">*</span></label>
-
-                    </div>
+                <div class="col-md-4">
                 </div>
-
-                <div class="col-md-6">
-                    <div class="floating-label-wrap">
-                        <select asp-for="Districtid" class="floating-label-field floating-label-field--s3" onchange="return onChange(this.options[this.selectedIndex].value);"
-                                asp-items="@(new SelectList(Model.DistrictList,"Id","Name"))">
-                            <option value="">---Select---</option>
-                        </select>
-                        <span asp-validation-for="Districtid" class="d-block text-danger field-validation-valid"></span>
-                        <label class="floating-label">District<span style="color:red">*</span></label>
-                    </div>
+                <div class="col-md-4">
+                    Weather a Damage Payee : <select class="floating-label-field floating-label-field--s3">
+                        <option value="">---Select---</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
                 </div>
-
+                <div class="col-md-4">
+                </div>
 
             </div>
+            <h3 class="my-3 d-flex sub-heading">COLONY DETAILS</h3>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input asp-for="RegId" type="text" class="floating-label-field floating-label-field--s3" placeholder="RegNo" />
+                        <span asp-validation-for="RegId" class="d-block text-danger field-validation-valid"></span>
+                        <label class="floating-label">Registration No<span style="color:red">*</span></label>
+                    </div>
+                </div>
+            </div>
             <div class="row mt-md-3">
-
                 <div class="col-md-6">
                     <div class="floating-label-wrap">
-                        <select asp-for="VillageId" class="floating-label-field floating-label-field--s3"
+                        <select asp-for="VillageId" class="floating-label-field floating-label-field--s3" onchange="return onChangeVillage(this.options[this.selectedIndex].value)"
                                 asp-items="@(new SelectList(Model.AcquiredlandvillageList,"Id","Name"))">
                             <option value="">---Select---</option>
                         </select>
                         <span asp-validation-for="VillageId" class="d-block text-danger field-validation-valid"></span>
-                        <label class="floating-label">Village<span style="color:red">*</span></label>
+                        <label class="floating-label">Village/Revenue state<span style="color:red">*</span></label>
                     </div>
                 </div>
 
@@ -75,7 +73,7 @@
                 <div class="floating-label-wrap">
                     <input asp-for="Pin" type="text" class="floating-label-field floating-label-field--s3" placeholder="PIN" />
                     <span asp-validation-for="Pin" class="d-block text-danger field-validation-valid"></span>
-                    <label class="floating-label">PIN<span style="color:red">*</span></label>
+                    <label class="floating-label">Pin Code</label>
                 </div>
             </div>
 
@@ -91,7 +89,7 @@
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input asp-for="North" type="text" class="floating-label-field floating-label-field--s3" placeholder="North" />
                         <span asp-validation-for="North" class="d-block text-danger field-validation-valid"></span>
-                        <label class="floating-label">North<span style="color:red">*</span></label>
+                        <label class="floating-label">North</label>
 
                     </div>
                 </div>
@@ -100,7 +98,7 @@
                     <div class="floating-label-wrap">
                         <input asp-for="South" type="text" class="floating-label-field floating-label-field--s3" placeholder="South" />
                         <span asp-validation-for="South" class="d-block text-danger field-validation-valid"></span>
-                        <label class="floating-label">South<span style="color:red">*</span></label>
+                        <label class="floating-label">South</label>
                     </div>
                 </div>
 
@@ -112,7 +110,7 @@
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input asp-for="East" type="text" class="floating-label-field floating-label-field--s3" placeholder="East" />
                         <span asp-validation-for="East" class="d-block text-danger field-validation-valid"></span>
-                        <label class="floating-label">East<span style="color:red">*</span></label>
+                        <label class="floating-label">East</label>
 
                     </div>
                 </div>
@@ -121,7 +119,7 @@
                     <div class="floating-label-wrap">
                         <input asp-for="West" type="text" class="floating-label-field floating-label-field--s3" placeholder="West" />
                         <span asp-validation-for="West" class="d-block text-danger field-validation-valid"></span>
-                        <label class="floating-label">West<span style="color:red">*</span></label>
+                        <label class="floating-label">West</label>
                     </div>
                 </div>
 
@@ -142,7 +140,20 @@
 
                     </div>
                 </div>
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <select class="floating-label-field floating-label-field--s3">
+                            <option value="">---Select---</option>
+                            <option value="Yes">Residential</option>
+                            <option value="No">Commercial</option>
+                            <option value="No">Industrial</option>
+                            <option value="No">Other</option>
+                        </select>
+                        <label class="floating-label">Type of Use<span style="color:red">*</span></label>
 
+                    </div>
+                </div>
+                <br/><br/>
                 <div class="col-md-6">
                     <div class="floating-label-wrap">
                         <input asp-for="ConstructedArea" type="text" class="floating-label-field floating-label-field--s3" placeholder="Constructed Area" />

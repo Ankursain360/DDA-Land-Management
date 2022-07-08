@@ -9,14 +9,7 @@ namespace Libraries.Model.Entity
 {
     public class NewDamageSelfAssessmentAtsDetails : AuditableEntity<int>
     {
-        //public int NewDamageSelfAssessmentId { get; set; }
-        //public DateTime? DateOfExecutionOfAts { get; set; }
-        //public string NameOfTheSeller { get; set; }
-        //public string NameOfThePayer { get; set; }
-        //public string AddressOfThePlotAsPerAts { get; set; }
-        //public string AreaOfThePlotAsPerAts { get; set; }
-        //public List<SelfAssessmentForm> SelfAssessmentFormAtsList { get; set; }
-        //public SelfAssessmentForm GetAtsSelfAssessmentForm { get; set; }
+         
 
         public int NewDamageSelfAssessmentId { get; set; }
         public DateTime? DateOfExecutionOfAts { get; set; }
@@ -24,9 +17,6 @@ namespace Libraries.Model.Entity
         public string NameOfThePayerAts { get; set; }
         public string AddressOfThePlotAsPerAts { get; set; }
         public string AreaOfThePlotAsPerAts { get; set; }
-
-        //[NotMapped]
-        //public List<NewDamageSelfAssessment> SelfAssessmentsList { get; set; }
         public NewDamageSelfAssessment GetSelfAssessment { get; set; }
 
 
