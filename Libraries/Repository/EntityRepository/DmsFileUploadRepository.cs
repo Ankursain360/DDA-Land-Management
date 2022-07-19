@@ -71,6 +71,7 @@ namespace Libraries.Repository.EntityRepository
                                         .Include(x => x.KhasraNo)
                                          .Include(x => x.Zone)
                                         .Include(x => x.Village)
+                                        .Include(x => x.Category)
                                         .Where(x => x.DepartmentId == (model.departmentId == 0 ? x.DepartmentId : model.departmentId)
                                         && (x.LocalityId == (model.localityId == 0 ? x.LocalityId : model.localityId))
                                         && (x.KhasraNoId == (model.KhasraId == 0 ? x.KhasraNoId : model.KhasraId))
@@ -86,6 +87,7 @@ namespace Libraries.Repository.EntityRepository
                                         .Include(x => x.KhasraNo)
                                            .Include(x => x.Zone)
                                         .Include(x => x.Village)
+                                        .Include(x => x.Category)
                                         .Where(x => x.DepartmentId == (model.departmentId == 0 ? x.DepartmentId : model.departmentId)
                                         && (x.LocalityId == (model.localityId == 0 ? x.LocalityId : model.localityId))
                                         && (x.KhasraNoId == (model.KhasraId == 0 ? x.KhasraNoId : model.KhasraId))
@@ -107,6 +109,7 @@ namespace Libraries.Repository.EntityRepository
                                         .Include(x => x.KhasraNo)
                                            .Include(x => x.Zone)
                                         .Include(x => x.Village)
+                                        .Include(x => x.Category)
                                         .Where(x => x.DepartmentId == (model.departmentId == 0 ? x.DepartmentId : model.departmentId)
                                         && (x.LocalityId == (model.localityId == 0 ? x.LocalityId : model.localityId))
                                         && (x.KhasraNoId == (model.KhasraId == 0 ? x.KhasraNoId : model.KhasraId))
@@ -128,6 +131,7 @@ namespace Libraries.Repository.EntityRepository
                                         .Include(x => x.Department)
                                         .Include(x => x.Locality)
                                         .Include(x => x.KhasraNo)
+                                        .Include(x => x.Category)
                                         .Where(x => x.Id == id)
                                         .FirstOrDefaultAsync();
 
@@ -182,6 +186,7 @@ namespace Libraries.Repository.EntityRepository
                                         .Include(x => x.Department)
                                         .Include(x => x.Locality)
                                         .Include(x => x.KhasraNo)
+                                        .Include(x => x.Category)
                                         .Where(x => x.DepartmentId == (model.Department == 0 ? x.DepartmentId : model.Department)
                                         && (x.LocalityId == (model.Locality == 0 ? x.LocalityId : model.Locality))
                                         && (x.KhasraNoId == (model.Khasra == 0 ? x.KhasraNoId : model.Khasra))
@@ -199,6 +204,7 @@ namespace Libraries.Repository.EntityRepository
                                         .Include(x => x.Department)
                                         .Include(x => x.Locality)
                                         .Include(x => x.KhasraNo)
+                                        .Include(x => x.Category)
                                         .Where(x => x.DepartmentId == (model.Department == 0 ? x.DepartmentId : model.Department)
                                         && (x.LocalityId == (model.Locality == 0 ? x.LocalityId : model.Locality))
                                         && (x.KhasraNoId == (model.Khasra == 0 ? x.KhasraNoId : model.Khasra))
@@ -223,6 +229,7 @@ namespace Libraries.Repository.EntityRepository
                                         .Include(x => x.Department)
                                         .Include(x => x.Locality)
                                         .Include(x => x.KhasraNo)
+                                        .Include(x => x.Category)
                                         .Where(x => x.DepartmentId == (model.Department == 0 ? x.DepartmentId : model.Department)
                                         && (x.LocalityId == (model.Locality == 0 ? x.LocalityId : model.Locality))
                                         && (x.KhasraNoId == (model.Khasra == 0 ? x.KhasraNoId : model.Khasra))
@@ -271,7 +278,10 @@ namespace Libraries.Repository.EntityRepository
                                      .ToListAsync();
         }
 
-
+        public async Task<List<Documentcategory>> allcategoryList()
+        {
+            return await _dbContext.documentcategory.Where(x => x.IsActive == 1).ToListAsync();
+        }
 
     }
 }

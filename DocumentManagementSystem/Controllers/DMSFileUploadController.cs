@@ -46,6 +46,8 @@ namespace DocumentManagementSystem.Controllers
             ViewBag.LocalityList = await _dmsfileuploadService.GetLocalityList();
             ViewBag.DepartmentList = await _dmsfileuploadService.GetDepartmentList();
             ViewBag.KhasraNoList = await _dmsfileuploadService.GetKhasraNoList();
+            ViewBag.categoryList = await _dmsfileuploadService.allcategoryList();
+
             dmsfileupload.VillageList = await _dmsfileuploadService.allVillageList(dmsfileupload.ZoneId);
             await BindDropDown(dmsfileupload);
             //ViewBag.ZoneList = await _dmsfileuploadService.allZoneList();
@@ -65,12 +67,14 @@ namespace DocumentManagementSystem.Controllers
             dmsfileupload.LocalityList = await _dmsfileuploadService.GetLocalityList();
             dmsfileupload.KhasraNoList = await _dmsfileuploadService.GetKhasraNoList();
             dmsfileupload.ZoneList = await _dmsfileuploadService.allZoneList();
+            dmsfileupload.CategoriesList = await _dmsfileuploadService.allcategoryList();
 
         }
         [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Dmsfileupload dmsfileupload = new Dmsfileupload();
+            dmsfileupload.CategoriesList = await _dmsfileuploadService.allcategoryList();
             dmsfileupload.VillageList = await _dmsfileuploadService.allVillageList(dmsfileupload.ZoneId);
             dmsfileupload.IsActive = 1;
             await BindDropDown(dmsfileupload);
@@ -91,6 +95,7 @@ namespace DocumentManagementSystem.Controllers
             dmsfileupload.DepartmentList = await _dmsfileuploadService.GetDepartmentList();
             dmsfileupload.LocalityList = await _dmsfileuploadService.GetLocalityList();
             dmsfileupload.KhasraNoList = await _dmsfileuploadService.GetKhasraNoList();
+            dmsfileupload.CategoriesList = await _dmsfileuploadService.allcategoryList();
             dmsfileupload.VillageList = await _dmsfileuploadService.allVillageList(dmsfileupload.ZoneId);
 
             if (ModelState.IsValid)
@@ -130,6 +135,7 @@ namespace DocumentManagementSystem.Controllers
                         ViewBag.DepartmentList = await _dmsfileuploadService.GetDepartmentList();
                         ViewBag.KhasraNoList = await _dmsfileuploadService.GetKhasraNoList();
                         ViewBag.ZoneList = await _dmsfileuploadService.allZoneList();
+                        ViewBag.categoryList = await _dmsfileuploadService.allcategoryList();
                         dmsfileupload.VillageList = await _dmsfileuploadService.allVillageList(dmsfileupload.ZoneId);
 
                         return View("Index");
@@ -304,6 +310,7 @@ namespace DocumentManagementSystem.Controllers
         {
             var Data = await _dmsfileuploadService.FetchSingleResult(id);
             Data.VillageList = await _dmsfileuploadService.allVillageList(Data.ZoneId);
+            Data.CategoriesList = await _dmsfileuploadService.allcategoryList();
             await BindDropDown(Data);
             if (Data == null)
             {
@@ -323,6 +330,8 @@ namespace DocumentManagementSystem.Controllers
             dmsfileupload.DepartmentList = await _dmsfileuploadService.GetDepartmentList();
             dmsfileupload.LocalityList = await _dmsfileuploadService.GetLocalityList();
             dmsfileupload.KhasraNoList = await _dmsfileuploadService.GetKhasraNoList();
+            dmsfileupload.CategoriesList = await _dmsfileuploadService.allcategoryList();
+
 
             if (ModelState.IsValid)
             {
@@ -353,6 +362,7 @@ namespace DocumentManagementSystem.Controllers
                     ViewBag.LocalityList = await _dmsfileuploadService.GetLocalityList();
                     ViewBag.DepartmentList = await _dmsfileuploadService.GetDepartmentList();
                     ViewBag.KhasraNoList = await _dmsfileuploadService.GetKhasraNoList();
+                    ViewBag.CategoryList = await _dmsfileuploadService.allcategoryList();
                     return View("Index");
                 }
                 else
@@ -395,6 +405,7 @@ namespace DocumentManagementSystem.Controllers
             ViewBag.DepartmentList = await _dmsfileuploadService.GetDepartmentList();
             ViewBag.LocalityList = await _dmsfileuploadService.GetLocalityList();
             ViewBag.KhasraNoList = await _dmsfileuploadService.GetKhasraNoList();
+            ViewBag.CategoryList = await _dmsfileuploadService.allcategoryList();
             return View("Index");
         }
         private string GetContentType(string path)

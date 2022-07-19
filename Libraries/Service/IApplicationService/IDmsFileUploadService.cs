@@ -14,6 +14,7 @@ namespace Libraries.Service.IApplicationService
         Task<List<Department>> GetDepartmentList();
         Task<List<Propertyregistration>> GetKhasraNoList();
         Task<List<Locality>> GetLocalityList();
+        Task<List<Documentcategory>> allcategoryList();
         Task<PagedResult<Dmsfileupload>> GetPagedDMSFileUploadList(DMSFileUploadSearchDto model);
         Task<bool> Create(Dmsfileupload dmsfileupload);
         Task<Dmsfileupload> FetchSingleResult(int id);

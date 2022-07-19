@@ -11,6 +11,7 @@
 
             <th scope="col">Zone</th>
             <th scope="col">Village</th>
+            <th scope="col">Document Category</th>
             <th scope="col">Status</th>
             <th scope="col" style="min-width: 105px;">Operations</th>
         </tr>
@@ -30,6 +31,7 @@
 
             <td>@(item.Zone == null ? "" :item.Zone.Name)</td>
             <td>@(item.Village == null ? "" :item.Village.Name)</td>
+            <td>@(item.Category == null ? "" :item.Category.CategoryName)</td>
 
             <td>
                 @if (item.IsActive == 1)

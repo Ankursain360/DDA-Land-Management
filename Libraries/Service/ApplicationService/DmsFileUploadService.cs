@@ -60,6 +60,7 @@ namespace Service.ApplicationService
                 model.DepartmentId = dmsfileupload.DepartmentId;
                 model.LocalityId = dmsfileupload.LocalityId;
                 model.KhasraNoId = dmsfileupload.KhasraNoId;
+                model.CategoryId = dmsfileupload.CategoryId;
                 model.PropertyNoAddress = dmsfileupload.PropertyNoAddress;
                 model.AlmirahNo = dmsfileupload.AlmirahNo;
                 model.Title = dmsfileupload.Title;
@@ -95,6 +96,7 @@ namespace Service.ApplicationService
             model.LocalityId = dmsfileupload.LocalityId;
             model.KhasraNoId = dmsfileupload.KhasraNoId;
             model.ZoneId = dmsfileupload.ZoneId;
+            model.CategoryId = dmsfileupload.CategoryId;
             model.VillageId = dmsfileupload.VillageId;
             model.PropertyNoAddress = dmsfileupload.PropertyNoAddress;
             model.AlmirahNo = dmsfileupload.AlmirahNo;
@@ -163,6 +165,9 @@ namespace Service.ApplicationService
             return await _dmsFileUploadRepository.allVillageList(zoneid);
         }
 
-
+        public async Task<List<Documentcategory>> allcategoryList()
+        {
+            return await _dmsFileUploadRepository.allcategoryList();
+        }
     }
 }

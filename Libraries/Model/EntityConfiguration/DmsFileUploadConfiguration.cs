@@ -24,6 +24,8 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.HasIndex(e => e.LocalityId)
                 .HasName("fk_LocalityIdDMSFileUpload_idx");
+            builder.HasIndex(e => e.CategoryId)
+                  .HasName("FkDocumentCategory_idx");
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
@@ -106,6 +108,10 @@ namespace Libraries.Model.EntityConfiguration
                 .WithMany(p => p.Dmsfileupload)
                 .HasForeignKey(d => d.ZoneId)
                 .HasConstraintName("fkZoneid23");
+            builder.HasOne(d => d.Category)
+                  .WithMany(p => p.Dmsfileupload)
+                  .HasForeignKey(d => d.CategoryId)
+                  .HasConstraintName("FkDocumentCategory");
         }
     }
 }

@@ -15,7 +15,8 @@ namespace Libraries.Model
 
         }
         public virtual DbSet<RefreshToken> RefreshToken { get; set; }
-       
+
+        public virtual DbSet<Documentcategory> documentcategory { get; set; }
         public virtual DbSet<Approvalstatus> Approvalstatus { get; set; }
         public virtual DbSet<Userprofile> Userprofile { get; set; }
         public virtual DbSet<SystemUser> SystemUser { get; set; }
@@ -360,6 +361,7 @@ namespace Libraries.Model
         {
             modelBuilder.ApplyConfiguration(new Undersection17plotdetailConfiguration());
 
+            modelBuilder.ApplyConfiguration(new DocumentcategoryConfiguration());
             modelBuilder.ApplyConfiguration(new SystemUserConfiguration());
             modelBuilder.ApplyConfiguration(new CountryConfiguration());
             modelBuilder.ApplyConfiguration(new DesignationConfiguration());

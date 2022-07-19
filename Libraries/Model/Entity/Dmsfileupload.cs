@@ -16,7 +16,7 @@ namespace Libraries.Model.Entity
         public string FileNo { get; set; }
         public string AlloteeName { get; set; }
 
-        [Required(ErrorMessage = "Mandatory", AllowEmptyStrings =false)]
+        [Required(ErrorMessage = " Department is Mandatory", AllowEmptyStrings =false)]
         public int DepartmentId { get; set; }
         public int? KhasraNoId { get; set; }
         public int? LocalityId { get; set; }
@@ -27,10 +27,15 @@ namespace Libraries.Model.Entity
         public string FilePath { get; set; }
         public byte IsActive { get; set; }
 
+        [Required(ErrorMessage = "Document Category Is Mandatory")]
+        public int? CategoryId { get; set; }
+        public Documentcategory Category { get; set; }
         public Department Department { get; set; }
         public Propertyregistration KhasraNo { get; set; }
         public Locality Locality { get; set; }
 
+        [NotMapped]
+        public List<Documentcategory> CategoriesList { get; set; }
         [NotMapped]
         public List<Department> DepartmentList { get; set; }
         [NotMapped]

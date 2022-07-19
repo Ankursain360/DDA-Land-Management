@@ -22,6 +22,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Dmsfileupload>> GetAllDMSFileUploadList();
         Task<List<Propertyregistration>> GetKhasraNoList();
         Task<List<Zone>> allZoneList();
+        Task<List<Documentcategory>> allcategoryList();
         Task<List<Village>> allVillageList(int? zoneid);
         Task<List<Locality>> GetLocalityList();
         Task<PagedResult<Dmsfileupload>> GetPagedDMSFileUploadList(DMSFileUploadSearchDto model);
