@@ -44,6 +44,7 @@ function GetSearchParam(pageNumber, pageSize, sortOrder) {
         Department: parseInt(($('#DepartmentId option:selected').val())),
         Locality: parseInt(($('#LocalityId option:selected').val())),
         Khasra: parseInt(($('#KhasraNoId option:selected').val())),
+        Category: parseInt(($('#Category option:selected').val())),
         FileNo: (($('#FileNo').val())),
         PropertyNo: (($('#PropertyNo').val())),
         AlmirahNo: (($('#AlmirahNo').val())),
@@ -78,5 +79,6 @@ $("#btnReset").click(function () {
     $('#PropertyNo').val('');
     $('#AlmirahNo').val('');
     $('#Title').val('');
+    $('#Category').val('0').trigger('change');
     GetDetails(currentPageNumber, currentPageSize, sortOrder);
 });

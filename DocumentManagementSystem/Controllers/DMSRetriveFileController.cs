@@ -37,6 +37,7 @@ namespace DocumentManagementSystem.Controllers
             ViewBag.LocalityList = await _dmsfileuploadService.GetLocalityList();
             ViewBag.DepartmentList = await _dmsfileuploadService.GetDepartmentList();
             ViewBag.KhasraNoList = await _dmsfileuploadService.GetKhasraNoList();
+            ViewBag.CategoryList = await _dmsfileuploadService.allcategoryList();
             return View(data);
         }
 

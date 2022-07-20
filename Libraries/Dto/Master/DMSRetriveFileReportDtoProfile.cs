@@ -17,5 +17,6 @@ namespace Dto.Master
         public string PropertyNo { get; set; }
         public string AlmirahNo { get; set; }
         public string Title { get; set; }
+        public string Category { get; set; }
     }
 }

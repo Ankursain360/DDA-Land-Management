@@ -28,6 +28,14 @@
                     <label class="floating-label" for="KhasraNoId">Khasra No.</label>
                 </div>
             </div>
+            <div class="col-md-3">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" id="CategoryId" asp-items="@(new SelectList(ViewBag.categoryList, "Id", "CategoryName"))">
+                        <option selected="selected" value="0">All</option>
+                    </select>
+                    <label class="floating-label" for="CategoryId">Document Category</label>
+                </div>
+            </div>
         </div>
         
 

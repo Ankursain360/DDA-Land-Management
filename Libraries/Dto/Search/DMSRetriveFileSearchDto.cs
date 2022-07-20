@@ -14,5 +14,6 @@ namespace Dto.Search
         public string PropertyNo { get; set; }
         public string AlmirahNo { get; set; }
         public string Title { get; set; }
+        public int Category { get; set; }
     }
 }
