@@ -8,8 +8,8 @@ function onChange(id) {
             html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
         }
       /*  $("#ColonyId").select2('val', '')*/
-        $("#VillageId").select2('val', '')
-        $("#VillageId").html(html);
+        //$("#VillageId").select2('val', '')
+        $("#VillageId").empty().html(html);
     });
 };
 function onChangeVillage(id) {
@@ -19,7 +19,7 @@ function onChangeVillage(id) {
         for (var i = 0; i < response.length; i++) {
             html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
         }
-        $("#ColonyId").select2('val', '')
+        $("#ColonyId").html('')
         $("#ColonyId").html(html);
     });
 };

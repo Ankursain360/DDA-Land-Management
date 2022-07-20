@@ -35,7 +35,7 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(100)
                 .IsUnicode(false);
 
-            builder.HasOne(d => d.acquiredlandvillage)
+            builder.HasOne(d => d.NewDamageVillage)
                 .WithMany(p => p.NewDamageColony)
                 .HasForeignKey(d => d.NewDamageVillageId)
                 .OnDelete(DeleteBehavior.ClientSetNull)

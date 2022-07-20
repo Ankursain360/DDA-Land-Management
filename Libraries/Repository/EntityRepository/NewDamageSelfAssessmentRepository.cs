@@ -37,17 +37,36 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<List<Acquiredlandvillage>> GetAllVillage(int districtId)
         {
-            List<Acquiredlandvillage> villageList = await _dbContext.Acquiredlandvillage.Where(x => x.DistrictId == districtId && x.IsActive == 1).ToListAsync();
-            return villageList; 
+            var result = await _dbContext.Acquiredlandvillage.Where(x => x.DistrictId == districtId && x.IsActive == 1).ToListAsync();
+
+            List<Acquiredlandvillage> villageList = result
+                        .Select(o => new Acquiredlandvillage
+                        {
+                            Id = o.Id,
+                            Name = o.Name
+                        }).ToList();
+
+            return villageList;
         }
         public async Task<List<New_Damage_Colony>> GetAllColony(int villageId)
         {
-            List<New_Damage_Colony> colonyList = await _dbContext.new_damage_colony.Where(x => x.NewDamageVillageId == villageId &&  x.IsActive == 1).ToListAsync();
+            List<New_Damage_Colony> result = await _dbContext.new_damage_colony.Where(//x => x.NewDamageVillageId == villageId &&
+                                                                                       x=> x.IsActive == 1).ToListAsync();
+
+            List<New_Damage_Colony> colonyList = result
+            .Select(o => new New_Damage_Colony
+            {
+                Id = o.Id,
+                Name = o.Name
+            }).ToList();
             return colonyList;
         }
         public async Task<List<NewDamageSelfAssessment>> GetAllDamageSelfAssessments()
         {
-            return await _dbContext.newdamage_selfassessment.Include(x => x.GetAcquiredLandVillage).Include(x => x.GetDistrict).Include(x => x.GetLocality).Include(x => x.GetNew_Damage_Colony).ToListAsync();
+            return await _dbContext.newdamage_selfassessment.Include(x => x.GetAcquiredLandVillage)
+                                                            .Include(x => x.GetDistrict)
+                                                            .Include(x => x.GetLocality)
+                                                            .Include(x => x.GetNew_Damage_Colony).ToListAsync();
         }
 
 
@@ -107,34 +126,34 @@ namespace Libraries.Repository.EntityRepository
         }
 
         //********* Add Floor ! Damage Details ***********
-       public async Task<bool> SaveSurveyReport(NewdamageAddfloor addDloorDetails)
+        public async Task<bool> SaveSurveyReport(NewdamageAddfloor addDloorDetails)
         {
             _dbContext.newdamage_addfloor.Add(addDloorDetails);
             var Result = await _dbContext.SaveChangesAsync();
             return Result > 0 ? true : false;
         }
-       public async Task<List<NewdamageAddfloor>> GetAddfloorsDetails(int id)
+        public async Task<List<NewdamageAddfloor>> GetAddfloorsDetails(int id)
         {
             return await _dbContext.newdamage_addfloor.Where(x => x.NewDamageSelfAssessmentId == id).ToListAsync();
         }
-       public async Task<NewdamageAddfloor> GetAddFloorFilePath(int Id)
+        public async Task<NewdamageAddfloor> GetAddFloorFilePath(int Id)
         {
             return await _dbContext.newdamage_addfloor.Where(x => x.Id == Id).FirstOrDefaultAsync();
         }
-       public async Task<bool> DeleteAddFloor(int Id)
+        public async Task<bool> DeleteAddFloor(int Id)
         {
             _dbContext.RemoveRange(_dbContext.newdamage_addfloor.Where(x => x.NewDamageSelfAssessmentId == Id));
             var Result = await _dbContext.SaveChangesAsync();
             return Result > 0 ? true : false;
         }
 
-      
+
 
         public async Task<NewDamageSelfAssessment> GetUploadDocumentFilePath(int Id)
         {
             return await _dbContext.newdamage_selfassessment.Where(x => x.Id == Id).FirstOrDefaultAsync();
         }
-       
+
 
     }
 }

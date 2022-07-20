@@ -21,7 +21,7 @@ namespace Libraries.Model.Entity
         public byte IsActive { get; set; }
         public string DamageColonycol { get; set; }
 
-        public Acquiredlandvillage acquiredlandvillage { get; set; }
+        public Acquiredlandvillage NewDamageVillage { get; set; }
         public ICollection<NewDamageSelfAssessment> NewDamageSelfAssessment { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿ 
+﻿
 
 
 var zoomZone = [];
@@ -44,6 +44,7 @@ var alljsondata = [];
 var CALVERT_LAYER = [];
 var MICK_LAYER = [];
 var LINE_LAYER = [];
+var DDA_VACANT_LAYER = [];
 
 
 
@@ -402,6 +403,10 @@ function showvillagelayers(villageid) {
         var Line = response.filter((x) => x.gisLayerId === 35);//Line
         if (Line.length > 0 && Line[0].checkedStatus == 1)
             showDisBoundariesLine(Line, villageid);
+
+        var VLand = response.filter((x) => x.gisLayerId === 36);//DDA Vacant Land
+        if (VLand.length > 0 && VLand[0].checkedStatus == 1)
+            showDDAVacantLandBoundaries(VLand, villageid);
     });
     VILLAGEID_UNIVERSAL = [];
     VILLAGEID_UNIVERSAL.push(villageid);
@@ -649,6 +654,23 @@ function showDisBoundariesLine(response, villageid) {
         Polys.push(ln);
     }
 }
+//Added by sachin for DDA Vacant Land Data 18-07-2022
+function showDDAVacantLandBoundaries(response, villageid) {
+    var poly = $.map(response, function (el) { return el; });
+
+    for (i = 0; i < poly.length; i++) {
+        var ln = createPolygon(getLatLongArr(poly[i].polygon));
+        // var lns = createDashedLine(getLatLongArr(poly[i].polygon));
+        ln.setOptions({ visibleZoom: 10, fillColor: poly[i].fillColor, hideZoom: 9, visible: true, map: map, strokeWeight: 1, strokeColor: poly[i].strokeColor, fillOpacity: 0.6, clickable: !1 });
+        var lp = new google.maps.LatLng(parseFloat(poly[i].labelYcoordinate), parseFloat(poly[i].labelXcoordinate));
+        var _label = new google.maps.Label({ visibleZoom: 13, hideZoom: 21, visible: true, map: map, cssName: 'nlLabelState', position: lp, text: poly[i].label });
+        DDA_VACANT_LAYER.push({ "villageid": poly[i].villageId, "layer": ln });
+        DDA_VACANT_LAYER.push({ "villageid": poly[i].villageId, "layer": _label });
+        Polys.push(ln);
+    }
+
+}
+
 function showDisBoundariesRoad(response, villageid) {
     var road = $.map(response, function (el) { return el; })
     for (y = 0; y < road.length; y++) {
@@ -761,7 +783,7 @@ function showDisBoundariesKhasraNo(response, villageid) {
     var khasrano = $.map(response, function (el) { return el; })
     for (aj = 0; aj < khasrano.length; aj++) {
         var lp = new google.maps.LatLng(parseFloat(khasrano[aj].ycoordinate), parseFloat(khasrano[aj].xcoordinate));
-  
+
         var mapLabel = new MapLabel({
             text: khasrano[aj].label,
             position: lp,//new google.maps.LatLng(parseFloat(khasrano[aj].ycoordinate), parseFloat(khasrano[aj].xcoordinate)),
@@ -774,7 +796,7 @@ function showDisBoundariesKhasraNo(response, villageid) {
             clickable: 1
         });
         mapLabel.set('position', new google.maps.LatLng(parseFloat(khasrano[aj].ycoordinate), parseFloat(khasrano[aj].xcoordinate)));
-        
+
         var khasradata = khasrano[aj].label.split('//');
         if (khasradata.length > 1) {
             mapLabel.khasrano = khasradata[1];
@@ -787,19 +809,19 @@ function showDisBoundariesKhasraNo(response, villageid) {
         }
         mapLabel.villageid = khasrano[aj].villageId;
 
-        google.maps.event.addListener(mapLabel, 'click', function () { 
+        google.maps.event.addListener(mapLabel, 'click', function () {
             getInfo(this.villageid, this.khasrano, this.Rectno);
         });
-       
-        KHASRANO_LAYER.push({ "villageid": khasrano[aj].villageId, "layer": mapLabel }); 
-        Polys.push(mapLabel); 
+
+        KHASRANO_LAYER.push({ "villageid": khasrano[aj].villageId, "layer": mapLabel });
+        Polys.push(mapLabel);
     }
 }
 function showDisBoundariesRectWithKhasraNo(response, villageid) {
     var rectkhasrano = $.map(response, function (el) { return el; })
     for (ak = 0; ak < rectkhasrano.length; ak++) {
         var lp = new google.maps.LatLng(parseFloat(rectkhasrano[ak].ycoordinate), parseFloat(rectkhasrano[ak].xcoordinate));
-      
+
 
         var mapLabel = new MapLabel({
             text: rectkhasrano[ak].label,
@@ -818,23 +840,23 @@ function showDisBoundariesRectWithKhasraNo(response, villageid) {
             mapLabel.khasrano = rectkhasrano[ak].label;
             //mapLabel.khasrano = khasradata[1];
             mapLabel.Rectno = khasradata[0];
-           
+
         }
         else {
 
             //mapLabel.khasrano = khasradata[0];
             mapLabel.khasrano = rectkhasrano[ak].label;
             mapLabel.Rectno = "0";
-            
+
         }
         mapLabel.id = rectkhasrano[ak].id;
         mapLabel.villageid = rectkhasrano[ak].villageId;
 
         google.maps.event.addListener(mapLabel, 'dblclick', function () {
-            getInfo(this.villageid, this.khasrano, this.Rectno,this.id);
+            getInfo(this.villageid, this.khasrano, this.Rectno, this.id);
         });
 
-        RECTWITHKHASRANO_LAYER.push({ "villageid": rectkhasrano[ak].villageId, "layer": mapLabel }); 
+        RECTWITHKHASRANO_LAYER.push({ "villageid": rectkhasrano[ak].villageId, "layer": mapLabel });
 
         Polys.push(mapLabel);
     }
@@ -853,7 +875,7 @@ function showDisBoundariesWell(response, villageid) {
 
 /*Village Boundary End*/
 
-function getInfo(villageid, khasrano,RectNo,khasraid) {
+function getInfo(villageid, khasrano, RectNo, khasraid) {
 
     HttpGet("/GIS/GetKhasraBasisOtherDetails?VillageId=" + parseInt(villageid) + "&KhasraNo=" + khasrano + "&RectNo=" + RectNo, 'json', function (response) {
         showKhasraBasisOtherDetails(response, khasraid, khasrano);
@@ -876,7 +898,7 @@ function showKhasraBasisOtherDetails(resp, khasraid, khasrano) {
             if (itm != null && itm != "")
                 tbl.append('<tr><td> <p class="m-0">' + itm.split(",")[0] + ' : <strong id="' + indx + '">' + itm.split(",")[1] + '</strong></p></td> </tr>');
 
-        }); 
+        });
         $('#RouteDetailShow').show();
     }
     else {
@@ -892,16 +914,16 @@ function editKhasra() {
 }
 /*update khasra no*/
 $(".btnupdate").click(function () {
-    var khasraid=$('#hdnkhasraid').val();
+    var khasraid = $('#hdnkhasraid').val();
     var khasrano = $('#txtKhasrano').val();
     if (khasraid != "") {
         if (khasrano != "") {
             HttpGet("/GIS/UpdatekhasraNo?khasraid=" + parseInt(khasraid) + "&KhasraNo=" + khasrano, 'json', function (response) {
-                  
+
                 alert(response.responseMessage);
                 $('#txtKhasrano').val('');
                 $('#btnclose').click();
-            
+
             });
         }
         else {
@@ -911,7 +933,7 @@ $(".btnupdate").click(function () {
     else {
         alert("Unable to process your request.Kindly refresh this page and try again.");
     }
-    
+
 });
 
 function showKhasraBasisOtherDetailsForCourtCases(resp) {
@@ -933,7 +955,7 @@ function showKhasraBasisOtherDetailsForCourtCases(resp) {
         $('#RouteDetailShow').show();
     }
     else {
-      //  $('#RouteDetailShow').hide();
+        //  $('#RouteDetailShow').hide();
     }
 
 }
@@ -1112,6 +1134,10 @@ $(document).on('change', '#chkAllImpInfra', function (e) {   /*Select all Functi
         var Line = data.filter((x) => x.gisLayerId === 35);//Line
         if (Line.length > 0)
             showDisBoundariesLine(Line);
+
+        var Vland = data.filter((x) => x.gisLayerId === 36);//DDA Vacant Land
+        if (Vland.length > 0)
+            showDDAVacantLandBoundaries(Vland);
     }
     else {
         $('#chkAllImpInfra').closest('table').find('td input[type="checkbox"]').prop('checked', false);
@@ -1355,6 +1381,13 @@ $(document).on('change', '#chkAllImpInfra', function (e) {   /*Select all Functi
             });
         }
 
+        var VLand = data.filter((x) => x.gisLayerId === 36);//Line
+        if (VLand.length > 0) {
+            $.each(DDA_VACANT_LAYER, function (index, value) {
+                value.layer.setMap(null);
+            });
+        }
+
 
     }
 });
@@ -1530,6 +1563,10 @@ $('#infrastructureData').on('change', '.checkUncheckInfra', function (e) {  /*ch
         var Line = data.filter((x) => x.gisLayerId === 35);//Line
         if (Line.length > 0 && Line[0].code == id)
             showDisBoundariesLine(Line);
+
+        var Vland = data.filter((x) => x.gisLayerId === 36);//DDA Vacant Land
+        if (Vland.length > 0 && Vland[0].code == id)
+            showDDAVacantLandBoundaries(Vland);
 
     }
     else {
@@ -1772,6 +1809,13 @@ $('#infrastructureData').on('change', '.checkUncheckInfra', function (e) {  /*ch
             });
         }
 
+        var Vland = data.filter((x) => x.gisLayerId === 36);//Line
+        if (Vland.length > 0 && Vland[0].code == id) {
+            $.each(DDA_VACANT_LAYER, function (index, value) {
+                value.layer.setMap(null);
+            });
+        }
+
 
     }
 });
@@ -1848,14 +1892,14 @@ function ShowKhasraNo(id) {
                 if (khasradata.length > 1) {
                     //marker.khasrano = khasradata[1];
                     marker.khasrano = khasrano[aj].label;
-                    marker.Rectno = khasradata[0]|0;
+                    marker.Rectno = khasradata[0] | 0;
                 }
                 else {
 
                     //marker.khasrano = khasradata[0];
                     marker.khasrano = khasrano[aj].label;
                     marker.Rectno = "0";
-                } 
+                }
                 marker.villageid = khasrano[aj].villageId;
                 google.maps.event.addListener(marker, 'click', function () {
                     getInfo(this.villageid, this.khasrano, this.Rectno);
@@ -1917,8 +1961,8 @@ $(document).on('change', '#KhasraId', function (e) {
 
                     marker.khasrano = khasradata[0];
                     marker.Rectno = "";
-                } 
-                
+                }
+
                 marker.villageid = khasrano[aj].villageId;
                 google.maps.event.addListener(marker, 'click', function () {
                     getInfo(this.villageid, this.khasrano, this.Rectno);
@@ -2092,6 +2136,10 @@ function RemoveAllVillageLayer(villageids) {
     });
     let welllayer = WELL_LAYER.filter((x) => x.villageid === villageid);
     $.each(welllayer, function (index, value) {
+        value.layer.setMap(null);
+    });
+    let ddavacantlandlayer = DDA_VACANT_LAYER.filter((x) => x.villageid === villageid);
+    $.each(ddavacantlandlayer, function (index, value) {
         value.layer.setMap(null);
     });
 

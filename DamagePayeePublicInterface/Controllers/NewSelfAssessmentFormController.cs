@@ -41,6 +41,7 @@ namespace DamagePayeePublicInterface.Controllers
         {
             NewDamageSelfAssessment model = new NewDamageSelfAssessment();
             model.DistrictList = await _selfAssessmentService.GetAllDistrict();
+            model.Colonylist = await _selfAssessmentService.GetAllColony(0);
             model.LocalitieList = await _selfAssessmentService.GetLocalityList();
             model.AcquiredlandvillageList = await _selfAssessmentService.GetAllVillage(model.Districtid);         
             return View(model);

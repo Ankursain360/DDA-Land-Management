@@ -22,6 +22,8 @@ namespace Libraries.Model.Entity
         public int VillageId { get; set; }
         public int ColonyId { get; set; }
         public string Latestatsname { get; set; }
+
+       // public string Latestatsname { get; set; }
         public string Pin { get; set; }
         public string North { get; set; }
         public string South { get; set; }
@@ -246,6 +248,8 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public List<Locality> LocalitieList { get; set; }
+        [NotMapped]
+        public List<New_Damage_Colony> Colonylist { get; set; }
         public Locality GetLocality { get; set; }
 
         public ICollection<NewdamageAddfloor> NewdamageAddfloor { get; set; }

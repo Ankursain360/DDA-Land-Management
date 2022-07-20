@@ -30,6 +30,17 @@
                         <label class="floating-label">Registration No<span style="color:red">*</span></label>
                     </div>
                 </div>
+                <div class="col-md-6">
+                    <div class="floating-label-wrap">
+                        @*changed*@
+                        <select asp-for="Districtid" class="floating-label-field floating-label-field--s3" onchange="return onChange(this.options[this.selectedIndex].value)"
+                                asp-items="@(new SelectList(Model.DistrictList,"Id","Name"))">
+                            <option value="">---Select---</option>
+                        </select>
+                        <span asp-validation-for="Districtid" class="d-block text-danger field-validation-valid"></span>
+                        <label class="floating-label">District<span style="color:red">*</span></label>
+                    </div>
+                </div>
             </div>
             <div class="row mt-md-3">
                 <div class="col-md-6">
@@ -47,7 +58,7 @@
                 <div class="col-md-6">
                     <div class="floating-label-wrap">
                         <select asp-for="ColonyId" class="floating-label-field floating-label-field--s3"
-                                asp-items="@(new SelectList(Model.LocalitieList,"Id","Name"))">
+                                asp-items="@(new SelectList(Model.Colonylist,"Id","Name"))">
                             <option value="">---Select---</option>
                         </select>
                         <span asp-validation-for="ColonyId" class="d-block text-danger field-validation-valid"></span>
@@ -68,7 +79,17 @@
 
                 </div>
             </div>
+            <div class="col-md-6">
+                @*changed*@
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="Latestatsname" type="text" class="floating-label-field floating-label-field--s3" placeholder="Latest ATS Name" />
+                    <span asp-validation-for="Latestatsname" class="d-block text-danger field-validation-valid"></span>
+                    <label class="floating-label">Latest GPA Name<span style="color:red">*</span></label>
 
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap">
                     <input asp-for="Pin" type="text" class="floating-label-field floating-label-field--s3" placeholder="PIN" />
@@ -76,8 +97,6 @@
                     <label class="floating-label">Pin Code</label>
                 </div>
             </div>
-
-
         </div>
 
 
@@ -131,55 +150,66 @@
         <div id="PROPERTYDETAILS">
             <h3 class="my-3 d-flex sub-heading">PROPERTY DETAILS</h3>
             <div class="row">
-
                 <div class="col-md-6">
+                    @*changed*@
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="TypeProperty" type="text" class="floating-label-field floating-label-field--s3" placeholder="Property Type" />
+                        @*<input asp-for="TypeProperty" type="text" class="floating-label-field floating-label-field--s3" placeholder="Property Type" />*@
+                        <select asp-for="TypeProperty" class="floating-label-field floating-label-field--s3">
+                            <option value="">---Select---</option>
+                            <option value="Residential">Built-up</option>
+                            <option value="Commercial">Vacant</option>
+                        </select>
                         <span asp-validation-for="TypeProperty" class="d-block text-danger field-validation-valid"></span>
                         <label class="floating-label">Type of Property<span style="color:red">*</span></label>
 
                     </div>
                 </div>
                 <div class="col-md-6">
+                    @*changed*@
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <select class="floating-label-field floating-label-field--s3">
                             <option value="">---Select---</option>
-                            <option value="Yes">Residential</option>
-                            <option value="No">Commercial</option>
-                            <option value="No">Industrial</option>
-                            <option value="No">Other</option>
+                            <option value="Residential">Residential</option>
+                            <option value="Commercial">Commercial</option>
+                            <option value="Industrial">Industrial</option>
+                            <option value="Other">Other</option>
                         </select>
                         <label class="floating-label">Type of Use<span style="color:red">*</span></label>
 
                     </div>
                 </div>
-                <br/><br/>
+            </div>
+            <div class="row mt-md-3">
                 <div class="col-md-6">
                     <div class="floating-label-wrap">
-                        <input asp-for="ConstructedArea" type="text" class="floating-label-field floating-label-field--s3" placeholder="Constructed Area" />
+                        <input asp-for="ConstructedArea" type="text" class="floating-label-field floating-label-field--s3" placeholder="Constructed Area  (sqm)" />
                         <span asp-validation-for="ConstructedArea" class="d-block text-danger field-validation-valid"></span>
                         <label class="floating-label">Constructed Area (sqm)<span style="color:red">*</span></label>
                     </div>
                 </div>
-
-
+                <div class="col-md-6">
+                    @*changed*@
+                    <div class="floating-label-wrap">
+                        <input asp-for="ConstructedArea" type="text" class="floating-label-field floating-label-field--s3" placeholder="Vacant Area (sqm)" />
+                        <span asp-validation-for="ConstructedArea" class="d-block text-danger field-validation-valid"></span>
+                        <label class="floating-label">Vacant Area (sqm)<span style="color:red">*</span></label>
+                    </div>
+                </div>
             </div>
             <div class="row mt-md-3">
-
                 <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input asp-for="HouseNo" type="text" class="floating-label-field floating-label-field--s3" placeholder="House No" />
                         <span asp-validation-for="HouseNo" class="d-block text-danger field-validation-valid"></span>
-                        <label class="floating-label">House No<span style="color:red">*</span></label>
+                        <label class="floating-label">House No/Property No<span style="color:red">*</span></label>
 
                     </div>
                 </div>
-
                 <div class="col-md-6">
                     <div class="floating-label-wrap">
                         <input asp-for="PlotNo" type="text" class="floating-label-field floating-label-field--s3" placeholder="Plot No" />
                         <span asp-validation-for="PlotNo" class="d-block text-danger field-validation-valid"></span>
-                        <label class="floating-label">Plot No<span style="color:red">*</span></label>
+                        <label class="floating-label">Plot No</label>
                     </div>
                 </div>
 
@@ -191,7 +221,7 @@
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input asp-for="Street" type="text" class="floating-label-field floating-label-field--s3" placeholder="Street" />
                         <span asp-validation-for="Street" class="d-block text-danger field-validation-valid"></span>
-                        <label class="floating-label">Street<span style="color:red">*</span></label>
+                        <label class="floating-label">Street</label>
 
                     </div>
                 </div>
@@ -203,7 +233,7 @@
                             <option value="">---Select---</option>
                         </select>
                         <span asp-validation-for="LocalityId" class="d-block text-danger field-validation-valid"></span>
-                        <label class="floating-label">Locality<span style="color:red">*</span></label>
+                        <label class="floating-label">Locality </label>
                     </div>
                 </div>
 
@@ -213,7 +243,7 @@
 
                 <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="NosFloor" type="text" class="floating-label-field floating-label-field--s3" placeholder="Floor" />
+                        <input asp-for="NosFloor" type="text" class="floating-label-field floating-label-field--s3" placeholder="No of Floor" />
                         <span asp-validation-for="NosFloor" class="d-block text-danger field-validation-valid"></span>
                         <label class="floating-label">No of floors costructed<span style="color:red">*</span></label>
 
@@ -222,9 +252,9 @@
 
                 <div class="col-md-6">
                     <div class="floating-label-wrap">
-                        <input asp-for="BuildingFootprintArea" type="text" class="floating-label-field floating-label-field--s3" placeholder="FootPrint" />
+                        <input asp-for="BuildingFootprintArea" type="text" class="floating-label-field floating-label-field--s3" placeholder="Area of building" />
                         <span asp-validation-for="BuildingFootprintArea" class="d-block text-danger field-validation-valid"></span>
-                        <label class="floating-label">Area of building footprint on plot (sqm)<span style="color:red">*</span></label>
+                        <label class="floating-label">Area of building footprint on plot (sqm) </label>
                     </div>
                 </div>
 
@@ -233,10 +263,11 @@
             <div class="row mt-md-3">
 
                 <div class="col-md-6">
+                    @*changed*@
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="ConstructionYear" type="text" class="floating-label-field floating-label-field--s3" placeholder="Year" />
+                        <input asp-for="ConstructionYear" type="text" class="floating-label-field floating-label-field--s3" placeholder="Khasra No" />
                         <span asp-validation-for="ConstructionYear" class="d-block text-danger field-validation-valid"></span>
-                        <label class="floating-label">Year of construction<span style="color:red">*</span></label>
+                        <label class="floating-label">Khasra No(as per revenue records)</label>
 
                     </div>
                 </div>
@@ -245,7 +276,7 @@
                     <div class="floating-label-wrap">
                         <input asp-for="FrontRoadWidth" type="text" class="floating-label-field floating-label-field--s3" placeholder="Width" />
                         <span asp-validation-for="FrontRoadWidth" class="d-block text-danger field-validation-valid"></span>
-                        <label class="floating-label">Road width in front of plot (m)<span style="color:red">*</span></label>
+                        <label class="floating-label">Road width in front of plot (m)</label>
                     </div>
                 </div>
 
@@ -278,7 +309,18 @@
                             <tr id="">
                                 <td style="text-align:center;"><span class="sn">1</span></td>
                                 <td>
-                                    <input asp-for="FloorName" type="text" class="floating-label-field floating-label-field--s3" id="txtFloorName" />
+                                    @*<input asp-for="FloorName" type="text" class="floating-label-field floating-label-field--s3" id="txtFloorName" />*@
+                                    <select asp-for="FloorName" class="floating-label-field floating-label-field--s3" id="txtFloorName">
+                                        <option value="">---Select---</option>
+                                        <option value="Residential">Ground Floor</option>
+                                        <option value="Commercial">First Floor</option>
+                                        <option value="Industrial">Second Floor</option>
+                                        <option value="Industrial">Thrid Floor</option>
+                                        <option value="Industrial">Fourth Floor</option>
+                                        <option value="Other">Fifth Floor</option>
+                                        <option value="Other">Sixth Floor</option>
+                                    </select>
+
                                 </td>
                                 <td>
                                     <input asp-for="CarpetArea" type="text" class="floating-label-field floating-label-field--s3" id="txtCarpetArea" />
@@ -296,7 +338,14 @@
                                     <input type="hidden" asp-for="WaterBill" />
                                 </td>
                                 <td>
-                                    <input asp-for="CurrentUse" type="text" class="floating-label-field floating-label-field--s3" id="txtCurrentUse" />
+                                    @*<input asp-for="CurrentUse" type="text" class="floating-label-field floating-label-field--s3" id="txtCurrentUse" />*@
+                                    <select asp-for="CurrentUse" class="floating-label-field floating-label-field--s3" id="txtCurrentUse">
+                                        <option value="">---Select---</option>
+                                        <option value="Residential">Residential</option>
+                                        <option value="Commercial">Commercial</option>
+                                        <option value="Industrial">Industrial</option>
+                                        <option value="Other">Other</option>
+                                    </select>
                                 </td>
                                 <td>
                                     <div class="floating-label-wrap mb-3 mb-md-0">
@@ -322,7 +371,7 @@
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input asp-for="FirstName" type="text" class="floating-label-field floating-label-field--s3" placeholder="First Name" />
                         <span asp-validation-for="FirstName" class="d-block text-danger field-validation-valid"></span>
-                        <label class="floating-label">FirstName<span style="color:red">*</span></label>
+                        <label class="floating-label">First Name</label>
 
                     </div>
                 </div>
@@ -331,7 +380,7 @@
                     <div class="floating-label-wrap">
                         <input asp-for="MiddleName" type="text" class="floating-label-field floating-label-field--s3" placeholder="Middle Name" />
                         <span asp-validation-for="MiddleName" class="d-block text-danger field-validation-valid"></span>
-                        <label class="floating-label">Middle Name<span style="color:red">*</span></label>
+                        <label class="floating-label">Middle Name</label>
                     </div>
                 </div>
 
@@ -343,7 +392,7 @@
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input asp-for="LastName" type="text" class="floating-label-field floating-label-field--s3" placeholder="Last Name" />
                         <span asp-validation-for="LastName" class="d-block text-danger field-validation-valid"></span>
-                        <label class="floating-label">Last Name<span style="color:red">*</span></label>
+                        <label class="floating-label">Last Name</label>
 
                     </div>
                 </div>
@@ -352,7 +401,7 @@
                     <div class="floating-label-wrap">
                         <input asp-for="SpouseName" type="text" class="floating-label-field floating-label-field--s3" placeholder="Spouse Name" />
                         <span asp-validation-for="SpouseName" class="d-block text-danger field-validation-valid"></span>
-                        <label class="floating-label">Spouse's Name<span style="color:red">*</span></label>
+                        <label class="floating-label">Spouse's Name</label>
                     </div>
                 </div>
 
@@ -364,7 +413,7 @@
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input asp-for="FatherName" type="text" class="floating-label-field floating-label-field--s3" placeholder="Father Name" />
                         <span asp-validation-for="FatherName" class="d-block text-danger field-validation-valid"></span>
-                        <label class="floating-label">Father's Name<span style="color:red">*</span></label>
+                        <label class="floating-label">Father's Name</label>
 
                     </div>
                 </div>
@@ -373,7 +422,7 @@
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input asp-for="MotherName" type="text" class="floating-label-field floating-label-field--s3" placeholder="Mother Name" />
                         <span asp-validation-for="MotherName" class="d-block text-danger field-validation-valid"></span>
-                        <label class="floating-label">Mother's Name<span style="color:red">*</span></label>
+                        <label class="floating-label">Mother's Name</label>
 
                     </div>
                 </div>
@@ -386,7 +435,7 @@
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input asp-for="EpicIdNumber" type="text" class="floating-label-field floating-label-field--s3" placeholder="EPIC ID Number" />
                         <span asp-validation-for="EpicIdNumber" class="d-block text-danger field-validation-valid"></span>
-                        <label class="floating-label">EPIC ID Number<span style="color:red">*</span></label>
+                        <label class="floating-label">EPIC ID Number</label>
 
                     </div>
                 </div>
@@ -395,7 +444,7 @@
                     <div class="floating-label-wrap">
                         <input asp-for="EmailId" type="text" class="floating-label-field floating-label-field--s3" placeholder="Email ID" />
                         <span asp-validation-for="EmailId" class="d-block text-danger field-validation-valid"></span>
-                        <label class="floating-label">EmailID<span style="color:red">*</span></label>
+                        <label class="floating-label">EmailID</label>
                     </div>
                 </div>
 
@@ -407,7 +456,7 @@
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input asp-for="MobileNo" type="text" class="floating-label-field floating-label-field--s3" placeholder="Mobile Number" />
                         <span asp-validation-for="MobileNo" class="d-block text-danger field-validation-valid"></span>
-                        <label class="floating-label">MobileNumber<span style="color:red">*</span></label>
+                        <label class="floating-label">Mobile Number</label>
 
                     </div>
                 </div>
@@ -416,7 +465,7 @@
                     <div class="floating-label-wrap">
                         <input asp-for="AadhaarNo" type="text" class="floating-label-field floating-label-field--s3" placeholder="AADHAAR" />
                         <span asp-validation-for="AadhaarNo" class="d-block text-danger field-validation-valid"></span>
-                        <label class="floating-label">AADHAAR<span style="color:red">*</span></label>
+                        <label class="floating-label">AADHAAR No</label>
                     </div>
                 </div>
 
@@ -428,7 +477,7 @@
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input asp-for="DateOfBirth" type="date" class="floating-label-field floating-label-field--s3" placeholder="Date of Birth Number" />
                         <span asp-validation-for="DateOfBirth" class="d-block text-danger field-validation-valid"></span>
-                        <label class="floating-label">Date of Birth<span style="color:red">*</span></label>
+                        <label class="floating-label">Date of Birth</label>
 
                     </div>
                 </div>
@@ -442,19 +491,18 @@
                             <option value="3">Other</option>
                         </select>
                         <span asp-validation-for="Gender" class="d-block text-danger field-validation-valid"></span>
-                        <label class="floating-label">Gender<span style="color:red">*</span></label>
+                        <label class="floating-label">Gender</label>
                     </div>
                 </div>
 
 
             </div>
             <div class="row mt-md-3">
-
                 <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input asp-for="PanNo" type="text" class="floating-label-field floating-label-field--s3" placeholder="PAN" />
                         <span asp-validation-for="PanNo" class="d-block text-danger field-validation-valid"></span>
-                        <label class="floating-label">PAN<span style="color:red">*</span></label>
+                        <label class="floating-label">PAN No</label>
 
                     </div>
                 </div>
@@ -490,7 +538,7 @@
                             <option value="">---Select---</option>
                         </select>
                         <span asp-validation-for="Districtid" class="d-block text-danger field-validation-valid"></span>
-                        <label class="floating-label">District<span style="color:red">*</span></label>
+                        <label class="floating-label">District</label>
                     </div>
                 </div>
 
@@ -498,7 +546,7 @@
                     <div class="floating-label-wrap">
                         <input asp-for="PropertyShare" type="text" class="floating-label-field floating-label-field--s3" placeholder="ShareinProperty" />
                         <span asp-validation-for="PropertyShare" class="d-block text-danger field-validation-valid"></span>
-                        <label class="floating-label">Share in Property(%)<span style="color:red">*</span></label>
+                        <label class="floating-label">Share in Property(%)</label>
                     </div>
                 </div>
 
@@ -511,7 +559,7 @@
                         <a id="viewOwnerPhoto" asp-action="OwnerPhoto" class="badge bg-primary px-2" target="_blank" style="display:none;">(View File)</a>
                         <input asp-for="OwnerPhoto" class="floating-label-field floating-label-field--s3 checkExtension" type="file" />
                         <input type="hidden" asp-for="OwnerPhoto" />
-                        <label class="floating-label">Owner Photo<span style="color:red">*</span></label>
+                        <label class="floating-label">Owner Photo</label>
                     </div>
                 </div>
 
@@ -522,97 +570,84 @@
                             <label class="floating-label">Share in Property(%)<span style="color:red">*</span></label>
                         </div>*@
                 </div>
-
-
             </div>
         </div>
-
         <div id="LANDDETAILS">
             <h3 class="my-3 d-flex sub-heading">LAND DETAILS</h3>
             <div class="row">
 
                 <div class="col-md-6">
-                    <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="DoesLandLitigation" type="text" class="floating-label-field floating-label-field--s3" placeholder="Litigation" />
-                        <span asp-validation-for="DoesLandLitigation" class="d-block text-danger field-validation-valid"></span>
-                        <label class="floating-label">Does The Land Fall in any Litigation<span style="color:red">*</span></label>
-
-                    </div>
-                </div>
-
-                <div class="col-md-6">
                     <div class="floating-label-wrap">
                         <input asp-for="LitigationStatus" type="text" class="floating-label-field floating-label-field--s3" placeholder="Litigation Status" />
                         <span asp-validation-for="LitigationStatus" class="d-block text-danger field-validation-valid"></span>
-                        <label class="floating-label">Litigation Status<span style="color:red">*</span></label>
+                        <label class="floating-label">Litigation Status</label>
                     </div>
                 </div>
-
-
-            </div>
-            <div class="row mt-md-3">
-
                 <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="CourtCaseStatus" type="text" class="floating-label-field floating-label-field--s3" placeholder="Court Case Status" />
+                        <input asp-for="DoesLandLitigation" type="text" class="floating-label-field floating-label-field--s3" placeholder="Fall in any High Tension" />
+                        <span asp-validation-for="DoesLandLitigation" class="d-block text-danger field-validation-valid"></span>
+                        <label class="floating-label">Does The Land Fall in any High Tension</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-md-3">
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        @*<input asp-for="CourtCaseStatus" type="text" class="floating-label-field floating-label-field--s3" placeholder="Court Case Status" />*@
+                        <select asp-for="CourtCaseStatus" class="floating-label-field floating-label-field--s3">
+                            <option value="">---Select---</option>
+                            <option value="No">Yes</option>
+                            <option value="Yes">No</option>
+                        </select>
                         <span asp-validation-for="CourtCaseStatus" class="d-block text-danger field-validation-valid"></span>
-                        <label class="floating-label">Court Case Status (if any)<span style="color:red">*</span></label>
-
+                        <label class="floating-label">Court Case Status (if any)</label>
                     </div>
                 </div>
-
-                <div class="col-md-6">
-                    <div class="floating-label-wrap">
-                        <input asp-for="DetailCourtCase" type="text" class="floating-label-field floating-label-field--s3" placeholder="Court Case Details" />
-                        <span asp-validation-for="DetailCourtCase" class="d-block text-danger field-validation-valid"></span>
-                        <label class="floating-label">Details of Court Case<span style="color:red">*</span></label>
-                    </div>
-                </div>
-
-
             </div>
-
-            <div class="row mt-md-3">
-
-                <div class="col-md-6">
-                    <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="CourtName" type="text" class="floating-label-field floating-label-field--s3" placeholder="Court Name" />
-                        <span asp-validation-for="CourtName" class="d-block text-danger field-validation-valid"></span>
-                        <label class="floating-label">Name of Court<span style="color:red">*</span></label>
-
+            <div id="divCoutCase">
+                <div class="row mt-md-3">
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap">
+                            <input asp-for="DetailCourtCase" type="text" class="floating-label-field floating-label-field--s3" placeholder="Court Case Details" />
+                            <span asp-validation-for="DetailCourtCase" class="d-block text-danger field-validation-valid"></span>
+                            <label class="floating-label">Details of Court Case</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <input asp-for="CourtName" type="text" class="floating-label-field floating-label-field--s3" placeholder="Court Name" />
+                            <span asp-validation-for="CourtName" class="d-block text-danger field-validation-valid"></span>
+                            <label class="floating-label">Name of Court</label>
+                        </div>
                     </div>
                 </div>
+                <div class="row mt-md-3">
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap">
+                            <input asp-for="CaseNumber" type="text" class="floating-label-field floating-label-field--s3" placeholder="Case Number" />
+                            <span asp-validation-for="CaseNumber" class="d-block text-danger field-validation-valid"></span>
+                            <label class="floating-label">Case Number</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <input asp-for="PetitionerRespondent" type="text" class="floating-label-field floating-label-field--s3" placeholder="Petitioner" />
+                            <span asp-validation-for="PetitionerRespondent" class="d-block text-danger field-validation-valid"></span>
+                            <label class="floating-label">Petitioner/Respondent</label>
+                        </div>
+                    </div>
 
-                <div class="col-md-6">
-                    <div class="floating-label-wrap">
-                        <input asp-for="CaseNumber" type="text" class="floating-label-field floating-label-field--s3" placeholder="Case Number" />
-                        <span asp-validation-for="CaseNumber" class="d-block text-danger field-validation-valid"></span>
-                        <label class="floating-label">Case Number<span style="color:red">*</span></label>
+                </div>
+                <div class="row mt-md-3">
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap">
+                            <input asp-for="NameOppositeParty" type="text" class="floating-label-field floating-label-field--s3" placeholder="Opposite Party" />
+                            <span asp-validation-for="NameOppositeParty" class="d-block text-danger field-validation-valid"></span>
+                            <label class="floating-label">Name of Opposite Party</label>
+                        </div>
                     </div>
                 </div>
-
-
-            </div>
-            <div class="row mt-md-3">
-
-                <div class="col-md-6">
-                    <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="PetitionerRespondent" type="text" class="floating-label-field floating-label-field--s3" placeholder="Petitioner" />
-                        <span asp-validation-for="PetitionerRespondent" class="d-block text-danger field-validation-valid"></span>
-                        <label class="floating-label">Petitioner/Respondent<span style="color:red">*</span></label>
-
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="floating-label-wrap">
-                        <input asp-for="NameOppositeParty" type="text" class="floating-label-field floating-label-field--s3" placeholder="Opposite Party" />
-                        <span asp-validation-for="NameOppositeParty" class="d-block text-danger field-validation-valid"></span>
-                        <label class="floating-label">Name of Opposite Party<span style="color:red">*</span></label>
-                    </div>
-                </div>
-
-
             </div>
         </div>
 
@@ -636,7 +671,7 @@
                         <input asp-for="PhotographOwnerFP" class="floating-label-field floating-label-field--s3 checkExtension" type="file" />
                         @*<input type="hidden" asp-for="OwnerPhotoDocument" />*@
                         <span asp-validation-for="PhotographOwnerFP" class="d-block text-danger field-validation-valid"></span>
-                        <label class="floating-label">Photograph of the Owner<span style="color:red">*</span></label>
+                        <label class="floating-label">Photograph of the Owner</label>
                     </div>
                 </div>
 
@@ -650,7 +685,7 @@
                         <input asp-for="GpaFilePathFP" class="floating-label-field floating-label-field--s3 checkExtension" type="file" />
                         @*<input type="hidden" asp-for="GPADocument" />*@
                         <span asp-validation-for="GpaFilePathFP" class="d-block text-danger field-validation-valid"></span>
-                        <label class="floating-label">GPA<span style="color:red">*</span></label>
+                        <label class="floating-label">GPA</label>
 
                     </div>
                 </div>
@@ -732,20 +767,6 @@
                 </div>
 
                 <div class="col-md-6">
-                    <div class="floating-label-wrap">
-                        <a id="viewCoOrdinate" asp-action="CoOrdinate" class="badge bg-primary px-2" target="_blank" style="display:none;">(View File)</a>
-                        <input asp-for="CoordinateDocumentFP" class="floating-label-field floating-label-field--s3 checkExtension" type="file" />
-                        @*<input type="hidden" asp-for="CoOrdinateDocument" />*@
-                        <span asp-validation-for="CoordinateDocumentFP" class="d-block text-danger field-validation-valid"></span>
-                        <label class="floating-label">Co-ordinate of Land<span style="color:red">*</span></label>
-                    </div>
-                </div>
-
-
-            </div>
-            <div class="row mt-md-3">
-
-                <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <a id="viewVerifyChainDocument" asp-action="VerifyChainDocument" class="badge bg-primary px-2" target="_blank" style="display:none;">(View File)</a>
                         <input asp-for="ChainDocumentFP" class="floating-label-field floating-label-field--s3 checkExtension" type="file" />
@@ -756,9 +777,29 @@
                     </div>
                 </div>
 
+
+            </div>
+            <div class="row mt-md-3">
                 <div class="col-md-6">
                     <div class="floating-label-wrap">
+                        @*<a id="viewCoOrdinate" asp-action="CoOrdinate" class="badge bg-primary px-2" target="_blank" style="display:none;">(View File)</a>
+                            <input asp-for="CoordinateDocumentFP" class="floating-label-field floating-label-field--s3 checkExtension" type="file" />*@
+                        @*<input type="hidden" asp-for="CoOrdinateDocument" />*@
+                        <input asp-for="CoordinateDocumentFP" type="text" class="floating-label-field floating-label-field--s3" />
+                        <span asp-validation-for="CoordinateDocumentFP" class="d-block text-danger field-validation-valid"></span>
+                        <label class="floating-label">Coordinate of Land(Latitude)</label>
+                    </div>
+                </div>
 
+
+                <div class="col-md-6">
+                    <div class="floating-label-wrap">
+                        @*<a id="viewCoOrdinate" asp-action="CoOrdinate" class="badge bg-primary px-2" target="_blank" style="display:none;">(View File)</a>
+                            <input asp-for="CoordinateDocumentFP" class="floating-label-field floating-label-field--s3 checkExtension" type="file" />*@
+                        @*<input type="hidden" asp-for="CoOrdinateDocument" />*@
+                        <input asp-for="CoordinateDocumentFP" type="text" class="floating-label-field floating-label-field--s3" />
+                        <span asp-validation-for="CoordinateDocumentFP" class="d-block text-danger field-validation-valid"></span>
+                        <label class="floating-label">Coordinate of Land(Longitude)</label>
                     </div>
                 </div>
 
@@ -865,6 +906,64 @@
                                 <td>
                                     <input asp-for="AreaOfThePlotAsPerAts" type="text" class="floating-label-field floating-label-field--s3" id="txtPlotAreaATS" />
                                 </td>
+                                <td>
+                                    <div class="floating-label-wrap mb-3 mb-md-0">
+                                        <a class="remove delete-record4 " title="delete" data-id="0" style="display:none;font-size:30px;"><i class="ri-delete-bin-fill"></i></a>
+                                        <a class="view add-record4" data-added="0" title="Add" style="font-size:30px;"><i class="ri-add-circle-fill"></i></a>
+                                    </div>
+
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="ATSDETAIL" style="margin-top:-15px;">
+            <h3 class="my-3 d-flex sub-heading">HOLDER DETAIL</h3>
+
+            <div class="table-section bg-white border shadow rounded">
+                <div class="table-responsive">
+
+                    <table class="table table-sm table-bordered mb-0 table-striped" id="tbl_posts4">
+                        <thead class="text-nowrap">
+                            <tr>
+                                <th>Sr.No</th>
+                                <th>Name of the GPA/ATS</th>
+                                <th>Death Certificate No</th>
+                                <th>Death Certificate Date</th>
+                                <th>Name of Surviving Member</th>
+                                <th>Relationship</th>
+                                <th>Whether surviving member relinquished his/her share</th>
+                                <th>Operation</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbl_posts5_body">
+                        </tbody>
+                        <tbody class="tbody" id="add5">
+                            <tr id="">
+                                <td style="text-align:center;"><span class="sn3">1</span></td>
+                                <td>
+                                    <input asp-for="DateOfExecutionOfAts" type="text" class="floating-label-field floating-label-field--s3" id="txtExecutionDateATS" />
+                                </td>
+                                <td>
+                                    <input asp-for="NameOfTheSellerAts" type="text" class="floating-label-field floating-label-field--s3" id="txtSellerNameATS" />
+                                </td>
+                                <td>
+                                    <input asp-for="NameOfThePayerAts" type="date" class="floating-label-field floating-label-field--s3" id="txtPayerNameATS" />
+                                </td>
+                                <td>
+                                    <input asp-for="AddressOfThePlotAsPerAts" type="text" class="floating-label-field floating-label-field--s3" id="txtPlotAddressATS" />
+                                </td>
+                                <td>
+                                    <input asp-for="AreaOfThePlotAsPerAts" type="text" class="floating-label-field floating-label-field--s3" id="txtPlotAreaATS" />
+                                </td>
+                                <td>
+                                    <input asp-for="AddressOfThePlotAsPerAts" type="text" class="floating-label-field floating-label-field--s3" id="txtPlotAddressATS" />
+                                </td>
+                               
                                 <td>
                                     <div class="floating-label-wrap mb-3 mb-md-0">
                                         <a class="remove delete-record4 " title="delete" data-id="0" style="display:none;font-size:30px;"><i class="ri-delete-bin-fill"></i></a>

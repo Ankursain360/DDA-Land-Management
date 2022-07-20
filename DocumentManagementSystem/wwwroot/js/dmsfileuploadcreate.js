@@ -306,8 +306,8 @@ $('.checkExtension').on('change', function (e) {
 
             var FileID = $(this).attr('id')
             var size = ValidateFileSize(FileID, $(this));
-            if (size > 5) {
-                alert("You Can Upload file Size Up to 5 MB.");
+            if (size > 25) {
+                alert("You Can Upload file Size Up to 25 MB.");
                 $(this).val('');
             }
             else {

@@ -20,7 +20,7 @@ using Service.IApplicationService;
 using Microsoft.AspNetCore.Hosting;
 using System.Text;
 using Dto.Master;
-using Dto.Common; 
+using Dto.Common;
 using Microsoft.AspNetCore.Http;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
@@ -131,127 +131,42 @@ namespace EncroachmentDemolition.Controllers
             {
                 if (IsValidpdf == true)
                 {
-                    var Data = await _annexureAApprovalService.FetchSingleResult(id);
-                    FileHelper fileHelper = new FileHelper();
-                    #region Approval Proccess At Further level start Added by Renu 16 march 2021
-                    var FirstApprovalProcessData = await _approvalproccessService.FirstApprovalProcessData((_configuration.GetSection("workflowPreccessGuidRequestDemolition").Value), fixingdemolition.Id);
-                    var ApprovalProccessBackId = _approvalproccessService.GetPreviousApprovalId((_configuration.GetSection("workflowPreccessGuidRequestDemolition").Value), fixingdemolition.Id);
-                    var ApprovalProcessBackData = await _approvalproccessService.FetchApprovalProcessDocumentDetails(ApprovalProccessBackId);
-                    var checkLastApprovalStatuscode = await _approvalproccessService.FetchSingleApprovalStatus(Convert.ToInt32(ApprovalProcessBackData.Status));
-
-                    var DataFlow = await DataAsync(ApprovalProcessBackData.Version);
-
-                    Approvalproccess approvalproccess = new Approvalproccess();
-
-                    /*Check if zonewise then aprovee user must have zoneid*/
-                    if (fixingdemolition.ApprovalStatusCode == ((int)ApprovalActionStatus.Forward) && checkLastApprovalStatuscode.StatusCode != ((int)ApprovalActionStatus.QueryForward))
+                    //UpdateDemolitionRecords(id, fixingdemolition);
+                    Fixingdemolition data = new Fixingdemolition();
+                    var dropdownValue = await GetApprovalStatusDropdownListAtIndex();
+                    int[] actions = Array.ConvertAll(dropdownValue, int.Parse);
+                    data.ApprovalStatusList = await _approvalproccessService.BindDropdownApprovalStatus(actions.Distinct().ToArray());
+                    data.ApprovalStatusList = await _approvalproccessService.BindDropdownApprovalStatus(actions.Distinct().ToArray());
+                    // For Approval Status
+                    if (fixingdemolition.ApprovalStatus == "3" && SiteContext.RoleId == 19) // 58 For CLM and 3 For Approved
                     {
-                        for (int i = 0; i < DataFlow.Count; i++)
-                        {
-                            if (!DataFlow[i].parameterSkip)
-                            {
-                                if (i == ApprovalProcessBackData.Level - 1 && Convert.ToInt32(DataFlow[i].parameterLevel) == ApprovalProcessBackData.Level)
-                                {
-                                    for (int d = i + 1; d < DataFlow.Count; d++)
-                                    {
-                                        if (!DataFlow[d].parameterSkip)
-                                        {
-                                            if (DataFlow[d].parameterConditional == (_configuration.GetSection("ApprovalZoneWise").Value))
-                                            {
-                                                if (SiteContext.ZoneId == null)
-                                                {
-                                                    ViewBag.Items = await _userProfileService.GetRole();
-                                                    await BindApprovalStatusDropdown(fixingdemolition);
-                                                    ViewBag.Message = Alert.Show("Your Zone is not available , Without zone application cannot be processed further, Please contact system administrator", "", AlertType.Warning);
-                                                    return View(fixingdemolition);
-                                                }
-
-                                                fixingdemolition.ApprovalZoneId = SiteContext.ZoneId;
-                                            }
-                                            break;
-                                        }
-                                    }
-                                }
-
-                            }
-                        }
-                    }
-
-                    if (ApprovalProcessBackData.Level == FirstApprovalProcessData.Level && fixingdemolition.ApprovalStatusCode == ((int)ApprovalActionStatus.Revert))//check if revert available at first level
-                    {
-                        result = false;
-                        ViewBag.Items = await _userProfileService.GetRole();
-                        await BindApprovalStatusDropdown(fixingdemolition);
-                        ViewBag.Message = Alert.Show("Application cannot be Reverted at First Level", "", AlertType.Warning);
-                        return View(fixingdemolition);
+                        HttpContext.Session.SetString("id", id.ToString());
+                        HttpContext.Session.SetString("fixingdemolition", JsonConvert.SerializeObject(fixingdemolition));
+                        Random random = new Random();
+                        var otp = random.Next(111111, 999999);
+                        string Action = otp.ToString();
+                        string Mobile = _propertyRegistrationService.GetMobileNo(SiteContext.UserId);
+                        HttpContext.Session.SetString("OTP", otp.ToString());
+                        SendSMSDto SMS = new SendSMSDto();
+                        SMS.GenerateSendSMS(Action, Mobile);
+                        return RedirectToAction("OTP");
                     }
                     else
                     {
-                        /* Update last record pending status in Approval Process Table*/
-                        result = true;
-                        approvalproccess.PendingStatus = 0;
-                        result = await _approvalproccessService.UpdatePreviousApprovalProccess(ApprovalProccessBackId, approvalproccess, SiteContext.UserId);
+                        #region Approval Proccess At Further level start Added by Renu 16 march 2021
+                        var Data = await _annexureAApprovalService.FetchSingleResult(id);
+                        FileHelper fileHelper = new FileHelper();
+                        var FirstApprovalProcessData = await _approvalproccessService.FirstApprovalProcessData((_configuration.GetSection("workflowPreccessGuidRequestDemolition").Value), fixingdemolition.Id);
+                        var ApprovalProccessBackId = _approvalproccessService.GetPreviousApprovalId((_configuration.GetSection("workflowPreccessGuidRequestDemolition").Value), fixingdemolition.Id);
+                        var ApprovalProcessBackData = await _approvalproccessService.FetchApprovalProcessDocumentDetails(ApprovalProccessBackId);
+                        var checkLastApprovalStatuscode = await _approvalproccessService.FetchSingleApprovalStatus(Convert.ToInt32(ApprovalProcessBackData.Status));
 
-                        /*Now New row added in Approval process*/
-                        approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
-                        approvalproccess.ProcessGuid = (_configuration.GetSection("workflowPreccessGuidRequestDemolition").Value);
-                        approvalproccess.ServiceId = fixingdemolition.Id;
-                        approvalproccess.SendFrom = SiteContext.UserId.ToString();
-                        approvalproccess.SendFromProfileId = SiteContext.ProfileId.ToString();
-                        approvalproccess.PendingStatus = 1;
-                        approvalproccess.Remarks = fixingdemolition.ApprovalRemarks; ///May be comment
-                        approvalproccess.Status = Convert.ToInt32(fixingdemolition.ApprovalStatus);
-                        approvalproccess.Version = ApprovalProcessBackData.Version;
-                        approvalproccess.DocumentName = fixingdemolition.ApprovalDocument == null ? null : fileHelper.SaveFile1(ApprovalDocumentPath, fixingdemolition.ApprovalDocument);
+                        var DataFlow = await DataAsync(ApprovalProcessBackData.Version);
 
+                        Approvalproccess approvalproccess = new Approvalproccess();
 
-                        if (checkLastApprovalStatuscode.StatusCode == ((int)ApprovalActionStatus.QueryForward)) // check islast approvalrow is of query type then return to the same user
-                        {
-                            approvalproccess.Level = ApprovalProcessBackData.Level;
-                            approvalproccess.SendTo = ApprovalProcessBackData.SendFrom;
-                            #region set sendto and sendtoprofileid 
-                            StringBuilder multouserprofileid = new StringBuilder();
-                            int col = 0;
-                            if (approvalproccess.SendTo != null)
-                            {
-                                string[] multiTo = approvalproccess.SendTo.Split(',');
-                                foreach (string MultiUserId in multiTo)
-                                {
-                                    if (col > 0)
-                                        multouserprofileid.Append(",");
-                                    var UserProfile = await _userProfileService.GetUserById(Convert.ToInt32(MultiUserId));
-                                    multouserprofileid.Append(UserProfile.Id);
-                                    col++;
-                                }
-                                approvalproccess.SendToProfileId = multouserprofileid.ToString();
-                            }
-                            #endregion
-
-                            result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
-                            #region Insert Into usernotification table Added By Renu 18 June 2021
-                            if (result == true && approvalproccess.SendTo != null)
-                            {
-                                var notificationtemplate = await _approvalproccessService.FetchSingleNotificationTemplate(_configuration.GetSection("userNotificationGuidRequestDemolition").Value);
-                                var user = await _userProfileService.GetUserById(SiteContext.UserId);
-                                Usernotification usernotification = new Usernotification();
-                                var replacement = notificationtemplate.Template.Replace("{proccess name}", "Request for Demolition").Replace("{from user}", user.User.UserName).Replace("{datetime}", DateTime.Now.ToString());
-                                usernotification.Message = replacement;
-                                usernotification.UserNotificationGuid = (_configuration.GetSection("userNotificationGuidRequestDemolition").Value);
-                                usernotification.ProcessGuid = approvalproccess.ProcessGuid;
-                                usernotification.ServiceId = approvalproccess.ServiceId;
-                                usernotification.SendFrom = approvalproccess.SendFrom;
-                                usernotification.SendTo = approvalproccess.SendTo;
-                                result = await _userNotificationService.Create(usernotification, SiteContext.UserId);
-                            }
-                            #endregion
-                            if (result)
-                            {
-                                fixingdemolition.ApprovedStatus = Convert.ToInt32(fixingdemolition.ApprovalStatus);
-                                fixingdemolition.PendingAt = ApprovalProcessBackData.SendFrom;
-                                result = await _annexureAService.UpdateBeforeApproval(fixingdemolition.Id, fixingdemolition);  //Update Table details 
-                            }
-                        }
-                        else
+                        /*Check if zonewise then aprovee user must have zoneid*/
+                        if (fixingdemolition.ApprovalStatusCode == ((int)ApprovalActionStatus.Forward) && checkLastApprovalStatuscode.StatusCode != ((int)ApprovalActionStatus.QueryForward))
                         {
                             for (int i = 0; i < DataFlow.Count; i++)
                             {
@@ -259,254 +174,345 @@ namespace EncroachmentDemolition.Controllers
                                 {
                                     if (i == ApprovalProcessBackData.Level - 1 && Convert.ToInt32(DataFlow[i].parameterLevel) == ApprovalProcessBackData.Level)
                                     {
-                                        if (result)
+                                        for (int d = i + 1; d < DataFlow.Count; d++)
                                         {
-                                            if (fixingdemolition.ApprovalStatusCode == ((int)ApprovalActionStatus.QueryForward))
+                                            if (!DataFlow[d].parameterSkip)
                                             {
-                                                approvalproccess.Level = ApprovalProcessBackData.Level;
-                                                approvalproccess.SendTo = fixingdemolition.ApprovalUserId.ToString();
-                                            }
-                                            else if (fixingdemolition.ApprovalStatusCode == ((int)ApprovalActionStatus.Revert))
-                                            {
-                                                /*Check previous level for revert */
-                                                for (int d = i - 1; d >= 0; d--)
+                                                if (DataFlow[d].parameterConditional == (_configuration.GetSection("ApprovalZoneWise").Value))
                                                 {
-                                                    if (!DataFlow[d].parameterSkip)
+                                                    if (SiteContext.ZoneId == null)
                                                     {
-                                                        var CheckLastUserForRevert = await _approvalproccessService.CheckLastUserForRevert((_configuration.GetSection("workflowPreccessGuidRequestDemolition").Value), fixingdemolition.Id, Convert.ToInt32(DataFlow[i].parameterLevel));
-                                                        approvalproccess.SendTo = CheckLastUserForRevert == null ? null : CheckLastUserForRevert.SendFrom;
-                                                        approvalproccess.Level = Convert.ToInt32(DataFlow[d].parameterLevel);
-
-                                                        break;
+                                                        ViewBag.Items = await _userProfileService.GetRole();
+                                                        await BindApprovalStatusDropdown(fixingdemolition);
+                                                        ViewBag.Message = Alert.Show("Your Zone is not available , Without zone application cannot be processed further, Please contact system administrator", "", AlertType.Warning);
+                                                        return View(fixingdemolition);
                                                     }
+
+                                                    fixingdemolition.ApprovalZoneId = SiteContext.ZoneId;
                                                 }
+                                                break;
                                             }
-                                            else if (fixingdemolition.ApprovalStatusCode == ((int)ApprovalActionStatus.Rejected))
-                                            {
-                                                approvalproccess.Level = ApprovalProcessBackData.Level;
-                                                approvalproccess.SendTo = null;
-                                                approvalproccess.PendingStatus = 0;
-                                            }
-                                            else  // Forward Check
-                                            {
-                                                if (i == DataFlow.Count - 1)
-                                                {
-                                                    approvalproccess.Level = 0;
-                                                    approvalproccess.SendTo = null;
-                                                    approvalproccess.PendingStatus = 0;
-                                                }
-                                                else
-                                                {
-                                                    /*Conditional check and other role user wise checks*/
-                                                    for (int d = i + 1; d < DataFlow.Count; d++)
-                                                    {
-                                                        if (!DataFlow[d].parameterSkip)
-                                                        {
-                                                            approvalproccess.Level = Convert.ToInt32(DataFlow[d].parameterLevel);
-                                                            break;
-                                                        }
-                                                    }
-                                                    approvalproccess.SendTo = fixingdemolition.ApprovalUserId.ToString();
+                                        }
+                                    }
 
-                                                }
-                                            }
+                                }
+                            }
+                        }
+
+                        if (ApprovalProcessBackData.Level == FirstApprovalProcessData.Level && fixingdemolition.ApprovalStatusCode == ((int)ApprovalActionStatus.Revert))//check if revert available at first level
+                        {
+                            result = false;
+                            ViewBag.Items = await _userProfileService.GetRole();
+                            await BindApprovalStatusDropdown(fixingdemolition);
+                            ViewBag.Message = Alert.Show("Application cannot be Reverted at First Level", "", AlertType.Warning);
+                            return View(fixingdemolition);
+                        }
+                        else
+                        {
+                            /* Update last record pending status in Approval Process Table*/
+                            result = true;
+                            approvalproccess.PendingStatus = 0;
+                            result = await _approvalproccessService.UpdatePreviousApprovalProccess(ApprovalProccessBackId, approvalproccess, SiteContext.UserId);
+
+                            /*Now New row added in Approval process*/
+                            approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
+                            approvalproccess.ProcessGuid = (_configuration.GetSection("workflowPreccessGuidRequestDemolition").Value);
+                            approvalproccess.ServiceId = fixingdemolition.Id;
+                            approvalproccess.SendFrom = SiteContext.UserId.ToString();
+                            approvalproccess.SendFromProfileId = SiteContext.ProfileId.ToString();
+                            approvalproccess.PendingStatus = 1;
+                            approvalproccess.Remarks = fixingdemolition.ApprovalRemarks; ///May be comment
+                            approvalproccess.Status = Convert.ToInt32(fixingdemolition.ApprovalStatus);
+                            approvalproccess.Version = ApprovalProcessBackData.Version;
+                            approvalproccess.DocumentName = fixingdemolition.ApprovalDocument == null ? null : fileHelper.SaveFile1(ApprovalDocumentPath, fixingdemolition.ApprovalDocument);
 
 
+                            if (checkLastApprovalStatuscode.StatusCode == ((int)ApprovalActionStatus.QueryForward)) // check islast approvalrow is of query type then return to the same user
+                            {
+                                approvalproccess.Level = ApprovalProcessBackData.Level;
+                                approvalproccess.SendTo = ApprovalProcessBackData.SendFrom;
+                                #region set sendto and sendtoprofileid 
+                                StringBuilder multouserprofileid = new StringBuilder();
+                                int col = 0;
+                                if (approvalproccess.SendTo != null)
+                                {
+                                    string[] multiTo = approvalproccess.SendTo.Split(',');
+                                    foreach (string MultiUserId in multiTo)
+                                    {
+                                        if (col > 0)
+                                            multouserprofileid.Append(",");
+                                        var UserProfile = await _userProfileService.GetUserById(Convert.ToInt32(MultiUserId));
+                                        multouserprofileid.Append(UserProfile.Id);
+                                        col++;
+                                    }
+                                    approvalproccess.SendToProfileId = multouserprofileid.ToString();
+                                }
+                                #endregion
 
-                                            #region set sendto and sendtoprofileid 
-                                            StringBuilder multouserprofileid = new StringBuilder();
-                                            int col = 0;
-                                            if (approvalproccess.SendTo != null)
-                                            {
-                                                string[] multiTo = approvalproccess.SendTo.Split(',');
-                                                foreach (string MultiUserId in multiTo)
-                                                {
-                                                    if (col > 0)
-                                                        multouserprofileid.Append(",");
-                                                    var UserProfile = await _userProfileService.GetUserById(Convert.ToInt32(MultiUserId));
-                                                    multouserprofileid.Append(UserProfile.Id);
-                                                    col++;
-                                                }
-                                                approvalproccess.SendToProfileId = multouserprofileid.ToString();
-                                            }
-                                            else if (approvalproccess.SendTo == null && (fixingdemolition.ApprovalStatusCode != ((int)ApprovalActionStatus.Rejected) && fixingdemolition.ApprovalStatusCode != ((int)ApprovalActionStatus.Approved)))
-                                            {
-                                                ViewBag.Items = await _userProfileService.GetRole();
-                                                await BindApprovalStatusDropdown(fixingdemolition);
-                                                ViewBag.Message = Alert.Show("No user found at the next approval level, In this case, the system is unable to process your request. Please contact to the system administrator.", "", AlertType.Warning);
-                                                return View(fixingdemolition);
-                                            }
-                                            #endregion
-
-                                            result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
-                                            #region Insert Into usernotification table Added By Renu 18 June 2021
-                                            if (result == true && approvalproccess.SendTo != null)
-                                            {
-                                                var notificationtemplate = await _approvalproccessService.FetchSingleNotificationTemplate(_configuration.GetSection("userNotificationGuidRequestDemolition").Value);
-                                                var user = await _userProfileService.GetUserById(SiteContext.UserId);
-                                                Usernotification usernotification = new Usernotification();
-                                                var replacement = notificationtemplate.Template.Replace("{proccess name}", "Request for Demolition").Replace("{from user}", user.User.UserName).Replace("{datetime}", DateTime.Now.ToString());
-                                                usernotification.Message = replacement;
-                                                usernotification.UserNotificationGuid = (_configuration.GetSection("userNotificationGuidRequestDemolition").Value);
-                                                usernotification.ProcessGuid = approvalproccess.ProcessGuid;
-                                                usernotification.ServiceId = approvalproccess.ServiceId;
-                                                usernotification.SendFrom = approvalproccess.SendFrom;
-                                                usernotification.SendTo = approvalproccess.SendTo;
-                                                result = await _userNotificationService.Create(usernotification, SiteContext.UserId);
-                                            }
-                                            #endregion
-
+                                result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
+                                #region Insert Into usernotification table Added By Renu 18 June 2021
+                                if (result == true && approvalproccess.SendTo != null)
+                                {
+                                    var notificationtemplate = await _approvalproccessService.FetchSingleNotificationTemplate(_configuration.GetSection("userNotificationGuidRequestDemolition").Value);
+                                    var user = await _userProfileService.GetUserById(SiteContext.UserId);
+                                    Usernotification usernotification = new Usernotification();
+                                    var replacement = notificationtemplate.Template.Replace("{proccess name}", "Request for Demolition").Replace("{from user}", user.User.UserName).Replace("{datetime}", DateTime.Now.ToString());
+                                    usernotification.Message = replacement;
+                                    usernotification.UserNotificationGuid = (_configuration.GetSection("userNotificationGuidRequestDemolition").Value);
+                                    usernotification.ProcessGuid = approvalproccess.ProcessGuid;
+                                    usernotification.ServiceId = approvalproccess.ServiceId;
+                                    usernotification.SendFrom = approvalproccess.SendFrom;
+                                    usernotification.SendTo = approvalproccess.SendTo;
+                                    result = await _userNotificationService.Create(usernotification, SiteContext.UserId);
+                                }
+                                #endregion
+                                if (result)
+                                {
+                                    fixingdemolition.ApprovedStatus = Convert.ToInt32(fixingdemolition.ApprovalStatus);
+                                    fixingdemolition.PendingAt = ApprovalProcessBackData.SendFrom;
+                                    result = await _annexureAService.UpdateBeforeApproval(fixingdemolition.Id, fixingdemolition);  //Update Table details 
+                                }
+                            }
+                            else
+                            {
+                                for (int i = 0; i < DataFlow.Count; i++)
+                                {
+                                    if (!DataFlow[i].parameterSkip)
+                                    {
+                                        if (i == ApprovalProcessBackData.Level - 1 && Convert.ToInt32(DataFlow[i].parameterLevel) == ApprovalProcessBackData.Level)
+                                        {
                                             if (result)
                                             {
                                                 if (fixingdemolition.ApprovalStatusCode == ((int)ApprovalActionStatus.QueryForward))
                                                 {
-                                                    fixingdemolition.ApprovedStatus = Convert.ToInt32(fixingdemolition.ApprovalStatus);
-                                                    fixingdemolition.PendingAt = approvalproccess.SendTo;
+                                                    approvalproccess.Level = ApprovalProcessBackData.Level;
+                                                    approvalproccess.SendTo = fixingdemolition.ApprovalUserId.ToString();
                                                 }
                                                 else if (fixingdemolition.ApprovalStatusCode == ((int)ApprovalActionStatus.Revert))
                                                 {
-                                                    fixingdemolition.ApprovedStatus = Convert.ToInt32(fixingdemolition.ApprovalStatus);
-                                                    fixingdemolition.PendingAt = approvalproccess.SendTo;
+                                                    /*Check previous level for revert */
+                                                    for (int d = i - 1; d >= 0; d--)
+                                                    {
+                                                        if (!DataFlow[d].parameterSkip)
+                                                        {
+                                                            var CheckLastUserForRevert = await _approvalproccessService.CheckLastUserForRevert((_configuration.GetSection("workflowPreccessGuidRequestDemolition").Value), fixingdemolition.Id, Convert.ToInt32(DataFlow[i].parameterLevel));
+                                                            approvalproccess.SendTo = CheckLastUserForRevert == null ? null : CheckLastUserForRevert.SendFrom;
+                                                            approvalproccess.Level = Convert.ToInt32(DataFlow[d].parameterLevel);
+
+                                                            break;
+                                                        }
+                                                    }
                                                 }
                                                 else if (fixingdemolition.ApprovalStatusCode == ((int)ApprovalActionStatus.Rejected))
                                                 {
-                                                    fixingdemolition.ApprovedStatus = Convert.ToInt32(fixingdemolition.ApprovalStatus);
-                                                    fixingdemolition.PendingAt = "0";
+                                                    approvalproccess.Level = ApprovalProcessBackData.Level;
+                                                    approvalproccess.SendTo = null;
+                                                    approvalproccess.PendingStatus = 0;
                                                 }
-                                                else
+                                                else  // Forward Check
                                                 {
                                                     if (i == DataFlow.Count - 1)
+                                                    {
+                                                        approvalproccess.Level = 0;
+                                                        approvalproccess.SendTo = null;
+                                                        approvalproccess.PendingStatus = 0;
+                                                    }
+                                                    else
+                                                    {
+                                                        /*Conditional check and other role user wise checks*/
+                                                        for (int d = i + 1; d < DataFlow.Count; d++)
+                                                        {
+                                                            if (!DataFlow[d].parameterSkip)
+                                                            {
+                                                                approvalproccess.Level = Convert.ToInt32(DataFlow[d].parameterLevel);
+                                                                break;
+                                                            }
+                                                        }
+                                                        approvalproccess.SendTo = fixingdemolition.ApprovalUserId.ToString();
+
+                                                    }
+                                                }
+
+                                                #region set sendto and sendtoprofileid 
+                                                StringBuilder multouserprofileid = new StringBuilder();
+                                                int col = 0;
+                                                if (approvalproccess.SendTo != null)
+                                                {
+                                                    string[] multiTo = approvalproccess.SendTo.Split(',');
+                                                    foreach (string MultiUserId in multiTo)
+                                                    {
+                                                        if (col > 0)
+                                                            multouserprofileid.Append(",");
+                                                        var UserProfile = await _userProfileService.GetUserById(Convert.ToInt32(MultiUserId));
+                                                        multouserprofileid.Append(UserProfile.Id);
+                                                        col++;
+                                                    }
+                                                    approvalproccess.SendToProfileId = multouserprofileid.ToString();
+                                                }
+                                                else if (approvalproccess.SendTo == null && (fixingdemolition.ApprovalStatusCode != ((int)ApprovalActionStatus.Rejected) && fixingdemolition.ApprovalStatusCode != ((int)ApprovalActionStatus.Approved)))
+                                                {
+                                                    ViewBag.Items = await _userProfileService.GetRole();
+                                                    await BindApprovalStatusDropdown(fixingdemolition);
+                                                    ViewBag.Message = Alert.Show("No user found at the next approval level, In this case, the system is unable to process your request. Please contact to the system administrator.", "", AlertType.Warning);
+                                                    return View(fixingdemolition);
+                                                }
+                                                #endregion
+
+                                                result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
+                                                #region Insert Into usernotification table Added By Renu 18 June 2021
+                                                if (result == true && approvalproccess.SendTo != null)
+                                                {
+                                                    var notificationtemplate = await _approvalproccessService.FetchSingleNotificationTemplate(_configuration.GetSection("userNotificationGuidRequestDemolition").Value);
+                                                    var user = await _userProfileService.GetUserById(SiteContext.UserId);
+                                                    Usernotification usernotification = new Usernotification();
+                                                    var replacement = notificationtemplate.Template.Replace("{proccess name}", "Request for Demolition").Replace("{from user}", user.User.UserName).Replace("{datetime}", DateTime.Now.ToString());
+                                                    usernotification.Message = replacement;
+                                                    usernotification.UserNotificationGuid = (_configuration.GetSection("userNotificationGuidRequestDemolition").Value);
+                                                    usernotification.ProcessGuid = approvalproccess.ProcessGuid;
+                                                    usernotification.ServiceId = approvalproccess.ServiceId;
+                                                    usernotification.SendFrom = approvalproccess.SendFrom;
+                                                    usernotification.SendTo = approvalproccess.SendTo;
+                                                    result = await _userNotificationService.Create(usernotification, SiteContext.UserId);
+                                                }
+                                                #endregion
+
+                                                if (result)
+                                                {
+                                                    if (fixingdemolition.ApprovalStatusCode == ((int)ApprovalActionStatus.QueryForward))
+                                                    {
+                                                        fixingdemolition.ApprovedStatus = Convert.ToInt32(fixingdemolition.ApprovalStatus);
+                                                        fixingdemolition.PendingAt = approvalproccess.SendTo;
+                                                    }
+                                                    else if (fixingdemolition.ApprovalStatusCode == ((int)ApprovalActionStatus.Revert))
+                                                    {
+                                                        fixingdemolition.ApprovedStatus = Convert.ToInt32(fixingdemolition.ApprovalStatus);
+                                                        fixingdemolition.PendingAt = approvalproccess.SendTo;
+                                                    }
+                                                    else if (fixingdemolition.ApprovalStatusCode == ((int)ApprovalActionStatus.Rejected))
                                                     {
                                                         fixingdemolition.ApprovedStatus = Convert.ToInt32(fixingdemolition.ApprovalStatus);
                                                         fixingdemolition.PendingAt = "0";
                                                     }
                                                     else
                                                     {
-                                                        fixingdemolition.ApprovedStatus = Convert.ToInt32(fixingdemolition.ApprovalStatus);
-                                                        fixingdemolition.PendingAt = approvalproccess.SendTo;
+                                                        if (i == DataFlow.Count - 1)
+                                                        {
+                                                            fixingdemolition.ApprovedStatus = Convert.ToInt32(fixingdemolition.ApprovalStatus);
+                                                            fixingdemolition.PendingAt = "0";
+                                                        }
+                                                        else
+                                                        {
+                                                            fixingdemolition.ApprovedStatus = Convert.ToInt32(fixingdemolition.ApprovalStatus);
+                                                            fixingdemolition.PendingAt = approvalproccess.SendTo;
+                                                        }
                                                     }
+                                                    result = await _annexureAService.UpdateBeforeApproval(fixingdemolition.Id, fixingdemolition);  //Update Table details 
                                                 }
-                                                result = await _annexureAService.UpdateBeforeApproval(fixingdemolition.Id, fixingdemolition);  //Update Table details 
                                             }
+                                            break;
+
+
+
+
                                         }
-                                        break;
-
-
-
-
                                     }
                                 }
+
                             }
+                            var sendMailResult = false;
 
-                        }
-                        var sendMailResult = false;
+                            var DataApprovalSatatusMsg = await _approvalproccessService.FetchSingleApprovalStatus(Convert.ToInt32(fixingdemolition.ApprovalStatus));
 
-                        var DataApprovalSatatusMsg = await _approvalproccessService.FetchSingleApprovalStatus(Convert.ToInt32(fixingdemolition.ApprovalStatus));
-
-                        if (approvalproccess.SendTo != null)
-                        {
-                            #region Mail Generate
-                            //At successfull completion send mail and sms
-                            Uri uri = new Uri("https://encroachment.ddalmis.org.in/AnnexureAApproval/Index");
-                            string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "ApprovalMailDetailsContent.html");
-                            string link = "<a target=\"_blank\" href=\"" + uri + "\">Click Here</a>";
-                            string linkhref = "https://encroachment.ddalmis.org.in/AnnexureAApproval/Index";
-
-                            var senderUser = await _userProfileService.GetUserById(SiteContext.UserId);
-                            StringBuilder multousermailId = new StringBuilder();
                             if (approvalproccess.SendTo != null)
                             {
-                                int col = 0;
-                                string[] multiTo = approvalproccess.SendTo.Split(',');
-                                foreach (string MultiUserId in multiTo)
+                                #region Mail Generate
+                                //At successfull completion send mail and sms
+                                Uri uri = new Uri("https://encroachment.ddalmis.org.in/AnnexureAApproval/Index");
+                                string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "ApprovalMailDetailsContent.html");
+                                string link = "<a target=\"_blank\" href=\"" + uri + "\">Click Here</a>";
+                                string linkhref = "https://encroachment.ddalmis.org.in/AnnexureAApproval/Index";
+
+                                var senderUser = await _userProfileService.GetUserById(SiteContext.UserId);
+                                StringBuilder multousermailId = new StringBuilder();
+                                if (approvalproccess.SendTo != null)
                                 {
-                                    if (col > 0)
-                                        multousermailId.Append(",");
-                                    var RecevierUsers = await _userProfileService.GetUserById(Convert.ToInt32(MultiUserId));
-                                    multousermailId.Append(RecevierUsers.User.Email);
-                                    col++;
+                                    int col = 0;
+                                    string[] multiTo = approvalproccess.SendTo.Split(',');
+                                    foreach (string MultiUserId in multiTo)
+                                    {
+                                        if (col > 0)
+                                            multousermailId.Append(",");
+                                        var RecevierUsers = await _userProfileService.GetUserById(Convert.ToInt32(MultiUserId));
+                                        multousermailId.Append(RecevierUsers.User.Email);
+                                        col++;
+                                    }
                                 }
+
+                                #region Mail Generation Added By Renu
+
+                                MailSMSHelper mailG = new MailSMSHelper();
+
+                                #region HTML Body Generation
+                                ApprovalMailBodyDto bodyDTO = new ApprovalMailBodyDto();
+                                bodyDTO.ApplicationName = "Request for Demolition Application";
+                                bodyDTO.Status = DataApprovalSatatusMsg.SentStatusName;
+                                bodyDTO.SenderName = senderUser.User.Name;
+                                bodyDTO.Link = linkhref;
+                                bodyDTO.AppRefNo = fixingdemolition.RefNo;
+                                bodyDTO.SubmitDate = DateTime.Now.ToString("dd-MMM-yyyy");
+                                bodyDTO.Remarks = fixingdemolition.ApprovalRemarks;
+                                bodyDTO.path = path;
+                                string strBodyMsg = mailG.PopulateBodyApprovalMailDetails(bodyDTO);
+                                #endregion
+
+                                //sendMailResult = mailG.SendMailWithAttachment(strMailSubject, strBodyMsg, multousermailId.ToString(), strMailCC, strMailBCC, strAttachPath);
+                                #region Common Mail Genration
+                                SentMailGenerationDto maildto = new SentMailGenerationDto();
+                                maildto.strMailSubject = "Pending Request for Demolition Application Approval Request Details ";
+                                maildto.strMailCC = ""; maildto.strMailBCC = ""; maildto.strAttachPath = "";
+                                maildto.strBodyMsg = strBodyMsg;
+                                maildto.defaultPswd = (_configuration.GetSection("EmailConfiguration:defaultPswd").Value).ToString();
+                                maildto.fromMail = (_configuration.GetSection("EmailConfiguration:fromMail").Value).ToString();
+                                maildto.fromMailPwd = (_configuration.GetSection("EmailConfiguration:fromMailPwd").Value).ToString();
+                                maildto.mailHost = (_configuration.GetSection("EmailConfiguration:mailHost").Value).ToString();
+                                maildto.port = Convert.ToInt32(_configuration.GetSection("EmailConfiguration:port").Value);
+
+                                maildto.strMailTo = multousermailId.ToString();
+                                sendMailResult = mailG.SendMailWithAttachment(maildto);
+                                #endregion
+                                #endregion
+
+
+                                #endregion
                             }
-
-                            #region Mail Generation Added By Renu
-
-                            MailSMSHelper mailG = new MailSMSHelper();
-
-                            #region HTML Body Generation
-                            ApprovalMailBodyDto bodyDTO = new ApprovalMailBodyDto();
-                            bodyDTO.ApplicationName = "Request for Demolition Application";
-                            bodyDTO.Status = DataApprovalSatatusMsg.SentStatusName;
-                            bodyDTO.SenderName = senderUser.User.Name;
-                            bodyDTO.Link = linkhref;
-                            bodyDTO.AppRefNo = fixingdemolition.RefNo;
-                            bodyDTO.SubmitDate = DateTime.Now.ToString("dd-MMM-yyyy");
-                            bodyDTO.Remarks = fixingdemolition.ApprovalRemarks;
-                            bodyDTO.path = path;
-                            string strBodyMsg = mailG.PopulateBodyApprovalMailDetails(bodyDTO);
-                            #endregion
-
-                            //sendMailResult = mailG.SendMailWithAttachment(strMailSubject, strBodyMsg, multousermailId.ToString(), strMailCC, strMailBCC, strAttachPath);
-                            #region Common Mail Genration
-                            SentMailGenerationDto maildto = new SentMailGenerationDto();
-                            maildto.strMailSubject = "Pending Request for Demolition Application Approval Request Details ";
-                            maildto.strMailCC = ""; maildto.strMailBCC = ""; maildto.strAttachPath = "";
-                            maildto.strBodyMsg = strBodyMsg;
-                            maildto.defaultPswd = (_configuration.GetSection("EmailConfiguration:defaultPswd").Value).ToString();
-                            maildto.fromMail = (_configuration.GetSection("EmailConfiguration:fromMail").Value).ToString();
-                            maildto.fromMailPwd = (_configuration.GetSection("EmailConfiguration:fromMailPwd").Value).ToString();
-                            maildto.mailHost = (_configuration.GetSection("EmailConfiguration:mailHost").Value).ToString();
-                            maildto.port = Convert.ToInt32(_configuration.GetSection("EmailConfiguration:port").Value);
-
-                            maildto.strMailTo = multousermailId.ToString();
-                            sendMailResult = mailG.SendMailWithAttachment(maildto);
-                            #endregion
-                            #endregion
-
-
-                            #endregion
-                        }
-                        if (result)
-                        {
-                            if (sendMailResult)
-                                ViewBag.Message = Alert.Show("Record " + DataApprovalSatatusMsg.SentStatusName + " Successfully  and Information Sent on emailid and Mobile No", "", AlertType.Success);
-                            else if (approvalproccess.PendingStatus == 0)
-                                ViewBag.Message = Alert.Show("Record " + DataApprovalSatatusMsg.SentStatusName + " Successfully", "", AlertType.Success);
-                            else
-                                ViewBag.Message = Alert.Show("Record " + DataApprovalSatatusMsg.SentStatusName + " Successfully  But Unable to Sent information on emailid or mobile no. due to network issue", "", AlertType.Info);
-
-                            Fixingdemolition data = new Fixingdemolition();
-                            var dropdownValue = await GetApprovalStatusDropdownListAtIndex();
-                            int[] actions = Array.ConvertAll(dropdownValue, int.Parse);
-                            data.ApprovalStatusList = await _approvalproccessService.BindDropdownApprovalStatus(actions.Distinct().ToArray());
-                            data.ApprovalStatusList = await _approvalproccessService.BindDropdownApprovalStatus(actions.Distinct().ToArray());
-                            // For Approval Status
-                            if (fixingdemolition.ApprovalStatus == "3" && SiteContext.UserId == 58) // 58 For CLM and 3 For Approved
+                            if (result)
                             {
-                                Random random = new Random();
-                                var otp = random.Next(111111, 999999);
-                                string Action = otp.ToString();
-                                string Mobile = _propertyRegistrationService.GetMobileNo(SiteContext.UserId);
-                                HttpContext.Session.SetString("OTP", otp.ToString());
-                                SendSMSDto SMS = new SendSMSDto();
-                                SMS.GenerateSendSMS(Action, Mobile);
-                                return RedirectToAction("OTP");
+                                if (sendMailResult)
+                                    ViewBag.Message = Alert.Show("Record " + DataApprovalSatatusMsg.SentStatusName + " Successfully  and Information Sent on emailid and Mobile No", "", AlertType.Success);
+                                else if (approvalproccess.PendingStatus == 0)
+                                    ViewBag.Message = Alert.Show("Record " + DataApprovalSatatusMsg.SentStatusName + " Successfully", "", AlertType.Success);
+                                else
+                                    ViewBag.Message = Alert.Show("Record " + DataApprovalSatatusMsg.SentStatusName + " Successfully  But Unable to Sent information on emailid or mobile no. due to network issue", "", AlertType.Info);
+
+
+
                             }
                             else
                             {
-                                return View("Index", data);
+                                ViewBag.Items = await _userProfileService.GetRole();
+                                await BindApprovalStatusDropdown(fixingdemolition);
+                                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                                return View(fixingdemolition);
                             }
 
-                        }
-                        else
-                        {
-                            ViewBag.Items = await _userProfileService.GetRole();
-                            await BindApprovalStatusDropdown(fixingdemolition);
-                            ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                            return View(fixingdemolition);
-                        }
 
-
+                        }
+                        //end code block
+                        #endregion
+                        return View("Index", data);
+                        //return View(fixingdemolition);
                     }
+
                 }
                 else
                 {
@@ -515,7 +521,7 @@ namespace EncroachmentDemolition.Controllers
                     ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
                     return View(fixingdemolition);
                 }
-                #endregion
+
 
             }
 
@@ -537,6 +543,7 @@ namespace EncroachmentDemolition.Controllers
         [HttpPost]
         public async Task<IActionResult> OTP(Fixingdemolition fixingdemolition)
         {
+            var result = false;
             if (HttpContext.Session.GetString("OTP") != null)
             {
                 string otp = HttpContext.Session.GetString("OTP").ToString();
@@ -544,9 +551,375 @@ namespace EncroachmentDemolition.Controllers
 
                 if (fixingdemolition.Otp == otp)
                 {
+                    if (HttpContext.Session.GetString("id") != null)
+                    {
+                        int id = Convert.ToInt32(HttpContext.Session.GetString("id"));
 
-                    ViewBag.Message = Alert.Show("Demolition Program successfully Approved.", "Application Approved", AlertType.Success, Position.TopRight, 20000);
-                    TempData["Message"] = Alert.Show("Demolition Program successfully Approved.", "", AlertType.Success);
+                        string data = HttpContext.Session.GetString("fixingdemolition").ToString();
+
+                        fixingdemolition = JsonConvert.DeserializeObject<Fixingdemolition>(data);
+
+                        #region Approval Proccess At Further level start Added by Renu 16 march 2021
+                        var Data = await _annexureAApprovalService.FetchSingleResult(id);
+                        FileHelper fileHelper = new FileHelper();
+                        var FirstApprovalProcessData = await _approvalproccessService.FirstApprovalProcessData((_configuration.GetSection("workflowPreccessGuidRequestDemolition").Value), fixingdemolition.Id);
+                        var ApprovalProccessBackId = _approvalproccessService.GetPreviousApprovalId((_configuration.GetSection("workflowPreccessGuidRequestDemolition").Value), fixingdemolition.Id);
+                        var ApprovalProcessBackData = await _approvalproccessService.FetchApprovalProcessDocumentDetails(ApprovalProccessBackId);
+                        var checkLastApprovalStatuscode = await _approvalproccessService.FetchSingleApprovalStatus(Convert.ToInt32(ApprovalProcessBackData.Status));
+
+                        var DataFlow = await DataAsync(ApprovalProcessBackData.Version);
+
+                        Approvalproccess approvalproccess = new Approvalproccess();
+
+                        /*Check if zonewise then aprovee user must have zoneid*/
+                        if (fixingdemolition.ApprovalStatusCode == ((int)ApprovalActionStatus.Forward) && checkLastApprovalStatuscode.StatusCode != ((int)ApprovalActionStatus.QueryForward))
+                        {
+                            for (int i = 0; i < DataFlow.Count; i++)
+                            {
+                                if (!DataFlow[i].parameterSkip)
+                                {
+                                    if (i == ApprovalProcessBackData.Level - 1 && Convert.ToInt32(DataFlow[i].parameterLevel) == ApprovalProcessBackData.Level)
+                                    {
+                                        for (int d = i + 1; d < DataFlow.Count; d++)
+                                        {
+                                            if (!DataFlow[d].parameterSkip)
+                                            {
+                                                if (DataFlow[d].parameterConditional == (_configuration.GetSection("ApprovalZoneWise").Value))
+                                                {
+                                                    if (SiteContext.ZoneId == null)
+                                                    {
+                                                        ViewBag.Items = await _userProfileService.GetRole();
+                                                        await BindApprovalStatusDropdown(fixingdemolition);
+                                                        ViewBag.Message = Alert.Show("Your Zone is not available , Without zone application cannot be processed further, Please contact system administrator", "", AlertType.Warning);
+                                                        return View(fixingdemolition);
+                                                    }
+
+                                                    fixingdemolition.ApprovalZoneId = SiteContext.ZoneId;
+                                                }
+                                                break;
+                                            }
+                                        }
+                                    }
+
+                                }
+                            }
+                        }
+
+                        if (ApprovalProcessBackData.Level == FirstApprovalProcessData.Level && fixingdemolition.ApprovalStatusCode == ((int)ApprovalActionStatus.Revert))//check if revert available at first level
+                        {
+                            result = false;
+                            ViewBag.Items = await _userProfileService.GetRole();
+                            await BindApprovalStatusDropdown(fixingdemolition);
+                            ViewBag.Message = Alert.Show("Application cannot be Reverted at First Level", "", AlertType.Warning);
+                            return View(fixingdemolition);
+                        }
+                        else
+                        {
+                            /* Update last record pending status in Approval Process Table*/
+                            result = true;
+                            approvalproccess.PendingStatus = 0;
+                            result = await _approvalproccessService.UpdatePreviousApprovalProccess(ApprovalProccessBackId, approvalproccess, SiteContext.UserId);
+
+                            /*Now New row added in Approval process*/
+                            approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
+                            approvalproccess.ProcessGuid = (_configuration.GetSection("workflowPreccessGuidRequestDemolition").Value);
+                            approvalproccess.ServiceId = fixingdemolition.Id;
+                            approvalproccess.SendFrom = SiteContext.UserId.ToString();
+                            approvalproccess.SendFromProfileId = SiteContext.ProfileId.ToString();
+                            approvalproccess.PendingStatus = 1;
+                            approvalproccess.Remarks = fixingdemolition.ApprovalRemarks; ///May be comment
+                            approvalproccess.Status = Convert.ToInt32(fixingdemolition.ApprovalStatus);
+                            approvalproccess.Version = ApprovalProcessBackData.Version;
+                            approvalproccess.DocumentName = fixingdemolition.ApprovalDocument == null ? null : fileHelper.SaveFile1(ApprovalDocumentPath, fixingdemolition.ApprovalDocument);
+
+
+                            if (checkLastApprovalStatuscode.StatusCode == ((int)ApprovalActionStatus.QueryForward)) // check islast approvalrow is of query type then return to the same user
+                            {
+                                approvalproccess.Level = ApprovalProcessBackData.Level;
+                                approvalproccess.SendTo = ApprovalProcessBackData.SendFrom;
+                                #region set sendto and sendtoprofileid 
+                                StringBuilder multouserprofileid = new StringBuilder();
+                                int col = 0;
+                                if (approvalproccess.SendTo != null)
+                                {
+                                    string[] multiTo = approvalproccess.SendTo.Split(',');
+                                    foreach (string MultiUserId in multiTo)
+                                    {
+                                        if (col > 0)
+                                            multouserprofileid.Append(",");
+                                        var UserProfile = await _userProfileService.GetUserById(Convert.ToInt32(MultiUserId));
+                                        multouserprofileid.Append(UserProfile.Id);
+                                        col++;
+                                    }
+                                    approvalproccess.SendToProfileId = multouserprofileid.ToString();
+                                }
+                                #endregion
+
+                                result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
+                                #region Insert Into usernotification table Added By Renu 18 June 2021
+                                if (result == true && approvalproccess.SendTo != null)
+                                {
+                                    var notificationtemplate = await _approvalproccessService.FetchSingleNotificationTemplate(_configuration.GetSection("userNotificationGuidRequestDemolition").Value);
+                                    var user = await _userProfileService.GetUserById(SiteContext.UserId);
+                                    Usernotification usernotification = new Usernotification();
+                                    var replacement = notificationtemplate.Template.Replace("{proccess name}", "Request for Demolition").Replace("{from user}", user.User.UserName).Replace("{datetime}", DateTime.Now.ToString());
+                                    usernotification.Message = replacement;
+                                    usernotification.UserNotificationGuid = (_configuration.GetSection("userNotificationGuidRequestDemolition").Value);
+                                    usernotification.ProcessGuid = approvalproccess.ProcessGuid;
+                                    usernotification.ServiceId = approvalproccess.ServiceId;
+                                    usernotification.SendFrom = approvalproccess.SendFrom;
+                                    usernotification.SendTo = approvalproccess.SendTo;
+                                    result = await _userNotificationService.Create(usernotification, SiteContext.UserId);
+                                }
+                                #endregion
+                                if (result)
+                                {
+                                    fixingdemolition.ApprovedStatus = Convert.ToInt32(fixingdemolition.ApprovalStatus);
+                                    fixingdemolition.PendingAt = ApprovalProcessBackData.SendFrom;
+                                    result = await _annexureAService.UpdateBeforeApproval(fixingdemolition.Id, fixingdemolition);  //Update Table details 
+                                }
+                            }
+                            else
+                            {
+                                for (int i = 0; i < DataFlow.Count; i++)
+                                {
+                                    if (!DataFlow[i].parameterSkip)
+                                    {
+                                        if (i == ApprovalProcessBackData.Level - 1 && Convert.ToInt32(DataFlow[i].parameterLevel) == ApprovalProcessBackData.Level)
+                                        {
+                                            if (result)
+                                            {
+                                                if (fixingdemolition.ApprovalStatusCode == ((int)ApprovalActionStatus.QueryForward))
+                                                {
+                                                    approvalproccess.Level = ApprovalProcessBackData.Level;
+                                                    approvalproccess.SendTo = fixingdemolition.ApprovalUserId.ToString();
+                                                }
+                                                else if (fixingdemolition.ApprovalStatusCode == ((int)ApprovalActionStatus.Revert))
+                                                {
+                                                    /*Check previous level for revert */
+                                                    for (int d = i - 1; d >= 0; d--)
+                                                    {
+                                                        if (!DataFlow[d].parameterSkip)
+                                                        {
+                                                            var CheckLastUserForRevert = await _approvalproccessService.CheckLastUserForRevert((_configuration.GetSection("workflowPreccessGuidRequestDemolition").Value), fixingdemolition.Id, Convert.ToInt32(DataFlow[i].parameterLevel));
+                                                            approvalproccess.SendTo = CheckLastUserForRevert == null ? null : CheckLastUserForRevert.SendFrom;
+                                                            approvalproccess.Level = Convert.ToInt32(DataFlow[d].parameterLevel);
+
+                                                            break;
+                                                        }
+                                                    }
+                                                }
+                                                else if (fixingdemolition.ApprovalStatusCode == ((int)ApprovalActionStatus.Rejected))
+                                                {
+                                                    approvalproccess.Level = ApprovalProcessBackData.Level;
+                                                    approvalproccess.SendTo = null;
+                                                    approvalproccess.PendingStatus = 0;
+                                                }
+                                                else  // Forward Check
+                                                {
+                                                    if (i == DataFlow.Count - 1)
+                                                    {
+                                                        approvalproccess.Level = 0;
+                                                        approvalproccess.SendTo = null;
+                                                        approvalproccess.PendingStatus = 0;
+                                                    }
+                                                    else
+                                                    {
+                                                        /*Conditional check and other role user wise checks*/
+                                                        for (int d = i + 1; d < DataFlow.Count; d++)
+                                                        {
+                                                            if (!DataFlow[d].parameterSkip)
+                                                            {
+                                                                approvalproccess.Level = Convert.ToInt32(DataFlow[d].parameterLevel);
+                                                                break;
+                                                            }
+                                                        }
+                                                        approvalproccess.SendTo = fixingdemolition.ApprovalUserId.ToString();
+
+                                                    }
+                                                }
+
+                                                #region set sendto and sendtoprofileid 
+                                                StringBuilder multouserprofileid = new StringBuilder();
+                                                int col = 0;
+                                                if (approvalproccess.SendTo != null)
+                                                {
+                                                    string[] multiTo = approvalproccess.SendTo.Split(',');
+                                                    foreach (string MultiUserId in multiTo)
+                                                    {
+                                                        if (col > 0)
+                                                            multouserprofileid.Append(",");
+                                                        var UserProfile = await _userProfileService.GetUserById(Convert.ToInt32(MultiUserId));
+                                                        multouserprofileid.Append(UserProfile.Id);
+                                                        col++;
+                                                    }
+                                                    approvalproccess.SendToProfileId = multouserprofileid.ToString();
+                                                }
+                                                else if (approvalproccess.SendTo == null && (fixingdemolition.ApprovalStatusCode != ((int)ApprovalActionStatus.Rejected) && fixingdemolition.ApprovalStatusCode != ((int)ApprovalActionStatus.Approved)))
+                                                {
+                                                    ViewBag.Items = await _userProfileService.GetRole();
+                                                    await BindApprovalStatusDropdown(fixingdemolition);
+                                                    ViewBag.Message = Alert.Show("No user found at the next approval level, In this case, the system is unable to process your request. Please contact to the system administrator.", "", AlertType.Warning);
+                                                    return View(fixingdemolition);
+                                                }
+                                                #endregion
+
+                                                result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
+                                                #region Insert Into usernotification table Added By Renu 18 June 2021
+                                                if (result == true && approvalproccess.SendTo != null)
+                                                {
+                                                    var notificationtemplate = await _approvalproccessService.FetchSingleNotificationTemplate(_configuration.GetSection("userNotificationGuidRequestDemolition").Value);
+                                                    var user = await _userProfileService.GetUserById(SiteContext.UserId);
+                                                    Usernotification usernotification = new Usernotification();
+                                                    var replacement = notificationtemplate.Template.Replace("{proccess name}", "Request for Demolition").Replace("{from user}", user.User.UserName).Replace("{datetime}", DateTime.Now.ToString());
+                                                    usernotification.Message = replacement;
+                                                    usernotification.UserNotificationGuid = (_configuration.GetSection("userNotificationGuidRequestDemolition").Value);
+                                                    usernotification.ProcessGuid = approvalproccess.ProcessGuid;
+                                                    usernotification.ServiceId = approvalproccess.ServiceId;
+                                                    usernotification.SendFrom = approvalproccess.SendFrom;
+                                                    usernotification.SendTo = approvalproccess.SendTo;
+                                                    result = await _userNotificationService.Create(usernotification, SiteContext.UserId);
+                                                }
+                                                #endregion
+
+                                                if (result)
+                                                {
+                                                    if (fixingdemolition.ApprovalStatusCode == ((int)ApprovalActionStatus.QueryForward))
+                                                    {
+                                                        fixingdemolition.ApprovedStatus = Convert.ToInt32(fixingdemolition.ApprovalStatus);
+                                                        fixingdemolition.PendingAt = approvalproccess.SendTo;
+                                                    }
+                                                    else if (fixingdemolition.ApprovalStatusCode == ((int)ApprovalActionStatus.Revert))
+                                                    {
+                                                        fixingdemolition.ApprovedStatus = Convert.ToInt32(fixingdemolition.ApprovalStatus);
+                                                        fixingdemolition.PendingAt = approvalproccess.SendTo;
+                                                    }
+                                                    else if (fixingdemolition.ApprovalStatusCode == ((int)ApprovalActionStatus.Rejected))
+                                                    {
+                                                        fixingdemolition.ApprovedStatus = Convert.ToInt32(fixingdemolition.ApprovalStatus);
+                                                        fixingdemolition.PendingAt = "0";
+                                                    }
+                                                    else
+                                                    {
+                                                        if (i == DataFlow.Count - 1)
+                                                        {
+                                                            fixingdemolition.ApprovedStatus = Convert.ToInt32(fixingdemolition.ApprovalStatus);
+                                                            fixingdemolition.PendingAt = "0";
+                                                        }
+                                                        else
+                                                        {
+                                                            fixingdemolition.ApprovedStatus = Convert.ToInt32(fixingdemolition.ApprovalStatus);
+                                                            fixingdemolition.PendingAt = approvalproccess.SendTo;
+                                                        }
+                                                    }
+                                                    result = await _annexureAService.UpdateBeforeApproval(fixingdemolition.Id, fixingdemolition);  //Update Table details 
+                                                }
+                                            }
+                                            break;
+
+
+
+
+                                        }
+                                    }
+                                }
+
+                            }
+                            var sendMailResult = false;
+
+                            var DataApprovalSatatusMsg = await _approvalproccessService.FetchSingleApprovalStatus(Convert.ToInt32(fixingdemolition.ApprovalStatus));
+
+                            if (approvalproccess.SendTo != null)
+                            {
+                                #region Mail Generate
+                                //At successfull completion send mail and sms
+                                Uri uri = new Uri("https://encroachment.ddalmis.org.in/AnnexureAApproval/Index");
+                                string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "ApprovalMailDetailsContent.html");
+                                string link = "<a target=\"_blank\" href=\"" + uri + "\">Click Here</a>";
+                                string linkhref = "https://encroachment.ddalmis.org.in/AnnexureAApproval/Index";
+
+                                var senderUser = await _userProfileService.GetUserById(SiteContext.UserId);
+                                StringBuilder multousermailId = new StringBuilder();
+                                if (approvalproccess.SendTo != null)
+                                {
+                                    int col = 0;
+                                    string[] multiTo = approvalproccess.SendTo.Split(',');
+                                    foreach (string MultiUserId in multiTo)
+                                    {
+                                        if (col > 0)
+                                            multousermailId.Append(",");
+                                        var RecevierUsers = await _userProfileService.GetUserById(Convert.ToInt32(MultiUserId));
+                                        multousermailId.Append(RecevierUsers.User.Email);
+                                        col++;
+                                    }
+                                }
+
+                                #region Mail Generation Added By Renu
+
+                                MailSMSHelper mailG = new MailSMSHelper();
+
+                                #region HTML Body Generation
+                                ApprovalMailBodyDto bodyDTO = new ApprovalMailBodyDto();
+                                bodyDTO.ApplicationName = "Request for Demolition Application";
+                                bodyDTO.Status = DataApprovalSatatusMsg.SentStatusName;
+                                bodyDTO.SenderName = senderUser.User.Name;
+                                bodyDTO.Link = linkhref;
+                                bodyDTO.AppRefNo = fixingdemolition.RefNo;
+                                bodyDTO.SubmitDate = DateTime.Now.ToString("dd-MMM-yyyy");
+                                bodyDTO.Remarks = fixingdemolition.ApprovalRemarks;
+                                bodyDTO.path = path;
+                                string strBodyMsg = mailG.PopulateBodyApprovalMailDetails(bodyDTO);
+                                #endregion
+
+                                //sendMailResult = mailG.SendMailWithAttachment(strMailSubject, strBodyMsg, multousermailId.ToString(), strMailCC, strMailBCC, strAttachPath);
+                                #region Common Mail Genration
+                                SentMailGenerationDto maildto = new SentMailGenerationDto();
+                                maildto.strMailSubject = "Pending Request for Demolition Application Approval Request Details ";
+                                maildto.strMailCC = ""; maildto.strMailBCC = ""; maildto.strAttachPath = "";
+                                maildto.strBodyMsg = strBodyMsg;
+                                maildto.defaultPswd = (_configuration.GetSection("EmailConfiguration:defaultPswd").Value).ToString();
+                                maildto.fromMail = (_configuration.GetSection("EmailConfiguration:fromMail").Value).ToString();
+                                maildto.fromMailPwd = (_configuration.GetSection("EmailConfiguration:fromMailPwd").Value).ToString();
+                                maildto.mailHost = (_configuration.GetSection("EmailConfiguration:mailHost").Value).ToString();
+                                maildto.port = Convert.ToInt32(_configuration.GetSection("EmailConfiguration:port").Value);
+
+                                maildto.strMailTo = multousermailId.ToString();
+                                sendMailResult = mailG.SendMailWithAttachment(maildto);
+                                #endregion
+                                #endregion
+                                #endregion
+                            }
+                            if (result)
+                            {
+                                if (sendMailResult)
+                                    ViewBag.Message = Alert.Show("Record " + DataApprovalSatatusMsg.SentStatusName + " Successfully  and Information Sent on emailid and Mobile No", "", AlertType.Success);
+                                else if (approvalproccess.PendingStatus == 0)
+                                    ViewBag.Message = Alert.Show("Record " + DataApprovalSatatusMsg.SentStatusName + " Successfully", "", AlertType.Success);
+                                else
+                                    ViewBag.Message = Alert.Show("Record " + DataApprovalSatatusMsg.SentStatusName + " Successfully  But Unable to Sent information on emailid or mobile no. due to network issue", "", AlertType.Info);
+                            }
+                            else
+                            {
+                                ViewBag.Items = await _userProfileService.GetRole();
+                                await BindApprovalStatusDropdown(fixingdemolition);
+                                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                                return View(fixingdemolition);
+                            }
+
+
+                        }
+                        //end code block
+                        #endregion
+
+
+                        ViewBag.Message = Alert.Show("Demolition Program successfully Approved.", "Application Approved", AlertType.Success, Position.TopRight, 20000);
+                        TempData["Message"] = Alert.Show("Demolition Program successfully Approved.", "", AlertType.Success);
+                    }
+                    else
+                    {
+                        ViewBag.Message = Alert.Show("System is unable to process your request, Kindly retry", "Warning", AlertType.Warning, Position.TopRight, 20000);
+                        TempData["Message"] = Alert.Show("Demolition Program successfully Approved.", "", AlertType.Success);
+                    }
                     return RedirectToAction("Index");
                 }
                 else
@@ -566,6 +939,7 @@ namespace EncroachmentDemolition.Controllers
             return RedirectToAction("Index");
         }
         #endregion
+
 
         #region Watch & Ward  Details
         public async Task<PartialViewResult> WatchWardView(int id)
@@ -1107,7 +1481,7 @@ namespace EncroachmentDemolition.Controllers
 
             return View(Data);
         }
-   
+
         public async Task<PartialViewResult> EncroachmentRegisterprint(int id)
         {
             var encroachmentRegisterations = await _encroachmentRegisterationService.FetchSingleResult(id);
@@ -1137,7 +1511,7 @@ namespace EncroachmentDemolition.Controllers
         }
 
         [HttpPost]
-       // [ValidateInput(false)]
+        // [ValidateInput(false)]
         public FileResult Export(string htmlstring)
         {
             HtmlNode.ElementsFlags["img"] = HtmlElementFlag.Closed;

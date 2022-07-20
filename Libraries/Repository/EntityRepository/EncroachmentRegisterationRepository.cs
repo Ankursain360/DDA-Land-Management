@@ -70,7 +70,15 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<List<Division>> GetAllDivision(int zoneId)
         {
-            return await _dbContext.Division.Where(x => x.ZoneId == zoneId && x.IsActive == 1).ToListAsync();
+            var result=  await _dbContext.Division.Where(x => x.ZoneId == zoneId && x.IsActive == 1).ToListAsync();
+
+            List<Division> list = result
+                          .Select(o => new Division
+                          {
+                              Id = o.Id,
+                              Name = o.Name
+                          }).ToList();
+            return list;
         }
 
         public async Task<List<EncroachmentRegisteration>> GetAllEncroachmentRegisteration()
@@ -104,7 +112,14 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<Zone>> GetAllZone(int departmentId)
         {
-            return await _dbContext.Zone.Where(x => x.DepartmentId == departmentId && x.IsActive == 1).ToListAsync();
+            var result= await _dbContext.Zone.Where(x => x.DepartmentId == departmentId && x.IsActive == 1).ToListAsync();
+            List<Zone> list = result
+                         .Select(o => new Zone
+                         {
+                             Id = o.Id,
+                             Name = o.Name
+                         }).ToList();
+            return list;
         }
 
         public async Task<List<DetailsOfEncroachment>> GetDetailsOfEncroachment(int encroachmentId)
