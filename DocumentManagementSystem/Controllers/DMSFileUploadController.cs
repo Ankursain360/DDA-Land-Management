@@ -382,6 +382,7 @@ namespace DocumentManagementSystem.Controllers
         public async Task<IActionResult> View(int id)
         {
             var Data = await _dmsfileuploadService.FetchSingleResult(id);
+            Data.VillageList = await _dmsfileuploadService.allVillageList(Data.ZoneId);
             await BindDropDown(Data);
             if (Data == null)
             {

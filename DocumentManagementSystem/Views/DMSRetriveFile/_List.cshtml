@@ -5,12 +5,12 @@
     <thead class="text-nowrap">
         <tr>
             <th>Department</th>
-            <th> Locality </th>
-            <th> Khasra No. </th>
+            @*<th> Locality </th>
+            <th> Khasra No. </th>*@
             <th> File No. </th>
-            <th> Allotte Name</th>
+            @*<th> Allotte Name</th>*@
             <th> Property No./Address </th>
-            <th> Almirah No. </th>
+            @*<th> Almirah No. </th>*@
             <th> Title </th>
             <th> Document Category </th>
             <th> Action  </th>
@@ -24,12 +24,12 @@
             {
         <tr>
             <td>@(item.Department == null ? "" : item.Department.Name)</td>
-            <td>@(item.Locality == null ? "" : item.Locality.Name)</td>
-            <td>@(item.KhasraNo == null ? "" : item.KhasraNo.KhasraNo)</td>
+            @*<td>@(item.Locality == null ? "" : item.Locality.Name)</td>
+            <td>@(item.KhasraNo == null ? "" : item.KhasraNo.KhasraNo)</td>*@
             <td>@item.FileNo</td>
-            <td>@item.AlloteeName</td>
+            @*<td>@item.AlloteeName</td>*@
             <td>@item.PropertyNoAddress</td>
-            <td>@item.AlmirahNo</td>
+            @*<td>@item.AlmirahNo</td>*@
             <td>@item.Title</td>
             <td>@(item.Category == null ? "" : item.Category.CategoryName)</td>
             @if (ViewBag.View == 0 && ViewBag.Download == 0)
