@@ -362,7 +362,7 @@ namespace DocumentManagementSystem.Controllers
                     ViewBag.LocalityList = await _dmsfileuploadService.GetLocalityList();
                     ViewBag.DepartmentList = await _dmsfileuploadService.GetDepartmentList();
                     ViewBag.KhasraNoList = await _dmsfileuploadService.GetKhasraNoList();
-                    ViewBag.CategoryList = await _dmsfileuploadService.allcategoryList();
+                    ViewBag.categoryList = await _dmsfileuploadService.allcategoryList();
                     return View("Index");
                 }
                 else
@@ -405,7 +405,7 @@ namespace DocumentManagementSystem.Controllers
             ViewBag.DepartmentList = await _dmsfileuploadService.GetDepartmentList();
             ViewBag.LocalityList = await _dmsfileuploadService.GetLocalityList();
             ViewBag.KhasraNoList = await _dmsfileuploadService.GetKhasraNoList();
-            ViewBag.CategoryList = await _dmsfileuploadService.allcategoryList();
+            ViewBag.categoryList = await _dmsfileuploadService.allcategoryList();
             return View("Index");
         }
         private string GetContentType(string path)

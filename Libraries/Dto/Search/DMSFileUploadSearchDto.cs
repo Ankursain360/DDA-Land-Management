@@ -8,5 +8,6 @@ namespace Dto.Search
         public int departmentId { get; set; }
         public int localityId { get; set; }
         public int KhasraId { get; set; }
+        public int CategoryId { get; set; } 
     }
 }

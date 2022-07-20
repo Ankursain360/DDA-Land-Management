@@ -75,6 +75,7 @@ namespace Libraries.Repository.EntityRepository
                                         .Where(x => x.DepartmentId == (model.departmentId == 0 ? x.DepartmentId : model.departmentId)
                                         && (x.LocalityId == (model.localityId == 0 ? x.LocalityId : model.localityId))
                                         && (x.KhasraNoId == (model.KhasraId == 0 ? x.KhasraNoId : model.KhasraId))
+                                        && (x.CategoryId == (model.CategoryId == 0 ? x.CategoryId : model.CategoryId))
                                         )
                                         .GetPaged<Dmsfileupload>(model.PageNumber, model.PageSize);
             int SortOrder = (int)model.SortOrder;
@@ -91,10 +92,12 @@ namespace Libraries.Repository.EntityRepository
                                         .Where(x => x.DepartmentId == (model.departmentId == 0 ? x.DepartmentId : model.departmentId)
                                         && (x.LocalityId == (model.localityId == 0 ? x.LocalityId : model.localityId))
                                         && (x.KhasraNoId == (model.KhasraId == 0 ? x.KhasraNoId : model.KhasraId))
+                                        && (x.CategoryId == (model.CategoryId == 0 ? x.CategoryId : model.CategoryId))
                                         )
                                 .OrderBy(s =>
                                 (model.SortBy.ToUpper() == "FILENO" ? s.FileNo
                                 : model.SortBy.ToUpper() == "DEPARTMENT" ? (s.Department == null ? null : s.Department.Name)
+                                : model.SortBy.ToUpper() == "CATEGORY" ? (s.Category == null ? null : s.Category.CategoryName)
                                 : model.SortBy.ToUpper() == "LOCALITY" ? (s.Locality != null ? s.Locality.Name : null)
                                 : model.SortBy.ToUpper() == "KHASRANO" ? (s.KhasraNo != null ? s.KhasraNo.KhasraNo : null) : s.FileNo)
                                 )
@@ -113,10 +116,12 @@ namespace Libraries.Repository.EntityRepository
                                         .Where(x => x.DepartmentId == (model.departmentId == 0 ? x.DepartmentId : model.departmentId)
                                         && (x.LocalityId == (model.localityId == 0 ? x.LocalityId : model.localityId))
                                         && (x.KhasraNoId == (model.KhasraId == 0 ? x.KhasraNoId : model.KhasraId))
+                                        && (x.CategoryId == (model.CategoryId == 0 ? x.CategoryId : model.CategoryId))
                                         )
                                 .OrderByDescending(s =>
                                 (model.SortBy.ToUpper() == "FILENO" ? s.FileNo
                                 : model.SortBy.ToUpper() == "DEPARTMENT" ? (s.Department == null ? null : s.Department.Name)
+                                : model.SortBy.ToUpper() == "CATEGORY" ? (s.Category == null ? null : s.Category.CategoryName)
                                 : model.SortBy.ToUpper() == "LOCALITY" ? (s.Locality != null ? s.Locality.Name : null)
                                 : model.SortBy.ToUpper() == "KHASRANO" ? (s.KhasraNo != null ? s.KhasraNo.KhasraNo : null) : s.FileNo)
                                 )
@@ -190,6 +195,7 @@ namespace Libraries.Repository.EntityRepository
                                         .Where(x => x.DepartmentId == (model.Department == 0 ? x.DepartmentId : model.Department)
                                         && (x.LocalityId == (model.Locality == 0 ? x.LocalityId : model.Locality))
                                         && (x.KhasraNoId == (model.Khasra == 0 ? x.KhasraNoId : model.Khasra))
+                                        && (x.CategoryId == (model.Category == 0 ? x.CategoryId : model.Category))
                                         && (x.FileNo.ToUpper().Trim().Contains(model.FileNo == "" ? x.FileNo.ToUpper().Trim() : model.FileNo.ToUpper().Trim()))
                                         && (x.PropertyNoAddress.ToUpper().Trim().Contains(model.PropertyNo == "" ? x.PropertyNoAddress.ToUpper().Trim() : model.PropertyNo.ToUpper().Trim()))
                                         && (x.AlmirahNo.ToUpper().Trim().Contains(model.AlmirahNo == "" ? x.AlmirahNo.ToUpper().Trim() : model.AlmirahNo.ToUpper().Trim()))
@@ -208,6 +214,7 @@ namespace Libraries.Repository.EntityRepository
                                         .Where(x => x.DepartmentId == (model.Department == 0 ? x.DepartmentId : model.Department)
                                         && (x.LocalityId == (model.Locality == 0 ? x.LocalityId : model.Locality))
                                         && (x.KhasraNoId == (model.Khasra == 0 ? x.KhasraNoId : model.Khasra))
+                                        &&(x.CategoryId ==(model.Category == 0? x.CategoryId:model.Category))
                                         && (x.FileNo.ToUpper().Trim().Contains(model.FileNo == "" ? x.FileNo.ToUpper().Trim() : model.FileNo.ToUpper().Trim()))
                                         && (x.PropertyNoAddress.ToUpper().Trim().Contains(model.PropertyNo == "" ? x.PropertyNoAddress.ToUpper().Trim() : model.PropertyNo.ToUpper().Trim()))
                                         && (x.AlmirahNo.ToUpper().Trim().Contains(model.AlmirahNo == "" ? x.AlmirahNo.ToUpper().Trim() : model.AlmirahNo.ToUpper().Trim()))
@@ -217,6 +224,7 @@ namespace Libraries.Repository.EntityRepository
                                 (model.SortBy.ToUpper() == "FILENO" ? s.FileNo
                                 : model.SortBy.ToUpper() == "DEPARTMENT" ? (s.Department == null ? null : s.Department.Name)
                                 : model.SortBy.ToUpper() == "LOCALITY" ? (s.Locality != null ? s.Locality.Name : null)
+                                : model.SortBy.ToUpper() == "CATEGORY" ? (s.Category == null ? null : s.Category.CategoryName)
                                 //: model.SortBy.ToUpper() == "KHASRANO" ? (s.KhasraNo != null ? s.KhasraNo.KhasraNo : null)
                                 : s.FileNo)
                                 )
@@ -233,6 +241,7 @@ namespace Libraries.Repository.EntityRepository
                                         .Where(x => x.DepartmentId == (model.Department == 0 ? x.DepartmentId : model.Department)
                                         && (x.LocalityId == (model.Locality == 0 ? x.LocalityId : model.Locality))
                                         && (x.KhasraNoId == (model.Khasra == 0 ? x.KhasraNoId : model.Khasra))
+                                        && (x.CategoryId == (model.Category == 0 ? x.CategoryId : model.Category))
                                         && (x.FileNo.ToUpper().Trim().Contains(model.FileNo == "" ? x.FileNo.ToUpper().Trim() : model.FileNo.ToUpper().Trim()))
                                         && (x.PropertyNoAddress.ToUpper().Trim().Contains(model.PropertyNo == "" ? x.PropertyNoAddress.ToUpper().Trim() : model.PropertyNo.ToUpper().Trim()))
                                         && (x.AlmirahNo.ToUpper().Trim().Contains(model.AlmirahNo == "" ? x.AlmirahNo.ToUpper().Trim() : model.AlmirahNo.ToUpper().Trim()))
@@ -242,6 +251,7 @@ namespace Libraries.Repository.EntityRepository
                                 (model.SortBy.ToUpper() == "FILENO" ? s.FileNo
                                 : model.SortBy.ToUpper() == "DEPARTMENT" ? (s.Department == null ? null : s.Department.Name)
                                 : model.SortBy.ToUpper() == "LOCALITY" ? (s.Locality != null ? s.Locality.Name : null)
+                                : model.SortBy.ToUpper() == "CATEGORY" ? (s.Category == null ? null : s.Category.CategoryName)
                                 // : model.SortBy.ToUpper() == "KHASRANO" ? (s.KhasraNo != null ? s.KhasraNo.KhasraNo : null) 
                                 : s.FileNo)
                                 )

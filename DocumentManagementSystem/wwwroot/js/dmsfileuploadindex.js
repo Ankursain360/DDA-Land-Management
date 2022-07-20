@@ -30,6 +30,7 @@ $("#btnReset").click(function () {
     $('#DepartmentId').val('0').trigger('change');
     $('#LocalityId').val('0').trigger('change');
     $('#KhasraNoId').val('0').trigger('change');
+    $('#CategoryId').val('0').trigger('change');
     GetDetails(currentPageNumber, currentPageSize, sortOrder);
 });
 
@@ -47,6 +48,7 @@ function GetSearchParam(pageNumber, pageSize, sortOrder) {
         departmentId: parseInt($('#DepartmentId').val()),
         localityId: parseInt($('#LocalityId').val()),
         KhasraId: parseInt($('#KhasraNoId').val()),
+        CategoryId: parseInt($('#CategoryId').val()),
         sortBy: $("#ddlSort").children("option:selected").val(),
         sortOrder: parseInt(sortOrder),
         pageSize: pageSize,
