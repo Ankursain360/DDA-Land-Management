@@ -646,6 +646,7 @@ namespace LandInventory.Controllers
                 {
                     data.Add(new LandInventoryUnverifiedListDto()
                     {
+                        
                         Id = result[i].Id,
                         InventoriedIn = result[i].InventoriedInId.ToString() == "1" ? "VLMS" : "Used",
                         PlannedUnplannedLand = result[i].PlannedUnplannedLand,
@@ -654,8 +655,42 @@ namespace LandInventory.Controllers
                         Department = result[i].Department == null ? " " : result[i].Department.Name,
                         Zone = result[i].Zone == null ? " " : result[i].Zone.Name,
                         Division = result[i].Division == null ? " " : result[i].Division.Name,
-                        PrimaryListNo = result[i].PrimaryListNo,
+                        Locality = result[i].Locality == null ? " " : result[i].Locality.Name,
                         KhasraNo = result[i].KhasraNo,
+                        Colony = result[i].Colony,
+                        Sector = result[i].Sector,
+                        Block = result[i].Block,
+                        Pocket = result[i].Pocket,
+                        PlotNo = result[i].PlotNo,
+                        PrimaryListNo = result[i].PrimaryListNo,
+                        AddressWithLandmark = result[i].Palandmark,
+                        AreaUnit = result[i].AreaUnit == 0 ? "bigha-biswa-bishwani" : result[i].AreaUnit == 1 ? "Sq Yd." : result[i].AreaUnit == 2 ? "Acre" : "Hectare",
+                        TotalArea = result[i].TotalAreaInSqAcreHt.ToString(),
+                        //    if (result[i].AreaUnit == 0)
+                        //{
+                        //   resu
+                        //}
+                        //  TotalArea = result[i].AreaUnit==0? result[i].TotalAreaInBigha.ToString() ?
+                        TotalAreaSqmt = result[i].TotalArea.ToString(),
+                        Encroachment = result[i].EncroachmentStatusId == 0 ? "No" : "Yes".ToString(),
+                        EncroachmentStatus = result[i].EncroachedPartiallyFully == "0" ? "Partially Encroached" : "Fully Encroached",
+                        EncroachmentArea = result[i].EncrochedArea.ToString(),
+                        BuiltUpInEncroachmentArea = result[i].BuiltUpEncraochmentArea.ToString(),
+                        Vacant = result[i].Vacant.ToString(),
+                        ActionOnEncroachment = result[i].ActionOnEncroachment,
+                        EncroachemntDetails = result[i].EncraochmentDetails,
+                         ProtectionOfLand = result[i].Boundary == 0 ? "Boundary Wall" : result[i].AreaUnit == 1 ? "Fencing" : "None".ToString(),
+                        AreaCovered = result[i].BoundaryAreaCovered.ToString(),
+                        Dimension = result[i].BoundaryDimension,
+                        BoundaryRemarks = result[i].BoundaryRemarks,
+                        BuiltType = result[i].BuiltUp == 0 ? "No" : "Yes",
+                        LitigationStatus = result[i].LitigationStatus == 0 ? "No" : "Yes",
+                        CourtName = result[i].CourtName,
+                        CaseNo = result[i].CaseNo,
+                        OppositeParty = result[i].OppositeParty,
+                        LitigationStatusRemarks = result[i].LitigationStatusRemarks,
+                        GeoReferencing = result[i].GeoReferencing == 0 ? "No" : "Yes",
+                        Remarks = result[i].Remarks,
 
                     }); ;
                 }
