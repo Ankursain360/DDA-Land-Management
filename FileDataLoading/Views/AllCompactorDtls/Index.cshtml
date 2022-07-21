@@ -9,7 +9,7 @@
 
         <div class="table-responsive ">
             @*<div id="divStructureTable"></div>*@
-            <table class="table table-sm table-bordered mb-0 table-striped">
+            <table class="table table-sm table-bordered mb-0 table-striped" id="MyTable">
                 <thead class="text-nowrap">
                     <tr>
 
@@ -69,7 +69,16 @@
     </div>
 
 </div>
+@section scripts{
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.css" />
 
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#MyTable").dataTable();
+        });
+    </script>
+}
 @*<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
     <environment include="Development">
         <script src="~/js/structureindex.js"></script>
