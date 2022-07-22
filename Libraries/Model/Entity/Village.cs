@@ -43,6 +43,7 @@ namespace Libraries.Model.Entity
             Gisvillageboundary = new HashSet<Gisvillageboundary>();
             Gisvillagetext = new HashSet<Gisvillagetext>();
             Giszero = new HashSet<Giszero>();
+            Newdamagepayeeregistration = new HashSet<Newdamagepayeeregistration>();
         }
 
         [Required(ErrorMessage = " Zone is mandatory")]
@@ -102,5 +103,6 @@ namespace Libraries.Model.Entity
         public ICollection<Gisvillageboundary> Gisvillageboundary { get; set; }
         public ICollection<Gisvillagetext> Gisvillagetext { get; set; }
         public ICollection<Giszero> Giszero { get; set; }
+        public ICollection<Newdamagepayeeregistration> Newdamagepayeeregistration { get; set; }
     }
 }

@@ -23,6 +23,7 @@ namespace Libraries.Model.Entity
             Kycapprovalproccess = new HashSet<Kycapprovalproccess>();
             Kycform = new HashSet<Kycform>();
             Kycdemandpaymentdetails = new HashSet<Kycdemandpaymentdetails>();
+            Newdamagepayeeregistration = new HashSet<Newdamagepayeeregistration>();
         }
         [Required(ErrorMessage = "Status Code is mandatory")]
         public int StatusCode { get; set; }
@@ -48,6 +49,7 @@ namespace Libraries.Model.Entity
         public ICollection<Kycform> Kycform { get; set; }
         public ICollection<Kycdemandpaymentdetails> Kycdemandpaymentdetails { get; set; }
         public ICollection<Kycapprovalproccess> Kycapprovalproccess { get; set; }
+        public ICollection<Newdamagepayeeregistration> Newdamagepayeeregistration { get; set; }
         [NotMapped]
         public string idcode { get; set; }
     }

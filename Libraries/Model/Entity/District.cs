@@ -19,6 +19,7 @@ namespace Libraries.Model.Entity
             Newlandvillage = new HashSet<Newlandvillage>();
             Userprofile = new HashSet<Userprofile>();
             NewdamageSelfassessment = new HashSet<NewDamageSelfAssessment>();
+            Newdamagepayeeregistration = new HashSet<Newdamagepayeeregistration>();
         }
         [Required(ErrorMessage = "District name is Mandatory")]
         [Remote(action: "Exist", controller: "Department", AdditionalFields = "Id")]
@@ -35,6 +36,7 @@ namespace Libraries.Model.Entity
         public ICollection<Newlandvillage> Newlandvillage { get; set; }
         public ICollection<Userprofile> Userprofile { get; set; }
 
+        public ICollection<Newdamagepayeeregistration> Newdamagepayeeregistration { get; set; }
         public ICollection<NewDamageSelfAssessment> NewdamageSelfassessment { get; set; }
     }
 }

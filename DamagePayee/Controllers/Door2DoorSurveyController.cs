@@ -387,14 +387,29 @@ namespace DamagePayee.Controllers
                 {
                     data.Add(new DoorToDoorSurveyListDto()
                     {
+
                         Id = result[i].Id,
                         LocationAddressofProperty = result[i].PropertyAddress,
                         // MunicipalNumberifany = result[i].MuncipalNo,
-                        GeoReferencing = result[i].GeoReferencingLattitude,
+                        lattitude = result[i].GeoReferencingLattitude,
+                        longitude = result[i].Longitude,
+                        presentUse = result[i].PresentUseNavigation.Name,
                         ApproxAreaoftheProperty = result[i].ApproxPropertyArea.ToString(),
-                        NumberofFloors = result[i].NumberOfFloors.ToString(),
+                        //AreaUnit = result[i].AreaUnit.ToString(),
+                        AreaUnit = result[i].AreaUnitNavigation == null ? "" : result[i].AreaUnitNavigation.Name,
+                        NumberofFloors = result[i].NumberOfFloorsNavigation.Name,
+                        CA_NumberOfElectricityConnection = result[i].CaelectricityNo,
+                        k_NumberOfWaterConnection = result[i].KwaterNo,
+                        HouseTaxNumberIssueBy_MCD = result[i].PropertyHouseTaxNo,
+                        NameOfOccupant = result[i].OccupantName,
+                        email = result[i].Email,
+                        Mobile = result[i].MobileNo,
+                        AadharNumberOfOccupant = result[i].OccupantAadharNo,
+                        VoterIdNumber = result[i].VoterIdNo,
+                        DemagePaidInThePast = result[i].DamagePaidPast,
 
                         Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                        remarks = result[i].Remarks,
                     }); ;
                 }
             }

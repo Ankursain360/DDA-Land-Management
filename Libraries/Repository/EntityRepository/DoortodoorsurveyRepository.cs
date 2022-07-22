@@ -28,7 +28,9 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<Doortodoorsurvey>> GetDoortodoorsurvey()
         {
-            return await _dbContext.Doortodoorsurvey.Where(x => x.IsActive == 1).Include(x => x.PresentUseNavigation).OrderByDescending(x => x.Id).ToListAsync();
+            //return await _dbContext.Doortodoorsurvey.Where(x => x.IsActive == 1).Include(x => x.PresentUseNavigation).OrderByDescending(x => x.Id).ToListAsync();
+            return await _dbContext.Doortodoorsurvey.Where(x => x.IsActive == 1).Include(x => x.PresentUseNavigation).Include(x => x.AreaUnitNavigation).Include(x => x.NumberOfFloorsNavigation)
+               .OrderByDescending(x => x.Id).ToListAsync();
         }
 
 

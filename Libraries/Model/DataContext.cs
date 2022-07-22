@@ -16,6 +16,15 @@ namespace Libraries.Model
         }
         public virtual DbSet<RefreshToken> RefreshToken { get; set; }
 
+
+        public virtual DbSet<Newdamagepayeeregistration> newdamagepayeeregistration { get; set; }
+        public virtual DbSet<Newdamagepaymenthistory> newdamagepaymenthistory { get; set; } 
+        public virtual DbSet<Newdamageselfassessmentatsdetail> newdamageselfassessmentatsdetail { get; set; }
+        public virtual DbSet<Newdamageselfassessmentfloordetail> newdamageselfassessmentfloordetail { get; set; } 
+        public virtual DbSet<Newdamageselfassessmentgpadetail> newdamageselfassessmentgpadetail { get; set; } 
+        public virtual DbSet<Newdamageselfassessmentholderdetail> newdamageselfassessmentholderdetail { get; set; } 
+        public virtual DbSet<Newdamagepayeeoccupantinfo> newdamagepayeeoccupantinfo { get; set; } 
+
         public virtual DbSet<Documentcategory> documentcategory { get; set; }
         public virtual DbSet<Approvalstatus> Approvalstatus { get; set; }
         public virtual DbSet<Userprofile> Userprofile { get; set; }
@@ -360,6 +369,14 @@ namespace Libraries.Model
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new Undersection17plotdetailConfiguration());
+
+            modelBuilder.ApplyConfiguration(new NewdamagepayeeregistrationConfiguration());
+            modelBuilder.ApplyConfiguration(new NewdamagepaymenthistoryConfiguration());
+            modelBuilder.ApplyConfiguration(new NewdamageselfassessmentatsdetailConfiguration());
+            modelBuilder.ApplyConfiguration(new NewdamageselfassessmentfloordetailConfiguration());
+            modelBuilder.ApplyConfiguration(new NewdamageselfassessmentgpadetailConfiguration());
+            modelBuilder.ApplyConfiguration(new NewdamageselfassessmentholderdetailConfiguration());
+            modelBuilder.ApplyConfiguration(new NewdamagepayeeoccupantinfoConfiguration());
 
             modelBuilder.ApplyConfiguration(new DocumentcategoryConfiguration());
             modelBuilder.ApplyConfiguration(new SystemUserConfiguration());

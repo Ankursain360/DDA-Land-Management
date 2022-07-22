@@ -13,6 +13,7 @@ namespace Libraries.Model.Entity
         public New_Damage_Colony()
         {
             NewDamageSelfAssessment = new HashSet<NewDamageSelfAssessment>();
+            Newdamagepayeeregistration = new HashSet<Newdamagepayeeregistration>();
 
         }
         public string Code { get; set; }
@@ -23,5 +24,6 @@ namespace Libraries.Model.Entity
 
         public Acquiredlandvillage NewDamageVillage { get; set; }
         public ICollection<NewDamageSelfAssessment> NewDamageSelfAssessment { get; set; }
+        public ICollection<Newdamagepayeeregistration> Newdamagepayeeregistration { get; set; }
     }
 }
