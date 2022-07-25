@@ -61,7 +61,7 @@ namespace DamagePayeePublicInterface.Controllers
 
                 string strPhotographProperty = _configuration.GetSection("FilePaths:NewDamagePayeeAssmt:PhotographProperty").Value.ToString();
                 string strElectricityBillFilePath = _configuration.GetSection("FilePaths:NewDamagePayeeAssmt:ElectricityBillFilePath").Value.ToString();
-                string strWaterBillDocumentFilePath = _configuration.GetSection("FilePaths:NewDamagePayeeAssmt:WaterNillDocumentFilePath").Value.ToString();
+                string strWaterBillDocumentFilePath = _configuration.GetSection("FilePaths:NewDamagePayeeAssmt:WaterBillDocumentFilePath").Value.ToString();
                 string strPropertyTaxReceiptFilePath = _configuration.GetSection("FilePaths:NewDamagePayeeAssmt:PropertyTaxReceiptFilePath").Value.ToString();
 
                 string strPhotographOwner = _configuration.GetSection("FilePaths:NewDamagePayeeAssmt:PhotographOwnerFilePath").Value.ToString();
