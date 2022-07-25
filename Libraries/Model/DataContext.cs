@@ -16,15 +16,16 @@ namespace Libraries.Model
         }
         public virtual DbSet<RefreshToken> RefreshToken { get; set; }
 
-
+        //new Damage Form tables
         public virtual DbSet<Newdamagepayeeregistration> newdamagepayeeregistration { get; set; }
         public virtual DbSet<Newdamagepaymenthistory> newdamagepaymenthistory { get; set; } 
         public virtual DbSet<Newdamageselfassessmentatsdetail> newdamageselfassessmentatsdetail { get; set; }
         public virtual DbSet<Newdamageselfassessmentfloordetail> newdamageselfassessmentfloordetail { get; set; } 
         public virtual DbSet<Newdamageselfassessmentgpadetail> newdamageselfassessmentgpadetail { get; set; } 
         public virtual DbSet<Newdamageselfassessmentholderdetail> newdamageselfassessmentholderdetail { get; set; } 
-        public virtual DbSet<Newdamagepayeeoccupantinfo> newdamagepayeeoccupantinfo { get; set; } 
-
+        public virtual DbSet<Newdamagepayeeoccupantinfo> newdamagepayeeoccupantinfo { get; set; }
+        public virtual DbSet<New_Damage_Colony> new_damage_colony { get; set; }
+        //
         public virtual DbSet<Documentcategory> documentcategory { get; set; }
         public virtual DbSet<Approvalstatus> Approvalstatus { get; set; }
         public virtual DbSet<Userprofile> Userprofile { get; set; }
@@ -357,7 +358,7 @@ namespace Libraries.Model
         public virtual DbSet<Restorationentry> Restorationentry { get; set; }
 
         public virtual DbSet<NewDamageSelfAssessment> newdamage_selfassessment { get; set; }
-        public virtual DbSet<New_Damage_Colony> new_damage_colony { get; set; }
+ 
         public virtual DbSet<NewDamageSelfAssessmentAtsDetails> newdamage_selfassessment_atsdetail
         { get; set; }
 
@@ -369,7 +370,7 @@ namespace Libraries.Model
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new Undersection17plotdetailConfiguration());
-
+            //new damage Page
             modelBuilder.ApplyConfiguration(new NewdamagepayeeregistrationConfiguration());
             modelBuilder.ApplyConfiguration(new NewdamagepaymenthistoryConfiguration());
             modelBuilder.ApplyConfiguration(new NewdamageselfassessmentatsdetailConfiguration());
@@ -377,6 +378,8 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new NewdamageselfassessmentgpadetailConfiguration());
             modelBuilder.ApplyConfiguration(new NewdamageselfassessmentholderdetailConfiguration());
             modelBuilder.ApplyConfiguration(new NewdamagepayeeoccupantinfoConfiguration());
+            modelBuilder.ApplyConfiguration(new New_Damage_ColonyConfiguration());
+            //
 
             modelBuilder.ApplyConfiguration(new DocumentcategoryConfiguration());
             modelBuilder.ApplyConfiguration(new SystemUserConfiguration());

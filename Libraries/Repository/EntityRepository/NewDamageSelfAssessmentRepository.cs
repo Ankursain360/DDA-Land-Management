@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Libraries.Repository.EntityRepository
 {
-    public class NewDamageSelfAssessmentRepository : GenericRepository<NewDamageSelfAssessment>, INewDamageSelfAssessmentRepository
+    public class NewDamageSelfAssessmentRepository : GenericRepository<Newdamagepayeeregistration>, INewDamageSelfAssessmentRepository
     {
         public NewDamageSelfAssessmentRepository(DataContext dbContext) : base(dbContext)
         {
@@ -26,10 +26,14 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<District>> GetAllDistrict()
         {
-            List<District> districtList = await _dbContext.District.Where(x => x.IsActive == 1).ToListAsync();
+            List<District> districtList = await _dbContext.District.Where(x => x.IsActive == 1 && x.Code=="09").ToListAsync();
             return districtList;
         }
-
+        public async Task<List<Floors>> GetFloors()
+        {
+            List<Floors> floorlist = await _dbContext.Floors.Where(x => x.IsActive == 1).ToListAsync();
+            return floorlist;
+        }
         public async Task<List<Locality>> GetLocalityList()
         {
             var localityList = await _dbContext.Locality.Where(x => x.IsActive == 1).ToListAsync();
@@ -61,12 +65,11 @@ namespace Libraries.Repository.EntityRepository
             }).ToList();
             return colonyList;
         }
-        public async Task<List<NewDamageSelfAssessment>> GetAllDamageSelfAssessments()
+        public async Task<List<Newdamagepayeeregistration>> GetAllDamageSelfAssessments()
         {
-            return await _dbContext.newdamage_selfassessment.Include(x => x.GetAcquiredLandVillage)
-                                                            .Include(x => x.GetDistrict)
-                                                            .Include(x => x.GetLocality)
-                                                            .Include(x => x.GetNew_Damage_Colony).ToListAsync();
+            return await _dbContext.newdamagepayeeregistration.Include(x => x.GetVillage)
+                                                            .Include(x => x.GetDistrict )
+                                                            .Include(x => x.GetColony).ToListAsync();
         }
 
 
@@ -91,29 +94,46 @@ namespace Libraries.Repository.EntityRepository
 
         //********* Gpa Self Assessment Details **********
 
-        public async Task<bool> SaveFloorDetails(NewdamageAddfloor attendance)
+        public async Task<bool> SaveFloorDetails(Newdamageselfassessmentfloordetail floordetails)
         {
-            _dbContext.newdamage_addfloor.Add(attendance);
+            _dbContext.newdamageselfassessmentfloordetail.Add(floordetails);    
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
+        public async Task<bool> SaveOccupantDetails(Newdamagepayeeoccupantinfo occupantdetails)
+        {
+            _dbContext.newdamagepayeeoccupantinfo.Add(occupantdetails);
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
+        
+
+        public async Task<bool> SaveGPADetails(Newdamageselfassessmentgpadetail gpaDetails)
+        {
+            _dbContext.newdamageselfassessmentgpadetail.Add(gpaDetails);
             var Result = await _dbContext.SaveChangesAsync();
             return Result > 0 ? true : false;
         }
 
-
-        public async Task<bool> SaveGPADetails(NewDamageSelfAssessmentGpaDetails gpaDetails)
+        public async Task<bool> SaveATSDetails(Newdamageselfassessmentatsdetail atsDetails)
         {
-            _dbContext.newdamage_selfassessment_gpadetail.Add(gpaDetails);
+            _dbContext.newdamageselfassessmentatsdetail .Add(atsDetails);
             var Result = await _dbContext.SaveChangesAsync();
             return Result > 0 ? true : false;
         }
-
-        public async Task<bool> SaveATSDetails(NewDamageSelfAssessmentAtsDetails atsDetails)
+        public async Task<bool> SaveHolderdetails(Newdamageselfassessmentholderdetail holderDetails)
         {
-            _dbContext.newdamage_selfassessment_atsdetail.Add(atsDetails);
+            _dbContext.newdamageselfassessmentholderdetail.Add(holderDetails);
             var Result = await _dbContext.SaveChangesAsync();
             return Result > 0 ? true : false;
         }
-
-
+        public async Task<bool> SavePaymentdetails(Newdamagepaymenthistory paymentDetails)
+        {
+            _dbContext.newdamagepaymenthistory.Add(paymentDetails);
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
+        
         public async Task<List<NewDamageSelfAssessmentGpaDetails>> GetAllGpaDetails(int id)
         {
             return await _dbContext.newdamage_selfassessment_gpadetail.Where(x => x.NewDamageSelfAssessmentId == id).ToListAsync();
@@ -149,9 +169,9 @@ namespace Libraries.Repository.EntityRepository
 
 
 
-        public async Task<NewDamageSelfAssessment> GetUploadDocumentFilePath(int Id)
+        public async Task<Newdamagepayeeregistration> GetUploadDocumentFilePath(int Id)
         {
-            return await _dbContext.newdamage_selfassessment.Where(x => x.Id == Id).FirstOrDefaultAsync();
+            return await _dbContext.newdamagepayeeregistration.Where(x => x.Id == Id).FirstOrDefaultAsync();
         }
 
 

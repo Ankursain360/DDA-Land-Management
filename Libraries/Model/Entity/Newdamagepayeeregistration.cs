@@ -3,6 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Http;
 
 namespace Libraries.Model.Entity
 {
@@ -18,17 +22,23 @@ namespace Libraries.Model.Entity
             Newdamageselfassessmentholderdetail = new HashSet<Newdamageselfassessmentholderdetail>();
         }
 
-
+        [Required(ErrorMessage = "Please specify the property")]
         public string WhetherDamageProp { get; set; }
+        [Required(ErrorMessage = "please specify current occupant")]
         public string Occupanttype { get; set; }
         public string IsNameChanged { get; set; }
         public string FileNo { get; set; }
+        [Required(ErrorMessage = "please select District")]
         public int? DistrictId { get; set; }
+        [Required(ErrorMessage = "please select Revenue eState")]
         public int? VillageId { get; set; }
+        [Required(ErrorMessage = "please select Colony")]
         public int? ColonyId { get; set; }
         public string OtherColonyName { get; set; }
         public string PinCode { get; set; }
+        [Required(ErrorMessage = "please choose type of property")]
         public string TypeOfProperty { get; set; }
+        [Required(ErrorMessage = "please choose use type")]
         public string UseType { get; set; }
         public string OtherUse { get; set; }
         public decimal? LandArea { get; set; }
@@ -66,172 +76,191 @@ namespace Libraries.Model.Entity
         public int? ApprovalZoneId { get; set; }
         public string UserId { get; set; }
 
+        //documents
+        [NotMapped]
+        public IFormFile FilePropertyPhoto { get; set; }
+        [NotMapped]
+        public IFormFile FileElectricityBill { get; set; }
+
+        [NotMapped]
+        public IFormFile FilePropertyTaxReceipt { get; set; }
+
+        [NotMapped]
+        public IFormFile FileWaterBill { get; set; }
+        //
 
         //****** Floor Details ******
 
         [NotMapped]
-        public int? FloorId { get; set; }
+        public List<int?>  FloorId { get; set; }
 
         [NotMapped]
-        public decimal? CarpetArea { get; set; }
+        public List<decimal?> CarpetArea { get; set; }
 
         [NotMapped]
-        public string ElectricityKno { get; set; }
+        public List<string> ElectricityKno { get; set; }
 
         [NotMapped]
-        public string McdpropertyTaxId { get; set; }
+        public List<string> McdpropertyTaxId { get; set; }
 
         [NotMapped]
-        public string WaterKno { get; set; }
+        public List<string> WaterKno { get; set; }
 
         [NotMapped]
-        public string CurrentUse { get; set; }
+        public List<string> CurrentUse { get; set; }
 
 
         //****** Occupant Details ******
 
         [NotMapped]
-        public string LatestAtsname { get; set; }
+        public List<string> LatestAtsname { get; set; }
 
         [NotMapped]
-        public string LatestGpaname { get; set; }
+        public List<string> LatestGpaname { get; set; }
 
         [NotMapped]
-        public string FirstName { get; set; }
+        public List<string> FirstName { get; set; }
 
         [NotMapped]
-        public string MiddleName { get; set; }
+        public List<string> MiddleName { get; set; }
 
         [NotMapped]
-        public string LastName { get; set; }
+        public List<string> LastName { get; set; }
 
         [NotMapped]
-        public string SpouseName { get; set; }
+        public List<string> SpouseName { get; set; }
 
         [NotMapped]
-        public string FatherName { get; set; }
+        public List<string> FatherName { get; set; }
 
         [NotMapped]
-        public string MontherName { get; set; }
+        public List<string> MontherName { get; set; }
 
         [NotMapped]
-        public string Epicid { get; set; }
+        public List<string> Epicid { get; set; }
 
         [NotMapped]
-        public string EmailId { get; set; }
+        public List<string> EmailId { get; set; }
 
         [NotMapped]
-        public string MobileNo { get; set; }
+        public List<string> MobileNo { get; set; }
 
         [NotMapped]
-        public string AadharNo { get; set; }
+        public List<string> AadharNo { get; set; }
 
         [NotMapped]
-        public DateTime? Dob { get; set; }
+        public List<DateTime?> Dob { get; set; }
 
         [NotMapped]
-        public string Gender { get; set; }
+        public List<string> Gender { get; set; }
 
         [NotMapped]
-        public string PanNo { get; set; }
+        public List<string> PanNo { get; set; }
 
         [NotMapped]
-        public string ShareInProperty { get; set; }
+        public List<string> ShareInProperty { get; set; }
 
         [NotMapped]
-        public string IsOccupingFloor { get; set; }
+        public List<string> IsOccupingFloor { get; set; }
 
         [NotMapped]
-        public string FloorNo { get; set; }
+        public List<string> FloorNo { get; set; }
 
         [NotMapped]
-        public string DamagePaidInPast { get; set; }
+        public List<string> DamagePaidInPast { get; set; }
 
         [NotMapped]
-        public string OccupantPhotoPath { get; set; }
+        public List<IFormFile> FileOccupantPhoto { get; set; }
 
         [NotMapped]
-        public string GpafilePath { get; set; }
+        public List<string> OccupantPhotoPath { get; set; }
+        [NotMapped]
+        public List<IFormFile> FileGpafile { get; set; }
 
         [NotMapped]
-        public string AtsfilePath { get; set; }
+        public List<string> GpafilePath { get; set; }
+        [NotMapped]
+        public List<IFormFile> FileAtsfile{ get; set; }
+        [NotMapped]
+        public List<string> AtsfilePath { get; set; }
 
         //****** GPA ******
 
         [NotMapped]
-        public DateTime? DateOfExecutionOfGpa { get; set; }
+        public List<DateTime?> DateOfExecutionOfGpa { get; set; }
 
         [NotMapped]
-        public string NameOfTheSeller { get; set; }
+        public List<string> NameOfTheSeller { get; set; }
 
         [NotMapped]
-        public string NameOfThePayer { get; set; }
+        public List<string> NameOfThePayer { get; set; }
 
         [NotMapped]
-        public string AddressOfThePlotAsPerGpa { get; set; }
+        public List<string> AddressOfThePlotAsPerGpa { get; set; }
 
         [NotMapped]
-        public string AreaOfThePlotAsPerGpa { get; set; }
+        public List<string> AreaOfThePlotAsPerGpa { get; set; }
 
 
         //****** ATS ******
 
         [NotMapped]
-        public DateTime? DateOfExecutionOfAts { get; set; }
+        public List<DateTime?> DateOfExecutionOfAts { get; set; }
 
         [NotMapped]
-        public string NameOfTheSellerAts { get; set; }
+        public List<string> NameOfTheSellerAts { get; set; }
 
         [NotMapped]
-        public string NameOfThePayerAts { get; set; }
+        public List<string> NameOfThePayerAts { get; set; }
 
         [NotMapped]
-        public string AddressOfThePlotAsPerAts { get; set; }
+        public List<string> AddressOfThePlotAsPerAts { get; set; }
 
         [NotMapped]
-        public string AreaOfThePlotAsPerAts { get; set; }
+        public List<string> AreaOfThePlotAsPerAts { get; set; }
 
 
         //****** Holder Details ******
 
         [NotMapped]
-        public string NameOfGpaats { get; set; }
+        public List<string> NameOfGpaats { get; set; }
 
         [NotMapped]
-        public string DeathCertificateNo { get; set; }
+        public List<string> DeathCertificateNo { get; set; }
 
         [NotMapped]
-        public DateTime? DeathCertificateDate { get; set; }
+        public List<DateTime?> DeathCertificateDate { get; set; }
 
         [NotMapped]
-        public string NameOfSurvivingMember { get; set; }
+        public List<string> NameOfSurvivingMember { get; set; }
 
         [NotMapped]
-        public string Relationship { get; set; }
+        public List<string> Relationship { get; set; }
 
         [NotMapped]
-        public string IsRelinquished { get; set; }
+        public List<string> IsRelinquished { get; set; }
 
 
         //****** Payment History ******
 
         [NotMapped]
-        public string Name { get; set; }
+        public List<string> Name { get; set; }
 
         [NotMapped]
-        public string RecieptNo { get; set; }
+        public List<string> RecieptNo { get; set; }
 
         [NotMapped]
-        public string PaymentMode { get; set; }
+        public List<string> PaymentMode { get; set; }
 
         [NotMapped]
-        public DateTime? PaymentDate { get; set; }
+        public List<DateTime?> PaymentDate { get; set; }
 
         [NotMapped]
-        public decimal? Amount { get; set; }
-
+        public List<decimal?> Amount { get; set; }
         [NotMapped]
-        public string RecieptDocumentPath { get; set; }
+        public List<IFormFile> FileRecieptDocument { get; set; }
+        [NotMapped]
+        public List<string> RecieptDocumentPath { get; set; }
 
 
 
@@ -240,23 +269,35 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public List<Approvalstatus> ApprovalstatuseList { get; set; }
-        public New_Damage_Colony GetColony { get; set; } 
+        public New_Damage_Colony GetColony { get; set; }
 
         [NotMapped]
         public List<New_Damage_Colony> ColonyList { get; set; }
         public District GetDistrict { get; set; }
-         
-        [NotMapped]
-        public List<District> districtList { get; set; }
-        public Village GetVillage { get; set; } 
 
         [NotMapped]
-        public List<Village> villageList { get; set; } 
+        public List<District> districtList { get; set; }
+        public Village GetVillage { get; set; }
+
+        [NotMapped]
+        public List<Floors> floorlist { get; set; }
+
+        [NotMapped]
+        public List<Village> villageList { get; set; }
+        [NotMapped]
+        public List<Acquiredlandvillage> damagevillageList { get; set; }
         public ICollection<Newdamagepayeeoccupantinfo> Newdamagepayeeoccupantinfo { get; set; }
         public ICollection<Newdamagepaymenthistory> Newdamagepaymenthistory { get; set; }
         public ICollection<Newdamageselfassessmentatsdetail> Newdamageselfassessmentatsdetail { get; set; }
         public ICollection<Newdamageselfassessmentfloordetail> Newdamageselfassessmentfloordetail { get; set; }
         public ICollection<Newdamageselfassessmentgpadetail> Newdamageselfassessmentgpadetail { get; set; }
         public ICollection<Newdamageselfassessmentholderdetail> Newdamageselfassessmentholderdetail { get; set; }
+
+        [NotMapped]
+        public bool DeclarationStatus1 { get; set; }
+        [NotMapped]
+        public bool DeclarationStatus2 { get; set; }
+        [NotMapped]
+        public bool DeclarationStatus3 { get; set; }
     }
 }

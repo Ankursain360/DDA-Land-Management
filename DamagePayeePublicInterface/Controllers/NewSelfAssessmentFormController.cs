@@ -28,258 +28,252 @@ namespace DamagePayeePublicInterface.Controllers
         private readonly INewDamageSelfAssessmentService _selfAssessmentService;
 
         public IConfiguration _configuration;
-        public NewSelfAssessmentFormController(INewDamageSelfAssessmentService selfAssessmentService,IConfiguration configuration)
+        public NewSelfAssessmentFormController(INewDamageSelfAssessmentService selfAssessmentService, IConfiguration configuration)
         {
             _selfAssessmentService = selfAssessmentService;
             _configuration = configuration;
         }
         public IActionResult Index()
         {
-            return View(); 
+            return View();
         }
-        public async Task<IActionResult> Create()       
+        public async Task<IActionResult> Create()
         {
-            NewDamageSelfAssessment model = new NewDamageSelfAssessment();
-            model.DistrictList = await _selfAssessmentService.GetAllDistrict();
-            model.Colonylist = await _selfAssessmentService.GetAllColony(0);
-            model.LocalitieList = await _selfAssessmentService.GetLocalityList();
-            model.AcquiredlandvillageList = await _selfAssessmentService.GetAllVillage(model.Districtid);         
+            Newdamagepayeeregistration model = new Newdamagepayeeregistration();
+            model.districtList = await _selfAssessmentService.GetAllDistrict();
+            model.floorlist = await _selfAssessmentService.GetFloors();
+            model.ColonyList = await _selfAssessmentService.GetAllColony(0);
+            model.damagevillageList = await _selfAssessmentService.GetAllVillage(model.DistrictId.HasValue ? Convert.ToInt32(model.DistrictId) : 0);
             return View(model);
-           
+
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(NewDamageSelfAssessment selfAssessment)
+        public async Task<IActionResult> Create(Newdamagepayeeregistration selfAssessment)
         {
             FileHelper fileHelper = new FileHelper();
             try
             {
-                selfAssessment.DistrictList = await _selfAssessmentService.GetAllDistrict();
-                selfAssessment.LocalitieList = await _selfAssessmentService.GetLocalityList();
-                selfAssessment.AcquiredlandvillageList = await _selfAssessmentService.GetAllVillage(selfAssessment.Districtid);
+                selfAssessment.districtList = await _selfAssessmentService.GetAllDistrict();
+                selfAssessment.ColonyList = await _selfAssessmentService.GetAllColony(0);
+                selfAssessment.damagevillageList = await _selfAssessmentService.GetAllVillage(selfAssessment.DistrictId.HasValue ? Convert.ToInt32(selfAssessment.DistrictId) : 0);
+                selfAssessment.floorlist = await _selfAssessmentService.GetFloors();
 
                 string strPhotographProperty = _configuration.GetSection("FilePaths:NewDamagePayeeAssmt:PhotographProperty").Value.ToString();
-                
+                string strElectricityBillFilePath = _configuration.GetSection("FilePaths:NewDamagePayeeAssmt:ElectricityBillFilePath").Value.ToString();
+                string strWaterBillDocumentFilePath = _configuration.GetSection("FilePaths:NewDamagePayeeAssmt:WaterNillDocumentFilePath").Value.ToString();
+                string strPropertyTaxReceiptFilePath = _configuration.GetSection("FilePaths:NewDamagePayeeAssmt:PropertyTaxReceiptFilePath").Value.ToString();
+
                 string strPhotographOwner = _configuration.GetSection("FilePaths:NewDamagePayeeAssmt:PhotographOwnerFilePath").Value.ToString();
                 string strGpaFilePath = _configuration.GetSection("FilePaths:NewDamagePayeeAssmt:GpaFilePath").Value.ToString();
                 string strAtsFilePath = _configuration.GetSection("FilePaths:NewDamagePayeeAssmt:AtsFilePath").Value.ToString();
-                string strElectricityBillFilePath = _configuration.GetSection("FilePaths:NewDamagePayeeAssmt:ElectricityBillFilePath").Value.ToString();
+
                 string strPaymentDocumentFilePath = _configuration.GetSection("FilePaths:NewDamagePayeeAssmt:PaymentDocumentFilePath").Value.ToString();
 
-                string strWillDocumentFilePath = _configuration.GetSection("FilePaths:NewDamagePayeeAssmt:WillDocumentFilePath").Value.ToString();
-                string strPossessionDocumentFilePath = _configuration.GetSection("FilePaths:NewDamagePayeeAssmt:PossessionDocumentFilePath").Value.ToString();
-
-                string strMutationDocumentFilePath = _configuration.GetSection("FilePaths:NewDamagePayeeAssmt:MutationDocumentFilePath").Value.ToString();
-                string strCoordinateDocumentFilePath = _configuration.GetSection("FilePaths:NewDamagePayeeAssmt:CoordinateDocumentFilePath").Value.ToString();
-                string strChainDocumentFilePath = _configuration.GetSection("FilePaths:NewDamagePayeeAssmt:ChainDocumentFilePath").Value.ToString();
-                
                 if (ModelState.IsValid)
                 {
-                    if (selfAssessment.PhotographarFP != null)
+                    if (selfAssessment.FilePropertyPhoto != null)
                     {
-                        selfAssessment.PhotographProperty = fileHelper.SaveFile(strPhotographProperty, selfAssessment.PhotographarFP);
+                        selfAssessment.PropertyPhotographFilePath = fileHelper.SaveFile(strPhotographProperty, selfAssessment.FilePropertyPhoto);
                     }
 
-                    if (selfAssessment.PhotographOwnerFP != null)
+                    if (selfAssessment.FileElectricityBill != null)
                     {
-                        selfAssessment.PhotographOwner = fileHelper.SaveFile(strPhotographOwner, selfAssessment.PhotographOwnerFP);
+                        selfAssessment.ElectricityBillFilePath = fileHelper.SaveFile(strElectricityBillFilePath, selfAssessment.FileElectricityBill);
                     }
 
-                    if (selfAssessment.GpaFilePathFP != null)
+                    if (selfAssessment.FileWaterBill != null)
                     {
-                        selfAssessment.Gpa = fileHelper.SaveFile(strGpaFilePath, selfAssessment.GpaFilePathFP);
+                        selfAssessment.WaterBillFilePath = fileHelper.SaveFile(strWaterBillDocumentFilePath, selfAssessment.FileWaterBill);
                     }
 
-                    if (selfAssessment.AtsFilePathFP != null)
-                    {
-                        selfAssessment.Ats = fileHelper.SaveFile(strAtsFilePath, selfAssessment.AtsFilePathFP);
+                    if (selfAssessment.FilePropertyTaxReceipt != null)
+                    { // change file path strAtsFilePath
+                        selfAssessment.PropertyTaxReceiptFilePath = fileHelper.SaveFile(strPropertyTaxReceiptFilePath, selfAssessment.FilePropertyTaxReceipt);
                     }
 
-                    if (selfAssessment.ElectricityBillFP != null)
-                    {
-                        selfAssessment.ElectricityBill = fileHelper.SaveFile(strElectricityBillFilePath, selfAssessment.ElectricityBillFP);
-                    }
-
-
-                    if (selfAssessment.PaymentDocumentFP != null)
-                    {
-                        selfAssessment.PaymentDocument = fileHelper.SaveFile(strPaymentDocumentFilePath, selfAssessment.PaymentDocumentFP);
-                    }
-
-                    if (selfAssessment.WillDocumentFP != null)
-                    {
-                        selfAssessment.WillDocument = fileHelper.SaveFile(strWillDocumentFilePath, selfAssessment.WillDocumentFP);
-                    }
-
-                    if (selfAssessment.PossessionDocumentFP != null)
-                    {
-                        selfAssessment.PossessionDocument = fileHelper.SaveFile(strPossessionDocumentFilePath, selfAssessment.PossessionDocumentFP);
-                    }
-
-                    if (selfAssessment.MutationDocumentFP != null)
-                    {
-                        selfAssessment.MutationDocument = fileHelper.SaveFile(strMutationDocumentFilePath, selfAssessment.MutationDocumentFP);
-                    }
-
-                    if (selfAssessment.CoordinateDocumentFP != null)
-                    {
-                        selfAssessment.CoordinateDocument = fileHelper.SaveFile(strCoordinateDocumentFilePath, selfAssessment.CoordinateDocumentFP);
-                    }
-                    if (selfAssessment.ChainDocumentFP != null)
-                    {
-                        selfAssessment.ChainDocument = fileHelper.SaveFile(strChainDocumentFilePath, selfAssessment.ChainDocumentFP);
-                    }
 
                     var result = await _selfAssessmentService.Create(selfAssessment);
-
-                    //************ Save Floor Details  ************  
-
-                    if (selfAssessment.AFloorName != null &&
-                        selfAssessment.AFloorName != null &&
-                        selfAssessment.AElectricityNumber != null)
-
+                    if (result)
                     {
-                        if (selfAssessment.AFloorName.Count > 0 &&
-                            selfAssessment.ACarpetArea.Count > 0 &&
-                            selfAssessment.AElectricityNumber.Count > 0
-                           )
+                        //************Save Floor Details  ************
 
+                        List<Newdamageselfassessmentfloordetail> addfloors = new List<Newdamageselfassessmentfloordetail>();
+                        for (int i = 0; i < selfAssessment.FloorId.Count; i++)
                         {
-                            List<NewdamageAddfloor> addfloors = new List<NewdamageAddfloor>();
-                            for (int i = 0; i < selfAssessment.AFloorName.Count; i++)
+                            addfloors.Add(new Newdamageselfassessmentfloordetail
                             {
-                                addfloors.Add(new NewdamageAddfloor
-                                {
-                                    FloorName = selfAssessment.AFloorName.Count <= i ? string.Empty : selfAssessment.AFloorName[i],
-                                    CarpetArea = selfAssessment.ACarpetArea.Count <= i ? 0 :Convert.ToDecimal(selfAssessment.ACarpetArea[i]),
-                                    ElectricityNumber = selfAssessment.AElectricityNumber.Count <= i ? string.Empty : selfAssessment.AElectricityNumber[i],
-                                    MuncipleTaxId= selfAssessment.AMuncipleTaxId.Count <= i ? string.Empty : selfAssessment.AMuncipleTaxId[i],
-                                    NewDamageSelfAssessmentId = selfAssessment.Id
-                                    
-                                });
-                            }
-                            foreach (var item in addfloors)
-                            {
-                                result = await _selfAssessmentService.SaveFloorDetails(item);
-                            }
+                                FloorId = selfAssessment.FloorId[i],
+                                CarpetArea = selfAssessment.CarpetArea[i],
+                                ElectricityKno = selfAssessment.ElectricityKno[i],
+                                WaterKno = selfAssessment.WaterKno[i],
+                                CurrentUse = selfAssessment.CurrentUse[i],
+                                CreatedBy = 1,//need to replace with dynamic value
+                                CreatedDate = DateTime.Now,
+                                NewDamageSelfAssessmentId = selfAssessment.Id
+
+                            });
                         }
-                    }
-                    //****** code for Floor Details *****
-
-
-                    //************ Save GPA Details  ************  
-
-                    if (selfAssessment.ADateOfExecutionOfGpa != null &&
-                        selfAssessment.ANameOfTheSeller != null &&
-                        selfAssessment.ANameOfThePayer != null)
-
-                    {
-                        if (selfAssessment.ADateOfExecutionOfGpa.Count > 0 &&
-                            selfAssessment.ANameOfTheSeller.Count > 0 &&
-                            selfAssessment.ANameOfThePayer.Count > 0
-                           )
-
+                        foreach (var item in addfloors)
                         {
-                            List<NewDamageSelfAssessmentGpaDetails> addGPA = new List<NewDamageSelfAssessmentGpaDetails>();
-                            for (int i = 0; i < selfAssessment.AFloorName.Count; i++)
-                            {
-                                addGPA.Add(new NewDamageSelfAssessmentGpaDetails
-                                {
-                                    DateOfExecutionOfGpa = selfAssessment.ADateOfExecutionOfGpa.Count <= i ? DateTime.Now : selfAssessment.ADateOfExecutionOfGpa[i],
-                                    NameOfTheSeller = selfAssessment.ANameOfTheSeller.Count <= i ? string.Empty : selfAssessment.ANameOfTheSeller[i],
-                                    NameOfThePayer = selfAssessment.ANameOfThePayer.Count <= i ? string.Empty : selfAssessment.ANameOfThePayer[i],
-                                    AddressOfThePlotAsPerGpa = selfAssessment.AAddressOfThePlotAsPerGpa.Count <= i ? string.Empty : selfAssessment.AAddressOfThePlotAsPerGpa[i],
-                                    AreaOfThePlotAsPerGpa = selfAssessment.AAreaOfThePlotAsPerGpa.Count <= i ? string.Empty : selfAssessment.AAreaOfThePlotAsPerGpa[i],
-                                 
-                                    NewDamageSelfAssessmentId = selfAssessment.Id
-
-                                });
-                            }
-                            foreach (var item in addGPA)
-                            {
-                                result = await _selfAssessmentService.SaveGPADetails(item);
-                            }
+                            result = await _selfAssessmentService.SaveFloorDetails(item);
                         }
-                    }
-                    //****** code for saving  GPA Details *****
 
-
-
-                    //************ Save ATS Details  ************  
-
-                    if (selfAssessment.ADateOfExecutionOfAts != null &&
-                        selfAssessment.ANameOfTheSellerAts != null &&
-                        selfAssessment.ANameOfThePayerAts != null)
-
-                    {
-                        if (selfAssessment.ADateOfExecutionOfAts.Count > 0 &&
-                            selfAssessment.ANameOfTheSellerAts.Count > 0 &&
-                            selfAssessment.ANameOfThePayerAts.Count > 0
-                           )
-
+                        List<Newdamagepayeeoccupantinfo> addOccupant = new List<Newdamagepayeeoccupantinfo>();
+                        for (int i = 0; i < selfAssessment.LatestAtsname.Count; i++)
                         {
-                            List<NewDamageSelfAssessmentAtsDetails> addATS = new List<NewDamageSelfAssessmentAtsDetails>();
-                            for (int i = 0; i < selfAssessment.AFloorName.Count; i++)
+                            addOccupant.Add(new Newdamagepayeeoccupantinfo
                             {
-                                addATS.Add(new NewDamageSelfAssessmentAtsDetails
-                                {
-                                    DateOfExecutionOfAts = selfAssessment.ADateOfExecutionOfAts.Count <= i ? DateTime.Now : selfAssessment.ADateOfExecutionOfAts[i],
-                                    NameOfTheSellerAts = selfAssessment.ANameOfTheSellerAts.Count <= i ? string.Empty : selfAssessment.ANameOfTheSellerAts[i],
-                                    NameOfThePayerAts = selfAssessment.ANameOfThePayerAts.Count <= i ? string.Empty : selfAssessment.ANameOfThePayerAts[i],
-                                    AddressOfThePlotAsPerAts = selfAssessment.AAddressOfThePlotAsPerAts.Count <= i ? string.Empty : selfAssessment.AAddressOfThePlotAsPerAts[i],
-                                    AreaOfThePlotAsPerAts = selfAssessment.AAreaOfThePlotAsPerAts.Count <= i ? string.Empty : selfAssessment.AAreaOfThePlotAsPerAts[i],
+                                LatestAtsname = selfAssessment.LatestAtsname[i],
+                                LatestGpaname = selfAssessment.LatestGpaname[i],
+                                FirstName = selfAssessment.FirstName[i],
+                                MiddleName = selfAssessment.MiddleName[i],
+                                LastName = selfAssessment.LastName[i],
+                                SpouseName = selfAssessment.SpouseName[i],
+                                FatherName = selfAssessment.FatherName[i],
 
-                                    NewDamageSelfAssessmentId = selfAssessment.Id
+                                MontherName = selfAssessment.MontherName[i],
+                                Epicid = selfAssessment.Epicid[i],
+                                EmailId = selfAssessment.EmailId[i],
+                                MobileNo = selfAssessment.MobileNo[i],
+                                AadharNo = selfAssessment.AadharNo[i],
+                                Dob = selfAssessment.Dob[i],//need to replace with dynamic value
+                                Gender = selfAssessment.Gender.Count <= i ? string.Empty : selfAssessment.Gender[i],
 
-                                });
-                            }
-                            foreach (var item in addATS)
-                            {
-                                result = await _selfAssessmentService.SaveATSDetails(item);
-                            }
+                                PanNo = selfAssessment.PanNo[i],
+                                ShareInProperty = selfAssessment.ShareInProperty[i],
+                                IsOccupingFloor = selfAssessment.IsOccupingFloor.Count <= i ? string.Empty : selfAssessment.IsOccupingFloor[i],
+                                FloorNo = selfAssessment.FloorNo.Count <= i ? string.Empty : selfAssessment.FloorNo[i],
+                                DamagePaidInPast = selfAssessment.DamagePaidInPast[i],
+                                OccupantPhotoPath = selfAssessment.FileOccupantPhoto == null ? "" : selfAssessment.FileOccupantPhoto.Count <= i ? null : fileHelper.SaveFile(strPhotographOwner, selfAssessment.FileOccupantPhoto[i]),
+                                GpafilePath = selfAssessment.FileGpafile == null ? "" : selfAssessment.FileGpafile.Count <= i ? null : fileHelper.SaveFile(strGpaFilePath, selfAssessment.FileGpafile[i]),
+                                AtsfilePath = selfAssessment.FileAtsfile == null ? "" : selfAssessment.FileAtsfile.Count <= i ? null : fileHelper.SaveFile(strAtsFilePath, selfAssessment.FileAtsfile[i]),
+                                NewDamageSelfAssessmentId = selfAssessment.Id
+
+                            });
                         }
-                    }
-                    //****** code for saving  ATS Details *****
+                        foreach (var item in addOccupant)
+                        {
+                            result = await _selfAssessmentService.SaveOccupantDetails(item);
+                        }
 
 
+                        List<Newdamageselfassessmentgpadetail> addGPA = new List<Newdamageselfassessmentgpadetail>();
+                        for (int i = 0; i < selfAssessment.DateOfExecutionOfGpa.Count; i++)
+                        {
+                            addGPA.Add(new Newdamageselfassessmentgpadetail
+                            {
+                                DateOfExecutionOfGpa = selfAssessment.DateOfExecutionOfGpa.Count <= i ? null : selfAssessment.DateOfExecutionOfGpa[i],
+                                NameOfTheSeller = selfAssessment.NameOfTheSeller.Count <= i ? null : selfAssessment.NameOfTheSeller[i],
+                                NameOfThePayer = selfAssessment.NameOfThePayer.Count <= i ? null : selfAssessment.NameOfThePayer[i],
+                                AddressOfThePlotAsPerGpa = selfAssessment.AddressOfThePlotAsPerGpa.Count <= i ? null : selfAssessment.AddressOfThePlotAsPerGpa[i],
+                                AreaOfThePlotAsPerGpa = selfAssessment.AreaOfThePlotAsPerGpa.Count <= i ? null : selfAssessment.AreaOfThePlotAsPerGpa[i],
+                                NewDamageSelfAssessmentId = selfAssessment.Id
+
+                            }); ;
+                        }
+                        foreach (var item in addGPA)
+                        {
+                            result = await _selfAssessmentService.SaveGPADetails(item);
+                        }
+
+                        List<Newdamageselfassessmentatsdetail> addATS = new List<Newdamageselfassessmentatsdetail>();
+                        for (int i = 0; i < selfAssessment.DateOfExecutionOfGpa.Count; i++)
+                        {
+                            addATS.Add(new Newdamageselfassessmentatsdetail
+                            {
+                                DateOfExecutionOfAts = selfAssessment.DateOfExecutionOfAts.Count <= i ? null : selfAssessment.DateOfExecutionOfAts[i],
+                                NameOfTheSellerAts = selfAssessment.NameOfTheSellerAts.Count <= i ? null : selfAssessment.NameOfTheSellerAts[i],
+                                NameOfThePayerAts = selfAssessment.NameOfThePayerAts.Count <= i ? null : selfAssessment.NameOfThePayerAts[i],
+                                AddressOfThePlotAsPerAts = selfAssessment.AddressOfThePlotAsPerAts.Count <= i ? null : selfAssessment.AddressOfThePlotAsPerAts[i],
+                                AreaOfThePlotAsPerAts = selfAssessment.AreaOfThePlotAsPerAts.Count <= i ? null : selfAssessment.AreaOfThePlotAsPerAts[i],
+                                NewDamageSelfAssessmentId = selfAssessment.Id
+
+                            }); ;
+                        }
+                        foreach (var item in addATS)
+                        {
+                            result = await _selfAssessmentService.SaveATSDetails(item);
+                        }
 
 
-                    if (result == true)
-                    {
-                        ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        var list = await _selfAssessmentService.GetAllDistrict();
-                        return View("Index", list);
+                        List<Newdamageselfassessmentholderdetail> holderdetails = new List<Newdamageselfassessmentholderdetail>();
+                        for (int i = 0; i < selfAssessment.NameOfGpaats.Count; i++)
+                        {
+                            holderdetails.Add(new Newdamageselfassessmentholderdetail
+                            {
+                                NameOfGpaats = selfAssessment.NameOfGpaats.Count <= i ? null : selfAssessment.NameOfGpaats[i],
+                                DeathCertificateNo = selfAssessment.DeathCertificateNo.Count <= i ? null : selfAssessment.DeathCertificateNo[i],
+                                DeathCertificateDate = selfAssessment.DeathCertificateDate.Count <= i ? null : selfAssessment.DeathCertificateDate[i],
+                                NameOfSurvivingMember = selfAssessment.NameOfSurvivingMember.Count <= i ? null : selfAssessment.NameOfSurvivingMember[i],
+                                Relationship = selfAssessment.Relationship.Count <= i ? null : selfAssessment.Relationship[i],
+                                IsRelinquished = selfAssessment.IsRelinquished.Count <= i ? null : selfAssessment.IsRelinquished[i],
+                                NewDamageSelfAssessmentId = selfAssessment.Id
 
+                            }); ;
+                        }
+                        foreach (var item in holderdetails)
+                        {
+                            result = await _selfAssessmentService.SaveHolderdetails(item);
+                        }
+                        List<Newdamagepaymenthistory> paymentdetails = new List<Newdamagepaymenthistory>();
+                        for (int i = 0; i < selfAssessment.Name.Count; i++)
+                        {
+                            paymentdetails.Add(new Newdamagepaymenthistory
+                            {
+                                Name = selfAssessment.NameOfGpaats.Count <= i ? null : selfAssessment.NameOfGpaats[i],
+                                RecieptNo = selfAssessment.DeathCertificateNo.Count <= i ? null : selfAssessment.DeathCertificateNo[i],
+                                PaymentMode = selfAssessment.PaymentMode.Count <= i ? null : selfAssessment.PaymentMode[i],
+                                PaymentDate = selfAssessment.PaymentDate.Count <= i ? null : selfAssessment.PaymentDate[i],
+                                Amount = selfAssessment.Amount.Count <= i ? null : selfAssessment.Amount[i],
+                                RecieptDocumentPath = selfAssessment.FileRecieptDocument.Count <= i ? null : fileHelper.SaveFile(strPaymentDocumentFilePath, selfAssessment.FileRecieptDocument[i]),
+                                NewDamageSelfAssessmentId = selfAssessment.Id
+
+                            }); ;
+                        }
+                        foreach (var item in paymentdetails)
+                        {
+                            result = await _selfAssessmentService.SavePaymentdetails(item);
+                        }
+
+
+                        if (result)
+                        {
+
+                            ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+                        }
                     }
                     else
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(selfAssessment);
-
                     }
+
+                    return View(selfAssessment);
+
                 }
                 else
                 {
                     string messages = string.Join("; ", ModelState.Values
                                         .SelectMany(x => x.Errors)
                                         .Select(x => x.ErrorMessage));
+                    ViewBag.Message = Alert.Show(Messages.Error + messages, "", AlertType.Error);
                     return View(selfAssessment);
                 }
             }
             catch (Exception ex)
             {
-                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Error);
                 return View(selfAssessment);
             }
         }
 
-   
+
 
         [HttpGet]
         public async Task<JsonResult> GetNewVillageList(int? DistrictId)
         {
-            
-           DistrictId = DistrictId ?? 0;
+
+            DistrictId = DistrictId ?? 0;
             return Json(await _selfAssessmentService.GetAllVillage(Convert.ToInt32(DistrictId)));
         }
         [HttpGet]
@@ -289,6 +283,6 @@ namespace DamagePayeePublicInterface.Controllers
             return Json(await _selfAssessmentService.GetAllColony(Convert.ToInt32(VillageId)));
         }
 
-     
+
     }
 }

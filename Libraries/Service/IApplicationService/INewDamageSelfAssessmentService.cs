@@ -8,16 +8,17 @@ using System.Threading.Tasks;
 
 namespace Libraries.Service.IApplicationService
 {
-    public interface INewDamageSelfAssessmentService : IEntityService<NewDamageSelfAssessment>
+    public interface INewDamageSelfAssessmentService : IEntityService<Newdamagepayeeregistration>
     {
-        Task<List<NewDamageSelfAssessment>> GetDamageSelfAssessments();
+        Task<List<Newdamagepayeeregistration>> GetDamageSelfAssessments();
         Task<List<District>> GetAllDistrict();
         Task<List<Locality>> GetLocalityList();
         Task<List<Acquiredlandvillage>> GetAllVillage(int districtId);
         Task<List<New_Damage_Colony>> GetAllColony(int villageId);
-        Task<bool> Update(int id, NewDamageSelfAssessment selfAssessment); 
-        Task<bool> Create(NewDamageSelfAssessment selfAssessment);
-        Task<NewDamageSelfAssessment> FetchSingleResult(int id);
+        Task<List<Floors>> GetFloors();
+        Task<bool> Update(int id, Newdamagepayeeregistration selfAssessment); 
+        Task<bool> Create(Newdamagepayeeregistration selfAssessment);
+        Task<Newdamagepayeeregistration> FetchSingleResult(int id);
         Task<bool> Delete(int id);
 
 
@@ -25,14 +26,14 @@ namespace Libraries.Service.IApplicationService
 
        
 
-        Task<bool> SaveFloorDetails(NewdamageAddfloor attendance);
+        Task<bool> SaveFloorDetails(Newdamageselfassessmentfloordetail attendance);
 
-
-        Task<bool> SaveGPADetails(NewDamageSelfAssessmentGpaDetails gpaDetails);
-
-
-        Task<bool> SaveATSDetails(NewDamageSelfAssessmentAtsDetails gpaDetails);
-
+        Task<bool> SaveOccupantDetails(Newdamagepayeeoccupantinfo occupantdetails);
+        Task<bool> SaveGPADetails(Newdamageselfassessmentgpadetail gpaDetails);
+        Task<bool> SaveATSDetails(Newdamageselfassessmentatsdetail gpaDetails);
+        Task<bool> SaveHolderdetails(Newdamageselfassessmentholderdetail holderDetails);
+        Task<bool> SavePaymentdetails(Newdamagepaymenthistory paymentDetails);
+        
         Task<List<NewDamageSelfAssessmentAtsDetails>> GetAllAtsDetails(int id);
         Task<bool> DeleteAts(int Id);
 
@@ -49,7 +50,7 @@ namespace Libraries.Service.IApplicationService
         Task<bool> DeleteAddFloor(int Id);
 
 
-        Task<NewDamageSelfAssessment> GetUploadDocumentFilePath(int Id);
+        Task<Newdamagepayeeregistration> GetUploadDocumentFilePath(int Id);
        
     }
 }

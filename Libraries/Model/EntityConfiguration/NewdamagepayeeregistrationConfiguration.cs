@@ -187,22 +187,22 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(20)
                 .IsUnicode(false);
 
-            builder.HasOne(d => d.ApprovedStatusNavigation)
+            builder.HasOne(d => d.GetApprovedStatusNavigation)
                 .WithMany(p => p.Newdamagepayeeregistration)
                 .HasForeignKey(d => d.ApprovedStatus)
                 .HasConstraintName("fkDamageApprovedStatus");
 
-            builder.HasOne(d => d.Colony)
+            builder.HasOne(d => d.GetColony)
                 .WithMany(p => p.Newdamagepayeeregistration)
                 .HasForeignKey(d => d.ColonyId)
                 .HasConstraintName("fkDamageColony");
 
-            builder.HasOne(d => d.District)
+            builder.HasOne(d => d.GetDistrict)
                 .WithMany(p => p.Newdamagepayeeregistration)
                 .HasForeignKey(d => d.DistrictId)
                 .HasConstraintName("fkDamageDistrict");
 
-            builder.HasOne(d => d.Village)
+            builder.HasOne(d => d.GetVillage)
                 .WithMany(p => p.Newdamagepayeeregistration)
                 .HasForeignKey(d => d.VillageId)
                 .HasConstraintName("fkDamageVillage");

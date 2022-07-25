@@ -8,10 +8,11 @@ using System.Threading.Tasks;
 
 namespace Libraries.Repository.IEntityRepository
 {
-    public interface INewDamageSelfAssessmentRepository : IGenericRepository<NewDamageSelfAssessment>
+    public interface INewDamageSelfAssessmentRepository : IGenericRepository<Newdamagepayeeregistration>
     {
-         Task<List<NewDamageSelfAssessment>> GetAllDamageSelfAssessments();
+         Task<List<Newdamagepayeeregistration>> GetAllDamageSelfAssessments();
         Task<List<District>> GetAllDistrict();
+        Task<List<Floors>> GetFloors();
         Task<List<Acquiredlandvillage>> GetAllVillage(int districtId);  
         Task<List<New_Damage_Colony>> GetAllColony(int villageId);
         Task<List<Locality>> GetLocalityList();
@@ -23,11 +24,15 @@ namespace Libraries.Repository.IEntityRepository
 
         
 
-        Task<bool> SaveFloorDetails(NewdamageAddfloor attendance);
+        Task<bool> SaveFloorDetails(Newdamageselfassessmentfloordetail Floordetails);
+        Task<bool> SaveOccupantDetails(Newdamagepayeeoccupantinfo OccupantDetails);
+        
+       Task<bool> SaveGPADetails(Newdamageselfassessmentgpadetail gpaDetails);
 
-        Task<bool> SaveGPADetails(NewDamageSelfAssessmentGpaDetails gpaDetails);
-
-        Task<bool> SaveATSDetails(NewDamageSelfAssessmentAtsDetails atsDetails);
+        Task<bool> SaveATSDetails(Newdamageselfassessmentatsdetail atsDetails);
+        Task<bool> SaveHolderdetails(Newdamageselfassessmentholderdetail holderDetails);
+        Task<bool> SavePaymentdetails(Newdamagepaymenthistory PaymentDetails);
+        
         Task<List<NewDamageSelfAssessmentAtsDetails>> GetAllAtsDetails(int id);
         Task<bool> DeleteAts(int Id); 
 
@@ -44,7 +49,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<bool> DeleteAddFloor(int Id); 
 
 
-        Task<NewDamageSelfAssessment> GetUploadDocumentFilePath(int Id);
+        Task<Newdamagepayeeregistration> GetUploadDocumentFilePath(int Id);
 
         // Task<PagedResult<NewDamageSelfAssessment>> GetPagedDivision(NewDamageSelfAssessmentSearchDto model);
     }

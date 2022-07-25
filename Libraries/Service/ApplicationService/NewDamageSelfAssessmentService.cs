@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace Libraries.Service.ApplicationService
 {
-    public class NewDamageSelfAssessmentService : EntityService<NewDamageSelfAssessment>, INewDamageSelfAssessmentService
+    public class NewDamageSelfAssessmentService : EntityService<Newdamagepayeeregistration>, INewDamageSelfAssessmentService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly INewDamageSelfAssessmentRepository _assessmentRepository;
@@ -31,16 +31,16 @@ namespace Libraries.Service.ApplicationService
         public async Task<bool> Delete(int id)
         {
             var form = await _assessmentRepository.FindBy(a => a.Id == id);
-            NewDamageSelfAssessment model = form.FirstOrDefault();
-            model.RegId = null;
+            Newdamagepayeeregistration model = form.FirstOrDefault();
+           // model.RegId = null;
             _assessmentRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
 
-        public async Task<NewDamageSelfAssessment> FetchSingleResult(int id)
+        public async Task<Newdamagepayeeregistration> FetchSingleResult(int id)
         {
             var result = await _assessmentRepository.FindBy(a => a.Id == id);
-            NewDamageSelfAssessment model = result.FirstOrDefault();
+            Newdamagepayeeregistration model = result.FirstOrDefault();
             return model;
         }
 
@@ -55,7 +55,11 @@ namespace Libraries.Service.ApplicationService
             List<District> districtList = await _assessmentRepository.GetAllDistrict();
             return districtList;
         }
-
+        public async Task<List<Floors>> GetFloors()
+        {
+            List<Floors> floorlist = await _assessmentRepository.GetFloors();
+            return floorlist;
+        }
         public async Task<List<Locality>> GetLocalityList()
         {
             List<Locality> localityList = await _assessmentRepository.GetLocalityList();
@@ -67,79 +71,79 @@ namespace Libraries.Service.ApplicationService
             return villageList;
         }
 
-        public async Task<bool> Update(int id, NewDamageSelfAssessment selfAssessment)
+        public async Task<bool> Update(int id, Newdamagepayeeregistration selfAssessment)
         {
             var result = await _assessmentRepository.FindBy(a => a.Id == id);
-            NewDamageSelfAssessment model = result.FirstOrDefault();
-            model.RegId = selfAssessment.RegId;
-            model.Districtid = selfAssessment.Districtid;
+            Newdamagepayeeregistration model = result.FirstOrDefault();
+           // model.RegId = selfAssessment.RegId;
+            //model.Districtid = selfAssessment.Districtid;
             model.VillageId = selfAssessment.VillageId;
             model.ColonyId = selfAssessment.ColonyId;
-            model.Latestatsname = selfAssessment.Latestatsname;
-            model.Pin = selfAssessment.Pin;
+            //model.Latestatsname = selfAssessment.Latestatsname;
+            //model.Pin = selfAssessment.Pin;
             model.North = selfAssessment.North;
             model.South = selfAssessment.South;
             model.East = selfAssessment.East;
             model.West = selfAssessment.West;
-            model.TypeProperty = selfAssessment.TypeProperty;
-            model.ConstructedArea = selfAssessment.ConstructedArea;
-            model.HouseNo = selfAssessment.HouseNo;
+            //model.TypeProperty = selfAssessment.TypeProperty;
+            //model.ConstructedArea = selfAssessment.ConstructedArea;
+            //model.HouseNo = selfAssessment.HouseNo;
             model.PlotNo = selfAssessment.PlotNo;
             model.Street = selfAssessment.Street;
-            model.LocalityId = selfAssessment.LocalityId;
-            model.NosFloor = selfAssessment.NosFloor;
-            model.BuildingFootprintArea = selfAssessment.BuildingFootprintArea;
-            model.ConstructionYear = selfAssessment.ConstructionYear;
-            model.FrontRoadWidth = selfAssessment.FrontRoadWidth;
+            //model.LocalityId = selfAssessment.LocalityId;
+            //model.NosFloor = selfAssessment.NosFloor;
+            //model.BuildingFootprintArea = selfAssessment.BuildingFootprintArea;
+            //model.ConstructionYear = selfAssessment.ConstructionYear;
+            //model.FrontRoadWidth = selfAssessment.FrontRoadWidth;
             model.FirstName = selfAssessment.FirstName;
             model.MiddleName = selfAssessment.MiddleName;
             model.LastName = selfAssessment.LastName;
             model.SpouseName = selfAssessment.SpouseName;
             model.FatherName = selfAssessment.FatherName;
-            model.MotherName = selfAssessment.MotherName;
-            model.EpicIdNumber = selfAssessment.EpicIdNumber;
+            //model.MotherName = selfAssessment.MotherName;
+            //model.EpicIdNumber = selfAssessment.EpicIdNumber;
             model.EmailId = selfAssessment.EmailId;
             model.MobileNo = selfAssessment.MobileNo;
-            model.AadhaarNo = selfAssessment.AadhaarNo;
-            model.DateOfBirth = selfAssessment.DateOfBirth;
+            //model.AadhaarNo = selfAssessment.AadhaarNo;
+            //model.DateOfBirth = selfAssessment.DateOfBirth;
             model.Gender = selfAssessment.Gender;
             model.PanNo = selfAssessment.PanNo;
-            model.OwnershipColony = selfAssessment.OwnershipColony;
-            model.OwnershipDistrictId = selfAssessment.OwnershipDistrictId;
-            model.PropertyShare = selfAssessment.PropertyShare;
-            model.OwnerPhoto = selfAssessment.OwnerPhoto;
-            model.DoesLandLitigation = selfAssessment.DoesLandLitigation;
-            model.LitigationStatus = selfAssessment.LitigationStatus;
+            //model.OwnershipColony = selfAssessment.OwnershipColony;
+            //model.OwnershipDistrictId = selfAssessment.OwnershipDistrictId;
+            //model.PropertyShare = selfAssessment.PropertyShare;
+            //model.OwnerPhoto = selfAssessment.OwnerPhoto;
+            //model.DoesLandLitigation = selfAssessment.DoesLandLitigation;
+            //model.LitigationStatus = selfAssessment.LitigationStatus;
             model.CourtCaseStatus = selfAssessment.CourtCaseStatus;
-            model.DetailCourtCase = selfAssessment.DetailCourtCase;
+            //model.DetailCourtCase = selfAssessment.DetailCourtCase;
             model.CourtName = selfAssessment.CourtName;
-            model.CaseNumber = selfAssessment.CaseNumber;
+            //model.CaseNumber = selfAssessment.CaseNumber;
             model.PetitionerRespondent = selfAssessment.PetitionerRespondent;
-            model.NameOppositeParty = selfAssessment.NameOppositeParty;
-            model.PhotographProperty = selfAssessment.PhotographProperty;
-            model.PhotographOwner = selfAssessment.PhotographOwner;
-            model.Gpa = selfAssessment.Gpa;
-            model.Ats = selfAssessment.Ats;
-            model.ElectricityBill = selfAssessment.ElectricityBill;
-            model.PaymentDocument = selfAssessment.PaymentDocument;
-            model.WillDocument = selfAssessment.WillDocument;
-            model.PossessionDocument = selfAssessment.PossessionDocument;
-            model.MutationDocument = selfAssessment.MutationDocument;
-            model.CoordinateDocument = selfAssessment.CoordinateDocument;
-            model.Declaration1 = selfAssessment.Declaration1;
-            model.Declaration2 = selfAssessment.Declaration2;
-            model.Declaration3 = selfAssessment.Declaration3;
-            model.Col1 = selfAssessment.Col1;
-            model.Col2 = selfAssessment.Col2;
-            model.RecordStatus = selfAssessment.RecordStatus;
-            model.ChainDocument = selfAssessment.ChainDocument;
+            //model.NameOppositeParty = selfAssessment.NameOppositeParty;
+            //model.PhotographProperty = selfAssessment.PhotographProperty;
+            //model.PhotographOwner = selfAssessment.PhotographOwner;
+            //model.Gpa = selfAssessment.Gpa;
+            //model.Ats = selfAssessment.Ats;
+            //model.ElectricityBill = selfAssessment.ElectricityBill;
+            //model.PaymentDocument = selfAssessment.PaymentDocument;
+            //model.WillDocument = selfAssessment.WillDocument;
+            //model.PossessionDocument = selfAssessment.PossessionDocument;
+            //model.MutationDocument = selfAssessment.MutationDocument;
+            //model.CoordinateDocument = selfAssessment.CoordinateDocument;
+            //model.Declaration1 = selfAssessment.Declaration1;
+            //model.Declaration2 = selfAssessment.Declaration2;
+            //model.Declaration3 = selfAssessment.Declaration3;
+            //model.Col1 = selfAssessment.Col1;
+            //model.Col2 = selfAssessment.Col2;
+            //model.RecordStatus = selfAssessment.RecordStatus;
+            //model.ChainDocument = selfAssessment.ChainDocument;
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = 1;
             _assessmentRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
 
-        public async Task<bool> Create(NewDamageSelfAssessment selfAssessment)
+        public async Task<bool> Create(Newdamagepayeeregistration selfAssessment)
         {
 
             selfAssessment.CreatedBy = 1;
@@ -148,7 +152,7 @@ namespace Libraries.Service.ApplicationService
             return await _unitOfWork.CommitAsync() > 0;
         }
 
-        public async Task<List<NewDamageSelfAssessment>> GetDamageSelfAssessments()
+        public async Task<List<Newdamagepayeeregistration>> GetDamageSelfAssessments()
         {
             return await _assessmentRepository.GetAllDamageSelfAssessments();
         }
@@ -169,15 +173,18 @@ namespace Libraries.Service.ApplicationService
 
         //********* Gpa Self Assessment Details **********
 
-        public async Task<bool> SaveFloorDetails(NewdamageAddfloor attendance)
+        public async Task<bool> SaveFloorDetails(Newdamageselfassessmentfloordetail attendance)
         {
-            attendance.CreatedBy = attendance.CreatedBy;
-            attendance.CreatedDate = DateTime.Now;
-          // attendance.IsActive = 1;
+            
             return await _assessmentRepository.SaveFloorDetails(attendance);
         }
+        public async Task<bool> SaveOccupantDetails(Newdamagepayeeoccupantinfo details)
+        {
 
-        public async Task<bool> SaveGPADetails(NewDamageSelfAssessmentGpaDetails gpaDetails)
+            return await _assessmentRepository.SaveOccupantDetails(details);
+        }
+        
+        public async Task<bool> SaveGPADetails(Newdamageselfassessmentgpadetail gpaDetails)
         {
             gpaDetails.CreatedBy = gpaDetails.CreatedBy;
             gpaDetails.CreatedDate = DateTime.Now;
@@ -185,15 +192,28 @@ namespace Libraries.Service.ApplicationService
             return await _assessmentRepository.SaveGPADetails(gpaDetails);
         }
 
-        public async Task<bool> SaveATSDetails(NewDamageSelfAssessmentAtsDetails gpaDetails)
+        public async Task<bool> SaveATSDetails(Newdamageselfassessmentatsdetail AtsDetails)
         {
-            gpaDetails.CreatedBy = gpaDetails.CreatedBy;
-            gpaDetails.CreatedDate = DateTime.Now;
+            AtsDetails.CreatedBy = AtsDetails.CreatedBy;
+            AtsDetails.CreatedDate = DateTime.Now;
             // attendance.IsActive = 1;
-            return await _assessmentRepository.SaveATSDetails(gpaDetails);
+            return await _assessmentRepository.SaveATSDetails(AtsDetails);
         }
-
-
+        public async Task<bool> SaveHolderdetails(Newdamageselfassessmentholderdetail holderDetails)
+        {
+            holderDetails.CreatedBy = holderDetails.CreatedBy;
+            holderDetails.CreatedDate = DateTime.Now;
+            // attendance.IsActive = 1;
+            return await _assessmentRepository.SaveHolderdetails(holderDetails);
+        }
+        public async Task<bool> SavePaymentdetails(Newdamagepaymenthistory paymentDetails)
+        {
+            paymentDetails.CreatedBy = paymentDetails.CreatedBy;
+            paymentDetails.CreatedDate = DateTime.Now;
+            // attendance.IsActive = 1;
+            return await _assessmentRepository.SavePaymentdetails(paymentDetails);
+        }
+        
 
 
         public async Task<List<NewDamageSelfAssessmentGpaDetails>> GetAllGpaDetails(int id)
@@ -227,7 +247,7 @@ namespace Libraries.Service.ApplicationService
         }
 
 
-        public async Task<NewDamageSelfAssessment> GetUploadDocumentFilePath(int Id)
+        public async Task<Newdamagepayeeregistration> GetUploadDocumentFilePath(int Id)
         {
             return await _assessmentRepository.GetUploadDocumentFilePath(Id);
         }
