@@ -11,22 +11,24 @@
         <div id="COLONYDETAILS">
             <div class="row">
                 <div class="col-md-4">
-                    Whether property is damage : <select asp-for="WhetherDamageProp" class="floating-label-field floating-label-field--s3">
+                    <span style="color: #2196F3"> Whether property is damage Payee :</span> <select asp-for="WhetherDamageProp" class="floating-label-field floating-label-field--s3">
                         <option value="">---Select---</option>
                         <option value="Yes">Yes</option>
                         <option value="No">No</option>
                     </select>
                 </div>
                 <div class="col-md-4">
-                    Whether the current occupant is a : <select asp-for="Occupanttype" class="floating-label-field floating-label-field--s3">
+                    <span style="color: #2196F3">
+                        Whether the current occupant is a :
+                    </span><select asp-for="Occupanttype" class="floating-label-field floating-label-field--s3">
                         <option value="">---Select---</option>
                         <option value="Original">Original</option>
                         <option value="Legal Heir">Legal Heir</option>
-                        <option value="Subsequent">Subsequent</option>
+                        <option value="Subsequent">Subsequent buyer</option>
                     </select>
                 </div>
                 <div class="col-md-4" style="display:none" id="divLegal">
-                    Has the Assessee Name change requested in DDA : <select asp-for="IsNameChanged" class="floating-label-field floating-label-field--s3">
+                    <span style="color: #2196F3"> Has the Assessee Name change requested in DDA :</span> <select asp-for="IsNameChanged" class="floating-label-field floating-label-field--s3">
                         <option value="">---Select---</option>
                         <option value="Yes">Yes</option>
                         <option value="No">No</option>
@@ -371,22 +373,22 @@
                         <a class="remove delete-occupant-record" title="Delete occupant Details" data-id="0" style="display:none;font-size:16px;color:red;"><i class="ri-delete-bin-fill"></i></a>
                     </span>
                     <hr />
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="floating-label-wrap mb-3 mb-md-0">
-                                <input asp-for="LatestAtsname" type="text" class="floating-label-field floating-label-field--s3" placeholder="Latest ATS Name" />
-                                <span asp-validation-for="LatestAtsname" class="d-block text-danger field-validation-valid"></span>
-                                <label class="floating-label">Latest ATS Name<span style="color:red">*</span></label>
+                    @*<div class="row">
+                            <div class="col-md-6">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+                                    <input asp-for="LatestAtsname" type="text" class="floating-label-field floating-label-field--s3" placeholder="Latest ATS Name" />
+                                    <span asp-validation-for="LatestAtsname" class="d-block text-danger field-validation-valid"></span>
+                                    <label class="floating-label">Latest ATS Name<span style="color:red">*</span></label>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="floating-label-wrap mb-3 mb-md-0">
-                                <input asp-for="LatestGpaname" type="text" class="floating-label-field floating-label-field--s3" placeholder="Latest ATS Name" />
-                                <span asp-validation-for="LatestGpaname" class="d-block text-danger field-validation-valid"></span>
-                                <label class="floating-label">Latest GPA Name<span style="color:red">*</span></label>
+                            <div class="col-md-6">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+                                    <input asp-for="LatestGpaname" type="text" class="floating-label-field floating-label-field--s3" placeholder="Latest ATS Name" />
+                                    <span asp-validation-for="LatestGpaname" class="d-block text-danger field-validation-valid"></span>
+                                    <label class="floating-label">Latest GPA Name<span style="color:red">*</span></label>
+                                </div>
                             </div>
-                        </div>
-                    </div>
+                        </div>*@
                     <div class="row mt-md-3">
                         <div class="col-md-6">
                             <div class="floating-label-wrap mb-3 mb-md-0">
@@ -572,17 +574,17 @@
                             </div>
                         </div>
 
-                        <div class="col-md-6">
+                        <!--<div class="col-md-6">
                             <div class="floating-label-wrap mb-3 mb-md-0">
                                 <a id="viewGpaFile" asp-action="GpaFile" class="badge bg-primary px-2" target="_blank" style="display:none;">(View File)</a>
                                 <input asp-for="FileGpafile" class="floating-label-field floating-label-field--s3 checkExtension" type="file" />
-                                <input type="hidden" asp-for="GpafilePath" />
+                                <input type="hidden" asp-for="GpafilePath" />-->
                                 @*<span asp-validation-for="GpafilePath" class="d-block text-danger field-validation-valid"></span>*@
-                                <label class="floating-label">GPA</label>
+                                <!--<label class="floating-label">GPA</label>
                             </div>
-                        </div>
+                        </div>-->
                     </div>
-                    <div class="row mt-md-3">
+                    @*<div class="row mt-md-3">
                         <div class="col-md-6">
                             <div class="floating-label-wrap mb-3 mb-md-0">
                                 <a id="viewAtsFile" asp-action="AtsFile" class="badge bg-primary px-2" target="_blank" style="display:none;">(View File)</a>
@@ -592,7 +594,7 @@
                                 <label class="floating-label">ATS</label>
                             </div>
                         </div>
-                    </div>
+                    </div>*@
                 </div>
             </div>
         </div>
@@ -691,8 +693,9 @@
                                 <th>Date of execution of GPA</th>
                                 <th>Name of the Seller</th>
                                 <th>Name of the Payer</th>
-                                <th>Address of the plot as per GPA (sqm)</th>
-                                <th>Area of the plot as per GPA (sqm)</th>
+                                <th>plot Address as per GPA</th>
+                                <th>plot Area as per GPA (sqm)</th>
+                                <th>GPA Document</th>
                                 <th>Operation</th>
                             </tr>
                         </thead>
@@ -711,10 +714,13 @@
                                     <input asp-for="NameOfThePayer" type="text" class="floating-label-field floating-label-field--s3" id="txtPayerNameGPA" />
                                 </td>
                                 <td>
-                                    <input asp-for="AddressOfThePlotAsPerGpa" type="text" class="floating-label-field floating-label-field--s3 numbers" id="txtPlotAddressGPA" />
+                                    <input asp-for="AddressOfThePlotAsPerGpa" type="text" class="floating-label-field floating-label-field--s3" id="txtPlotAddressGPA" />
                                 </td>
                                 <td>
                                     <input asp-for="AreaOfThePlotAsPerGpa" type="text" class="floating-label-field floating-label-field--s3 numbers" id="txtPlotAreaGPA" />
+                                </td>
+                                <td>
+                                    <input asp-for="FileGpafile" class="floating-label-field floating-label-field--s3 checkExtension" type="file" />
                                 </td>
                                 <td>
                                     <div class="floating-label-wrap mb-3 mb-md-0">
@@ -746,8 +752,9 @@
                                 <th>Date of execution of ATS</th>
                                 <th>Name of the Seller</th>
                                 <th>Name of the Payer</th>
-                                <th>Address of the plot as per ATS (sqm)</th>
-                                <th>Area of the plot as per ATS (sqm)</th>
+                                <th>Plot Address as per ATS</th>
+                                <th>plot Area  as per ATS (sqm)</th>
+                                <th>ATS Document</th>
                                 <th>Operation</th>
                             </tr>
                         </thead>
@@ -766,12 +773,13 @@
                                     <input asp-for="NameOfThePayerAts" type="text" class="floating-label-field floating-label-field--s3" id="txtPayerNameATS" />
                                 </td>
                                 <td>
-                                    <input asp-for="AddressOfThePlotAsPerAts" type="text" class="floating-label-field floating-label-field--s3 numbers" id="txtPlotAddressATS" />
+                                    <input asp-for="AddressOfThePlotAsPerAts" type="text" class="floating-label-field floating-label-field--s3" id="txtPlotAddressATS" />
                                 </td>
-
-
                                 <td>
                                     <input asp-for="AreaOfThePlotAsPerAts" type="text" class="floating-label-field floating-label-field--s3 numbers" id="txtPlotAreaATS" />
+                                </td>
+                                <td>
+                                    <input asp-for="FileAtsfile" class="floating-label-field floating-label-field--s3 checkExtension" type="file" />
                                 </td>
                                 <td>
                                     <div class="floating-label-wrap mb-3 mb-md-0">
@@ -788,7 +796,7 @@
 
         </div>
 
-        <div id="ATSDETAIL" style="margin-top:-15px;">
+        @*<div id="ATSDETAIL" style="margin-top:-15px;">
             <h3 class="my-3 d-flex sub-heading">HOLDER DETAIL</h3>
 
             <div class="table-section bg-white border shadow rounded">
@@ -844,7 +852,7 @@
                 </div>
             </div>
 
-        </div>
+        </div>*@
         <div id="DivMainContentForm" style="margin-top:-15px;">
             <h3 class="my-3 d-flex sub-heading">Payment History</h3>
 

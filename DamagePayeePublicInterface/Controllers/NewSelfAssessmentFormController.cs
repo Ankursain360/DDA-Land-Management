@@ -2,41 +2,48 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using Microsoft.Extensions.Configuration;
+using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using Utility.Helper;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
-using Dto.Search;
-using DamagePayeePublicInterface.Filters;
-using Core.Enum;
+using System.Text;
+using Service.IApplicationService;
 using Dto.Master;
-using Utility.Helper;
-using Microsoft.Extensions.Configuration;
-using Microsoft.AspNetCore.Http;
+using Core.Enum;
 using System.IO;
-using DamagePayeePublicInterface.Helper;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using System.Security.Cryptography;
+
 
 namespace DamagePayeePublicInterface.Controllers
 {
-    public class NewSelfAssessmentFormController : Controller
+    public class NewSelfAssessmentFormController : BaseController
     {
         private readonly INewDamageSelfAssessmentService _selfAssessmentService;
-
+        private readonly IUserProfileService _userProfileService;
         public IConfiguration _configuration;
-        public NewSelfAssessmentFormController(INewDamageSelfAssessmentService selfAssessmentService, IConfiguration configuration)
+        public NewSelfAssessmentFormController(INewDamageSelfAssessmentService selfAssessmentService, IConfiguration configuration, IUserProfileService userProfileService)
         {
             _selfAssessmentService = selfAssessmentService;
             _configuration = configuration;
+            _userProfileService = userProfileService;
         }
         public IActionResult Index()
         {
             return View();
         }
+        //[HttpPost]
+        //public async Task<PartialViewResult> List([FromBody] DamagepayeeregistertempSearchDto model)
+        //{
+        //    //var result = await _selfAssessmentService.GetA(model);
+        //    //return PartialView("_List", result);
+        //}
         public async Task<IActionResult> Create()
         {
             Newdamagepayeeregistration model = new Newdamagepayeeregistration();
@@ -91,7 +98,7 @@ namespace DamagePayeePublicInterface.Controllers
                     { // change file path strAtsFilePath
                         selfAssessment.PropertyTaxReceiptFilePath = fileHelper.SaveFile(strPropertyTaxReceiptFilePath, selfAssessment.FilePropertyTaxReceipt);
                     }
-
+                    selfAssessment.UserId = SiteContext.UserId.ToString();
 
                     var result = await _selfAssessmentService.Create(selfAssessment);
                     if (result)
@@ -120,7 +127,7 @@ namespace DamagePayeePublicInterface.Controllers
                         }
 
                         List<Newdamagepayeeoccupantinfo> addOccupant = new List<Newdamagepayeeoccupantinfo>();
-                        for (int i = 0; i < selfAssessment.LatestAtsname.Count; i++)
+                        for (int i = 0; i < selfAssessment.FirstName.Count; i++)
                         {
                             addOccupant.Add(new Newdamagepayeeoccupantinfo
                             {

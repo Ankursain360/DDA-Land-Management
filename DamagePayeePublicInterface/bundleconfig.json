@@ -46,5 +46,11 @@
     "inputFiles": [
       "wwwroot/js/SubstitutionMutationDetailsCreate.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/newdamageselfassessmentcreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/newdamageselfassessmentcreate.js"
+    ]
   }
 ]

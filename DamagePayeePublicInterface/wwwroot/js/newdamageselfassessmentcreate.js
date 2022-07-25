@@ -106,8 +106,7 @@ $(document).delegate('a.add-record2', 'click', function (e) {
 $(document).delegate('a.add-occupant-record', 'click', function (e) {
     debugger
     var size = $('#hdncounter').val();
-    if ($("#divPersonaldata #LatestAtsname").val() != ''
-        && $("#divPersonaldata #LatestGpaname").val() != '') {
+    if ($("#divPersonaldata #FirstName").val() != '') {
         e.preventDefault();
         var content = jQuery('#divPersonaldata >div'),
             element = null,
