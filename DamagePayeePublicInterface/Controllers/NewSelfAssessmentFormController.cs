@@ -266,9 +266,7 @@ namespace DamagePayeePublicInterface.Controllers
                 return View(selfAssessment);
             }
         }
-
-
-
+         
         [HttpGet]
         public async Task<JsonResult> GetNewVillageList(int? DistrictId)
         {

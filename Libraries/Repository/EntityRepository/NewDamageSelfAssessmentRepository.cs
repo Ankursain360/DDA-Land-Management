@@ -96,14 +96,17 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<bool> SaveFloorDetails(Newdamageselfassessmentfloordetail floordetails)
         {
-            _dbContext.newdamageselfassessmentfloordetail.Add(floordetails);    
+            _dbContext.newdamageselfassessmentfloordetail.Add(floordetails); 
             var Result = await _dbContext.SaveChangesAsync();
+            _dbContext.Entry(floordetails).State = EntityState.Detached;
             return Result > 0 ? true : false;
         }
         public async Task<bool> SaveOccupantDetails(Newdamagepayeeoccupantinfo occupantdetails)
         {
             _dbContext.newdamagepayeeoccupantinfo.Add(occupantdetails);
+           
             var Result = await _dbContext.SaveChangesAsync();
+            _dbContext.Entry(occupantdetails).State = EntityState.Detached;
             return Result > 0 ? true : false;
         }
         
@@ -111,26 +114,33 @@ namespace Libraries.Repository.EntityRepository
         public async Task<bool> SaveGPADetails(Newdamageselfassessmentgpadetail gpaDetails)
         {
             _dbContext.newdamageselfassessmentgpadetail.Add(gpaDetails);
+          
             var Result = await _dbContext.SaveChangesAsync();
+            _dbContext.Entry(gpaDetails).State = EntityState.Detached;
             return Result > 0 ? true : false;
         }
 
         public async Task<bool> SaveATSDetails(Newdamageselfassessmentatsdetail atsDetails)
         {
             _dbContext.newdamageselfassessmentatsdetail .Add(atsDetails);
+            
             var Result = await _dbContext.SaveChangesAsync();
+            _dbContext.Entry(atsDetails).State = EntityState.Detached;
             return Result > 0 ? true : false;
         }
         public async Task<bool> SaveHolderdetails(Newdamageselfassessmentholderdetail holderDetails)
         {
             _dbContext.newdamageselfassessmentholderdetail.Add(holderDetails);
+           
             var Result = await _dbContext.SaveChangesAsync();
+            _dbContext.Entry(holderDetails).State = EntityState.Detached;
             return Result > 0 ? true : false;
         }
         public async Task<bool> SavePaymentdetails(Newdamagepaymenthistory paymentDetails)
         {
-            _dbContext.newdamagepaymenthistory.Add(paymentDetails);
+            _dbContext.newdamagepaymenthistory.Add(paymentDetails);           
             var Result = await _dbContext.SaveChangesAsync();
+            _dbContext.Entry(paymentDetails).State = EntityState.Detached;
             return Result > 0 ? true : false;
         }
         

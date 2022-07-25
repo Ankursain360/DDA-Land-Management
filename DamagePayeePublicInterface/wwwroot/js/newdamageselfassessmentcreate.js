@@ -69,6 +69,7 @@ function onChangeVillage(id) {
         $("#ColonyId").html(html);
     });
 };
+//Floor Details
 $(document).delegate('a.add-record2', 'click', function (e) {
     debugger
 
@@ -138,7 +139,6 @@ $(document).delegate('a.add-occupant-record', 'click', function (e) {
     }
 });
 //delete occupant details
-
 $(document).delegate('a.delete-occupant-record', 'click', function (e) {
     e.preventDefault();
     var didConfirm = confirm("Are you sure You want to delete");
@@ -169,7 +169,7 @@ $(document).delegate('a.delete-occupant-record', 'click', function (e) {
     }
 });
 
-
+//GAP repeater
 $(document).delegate('a.add-record3', 'click', function (e) {
     debugger
 
@@ -185,8 +185,8 @@ $(document).delegate('a.add-record3', 'click', function (e) {
         element.appendTo('#tbl_posts3_body');
 
         /*   $('#tbl_posts2_body #rec-' + size + ' #FloorName').val(Gender);*/
-        element.find('.sn2').html(size);
-        $("#tbl_posts3 #add3 .sn2").text($('#tbl_posts2 >tbody >tr').length);
+        element.find('.sn3').html(size);
+        $("#tbl_posts3 #add3 .sn3").text($('#tbl_posts3 >tbody >tr').length);
         $("#tbl_posts3 #add3 .add").remove();
         /*  $("#tbl_posts2 #add2 #AAttendance").select2('val', '');*/
         $("#tbl_posts3 #tbl_posts3_body .floating-label-field").attr("readonly", true);
@@ -194,17 +194,18 @@ $(document).delegate('a.add-record3', 'click', function (e) {
         element.find(".delete-record3").show();
         debugger
 
-        $("#tbl_posts2 #add3 .floating-label-field").val('');
+        $("#tbl_posts3 #add3 .floating-label-field").val('');
     }
     else {
         alert('Please fill record before add new record ');
     }
 });
 
+//ATS records
 $(document).delegate('a.add-record4', 'click', function (e) {
     debugger
-    if ($("#tbl_posts4 #add4 #NameOfThePayerAts").val() != ''
-        && $("#tbl_posts4 #add4 #NameOfTheSellerAts").val() != '') {
+    if ($("#tbl_posts4 #add4 #txtSellerNameATS").val() != ''
+        && $("#tbl_posts4 #add4 #txtPayerNameATS").val() != '') {
         e.preventDefault();
         var content = jQuery('#tbl_posts4 #add4 tr'),
             size = jQuery('#tbl_posts4 >tbody >tr').length,
@@ -215,8 +216,8 @@ $(document).delegate('a.add-record4', 'click', function (e) {
         element.appendTo('#tbl_posts4_body');
 
         /*   $('#tbl_posts2_body #rec-' + size + ' #FloorName').val(Gender);*/
-        element.find('.sn2').html(size);
-        $("#tbl_posts4 #add4 .sn2").text($('#tbl_posts4 >tbody >tr').length);
+        element.find('.sn4').html(size);
+        $("#tbl_posts4 #add4 .sn4").text($('#tbl_posts4 >tbody >tr').length);
         $("#tbl_posts4 #add4 .add").remove();
         /*  $("#tbl_posts2 #add2 #AAttendance").select2('val', '');*/
         $("#tbl_posts4 #tbl_posts4_body .floating-label-field").attr("readonly", true);
@@ -231,7 +232,89 @@ $(document).delegate('a.add-record4', 'click', function (e) {
     }
 });
 
+//HOLDER records
+$(document).delegate('a.add-record5', 'click', function (e) {
+    debugger
+    if ($("#tbl_posts5 #add5 #txtNameofGPAats").val() != ''
+        && $("#tbl_posts5 #add5 #txtDeathCertificateNo").val() != '') {
+        e.preventDefault();
+        var content = jQuery('#tbl_posts5 #add5 tr'),
+            size = jQuery('#tbl_posts5 >tbody >tr').length,
+            element = null,
+            element = content.clone();
+        element.attr('id', 'rec-' + size);
+        element.find('.delete-record5').attr('data-id', size);
+        element.appendTo('#tbl_posts5_body');
 
+        /*   $('#tbl_posts2_body #rec-' + size + ' #FloorName').val(Gender);*/
+        element.find('.sn5').html(size);
+        $("#tbl_posts5 #add5 .sn5").text($('#tbl_posts5 >tbody >tr').length);
+        $("#tbl_posts5 #add5 .add").remove();
+        /*  $("#tbl_posts2 #add2 #AAttendance").select2('val', '');*/
+        $("#tbl_posts5 #tbl_posts5_body .floating-label-field").attr("readonly", true);
+        element.find(".add-record5").hide();
+        element.find(".delete-record5").show();
+        debugger
+
+        $("#tbl_posts5 #add5 .floating-label-field").val('');
+    }
+    else {
+        alert('Please fill record before add new record ');
+    }
+});
+
+//pAYMENT records
+$(document).delegate('a.add-recordPayment', 'click', function (e) {
+    debugger
+    if ($("#tbl_Payment #addPayment #txtNameofGPAats").val() != ''
+        && $("#tbl_Payment #addPayment #txtDeathCertificateNo").val() != '') {
+        e.preventDefault();
+        var content = jQuery('#tbl_Payment #addPayment tr'),
+            size = jQuery('#tbl_Payment >tbody >tr').length,
+            element = null,
+            element = content.clone();
+        element.attr('id', 'rec-' + size);
+        element.find('.delete-recordPayment').attr('data-id', size);
+        element.appendTo('#tbl_Payment_body');
+
+        /*   $('#tbl_posts2_body #rec-' + size + ' #FloorName').val(Gender);*/
+        element.find('.sn6').html(size);
+        $("#tbl_Payment #addPayment .sn6").text($('#tbl_Payment >tbody >tr').length);
+        $("#tbl_Payment #addPayment .add").remove();
+        /*  $("#tbl_posts2 #add2 #AAttendance").select2('val', '');*/
+        $("#tbl_Payment #tbl_Payment_body .floating-label-field").attr("readonly", true);
+        element.find(".add-recordPayment").hide();
+        element.find(".delete-recordPayment").show();
+        debugger
+
+        $("#tbl_Payment #addPayment .floating-label-field").val('');
+    }
+    else {
+        alert('Please fill record before add new record ');
+    }
+});
+
+//delete Payment repater data
+$(document).delegate('a.delete-recordPayment', 'click', function (e) {
+    e.preventDefault();
+    var didConfirm = confirm("Are you sure You want to delete");
+    if (didConfirm == true) {
+        var id = jQuery(this).attr('data-id');
+        var targetDiv = jQuery(this).attr('targetDiv');
+        jQuery('#rec-' + id).remove();
+        //regnerate index number on table
+        $('#tbl_Payment_body tr').each(function (index) {
+            //alert(index);
+            $(this).find('span .sn6').html(index + 1);
+        });
+        $("#tbl_Payment #addPayment .sn6").text($('#tbl_Payment >tbody >tr').length);
+        return true;
+    } else {
+        return false;
+    }
+});
+
+//delete GPA repater data
 $(document).delegate('a.delete-record3', 'click', function (e) {
     e.preventDefault();
     var didConfirm = confirm("Are you sure You want to delete");
@@ -242,16 +325,16 @@ $(document).delegate('a.delete-record3', 'click', function (e) {
         //regnerate index number on table
         $('#tbl_posts3_body tr').each(function (index) {
             //alert(index);
-            $(this).find('span .sn2').html(index + 1);
+            $(this).find('span .sn3').html(index + 1);
         });
-        $("#tbl_posts3 #add3 .sn2").text($('#tbl_posts3 >tbody >tr').length);
+        $("#tbl_posts3 #add3 .sn3").text($('#tbl_posts3 >tbody >tr').length);
         return true;
     } else {
         return false;
     }
 });
 
-
+//delete ATS repater data
 $(document).delegate('a.delete-record4', 'click', function (e) {
     e.preventDefault();
     var didConfirm = confirm("Are you sure You want to delete");
@@ -262,15 +345,36 @@ $(document).delegate('a.delete-record4', 'click', function (e) {
         //regnerate index number on table
         $('#tbl_posts4_body tr').each(function (index) {
             //alert(index);
-            $(this).find('span .sn2').html(index + 1);
+            $(this).find('span .sn4').html(index + 1);
         });
-        $("#tbl_posts4 #add4 .sn2").text($('#tbl_posts4 >tbody >tr').length);
+        $("#tbl_posts4 #add4 .sn4").text($('#tbl_posts4 >tbody >tr').length);
         return true;
     } else {
         return false;
     }
 });
 
+//delete hOLDER repater data
+$(document).delegate('a.delete-record5', 'click', function (e) {
+    e.preventDefault();
+    var didConfirm = confirm("Are you sure You want to delete");
+    if (didConfirm == true) {
+        var id = jQuery(this).attr('data-id');
+        var targetDiv = jQuery(this).attr('targetDiv');
+        jQuery('#rec-' + id).remove();
+        //regnerate index number on table
+        $('#tbl_posts5_body tr').each(function (index) {
+            //alert(index);
+            $(this).find('span .sn5').html(index + 1);
+        });
+        $("#tbl_posts5 #add5 .sn5").text($('#tbl_posts5 >tbody >tr').length);
+        return true;
+    } else {
+        return false;
+    }
+});
+
+//delete floor details
 $(document).delegate('a.delete-record2', 'click', function (e) {
     e.preventDefault();
     var didConfirm = confirm("Are you sure You want to delete");

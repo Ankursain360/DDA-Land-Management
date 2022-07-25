@@ -472,7 +472,7 @@
 
                         <div class="col-md-6">
                             <div class="floating-label-wrap mb-3 mb-md-0">
-                                <input asp-for="MobileNo" type="text" class="floating-label-field floating-label-field--s3" placeholder="Mobile Number" />
+                                <input asp-for="MobileNo" type="text" class="floating-label-field floating-label-field--s3 numbers" maxlength="10" placeholder="Mobile Number" />
                                 <span asp-validation-for="MobileNo" class="d-block text-danger field-validation-valid"></span>
                                 <label class="floating-label">Mobile Number</label>
 
@@ -481,7 +481,7 @@
 
                         <div class="col-md-6">
                             <div class="floating-label-wrap">
-                                <input asp-for="AadharNo" type="text" class="floating-label-field floating-label-field--s3" placeholder="AADHAAR" />
+                                <input asp-for="AadharNo" type="text" class="floating-label-field floating-label-field--s3 numbers" maxlength="12" placeholder="AADHAAR" />
                                 <span asp-validation-for="AadharNo" class="d-block text-danger field-validation-valid"></span>
                                 <label class="floating-label">AADHAAR No</label>
                             </div>
@@ -549,7 +549,7 @@
 
                         <div class="col-md-6">
                             <div class="floating-label-wrap">
-                                <input asp-for="DamagePaidInPast" type="text" class="floating-label-field floating-label-field--s3" placeholder="ShareinProperty" />
+                                <input asp-for="DamagePaidInPast" type="text" class="floating-label-field floating-label-field--s3 numbers" placeholder="Damage Paid Amount" />
                                 <span asp-validation-for="DamagePaidInPast" class="d-block text-danger field-validation-valid"></span>
                                 <label class="floating-label">Damage paid in the past</label>
                             </div>
@@ -700,7 +700,7 @@
                         </tbody>
                         <tbody class="tbody" id="add3">
                             <tr id="">
-                                <td style="text-align:center;"><span class="sn2">1</span></td>
+                                <td style="text-align:center;"><span class="sn3">1</span></td>
                                 <td>
                                     <input asp-for="DateOfExecutionOfGpa" type="date" class="floating-label-field floating-label-field--s3" id="txtExecutionDateGPA" />
                                 </td>
@@ -711,15 +711,15 @@
                                     <input asp-for="NameOfThePayer" type="text" class="floating-label-field floating-label-field--s3" id="txtPayerNameGPA" />
                                 </td>
                                 <td>
-                                    <input asp-for="AddressOfThePlotAsPerGpa" type="text" class="floating-label-field floating-label-field--s3" id="txtPlotAddressGPA" />
+                                    <input asp-for="AddressOfThePlotAsPerGpa" type="text" class="floating-label-field floating-label-field--s3 numbers" id="txtPlotAddressGPA" />
                                 </td>
                                 <td>
-                                    <input asp-for="AreaOfThePlotAsPerGpa" type="text" class="floating-label-field floating-label-field--s3" id="txtPlotAreaGPA" />
+                                    <input asp-for="AreaOfThePlotAsPerGpa" type="text" class="floating-label-field floating-label-field--s3 numbers" id="txtPlotAreaGPA" />
                                 </td>
                                 <td>
                                     <div class="floating-label-wrap mb-3 mb-md-0">
                                         <div class="floating-label-wrap mb-3 mb-md-0">
-                                            <a class="remove delete-record3 " title="delete" data-id="0" style="display:none;font-size:30px;"><i class="ri-delete-bin-fill"></i></a>
+                                            <a class="remove delete-record3 " title="delete" data-id="0" style="display:none;font-size:20px;color:red"><i class="ri-delete-bin-fill"></i></a>
                                             <a class="view add-record3" data-added="0" title="Add" style="font-size:30px;"><i class="ri-add-circle-fill"></i></a>
                                         </div>
                                     </div>
@@ -755,7 +755,7 @@
                         </tbody>
                         <tbody class="tbody" id="add4">
                             <tr id="">
-                                <td style="text-align:center;"><span class="sn3">1</span></td>
+                                <td style="text-align:center;"><span class="sn4">1</span></td>
                                 <td>
                                     <input asp-for="DateOfExecutionOfAts" type="date" class="floating-label-field floating-label-field--s3" id="txtExecutionDateATS" />
                                 </td>
@@ -766,16 +766,16 @@
                                     <input asp-for="NameOfThePayerAts" type="text" class="floating-label-field floating-label-field--s3" id="txtPayerNameATS" />
                                 </td>
                                 <td>
-                                    <input asp-for="AddressOfThePlotAsPerAts" type="text" class="floating-label-field floating-label-field--s3" id="txtPlotAddressATS" />
+                                    <input asp-for="AddressOfThePlotAsPerAts" type="text" class="floating-label-field floating-label-field--s3 numbers" id="txtPlotAddressATS" />
                                 </td>
 
 
                                 <td>
-                                    <input asp-for="AreaOfThePlotAsPerAts" type="text" class="floating-label-field floating-label-field--s3" id="txtPlotAreaATS" />
+                                    <input asp-for="AreaOfThePlotAsPerAts" type="text" class="floating-label-field floating-label-field--s3 numbers" id="txtPlotAreaATS" />
                                 </td>
                                 <td>
                                     <div class="floating-label-wrap mb-3 mb-md-0">
-                                        <a class="remove delete-record4 " title="delete" data-id="0" style="display:none;font-size:30px;"><i class="ri-delete-bin-fill"></i></a>
+                                        <a class="remove delete-record4 " title="delete" data-id="0" style="display:none;font-size:20px;color:red"><i class="ri-delete-bin-fill"></i></a>
                                         <a class="view add-record4" data-added="0" title="Add" style="font-size:30px;"><i class="ri-add-circle-fill"></i></a>
                                     </div>
 
@@ -794,7 +794,7 @@
             <div class="table-section bg-white border shadow rounded">
                 <div class="table-responsive">
 
-                    <table class="table table-sm table-bordered mb-0 table-striped" id="tbl_posts4">
+                    <table class="table table-sm table-bordered mb-0 table-striped" id="tbl_posts5">
                         <thead class="text-nowrap">
                             <tr>
                                 <th>Sr.No</th>
@@ -811,7 +811,7 @@
                         </tbody>
                         <tbody class="tbody" id="add5">
                             <tr id="">
-                                <td style="text-align:center;"><span class="sn3">1</span></td>
+                                <td style="text-align:center;"><span class="sn5">1</span></td>
                                 <td>
                                     <input asp-for="NameOfGpaats" type="text" class="floating-label-field floating-label-field--s3" id="txtNameofGPAats" />
                                 </td>
@@ -833,8 +833,8 @@
 
                                 <td>
                                     <div class="floating-label-wrap mb-3 mb-md-0">
-                                        <a class="remove delete-record4 " title="delete" data-id="0" style="display:none;font-size:30px;"><i class="ri-delete-bin-fill"></i></a>
-                                        <a class="view add-record4" data-added="0" title="Add" style="font-size:30px;"><i class="ri-add-circle-fill"></i></a>
+                                        <a class="remove delete-record5 " title="delete" data-id="0" style="display:none;font-size:30px;"><i class="ri-delete-bin-fill"></i></a>
+                                        <a class="view add-record5" data-added="0" title="Add" style="font-size:30px;"><i class="ri-add-circle-fill"></i></a>
                                     </div>
 
                                 </td>
@@ -868,7 +868,7 @@
                         </tbody>
                         <tbody class="tbody" id="addPayment">
                             <tr id="">
-                                <td style="text-align:center;"><span class="sn2">1</span></td>
+                                <td style="text-align:center;"><span class="sn6">1</span></td>
                                 <td>
                                     <input asp-for="Name" type="text" class="floating-label-field floating-label-field--s3" id="txtPaymentName" />
                                 </td>

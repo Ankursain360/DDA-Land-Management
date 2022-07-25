@@ -175,7 +175,6 @@ namespace Libraries.Service.ApplicationService
 
         public async Task<bool> SaveFloorDetails(Newdamageselfassessmentfloordetail attendance)
         {
-            
             return await _assessmentRepository.SaveFloorDetails(attendance);
         }
         public async Task<bool> SaveOccupantDetails(Newdamagepayeeoccupantinfo details)
