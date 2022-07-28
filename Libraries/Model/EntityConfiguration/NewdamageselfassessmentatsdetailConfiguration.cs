@@ -32,6 +32,10 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.DateOfExecutionOfAts).HasColumnType("date");
 
+            builder.Property(e => e.AtsfilePath)
+                .HasColumnName("ATSFilePath")
+                .HasColumnType("longtext");
+
             builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
 
             builder.Property(e => e.NameOfThePayerAts)

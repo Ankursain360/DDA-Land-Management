@@ -1,4 +1,5 @@
-﻿using Libraries.Model;
+﻿using Dto.Search;
+using Libraries.Model;
 using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using Libraries.Repository.IEntityRepository;
@@ -146,7 +147,7 @@ namespace Libraries.Service.ApplicationService
         public async Task<bool> Create(Newdamagepayeeregistration selfAssessment)
         {
 
-            selfAssessment.CreatedBy = 1;
+           
             selfAssessment.CreatedDate = DateTime.Now;
             _assessmentRepository.Add(selfAssessment);
             return await _unitOfWork.CommitAsync() > 0;
@@ -157,39 +158,12 @@ namespace Libraries.Service.ApplicationService
             return await _assessmentRepository.GetAllDamageSelfAssessments();
         }
 
-
+        public async Task<PagedResult<Newdamagepayeeregistration>> GetPagedDamagePayee(DamagePayeeSearchDto model , int id)
+        {
+            return await _assessmentRepository.GetPagedDamagePayee(model,id);
+        }
 
         //********* Ats Self Assessment Details **********
-
-      
-       public async Task<List<NewDamageSelfAssessmentAtsDetails>> GetAllAtsDetails(int id)
-        {
-            return await _assessmentRepository.GetAllAtsDetails(id);
-        }
-       public async Task<bool> DeleteAts(int Id)
-        {
-            return await _assessmentRepository.DeleteAts(Id);
-        }
-
-        //********* Gpa Self Assessment Details **********
-
-        public async Task<bool> SaveFloorDetails(Newdamageselfassessmentfloordetail attendance)
-        {
-            return await _assessmentRepository.SaveFloorDetails(attendance);
-        }
-        public async Task<bool> SaveOccupantDetails(Newdamagepayeeoccupantinfo details)
-        {
-
-            return await _assessmentRepository.SaveOccupantDetails(details);
-        }
-        
-        public async Task<bool> SaveGPADetails(Newdamageselfassessmentgpadetail gpaDetails)
-        {
-            gpaDetails.CreatedBy = gpaDetails.CreatedBy;
-            gpaDetails.CreatedDate = DateTime.Now;
-            // attendance.IsActive = 1;
-            return await _assessmentRepository.SaveGPADetails(gpaDetails);
-        }
 
         public async Task<bool> SaveATSDetails(Newdamageselfassessmentatsdetail AtsDetails)
         {
@@ -198,24 +172,37 @@ namespace Libraries.Service.ApplicationService
             // attendance.IsActive = 1;
             return await _assessmentRepository.SaveATSDetails(AtsDetails);
         }
-        public async Task<bool> SaveHolderdetails(Newdamageselfassessmentholderdetail holderDetails)
+        public async Task<List<Newdamageselfassessmentatsdetail>> GetAllAtsDetails(int id)
         {
-            holderDetails.CreatedBy = holderDetails.CreatedBy;
-            holderDetails.CreatedDate = DateTime.Now;
-            // attendance.IsActive = 1;
-            return await _assessmentRepository.SaveHolderdetails(holderDetails);
+            return await _assessmentRepository.GetAllAtsDetails(id);
         }
-        public async Task<bool> SavePaymentdetails(Newdamagepaymenthistory paymentDetails)
+       public async Task<bool> DeleteAts(int Id)
         {
-            paymentDetails.CreatedBy = paymentDetails.CreatedBy;
-            paymentDetails.CreatedDate = DateTime.Now;
-            // attendance.IsActive = 1;
-            return await _assessmentRepository.SavePaymentdetails(paymentDetails);
+            return await _assessmentRepository.DeleteAts(Id);
         }
-        
+       public async Task<Newdamageselfassessmentatsdetail> GetAtsFilePath(int id)
+        {
+            return await _assessmentRepository.GetAtsFilePath(id);
+        }
 
 
-        public async Task<List<NewDamageSelfAssessmentGpaDetails>> GetAllGpaDetails(int id)
+        //********* Gpa Self Assessment Details **********     
+        public async Task<bool> SaveGPADetails(Newdamageselfassessmentgpadetail gpaDetails)
+        {
+            gpaDetails.CreatedBy = gpaDetails.CreatedBy;
+            gpaDetails.CreatedDate = DateTime.Now;
+            // attendance.IsActive = 1;
+            return await _assessmentRepository.SaveGPADetails(gpaDetails);
+        }       
+        //public async Task<bool> SaveHolderdetails(Newdamageselfassessmentholderdetail holderDetails)
+        //{
+        //    holderDetails.CreatedBy = holderDetails.CreatedBy;
+        //    holderDetails.CreatedDate = DateTime.Now;
+        //    // attendance.IsActive = 1;
+        //    return await _assessmentRepository.SaveHolderdetails(holderDetails);
+        //}
+      
+        public async Task<List<Newdamageselfassessmentgpadetail>> GetAllGpaDetails(int id)
         {
             return await _assessmentRepository.GetAllGpaDetails(id);
         }
@@ -224,19 +211,29 @@ namespace Libraries.Service.ApplicationService
             return await _assessmentRepository.DeleteGpa(Id);
         }
 
+        public async Task<Newdamageselfassessmentgpadetail> GetGpaFilePath(int Id)
+        {
+            return await _assessmentRepository.GetGpaFilePath(Id);
+        }
+
+
         //********* Add Floor ! Damage Details ***********
-       public async Task<bool> SaveSurveyReport(NewdamageAddfloor addDloorDetails)
+        public async Task<bool> SaveFloorDetails(Newdamageselfassessmentfloordetail attendance)
+        {
+            return await _assessmentRepository.SaveFloorDetails(attendance);
+        }
+        public async Task<bool> SaveSurveyReport(Newdamageselfassessmentfloordetail addDloorDetails)
         {
             addDloorDetails.CreatedBy = addDloorDetails.CreatedBy;
             addDloorDetails.CreatedDate = DateTime.Now;
             //atsDetails.IsActive = 1;
             return await _assessmentRepository.SaveSurveyReport(addDloorDetails);
         }
-       public async Task<List<NewdamageAddfloor>> GetAddfloorsDetails(int id)
+       public async Task<List<Newdamageselfassessmentfloordetail>> GetAddfloorsDetails(int id)
         {
             return await _assessmentRepository.GetAddfloorsDetails(id);
         }
-       public async Task<NewdamageAddfloor> GetAddFloorFilePath(int Id)
+       public async Task<Newdamageselfassessmentfloordetail> GetAddFloorFilePath(int Id)
         {
             return await _assessmentRepository.GetAddFloorFilePath(Id);
         }
@@ -250,5 +247,37 @@ namespace Libraries.Service.ApplicationService
         {
             return await _assessmentRepository.GetUploadDocumentFilePath(Id);
         }
+
+        //******** occupant details *******
+
+        //public async Task<Newdamagepayeeoccupantinfo> FetchSingleResultOccupant(int id)
+        //{
+        //    var data = await _assessmentRepository.FindBy(x => x.Id == id);
+        //    Newdamagepayeeoccupantinfo model = data.FirstOrDefault();
+        //    return model;
+        //}
+        public async Task<bool> SaveOccupantDetails(Newdamagepayeeoccupantinfo details)
+        {
+
+            return await _assessmentRepository.SaveOccupantDetails(details);
+        }
+
+        //*******payment details*******
+        public async Task<bool> SavePaymentdetails(Newdamagepaymenthistory paymentDetails)
+        {
+            paymentDetails.CreatedBy = paymentDetails.CreatedBy;
+            paymentDetails.CreatedDate = DateTime.Now;
+            // attendance.IsActive = 1;
+            return await _assessmentRepository.SavePaymentdetails(paymentDetails);
+        }
+       public async Task<List<Newdamagepaymenthistory>> Getpaymentdetail(int id)
+        {
+            return await _assessmentRepository.Getpaymentdetail(id);
+        }
+        public async Task<Newdamagepaymenthistory> GetpaymentFile(int id)
+        {
+            return await _assessmentRepository.GetpaymentFile(id);
+        }
+
     }
 }

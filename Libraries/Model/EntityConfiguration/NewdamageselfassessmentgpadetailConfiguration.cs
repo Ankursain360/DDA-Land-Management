@@ -16,9 +16,7 @@ namespace Libraries.Model.EntityConfiguration
             builder.HasIndex(e => e.NewDamageSelfAssessmentId)
                 .HasName("fkNewDamagepayeeRegistrationtGpaId_idx");
 
-            builder.Property(e => e.Id)
-                .HasColumnType("int(11)")
-                .ValueGeneratedNever();
+            builder.Property(e => e.Id).HasColumnType("int(11)");
 
             builder.Property(e => e.AddressOfThePlotAsPerGpa)
                 .HasMaxLength(4000)
@@ -31,6 +29,8 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.CreatedBy).HasColumnType("int(11)");
 
             builder.Property(e => e.DateOfExecutionOfGpa).HasColumnType("date");
+
+            builder.Property(e => e.GpafilePath).HasColumnType("longtext");
 
             builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
 

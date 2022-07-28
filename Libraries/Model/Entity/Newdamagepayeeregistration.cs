@@ -3,9 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Http;
 
 namespace Libraries.Model.Entity
@@ -174,15 +172,8 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public List<string> OccupantPhotoPath { get; set; }
-        [NotMapped]
-        public List<IFormFile> FileGpafile { get; set; }
-
-        [NotMapped]
-        public List<string> GpafilePath { get; set; }
-        [NotMapped]
-        public List<IFormFile> FileAtsfile{ get; set; }
-        [NotMapped]
-        public List<string> AtsfilePath { get; set; }
+       
+       
 
         //****** GPA ******
 
@@ -200,6 +191,11 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public List<string> AreaOfThePlotAsPerGpa { get; set; }
+        [NotMapped]
+        public List<IFormFile> FileGpafile { get; set; }
+
+        [NotMapped]
+        public string GpafilePath { get; set; }
 
 
         //****** ATS ******
@@ -218,6 +214,10 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public List<string> AreaOfThePlotAsPerAts { get; set; }
+        [NotMapped]
+        public List<IFormFile> FileAtsfile { get; set; }
+        [NotMapped]
+        public List<string> AtsfilePath { get; set; }
 
 
         //****** Holder Details ******
@@ -277,13 +277,16 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public List<District> districtList { get; set; }
-        public Village GetVillage { get; set; }
+
+        [NotMapped]
+        public Acquiredlandvillage GetVillage { get; set; }
 
         [NotMapped]
         public List<Floors> floorlist { get; set; }
 
-        [NotMapped]
-        public List<Village> villageList { get; set; }
+        //[NotMapped]
+        //public List<Village> villageList { get; set; }
+
         [NotMapped]
         public List<Acquiredlandvillage> damagevillageList { get; set; }
         public ICollection<Newdamagepayeeoccupantinfo> Newdamagepayeeoccupantinfo { get; set; }

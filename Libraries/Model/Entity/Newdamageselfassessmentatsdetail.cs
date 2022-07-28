@@ -13,6 +13,7 @@ namespace Libraries.Model.Entity
         public string NameOfThePayerAts { get; set; }
         public string AddressOfThePlotAsPerAts { get; set; }
         public string AreaOfThePlotAsPerAts { get; set; }
+        public string AtsfilePath { get; set; }
 
         public Newdamagepayeeregistration NewDamageSelfAssessment { get; set; }
     }

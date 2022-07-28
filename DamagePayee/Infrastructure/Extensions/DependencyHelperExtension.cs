@@ -22,6 +22,9 @@ namespace DamagePayee.Infrastructure.Extensions
             services.AddScoped<ISiteContext, SiteContext>();
 
             /* Respository */
+
+            services.AddScoped<INewDamageSelfAssessmentRepository, NewDamageSelfAssessmentRepository>();
+
             services.AddScoped<ICountryRepository, CountryRepository>();
             services.AddScoped<IWatchandwardRepository, WatchandwardRepository>();
             services.AddScoped<IEncroachmentRegisterationRepository, EncroachmentRegisterationRepository>();
@@ -55,6 +58,9 @@ namespace DamagePayee.Infrastructure.Extensions
             services.AddScoped<IAuditRepository, AuditRepository>();
 
             /* Application Services */
+
+            services.AddScoped<INewDamageSelfAssessmentService, NewDamageSelfAssessmentService>();
+
             services.AddScoped<ICountryService, CountryService>();
             services.AddScoped<IWatchandwardService, WatchandwardService>();
             services.AddScoped<IEncroachmentRegisterationService, EncroachmentRegisterationService>();

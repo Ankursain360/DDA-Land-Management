@@ -64,8 +64,6 @@ namespace DamagePayee.Controllers
             return View();
         }
 
-
-
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] DamagepayeeregistertempSearchDto model)
         
@@ -639,7 +637,7 @@ namespace DamagePayee.Controllers
                     else
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
-                        return View(damagepayeeregister);
+                       return View(damagepayeeregister);
 
                     }
 
@@ -655,6 +653,7 @@ namespace DamagePayee.Controllers
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                 return View(damagepayeeregister);
             }
+            
         }
 
         public async Task<JsonResult> GetDetailspersonelinfotemp(int? Id)
@@ -702,7 +701,7 @@ namespace DamagePayee.Controllers
                 x.Name,
                 x.RecieptNo,
                 x.PaymentMode,
-                PaymentDate = Convert.ToDateTime(x.PaymentDate).ToString("yyyy-MM-dd"),
+                PaymentDate = Convert.ToDateTime(x.PaymentDate).ToString("yyyy-MM-dd"), 
                 x.Amount,
                 x.RecieptDocumentPath
             }));

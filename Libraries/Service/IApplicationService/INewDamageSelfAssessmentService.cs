@@ -1,4 +1,6 @@
-﻿using Libraries.Model.Entity;
+﻿using Dto.Search;
+using Libraries.Model.Entity;
+using Libraries.Repository.Common;
 using Libraries.Service.Common;
 using Model.Entity;
 using System;
@@ -21,36 +23,43 @@ namespace Libraries.Service.IApplicationService
         Task<Newdamagepayeeregistration> FetchSingleResult(int id);
         Task<bool> Delete(int id);
 
+        Task<PagedResult<Newdamagepayeeregistration>> GetPagedDamagePayee(DamagePayeeSearchDto model , int id );
+        Task<Newdamagepayeeregistration> GetUploadDocumentFilePath(int Id);
+
+
+        ////********* fetch occupant details **********
+         
+        //Task<Newdamagepayeeoccupantinfo> FetchSingleResultOccupant(int id);
+        Task<bool> SaveOccupantDetails(Newdamagepayeeoccupantinfo occupantdetails);
 
         //********* Ats Self Assessment Details **********
 
-       
 
-        Task<bool> SaveFloorDetails(Newdamageselfassessmentfloordetail attendance);
-
-        Task<bool> SaveOccupantDetails(Newdamagepayeeoccupantinfo occupantdetails);
-        Task<bool> SaveGPADetails(Newdamageselfassessmentgpadetail gpaDetails);
         Task<bool> SaveATSDetails(Newdamageselfassessmentatsdetail gpaDetails);
-        Task<bool> SaveHolderdetails(Newdamageselfassessmentholderdetail holderDetails);
-        Task<bool> SavePaymentdetails(Newdamagepaymenthistory paymentDetails);
-        
-        Task<List<NewDamageSelfAssessmentAtsDetails>> GetAllAtsDetails(int id);
+       
+        // Task<bool> SaveHolderdetails(Newdamageselfassessmentholderdetail holderDetails); 
+        Task<List<Newdamageselfassessmentatsdetail>> GetAllAtsDetails(int id);
         Task<bool> DeleteAts(int Id);
+        Task<Newdamageselfassessmentatsdetail> GetAtsFilePath(int id);
 
         //********* Gpa Self Assessment Details **********
-
-        
-        Task<List<NewDamageSelfAssessmentGpaDetails>> GetAllGpaDetails(int id);
+        Task<bool> SaveGPADetails(Newdamageselfassessmentgpadetail gpaDetails);
+        Task<List<Newdamageselfassessmentgpadetail>> GetAllGpaDetails(int id);
         Task<bool> DeleteGpa(int Id);
+        Task<Newdamageselfassessmentgpadetail> GetGpaFilePath(int Id);
 
         //********* Add Floor ! Damage Details ***********
-        Task<bool> SaveSurveyReport(NewdamageAddfloor addDloorDetails);
-        Task<List<NewdamageAddfloor>> GetAddfloorsDetails(int id);
-        Task<NewdamageAddfloor> GetAddFloorFilePath(int Id);
+        Task<bool> SaveFloorDetails(Newdamageselfassessmentfloordetail attendance);
+        Task<bool> SaveSurveyReport(Newdamageselfassessmentfloordetail addDloorDetails);
+        Task<List<Newdamageselfassessmentfloordetail>> GetAddfloorsDetails(int id);
+        Task<Newdamageselfassessmentfloordetail> GetAddFloorFilePath(int Id);
         Task<bool> DeleteAddFloor(int Id);
 
 
-        Task<Newdamagepayeeregistration> GetUploadDocumentFilePath(int Id);
-       
+        //******* Payement details *******
+        Task<bool> SavePaymentdetails(Newdamagepaymenthistory paymentDetails);
+        Task<List<Newdamagepaymenthistory>> Getpaymentdetail(int id);
+        Task<Newdamagepaymenthistory> GetpaymentFile(int id);
+
     }
 }

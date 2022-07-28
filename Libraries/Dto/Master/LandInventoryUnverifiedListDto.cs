@@ -51,7 +51,10 @@ namespace Dto.Master
         public string PrimaryListNo { get; set; }
         public string AddressWithLandmark { get; set; }
 
-        public string AreaUnit { get; set; }
+        public string AreaUnit { get; set; } 
+        public string Bigha { get; set; }
+        public string Biswa { get; set; }
+        public string Bishwani { get; set; }
         public string TotalArea { get; set; }
         public string TotalAreaSqmt { get; set; }
         public string Encroachment { get; set; }

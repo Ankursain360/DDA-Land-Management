@@ -646,7 +646,7 @@ namespace LandInventory.Controllers
                 {
                     data.Add(new LandInventoryUnverifiedListDto()
                     {
-                        
+
                         Id = result[i].Id,
                         InventoriedIn = result[i].InventoriedInId.ToString() == "1" ? "VLMS" : "Used",
                         PlannedUnplannedLand = result[i].PlannedUnplannedLand,
@@ -665,6 +665,9 @@ namespace LandInventory.Controllers
                         PrimaryListNo = result[i].PrimaryListNo,
                         AddressWithLandmark = result[i].Palandmark,
                         AreaUnit = result[i].AreaUnit == 0 ? "bigha-biswa-bishwani" : result[i].AreaUnit == 1 ? "Sq Yd." : result[i].AreaUnit == 2 ? "Acre" : "Hectare",
+                        Bigha = result[i].TotalAreaInBigha.ToString(),
+                        Biswa = result[i].TotalAreaInBiswa.ToString(),
+                        Bishwani = result[i].TotalAreaInBiswani.ToString(),
                         TotalArea = result[i].TotalAreaInSqAcreHt.ToString(),
                         //    if (result[i].AreaUnit == 0)
                         //{
@@ -673,13 +676,14 @@ namespace LandInventory.Controllers
                         //  TotalArea = result[i].AreaUnit==0? result[i].TotalAreaInBigha.ToString() ?
                         TotalAreaSqmt = result[i].TotalArea.ToString(),
                         Encroachment = result[i].EncroachmentStatusId == 0 ? "No" : "Yes".ToString(),
-                        EncroachmentStatus = result[i].EncroachedPartiallyFully == "0" ? "Partially Encroached" : "Fully Encroached",
+                        EncroachmentStatus = result[i].EncroachedPartiallyFully == "0" ? "Partially Encroached" : result[i].EncroachedPartiallyFully =="1"? "Fully Encroached" :"Null",
+
                         EncroachmentArea = result[i].EncrochedArea.ToString(),
                         BuiltUpInEncroachmentArea = result[i].BuiltUpEncraochmentArea.ToString(),
                         Vacant = result[i].Vacant.ToString(),
                         ActionOnEncroachment = result[i].ActionOnEncroachment,
                         EncroachemntDetails = result[i].EncraochmentDetails,
-                         ProtectionOfLand = result[i].Boundary == 0 ? "Boundary Wall" : result[i].AreaUnit == 1 ? "Fencing" : "None".ToString(),
+                        ProtectionOfLand = result[i].Boundary == 0 ? "Boundary Wall" : result[i].AreaUnit == 1 ? "Fencing" : "None".ToString(),
                         AreaCovered = result[i].BoundaryAreaCovered.ToString(),
                         Dimension = result[i].BoundaryDimension,
                         BoundaryRemarks = result[i].BoundaryRemarks,
@@ -692,7 +696,7 @@ namespace LandInventory.Controllers
                         GeoReferencing = result[i].GeoReferencing == 0 ? "No" : "Yes",
                         Remarks = result[i].Remarks,
 
-                    }); ;
+                    });
                 }
             }
 

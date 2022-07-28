@@ -22,10 +22,6 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(50)
                 .IsUnicode(false);
 
-            builder.Property(e => e.AtsfilePath)
-                .HasColumnName("ATSFilePath")
-                .HasColumnType("longtext");
-
             builder.Property(e => e.CreatedBy).HasColumnType("int(11)");
 
             builder.Property(e => e.CreatedDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
@@ -63,9 +59,6 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(20)
                 .IsUnicode(false);
 
-            builder.Property(e => e.GpafilePath)
-                .HasColumnName("GPAFilePath")
-                .HasColumnType("longtext");
 
             builder.Property(e => e.IsActive).HasColumnType("tinyint(4)");
 
@@ -77,15 +70,15 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(50)
                 .IsUnicode(false);
 
-            builder.Property(e => e.LatestAtsname)
-                .HasColumnName("LatestATSName")
-                .HasMaxLength(100)
-                .IsUnicode(false);
+            //builder.Property(e => e.LatestAtsname)
+            //    .HasColumnName("LatestATSName")
+            //    .HasMaxLength(100)
+            //    .IsUnicode(false);
 
-            builder.Property(e => e.LatestGpaname)
-                .HasColumnName("LatestGPAName")
-                .HasMaxLength(100)
-                .IsUnicode(false);
+            //builder.Property(e => e.LatestGpaname)
+            //    .HasColumnName("LatestGPAName")
+            //    .HasMaxLength(100)
+            //    .IsUnicode(false);
 
             builder.Property(e => e.MiddleName)
                 .HasMaxLength(50)

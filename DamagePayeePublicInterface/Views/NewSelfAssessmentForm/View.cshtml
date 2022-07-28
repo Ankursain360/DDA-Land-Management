@@ -5,7 +5,7 @@
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
         <input type="hidden" asp-for="ApprovedStatus" />
-        @*<input type="hidden" asp-for="Id" value="@ViewBag.MainDamagePayeeId" />*@
+        <input type="hidden" asp-for="Id" />
 
         <h3 class="mb-3 d-flex">Add Details <span class="ms-auto"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span> </h3>
         <div id="COLONYDETAILS">
@@ -283,7 +283,7 @@
 
         <div id="FLOORDETAILS" style="margin-top:-15px;">
             <h3 class="my-3 d-flex sub-heading">FLOOR DETAILS</h3>
-
+                
             <div class="table-section bg-white border shadow rounded">
                 <div class="table-responsive">
 
@@ -325,7 +325,7 @@
                                     <input asp-for="WaterKno" type="text" class="floating-label-field floating-label-field--s3" id="txtWaterKno" />
                                 </td>
                                 <td>
-                                    <select asp-for="CurrentUse" class="floating-label-field floating-label-field--s3" id="txtCurrentUse">
+                                    <select asp-for="CurrentUse" class="floating-label-field floating-label-field--s3" id="ddlCurrentUse">
                                         <option value="">---Select Use---</option>
                                         <option value="Residential">Residential</option>
                                         <option value="Commercial">Commercial</option>
@@ -720,8 +720,16 @@
                                     <input asp-for="AreaOfThePlotAsPerGpa" type="text" class="floating-label-field floating-label-field--s3 numbers" id="txtPlotAreaGPA" />
                                 </td>
                                 <td>
-                                    <input asp-for="FileGpafile" class="floating-label-field floating-label-field--s3 checkExtension" type="file" />
+                                  <a id="txtFileGpaFile" asp-action="viewGpaFile" class="badge bg-primary px-2" target="_blank" >(View File)</a>
+                                  <input asp-for="FileGpafile" class="floating-label-field floating-label-field--s3 checkExtension" type="file" id="txtFileGpaFile" />
                                 </td>
+                                @*<td>
+                                    <a id="txtFileGpaFile" asp-action="viewGpaFile" class="badge bg-primary px-2" target="_blank">(View File)</a>
+                                    <input type="hidden" asp-for="GpafilePath" />
+                                    <input asp-for="GpafilePath" type="file" class="floating-label-field floating-label-field--s3" />
+                                    <span asp-validation-for="GpafilePath" class="d-block text-danger field-validation-valid"></span>
+
+                                </td>*@
                                 <td>
                                     <div class="floating-label-wrap mb-3 mb-md-0">
                                         <div class="floating-label-wrap mb-3 mb-md-0">
@@ -779,7 +787,8 @@
                                     <input asp-for="AreaOfThePlotAsPerAts" type="text" class="floating-label-field floating-label-field--s3 numbers" id="txtPlotAreaATS" />
                                 </td>
                                 <td>
-                                    <input asp-for="FileAtsfile" class="floating-label-field floating-label-field--s3 checkExtension" type="file" />
+                                    <a id="txtFileAtsFile" asp-action="viewAtsFile" class="badge bg-primary px-2" target="_blank">(View File)</a>
+                                    <input id="txtFileAtsFile" asp-for="FileAtsfile" class="floating-label-field floating-label-field--s3 checkExtension" type="file" />
                                 </td>
                                 <td>
                                     <div class="floating-label-wrap mb-3 mb-md-0">
@@ -894,7 +903,7 @@
                                 </td>
                                 <td>
                                     <a id="viewRecieptId" asp-action="ViewRecieptFile" class="badge bg-primary px-2" target="_blank" style="display:none;">(View File)</a>
-                                    <input asp-for="FileRecieptDocument" class="floating-label-field floating-label-field--s3 checkExtension" type="file" />
+                                    <input id="viewRecieptId" asp-for="FileRecieptDocument" class="floating-label-field floating-label-field--s3 checkExtension" type="file" />
                                     <input type="hidden" />
                                 </td>
                                 <td>
@@ -915,23 +924,47 @@
         <div id="DETAILSOFDOCUMENTS">
             <h3 class="my-3 d-flex sub-heading">DETAILS OF DOCUMENTS</h3>
             <div class="row">
-
                 <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <a id="viewPropertyPhoto" asp-action="PhotographarFP" class="badge bg-primary px-2" target="_blank" style="display:none;">(View File)</a>
-                        <input type="file" asp-for="FilePropertyPhoto" class="floating-label-field floating-label-field--s3 checkExtension" placeholder="Name">
-                        <span asp-validation-for="PropertyPhotographFilePath" class="d-block text-danger field-validation-valid"></span>
+                        <input type="hidden" asp-for="FilePropertyPhoto" />
+                        @{
+                            @if (Model.PropertyPhotographFilePath != null)
+                            {
+                                <input disabled type="file" asp-for="FilePropertyPhoto" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                                <a class="badge bg-primary px-2" asp-action="fetchPropertyPhoto" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
+                            }
+                            else
+                            {
+                                <input disabled type="file" asp-for="FilePropertyPhoto" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                            }
+                        }
                         <label for="field-1" class="floating-label"> Photograph of the Property <span style="color:red">(.pdf only)</span></label>
-
+                        @*<a id="viewPropertyPhoto" asp-action="PhotographarFP" class="badge bg-primary px-2" target="_blank" style="display:none;">(View File)</a>
+        <input type="file" asp-for="FilePropertyPhoto" class="floating-label-field floating-label-field--s3 checkExtension" placeholder="Name">
+        <span asp-validation-for="PropertyPhotographFilePath" class="d-block text-danger field-validation-valid"></span>*@
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <a id="viewElectricityBill" asp-action="ElectricityBillFP" class="badge bg-primary px-2" target="_blank" style="display:none;">(View File)</a>
-                        <input asp-for="FileElectricityBill" class="floating-label-field floating-label-field--s3 checkExtension" type="file" />
-                        @*<input type="hidden" asp-for="ElectricityBillDocument" />*@
-                        <span asp-validation-for="ElectricityBillFilePath" class="d-block text-danger field-validation-valid"></span>
+                        <input type="hidden" asp-for="FileElectricityBill" />
+                        @{
+                            @if (Model.ElectricityBillFilePath != null)
+                            {
+                                <input disabled type="file" asp-for="FileElectricityBill" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                                <a class="badge bg-primary px-2" asp-action="fetchPropertyPhoto" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
+                            }
+                            else
+                            {
+                                <input disabled type="file" asp-for="FileElectricityBill" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                            }
+                        }
                         <label class="floating-label">Electricity Bill<span style="color:red">*</span></label>
+                        <!--<a id="viewElectricityBill" asp-action="ElectricityBillFP" class="badge bg-primary px-2" target="_blank" style="display:none;">(View File)</a>
+    <input asp-for="FileElectricityBill" class="floating-label-field floating-label-field--s3 checkExtension" type="file" />-->
+                        @*<input type="hidden" asp-for="ElectricityBillDocument" />*@
+                        <!--<span asp-validation-for="ElectricityBillFilePath" class="d-block text-danger field-validation-valid"></span>-->
+
+
 
                     </div>
                 </div>
@@ -940,20 +973,46 @@
             <div class="row mt-md-3">
                 <div class="col-md-6">
                     <div class="floating-label-wrap">
-                        <a id="viewPaymentDocument" asp-action="PaymentDocumentFP" class="badge bg-primary px-2" target="_blank" style="display:none;">(View File)</a>
-                        <input asp-for="FileWaterBill" class="floating-label-field floating-label-field--s3 checkExtension" type="file" />
-                        @*<input type="hidden" asp-for="PaymentDocument" />*@
-                        <span asp-validation-for="WaterBillFilePath" class="d-block text-danger field-validation-valid"></span>
+                        <input type="hidden" asp-for="FileWaterBill" />
+                        @{
+                            @if (Model.WaterBillFilePath != null)
+                            {
+                                <input disabled type="file" asp-for="FileWaterBill" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                                <a class="badge bg-primary px-2" asp-action="fetchPropertyPhoto" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
+                            }
+                            else
+                            {
+                                <input disabled type="file" asp-for="FileWaterBill" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                            }
+                        }
                         <label class="floating-label">Water bill<span style="color:red">*</span></label>
+                        <!--<a id="viewPaymentDocument" asp-action="PaymentDocumentFP" class="badge bg-primary px-2" target="_blank" style="display:none;">(View File)</a>
+    <input asp-for="FileWaterBill" class="floating-label-field floating-label-field--s3 checkExtension" type="file" />-->
+                        @*<input type="hidden" asp-for="PaymentDocument" />*@
+                        <!--<span asp-validation-for="WaterBillFilePath" class="d-block text-danger field-validation-valid"></span>-->
+
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="floating-label-wrap">
-                        <a id="viewPaymentDocument" asp-action="PaymentDocumentFP" class="badge bg-primary px-2" target="_blank" style="display:none;">(View File)</a>
-                        <input asp-for="FilePropertyTaxReceipt" class="floating-label-field floating-label-field--s3 checkExtension" type="file" />
-                        @*<input type="hidden" asp-for="PaymentDocument" />*@
-                        <span asp-validation-for="PropertyTaxReceiptFilePath" class="d-block text-danger field-validation-valid"></span>
+                        <input type="hidden" asp-for="FilePropertyPhoto" />
+                        @{
+                            @if (Model.PropertyTaxReceiptFilePath != null)
+                            {
+                                <input disabled type="file" asp-for="FilePropertyTaxReceipt" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                                <a class="badge bg-primary px-2" asp-action="fetchPropertyPhoto" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
+                            }
+                            else
+                            {
+                                <input disabled type="file" asp-for="FilePropertyTaxReceipt" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                            }
+                        }
                         <label class="floating-label">Property Tax Receipt<span style="color:red">*</span></label>
+                        @*<a id="viewPaymentDocument" asp-action="PaymentDocumentFP" class="badge bg-primary px-2" target="_blank" style="display:none;">(View File)</a>
+    <input asp-for="FilePropertyTaxReceipt" class="floating-label-field floating-label-field--s3 checkExtension" type="file" />
+                        <input type="hidden" asp-for="PaymentDocument" />
+                        <span asp-validation-for="PropertyTaxReceiptFilePath" class="d-block text-danger field-validation-valid"></span>*@
+
                     </div>
                 </div>
             </div>
@@ -989,17 +1048,18 @@
         </div>
         <div class="row mt-md-3">
             <div class=" col-md-12">
-                <button class="btn btn-theme " type="submit">Submit</button>
+                @*<button class="btn btn-theme " type="submit">Submit</button>*@
                 @*@Html.ActionLink("Back", "Index", "NewSelfAssessmentForm", null, new { @class = "btn btn-theme " })*@
             </div>
         </div>
     </form>
 </div>
+
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 <environment include="Development">
-    <script src="~/js/newdamageselfassessmentcreate.js"></script>
+    <script src="~/js/newdamageselfview.js"></script>
 </environment>
 <environment exclude="Development">
-    <script src="~/js/newdamageselfassessmentcreate.min.js" asp-append-version="true"></script>
+    <script src="~/js/newdamageselfview.min.js" asp-append-version="true"></script>
 </environment>
 

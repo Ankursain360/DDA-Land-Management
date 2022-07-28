@@ -13,6 +13,7 @@ namespace Libraries.Model.Entity
         public string NameOfThePayer { get; set; }
         public string AddressOfThePlotAsPerGpa { get; set; }
         public string AreaOfThePlotAsPerGpa { get; set; }
+        public string GpafilePath { get; set; }
 
         public Newdamagepayeeregistration NewDamageSelfAssessment { get; set; }
     }

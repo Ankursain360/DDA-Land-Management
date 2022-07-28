@@ -32,14 +32,20 @@
   <ItemGroup>
   <Content Remove="wwwroot\js\damagepayeeregisterview.min.js" />
   <Content Remove="wwwroot\js\demandletterindex.min.js" />
+  <Content Remove="wwwroot\js\newdamageselfassessmentview.min.js" />
   <Content Remove="wwwroot\js\payementverificationdocebyaccountsection.min.js" />
   <Content Remove="wwwroot\js\reliefreportindex.min.js" />
   <Content Remove="wwwroot\js\SubstitutionMutationDetailsCreate.min.js" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Remove="Controllers\DamagePayeeRegisterController.cs~RFa405d18.TMP" />
   </ItemGroup>
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="wwwroot\js\damagepayeeregisterview.min.js" />
     <_ContentIncludedByDefault Remove="wwwroot\js\demandletterindex.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\newdamageselfassessmentview.min.js" />
     <_ContentIncludedByDefault Remove="wwwroot\js\payementverificationdocebyaccountsection.min.js" />
     <_ContentIncludedByDefault Remove="wwwroot\js\reliefreportindex.min.js" />
     <_ContentIncludedByDefault Remove="wwwroot\js\SubstitutionMutationDetailsCreate.min.js" />
@@ -48,6 +54,7 @@
   <ItemGroup>
     <None Include="wwwroot\js\damagepayeeregisterview.min.js" />
     <None Include="wwwroot\js\demandletterindex.min.js" />
+    <None Include="wwwroot\js\newdamageselfassessmentview.min.js" />
     <None Include="wwwroot\js\payementverificationdocebyaccountsection.min.js" />
     <None Include="wwwroot\js\reliefreportindex.min.js" />
     <None Include="wwwroot\js\SubstitutionMutationDetailsCreate.min.js" />
