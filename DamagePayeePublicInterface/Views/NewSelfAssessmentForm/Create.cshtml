@@ -11,21 +11,23 @@
         <div id="COLONYDETAILS">
             <div class="row">
                 <div class="col-md-4">
-                    <span style="color: #2196F3"> Whether property is damage Payee :</span> <select asp-for="WhetherDamageProp" class="floating-label-field floating-label-field--s3">
+                    <span style="color: #2196F3"> Whether property is damage Payee :</span><span style="color:red">*</span> <select asp-for="WhetherDamageProp" class="floating-label-field floating-label-field--s3">
                         <option value="">---Select---</option>
                         <option value="Yes">Yes</option>
                         <option value="No">No</option>
                     </select>
+                    <span asp-validation-for="WhetherDamageProp" class="d-block text-danger field-validation-valid"></span>
                 </div>
                 <div class="col-md-4">
                     <span style="color: #2196F3">
-                        Whether the current occupant is a :
+                        Whether the current occupant is a :<span style="color:red">*</span>
                     </span><select asp-for="Occupanttype" class="floating-label-field floating-label-field--s3">
                         <option value="">---Select---</option>
                         <option value="Original">Original</option>
                         <option value="Legal Heir">Legal Heir</option>
                         <option value="Subsequent">Subsequent buyer</option>
                     </select>
+                    <span asp-validation-for="Occupanttype" class="d-block text-danger field-validation-valid"></span>
                 </div>
                 <div class="col-md-4" style="display:none" id="divLegal">
                     <span style="color: #2196F3"> Has the Assessee Name change requested in DDA :</span> <select asp-for="IsNameChanged" class="floating-label-field floating-label-field--s3">

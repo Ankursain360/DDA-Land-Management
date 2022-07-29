@@ -41,8 +41,14 @@ namespace Libraries.Model.Entity
         public string OtherUse { get; set; }
         public decimal? LandArea { get; set; }
         public decimal? AreaBuildingFootprint { get; set; }
+
+        [Required(ErrorMessage = " Total constricted area is mandatory ")]
         public decimal? TotalConstructedArea { get; set; }
+
+        [Required(ErrorMessage = " Vacant area is mandatory ")]
         public decimal? VacantArea { get; set; }
+
+        [Required(ErrorMessage = " House property no is mandatory ")]
         public string HousePropertyNo { get; set; }
         public string PlotNo { get; set; }
         public string Street { get; set; }

@@ -1,12 +1,35 @@
 ﻿
 $(document).ready(function () {
-
+    $('#ddlfloor').removeAttr('multiple');
+    $('#txtCurrentUse').removeAttr('multiple');
+    $('#txtCurrentUse').removeAttr('multiple');
+    $('#IsOccupingFloor').removeAttr('multiple');
+    $('#Gender').removeAttr('multiple');
 
     FillRepeatorAtEdit();
     FillRepeatorGpa();
     RepeatorAts();
     FillRepeatorPayementDetails();
     OccupantRepeator();
+    var type = $('#Occupanttype :selected').text();
+    if (type == 'Legal Heir') {
+        $('#divLegal').show();
+        $('#IsNameChanged').select2();
+    }
+    else {
+        $('#divLegal').hide();
+    }
+    var type = $('#txtfloor :selected').text();
+    if (type == 'Yes') {
+        $('#divIndFloor').show();
+        $('#txtfloorno').select2();
+    }
+    else {
+        $('#divIndFloor').hide();
+    }
+    
+
+   
     // FillAllotteAtEdit();
     //FillPaymentHistoryAtEdit();
 });
@@ -204,8 +227,8 @@ function OccupantRepeator() {/* -----------Added by Ankur  --------------- */
             $("#divPersonaldata  #txtpan").val(data[i].panNo);
             $("#divPersonaldata  #txtproperty").val(data[i].shareInProperty);
             $("#divPersonaldata  #txtfloor").val(data[i].isOccupingFloor).change();
-            $("#divPersonaldata  #txtdamagepaid").val(data[i].floorNo);
-            $("#divPersonaldata  #txtfloorno").val(data[i].damagePaidInPast);
+            $("#divPersonaldata  #txtfloorno").val(data[i].floorNo);
+            $("#divPersonaldata  #txtdamagepaid").val(data[i].damagePaidInPast);
            // $("#divPersonaldata  #txtFileoccupant").val(data[i].occupantPhotoPath).change();
 
             if (data[i].occupantPhotoPath != "" && data[i].occupantPhotoPath != null) {
