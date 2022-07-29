@@ -298,6 +298,14 @@ namespace Libraries.Repository.EntityRepository
             _dbContext.Entry(occupantdetails).State = EntityState.Detached;
             return Result > 0 ? true : false;
         }
+        public async Task<List<Newdamagepayeeoccupantinfo>> GetOccupantDetails(int id)
+        {
+            return await _dbContext.newdamagepayeeoccupantinfo.Where(x => x.NewDamageSelfAssessmentId == id).ToListAsync();
+        }
+        public async Task<Newdamagepayeeoccupantinfo> GetOccupantFile(int id)
+        {
+            return await _dbContext.newdamagepayeeoccupantinfo.Where(x => x.Id == id).FirstOrDefaultAsync();
+        }
 
     }
 }

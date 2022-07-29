@@ -313,7 +313,7 @@ namespace DamagePayeePublicInterface.Controllers
             return View(data);
 
         }
-        public async Task<JsonResult> Getallfloordetails(Newdamageselfassessmentfloordetail model, int? Id)
+        public async Task<JsonResult> Getallfloordetails(int? Id)
         {
 
             Id = Id ?? 0;
@@ -342,7 +342,9 @@ namespace DamagePayeePublicInterface.Controllers
                 x.NameOfThePayer,
                 x.AddressOfThePlotAsPerGpa,
                 x.AreaOfThePlotAsPerGpa,
-                x.GpafilePath
+                x.GpafilePath,
+                x.Id
+
 
             }));
         }
@@ -366,7 +368,8 @@ namespace DamagePayeePublicInterface.Controllers
                 X.NameOfThePayerAts,
                 X.AddressOfThePlotAsPerAts,
                 X.AreaOfThePlotAsPerAts,
-                X.AtsfilePath
+                X.AtsfilePath,
+                X.Id
 
             })) ;
         }
@@ -409,6 +412,44 @@ namespace DamagePayeePublicInterface.Controllers
             path = data.ElectricityBillFilePath;
             path = data.WaterBillFilePath;
             path = data.PropertyTaxReceiptFilePath;
+            byte[] fileBytes = System.IO.File.ReadAllBytes(path);
+            return File(fileBytes, file.GetContentType(path));
+        }
+        public async Task<JsonResult> getAllOccupantDetails(int? Id) 
+        {
+            Id = Id ?? 0;
+
+            var data = await _selfAssessmentService.GetOccupantDetails(Convert.ToInt32(Id));
+            return Json(data.Select(x => new
+            {
+                x.FirstName,
+                x.MiddleName,
+                x.LastName,
+                x.SpouseName,
+                x.FatherName,
+                x.MontherName,
+                x.Epicid,
+                x.EmailId,
+                x.MobileNo,
+                x.AadharNo,
+                Dob = Convert.ToDateTime(x.Dob).ToString("yyyy-MM-dd"),
+                x.Gender,
+                x.PanNo,
+                x.ShareInProperty,
+                x.IsOccupingFloor,
+                x.FloorNo,
+                x.DamagePaidInPast,
+                x.OccupantPhotoPath,
+                x.Id
+            })) ;
+
+        }
+
+        public async Task<FileResult> getOccupantDetails(int id)
+        {
+            FileHelper file = new FileHelper();
+            Newdamagepayeeoccupantinfo data = await _selfAssessmentService.GetOccupantFile(id);
+            string path = data.OccupantPhotoPath;
             byte[] fileBytes = System.IO.File.ReadAllBytes(path);
             return File(fileBytes, file.GetContentType(path));
         }

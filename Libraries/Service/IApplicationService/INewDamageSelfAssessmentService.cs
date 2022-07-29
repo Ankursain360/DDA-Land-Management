@@ -31,6 +31,8 @@ namespace Libraries.Service.IApplicationService
          
         //Task<Newdamagepayeeoccupantinfo> FetchSingleResultOccupant(int id);
         Task<bool> SaveOccupantDetails(Newdamagepayeeoccupantinfo occupantdetails);
+        Task<List<Newdamagepayeeoccupantinfo>> GetOccupantDetails(int id);
+        Task<Newdamagepayeeoccupantinfo> GetOccupantFile(int id);
 
         //********* Ats Self Assessment Details **********
 

@@ -261,7 +261,14 @@ namespace Libraries.Service.ApplicationService
 
             return await _assessmentRepository.SaveOccupantDetails(details);
         }
-
+       public async Task<List<Newdamagepayeeoccupantinfo>> GetOccupantDetails(int id)
+        {
+            return await _assessmentRepository.GetOccupantDetails(id);
+        }
+        public async Task<Newdamagepayeeoccupantinfo> GetOccupantFile(int id)
+        {
+            return await _assessmentRepository.GetOccupantFile(id);
+        }
         //*******payment details*******
         public async Task<bool> SavePaymentdetails(Newdamagepaymenthistory paymentDetails)
         {

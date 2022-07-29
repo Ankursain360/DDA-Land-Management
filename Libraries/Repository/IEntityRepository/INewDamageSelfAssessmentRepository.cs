@@ -50,10 +50,12 @@ namespace Libraries.Repository.IEntityRepository
         //******* damage payment details ******
         Task<bool> SavePaymentdetails(Newdamagepaymenthistory PaymentDetails);
         Task<List<Newdamagepaymenthistory>> Getpaymentdetail(int id);
-        Task<Newdamagepaymenthistory>GetpaymentFile(int id);
+        Task<Newdamagepaymenthistory>GetpaymentFile(int id); 
 
         //********occupant details********
         Task<bool> SaveOccupantDetails(Newdamagepayeeoccupantinfo OccupantDetails);
+        Task<List<Newdamagepayeeoccupantinfo>> GetOccupantDetails(int id);
+        Task<Newdamagepayeeoccupantinfo> GetOccupantFile(int id);
 
         // Task<PagedResult<NewDamageSelfAssessment>> GetPagedDivision(NewDamageSelfAssessmentSearchDto model);
     }
