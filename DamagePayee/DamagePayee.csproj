@@ -31,6 +31,7 @@
   
   <ItemGroup>
   <Content Remove="wwwroot\js\damagepayeeregisterview.min.js" />
+  <Content Remove="wwwroot\js\dashboardForDamageForm.min.js" />
   <Content Remove="wwwroot\js\demandletterindex.min.js" />
   <Content Remove="wwwroot\js\newdamageselfassessmentview.min.js" />
   <Content Remove="wwwroot\js\payementverificationdocebyaccountsection.min.js" />
@@ -44,6 +45,7 @@
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="wwwroot\js\damagepayeeregisterview.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\dashboardForDamageForm.min.js" />
     <_ContentIncludedByDefault Remove="wwwroot\js\demandletterindex.min.js" />
     <_ContentIncludedByDefault Remove="wwwroot\js\newdamageselfassessmentview.min.js" />
     <_ContentIncludedByDefault Remove="wwwroot\js\payementverificationdocebyaccountsection.min.js" />
@@ -53,6 +55,7 @@
 
   <ItemGroup>
     <None Include="wwwroot\js\damagepayeeregisterview.min.js" />
+    <None Include="wwwroot\js\dashboardForDamageForm.min.js" />
     <None Include="wwwroot\js\demandletterindex.min.js" />
     <None Include="wwwroot\js\newdamageselfassessmentview.min.js" />
     <None Include="wwwroot\js\payementverificationdocebyaccountsection.min.js" />

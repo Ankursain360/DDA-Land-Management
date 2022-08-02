@@ -220,5 +220,11 @@
     "inputFiles": [
       "wwwroot/js/paymenttransactionreportindex.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/dashboardForDamageForm.min.js",
+    "inputFiles": [
+      "wwwroot/js/dashboardForDamageForm.js"
+    ]
   }
 ]

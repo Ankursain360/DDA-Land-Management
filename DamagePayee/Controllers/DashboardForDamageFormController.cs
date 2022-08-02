@@ -1,4 +1,6 @@
-﻿using DamagePayee.Helper;
+﻿using Core.Enum;
+using DamagePayee.Filters;
+using DamagePayee.Helper;
 using Dto.Search;
 using Libraries.Service.IApplicationService;
 using Microsoft.AspNetCore.Mvc;
@@ -21,7 +23,7 @@ namespace DamagePayee.Controllers
         {
             _newDamageSelf = newDamageSelf;
         }
-
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
@@ -40,7 +42,7 @@ namespace DamagePayee.Controllers
                 return PartialView();
             }
         }
-
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> DamagePayeeReport(DamagePayeeDashboardSearchDto Model)
         {
             var result = await _newDamageSelf.GetDamagePayee(Model);
@@ -51,8 +53,8 @@ namespace DamagePayee.Controllers
                 {
                     data.Add(new NewDamagePayeeDashboardListDto()
                     {
-                        villageName = result[i].VillageName,
-                        totalapplicationReceived = result[i].TotalapplicationReceived,
+                        VillageName = result[i].VillageName,
+                        TotalApplicationReceived = result[i].TotalapplicationReceived,
                     }); ;
                 }
             }
