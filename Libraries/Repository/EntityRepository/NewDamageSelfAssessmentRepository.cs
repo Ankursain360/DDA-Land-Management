@@ -43,7 +43,7 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<List<Acquiredlandvillage>> GetAllVillage(int districtId)
         {
-            var result = await _dbContext.Acquiredlandvillage.Where(x => x.DistrictId == districtId && x.IsActive == 1).ToListAsync();
+            var result = await _dbContext.Acquiredlandvillage.Where(x => x.DistrictId == districtId && x.VillageType == "Nazul" && x.IsActive == 1).ToListAsync();
 
             List<Acquiredlandvillage> villageList = result
                         .Select(o => new Acquiredlandvillage
@@ -56,10 +56,12 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<List<New_Damage_Colony>> GetAllColony(int villageId)
         {
-            List<New_Damage_Colony> result = await _dbContext.new_damage_colony.Where(//x => x.NewDamageVillageId == villageId &&
-                                                                                       x => x.IsActive == 1).ToListAsync();
-
-            List<New_Damage_Colony> colonyList = result
+            List<New_Damage_Colony> result = await _dbContext.new_damage_colony.Where(x => x.NewDamageVillageId == villageId &&
+                                                                                        x.IsActive == 1).ToListAsync();
+            List<New_Damage_Colony> Otherresult = await _dbContext.new_damage_colony.Where(x => x.Code == "OTH" &&
+                                                                                        x.IsActive == 1).ToListAsync();
+            List<New_Damage_Colony> finallist = result.Union(Otherresult).ToList();
+            List<New_Damage_Colony> colonyList = finallist
             .Select(o => new New_Damage_Colony
             {
                 Id = o.Id,

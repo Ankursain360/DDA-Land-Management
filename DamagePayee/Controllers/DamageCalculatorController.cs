@@ -497,7 +497,7 @@ namespace DamagePayee.Controllers
             this.WriteToFile("from_dt, to_dt line number 489: fromdate" + from_dt + "  todate:" + to_dt);
             int TotalMonths = 0;
             DateTime startdate = DateTime.ParseExact(from_dt, "dd/MM/yyyy", CultureInfo.InvariantCulture); // Convert.ToDateTime(from_dt.ToString());
-            DateTime enddate = DateTime.ParseExact(from_dt, "dd/MM/yyyy", CultureInfo.InvariantCulture); // Convert.ToDateTime(to_dt.ToString());
+            DateTime enddate = DateTime.ParseExact(to_dt, "dd/MM/yyyy", CultureInfo.InvariantCulture); // Convert.ToDateTime(to_dt.ToString());
             this.WriteToFile("startdate, enddate line number 489: startdate" + startdate.ToString() + "  enddate:" + enddate.ToString());
             TotalMonths = (12 * (startdate.Year - enddate.Year) + (startdate.Month - enddate.Month));
             return (Math.Abs(TotalMonths) + 1);
