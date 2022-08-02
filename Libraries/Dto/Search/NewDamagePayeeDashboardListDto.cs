@@ -6,7 +6,7 @@ namespace Dto.Search
 {
     public class NewDamagePayeeDashboardListDto
     {
-        public string villageName { get; set; }
-        public int totalapplicationReceived { get; set; }
+        public string VillageName { get; set; }
+        public int TotalApplicationReceived { get; set; }
     }
 }

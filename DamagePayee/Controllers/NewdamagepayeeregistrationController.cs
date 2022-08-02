@@ -33,7 +33,7 @@ namespace DamagePayee.Controllers
             _selfAssessmentService = selfAssessmentService;
         }
 
-        // [AuthorizeContext(ViewAction.View)]
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
