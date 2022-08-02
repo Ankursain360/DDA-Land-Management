@@ -286,5 +286,13 @@ namespace Libraries.Service.ApplicationService
             return await _assessmentRepository.GetpaymentFile(id);
         }
 
+
+        //************ NewDamagePayeeDashboard ******************** 
+
+        public async Task<List<DamagePayeeDashboardList>> GetDamagePayee(DamagePayeeDashboardSearchDto model)
+        {
+            return await _assessmentRepository.GetDamagePayee(model);
+        }
+
     }
 }

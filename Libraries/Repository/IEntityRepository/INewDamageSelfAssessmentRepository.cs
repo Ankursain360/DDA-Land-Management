@@ -58,5 +58,10 @@ namespace Libraries.Repository.IEntityRepository
         Task<Newdamagepayeeoccupantinfo> GetOccupantFile(int id);
 
         // Task<PagedResult<NewDamageSelfAssessment>> GetPagedDivision(NewDamageSelfAssessmentSearchDto model);
+
+
+        //************ NewDamagePayeeDashboard ******************** 
+
+        Task<List<DamagePayeeDashboardList>> GetDamagePayee(DamagePayeeDashboardSearchDto model);
     }
 }

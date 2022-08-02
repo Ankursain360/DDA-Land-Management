@@ -63,5 +63,10 @@ namespace Libraries.Service.IApplicationService
         Task<List<Newdamagepaymenthistory>> Getpaymentdetail(int id);
         Task<Newdamagepaymenthistory> GetpaymentFile(int id);
 
+
+        //************ NewDamagePayeeDashboard ******************** 
+
+        Task<List<DamagePayeeDashboardList>> GetDamagePayee(DamagePayeeDashboardSearchDto model);
+
     }
 }

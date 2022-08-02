@@ -5,6 +5,7 @@ using Libraries.Repository.Common;
 using Libraries.Repository.IEntityRepository;
 using Microsoft.EntityFrameworkCore;
 using Model.Entity;
+using Repository.Common;
 using Repository.IEntityRepository;
 using System;
 using System.Collections.Generic;
@@ -306,6 +307,23 @@ namespace Libraries.Repository.EntityRepository
         {
             return await _dbContext.newdamagepayeeoccupantinfo.Where(x => x.Id == id).FirstOrDefaultAsync();
         }
+        //************ NewDamagePayeeDashboard ******************** 
 
+        public async Task<List<DamagePayeeDashboardList>> GetDamagePayee(DamagePayeeDashboardSearchDto model)
+        {
+            try
+            {
+                var data = await _dbContext.LoadStoredProcedure("DamageFormNewDashboard")
+                                            .WithSqlParams(("P_todate", model.toDate),
+                                            ("P_fromDate", model.fromDate))
+
+                                            .ExecuteStoredProcedureAsync<DamagePayeeDashboardList>();
+                return (List<DamagePayeeDashboardList>)data;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
     }
 }

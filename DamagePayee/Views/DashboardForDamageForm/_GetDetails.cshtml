@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Dto.Search.DamagePayeeDashboardList>
+@{int rowNo = 0; }
+
+<table class="table table-sm table-bordered mb-0 table-striped">
+    <thead class="text-nowrap">
+        <tr>
+            <th>Sr.No</th>
+            <th>Nazul Estate</th>
+            <th>Total Application Received</th>
+
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model.ToList())
+        {
+            <tr>
+                <td>@(rowNo += 1)</td>
+                <td>@item.VillageName</td>
+                <td>@item.TotalapplicationReceived</td>
+
+            </tr>
+        }
+
+
+    </tbody>
+    <tfoot>
+        @if (Model != null)
+        {
+            <tr>
+                <td colspan="2" align="left" style="font-weight:bolder"><b>Grand Total</b></td>
+                <td style="font-weight:bolder" align="left">@Model.Sum(x => x.TotalapplicationReceived)</td>
+            </tr>
+        }
+        else
+        {
+            <tr>
+                <td colspan="2" align="right" style="font-weight:bolder"><b>Total</b></td>
+                <td style="font-weight:bolder">0</td>
+            </tr>
+        }
+    </tfoot>
+
+</table>
+
+<br />
+
+@*@await Component.InvokeAsync("Pager", new { totalCount = Model.RowCount, pageNumber = Model.CurrentPage, pageSize = Model.PazeSize })*@
