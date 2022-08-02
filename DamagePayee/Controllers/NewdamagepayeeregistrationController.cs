@@ -1,15 +1,24 @@
-﻿using AutoMapper.Configuration;
-using Core.Enum;
-using DamagePayee.Filters;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
 using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
 using Microsoft.AspNetCore.Mvc;
-using NPOI.OpenXml4Net.OPC.Internal;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Utility.Helper;
+using Notification;
+using Notification.Constants;
+using Notification.OptionEnums;
+using System.Text;
+using Service.IApplicationService;
+using Dto.Master;
+using Core.Enum;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using System.Security.Cryptography;
 
 namespace DamagePayee.Controllers
 {
@@ -53,7 +62,7 @@ namespace DamagePayee.Controllers
 
         }
 
-        public async Task<JsonResult> Getallfloordetails(Newdamageselfassessmentfloordetail model , int? Id)
+        public async Task<JsonResult> Getallfloordetails( int? Id)
         {
             
             Id = Id ?? 0;
@@ -70,7 +79,7 @@ namespace DamagePayee.Controllers
 
             }));
         }
-        public async Task<JsonResult> GetallGpaDetails( int? Id)
+        public async Task<JsonResult> GetallGpaDetails(int? Id)
         {
 
             Id = Id ?? 0;
@@ -81,18 +90,120 @@ namespace DamagePayee.Controllers
                 x.NameOfTheSeller,
                 x.NameOfThePayer,
                 x.AddressOfThePlotAsPerGpa,
-                x.AreaOfThePlotAsPerGpa
+                x.AreaOfThePlotAsPerGpa,
+                x.GpafilePath,
+                x.Id
+
 
             }));
         }
 
-        //public async Task<FileResult> ViewGpaFile(int Id)
-        //{
-        //    FileHelper file = new FileHelper();
-        //    Newdamageselfassessmentgpadetail Data = await _selfAssessmentService.GetGpaFilePath(Id);
-        //    string path = Data.SignaturePath;
-        //    byte[] FileBytes = System.IO.File.ReadAllBytes(path);
-        //    return File(FileBytes, file.GetContentType(path));
-        //}
+        public async Task<FileResult> viewGpaFile(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Newdamageselfassessmentgpadetail data = await _selfAssessmentService.GetGpaFilePath(Id);
+            string path = data.GpafilePath;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(path);
+            return File(FileBytes, file.GetContentType(path));
+        }
+
+        public async Task<JsonResult> GetallAtsDetails(int? Id)
+        {
+            Id = Id ?? 0;
+            var data = await _selfAssessmentService.GetAllAtsDetails(Convert.ToInt32(Id));
+            return Json(data.Select(X => new
+            {
+                DateOfExecutionOfAts = Convert.ToDateTime(X.DateOfExecutionOfAts).ToString("yyyy-MM-dd"),
+                X.NameOfTheSellerAts,
+                X.NameOfThePayerAts,
+                X.AddressOfThePlotAsPerAts,
+                X.AreaOfThePlotAsPerAts,
+                X.AtsfilePath,
+                X.Id
+
+            }));
+        }
+
+        public async Task<FileResult> viewAtsFile(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Newdamageselfassessmentatsdetail data = await _selfAssessmentService.GetAtsFilePath(Id);
+            string path = data.AtsfilePath;
+            byte[] fileBytes = System.IO.File.ReadAllBytes(path);
+            return File(fileBytes, file.GetContentType(path));
+        }
+        public async Task<JsonResult> getPaymentDetails(int? Id)
+        {
+            Id = Id ?? 0;
+            var data = await _selfAssessmentService.Getpaymentdetail(Convert.ToInt32(Id));
+            return Json(data.Select(x => new
+            {
+                x.Name,
+                x.RecieptNo,
+                x.PaymentMode,
+                PaymentDate = Convert.ToDateTime(x.PaymentDate).ToString("yyyy-MM-dd"),
+                x.Amount,
+                x.RecieptDocumentPath,
+                x.Id
+            }));
+        }
+        public async Task<FileResult> getPaymentFile(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Newdamagepaymenthistory data = await _selfAssessmentService.GetpaymentFile(Id);
+            string path = data.RecieptDocumentPath;
+            byte[] fileBytes = System.IO.File.ReadAllBytes(path);
+            return File(fileBytes, file.GetContentType(path));
+        }
+
+        public async Task<FileResult> fetchPropertyPhoto(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Newdamagepayeeregistration data = await _selfAssessmentService.FetchSingleResult(Id);
+            string path = data.PropertyPhotographFilePath;
+            path = data.ElectricityBillFilePath;
+            path = data.WaterBillFilePath;
+            path = data.PropertyTaxReceiptFilePath;
+            byte[] fileBytes = System.IO.File.ReadAllBytes(path);
+            return File(fileBytes, file.GetContentType(path));
+        }
+        public async Task<JsonResult> getAllOccupantDetails(int? Id)
+        {
+            Id = Id ?? 0;
+
+            var data = await _selfAssessmentService.GetOccupantDetails(Convert.ToInt32(Id));
+            return Json(data.Select(x => new
+            {
+                x.FirstName,
+                x.MiddleName,
+                x.LastName,
+                x.SpouseName,
+                x.FatherName,
+                x.MontherName,
+                x.Epicid,
+                x.EmailId,
+                x.MobileNo,
+                x.AadharNo,
+                Dob = Convert.ToDateTime(x.Dob).ToString("yyyy-MM-dd"),
+                x.Gender,
+                x.PanNo,
+                x.ShareInProperty,
+                x.IsOccupingFloor,
+                x.FloorNo,
+                x.DamagePaidInPast,
+                x.OccupantPhotoPath,
+                x.Id
+            }));
+
+        }
+
+        public async Task<FileResult> getOccupantDetails(int id)
+        {
+            FileHelper file = new FileHelper();
+            Newdamagepayeeoccupantinfo data = await _selfAssessmentService.GetOccupantFile(id);
+            string path = data.OccupantPhotoPath;
+            byte[] fileBytes = System.IO.File.ReadAllBytes(path);
+            return File(fileBytes, file.GetContentType(path));
+        }
     }
 }

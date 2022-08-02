@@ -4,14 +4,9 @@
     <thead class="text-nowrap">
         <tr>
             <th scope="col">File No.</th>
-            @*<th scope="col">Allotee Name</th>*@
             <th scope="col">Department</th>
-            @*<th scope="col">Locality</th>
-            <th scope="col">Khasra No.</th>
-
-            <th scope="col">Zone</th>
-            <th scope="col">Village</th>*@
             <th scope="col">Document Category</th>
+            <th scope="col">Title/Subject</th>
             <th scope="col">Status</th>
             <th scope="col" style="min-width: 105px;">Operations</th>
         </tr>
@@ -24,14 +19,9 @@
             {
         <tr>
             <td>@item.FileNo </td>
-            @*<td>@item.AlloteeName</td>*@
             <td>@(item.Department == null ? "" :item.Department.Name)</td>
-            @*<td>@(item.Locality == null ? "" :item.Locality.Name)</td>
-            <td>@(item.KhasraNo == null ? "" :item.KhasraNo.KhasraNo)</td>
-
-            <td>@(item.Zone == null ? "" :item.Zone.Name)</td>
-            <td>@(item.Village == null ? "" :item.Village.Name)</td>*@
             <td>@(item.Category == null ? "" :item.Category.CategoryName)</td>
+            <td>@(item.Title)</td>
 
             <td>
                 @if (item.IsActive == 1)

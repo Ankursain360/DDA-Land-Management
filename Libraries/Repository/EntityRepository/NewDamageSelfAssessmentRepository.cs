@@ -86,8 +86,7 @@ namespace Libraries.Repository.EntityRepository
                                            .Include(x => x.GetApprovedStatusNavigation)
                                            .Where(x => (string.IsNullOrEmpty(model.fileno) || x.FileNo.Contains(model.fileno))
                                            && (x.CreatedBy == (id == 0 ? x.CreatedBy : id))
-                                           //&& (x.DistrictId == (model.district == 0 ? x.DistrictId : model.district))
-                                           //&& (x.VillageId == (model.village == 0 ? x.VillageId : model.village))
+                                           
                                            )
                                            .GetPaged<Newdamagepayeeregistration>(model.PageNumber, model.PageSize);
 
@@ -97,46 +96,13 @@ namespace Libraries.Repository.EntityRepository
                 switch (model.SortBy.ToUpper())
                 {
                     case ("FILE"):
-                        data = null;
-                        data = await _dbContext.newdamagepayeeregistration
-                                               .Where(x => (string.IsNullOrEmpty(model.fileno) || x.FileNo.Contains(model.fileno))
-                                               && (x.CreatedBy == id)
-                                               )
-                                               //&& (x.DistrictId == (model.district == 0 ? x.DistrictId : model.district))
-                                               //&& (x.VillageId == (model.village == 0 ? x.VillageId : model.village)))
-                                               .OrderBy(x => x.FileNo)
-                                               .GetPaged<Newdamagepayeeregistration>(model.PageNumber, model.PageSize);
+                        data.Results=data.Results.OrderBy(x => x.FileNo).ToList();
+                       
                         break;
-
-
-                    //case ("DISTRICT"):
-                    //    data = null;
-                    //    data = await _dbContext.newdamagepayeeregistration
-                    //                           .Where(x => (string.IsNullOrEmpty(model.fileno) || x.FileNo.Contains(model.fileno))
-                    //                           && (x.DistrictId == (model.district == 0 ? x.DistrictId : model.district))
-                    //                           && (x.VillageId == (model.village == 0 ? x.VillageId : model.village)))
-                    //                           .OrderBy(x => x.District.Name)
-                    //                           .GetPaged<Newdamagepayeeregistration>(model.PageNumber, model.PageSize);
-                    //    break;
-                    //case ("VILLAGE"):
-                    //    data = null;
-                    //    data = await _dbContext.newdamagepayeeregistration
-                    //                           .Where(x => (string.IsNullOrEmpty(model.fileno) || x.FileNo.Contains(model.fileno))
-                    //                           && (x.DistrictId == (model.district == 0 ? x.DistrictId : model.district))
-                    //                           && (x.VillageId == (model.village == 0 ? x.VillageId : model.village)))
-                    //                           .OrderBy(x => x.Village.Name)
-                    //                           .GetPaged<Newdamagepayeeregistration>(model.PageNumber, model.PageSize);
-                    //    break;
+ 
                     case ("ISACTIVE"):
-                        data = null;
-                        data = await _dbContext.newdamagepayeeregistration
-                                               .Where(x => (string.IsNullOrEmpty(model.fileno) || x.FileNo.Contains(model.fileno))
-                                               && (x.CreatedBy == id)
-                                               //&& (x.DistrictId == (model.district == 0 ? x.DistrictId : model.district))
-                                               //&& (x.VillageId == (model.village == 0 ? x.VillageId : model.village)))
-                                               )
-                                               .OrderByDescending(x => x.IsActive)
-                                               .GetPaged<Newdamagepayeeregistration>(model.PageNumber, model.PageSize);
+                        data.Results = data.Results.OrderByDescending(x => x.IsActive).ToList();
+                       
                         break;
 
                 }
@@ -148,25 +114,14 @@ namespace Libraries.Repository.EntityRepository
                 switch (model.SortBy.ToUpper())
                 {
                     case ("FILE"):
-                        data = null;
-                        data = await _dbContext.newdamagepayeeregistration
-                                               .Where(x => (string.IsNullOrEmpty(model.fileno) || x.FileNo.Contains(model.fileno))
-                                               && (x.CreatedBy == id)
-                                               )
-                                               .OrderByDescending(x => x.FileNo)
-                                               .GetPaged<Newdamagepayeeregistration>(model.PageNumber, model.PageSize);
+                        data.Results = data.Results.OrderByDescending(x => x.FileNo).ToList();
+
                         break;
                     case ("ISACTIVE"):
-                        data = null;
-                        data = await _dbContext.newdamagepayeeregistration
-                                               .Where(x => (string.IsNullOrEmpty(model.fileno) || x.FileNo.Contains(model.fileno))
-                                               && (x.CreatedBy == id)
-                                               //&& (x.DistrictId == (model.district == 0 ? x.DistrictId : model.district))
-                                               //&& (x.VillageId == (model.village == 0 ? x.VillageId : model.village)))
-                                               )
-                                               .OrderBy(x => x.IsActive)
-                                               .GetPaged<Newdamagepayeeregistration>(model.PageNumber, model.PageSize);
+                        data.Results = data.Results.OrderBy(x => x.IsActive).ToList();
+
                         break;
+
                 }
             }
             return data;
