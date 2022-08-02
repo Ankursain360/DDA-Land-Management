@@ -66,7 +66,7 @@
                             <option value="">---Select---</option>
                         </select>
                         <span asp-validation-for="VillageId" class="d-block text-danger field-validation-valid"></span>
-                        <label class="floating-label">Village/Revenue state<span style="color:red">*</span></label>
+                        <label class="floating-label">Village/Revenue estate<span style="color:red">*</span></label>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -296,8 +296,7 @@
                                 <th>Floor Name</th>
                                 <th>Carpet Area</th>
                                 <th>Electricity K Number</th>
-                                <th>MCD Property Tax ID</th>
-                                @*<th>Water Bill</th>*@
+                                <th>MCD Property Tax ID</th> 
                                 <th>Water (KNO.No)</th>
                                 <th>Current Use</th>
                                 <th>Operation</th>
@@ -309,25 +308,25 @@
                             <tr id="">
                                 <td style="text-align:center;"><span class="sn">1</span></td>
                                 <td>
-                                    <select asp-for="FloorId" class="floating-label-field floating-label-field--s3" asp-items="@(new SelectList(Model.floorlist,"Id","Name"))" id="ddlfloor">
+                                    <select asp-for="FloorId" class="floating-label-field floating-label-field--s3" asp-items="@(new SelectList(Model.floorlist,"Id","Name"))">
                                         <option value="">---Select floor---</option>
                                     </select>
 
                                 </td>
                                 <td>
-                                    <input asp-for="CarpetArea" type="text" class="floating-label-field floating-label-field--s3 numbers" maxlength="10" id="txtCarpetArea" />
+                                    <input asp-for="CarpetArea" type="text" class="floating-label-field floating-label-field--s3 numbers" maxlength="10" />
                                 </td>
                                 <td>
-                                    <input asp-for="ElectricityKno" type="text" class="floating-label-field floating-label-field--s3" id="txtElectricityNumber" />
+                                    <input asp-for="ElectricityKno" type="text" class="floating-label-field floating-label-field--s3" maxlength="12" />
                                 </td>
                                 <td>
-                                    <input asp-for="McdpropertyTaxId" type="text" class="floating-label-field floating-label-field--s3" id="txtMCDPropertyTaxID" />
+                                    <input asp-for="McdpropertyTaxId" type="text" class="floating-label-field floating-label-field--s3" maxlength="15"/>
                                 </td>
                                 <td>
-                                    <input asp-for="WaterKno" type="text" class="floating-label-field floating-label-field--s3" id="txtWaterKno" />
+                                    <input asp-for="WaterKno" type="text" class="floating-label-field floating-label-field--s3" maxlength="15"/>
                                 </td>
                                 <td>
-                                    <select asp-for="CurrentUse" class="floating-label-field floating-label-field--s3" id="txtCurrentUse">
+                                    <select asp-for="CurrentUse" class="floating-label-field floating-label-field--s3">
                                         <option value="">---Select Use---</option>
                                         <option value="Residential">Residential</option>
                                         <option value="Commercial">Commercial</option>
@@ -923,7 +922,7 @@
                         <a id="viewPropertyPhoto" asp-action="PhotographarFP" class="badge bg-primary px-2" target="_blank" style="display:none;">(View File)</a>
                         <input type="file" asp-for="FilePropertyPhoto" class="floating-label-field floating-label-field--s3 checkExtension" placeholder="Name">
                         <span asp-validation-for="PropertyPhotographFilePath" class="d-block text-danger field-validation-valid"></span>
-                        <label for="field-1" class="floating-label"> Photograph of the Property <span style="color:red">(.pdf only)</span></label>
+                        <label for="field-1" class="floating-label"> Photograph of the Property @*<span style="color:red">(.pdf only)</span>*@</label>
 
                     </div>
                 </div>
@@ -933,7 +932,7 @@
                         <input asp-for="FileElectricityBill" class="floating-label-field floating-label-field--s3 checkExtension" type="file" />
                         @*<input type="hidden" asp-for="ElectricityBillDocument" />*@
                         <span asp-validation-for="ElectricityBillFilePath" class="d-block text-danger field-validation-valid"></span>
-                        <label class="floating-label">Electricity Bill<span style="color:red">*</span></label>
+                        <label class="floating-label">Electricity Bill@*<span style="color:red">*</span>*@</label>
 
                     </div>
                 </div>
@@ -946,7 +945,7 @@
                         <input asp-for="FileWaterBill" class="floating-label-field floating-label-field--s3 checkExtension" type="file" />
                         @*<input type="hidden" asp-for="PaymentDocument" />*@
                         <span asp-validation-for="WaterBillFilePath" class="d-block text-danger field-validation-valid"></span>
-                        <label class="floating-label">Water bill<span style="color:red">*</span></label>
+                        <label class="floating-label">Water bill@*<span style="color:red">*</span>*@</label>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -955,7 +954,7 @@
                         <input asp-for="FilePropertyTaxReceipt" class="floating-label-field floating-label-field--s3 checkExtension" type="file" />
                         @*<input type="hidden" asp-for="PaymentDocument" />*@
                         <span asp-validation-for="PropertyTaxReceiptFilePath" class="d-block text-danger field-validation-valid"></span>
-                        <label class="floating-label">Property Tax Receipt<span style="color:red">*</span></label>
+                        <label class="floating-label">Property Tax Receipt@*<span style="color:red">*</span>*@</label>
                     </div>
                 </div>
             </div>

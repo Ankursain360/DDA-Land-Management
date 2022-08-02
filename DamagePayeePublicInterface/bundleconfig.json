@@ -52,5 +52,11 @@
     "inputFiles": [
       "wwwroot/js/newdamageselfassessmentcreate.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/newdamageselfview.min.js",
+    "inputFiles": [
+      "wwwroot/js/newdamageselfview.js"
+    ]
   }
 ]

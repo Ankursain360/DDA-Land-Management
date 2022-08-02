@@ -1,7 +1,6 @@
 ﻿$(document).ready(function () {
-    $('#ddlfloor').removeAttr('multiple');
-    $('#txtCurrentUse').removeAttr('multiple');
-    $('#txtCurrentUse').removeAttr('multiple');
+    $('#FloorId').removeAttr('multiple');
+    $('#CurrentUse').removeAttr('multiple'); 
     $('#IsOccupingFloor').removeAttr('multiple');
     $('#Gender').removeAttr('multiple');
 
@@ -76,6 +75,8 @@ $(document).delegate('a.add-record2', 'click', function (e) {
     if ($("#tbl_posts2 #add2 #CarpetArea").val() != ''
         && $("#tbl_posts2 #add2 #FloorName").val() != '') {
         e.preventDefault();
+        var floorid = $("#tbl_posts2 #add2 #FloorId").children("option:selected").val();
+        var currentuse = $("#tbl_posts2 #add2 #CurrentUse").children("option:selected").val();
         var content = jQuery('#tbl_posts2 #add2 tr'),
             size = jQuery('#tbl_posts2 >tbody >tr').length,
             element = null,
@@ -83,7 +84,8 @@ $(document).delegate('a.add-record2', 'click', function (e) {
         element.attr('id', 'rec-' + size);
         element.find('.delete-record2').attr('data-id', size);
         element.appendTo('#tbl_posts2_body');
-
+        $('#tbl_posts2_body #rec-' + size + ' #FloorId').val(floorid);
+        $('#tbl_posts2_body #rec-' + size + ' #CurrentUse').val(currentuse);
         /*   $('#tbl_posts2_body #rec-' + size + ' #FloorName').val(Gender);*/
         element.find('.sn').html(size);
         $("#tbl_posts2 #add2 .sn").text($('#tbl_posts2 >tbody >tr').length);
@@ -95,8 +97,8 @@ $(document).delegate('a.add-record2', 'click', function (e) {
         debugger
 
         $("#tbl_posts2 #add2 .floating-label-field").val('');
-        $("#tbl_posts2 #add2 #ddlfloor").select2("val", "");
-        $("#tbl_posts2 #add2 #txtCurrentUse").select2("val", "");
+        $("#tbl_posts2 #add2 #FloorId").select2("val", "");
+        $("#tbl_posts2 #add2 #CurrentUse").select2("val", "");
     }
     else {
         alert('Please fill record before add new record ');

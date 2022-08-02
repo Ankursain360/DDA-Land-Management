@@ -295,7 +295,7 @@
                                 @*<th>Water Bill</th>*@
                                 <th>Water (KNO.No)</th>
                                 <th>Current Use</th>
-                                <th>Operation</th>
+                                <th style="display:none">Operation</th>
                             </tr>
                         </thead>
                         <tbody id="tbl_posts2_body">
@@ -331,7 +331,7 @@
                                         <option value="Other">Other</option>
                                     </select>
                                 </td>
-                                <td>
+                                <td style="display:none">
                                     <div class="floating-label-wrap mb-3 mb-md-0">
                                         <a class="remove delete-record2 " title="delete" data-id="0" style="display:none;font-size:30px;"><i class="ri-delete-bin-fill"></i></a>
                                         <a class="view add-record2" data-added="0" title="Add" style="font-size:30px;"><i class="ri-add-circle-fill"></i></a>
@@ -688,13 +688,13 @@
                         <thead class="text-nowrap">
                             <tr>
                                 <th>Sr.No</th>
-                                <th>Date of execution of GPA</th>
-                                <th>Name of the Seller</th>
-                                <th>Name of the Payer</th>
-                                <th>plot Address as per GPA</th>
-                                <th>plot Area as per GPA (sqm)</th>
+                                <th>Execution Date of GPA</th>
+                                <th>Seller Name</th>
+                                <th>Payer Name</th>
+                                <th>plot Address</th>
+                                <th>plot Area (sqm)</th>
                                 <th>GPA Document</th>
-                                <th>Operation</th>
+                                <th style="display:none">Operation</th>
                             </tr>
                         </thead>
                         <tbody id="tbl_posts3_body">
@@ -719,7 +719,7 @@
                                 </td>
                                 <td>
                                   <a id="txtFileGpaFile" asp-action="viewGpaFile" class="badge bg-primary px-2" target="_blank" >(View File)</a>
-                                  <input asp-for="FileGpafile" class="floating-label-field floating-label-field--s3 checkExtension" type="file" id="txtFileGpaFile" />
+                                  @*<input asp-for="FileGpafile" class="floating-label-field floating-label-field--s3 checkExtension" type="file" id="txtFileGpaFile" />*@
                                 </td>
                                 @*<td>
                                     <a id="txtFileGpaFile" asp-action="viewGpaFile" class="badge bg-primary px-2" target="_blank">(View File)</a>
@@ -728,7 +728,7 @@
                                     <span asp-validation-for="GpafilePath" class="d-block text-danger field-validation-valid"></span>
 
                                 </td>*@
-                                <td>
+                                <td style="display:none">
                                     <div class="floating-label-wrap mb-3 mb-md-0">
                                         <div class="floating-label-wrap mb-3 mb-md-0">
                                             <a class="remove delete-record3 " title="delete" data-id="0" style="display:none;font-size:20px;color:red"><i class="ri-delete-bin-fill"></i></a>
@@ -755,13 +755,13 @@
                         <thead class="text-nowrap">
                             <tr>
                                 <th>Sr.No</th>
-                                <th>Date of execution of ATS</th>
-                                <th>Name of the Seller</th>
-                                <th>Name of the Payer</th>
-                                <th>Plot Address as per ATS</th>
-                                <th>plot Area  as per ATS (sqm)</th>
+                                <th>Execution Date of ATS</th>
+                                <th>Seller Name</th>
+                                <th>Payer Name</th>
+                                <th>Plot Address</th>
+                                <th>plot Area(sqm)</th>
                                 <th>ATS Document</th>
-                                <th>Operation</th>
+                                <th style="display:none">Operation</th>
                             </tr>
                         </thead>
                         <tbody id="tbl_posts4_body">
@@ -786,9 +786,9 @@
                                 </td>
                                 <td>
                                     <a id="txtFileAtsFile" asp-action="viewAtsFile" class="badge bg-primary px-2" target="_blank">(View File)</a>
-                                    <input id="txtFileAtsFile" asp-for="FileAtsfile" class="floating-label-field floating-label-field--s3 checkExtension" type="file" />
+                                    @*<input id="txtFileAtsFile" asp-for="FileAtsfile" class="floating-label-field floating-label-field--s3 checkExtension" type="file" />*@
                                 </td>
-                                <td>
+                                <td style="display:none">
                                     <div class="floating-label-wrap mb-3 mb-md-0">
                                         <a class="remove delete-record4 " title="delete" data-id="0" style="display:none;font-size:20px;color:red"><i class="ri-delete-bin-fill"></i></a>
                                         <a class="view add-record4" data-added="0" title="Add" style="font-size:30px;"><i class="ri-add-circle-fill"></i></a>
@@ -875,8 +875,8 @@
                                 <th>Mode of Payment</th>
                                 <th>Date of Payment</th>
                                 <th>Amount(Rs.)</th>
-                                <th>Upload receipt</th>
-                                <th>Operation</th>
+                                <th>View receipt</th>
+                                <th style="display:none">Operation</th>
                             </tr>
                         </thead>
                         <tbody id="tbl_Payment_body">
@@ -901,10 +901,10 @@
                                 </td>
                                 <td>
                                     <a id="viewRecieptId" asp-action="ViewRecieptFile" class="badge bg-primary px-2" target="_blank" style="display:none;">(View File)</a>
-                                    <input id="viewRecieptId" asp-for="FileRecieptDocument" class="floating-label-field floating-label-field--s3 checkExtension" type="file" />
+                                    @*<input id="viewRecieptId" asp-for="FileRecieptDocument" class="floating-label-field floating-label-field--s3 checkExtension" type="file" />*@
                                     <input type="hidden" />
                                 </td>
-                                <td>
+                                <td style="display:none">
                                     <div class="floating-label-wrap mb-3 mb-md-0">
 
                                         <a class="delete-recordPayment" data-id="0" style="display: none; font-size: 40px;"><i class="ri-indeterminate-circle-fill"></i></a>
@@ -1021,18 +1021,18 @@
             <div class="panel-body">
                 <div class="row">
                     <div class="col-md-12">
-                        <input asp-for="DeclarationStatus1" type="checkbox" />
+                        <input asp-for="DeclarationStatus1" checked="checked" type="checkbox" />
                         <input type="hidden" asp-for="Declaration1" />
 
                         I certify that the particulars filled in this form are true and correct to the best of my knowledge and i am authorized to sign this form. I am aware of the penel provisions of the Delhi Development Authority, 2019 which are attracted on wilful suppression and submission of false and in correct particulars.
                         <span asp-validation-for="Declaration1" id="DeclarationStatus1Msg" class="text-danger" style="display:none;font-weight:700">Checkbox is Mandatory</span>
                         <br />
-                        <input asp-for="DeclarationStatus2" type="checkbox" />
+                        <input asp-for="DeclarationStatus2" checked="checked" type="checkbox" />
                         <input type="hidden" asp-for="Declaration2" />
                         I understand that any of the information supplied by me is found incorrect, my application shall be rejected.
                         <span asp-validation-for="Declaration2" id="DeclarationStatus2Msg" class="text-danger" style="display:none;font-weight:700">Checkbox is Mandatory</span>
                         <br />
-                        <input asp-for="DeclarationStatus3" type="checkbox" />
+                        <input asp-for="DeclarationStatus3" checked="checked" type="checkbox" />
                         <input type="hidden" asp-for="Declaration3" />
                         I understand that any email sent to me on the ID provided by me shall be deemed service of notice to me.
                         <span asp-validation-for="Declaration3" id="DeclarationStatus3Msg" class="text-danger" style="display:none;font-weight:700">Checkbox is Mandatory</span>

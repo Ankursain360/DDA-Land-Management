@@ -42,7 +42,7 @@ namespace Libraries.Model.Entity
         public decimal? LandArea { get; set; }
         public decimal? AreaBuildingFootprint { get; set; }
 
-        [Required(ErrorMessage = " Total constricted area is mandatory ")]
+        [Required(ErrorMessage = " Total constructed area is mandatory ")]
         public decimal? TotalConstructedArea { get; set; }
 
         [Required(ErrorMessage = " Vacant area is mandatory ")]

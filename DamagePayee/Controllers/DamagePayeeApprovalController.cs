@@ -371,7 +371,7 @@ namespace DamagePayee.Controllers
                         Uri uri = new Uri("https://www.managemybusinessess.com/");
                         string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "ApprovalMailDetailsContent.html");
                         string link = "<a target=\"_blank\" href=\"" + uri + "\">Click Here</a>";
-                        string linkhref = "https://master.managemybusinessess.com/ApprovalProcess/Index";
+                        string linkhref = "https://damage.ddalmis.org.in/DamagePayeeApproval/Index";
 
                         var senderUser = await _userProfileService.GetUserById(SiteContext.UserId);
                         StringBuilder multousermailId = new StringBuilder();

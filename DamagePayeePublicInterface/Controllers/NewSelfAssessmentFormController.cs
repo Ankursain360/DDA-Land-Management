@@ -40,14 +40,14 @@ namespace DamagePayeePublicInterface.Controllers
         }
 
         [HttpPost]
-        public async Task<PartialViewResult> List([FromBody] DamagePayeeSearchDto model , int id)
+        public async Task<PartialViewResult> List([FromBody] DamagePayeeSearchDto model, int id)
         {
-            
-            var data = await _selfAssessmentService.GetPagedDamagePayee(model,SiteContext.UserId);
+
+            var data = await _selfAssessmentService.GetPagedDamagePayee(model, SiteContext.UserId);
             return PartialView("_List", data);
 
         }
-       
+
         public async Task<IActionResult> Create()
         {
             Newdamagepayeeregistration model = new Newdamagepayeeregistration();
@@ -103,7 +103,7 @@ namespace DamagePayeePublicInterface.Controllers
                         selfAssessment.PropertyTaxReceiptFilePath = fileHelper.SaveFile(strPropertyTaxReceiptFilePath, selfAssessment.FilePropertyTaxReceipt);
                     }
                     selfAssessment.UserId = SiteContext.UserId.ToString();
-                    selfAssessment.CreatedBy =  SiteContext.UserId;
+                    selfAssessment.CreatedBy = SiteContext.UserId;
                     var result = await _selfAssessmentService.Create(selfAssessment);
                     if (result)
                     {
@@ -119,9 +119,10 @@ namespace DamagePayeePublicInterface.Controllers
                                 ElectricityKno = selfAssessment.ElectricityKno[i],
                                 WaterKno = selfAssessment.WaterKno[i],
                                 CurrentUse = selfAssessment.CurrentUse[i],
+                                McdpropertyTaxId= selfAssessment.McdpropertyTaxId[i],
                                 CreatedBy = 1,//need to replace with dynamic value
                                 CreatedDate = DateTime.Now,
-                                NewDamageSelfAssessmentId = selfAssessment.Id 
+                                NewDamageSelfAssessmentId = selfAssessment.Id
 
                             });
                         }
@@ -243,9 +244,9 @@ namespace DamagePayeePublicInterface.Controllers
                                 Amount = selfAssessment.Amount.Count <= i ? null : selfAssessment.Amount[i],
                                 RecieptDocumentPath = selfAssessment.FileRecieptDocument == null ? "" : selfAssessment.FileRecieptDocument.Count <= i ? null : fileHelper.SaveFile(strAtsFilePath, selfAssessment.FileRecieptDocument[i]),
                                 NewDamageSelfAssessmentId = selfAssessment.Id
-                              
 
-                            }); 
+
+                            });
                         }
                         foreach (var item in paymentdetails)
                         {
@@ -257,6 +258,7 @@ namespace DamagePayeePublicInterface.Controllers
                         {
 
                             ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+                            return View("Index", selfAssessment);
                         }
                     }
                     else
@@ -264,8 +266,8 @@ namespace DamagePayeePublicInterface.Controllers
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                     }
 
-                   // return View(selfAssessment);   
-                   return RedirectToAction("Index",selfAssessment);
+                    return View(selfAssessment);
+
 
                 }
                 else
@@ -279,12 +281,12 @@ namespace DamagePayeePublicInterface.Controllers
             }
             catch (Exception ex)
             {
-                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Error);
-                
+                ViewBag.Message = Alert.Show(Messages.Error + " " + ex.Message.ToString(), "An Error Occured", AlertType.Error);
+
             }
-            return RedirectToAction("Index",selfAssessment);
+            return View("Index", selfAssessment);
         }
-         
+
         [HttpGet]
         public async Task<JsonResult> GetNewVillageList(int? DistrictId)
         {
@@ -304,7 +306,7 @@ namespace DamagePayeePublicInterface.Controllers
             var data = await _selfAssessmentService.FetchSingleResult(id);
             data.districtList = await _selfAssessmentService.GetAllDistrict();
             data.damagevillageList = await _selfAssessmentService.GetAllVillage(data.DistrictId.HasValue ? Convert.ToInt32(data.DistrictId) : 0);
-            data.ColonyList = await _selfAssessmentService.GetAllColony(id);
+            data.ColonyList = await _selfAssessmentService.GetAllColony(data.VillageId.HasValue ? Convert.ToInt32(data.VillageId):0);
             data.floorlist = await _selfAssessmentService.GetFloors();
             if (data == null)
             {
@@ -371,7 +373,7 @@ namespace DamagePayeePublicInterface.Controllers
                 X.AtsfilePath,
                 X.Id
 
-            })) ;
+            }));
         }
         public async Task<FileResult> viewAtsFile(int Id)
         {
@@ -392,8 +394,9 @@ namespace DamagePayeePublicInterface.Controllers
                 x.PaymentMode,
                 PaymentDate = Convert.ToDateTime(x.PaymentDate).ToString("yyyy-MM-dd"),
                 x.Amount,
-                x.RecieptDocumentPath
-            })); 
+                x.RecieptDocumentPath,
+                x.Id
+            }));
         }
         public async Task<FileResult> getPaymentFile(int Id)
         {
@@ -415,7 +418,7 @@ namespace DamagePayeePublicInterface.Controllers
             byte[] fileBytes = System.IO.File.ReadAllBytes(path);
             return File(fileBytes, file.GetContentType(path));
         }
-        public async Task<JsonResult> getAllOccupantDetails(int? Id) 
+        public async Task<JsonResult> getAllOccupantDetails(int? Id)
         {
             Id = Id ?? 0;
 
@@ -441,7 +444,7 @@ namespace DamagePayeePublicInterface.Controllers
                 x.DamagePaidInPast,
                 x.OccupantPhotoPath,
                 x.Id
-            })) ;
+            }));
 
         }
 
