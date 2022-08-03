@@ -19,6 +19,7 @@ using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using System.Security.Cryptography;
+using DamagePayee.Filters;
 
 namespace DamagePayee.Controllers
 {
@@ -33,7 +34,7 @@ namespace DamagePayee.Controllers
             _selfAssessmentService = selfAssessmentService;
         }
 
-        [AuthorizeContext(ViewAction.View)]
+        //[AuthorizeContext(ViewAction.Index)]
         public IActionResult Index()
         {
             return View();
@@ -204,6 +205,37 @@ namespace DamagePayee.Controllers
             string path = data.OccupantPhotoPath;
             byte[] fileBytes = System.IO.File.ReadAllBytes(path);
             return File(fileBytes, file.GetContentType(path));
+        }
+
+        public async Task<IActionResult> DownloadDamagePayeeList(int id)
+        {
+            var result = await _selfAssessmentService.GetDamageSelfAssessments(id);
+            List<NewDamagePayeeListDto> data = new List<NewDamagePayeeListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new NewDamagePayeeListDto()
+                    {
+                        FileNo = result[i].FileNo,
+                        DamagePayee = result[i].WhetherDamageProp,
+                        CurrentOccupant = result[i].Occupanttype,
+                        TypeOfUse = result[i].UseType,
+                        TotalConstructedArea = result[i].TotalConstructedArea,
+                        HouseNo = result[i].HousePropertyNo,
+                        RevenueEstate = result[i].GetVillage == null ? "" : result[i].GetVillage.Name,
+                        Colony = result[i].GetColony == null ? "" : result[i].GetColony.Name
+
+
+                    });
+
+                }
+
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+
         }
     }
 }

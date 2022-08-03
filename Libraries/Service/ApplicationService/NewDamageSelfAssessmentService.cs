@@ -153,9 +153,9 @@ namespace Libraries.Service.ApplicationService
             return await _unitOfWork.CommitAsync() > 0;
         }
 
-        public async Task<List<Newdamagepayeeregistration>> GetDamageSelfAssessments()
+        public async Task<List<Newdamagepayeeregistration>> GetDamageSelfAssessments(int id)
         {
-            return await _assessmentRepository.GetAllDamageSelfAssessments();
+            return await _assessmentRepository.GetAllDamageSelfAssessments(id);
         }
 
         public async Task<PagedResult<Newdamagepayeeregistration>> GetPagedDamagePayee(DamagePayeeSearchDto model , int id)

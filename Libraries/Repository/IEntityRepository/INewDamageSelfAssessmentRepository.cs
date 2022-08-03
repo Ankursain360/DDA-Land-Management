@@ -11,7 +11,7 @@ namespace Libraries.Repository.IEntityRepository
 {
     public interface INewDamageSelfAssessmentRepository : IGenericRepository<Newdamagepayeeregistration>
     {
-         Task<List<Newdamagepayeeregistration>> GetAllDamageSelfAssessments();
+         Task<List<Newdamagepayeeregistration>> GetAllDamageSelfAssessments( int id);
         Task<List<District>> GetAllDistrict();
         Task<List<Floors>> GetFloors();
         Task<List<Acquiredlandvillage>> GetAllVillage(int districtId);  

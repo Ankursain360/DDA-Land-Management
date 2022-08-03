@@ -12,7 +12,7 @@ namespace Libraries.Service.IApplicationService
 {
     public interface INewDamageSelfAssessmentService : IEntityService<Newdamagepayeeregistration>
     {
-        Task<List<Newdamagepayeeregistration>> GetDamageSelfAssessments();
+        Task<List<Newdamagepayeeregistration>> GetDamageSelfAssessments(int id );
         Task<List<District>> GetAllDistrict();
         Task<List<Locality>> GetLocalityList();
         Task<List<Acquiredlandvillage>> GetAllVillage(int districtId);

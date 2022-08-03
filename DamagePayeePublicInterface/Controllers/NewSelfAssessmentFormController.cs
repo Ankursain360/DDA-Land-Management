@@ -457,5 +457,36 @@ namespace DamagePayeePublicInterface.Controllers
             return File(fileBytes, file.GetContentType(path));
         }
 
+
+        public async Task<IActionResult> DownloadDamagePayeeList()
+        {
+            var result = await _selfAssessmentService.GetDamageSelfAssessments( SiteContext.UserId);
+            List<NewDamagePayeeListDto> data = new List<NewDamagePayeeListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new NewDamagePayeeListDto()
+                    {
+                        FileNo = result[i].FileNo,
+                        DamagePayee = result[i].WhetherDamageProp,
+                        CurrentOccupant = result[i].Occupanttype,
+                        TypeOfUse = result[i].UseType,
+                        TotalConstructedArea = result[i].TotalConstructedArea,
+                        HouseNo = result[i].HousePropertyNo,
+                        RevenueEstate = result[i].GetVillage == null ? "" : result[i].GetVillage.Name,
+                        Colony = result[i].GetColony == null ? "" : result[i].GetColony.Name
+
+
+                    });
+
+                }
+
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+
+        }
     }
 }

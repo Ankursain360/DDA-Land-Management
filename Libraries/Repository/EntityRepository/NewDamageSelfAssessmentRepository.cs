@@ -69,9 +69,10 @@ namespace Libraries.Repository.EntityRepository
             }).ToList();
             return colonyList;
         }
-        public async Task<List<Newdamagepayeeregistration>> GetAllDamageSelfAssessments()
+        public async Task<List<Newdamagepayeeregistration>> GetAllDamageSelfAssessments(int id)
         {
-            return await _dbContext.newdamagepayeeregistration.Include(x => x.GetVillage)
+            return await _dbContext.newdamagepayeeregistration.Where(x=>x.CreatedBy ==(id == 0 ? x.CreatedBy:id))
+                                                            .Include(x => x.GetVillage)
                                                             .Include(x => x.GetDistrict)
                                                             .Include(x => x.GetColony).ToListAsync();
         }
