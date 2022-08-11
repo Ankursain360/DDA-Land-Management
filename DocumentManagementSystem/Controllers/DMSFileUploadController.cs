@@ -636,16 +636,16 @@ namespace DocumentManagementSystem.Controllers
                     {
                         Id = result[i].Id,
                         FileNo = result[i].FileNo,
-                        AlloteeName = result[i].AlloteeName,
+                        //AlloteeName = result[i].AlloteeName,
                         Department = result[i].Department == null ? "" : result[i].Department.Name.ToString(),
-                        Locality = result[i].Locality == null ? "" : result[i].Locality.Name.ToString(),
-                        KhasraNo = result[i].KhasraNo == null ? "" : result[i].KhasraNo.KhasraNo.ToString(),
-                        Zone = result[i].Zone == null ? "" : result[i].Zone.Name.ToString(),
-                        Village = result[i].Village == null ? "" : result[i].Village.Name.ToString(),
+                        Category = result[i].Category == null ? "" : result[i].Category.CategoryName.ToString(),
+                        //KhasraNo = result[i].KhasraNo == null ? "" : result[i].KhasraNo.KhasraNo.ToString(),
+                        //Zone = result[i].Zone == null ? "" : result[i].Zone.Name.ToString(),
+                        //Village = result[i].Village == null ? "" : result[i].Village.Name.ToString(),
+                        Title_Subject = result[i].Title,
 
-
-                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
-                    }); ;
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive"
+                    }) ;
                 }
             }
 

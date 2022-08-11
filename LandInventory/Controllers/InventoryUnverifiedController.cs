@@ -664,7 +664,7 @@ namespace LandInventory.Controllers
                         PlotNo = result[i].PlotNo,
                         PrimaryListNo = result[i].PrimaryListNo,
                         AddressWithLandmark = result[i].Palandmark,
-                        AreaUnit = result[i].AreaUnit == 0 ? "bigha-biswa-bishwani" : result[i].AreaUnit == 1 ? "Sq Yd." : result[i].AreaUnit == 2 ? "Acre" : "Hectare",
+                        AreaUnit = result[i].AreaUnit == 0 ? "bigha-biswa-bishwani" : result[i].AreaUnit == 1 ? "Sq Yd." : result[i].AreaUnit == 2 ? "Acre" : result[i].AreaUnit == 3 ? "Hectare" :"Sq. mt." ,
                         Bigha = result[i].TotalAreaInBigha.ToString(),
                         Biswa = result[i].TotalAreaInBiswa.ToString(),
                         Bishwani = result[i].TotalAreaInBiswani.ToString(),
@@ -676,7 +676,7 @@ namespace LandInventory.Controllers
                         //  TotalArea = result[i].AreaUnit==0? result[i].TotalAreaInBigha.ToString() ?
                         TotalAreaSqmt = result[i].TotalArea.ToString(),
                         Encroachment = result[i].EncroachmentStatusId == 0 ? "No" : "Yes".ToString(),
-                        EncroachmentStatus = result[i].EncroachedPartiallyFully == "0" ? "Partially Encroached" : result[i].EncroachedPartiallyFully =="1"? "Fully Encroached" :"Null",
+                        EncroachmentStatus = result[i].EncroachedPartiallyFully == "0" ? "Partially Encroached" : result[i].EncroachedPartiallyFully =="1"? "Fully Encroached" :" ",
 
                         EncroachmentArea = result[i].EncrochedArea.ToString(),
                         BuiltUpInEncroachmentArea = result[i].BuiltUpEncraochmentArea.ToString(),

@@ -56,10 +56,11 @@ namespace Libraries.Repository.EntityRepository
         {
             return await _dbContext.Dmsfileupload
                  .Include(x => x.Department)
-                                        .Include(x => x.Locality)
-                                        .Include(x => x.KhasraNo)
-                                          .Include(x => x.Zone)
-                                        .Include(x => x.Village)
+                 .Include(x=>x.Category)
+                                        //.Include(x => x.Locality)
+                                        //.Include(x => x.KhasraNo)
+                                        //  .Include(x => x.Zone)
+                                        //.Include(x => x.Village)
                 .ToListAsync();
         }
 

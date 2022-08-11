@@ -109,19 +109,20 @@ namespace DocumentManagementSystem.Controllers
                     {
                         Id = result[i].Id,
                         Department = result[i].Department == null ? "" : result[i].Department.Name.ToString(),
-                        Locality = result[i].Locality == null ? "" : result[i].Locality.Name.ToString(),
-                        KhasraNo = result[i].KhasraNo == null ? "" : result[i].KhasraNo.KhasraNo.ToString(),
+                        //Locality = result[i].Locality == null ? "" : result[i].Locality.Name.ToString(),
+                        //KhasraNo = result[i].KhasraNo == null ? "" : result[i].KhasraNo.KhasraNo.ToString(),
                         FileNo = result[i].FileNo,
-                        AlloteeName = result[i].AlloteeName,
-                        PropertyNo = result[i].PropertyNoAddress,
-                        AlmirahNo = result[i].AlmirahNo,
-                        Title = result[i].Title,
+                       // AlloteeName = result[i].AlloteeName,
+                        PropertyNo_Address = result[i].PropertyNoAddress,
+                      //  AlmirahNo = result[i].AlmirahNo,
+                        Title_Subject = result[i].Title,
+                        Document_Category = result[i].Category ==null ? "" : result[i].Category.CategoryName.ToString()
                       
                      
                       
 
                        
-                    }); ;
+                    }) ;
                 }
             }
 
