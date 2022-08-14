@@ -23,10 +23,13 @@ namespace DamagePayee.Controllers
         {
             _newDamageSelf = newDamageSelf;
         }
-        [AuthorizeContext(ViewAction.View)]
+       // [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
-            return View();
+            DamagePayeeDashboardSearchDto damage = new DamagePayeeDashboardSearchDto();
+            damage.fromDate = DateTime.Now.AddDays(-30);
+            damage.toDate = DateTime.Now;
+            return View(damage);
         }
         [HttpPost]
         public async Task<PartialViewResult> GetDetails([FromBody] DamagePayeeDashboardSearchDto report)
@@ -43,6 +46,7 @@ namespace DamagePayee.Controllers
             }
         }
         [AuthorizeContext(ViewAction.Download)]
+        
         public async Task<IActionResult> DamagePayeeReport(DamagePayeeDashboardSearchDto Model)
         {
             var result = await _newDamageSelf.GetDamagePayee(Model);

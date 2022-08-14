@@ -25,9 +25,9 @@ function GetDamageDashboard(pageNumber, pageSize, sortOrder) {
 }
 
 $("#btnReset").click(function () {
-    $('#todate').val('');
-    $('#fromDate').val('');
-
+    $('#todate').val(Date.now).add;
+    $('#fromDate').val(Date.now(-30)).add;
+   
 });
 
 function GetSearchParam(pageNumber, pageSize, sortOrder) {
