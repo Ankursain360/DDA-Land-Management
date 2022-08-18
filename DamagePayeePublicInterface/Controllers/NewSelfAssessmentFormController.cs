@@ -315,7 +315,7 @@ namespace DamagePayeePublicInterface.Controllers
             return View(data);
 
         }
-        public async Task<JsonResult> Getallfloordetails(int? Id)
+        public async Task<JsonResult> Getallfloordetail(int? Id)
         {
 
             Id = Id ?? 0;
@@ -412,9 +412,30 @@ namespace DamagePayeePublicInterface.Controllers
             FileHelper file = new FileHelper();
             Newdamagepayeeregistration data = await _selfAssessmentService.FetchSingleResult(Id);
             string path = data.PropertyPhotographFilePath;
-            path = data.ElectricityBillFilePath;
-            path = data.WaterBillFilePath;
-            path = data.PropertyTaxReceiptFilePath;
+            byte[] fileBytes = System.IO.File.ReadAllBytes(path);
+            return File(fileBytes, file.GetContentType(path));
+        }
+        public async Task<FileResult> fetchElectricityBillFile(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Newdamagepayeeregistration data = await _selfAssessmentService.FetchSingleResult(Id);
+            string path = data.ElectricityBillFilePath;
+            byte[] fileBytes = System.IO.File.ReadAllBytes(path);
+            return File(fileBytes, file.GetContentType(path));
+        }
+        public async Task<FileResult> fetchWaterBillPath(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Newdamagepayeeregistration data = await _selfAssessmentService.FetchSingleResult(Id);
+            string path = data.WaterBillFilePath;
+            byte[] fileBytes = System.IO.File.ReadAllBytes(path);
+            return File(fileBytes, file.GetContentType(path));
+        }
+        public async Task<FileResult> fetchPropertyTexFile(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Newdamagepayeeregistration data = await _selfAssessmentService.FetchSingleResult(Id);
+           string path = data.PropertyTaxReceiptFilePath;
             byte[] fileBytes = System.IO.File.ReadAllBytes(path);
             return File(fileBytes, file.GetContentType(path));
         }
@@ -448,7 +469,7 @@ namespace DamagePayeePublicInterface.Controllers
 
         }
 
-        public async Task<FileResult> getOccupantDetails(int id)
+        public async Task<FileResult> getOccupantDetail(int id)
         {
             FileHelper file = new FileHelper();
             Newdamagepayeeoccupantinfo data = await _selfAssessmentService.GetOccupantFile(id);

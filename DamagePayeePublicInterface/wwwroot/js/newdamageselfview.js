@@ -4,8 +4,8 @@ $(document).ready(function () {
     $('#ddlCurrentUse').removeAttr('multiple'); 
     $('#IsOccupingFloor').removeAttr('multiple');
     $('#Gender').removeAttr('multiple');
-
-    FillRepeatorAtEdit();
+     
+    FillRepeatorForFloor();
     FillRepeatorGpa();
     RepeatorAts();
     FillRepeatorPayementDetails();
@@ -41,20 +41,22 @@ $(document).ready(function () {
 
 /*--------repeator for floor details--------------*/
 
-function FillRepeatorAtEdit() {/* -----------Added by Ankur  --------------- */
+function FillRepeatorForFloor() {/* -----------Added by Ankur  --------------- */
 
     /* -----------Floor details Repeator Added by Ankur --------------- */
-    HttpGet(`/NewSelfAssessmentForm/Getallfloordetails/?Id=${$("#Id").val() == null ? "" : $("#Id").val()}`, 'json', function (data) {
+    HttpGet(`/NewSelfAssessmentForm/Getallfloordetail/?Id=${$("#Id").val() == null ? "" : $("#Id").val()}`, 'json', function (data) {
         /*debugger*/
         for (var i = 0; i < data.length; i++) {
-            $("#tbl_posts2 #add2 #ddlfloor").val(data[i].floorId).change();
+            $("#tbl_posts2 #add2 #ddlfloor").val(data[i].floorId);
+            $("#tbl_posts2 #add2 #ddlfloor").trigger('change');
             $("#tbl_posts2 #add2 #txtCarpetArea").val(data[i].carpetArea);
-            $("#tbl_posts2 #add2 #txtElectricityNumber").val(data[i].electricityKno);
+            $("#tbl_posts2 #add2 #txtElectricityNumber").val(data[i].electricityKno);   
             $("#tbl_posts2 #add2 #txtMCDPropertyTaxID").val(data[i].mcdpropertyTaxId);
             $("#tbl_posts2 #add2 #txtWaterKno").val(data[i].waterKno);
             $("#tbl_posts2 #add2 #ddlCurrentUse").val(data[i].currentUse).change();
             if (i < data.length - 1) {
-
+                var floorid = $("#tbl_posts2 #add2 #ddlfloor").children("option:selected").val();
+                var usedata = $("#tbl_posts2 #add2 #ddlCurrentUse").children("option:selected").val();
                 var content = jQuery('#tbl_posts2 #add2 tr'),
                     size = jQuery('#tbl_posts2 >tbody >tr').length,
                     element = null,
@@ -62,7 +64,8 @@ function FillRepeatorAtEdit() {/* -----------Added by Ankur  --------------- */
                 element.attr('id', 'rec-' + size);
                 element.find('.delete-record').attr('data-id', size);
                 element.appendTo('#tbl_posts2_body');
-                /*$('#tbl_posts2_body #rec-' + size + ' #Gender').val(Gender);*/
+                $('#tbl_posts2_body #rec-' + size + ' #ddlfloor').val(floorid).change();
+                $('#tbl_posts2_body #rec-' + size + ' #ddlCurrentUse').val(usedata).change();
                 element.find('.sn').html(size);
                 $("#tbl_posts2 #add2 .sn").text($('#tbl_posts2 >tbody >tr').length);
                 $("#tbl_posts2 #add2 .add").remove();
@@ -153,7 +156,7 @@ function RepeatorAts() {/* -----------Added by Ankur  --------------- */
                 $("#tbl_posts4 #add4 #txtFileAtsFile").attr('href', '/NewSelfAssessmentForm/viewAtsFile/' + data[i].id)
                 $("#tbl_posts4 #add4 #txtFileAtsFile").show();
             } else {
-                $("#tbl_posts3 #add4 #txtFileAtsFile").hide();
+                $("#tbl_posts4 #add4 #txtFileAtsFile").hide();
             }
 
             if (i < data.length - 1) {
@@ -265,7 +268,7 @@ function OccupantRepeator() {/* -----------Added by Ankur  --------------- */
            // $("#divPersonaldata  #txtFileoccupant").val(data[i].occupantPhotoPath).change();
 
             if (data[i].occupantPhotoPath != "" && data[i].occupantPhotoPath != null) {
-                $("#divPersonaldata  #txtFileoccupant").attr('href', '/NewSelfAssessmentForm/getOccupantDetails/' + data[i].id)
+                $("#divPersonaldata  #txtFileoccupant").attr('href', '/NewSelfAssessmentForm/getOccupantDetail/' + data[i].id)
                 $("#divPersonaldata  #txtFileoccupant").show();
             } else {
                 $("#divPersonaldata  #txtFileoccupant").hide();

@@ -68,7 +68,8 @@ function onChangeVillage(id) {
         $("#ColonyId").html(html);
     });
 };
-//Floor Details
+
+//**********************Floor Details**************************//
 $(document).delegate('a.add-record2', 'click', function (e) {
     debugger
 
@@ -104,7 +105,9 @@ $(document).delegate('a.add-record2', 'click', function (e) {
         alert('Please fill record before add new record ');
     }
 });
-//occupant details
+
+//**********************occupant details**************************//
+
 $(document).delegate('a.add-occupant-record', 'click', function (e) {
     debugger
     var size = $('#hdncounter').val();
@@ -139,7 +142,9 @@ $(document).delegate('a.add-occupant-record', 'click', function (e) {
         alert('Please fill record before add new record ');
     }
 });
-//delete occupant details
+
+//**********************delete occupant details**************************//
+
 $(document).delegate('a.delete-occupant-record', 'click', function (e) {
     e.preventDefault();
     var didConfirm = confirm("Are you sure You want to delete");
@@ -152,7 +157,7 @@ $(document).delegate('a.delete-occupant-record', 'click', function (e) {
         if (counter != id) {
             counter = parseInt(counter) - 1;
             $('#hdncounter').val(counter);
-            jQuery('#rec-' + id).remove();
+            jQuery('#divaddedpersonaldata #rec-' + id).remove();
             //regnerate index number on table
             $('#divaddedpersonaldata >div .heading_1').each(function (index) {
                 //alert(index);
@@ -170,12 +175,14 @@ $(document).delegate('a.delete-occupant-record', 'click', function (e) {
     }
 });
 
-//GAP repeater
+
+//**********************GAP repeater**************************//
+
 $(document).delegate('a.add-record3', 'click', function (e) {
     debugger
 
-    if ($("#tbl_posts3 #add3 #NameOfTheSeller").val() != ''
-        && $("#tbl_posts3 #add3 #NameOfThePayer").val() != '') {
+    if ($("#tbl_posts3 #add3 #txtSellerNameGPA").val() != ''
+        && $("#tbl_posts3 #add3 #txtPayerNameGPA").val() != '') {
         e.preventDefault();
         var content = jQuery('#tbl_posts3 #add3 tr'),
             size = jQuery('#tbl_posts3 >tbody >tr').length,
@@ -202,7 +209,8 @@ $(document).delegate('a.add-record3', 'click', function (e) {
     }
 });
 
-//ATS records
+//**********************ATS records**************************//
+
 $(document).delegate('a.add-record4', 'click', function (e) {
     debugger
     if ($("#tbl_posts4 #add4 #txtSellerNameATS").val() != ''
@@ -233,7 +241,8 @@ $(document).delegate('a.add-record4', 'click', function (e) {
     }
 });
 
-//HOLDER records
+//**********************HOLDER records*************************//
+
 $(document).delegate('a.add-record5', 'click', function (e) {
     debugger
     if ($("#tbl_posts5 #add5 #txtNameofGPAats").val() != ''
@@ -264,11 +273,12 @@ $(document).delegate('a.add-record5', 'click', function (e) {
     }
 });
 
-//pAYMENT records
+//**********************PAYMENT records*************************//
+
 $(document).delegate('a.add-recordPayment', 'click', function (e) {
     debugger
-    if ($("#tbl_Payment #addPayment #txtNameofGPAats").val() != ''
-        && $("#tbl_Payment #addPayment #txtDeathCertificateNo").val() != '') {
+    if ($("#tbl_Payment #addPayment #txtPaymentName").val() != ''
+        && $("#tbl_Payment #addPayment #txtRecieptNo").val() != '') {
         e.preventDefault();
         var content = jQuery('#tbl_Payment #addPayment tr'),
             size = jQuery('#tbl_Payment >tbody >tr').length,
@@ -295,14 +305,16 @@ $(document).delegate('a.add-recordPayment', 'click', function (e) {
     }
 });
 
-//delete Payment repater data
+
+//**********************delete Payment repater data*************************//
+
 $(document).delegate('a.delete-recordPayment', 'click', function (e) {
     e.preventDefault();
     var didConfirm = confirm("Are you sure You want to delete");
     if (didConfirm == true) {
         var id = jQuery(this).attr('data-id');
         var targetDiv = jQuery(this).attr('targetDiv');
-        jQuery('#rec-' + id).remove();
+        jQuery('#tbl_Payment_body #rec-' + id).remove();
         //regnerate index number on table
         $('#tbl_Payment_body tr').each(function (index) {
             //alert(index);
@@ -315,14 +327,39 @@ $(document).delegate('a.delete-recordPayment', 'click', function (e) {
     }
 });
 
-//delete GPA repater data
-$(document).delegate('a.delete-record3', 'click', function (e) {
+//*******************************delete floor details**************************//
+
+$(document).delegate('a.delete-record2', 'click', function (e) {
+    debugger
     e.preventDefault();
     var didConfirm = confirm("Are you sure You want to delete");
     if (didConfirm == true) {
         var id = jQuery(this).attr('data-id');
         var targetDiv = jQuery(this).attr('targetDiv');
-        jQuery('#rec-' + id).remove();
+        jQuery('#tbl_posts2_body #rec-' + id).remove();
+        //regnerate index number on table
+        $('#tbl_posts2_body tr').each(function (index) {
+            //alert(index);
+            $(this).find('span .sn2').html(index + 1);
+        });
+        $("#tbl_posts2 #add2 .sn2").text($('#tbl_posts2 >tbody >tr').length);
+        return true;
+    } else {
+        return false;
+    }
+});
+
+
+//**********************delete GPA repater data*************************//
+
+$(document).delegate('a.delete-record3', 'click', function (e) {
+    debugger
+    e.preventDefault();
+    var didConfirm = confirm("Are you sure You want to delete");
+    if (didConfirm == true) {
+        var id = jQuery(this).attr('data-id');
+        var targetDiv = jQuery(this).attr('targetDiv');
+        jQuery('#tbl_posts3_body #rec-' + id).remove();
         //regnerate index number on table
         $('#tbl_posts3_body tr').each(function (index) {
             //alert(index);
@@ -335,14 +372,16 @@ $(document).delegate('a.delete-record3', 'click', function (e) {
     }
 });
 
-//delete ATS repater data
+
+//**********************delete ATS repater data*************************//
+
 $(document).delegate('a.delete-record4', 'click', function (e) {
     e.preventDefault();
     var didConfirm = confirm("Are you sure You want to delete");
     if (didConfirm == true) {
         var id = jQuery(this).attr('data-id');
         var targetDiv = jQuery(this).attr('targetDiv');
-        jQuery('#rec-' + id).remove();
+        jQuery('#tbl_posts4_body #rec-' + id).remove();
         //regnerate index number on table
         $('#tbl_posts4_body tr').each(function (index) {
             //alert(index);
@@ -355,45 +394,26 @@ $(document).delegate('a.delete-record4', 'click', function (e) {
     }
 });
 
-//delete hOLDER repater data
-$(document).delegate('a.delete-record5', 'click', function (e) {
-    e.preventDefault();
-    var didConfirm = confirm("Are you sure You want to delete");
-    if (didConfirm == true) {
-        var id = jQuery(this).attr('data-id');
-        var targetDiv = jQuery(this).attr('targetDiv');
-        jQuery('#rec-' + id).remove();
-        //regnerate index number on table
-        $('#tbl_posts5_body tr').each(function (index) {
-            //alert(index);
-            $(this).find('span .sn5').html(index + 1);
-        });
-        $("#tbl_posts5 #add5 .sn5").text($('#tbl_posts5 >tbody >tr').length);
-        return true;
-    } else {
-        return false;
-    }
-});
+////**********************delete hOLDER repater data**************************//
+//$(document).delegate('a.delete-record5', 'click', function (e) {
+//    e.preventDefault();
+//    var didConfirm = confirm("Are you sure You want to delete");
+//    if (didConfirm == true) {
+//        var id = jQuery(this).attr('data-id');
+//        var targetDiv = jQuery(this).attr('targetDiv');
+//        jQuery('#rec-' + id).remove();
+//        //regnerate index number on table
+//        $('#tbl_posts5_body tr').each(function (index) {
+//            //alert(index);
+//            $(this).find('span .sn5').html(index + 1);
+//        });
+//        $("#tbl_posts5 #add5 .sn5").text($('#tbl_posts5 >tbody >tr').length);
+//        return true;
+//    } else {
+//        return false;
+//    }
+//});
 
-//delete floor details
-$(document).delegate('a.delete-record2', 'click', function (e) {
-    e.preventDefault();
-    var didConfirm = confirm("Are you sure You want to delete");
-    if (didConfirm == true) {
-        var id = jQuery(this).attr('data-id');
-        var targetDiv = jQuery(this).attr('targetDiv');
-        jQuery('#rec-' + id).remove();
-        //regnerate index number on table
-        $('#tbl_posts2_body tr').each(function (index) {
-            //alert(index);
-            $(this).find('span .sn2').html(index + 1);
-        });
-        $("#tbl_posts2 #add2 .sn2").text($('#tbl_posts2 >tbody >tr').length);
-        return true;
-    } else {
-        return false;
-    }
-});
 
 
 $("input[name='DeclarationStatus1']").click(function () {/* -----------Added by Renu  --------------- */

@@ -53,7 +53,7 @@ namespace DamagePayee.Controllers
             var data = await _selfAssessmentService.FetchSingleResult(id);
             data.districtList = await _selfAssessmentService.GetAllDistrict();
             data.damagevillageList = await _selfAssessmentService.GetAllVillage(data.DistrictId.HasValue ? Convert.ToInt32(data.DistrictId) : 0);
-            data.ColonyList = await _selfAssessmentService.GetAllColony(id);
+            data.ColonyList = await _selfAssessmentService.GetAllColony(data.VillageId.HasValue ? Convert.ToInt32(data.VillageId) : 0);
             data.floorlist = await _selfAssessmentService.GetFloors();
             if (data == null)
             {
@@ -80,7 +80,7 @@ namespace DamagePayee.Controllers
 
             }));
         }
-        public async Task<JsonResult> GetallGpaDetails(int? Id)
+        public async Task<JsonResult> GetallGpaDetail(int? Id)  
         {
 
             Id = Id ?? 0;
@@ -108,7 +108,7 @@ namespace DamagePayee.Controllers
             return File(FileBytes, file.GetContentType(path));
         }
 
-        public async Task<JsonResult> GetallAtsDetails(int? Id)
+        public async Task<JsonResult> GetallAtsDetail(int? Id)
         {
             Id = Id ?? 0;
             var data = await _selfAssessmentService.GetAllAtsDetails(Convert.ToInt32(Id));
@@ -161,10 +161,31 @@ namespace DamagePayee.Controllers
         {
             FileHelper file = new FileHelper();
             Newdamagepayeeregistration data = await _selfAssessmentService.FetchSingleResult(Id);
-            string path = data.PropertyPhotographFilePath;
-            path = data.ElectricityBillFilePath;
-            path = data.WaterBillFilePath;
-            path = data.PropertyTaxReceiptFilePath;
+            string path = data.PropertyPhotographFilePath; 
+            byte[] fileBytes = System.IO.File.ReadAllBytes(path);
+            return File(fileBytes, file.GetContentType(path));
+        }
+        public async Task<FileResult> fetchElectricityBillFile(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Newdamagepayeeregistration data = await _selfAssessmentService.FetchSingleResult(Id);
+            string path = data.ElectricityBillFilePath;
+            byte[] fileBytes = System.IO.File.ReadAllBytes(path);
+            return File(fileBytes, file.GetContentType(path));
+        }
+        public async Task<FileResult> fetchWaterBillPath(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Newdamagepayeeregistration data = await _selfAssessmentService.FetchSingleResult(Id);
+            string path = data.WaterBillFilePath;
+            byte[] fileBytes = System.IO.File.ReadAllBytes(path);
+            return File(fileBytes, file.GetContentType(path));
+        }
+        public async Task<FileResult> fetchPropertyTexFile(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Newdamagepayeeregistration data = await _selfAssessmentService.FetchSingleResult(Id);
+            string path = data.PropertyTaxReceiptFilePath;
             byte[] fileBytes = System.IO.File.ReadAllBytes(path);
             return File(fileBytes, file.GetContentType(path));
         }

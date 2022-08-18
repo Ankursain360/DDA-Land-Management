@@ -5,7 +5,7 @@ $(document).ready(function () {
     $('#IsOccupingFloor').removeAttr('multiple');
     $('#Gender').removeAttr('multiple');
 
-    FillRepeatorAtEdit();
+    FillRepeatorForFloor();
     FillRepeatorGpa();
     RepeatorAts();
     FillRepeatorPayementDetails();
@@ -41,10 +41,10 @@ $(document).ready(function () {
 
 /*--------repeator for floor details--------------*/
 
-function FillRepeatorAtEdit() {/* -----------Added by Ankur  --------------- */
+function FillRepeatorForFloor() {/* -----------Added by Ankur  --------------- */
 
     /* -----------Floor details Repeator Added by Ankur --------------- */
-    HttpGet(`/NewSelfAssessmentForm/Getallfloordetails/?Id=${$("#Id").val() == null ? "" : $("#Id").val()}`, 'json', function (data) {
+    HttpGet(`/Newdamagepayeeregistration/Getallfloordetails/?Id=${$("#Id").val() == null ? "" : $("#Id").val()}`, 'json', function (data) {
         /*debugger*/
         for (var i = 0; i < data.length; i++) {
             $("#tbl_posts2 #add2 #ddlfloor").val(data[i].floorId).change();
@@ -54,7 +54,8 @@ function FillRepeatorAtEdit() {/* -----------Added by Ankur  --------------- */
             $("#tbl_posts2 #add2 #txtWaterKno").val(data[i].waterKno);
             $("#tbl_posts2 #add2 #ddlCurrentUse").val(data[i].currentUse).change();
             if (i < data.length - 1) {
-
+                var floorid = $("#tbl_posts2 #add2 #ddlfloor").children("option:selected").val();
+                var usedata = $("#tbl_posts2 #add2 #ddlCurrentUse").children("option:selected").val();
                 var content = jQuery('#tbl_posts2 #add2 tr'),
                     size = jQuery('#tbl_posts2 >tbody >tr').length,
                     element = null,
@@ -62,6 +63,8 @@ function FillRepeatorAtEdit() {/* -----------Added by Ankur  --------------- */
                 element.attr('id', 'rec-' + size);
                 element.find('.delete-record').attr('data-id', size);
                 element.appendTo('#tbl_posts2_body');
+                $('#tbl_posts2_body #rec-' + size + ' #ddlfloor').val(floorid).change();
+                $('#tbl_posts2_body #rec-' + size + ' #ddlCurrentUse').val(usedata).change();
                 /*$('#tbl_posts2_body #rec-' + size + ' #Gender').val(Gender);*/
                 element.find('.sn').html(size);
                 $("#tbl_posts2 #add2 .sn").text($('#tbl_posts2 >tbody >tr').length);
@@ -79,8 +82,9 @@ function FillRepeatorAtEdit() {/* -----------Added by Ankur  --------------- */
 function FillRepeatorGpa() {/* -----------Added by Ankur  --------------- */
 
     /* -----------GPA Repeator Added by Ankur --------------- */
-    HttpGet(`/NewSelfAssessmentForm/GetallGpaDetails/?Id=${$("#Id").val() == null ? "" : $("#Id").val()}`, 'json', function (data) {
-        debugger
+    debugger
+    HttpGet(`/Newdamagepayeeregistration/GetallGpaDetail/?Id=${$("#Id").val() == null ? "" : $("#Id").val()}`, 'json', function (data) {
+        
         for (var i = 0; i < data.length; i++) {
 
             if (data[i].dateOfExecutionOfGpa == "0001-01-01") {
@@ -98,7 +102,7 @@ function FillRepeatorGpa() {/* -----------Added by Ankur  --------------- */
 
             /*$('#tbl_posts2 #add2 #ddlCurrentUse').trigger('change');*/
             if (data[i].gpafilePath != "" && data[i].gpafilePath != null) {
-                $("#tbl_posts3 #add3 #txtFileGpaFile").attr('href', '/NewSelfAssessmentForm/viewGpaFile/' + data[i].id)
+                $("#tbl_posts3 #add3 #txtFileGpaFile").attr('href', '/Newdamagepayeeregistration/viewGpaFile/' + data[i].id)
                 $("#tbl_posts3 #add3 #txtFileGpaFile").show();
             } else {
                 $("#tbl_posts3 #add3 #txtFileGpaFile").hide();
@@ -132,7 +136,7 @@ function FillRepeatorGpa() {/* -----------Added by Ankur  --------------- */
 function RepeatorAts() {/* -----------Added by Ankur  --------------- */
 
     /* -----------ATS Repeator Added by Ankur --------------- */
-    HttpGet(`/NewSelfAssessmentForm/GetallAtsDetails/?Id=${$("#Id").val() == null ? "" : $("#Id").val()}`, 'json', function (data) {
+    HttpGet(`/Newdamagepayeeregistration/GetallAtsDetail/?Id=${$("#Id").val() == null ? "" : $("#Id").val()}`, 'json', function (data) {
         debugger
         for (var i = 0; i < data.length; i++) {
             // $("#tbl_posts4 #add4 #txtExecutionDateATS").val(data[i].dateOfExecutionOfAts);
@@ -150,10 +154,10 @@ function RepeatorAts() {/* -----------Added by Ankur  --------------- */
 
             /*$('#tbl_posts2 #add2 #ddlCurrentUse').trigger('change');*/
             if (data[i].atsfilePath != "" && data[i].atsfilePath != null) {
-                $("#tbl_posts4 #add4 #txtFileAtsFile").attr('href', '/NewSelfAssessmentForm/viewAtsFile/' + data[i].id)
+                $("#tbl_posts4 #add4 #txtFileAtsFile").attr('href', '/Newdamagepayeeregistration/viewAtsFile/' + data[i].id)
                 $("#tbl_posts4 #add4 #txtFileAtsFile").show();
             } else {
-                $("#tbl_posts3 #add4 #txtFileAtsFile").hide();
+                $("#tbl_posts4 #add4 #txtFileAtsFile").hide();
             }
 
             if (i < data.length - 1) {
@@ -182,7 +186,7 @@ function RepeatorAts() {/* -----------Added by Ankur  --------------- */
 function FillRepeatorPayementDetails() {/* -----------Added by Ankur  --------------- */
 
     /* -----------Payment Repeator Added by Ankur --------------- */
-    HttpGet(`/NewSelfAssessmentForm/getPaymentDetails/?Id=${$("#Id").val() == null ? "" : $("#Id").val()}`, 'json', function (data) {
+    HttpGet(`/Newdamagepayeeregistration/getPaymentDetails/?Id=${$("#Id").val() == null ? "" : $("#Id").val()}`, 'json', function (data) {
         debugger
         for (var i = 0; i < data.length; i++) {
             $("#tbl_Payment #addPayment #txtPaymentName").val(data[i].name);
@@ -200,7 +204,7 @@ function FillRepeatorPayementDetails() {/* -----------Added by Ankur  ----------
 
             /*$('#tbl_posts2 #add2 #ddlCurrentUse').trigger('change');*/
             if (data[i].recieptDocumentPath != "" && data[i].recieptDocumentPath != null) {
-                $("#tbl_Payment #addPayment #viewRecieptId").attr('href', '/NewSelfAssessmentForm/getPaymentFile/' + data[i].id)
+                $("#tbl_Payment #addPayment #viewRecieptId").attr('href', '/Newdamagepayeeregistration/getPaymentFile/' + data[i].id)
                 $("#tbl_Payment #addPayment #viewRecieptId").show();
             } else {
                 $("#tbl_Payment #addPayment #viewRecieptId").hide();
@@ -233,7 +237,7 @@ function FillRepeatorPayementDetails() {/* -----------Added by Ankur  ----------
 function OccupantRepeator() {/* -----------Added by Ankur  --------------- */
 
     /* -----------Occupant details Repeator Added by Ankur --------------- */
-    HttpGet(`/NewSelfAssessmentForm/getAllOccupantDetails/?Id=${$("#Id").val() == null ? "" : $("#Id").val()}`, 'json', function (data) {
+    HttpGet(`/Newdamagepayeeregistration/getAllOccupantDetails/?Id=${$("#Id").val() == null ? "" : $("#Id").val()}`, 'json', function (data) {
         debugger
         var size = $('#hdncounter').val();
         for (var i = 0; i < data.length; i++) {
@@ -266,7 +270,7 @@ function OccupantRepeator() {/* -----------Added by Ankur  --------------- */
             // $("#divPersonaldata  #txtFileoccupant").val(data[i].occupantPhotoPath).change();
 
             if (data[i].occupantPhotoPath != "" && data[i].occupantPhotoPath != null) {
-                $("#divPersonaldata  #txtFileoccupant").attr('href', '/NewSelfAssessmentForm/getOccupantDetails/' + data[i].id)
+                $("#divPersonaldata  #txtFileoccupant").attr('href', '/Newdamagepayeeregistration/getOccupantDetails/' + data[i].id)
                 $("#divPersonaldata  #txtFileoccupant").show();
             } else {
                 $("#divPersonaldata  #txtFileoccupant").hide();

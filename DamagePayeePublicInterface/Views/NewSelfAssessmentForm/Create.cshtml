@@ -568,7 +568,7 @@
                     <div class="row mt-md-3">
                         <div class="col-md-6">
                             <div class="floating-label-wrap">
-                                <a id="viewOwnerPhoto" asp-action="OwnerPhoto" class="badge bg-primary px-2" target="_blank" style="display:none;">(View File)</a>
+                                <a id=" " asp-action="OwnerPhoto" class="badge bg-primary px-2" target="_blank" style="display:none;">(View File)</a>
                                 <input asp-for="FileOccupantPhoto" class="floating-label-field floating-label-field--s3 checkExtension" type="file" />
                                 <input type="hidden" asp-for="OccupantPhotoPath" />
                                 <label class="floating-label">Occupent Photo</label>
@@ -901,7 +901,7 @@
                                 <td>
                                     <div class="floating-label-wrap mb-3 mb-md-0">
 
-                                        <a class="delete-recordPayment" data-id="0" style="display: none; font-size: 40px;"><i class="ri-indeterminate-circle-fill"></i></a>
+                                        <a class="delete-recordPayment" title="delete" data-id="0" style="display:none;font-size:20px;color:red"><i class="ri-delete-bin-fill"></i></a>
                                         <a class="add-recordPayment" data-added="0" style="font-size:40px;"><i class="ri-add-circle-fill"></i></a>
                                     </div>
 
@@ -991,7 +991,7 @@
         <div class="row mt-md-3">
             <div class=" col-md-12">
                 <button class="btn btn-theme " type="submit">Submit</button>
-                @*@Html.ActionLink("Back", "Index", "NewSelfAssessmentForm", null, new { @class = "btn btn-theme " })*@
+                @Html.ActionLink("Back", "Index", "NewSelfAssessmentForm", null, new { @class = "btn btn-theme " })
             </div>
         </div>
     </form>

@@ -7,7 +7,7 @@
         <input type="hidden" asp-for="ApprovedStatus" />
         <input type="hidden" asp-for="Id" />
 
-        <h3 class="mb-3 d-flex">Add Details <span class="ms-auto"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span> </h3>
+        <h3 class="mb-3 d-flex">View Details <span class="ms-auto"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span> </h3>
         <div id="COLONYDETAILS">
             <div class="row">
                 <div class="col-md-4">
@@ -928,12 +928,12 @@
                         @{
                             @if (Model.PropertyPhotographFilePath != null)
                             {
-                                <input disabled type="file" asp-for="FilePropertyPhoto" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                                <input disabled type="file" asp-for="FilePropertyPhoto" class="floating-label-field floating-label-field--s3" >
                                 <a class="badge bg-primary px-2" asp-action="fetchPropertyPhoto" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
                             }
                             else
                             {
-                                <input disabled type="file" asp-for="FilePropertyPhoto" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                                <input disabled type="file" asp-for="FilePropertyPhoto" class="floating-label-field floating-label-field--s3" >
                             }
                         }
                         <label for="field-1" class="floating-label"> Photograph of the Property <span style="color:red">(.pdf only)</span></label>
@@ -948,12 +948,12 @@
                         @{
                             @if (Model.ElectricityBillFilePath != null)
                             {
-                                <input disabled type="file" asp-for="FileElectricityBill" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
-                                <a class="badge bg-primary px-2" asp-action="fetchPropertyPhoto" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
+                                <input disabled type="file" asp-for="FileElectricityBill" class="floating-label-field floating-label-field--s3" >
+                                <a class="badge bg-primary px-2" asp-action="fetchElectricityBillFile" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
                             }
                             else
                             {
-                                <input disabled type="file" asp-for="FileElectricityBill" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                                <input disabled type="file" asp-for="FileElectricityBill" class="floating-label-field floating-label-field--s3" >
                             }
                         }
                         <label class="floating-label">Electricity Bill<span style="color:red">*</span></label>
@@ -975,12 +975,12 @@
                         @{
                             @if (Model.WaterBillFilePath != null)
                             {
-                                <input disabled type="file" asp-for="FileWaterBill" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
-                                <a class="badge bg-primary px-2" asp-action="fetchPropertyPhoto" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
+                                <input disabled type="file" asp-for="FileWaterBill" class="floating-label-field floating-label-field--s3" >
+                                <a class="badge bg-primary px-2" asp-action="fetchWaterBillPath" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
                             }
                             else
                             {
-                                <input disabled type="file" asp-for="FileWaterBill" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                                <input disabled type="file" asp-for="FileWaterBill" class="floating-label-field floating-label-field--s3" >
                             }
                         }
                         <label class="floating-label">Water bill<span style="color:red">*</span></label>
@@ -998,7 +998,7 @@
                             @if (Model.PropertyTaxReceiptFilePath != null)
                             {
                                 <input disabled type="file" asp-for="FilePropertyTaxReceipt" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
-                                <a class="badge bg-primary px-2" asp-action="fetchPropertyPhoto" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
+                                <a class="badge bg-primary px-2" asp-action="fetchPropertyTexFile" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
                             }
                             else
                             {
@@ -1047,7 +1047,7 @@
         <div class="row mt-md-3">
             <div class=" col-md-12">
                 @*<button class="btn btn-theme " type="submit">Submit</button>*@
-                @*@Html.ActionLink("Back", "Index", "NewSelfAssessmentForm", null, new { @class = "btn btn-theme " })*@
+                @Html.ActionLink("Back", "Index", "NewSelfAssessmentForm", null, new { @class = "btn btn-theme " })
             </div>
         </div>
     </form>
