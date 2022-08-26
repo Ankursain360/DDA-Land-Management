@@ -25,6 +25,14 @@
             </div>
         </div>
     </form>
+    <div>
+        @{
+            if (ViewBag.CountMessage != null)
+            {
+                @Html.Raw(ViewBag.CountMessage);
+            }
+        }
+    </div>
     <div id="generatepdf" style="display:none;">
         <div id="insertSumaary">
             @{
