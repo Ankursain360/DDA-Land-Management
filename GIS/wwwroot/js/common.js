@@ -237,7 +237,7 @@ function displayCoordinates(pnt) {
     lat = lat.toFixed(6);
     var lng = pnt.lng();
     lng = lng.toFixed(6);
-    coordsLabel.innerHTML = lng + "," + lat;
+    coordsLabel.innerHTML = lat + "," + lng;
 }
 
 var lineSymbol = {

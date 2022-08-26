@@ -71,7 +71,7 @@ namespace Libraries.Repository.EntityRepository
             }
             else
             {
-                 File = 8;  //**********Other ***************//
+                 File = 7;  //**********Other ***************//
             }
 
             return File;
@@ -99,12 +99,12 @@ namespace Libraries.Repository.EntityRepository
         }
         public int GetZoneByName(string name)
         {
-            var file = (from n in _dbContext.Zone where n.Name.ToUpper().Trim() == name.ToUpper().Trim() select n.Id).FirstOrDefault();
+            var file = (from n in _dbContext.Zone where n.Name.Contains(name.ToUpper().Trim()) select n.Id).FirstOrDefault();
             return file;
         }
         public int GetVillgeByName(string name)
         {
-            var file = (from n in _dbContext.Locality where n.Name.ToUpper().Trim() == name.ToUpper().Trim() select n.Id).FirstOrDefault();
+            var file = (from n in _dbContext.Locality where n.Name.Contains(name.ToUpper().Trim()) select n.Id).FirstOrDefault();
             return file;
         }
         public async Task<Legalmanagementsystem> fetchLegalAllRecord(int id)

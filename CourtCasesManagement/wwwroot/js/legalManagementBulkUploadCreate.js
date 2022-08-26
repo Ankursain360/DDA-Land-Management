@@ -45,3 +45,9 @@ function fileValidationBulk(filePath, fileInput, size) {
 
 
 }
+
+var doc = new jsPDF();
+function saveDiv(div, title) {
+    doc.fromHTML(`<html><head><title>${'Details'}</title></head><body>` + document.getElementById('generatepdf').innerHTML + `</body></html>`);
+    doc.save('FileReport.pdf');
+}
