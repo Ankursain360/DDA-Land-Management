@@ -40,11 +40,11 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.ContemptOfCourt).HasColumnType("int(11)");
 
             builder.Property(e => e.CourtCaseNo)
-                .HasMaxLength(100)
+                .HasMaxLength(500)
                 .IsUnicode(false);
 
             builder.Property(e => e.CourtCaseTitle)
-                .HasMaxLength(100)
+                .HasMaxLength(500)
                 .IsUnicode(false);
 
             builder.Property(e => e.CourtTypeId).HasColumnType("int(11)");
@@ -59,7 +59,7 @@ namespace Libraries.Model.EntityConfiguration
                .IsUnicode(false);
 
             builder.Property(e => e.FileNo)
-                .HasMaxLength(100)
+                .HasMaxLength(500)
                 .IsUnicode(false);
 
             builder.Property(e => e.HearingDate).HasColumnType("date");
@@ -91,11 +91,11 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.NextHearingDate).HasColumnType("date");
 
             builder.Property(e => e.PanelLawyer)
-                .HasMaxLength(100)
+                .HasMaxLength(500)
                 .IsUnicode(false);
 
             builder.Property(e => e.Remarks)
-                .HasMaxLength(500)
+                .HasMaxLength(5000)
                 .IsUnicode(false);
 
             builder.Property(e => e.StayInterimGranted).HasColumnType("int(11)");
@@ -107,7 +107,7 @@ namespace Libraries.Model.EntityConfiguration
                 .IsUnicode(false);
 
             builder.Property(e => e.Subject)
-                .HasMaxLength(100)
+                .HasMaxLength(5000)
                 .IsUnicode(false);
 
             builder.Property(e => e.ZoneId).HasColumnType("int(11)");
