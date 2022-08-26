@@ -117,9 +117,6 @@ namespace SiteMaster.Controllers
         }
 
 
-
-
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AuthorizeContext(ViewAction.Edit)]

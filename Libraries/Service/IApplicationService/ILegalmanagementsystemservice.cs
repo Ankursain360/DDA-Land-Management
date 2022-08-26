@@ -14,9 +14,16 @@ namespace Libraries.Service.IApplicationService
     public interface ILegalmanagementsystemservice : IEntityService<Legalmanagementsystem>
 
     {
-       
+
+        int GetCourtCaseByName(string name); 
+        int GetCaseStatusByName(string name);
+        int GetZoneByName(string name);
+        int GetVillgeByName(string name);
+        Task<Legalmanagementsystem> fetchLegalRecord(int id);
+        Task<bool> UpdateBulkUploadFile(int id, Legalmanagementsystem legalmanagementsystem);
         Task<List<Zone>> GetZoneList();
         Task<List<Locality>> GetLocalityList(int zoneId);
+        Task<List<Locality>> GetAllLocalityList();
         Task<List<Casestatus>> GetCasestatusList();
         Task<List<Courttype>> GetCourttypeList();
         Task<List<Legalmanagementsystem>> GetFileNoList();
@@ -31,14 +38,15 @@ namespace Libraries.Service.IApplicationService
         string GetDocDownload(int id);
         string GetJDocDownload(int id);
         Task<PagedResult<Legalmanagementsystem>> GetPagedLegalmanagementsystem(LegalManagementSystemSearchDto model);
-       
-        Task<bool> AnyCode(int id, string name);
+
+        //Task<bool> AnyCode(int id, string name);
+        Task<bool> CheckUniqueName(int id, string legalmanagementsystem);
         Task<List<Legalmanagementsystem>> GetAllLegalmanagementsystem();
         Task<Legalmanagementsystem> FetchSingleResult(int id);
         Task<bool> Update(int id, Legalmanagementsystem legalmanagementsystem);
         Task<bool> Create(Legalmanagementsystem legalmanagementsystem);
         // leTask GetAllLegalmanagementsystem();
-        Task<bool> CheckUniqueName(int id, string legalmanagementsystem);
+        Task<int> checkUniqueUpload(string fileno, string caseno );
         Task<bool> Delete(int id);
     }
 }

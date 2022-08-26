@@ -70,5 +70,11 @@
     "inputFiles": [
       "wwwroot/js/legalreportindex.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/legalManagementBulkUploadCreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/legalManagementBulkUploadCreate.js"
+    ]
   }
 ]

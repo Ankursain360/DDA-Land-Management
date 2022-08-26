@@ -19,6 +19,7 @@ using Utility.Helper;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Http;
 using System.IO;
+using System.Text;
 
 namespace CourtCasesManagement.Controllers
 {
@@ -27,7 +28,7 @@ namespace CourtCasesManagement.Controllers
         public object JsonRequestBehavior { get; private set; }
         private readonly ILegalmanagementsystemservice _legalmanagementsystemService;
         public IConfiguration _configuration;
-         public LegalmanagementsystemController(ILegalmanagementsystemservice legalmanagementsystemService, IConfiguration configuration)
+        public LegalmanagementsystemController(ILegalmanagementsystemservice legalmanagementsystemService, IConfiguration configuration)
         {
             _configuration = configuration;
             _legalmanagementsystemService = legalmanagementsystemService;
@@ -50,7 +51,7 @@ namespace CourtCasesManagement.Controllers
             await BindDropDownView(model);
             return View(model);
         }
-        
+
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] LegalManagementSystemSearchDto model)
         {
@@ -72,7 +73,7 @@ namespace CourtCasesManagement.Controllers
             await BindDropDownView(model);
             return View(model);
         }
-       
+
         [HttpPost]
         [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Legalmanagementsystem legalmanagementsystem)
@@ -83,7 +84,7 @@ namespace CourtCasesManagement.Controllers
             legalmanagementsystem.LocalityList = await _legalmanagementsystemService.GetLocalityList(Convert.ToInt32(legalmanagementsystem.ZoneId));
             legalmanagementsystem.CasestatusList = await _legalmanagementsystemService.GetCasestatusList();
             legalmanagementsystem.CourttypeList = await _legalmanagementsystemService.GetCourttypeList();
-             string JudgementFilePathLayout = _configuration.GetSection("FilePaths:CourtCasesManagementFiles:JudgementFileDocument").Value.ToString();
+            string JudgementFilePathLayout = _configuration.GetSection("FilePaths:CourtCasesManagementFiles:JudgementFileDocument").Value.ToString();
             string StayFilePathLayout = _configuration.GetSection("FilePaths:CourtCasesManagementFiles:StayFileDocument").Value.ToString();
             string DocumentFilePathLayout = _configuration.GetSection("FilePaths:CourtCasesManagementFiles:DocumentFileDocument").Value.ToString();
 
@@ -130,7 +131,7 @@ namespace CourtCasesManagement.Controllers
                 }
                 else { return View(legalmanagementsystem); }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                 return View(legalmanagementsystem);
@@ -149,7 +150,7 @@ namespace CourtCasesManagement.Controllers
             ViewBag.ExistDocFile = Data.DocumentFilePath;
             ViewBag.ExistJFile = Data.JudgementFilePath;
             ViewBag.ExistStayFile = Data.StayInterimGrantedDocument;
-            if ( Data==null)
+            if (Data == null)
             { return NotFound(); }
             return View(Data);
         }
@@ -175,7 +176,7 @@ namespace CourtCasesManagement.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AuthorizeContext(ViewAction.Edit)]
-        public async Task<IActionResult> Edit(int id, Legalmanagementsystem legalmanagementsystem,IFormFile Assignfile, IFormFile AssignJfile, IFormFile AssignSIfile)
+        public async Task<IActionResult> Edit(int id, Legalmanagementsystem legalmanagementsystem, IFormFile Assignfile, IFormFile AssignJfile, IFormFile AssignSIfile)
         {
             bool IsValidpdf = CheckMimeType(legalmanagementsystem);
             await BindDropDownView(legalmanagementsystem);
@@ -186,7 +187,7 @@ namespace CourtCasesManagement.Controllers
             ViewBag.ExistDocFile = legalmanagementsystem.DocumentFilePath;
             ViewBag.ExistJFile = legalmanagementsystem.JudgementFilePath;
             ViewBag.ExistStayFile = legalmanagementsystem.StayInterimGrantedDocument;
-           
+
             if (ModelState.IsValid)
             {
                 if (IsValidpdf == true)
@@ -277,13 +278,13 @@ namespace CourtCasesManagement.Controllers
                     await BindDropDownView(legalmanagementsystem);
                     return View(legalmanagementsystem);
                 }
-                }
-                else
-                {
+            }
+            else
+            {
                 await BindDropDownView(legalmanagementsystem);
                 return View(legalmanagementsystem);
-                }
             }
+        }
         [AcceptVerbs("Get", "Post")]
         [AllowAnonymous]
         public async Task<IActionResult> Exist(int Id, string Name)
@@ -372,7 +373,7 @@ namespace CourtCasesManagement.Controllers
                 {
                     ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                 }
-                
+
             }
             catch { }
             return RedirectToAction("Index", "Legalmanagementsystem");
@@ -408,8 +409,8 @@ namespace CourtCasesManagement.Controllers
                         Zone = result[i].Zone == null ? "" : result[i].Zone.Name,
                         Village = result[i].Locality == null ? "" : result[i].Locality.Name,
                         COC = result[i].IsActive.ToString() == "1" ? "Yes" : "No",
-                        Jugement= result[i].IsActive.ToString() == "1" ? "Yes" : "No",
-                        StayinterimGranted= result[i].IsActive.ToString() == "1" ? "Yes" : "No",
+                        Jugement = result[i].IsActive.ToString() == "1" ? "Yes" : "No",
+                        StayinterimGranted = result[i].IsActive.ToString() == "1" ? "Yes" : "No",
                         IsActive = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
                     });
                 }
@@ -427,7 +428,7 @@ namespace CourtCasesManagement.Controllers
             string fullpath = string.Empty;
             //   string fullpath = string.Empty;
             string extension = string.Empty;
-            string DocumentFilePathLayout = _configuration.GetSection("FilePaths:CourtCasesManagementFiles:DocumentFileDocument").Value.ToString();           
+            string DocumentFilePathLayout = _configuration.GetSection("FilePaths:CourtCasesManagementFiles:DocumentFileDocument").Value.ToString();
             IFormFile files = Request.Form.Files["file"];
             if (files != null)
             {
@@ -496,7 +497,7 @@ namespace CourtCasesManagement.Controllers
         public bool CheckMimeType(Legalmanagementsystem legalmanagementsystem)
         {
             bool Flag = true;
-            string fullpath = string.Empty;          
+            string fullpath = string.Empty;
             string extension = string.Empty;
             string DocumentFilePathLayout = _configuration.GetSection("FilePaths:CourtCasesManagementFiles:DocumentFileDocument").Value.ToString();
             IFormFile files = legalmanagementsystem.DocumentFile;
@@ -566,8 +567,193 @@ namespace CourtCasesManagement.Controllers
 
             return Flag;
         }
+        public IActionResult CreateBulkfile()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> CreateBulkfile(Legalmanagementsystem legalmanagementsystem)
+        {
+
+            //var result = false;
+            bool row = true;
+
+            //List<CourtCaseCSVTableDTO> data;
+            //string jsonString;
+
+            StringBuilder htmlSummary = new StringBuilder();
+            string text = "Not Saved File No.<ul>";
+            htmlSummary.Append(text);
+            StringBuilder htmlsummaryuniq = new StringBuilder();
+            string textuniq = "File No. Already Exists<ul>";
+            htmlsummaryuniq.Append(textuniq);
+            using (var dreader = new StreamReader(legalmanagementsystem.BulkUpload.OpenReadStream()))
+            {
+                string[] headers = dreader.ReadLine().Split(',');
+                while (!dreader.EndOfStream)
+                {
+                    string[] rows = dreader.ReadLine().Split(',');
+                    if (rows[1].Trim() != "" && rows[2].Trim() != "")
+                    {
+                        if (rows[0].Trim() == "")
+                        {
+                            legalmanagementsystem.FileNo = "NA";
+
+                        }
+                        else
+                        {
+                            legalmanagementsystem.FileNo = (rows[0].Trim().ToString());
+                        }
+
+                        if (rows[1].Trim() == "")
+                        {
+                            legalmanagementsystem.CaseStatusId = null;
+                        }
+                        else
+                        {
+                            var CaseStatusList = _legalmanagementsystemService.GetCaseStatusByName((rows[1]).ToString());
+                            legalmanagementsystem.CaseStatusId = CaseStatusList;
+                        }
+                        if (rows[2] == "")
+                        {
+                            legalmanagementsystem.CourtCaseNo = null;
+                        }
+                        else
+                        {
+                            legalmanagementsystem.CourtCaseNo = (rows[2].Trim().ToString());
+                        }
+
+                        if (rows[3] == "")
+                        {
+                            legalmanagementsystem.CourtType = null;
+                        }
+                        else
+                        {
+                            var CourtType = _legalmanagementsystemService.GetCourtCaseByName((rows[3]).ToString());
+                            legalmanagementsystem.CourtTypeId = CourtType;
+                        }
+
+                        DateTime? hearingdate = null;
+                        if (rows[4].ToString().Trim() == "")
+                        {
+                            hearingdate = null;
+                        }
+                        else
+                        {
+                            rows[4].ToString();
+                        }
+                        legalmanagementsystem.HearingDate = hearingdate;
+
+                        DateTime? nexthearingdate = null;
+                        if (rows[5].ToString() == "")
+                        {
+                            nexthearingdate = null;
+                        }
+                        else if (rows[5].ToString().Trim() == "Unlisted")
+                        {
+                            nexthearingdate = null;
+                        }
+                        else
+                        {
+                            rows[5].ToString();
+                        }
+                        legalmanagementsystem.NextHearingDate = nexthearingdate;
+                        // legalmanagementsystem.HearingDate = rows[4]==""?null:Convert.ToDateTime((rows[4]));
+                        // legalmanagementsystem.NextHearingDate = Convert.ToDateTime((rows[5]) == "Unlisted" ? "" : (rows[5]).ToString());
+                        legalmanagementsystem.Remarks = (rows[6] == "" ? null : "Court Name // " + rows[3].ToString() + "Usergroup // " + rows[6].ToString() + "Case Status // " + rows[9].ToString() + "Case Type // " + rows[1].ToString() + "VillageName // " + rows[11].ToString() + ToString());
+                        legalmanagementsystem.CourtCaseTitle = (rows[7].ToString());
+                        legalmanagementsystem.Subject = (rows[8].ToString());
+                        // legalmanagementsystem.Judgement = Convert.ToInt32((rows[9]) == "0" ? "No" : (rows[9]) == "1" ? "DISPOSED OFF" : "DISPOSED");
+                        int? temp = null;
+                        if (rows[9].ToString().Trim() == "")
+                        {
+                            temp = null;
+                        }
+                        else if (rows[9].ToString().Trim().ToUpper() == "DISPOSED OFF" || rows[9].ToString().Trim().ToUpper() == "DISPOSED")
+                        {
+                            temp = 1;
+                        }
+                        else
+                        {
+                            temp = 0;
+                        }
+                        legalmanagementsystem.Judgement = temp;
+                        if (rows[10] == "")
+                        {
+                            legalmanagementsystem.ZoneId = null;
+                        }
+                        else
+                        {
+                            var zone = _legalmanagementsystemService.GetZoneByName((rows[10]).ToString());
+                            legalmanagementsystem.ZoneId = zone;
+                        }
+
+                        if (rows[11] == "")
+                        {
+                            legalmanagementsystem.LocalityId = null;
+                        }
+                        else
+                        {
+                            var Locality = _legalmanagementsystemService.GetVillgeByName((rows[11]).ToString());
+                            legalmanagementsystem.LocalityId = Locality;
+                        }
 
 
+                        legalmanagementsystem.IsActive = 1;
+
+                        int id = await _legalmanagementsystemService.checkUniqueUpload(legalmanagementsystem.FileNo, legalmanagementsystem.CourtCaseNo);
+                        if (id <= 0)//insert
+                        {
+                            legalmanagementsystem.CreatedBy = SiteContext.UserId;
+                            legalmanagementsystem.CreatedDate = DateTime.Now;
+                            legalmanagementsystem.Id = 0;
+                            var results = await _legalmanagementsystemService.Create(legalmanagementsystem);
+                            if (!results)
+                            {
+                                text = "<li>" + legalmanagementsystem.FileNo + "</li>";
+                                htmlSummary.Append(text);
+                                row = false;
+
+                            }
+                        }
+                        else //update
+                        {
+                            legalmanagementsystem.ModifiedBy = SiteContext.UserId;
+                            legalmanagementsystem.ModifiedDate = DateTime.Now;
+                            var results = await _legalmanagementsystemService.UpdateBulkUploadFile(id, legalmanagementsystem);
+                            if (!results)
+                            {
+                                text = "<li>" + legalmanagementsystem.FileNo + "</li>";
+                                htmlSummary.Append(text);
+                                row = false;
+
+                            }
+                        }
+                    }
+                }
+            }
+            if (row)
+            {
+                htmlSummary.Append("</ul>");
+                ViewBag.summary = htmlSummary.ToString();
+                htmlsummaryuniq.Append("</ul>");
+                ViewBag.summaryuniq = htmlsummaryuniq.ToString();
+                ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+                return View("CreateBulkfile", legalmanagementsystem);
+
+            }
+            else
+            {
+                htmlSummary.Append("</ul>");
+                ViewBag.Summary = htmlSummary.ToString();
+                htmlsummaryuniq.Append("</ul>");
+                ViewBag.SummaryUniq = htmlsummaryuniq.ToString();
+                ViewBag.Message = Alert.Show("Either all or some rows in file not Saved check Msg", "", AlertType.Warning);
+                return View("CreateBulkfile", legalmanagementsystem);
+
+            }
+
+        }
 
     }
 }

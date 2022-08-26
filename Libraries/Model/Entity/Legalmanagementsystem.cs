@@ -67,6 +67,9 @@ namespace Libraries.Model.Entity
         public IFormFile StayFile { get; set; }
 
         [NotMapped]
+        public IFormFile BulkUpload { get; set; }
+
+        [NotMapped]
         public List<Legalmanagementsystem> legalmanagementsytemlist { get; set; }
         public ICollection<Courtcasesmapping> Courtcasesmapping { get; set; }
     }

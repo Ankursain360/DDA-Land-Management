@@ -11,8 +11,14 @@ namespace Libraries.Repository.IEntityRepository
 {
     public interface ILegalmanagementsystemRepository : IGenericRepository<Legalmanagementsystem>
     {
+        int GetCaseStatusByName(string name); 
+        int GetCourtTypeByName(string name);
+        int GetZoneByName(string name);
+        int GetVillgeByName(string name);
+        Task<Legalmanagementsystem> fetchLegalAllRecord(int id);
         Task<List<Zone>> GetZoneList();
         Task<List<Locality>> GetLocalityList (int zoneId);
+        Task<List<Locality>> GetAllLocalityList();
         Task<List<Casestatus>> GetCasestatusList();
         Task<List<Courttype>> GetCourttypeList();
 
@@ -32,6 +38,7 @@ namespace Libraries.Repository.IEntityRepository
         string GetJDocDownload(int id);
         Task<PagedResult<Legalmanagementsystem>> GetPagedLegalmanagementsystem(LegalManagementSystemSearchDto model);
         Task<bool> AnyCode(int id, string name);
+        Task<int> checkUniqueUpload(string fileno , string caseno);
         Task<List<Legalmanagementsystem>> GetAllLegalmanagementsystem();
     }
 }

@@ -23,6 +23,50 @@ namespace Service.ApplicationService
             _unitOfWork = unitOfWork;
             _legalmanagementsystemRepository = legalmanagementsystemRepository;
         }
+        public  int GetCaseStatusByName(string name)
+        {
+            return _legalmanagementsystemRepository.GetCaseStatusByName(name);
+        }
+        public int GetCourtCaseByName(string name)
+        {
+            return _legalmanagementsystemRepository.GetCourtTypeByName(name);
+        }
+        public int GetZoneByName(string name)
+        {
+            return _legalmanagementsystemRepository.GetZoneByName(name);
+        }
+        public int GetVillgeByName(string name)
+        {
+            return _legalmanagementsystemRepository.GetVillgeByName(name);
+        }
+        public async  Task<Legalmanagementsystem> fetchLegalRecord(int id) 
+        {
+            return await _legalmanagementsystemRepository.fetchLegalAllRecord(id);
+        }
+        public async Task<bool> UpdateBulkUploadFile(int id, Legalmanagementsystem legalmanagementsystem)
+        {
+            var result = await _legalmanagementsystemRepository.FindBy(x => x.Id == id);
+            Legalmanagementsystem model = result.FirstOrDefault();
+            model.FileNo = legalmanagementsystem.FileNo;
+            model.CaseStatusId = legalmanagementsystem.CaseStatusId;
+            model.CourtCaseNo = legalmanagementsystem.CourtCaseNo;
+            model.CourtTypeId = legalmanagementsystem.CourtTypeId;
+            model.HearingDate = legalmanagementsystem.HearingDate;
+            model.NextHearingDate = legalmanagementsystem.NextHearingDate;
+            model.Remarks = legalmanagementsystem.Remarks;
+            model.CourtCaseTitle = legalmanagementsystem.CourtCaseTitle;
+            model.Subject = legalmanagementsystem.Subject;
+            model.Judgement = legalmanagementsystem.Judgement;
+            model.ZoneId = legalmanagementsystem.ZoneId;
+            model.LocalityId = legalmanagementsystem.LocalityId;
+            model.IsActive = legalmanagementsystem.IsActive;
+            model.ModifiedBy = legalmanagementsystem.ModifiedBy;
+            model.ModifiedDate = DateTime.Now;
+            _legalmanagementsystemRepository.Edit(model);
+            return await _unitOfWork.CommitAsync() > 0;
+
+
+        }
 
         // * *********** methods for legal report added by ishu ************
         public async Task<List<Zone>> GetZoneList()  
@@ -36,7 +80,11 @@ namespace Service.ApplicationService
             return localityList;
         }
 
-       
+       public async Task<List<Locality>> GetAllLocalityList()
+        {
+           List<Locality> list =await _legalmanagementsystemRepository.GetAllLocalityList();
+            return list;
+        }
         public async Task<List<Casestatus>> GetCasestatusList()
         {
             List<Casestatus> casestatusList = await _legalmanagementsystemRepository.GetCasestatusList();
@@ -180,9 +228,14 @@ namespace Service.ApplicationService
             return _legalmanagementsystemRepository.GetJDocDownload(id);
         }
 
-        public Task<bool> AnyCode(int id, string name)
+        public async Task<int> checkUniqueUpload(string fileno, string caseno)
         {
-            throw new NotImplementedException();
+            return await _legalmanagementsystemRepository.checkUniqueUpload(fileno, caseno);
         }
+
+        //public Task<bool> AnyCode(int id, string name)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

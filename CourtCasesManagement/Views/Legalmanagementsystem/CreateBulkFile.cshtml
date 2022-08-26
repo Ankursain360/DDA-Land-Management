@@ -1,0 +1,69 @@
+﻿@model Libraries.Model.Entity.Legalmanagementsystem
+@await Component.InvokeAsync("PageHeader", new { pageName = "Bulk Upload" })
+<div class="pt-3">
+
+    <form asp-action="CreateBulkfile" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
+        <h3 class="mb-3 d-flex">Bulk Upload<span class="ms-auto"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span></h3>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input type="file" asp-for="BulkUpload" class="floating-label-field floating-label-field--s3" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+                    <span asp-validation-for="BulkUpload" id="BulkUploadMsg" class="text-danger" style="display:none;">Mandatory</span>
+                    <label for="field-1" class="floating-label">Upload CSV File <span style="color:red">*</span></label>
+
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class=" col-md-12">
+                <button class="btn btn-theme " type="submit" onclick="return CheckBulkValidation();">Submit</button>
+                @Html.ActionLink("Back", "Index", "Legalmanagementsystem", null, new { @class = "btn btn-theme " })
+            </div>
+        </div>
+    </form>
+    <div id="generatepdf" style="display:none;">
+        <div id="insertSumaary">
+            @{
+                if (ViewBag.Summary != null)
+                {
+                    @Html.Raw(ViewBag.Summary);
+                }
+            }
+
+        </div>
+        <div id="insertSumaaryUniq">
+            @{
+                if (ViewBag.SummaryUniq != null)
+                {
+                    @Html.Raw(ViewBag.SummaryUniq);
+                }
+            }
+
+        </div>
+    </div>
+    @*@{
+        if (ViewBag.PdfGenerate == "Yes")
+        {
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>You Can Download!</strong> Error while Bulk Uploading .
+                <button onclick="saveDiv('pdf','Title')" class="btn btn-theme">Download Error List</button>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+        }
+    }*@
+</div>
+
+
+
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/legalManagementBulkUploadCreate.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/legalManagementBulkUploadCreate.min.js" asp-append-version="true"></script>
+</environment>
