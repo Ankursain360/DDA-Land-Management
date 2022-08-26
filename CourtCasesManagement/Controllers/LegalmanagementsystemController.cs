@@ -595,23 +595,23 @@ namespace CourtCasesManagement.Controllers
                     string[] rows = dreader.ReadLine().Split(',');
                     if (rows[1].Trim() != "" && rows[2].Trim() != "")
                     {
-                        if (rows[0].Trim() == "")
+                        if (rows[0].Trim().Replace("\"", string.Empty) == "")
                         {
                             legalmanagementsystem.FileNo = "NA";
 
                         }
                         else
                         {
-                            legalmanagementsystem.FileNo = (rows[0].Trim().ToString());
+                            legalmanagementsystem.FileNo = (rows[0].Trim().Replace("\"", string.Empty).ToString());
                         }
 
-                        if (rows[1].Trim() == "")
+                        if (rows[1].Trim().Replace("\"", string.Empty) == "")
                         {
                             legalmanagementsystem.CaseStatusId = null;
                         }
                         else
                         {
-                            var CaseStatusList = _legalmanagementsystemService.GetCaseStatusByName((rows[1]).ToString());
+                            var CaseStatusList = _legalmanagementsystemService.GetCaseStatusByName((rows[1]).Replace("\"", string.Empty).ToString());
                             legalmanagementsystem.CaseStatusId = CaseStatusList;
                         }
                         if (rows[2] == "")
@@ -620,7 +620,7 @@ namespace CourtCasesManagement.Controllers
                         }
                         else
                         {
-                            legalmanagementsystem.CourtCaseNo = (rows[2].Trim().ToString());
+                            legalmanagementsystem.CourtCaseNo = (rows[2].Trim().Replace("\"", string.Empty).ToString());
                         }
 
                         if (rows[3] == "")
@@ -629,47 +629,52 @@ namespace CourtCasesManagement.Controllers
                         }
                         else
                         {
-                            var CourtType = _legalmanagementsystemService.GetCourtCaseByName((rows[3]).ToString());
+                            var CourtType = _legalmanagementsystemService.GetCourtCaseByName((rows[3]).Replace("\"", string.Empty).ToString());
                             legalmanagementsystem.CourtTypeId = CourtType;
                         }
 
                         DateTime? hearingdate = null;
-                        if (rows[4].ToString().Trim() == "")
+                        if (rows[4].ToString().Replace("\"", string.Empty).Trim() == "")
                         {
                             hearingdate = null;
                         }
                         else
                         {
-                            rows[4].ToString();
+                            DateTime t;
+                            DateTime.TryParse(rows[4].ToString().Replace("\"", string.Empty), out t);
+                            hearingdate = t;
+
                         }
                         legalmanagementsystem.HearingDate = hearingdate;
 
                         DateTime? nexthearingdate = null;
-                        if (rows[5].ToString() == "")
+                        if (rows[5].ToString().Replace("\"", string.Empty) == "")
                         {
                             nexthearingdate = null;
                         }
-                        else if (rows[5].ToString().Trim() == "Unlisted")
+                        else if (rows[5].ToString().Replace("\"", string.Empty).Trim() == "Unlisted")
                         {
                             nexthearingdate = null;
                         }
                         else
                         {
-                            rows[5].ToString();
+                            DateTime t;
+                            DateTime.TryParse(rows[5].ToString().Replace("\"", string.Empty), out t);
+                            nexthearingdate = t;
                         }
                         legalmanagementsystem.NextHearingDate = nexthearingdate;
                         // legalmanagementsystem.HearingDate = rows[4]==""?null:Convert.ToDateTime((rows[4]));
                         // legalmanagementsystem.NextHearingDate = Convert.ToDateTime((rows[5]) == "Unlisted" ? "" : (rows[5]).ToString());
-                        legalmanagementsystem.Remarks = (rows[6] == "" ? null : "Court Name // " + rows[3].ToString() + "Usergroup // " + rows[6].ToString() + "Case Status // " + rows[9].ToString() + "Case Type // " + rows[1].ToString() + "VillageName // " + rows[11].ToString() + ToString());
-                        legalmanagementsystem.CourtCaseTitle = (rows[7].ToString());
-                        legalmanagementsystem.Subject = (rows[8].ToString());
+                        legalmanagementsystem.Remarks = (rows[6].Replace("\"", string.Empty) == "" ? null : "Court Name::  " + rows[3].ToString().Replace("\"", string.Empty) + "// Usergroup:: " + rows[6].ToString().Replace("\"", string.Empty) + "// Case Status:: " + rows[9].ToString().Replace("\"", string.Empty) + "// Case Type::" + rows[1].ToString().Replace("\"", string.Empty) + "// VillageName:: " + rows[11].ToString().Replace("\"", string.Empty));
+                        legalmanagementsystem.CourtCaseTitle = (rows[7].ToString().Replace("\"", string.Empty));
+                        legalmanagementsystem.Subject = (rows[8].ToString().Replace("\"", string.Empty));
                         // legalmanagementsystem.Judgement = Convert.ToInt32((rows[9]) == "0" ? "No" : (rows[9]) == "1" ? "DISPOSED OFF" : "DISPOSED");
                         int? temp = null;
-                        if (rows[9].ToString().Trim() == "")
+                        if (rows[9].ToString().Trim().Replace("\"", string.Empty) == "")
                         {
                             temp = null;
                         }
-                        else if (rows[9].ToString().Trim().ToUpper() == "DISPOSED OFF" || rows[9].ToString().Trim().ToUpper() == "DISPOSED")
+                        else if (rows[9].ToString().Trim().Replace("\"", string.Empty).ToUpper() == "DISPOSED OFF" || rows[9].ToString().Trim().Replace("\"", string.Empty).ToUpper() == "DISPOSED")
                         {
                             temp = 1;
                         }
@@ -678,24 +683,40 @@ namespace CourtCasesManagement.Controllers
                             temp = 0;
                         }
                         legalmanagementsystem.Judgement = temp;
-                        if (rows[10] == "")
+                        if (rows[10].ToString().Replace("\"", string.Empty) == "")
                         {
                             legalmanagementsystem.ZoneId = null;
                         }
                         else
                         {
-                            var zone = _legalmanagementsystemService.GetZoneByName((rows[10]).ToString());
-                            legalmanagementsystem.ZoneId = zone;
+                            var zone = _legalmanagementsystemService.GetZoneByName((rows[10]).ToString().Replace("\"", string.Empty));
+                            if (zone == 0)
+                            {
+                                legalmanagementsystem.ZoneId = null;
+                            }
+                            else
+                            {
+                                legalmanagementsystem.ZoneId = zone;
+                            }
+
                         }
 
-                        if (rows[11] == "")
+                        if (rows[11].ToString().Replace("\"", string.Empty) == "")
                         {
                             legalmanagementsystem.LocalityId = null;
                         }
                         else
                         {
-                            var Locality = _legalmanagementsystemService.GetVillgeByName((rows[11]).ToString());
-                            legalmanagementsystem.LocalityId = Locality;
+                            var Locality = _legalmanagementsystemService.GetVillgeByName((rows[11]).ToString().Replace("\"", string.Empty));
+                            if (Locality == 0)
+                            {
+                                legalmanagementsystem.LocalityId = null;
+                            }
+                            else
+                            {
+                                legalmanagementsystem.LocalityId = Locality;
+                            }
+
                         }
 
 
@@ -738,6 +759,7 @@ namespace CourtCasesManagement.Controllers
                 ViewBag.summary = htmlSummary.ToString();
                 htmlsummaryuniq.Append("</ul>");
                 ViewBag.summaryuniq = htmlsummaryuniq.ToString();
+                ViewBag.PdfGenerate = "No";
                 ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
                 return View("CreateBulkfile", legalmanagementsystem);
 
@@ -747,6 +769,7 @@ namespace CourtCasesManagement.Controllers
                 htmlSummary.Append("</ul>");
                 ViewBag.Summary = htmlSummary.ToString();
                 htmlsummaryuniq.Append("</ul>");
+                ViewBag.PdfGenerate = "Yes";
                 ViewBag.SummaryUniq = htmlsummaryuniq.ToString();
                 ViewBag.Message = Alert.Show("Either all or some rows in file not Saved check Msg", "", AlertType.Warning);
                 return View("CreateBulkfile", legalmanagementsystem);
