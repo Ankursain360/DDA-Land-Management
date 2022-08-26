@@ -51,3 +51,16 @@ function saveDiv(div, title) {
     doc.fromHTML(`<html><head><title>${'Details'}</title></head><body>` + document.getElementById('generatepdf').innerHTML + `</body></html>`);
     doc.save('FileReport.pdf');
 }
+
+
+function CheckBulkValidation() {
+    debugger;
+    var data = $('#BulkUpload').val();
+    if (data == "" || data == undefined) {
+        alert("File upload is mandatory");
+        return false;
+
+    } else {
+        return true;
+    }
+};

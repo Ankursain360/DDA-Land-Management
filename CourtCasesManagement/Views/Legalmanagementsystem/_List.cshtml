@@ -2,13 +2,13 @@
 @{int rowNo = 0; }
 <table class="table table-sm table-bordered mb-0 table-striped">
     <thead class="text-nowrap">
-        <tr> 
+        <tr>
             <th>File No</th>
             <th>Court Case No</th>
             <th>Case Type</th>
             <th>Court Name</th>
             <th>Case Title</th>
-            <th>Court Name</th>
+            <th>Next Hearing Date</th>
             <th>Judgement</th>
             <th>Status</th>
 
@@ -18,59 +18,39 @@
     <tbody>
         @foreach (var item in Model.Results)
         {
-        <tr>
+            <tr>
 
-            <td>@item.FileNo</td>
-            <td>@item.CourtCaseNo</td>
-            <td>@item.CourtCaseNo</td>
+                <td>@item.FileNo</td>
+                <td>@item.CourtCaseNo</td>
+                <td>@item.CaseStatus.CaseStatus</td>
+                <td>@item.CourtType.CourtType</td>
+                <td>@item.CourtCaseTitle</td>
+                <td>@(item.NextHearingDate.HasValue ? item.NextHearingDate.Value.ToString("dd-MM-yyyy"):"-")</td>
+                <td>
+                    @if (item.Judgement == 1)
+                    {<span>Yes</span> }
+                    else
+                    { <span>No</span>}
+                </td>
+                <td>
+                    @if (item.IsActive == 1)
+                    {
+                        <span class="badge bg-primary px-2 py-1">Active</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-danger px-2 py-1">Inactive</span>
+                    }
+                </td>
+                <td>
+                    <div class="action-btns">
+                        <a asp-action="View" asp-route-id="@item.Id" title="View" class="view">  <i class="ri-eye-fill"></i> </a>
+                        <a asp-action="Edit" asp-route-id="@item.Id" title="edit" class="edit"> <i class="ri-edit-line"></i> </a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" title="delete" class="remove" onclick="return confirm('Are You Sure, You want to Delete this Record?')"><i class="ri-delete-bin-5-fill"></i></a>
+                    </div>
 
-            @*<td>
-            @if (@item.ContemptOfCourt == 1)
-            {
-                <span>Yes</span>
-            }
-            else
-            {
-                <span>No</span>
-            }
-
-        </td>*@
-            <td>@(item.Zone == null ? "" : item.Zone.Name)</td>
-            <td>
-                @(item.Locality == null ? "" : item.Locality.Name)
-            </td>
-            <td>
-                @if (@item.StayInterimGranted == 1)
-                {<span>Yes</span> }
-                else
-                { <span>No</span>}
-
-            </td>
-            <td>
-                @if (item.Judgement == 1)
-                {<span>Yes</span> }
-                else
-                { <span>No</span>}
-            </td>
-            <td>
-                @if (item.IsActive == 1)
-                {
-                    <span class="badge bg-primary px-2 py-1">Active</span>
-                }
-                else
-                {
-                    <span class="badge bg-danger px-2 py-1">Inactive</span>
-                }
-            </td>
-            <td>
-                <div class="action-btns">
-                    <a asp-action="View" asp-route-id="@item.Id" title="View" class="view">  <i class="ri-eye-fill"></i> </a>
-                    <a asp-action="Edit" asp-route-id="@item.Id" title="edit" class="edit"> <i class="ri-edit-line"></i> </a>
-                    <a asp-action="Delete" asp-route-id="@item.Id" title="delete" class="remove" onclick="return confirm('Are You Sure, You want to Delete this Record?')"><i class="ri-delete-bin-5-fill"></i></a>
-                </div>
-
-            </td>
-        </tr>
+                </td>
+            </tr>
         }
     </tbody>
 </table>
