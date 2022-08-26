@@ -2,7 +2,7 @@
 @await Component.InvokeAsync("PageHeader", new { pageName = "Bulk Upload" })
 <div class="pt-3">
 
-    <form asp-action="CreateBulkfile" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
+    <form asp-action="CreateBulkfile" name="myForm" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
         <h3 class="mb-3 d-flex">Bulk Upload<span class="ms-auto"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span></h3>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="row">
@@ -18,7 +18,7 @@
         </div>
         <div class="row mt-md-3">
             <div class=" col-md-12">
-                <button class="btn btn-theme " type="submit" onclick="return CheckBulkValidation();">Submit</button>
+                <button class="btn btn-theme " type="submit" onclick="return CheckBulkValidation()">Submit</button>
                 @Html.ActionLink("Back", "Index", "Legalmanagementsystem", null, new { @class = "btn btn-theme " })
             </div>
         </div>
@@ -43,19 +43,6 @@
 
         </div>
     </div>
-    @*@{
-        if (ViewBag.PdfGenerate == "Yes")
-        {
-            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                <strong>You Can Download!</strong> Error while Bulk Uploading .
-                <button onclick="saveDiv('pdf','Title')" class="btn btn-theme">Download Error List</button>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-
-        }
-    }*@
 </div>
 
 
