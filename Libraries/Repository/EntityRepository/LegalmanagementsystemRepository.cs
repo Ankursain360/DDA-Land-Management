@@ -300,7 +300,12 @@ namespace Libraries.Repository.EntityRepository
                      .Include(x => x.Locality)
                      .Include(x => x.CaseStatus)
                       .Include(x => x.CourtType)
-                     .Where(x => ((string.IsNullOrEmpty(model.name) || x.FileNo.Contains(model.name))))
+                     .Where(x => (string.IsNullOrEmpty(model.fileNo) || x.FileNo.Contains(model.fileNo))
+                          && (string.IsNullOrEmpty(model.courtCaseNo)||x.CourtCaseNo.Contains(model.courtCaseNo))
+                          &&(string.IsNullOrEmpty(model.courtType)||x.CourtType.CourtType.Trim().Contains(model.courtType))
+                          && (string.IsNullOrEmpty(model.courtCaseTitle) || x.CourtCaseTitle.Contains(model.courtCaseTitle))
+                          && (string.IsNullOrEmpty(model.caseStatus) || x.CaseStatus.CaseStatus.Contains(model.caseStatus))
+                     )
                       //.OrderByDescending(s => s.IsActive == 1)
                       .GetPaged<Legalmanagementsystem>(model.PageNumber, model.PageSize);
 
@@ -309,63 +314,95 @@ namespace Libraries.Repository.EntityRepository
             {
                 switch (model.SortBy.ToUpper())
                 {
-                    case ("NAME"):
-                        data = null;
-                        data = await _dbContext.Legalmanagementsystem
-                     .Include(x => x.Zone)
-                     .Include(x => x.Locality)
-                     .Include(x => x.CaseStatus)
-                      .Include(x => x.CourtType)
-                     .Where(x => ((string.IsNullOrEmpty(model.name) || x.FileNo.Contains(model.name))))
-                      .OrderBy(x => x.FileNo)
-                      .GetPaged<Legalmanagementsystem>(model.PageNumber, model.PageSize);
-
-
+                    case ("FILE"):
+                        data.Results = data.Results.OrderBy(x => x.FileNo).ToList();
                         break;
                     case ("STATUS"):
-                        data = null;
-                        data = await _dbContext.Legalmanagementsystem
-                            .Include(x => x.Zone)
-                            .Include(x => x.Locality)
-                            .Include(x => x.CaseStatus)
-                             .Include(x => x.CourtType)
-                            .Where(x => ((string.IsNullOrEmpty(model.name) || x.FileNo.Contains(model.name))))
-                                .OrderBy(s => s.IsActive == 0)
-                                 .GetPaged<Legalmanagementsystem>(model.PageNumber, model.PageSize);
-
-
+                        data.Results = data.Results.OrderByDescending(x => x.IsActive).ToList();
                         break;
+                        //case ("FILE"):
+                        //    data = null;
+                        //    data = await _dbContext.Legalmanagementsystem
+                        // .Include(x => x.Zone)
+                        // .Include(x => x.Locality)
+                        // .Include(x => x.CaseStatus)
+                        //  .Include(x => x.CourtType)
+                        // .Where(x => (string.IsNullOrEmpty(model.fileNo) || x.FileNo.Contains(model.fileNo))
+                        //  && (string.IsNullOrEmpty(model.courtCaseNo) || x.CourtCaseNo.Contains(model.courtCaseNo))
+                        //      && (string.IsNullOrEmpty(model.caseStatus) || x.CaseStatus.CaseStatus.Contains(model.caseStatus))
+                        //      && (string.IsNullOrEmpty(model.courtType) || x.CourtType.CourtType.Contains(model.courtType))
+                        //      && (string.IsNullOrEmpty(model.courtCaseTitle) || x.CourtCaseTitle.Contains(model.courtCaseTitle))
+                        // )
+                        //  .OrderBy(x => x.FileNo)
+                        //  .GetPaged<Legalmanagementsystem>(model.PageNumber, model.PageSize);
+                        //    break;
+
+                        //case ("STATUS"):
+                        //    data = null;
+                        //    data = await _dbContext.Legalmanagementsystem
+                        //        .Include(x => x.Zone)
+                        //        .Include(x => x.Locality)
+                        //        .Include(x => x.CaseStatus)
+                        //         .Include(x => x.CourtType)
+                        //        .Where(x => (string.IsNullOrEmpty(model.fileNo) || x.FileNo.Contains(model.fileNo))
+                        //         && (string.IsNullOrEmpty(model.courtCaseNo) || x.CourtCaseNo.Contains(model.courtCaseNo))
+                        //      && (string.IsNullOrEmpty(model.courtType) || x.CourtType.CourtType.Trim().Contains(model.courtType))
+                        //      && (string.IsNullOrEmpty(model.courtCaseTitle) || x.CourtCaseTitle.Contains(model.courtCaseTitle))
+                        //      && (string.IsNullOrEmpty(model.caseStatus) || x.CaseStatus.CaseStatus.Contains(model.caseStatus))
+                        //        )
+                        //            .OrderByDescending(s => s.IsActive==0)
+                        //             .GetPaged<Legalmanagementsystem>(model.PageNumber, model.PageSize);
+
+
+                        //    break;
                 }
             }
             else if (SortOrder == 2)
             {
                 switch (model.SortBy.ToUpper())
                 {
-                    case ("NAME"):
-                        data = null;
-                        data = await _dbContext.Legalmanagementsystem
-                     .Include(x => x.Zone)
-                     .Include(x => x.Locality)
-                     .Include(x => x.CaseStatus)
-                      .Include(x => x.CourtType)
-                     .Where(x => ((string.IsNullOrEmpty(model.name) || x.FileNo.Contains(model.name))))
-                         .OrderByDescending(x => x.FileNo)
-                        .GetPaged<Legalmanagementsystem>(model.PageNumber, model.PageSize);
-
+                    case ("FILE"):
+                        data.Results = data.Results.OrderByDescending(x => x.FileNo).ToList();
                         break;
                     case ("STATUS"):
-                        data = null;
-                        data = await _dbContext.Legalmanagementsystem
-                     .Include(x => x.Zone)
-                     .Include(x => x.Locality)
-                     .Include(x => x.CaseStatus)
-                      .Include(x => x.CourtType)
-                     .Where(x => ((string.IsNullOrEmpty(model.name) || x.FileNo.Contains(model.name))))
-                                .OrderByDescending(x => x.IsActive == 0)
-                                 .GetPaged<Legalmanagementsystem>(model.PageNumber, model.PageSize);
-
-
+                        data.Results = data.Results.OrderBy(x => x.IsActive).ToList();
                         break;
+                        //case ("NAME"):
+                        //    data = null;
+                        //    data = await _dbContext.Legalmanagementsystem
+                        // .Include(x => x.Zone)
+                        // .Include(x => x.Locality)
+                        // .Include(x => x.CaseStatus)
+                        //  .Include(x => x.CourtType)
+                        // .Where(x => (string.IsNullOrEmpty(model.fileNo) || x.FileNo.Contains(model.fileNo))
+                        //  && (string.IsNullOrEmpty(model.courtCaseNo) || x.CourtCaseNo.Contains(model.courtCaseNo))
+                        //      && (string.IsNullOrEmpty(model.courtType) || x.CourtType.CourtType.Trim().Contains(model.courtType))
+                        //      && (string.IsNullOrEmpty(model.courtCaseTitle) || x.CourtCaseTitle.Contains(model.courtCaseTitle))
+                        //      && (string.IsNullOrEmpty(model.caseStatus) || x.CaseStatus.CaseStatus.Contains(model.caseStatus))
+                        // )
+                        //     .OrderByDescending(x => x.FileNo)
+                        //    .GetPaged<Legalmanagementsystem>(model.PageNumber, model.PageSize);
+
+                        //    break;
+
+                        //case ("STATUS"):
+                        //    data = null;
+                        //    data = await _dbContext.Legalmanagementsystem
+                        // .Include(x => x.Zone)
+                        // .Include(x => x.Locality)
+                        // .Include(x => x.CaseStatus)
+                        //  .Include(x => x.CourtType)
+                        // .Where(x => (string.IsNullOrEmpty(model.fileNo) || x.FileNo.Contains(model.fileNo))
+                        //  && (string.IsNullOrEmpty(model.courtCaseNo) || x.CourtCaseNo.Contains(model.courtCaseNo))
+                        //      && (string.IsNullOrEmpty(model.courtType) || x.CourtType.CourtType.Trim().Contains(model.courtType))
+                        //      && (string.IsNullOrEmpty(model.courtCaseTitle) || x.CourtCaseTitle.Contains(model.courtCaseTitle))
+                        //      && (string.IsNullOrEmpty(model.caseStatus) || x.CaseStatus.CaseStatus.Contains(model.caseStatus))
+                        // )
+                        //            .OrderBy(x => x.IsActive==0)
+                        //             .GetPaged<Legalmanagementsystem>(model.PageNumber, model.PageSize);
+
+
+                        //    break;
                 }
             }
             return data;
@@ -374,11 +411,11 @@ namespace Libraries.Repository.EntityRepository
         public async Task<List<Legalmanagementsystem>> GetAllLegalmanagementsystem()
         {
             return await _dbContext.Legalmanagementsystem
+                    .Where(x=>x.IsActive == 1)
                     .Include(x => x.Zone)
                     .Include(x => x.Locality)
                     .Include(x => x.CaseStatus)
                     .Include(x => x.CourtType)
-                    .Where(x => x.IsActive == 1)
                     .ToListAsync();
         }
        
