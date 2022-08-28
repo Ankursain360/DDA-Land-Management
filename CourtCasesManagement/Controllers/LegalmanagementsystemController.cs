@@ -579,6 +579,13 @@ namespace CourtCasesManagement.Controllers
 
             return Flag;
         }
+        public async Task<IActionResult> DownloadCSVFormat()
+        {
+            FileHelper file = new FileHelper();
+
+            string filename = _configuration.GetSection("FilePaths:DownloadCSVFormat:DownloadCSVFormat").Value.ToString();
+            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+        }
         public IActionResult CreateBulkfile()
         {
             return View();
