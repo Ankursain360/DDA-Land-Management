@@ -637,7 +637,7 @@ namespace CourtCasesManagement.Controllers
                             }
                             else
                             {
-                                var CaseStatusList = _legalmanagementsystemService.GetCaseStatusByName((rows[1]).Replace("\"", string.Empty).ToString());
+                                var CaseStatusList = _legalmanagementsystemService.GetCaseStatusByName((rows[1]).Replace("\"", string.Empty).ToLower().ToString());
                                 legalmanagementsystem.CaseStatusId = CaseStatusList;
                             }
                             if (rows[2] == "")
@@ -655,7 +655,7 @@ namespace CourtCasesManagement.Controllers
                             }
                             else
                             {
-                                var CourtType = _legalmanagementsystemService.GetCourtCaseByName((rows[3]).Replace("\"", string.Empty).ToString());
+                                var CourtType = _legalmanagementsystemService.GetCourtCaseByName((rows[3]).Replace("\"", string.Empty).ToLower().Trim().ToString());
                                 legalmanagementsystem.CourtTypeId = CourtType;
                             }
 
