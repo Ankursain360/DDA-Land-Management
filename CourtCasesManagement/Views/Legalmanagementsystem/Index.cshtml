@@ -4,71 +4,101 @@
     <div class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
         <h3 class="mb-3 d-flex">Search</h3>
         <div class="row">
-            <div class="col-md-3    ">
+            <div class="col-md-3">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input type="text" id="txtName" class="floating-label-field floating-label-field--s3" placeholder="Name" />
-                    <label for="txtName" class="floating-label">File Number</label>
+                    <input type="text" id="txtfileno" class="floating-label-field floating-label-field--s3" placeholder="Name" />
+                    <label for="txtfileno" class="floating-label">File No</label>
                 </div>
             </div>
+            <div class="col-md-3">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="text" id="txtCaseNo" class="floating-label-field floating-label-field--s3" placeholder="Name" />
+                    <label for="txtCaseNo" class="floating-label">Court Case No</label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    @*<select class="floating-label-field floating-label-field--s3" id="txtLocalityId"
+                            asp-items="@(new SelectList(ViewBag.courtType,"Id","CourtType"))">
+                        <option selected="selected" disabled="disabled" value="0">--Select-- </option>
 
+                    </select>*@
+                    <input type="text" id="ddlCaseStatus" class="floating-label-field floating-label-field--s3" placeholder="Name" />
+                    <label for="ddlCaseStatus" class="floating-label">Case Status</label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="text" id="ddlCourtName" class="floating-label-field floating-label-field--s3" placeholder="Name" />
+                    <label for="ddlCourtName" class="floating-label">Court Name</label>
+                </div>
+            </div>
         </div>
         <div class="row mt-md-3">
-            <div class="col-md-12 col-xl-3">
-                <div class="row">
-                    <div class="col-6 col-md-5 col-xl-6">
-                        <button class="btn btn-link btn-block d-flex align-items-center justify-content-center" type="reset" id="btnReset">
-                            <i class="ri-refresh-line me-2"></i>Reset
-                        </button>
-                    </div>
-                    <div class="col-6 col-md-7 col-xl-6">
-                        <button class="btn btn-theme btn-block" type="submit" id="btnSearch">Submit</button>
+            <div class="col-md-3">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="text" id="txtCaseTitle" class="floating-label-field floating-label-field--s3" placeholder="Name" />
+                    <label for="txtCaseTitle" class="floating-label">Case Title</label>
+                </div>
+            </div>
+        </div>
+            <div class="row mt-md-3">
+                <div class="col-md-12 col-xl-3">
+                    <div class="row">
+                        <div class="col-6 col-md-5 col-xl-6">
+                            <button class="btn btn-link btn-block d-flex align-items-center justify-content-center" type="reset" id="btnReset">
+                                <i class="ri-refresh-line me-2"></i>Reset
+                            </button>
+                        </div>
+                        <div class="col-6 col-md-7 col-xl-6">
+                            <button class="btn btn-theme btn-block" type="submit" id="btnSearch">Submit</button>
+                        </div>
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="table-section bg-white border shadow rounded">
+            <div class="short-section d-md-flex align-items-center">
+                <div class="p-3 d-flex align-items-end me-auto">
+                    <div class="floating-label-wrap">
+                        <select id="ddlSort" class="floating-label-field floating-label-field--s3">
+                            <option value="FILE">File No.</option>
+                            <option value="STATUS">Status</option>
+
+                        </select>
+                        <label for="field-1" class="floating-label">Sort by</label>
+                    </div>
+                    <div class="short-btn d-flex align-items-center">
+                        <button id="btnAscending" class="btn slow active" onclick="Ascending();" title="Ascending order"><i class="ri-sort-asc"></i></button>
+                        <button id="btndescending" class="btn slow" title="Descending order" onclick="Descending();"><i class="ri-sort-desc"></i></button>
+
+                    </div>
+                </div>
+
+
+                <div class="download-table d-flex align-items-center px-3 mb-3 mb-md-0">
+                    <a href="/Legalmanagementsystem/CreateBulkfile" class="d-flex align-items-center btn btn-danger me-2">
+                        <i class="ri-file-upload-line me-2 me-lg-1"></i>
+                        <small>BulkUpload</small>
+                    </a>
+                    <a href="/Legalmanagementsystem/create" class="d-flex align-items-center btn btn-primary me-2">
+                        <i class="ri-add-fill me-2 me-lg-1"></i>
+                        <small>Add More</small>
+                    </a>
+                    <a href="/LegalManagementSystem/LegalManagementSystemList" class="d-flex align-items-center btn btn-success">
+                        <i class="ri-download-2-line me-2 me-lg-1"></i>
+                        <small>Download</small>
+                    </a>
+                </div>
+            </div>
+
+            <div class="table-responsive px-2" id="divLegalmanagementsystemTable">
+
+            </div>
+
+
         </div>
     </div>
-    <div class="table-section bg-white border shadow rounded">
-        <div class="short-section d-md-flex align-items-center">
-            <div class="p-3 d-flex align-items-end me-auto">
-                <div class="floating-label-wrap">
-                    <select id="ddlSort" class="floating-label-field floating-label-field--s3">
-                        <option value="Name">File No.</option>
-                        <option value="Status">Status</option>
-
-                    </select>
-                    <label for="field-1" class="floating-label">Sort by</label>
-                </div>
-                <div class="short-btn d-flex align-items-center">
-                    <button id="btnAscending" class="btn slow active" onclick="Ascending();" title="Ascending order"><i class="ri-sort-asc"></i></button>
-                    <button id="btndescending" class="btn slow" title="Descending order" onclick="Descending();"><i class="ri-sort-desc"></i></button>
-
-                </div>
-            </div>
-             
-
-            <div class="download-table d-flex align-items-center px-3 mb-3 mb-md-0">
-                <a href="/Legalmanagementsystem/CreateBulkfile" class="d-flex align-items-center btn btn-danger me-2">
-                    <i class="ri-file-upload-line me-2 me-lg-1"></i>
-                    <small>BulkUpload</small>
-                </a>
-                <a href="/Legalmanagementsystem/create" class="d-flex align-items-center btn btn-primary me-2">
-                    <i class="ri-add-fill me-2 me-lg-1"></i>
-                    <small>Add More</small>
-                </a>
-                <a href="/LegalManagementSystem/LegalManagementSystemList" class="d-flex align-items-center btn btn-success">
-                    <i class="ri-download-2-line me-2 me-lg-1"></i>
-                    <small>Download</small>
-                </a>
-            </div>
-        </div>
-
-        <div class="table-responsive px-2" id="divLegalmanagementsystemTable">
-
-        </div>
-
-
-    </div>
-</div>
 
 
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />

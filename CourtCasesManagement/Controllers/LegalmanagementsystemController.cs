@@ -46,8 +46,9 @@ namespace CourtCasesManagement.Controllers
         [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
         {
+            //ViewBag.courtType = await _legalmanagementsystemService.GetCourttypeList();
             Legalmanagementsystem model = new Legalmanagementsystem();
-
+            
             await BindDropDownView(model);
             return View(model);
         }
@@ -404,14 +405,25 @@ namespace CourtCasesManagement.Controllers
                     data.Add(new LegalManagementSystemListDto()
                     {
                         Id = result[i].Id,
-                        FileNo = result[i].FileNo,
-                        CourtCaseNo = result[i].CourtCaseNo,
+                        fileNo = result[i].FileNo,
+                        courtCaseNo = result[i].CourtCaseNo,
+                        courtCaseTitle =result[i].CourtCaseTitle,
+                        Subject = result[i].Subject,
+                        HearingDate=Convert.ToDateTime(result[i].HearingDate).ToString("dd-MMM-yyyy")==null ? "" :Convert.ToDateTime(result[i].HearingDate).ToString("dd-MMM-yyyyy"),
+                        NextHearingDate = Convert.ToDateTime(result[i].NextHearingDate).ToString("dd-MMM-yyyy") == null ? "" : Convert.ToDateTime(result[i].NextHearingDate).ToString("dd-MMM-yyyy"),
+                        ContemptOfCourt = result[i].ContemptOfCourt.ToString() == "1" ? "Yes" : "No",
+                        Courttype = result[i].CourtType.CourtType == null ? "" : result[i].CourtType.CourtType,
+                        Casestatus = result[i].CaseStatus.CaseStatus == null ? "" : result[i].CaseStatus.CaseStatus,
+                        LastDecision = result[i].LastDecision,
                         Zone = result[i].Zone == null ? "" : result[i].Zone.Name,
-                        Village = result[i].Locality == null ? "" : result[i].Locality.Name,
-                        COC = result[i].IsActive.ToString() == "1" ? "Yes" : "No",
-                        Jugement = result[i].IsActive.ToString() == "1" ? "Yes" : "No",
-                        StayinterimGranted = result[i].IsActive.ToString() == "1" ? "Yes" : "No",
-                        IsActive = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                        Locality = result[i].Locality == null ? " " : result[i].Locality.Name,
+                        CaseType = result[i].CaseType,
+                        InFavour = result[i].InFavour,
+                        PanelLawyer = result[i].PanelLawyer,
+                        StayInterimGranted = result[i].StayInterimGranted.ToString() == "1" ? "Yes" : "No",
+                        Judgement = result[i].Judgement.ToString() == "1" ? "Yes" : "No",
+                        Remarks = result[i].Remarks,
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
                     });
                 }
             }
@@ -567,6 +579,13 @@ namespace CourtCasesManagement.Controllers
 
             return Flag;
         }
+        public async Task<IActionResult> DownloadCSVFormat()
+        {
+            FileHelper file = new FileHelper();
+
+            string filename = _configuration.GetSection("FilePaths:DownloadCSVFormat:DownloadCSVFormat").Value.ToString();
+            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+        }
         public IActionResult CreateBulkfile()
         {
             return View();
@@ -618,7 +637,7 @@ namespace CourtCasesManagement.Controllers
                             }
                             else
                             {
-                                var CaseStatusList = _legalmanagementsystemService.GetCaseStatusByName((rows[1]).Replace("\"", string.Empty).ToString());
+                                var CaseStatusList = _legalmanagementsystemService.GetCaseStatusByName((rows[1]).Replace("\"", string.Empty).ToLower().ToString());
                                 legalmanagementsystem.CaseStatusId = CaseStatusList;
                             }
                             if (rows[2] == "")
@@ -636,7 +655,7 @@ namespace CourtCasesManagement.Controllers
                             }
                             else
                             {
-                                var CourtType = _legalmanagementsystemService.GetCourtCaseByName((rows[3]).Replace("\"", string.Empty).ToString());
+                                var CourtType = _legalmanagementsystemService.GetCourtCaseByName((rows[3]).Replace("\"", string.Empty).ToLower().Trim().ToString());
                                 legalmanagementsystem.CourtTypeId = CourtType;
                             }
 
@@ -670,12 +689,9 @@ namespace CourtCasesManagement.Controllers
                                 nexthearingdate = t;
                             }
                             legalmanagementsystem.NextHearingDate = nexthearingdate;
-                            // legalmanagementsystem.HearingDate = rows[4]==""?null:Convert.ToDateTime((rows[4]));
-                            // legalmanagementsystem.NextHearingDate = Convert.ToDateTime((rows[5]) == "Unlisted" ? "" : (rows[5]).ToString());
                             legalmanagementsystem.Remarks = (rows[6].Replace("\"", string.Empty) == "" ? null : "Court Name::  " + rows[3].ToString().Replace("\"", string.Empty) + "// Usergroup:: " + rows[6].ToString().Replace("\"", string.Empty) + "// Case Status:: " + rows[9].ToString().Replace("\"", string.Empty) + "// Case Type::" + rows[1].ToString().Replace("\"", string.Empty) + "// VillageName:: " + rows[11].ToString().Replace("\"", string.Empty));
                             legalmanagementsystem.CourtCaseTitle = (rows[7].ToString().Replace("\"", string.Empty));
                             legalmanagementsystem.Subject = (rows[8].ToString().Replace("\"", string.Empty));
-                            // legalmanagementsystem.Judgement = Convert.ToInt32((rows[9]) == "0" ? "No" : (rows[9]) == "1" ? "DISPOSED OFF" : "DISPOSED");
                             int? temp = null;
                             if (rows[9].ToString().Trim().Replace("\"", string.Empty) == "")
                             {

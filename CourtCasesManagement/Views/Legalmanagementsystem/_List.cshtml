@@ -5,7 +5,7 @@
         <tr>
             <th>File No</th>
             <th>Court Case No</th>
-            <th>Case Type</th>
+            <th>Case Status</th>
             <th>Court Name</th>
             <th>Case Title</th>
             <th>Next Hearing Date</th>
@@ -22,8 +22,8 @@
 
                 <td>@item.FileNo</td>
                 <td>@item.CourtCaseNo</td>
-                <td>@(item.CaseStatus!=null? item.CaseStatus.CaseStatus:"-")</td>
-                <td>@item.CourtType.CourtType</td>
+                <td>@(item.CaseStatus == null ? "" : item.CaseStatus.CaseStatus)</td>
+                <td>@(item.CourtType == null ? "" : item.CourtType.CourtType)</td>
                 <td>@item.CourtCaseTitle</td>
                 <td>@(item.NextHearingDate.HasValue ? item.NextHearingDate.Value.ToString("dd-MM-yyyy"):"-")</td>
                 <td>

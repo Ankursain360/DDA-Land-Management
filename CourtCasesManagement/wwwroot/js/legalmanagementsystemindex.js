@@ -15,8 +15,14 @@ function GetLms(pageNumber, pageSize, order) {
 
 }
 function GetSearchParam(pageNumber, pageSize, sortOrder) {
+    debugger;
     var model = {
-        name: $('#txtName').val(),
+        fileNo: $('#txtfileno').val(),
+        courtCaseNo: $('#txtCaseNo').val(),
+       /* CourtType: parseInt($('#ddlCaseStatus option:selected').val()),*/
+        caseStatus: $('#ddlCaseStatus').val(),
+        courtType: $('#ddlCourtName').val(),
+        courtCaseTitle: $('#txtCaseTitle').val(),
         sortBy: $("#ddlSort").children("option:selected").val(),
         sortOrder: parseInt(sortOrder),
         pageSize: parseInt(pageSize),
@@ -52,20 +58,31 @@ function GetLmsOrderby(pageNumber, pageSize, order) {
 
     });
 }
-function GetSearchParamOrderby(pageNumber, pageSize, sortOrder) {
-    var model = {
-        name: $('#txtName').val(),
-        sortBy: $("#ddlSort").children("option:selected").val(),
-        sortOrder: parseInt(sortOrder),
-        pageSize: pageSize,
-        pageNumber: pageNumber
-    }
-    return model;
-}
+//function GetSearchParamOrderby(pageNumber, pageSize, sortOrder) {
+//    var model = {
+//      /*  name: $('#txtName').val(),*/
+//        fileNo: $('#txtfileno').val(),
+//        courtCaseNo: $('#txtCaseNo').val(),
+//        /* CourtType: parseInt($('#ddlCaseStatus option:selected').val()),*/
+//        courtType: $('#ddlCaseStatus').val(),
+//        courtCaseTitle: $('#ddlCourtName').val(),
+//        caseStatus: $('#txtCaseTitle').val(),
+//        sortBy: $("#ddlSort").children("option:selected").val(),
+//        sortOrder: parseInt(sortOrder),
+//        pageSize: pageSize,
+//        pageNumber: pageNumber
+//    }
+//    return model;
+//}
 
 
 $("#btnReset").click(function () {
-    $("#txtName").val('');
+    $("#txtfileno").val('');
+    $("#txtCaseNo").val('');
+   /* $('#ddlCaseStatus').val('0').trigger('change');*/
+    $("#ddlCaseStatus").val('');
+    $("#ddlCourtName").val('');
+    $("#txtCaseTitle").val('');
     GetLms(currentPageNumber, currentPageSize, sortby);
 });
 

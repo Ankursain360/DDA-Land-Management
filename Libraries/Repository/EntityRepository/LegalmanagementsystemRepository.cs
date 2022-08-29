@@ -23,47 +23,47 @@ namespace Libraries.Repository.EntityRepository
 
             int File = 0;
             
-            if ((name == "W.P.(C)") || (name == "Write Petition (Civil)") || (name == "W.P.(CRL)"))
+            if ((name == "W.P.(C)".ToLower()) || (name == "Write Petition (Civil)".ToLower()) || (name == "W.P.(CRL)".ToLower()))
             {
                 File = 1;     //**********Writ Pitition ***************//
             }
-            else if ((name == "SLP (Civil)") || (name == "SLP (Civil) CC") || (name == "SLP (Civil) D") || (name == "SLP (Criminal) CRLMP") || (name == "Diary No And Diary Yr (SLPD)"))
+            else if ((name == "SLP (Civil)".ToLower()) || (name == "SLP (Civil) CC".ToLower()) || (name == "SLP (Civil) D".ToLower()) || (name == "SLP (Criminal) CRLMP".ToLower()) || (name == "Diary No And Diary Yr (SLPD)".ToLower()))
             {
                 File = 2;   //**********SLP ***************//
             }
-            else if ((name == "REVIEW PET.") || (name == "Review Petition (Civil)") || (name == "Review Petition (Civil) D"))
+            else if ((name == "REVIEW PET.".ToLower()) || (name == "Review Petition (Civil)".ToLower()) || (name == "Review Petition (Civil) D".ToLower()))
             {
                 File = 3;   //**********Review***************//
             }
-            else if (name == "Curative Petition (Civil)")
+            else if (name == "Curative Petition (Civil)".ToLower())
             {
                  File = 4;  //**********Curative***************//
             }
-            else if ((name == "Contempt Petition") || (name == "Contempt Petition (Civil)") || (name == "Mediation Petition No") || (name == "Transfer Petition (Civil)"))
+            else if ((name == "Contempt Petition".ToLower()) || (name == "Contempt Petition (Civil)".ToLower()) || (name == "Mediation Petition No".ToLower()) || (name == "Transfer Petition (Civil)".ToLower()))
             {
                  File = 5;  //********** Pitition ***************//
             }
-            else if ((name == "Appeal") || (name == "Appeal (THC)") || (name == "CA - CRIMINAL APPEAL") || (name == "Civil Appeal") || (name == "Civil Appeal D") ||
-                    (name == "M C A - MISC. CIVIL APPEAL FOR CJ") ||
-                    (name == "MCA DJ - MISC. CIVIL APPEAL DJ AND  ADJ") ||
-                    (name == "MCA DJ - MISC. CIVIL APPEAL FOR DJ ADJ") ||
-                    (name == " MCA DJ ADJ -MISC.CIVIL APPEAL FOR DJ ADJ") ||
-                    (name == "MCA SCJ - MISC. CIVIL APPEAL FOR CJ") ||
-                    (name == "MCA SCJ - MISC. CIVIL APPEAL FOR SCJ") ||
-                    (name == "MCD APPL - MCD APPEAL") ||
-                    (name == "R.C.A. - REGULAR CIVIL APPEAL CJ") ||
-                    (name == "VAT APPEAL") ||
-                    (name == "RCA CIVIL DJ ADJ - REG. CIVIL APPEAL FOR DJ ADJ") ||
-                    (name == "RCA DJ - REGULAR CIVIL APPEAL FOR DJ") ||
-                    (name == "RCA DJ - REG CIVIL APPEAL  DJ and ADJ") ||
-                    (name == "RCA DJ - REG. CIVIL APPEAL FOR DJ ADJ") ||
-                    (name == "RCA DJ - REG CIVIL APPEAL FOR DJ ADJ") ||
-                    (name == "RCA SCJ - CIVIL APPEAL FOR CJ") ||
-                    (name == "RCA SCJ - REGULAR CIVIL APPEAL FOR CJ") ||
-                    (name == "RCA - REGULAR CIVIL APPEAL FOR DJ") ||
-                    (name == "R.C.A. - REGULAR CIVIL APPEAL CJ") ||
-                    (name == "RCA DJ - REGULAR CIVIL APPEAL DJ ADJ") ||
-                    (name == "RCA - REGULAR CIVIL APPEAL  DJ ADJ")) 
+            else if ((name == "Appeal".ToLower()) || (name == "Appeal (THC)".ToLower()) || (name == "CA - CRIMINAL APPEAL".ToLower()) || (name == "Civil Appeal".ToLower()) || (name == "Civil Appeal D".ToLower()) ||
+                    (name == "M C A - MISC. CIVIL APPEAL FOR CJ".ToLower()) ||
+                    (name == "MCA DJ - MISC. CIVIL APPEAL DJ AND  ADJ".ToLower()) ||
+                    (name == "MCA DJ - MISC. CIVIL APPEAL FOR DJ ADJ".ToLower()) ||
+                    (name == " MCA DJ ADJ -MISC.CIVIL APPEAL FOR DJ ADJ".ToLower()) ||
+                    (name == "MCA SCJ - MISC. CIVIL APPEAL FOR CJ".ToLower()) ||
+                    (name == "MCA SCJ - MISC. CIVIL APPEAL FOR SCJ".ToLower()) ||
+                    (name == "MCD APPL - MCD APPEAL".ToLower()) ||
+                    (name == "R.C.A. - REGULAR CIVIL APPEAL CJ".ToLower()) ||
+                    (name == "VAT APPEAL".ToLower()) ||
+                    (name == "RCA CIVIL DJ ADJ - REG. CIVIL APPEAL FOR DJ ADJ".ToLower()) ||
+                    (name == "RCA DJ - REGULAR CIVIL APPEAL FOR DJ".ToLower()) ||
+                    (name == "RCA DJ - REG CIVIL APPEAL  DJ and ADJ".ToLower()) ||
+                    (name == "RCA DJ - REG. CIVIL APPEAL FOR DJ ADJ".ToLower()) ||
+                    (name == "RCA DJ - REG CIVIL APPEAL FOR DJ ADJ".ToLower()) ||
+                    (name == "RCA SCJ - CIVIL APPEAL FOR CJ".ToLower()) ||
+                    (name == "RCA SCJ - REGULAR CIVIL APPEAL FOR CJ".ToLower()) ||
+                    (name == "RCA - REGULAR CIVIL APPEAL FOR DJ".ToLower()) ||
+                    (name == "R.C.A. - REGULAR CIVIL APPEAL CJ".ToLower()) ||
+                    (name == "RCA DJ - REGULAR CIVIL APPEAL DJ ADJ".ToLower()) ||
+                    (name == "RCA - REGULAR CIVIL APPEAL  DJ ADJ".ToLower())) 
 
 
             {
@@ -80,11 +80,11 @@ namespace Libraries.Repository.EntityRepository
         {
             int File = 0;
 
-            if ((name == "Delhi High Court"))
+            if ((name == "Delhi High Court".ToLower().Trim()))
             {
                 File = 1;     //**********high court ***************//
             }
-            else if ((name == "Supreme Court"))
+            else if ((name == "Supreme Court".ToLower().Trim()))
             {
                 File = 3;    //**********Supreme court ***************//
 
@@ -300,7 +300,12 @@ namespace Libraries.Repository.EntityRepository
                      .Include(x => x.Locality)
                      .Include(x => x.CaseStatus)
                       .Include(x => x.CourtType)
-                     .Where(x => ((string.IsNullOrEmpty(model.name) || x.FileNo.Contains(model.name))))
+                     .Where(x => (string.IsNullOrEmpty(model.fileNo) || x.FileNo.Contains(model.fileNo))
+                          && (string.IsNullOrEmpty(model.courtCaseNo)||x.CourtCaseNo.Contains(model.courtCaseNo))
+                          &&(string.IsNullOrEmpty(model.courtType)||x.CourtType.CourtType.Trim().Contains(model.courtType))
+                          && (string.IsNullOrEmpty(model.courtCaseTitle) || x.CourtCaseTitle.Contains(model.courtCaseTitle))
+                          && (string.IsNullOrEmpty(model.caseStatus) || x.CaseStatus.CaseStatus.Contains(model.caseStatus))
+                     )
                       //.OrderByDescending(s => s.IsActive == 1)
                       .GetPaged<Legalmanagementsystem>(model.PageNumber, model.PageSize);
 
@@ -309,63 +314,95 @@ namespace Libraries.Repository.EntityRepository
             {
                 switch (model.SortBy.ToUpper())
                 {
-                    case ("NAME"):
-                        data = null;
-                        data = await _dbContext.Legalmanagementsystem
-                     .Include(x => x.Zone)
-                     .Include(x => x.Locality)
-                     .Include(x => x.CaseStatus)
-                      .Include(x => x.CourtType)
-                     .Where(x => ((string.IsNullOrEmpty(model.name) || x.FileNo.Contains(model.name))))
-                      .OrderBy(x => x.FileNo)
-                      .GetPaged<Legalmanagementsystem>(model.PageNumber, model.PageSize);
-
-
+                    case ("FILE"):
+                        data.Results = data.Results.OrderBy(x => x.FileNo).ToList();
                         break;
                     case ("STATUS"):
-                        data = null;
-                        data = await _dbContext.Legalmanagementsystem
-                            .Include(x => x.Zone)
-                            .Include(x => x.Locality)
-                            .Include(x => x.CaseStatus)
-                             .Include(x => x.CourtType)
-                            .Where(x => ((string.IsNullOrEmpty(model.name) || x.FileNo.Contains(model.name))))
-                                .OrderBy(s => s.IsActive == 0)
-                                 .GetPaged<Legalmanagementsystem>(model.PageNumber, model.PageSize);
-
-
+                        data.Results = data.Results.OrderByDescending(x => x.IsActive).ToList();
                         break;
+                        //case ("FILE"):
+                        //    data = null;
+                        //    data = await _dbContext.Legalmanagementsystem
+                        // .Include(x => x.Zone)
+                        // .Include(x => x.Locality)
+                        // .Include(x => x.CaseStatus)
+                        //  .Include(x => x.CourtType)
+                        // .Where(x => (string.IsNullOrEmpty(model.fileNo) || x.FileNo.Contains(model.fileNo))
+                        //  && (string.IsNullOrEmpty(model.courtCaseNo) || x.CourtCaseNo.Contains(model.courtCaseNo))
+                        //      && (string.IsNullOrEmpty(model.caseStatus) || x.CaseStatus.CaseStatus.Contains(model.caseStatus))
+                        //      && (string.IsNullOrEmpty(model.courtType) || x.CourtType.CourtType.Contains(model.courtType))
+                        //      && (string.IsNullOrEmpty(model.courtCaseTitle) || x.CourtCaseTitle.Contains(model.courtCaseTitle))
+                        // )
+                        //  .OrderBy(x => x.FileNo)
+                        //  .GetPaged<Legalmanagementsystem>(model.PageNumber, model.PageSize);
+                        //    break;
+
+                        //case ("STATUS"):
+                        //    data = null;
+                        //    data = await _dbContext.Legalmanagementsystem
+                        //        .Include(x => x.Zone)
+                        //        .Include(x => x.Locality)
+                        //        .Include(x => x.CaseStatus)
+                        //         .Include(x => x.CourtType)
+                        //        .Where(x => (string.IsNullOrEmpty(model.fileNo) || x.FileNo.Contains(model.fileNo))
+                        //         && (string.IsNullOrEmpty(model.courtCaseNo) || x.CourtCaseNo.Contains(model.courtCaseNo))
+                        //      && (string.IsNullOrEmpty(model.courtType) || x.CourtType.CourtType.Trim().Contains(model.courtType))
+                        //      && (string.IsNullOrEmpty(model.courtCaseTitle) || x.CourtCaseTitle.Contains(model.courtCaseTitle))
+                        //      && (string.IsNullOrEmpty(model.caseStatus) || x.CaseStatus.CaseStatus.Contains(model.caseStatus))
+                        //        )
+                        //            .OrderByDescending(s => s.IsActive==0)
+                        //             .GetPaged<Legalmanagementsystem>(model.PageNumber, model.PageSize);
+
+
+                        //    break;
                 }
             }
             else if (SortOrder == 2)
             {
                 switch (model.SortBy.ToUpper())
                 {
-                    case ("NAME"):
-                        data = null;
-                        data = await _dbContext.Legalmanagementsystem
-                     .Include(x => x.Zone)
-                     .Include(x => x.Locality)
-                     .Include(x => x.CaseStatus)
-                      .Include(x => x.CourtType)
-                     .Where(x => ((string.IsNullOrEmpty(model.name) || x.FileNo.Contains(model.name))))
-                         .OrderByDescending(x => x.FileNo)
-                        .GetPaged<Legalmanagementsystem>(model.PageNumber, model.PageSize);
-
+                    case ("FILE"):
+                        data.Results = data.Results.OrderByDescending(x => x.FileNo).ToList();
                         break;
                     case ("STATUS"):
-                        data = null;
-                        data = await _dbContext.Legalmanagementsystem
-                     .Include(x => x.Zone)
-                     .Include(x => x.Locality)
-                     .Include(x => x.CaseStatus)
-                      .Include(x => x.CourtType)
-                     .Where(x => ((string.IsNullOrEmpty(model.name) || x.FileNo.Contains(model.name))))
-                                .OrderByDescending(x => x.IsActive == 0)
-                                 .GetPaged<Legalmanagementsystem>(model.PageNumber, model.PageSize);
-
-
+                        data.Results = data.Results.OrderBy(x => x.IsActive).ToList();
                         break;
+                        //case ("NAME"):
+                        //    data = null;
+                        //    data = await _dbContext.Legalmanagementsystem
+                        // .Include(x => x.Zone)
+                        // .Include(x => x.Locality)
+                        // .Include(x => x.CaseStatus)
+                        //  .Include(x => x.CourtType)
+                        // .Where(x => (string.IsNullOrEmpty(model.fileNo) || x.FileNo.Contains(model.fileNo))
+                        //  && (string.IsNullOrEmpty(model.courtCaseNo) || x.CourtCaseNo.Contains(model.courtCaseNo))
+                        //      && (string.IsNullOrEmpty(model.courtType) || x.CourtType.CourtType.Trim().Contains(model.courtType))
+                        //      && (string.IsNullOrEmpty(model.courtCaseTitle) || x.CourtCaseTitle.Contains(model.courtCaseTitle))
+                        //      && (string.IsNullOrEmpty(model.caseStatus) || x.CaseStatus.CaseStatus.Contains(model.caseStatus))
+                        // )
+                        //     .OrderByDescending(x => x.FileNo)
+                        //    .GetPaged<Legalmanagementsystem>(model.PageNumber, model.PageSize);
+
+                        //    break;
+
+                        //case ("STATUS"):
+                        //    data = null;
+                        //    data = await _dbContext.Legalmanagementsystem
+                        // .Include(x => x.Zone)
+                        // .Include(x => x.Locality)
+                        // .Include(x => x.CaseStatus)
+                        //  .Include(x => x.CourtType)
+                        // .Where(x => (string.IsNullOrEmpty(model.fileNo) || x.FileNo.Contains(model.fileNo))
+                        //  && (string.IsNullOrEmpty(model.courtCaseNo) || x.CourtCaseNo.Contains(model.courtCaseNo))
+                        //      && (string.IsNullOrEmpty(model.courtType) || x.CourtType.CourtType.Trim().Contains(model.courtType))
+                        //      && (string.IsNullOrEmpty(model.courtCaseTitle) || x.CourtCaseTitle.Contains(model.courtCaseTitle))
+                        //      && (string.IsNullOrEmpty(model.caseStatus) || x.CaseStatus.CaseStatus.Contains(model.caseStatus))
+                        // )
+                        //            .OrderBy(x => x.IsActive==0)
+                        //             .GetPaged<Legalmanagementsystem>(model.PageNumber, model.PageSize);
+
+
+                        //    break;
                 }
             }
             return data;
@@ -374,11 +411,11 @@ namespace Libraries.Repository.EntityRepository
         public async Task<List<Legalmanagementsystem>> GetAllLegalmanagementsystem()
         {
             return await _dbContext.Legalmanagementsystem
+                    .Where(x=>x.IsActive == 1)
                     .Include(x => x.Zone)
                     .Include(x => x.Locality)
                     .Include(x => x.CaseStatus)
                     .Include(x => x.CourtType)
-                    .Where(x => x.IsActive == 1)
                     .ToListAsync();
         }
        

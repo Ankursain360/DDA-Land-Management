@@ -11,7 +11,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Documentcategory> builder)
         {
-            builder.ToTable("documentcategory", "lms");
+           // builder.ToTable("documentcategory", "lms");
 
             builder.Property(e => e.Id)
                 .HasColumnName("id")
