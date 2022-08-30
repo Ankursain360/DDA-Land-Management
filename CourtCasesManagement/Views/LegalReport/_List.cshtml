@@ -37,7 +37,7 @@
                     <td>@item.Subject</td>
                     <td>@(item.HearingDate.HasValue? item.HearingDate.Value.ToString("dd-MMM-yyyy"):"")</td>
                     <td>@(item.NextHearingDate.HasValue? item.NextHearingDate.Value.ToString("dd-MMM-yyyy"):"")</td>
-                    <td>@(item.ContemptOfCourt==0?"No":"Yes")</td>
+                    <td>@(item.ContemptOfCourt==0?"":item.ContemptOfCourt==1? "Yes":"No")</td>
                     <td>
                         @(item.CourtType==null?"NA": item.CourtType.CourtType)
                     </td>
@@ -54,8 +54,8 @@
                     <td>@item.CaseType</td>
                     <td>@item.InFavour </td>
                     <td>@item.PanelLawyer</td>
-                    <td>@(item.StayInterimGranted == 0?"No":"Yes")</td>
-                    <td>@(item.Judgement == 0?"No":"Yes")</td>
+                    <td>@(item.StayInterimGranted == 0?"":item.StayInterimGranted==1? "Yes":"No")</td>
+                    <td>@(item.Judgement == 0?"":item.Judgement==1? "Yes":"No")</td>
                     <td>@item.Remarks</td>
                     <td>@item.CreatedDate.ToString("dd-MMM-yyyy")</td>
                 </tr>
