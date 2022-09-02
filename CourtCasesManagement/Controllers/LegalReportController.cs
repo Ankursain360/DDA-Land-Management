@@ -70,22 +70,64 @@ namespace CourtCasesManagement.Controllers
             return Json(await _legalmanagementsystemservice.GetCourtCaseNoList(Convert.ToInt32(filenoId)));
         }
 
-        //public async Task<IActionResult> LegalReportList([FromBody] LegalReportSearchDto report)
+        public async Task<IActionResult> LegalReportList([FromBody] LegalReportSearchDto report)
+        {
+
+            var result = await _legalmanagementsystemservice.GetPagedLegalReportForDownload(report);
+            List<LegalManagementSystemListDto> data = new List<LegalManagementSystemListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.RowCount; i++)
+                {
+                    data.Add(new LegalManagementSystemListDto()
+                    {
+                        Id = result.Results.Select(x => x.Id).FirstOrDefault(),
+                        fileNo = result.Results.Select(x => x.FileNo).FirstOrDefault(),
+                        courtCaseNo = result.Results.Select(x => x.CourtCaseNo).FirstOrDefault(),
+                        courtCaseTitle = result.Results.Select(x => x.CourtCaseTitle).FirstOrDefault(),
+                        Subject = result.Results.Select(x => x.Subject).FirstOrDefault(),
+                        // HearingDate = result.Results.Select(x=>x.HearingDate.HasValue?"" : Convert.ToDateTime(x.HearingDate)).FirstOrDefault(),
+                       // NextHearingDate = result.Results.Select(x => x.NextHearingDate.HasValue ? "" : Convert.ToDateTime(x.NextHearingDate)).FirstOrDefault(),
+
+                    });
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        }
+
+
+        //public async Task<IActionResult> LegalReportList()
         //{
-           
-        //    var result = await_legalmanagementsystemservice.GetPagedLegalReportForDownload(report);
-        //    List<BranchListDto> data = new List<BranchListDto>();
+        //    var result = await _legalmanagementsystemservice.GetAllLegalmanagementsystem();
+        //    List<LegalManagementSystemListDto> data = new List<LegalManagementSystemListDto>();
         //    if (result != null)
         //    {
         //        for (int i = 0; i < result.Count; i++)
         //        {
-        //            data.Add(new BranchListDto()
+        //            data.Add(new LegalManagementSystemListDto()
         //            {
         //                Id = result[i].Id,
-        //                BranchCode = result[i].Code,
-        //                BranchName = result[i].Name,
-        //                Department = result[i].Department == null ? "" : result[i].Department.Name,
-        //                IsActive = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+        //                fileNo = result[i].FileNo,
+        //                courtCaseNo = result[i].CourtCaseNo,
+        //                courtCaseTitle = result[i].CourtCaseTitle,
+        //                Subject = result[i].Subject,
+        //                HearingDate = Convert.ToDateTime(result[i].HearingDate).ToString("dd-MMM-yyyy") == null ? "" : Convert.ToDateTime(result[i].HearingDate).ToString("dd-MMM-yyyyy"),
+        //                NextHearingDate = Convert.ToDateTime(result[i].NextHearingDate).ToString("dd-MMM-yyyy") == null ? "" : Convert.ToDateTime(result[i].NextHearingDate).ToString("dd-MMM-yyyy"),
+        //                ContemptOfCourt = result[i].ContemptOfCourt.ToString() == "1" ? "Yes" : "No",
+        //                Courttype = result[i].CourtType.CourtType == null ? "" : result[i].CourtType.CourtType,
+        //                Casestatus = result[i].CaseStatus.CaseStatus == null ? "" : result[i].CaseStatus.CaseStatus,
+        //                LastDecision = result[i].LastDecision,
+        //                Zone = result[i].Zone == null ? "" : result[i].Zone.Name,
+        //                Locality = result[i].Locality == null ? " " : result[i].Locality.Name,
+        //                CaseType = result[i].CaseType,
+        //                InFavour = result[i].InFavour,
+        //                PanelLawyer = result[i].PanelLawyer,
+        //                StayInterimGranted = result[i].StayInterimGranted.ToString() == "1" ? "Yes" : "No",
+        //                Judgement = result[i].Judgement.ToString() == "1" ? "Yes" : "No",
+        //                Remarks = result[i].Remarks,
+        //                Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
         //            });
         //        }
         //    }

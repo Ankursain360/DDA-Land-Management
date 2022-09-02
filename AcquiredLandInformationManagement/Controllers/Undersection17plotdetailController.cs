@@ -231,7 +231,7 @@ namespace AcquiredLandInformationManagement.Controllers
                         ActualArea = result[i].Khasra.Bigha.ToString()
                                   + '-' + result[i].Khasra.Biswa.ToString()
                                   + '-' + result[i].Khasra.Biswanshi.ToString(),
-                        Area = result[i].Bigha.ToString()
+                        NotifyArea = result[i].Bigha.ToString()
                                   + '-' + result[i].Biswa.ToString()
                                   + '-' + result[i].Biswanshi.ToString(),
                         Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",

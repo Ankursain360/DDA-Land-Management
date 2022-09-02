@@ -11,6 +11,8 @@ using Notification.Constants;
 using Notification.OptionEnums;
 using CourtCasesManagement.Filters;
 using Core.Enum;
+using Dto.Master;
+using Utility.Helper;
 
 namespace CourtCasesManagement.Controllers
 {
@@ -43,6 +45,34 @@ namespace CourtCasesManagement.Controllers
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                 return PartialView();
             }
+        }
+        public async Task<IActionResult> CaseHearningReportList()
+        {
+            var result = await _legalmanagementsystemService.GetAllLegalmanagementsystem();
+            List<HearingReportListDto> data = new List<HearingReportListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new HearingReportListDto()
+                    {
+                        //Id = result[i].Id,
+                        fileNo = result[i].FileNo,
+                        courtCaseNo = result[i].CourtCaseNo,
+                        courtCaseTitle = result[i].CourtCaseTitle,
+                        Subject = result[i].Subject,
+                        HearingDate = Convert.ToDateTime(result[i].HearingDate).ToString("dd-MMM-yyyy") == null ? "" : Convert.ToDateTime(result[i].HearingDate).ToString("dd-MMM-yyyyy"),
+                        NextHearingDate = Convert.ToDateTime(result[i].NextHearingDate).ToString("dd-MMM-yyyy") == null ? "" : Convert.ToDateTime(result[i].NextHearingDate).ToString("dd-MMM-yyyy"),
+                        CaseType = result[i].CaseType,
+                        InFavour = result[i].InFavour,
+                        PanelLawyer = result[i].PanelLawyer,
+                        
+                    });
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
 
     }

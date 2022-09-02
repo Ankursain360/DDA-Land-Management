@@ -22,13 +22,24 @@
             </div>
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input asp-for="LMFileNO" placeholder="LegalFileNo" type="text" class="floating-label-field floating-label-field--s3" limit="100" disabled />
+
+                    <span asp-validation-for="LMFileNO" class="text-danger"></span>
+
+                    <label class="floating-label">Legal File No. <span style="color:red"></span>  </label>
+                </div>
+            </div>
+           
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="CourtCaseNo" placeholder="CourtCaseNo" type="text" class="floating-label-field floating-label-field--s3" limit="100" disabled />
                     <span asp-validation-for="CourtCaseNo" class="text-danger"></span>
                     <label class="floating-label"> Court Case No   </label>
                 </div>
             </div>
-        </div>
-        <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="CourtCaseTitle" placeholder="CourtCaseTitle" class="floating-label-field floating-label-field--s3" type="text" limit="100" disabled />
@@ -36,6 +47,9 @@
                     <label class="floating-label"> Court Case Title   </label>
                 </div>
             </div>
+         
+        </div>
+        <div class="mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="Subject" placeholder="Subject" type="text" class="floating-label-field floating-label-field--s3" disabled />
@@ -142,7 +156,7 @@
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label class="radio-inline  ">
-                            <input type="radio" name="grpCaseType" id="Case" checked="checked" asp-for="CaseType" value="24(2) Case" disabled />24(2) Case
+                            <input type="radio" name="grpCaseType" id="Case"  asp-for="CaseType" value="24(2) Case" disabled />24(2) Case
                         </label>
                     </div>
                     <div class="form-group col-md-4">
@@ -160,7 +174,7 @@
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label class="radio-inline  ">
-                            <input type="radio" name="grpInfavour" id="DDA" checked="checked" asp-for="InFavour" value="DDA" disabled />DDA
+                            <input type="radio" name="grpInfavour" id="DDA"  asp-for="InFavour" value="DDA" disabled />DDA
                         </label>
                     </div>
                     <div class="form-group col-md-4">
@@ -196,7 +210,7 @@
                         @if (ViewBag.ExistStayFile != null)
                         {
 
-                            <input type="file" class="floating-label-field floating-label-field--s3" id="AssignSfile" name="AssignSfile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                            <input disabled type="file" class="floating-label-field floating-label-field--s3" id="AssignSfile" name="AssignSfile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
                             @Html.ActionLink(" (View File)", "Download", new { id = Model.Id }, new { @class = "badge bg-primary px-2" })
                         }
                         else
@@ -212,7 +226,7 @@
             <div class="form-group col-md-6">
                 <div class="floating-label-wrap">
 
-                    <input type="text" class="floating-label-field floating-label-field--s3" asp-for="StayInterimGrantedRemarks">
+                    <input disabled type="text" class="floating-label-field floating-label-field--s3" asp-for="StayInterimGrantedRemarks">
                     <label class="floating-label">Stay Interim Granted Remarks</label>
                 </div>
             </div>
@@ -220,7 +234,7 @@
         <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3" id="ddlJudgement" asp-for="Judgement">
+                    <select disabled class="floating-label-field floating-label-field--s3" id="ddlJudgement" asp-for="Judgement">
                         <option value="0">No</option>
                         <option value="1">Yes</option>
                     </select>
@@ -278,17 +292,23 @@
             </div>
         </div>
         <div class="row mt-md-3">
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <div class="floating-label-wrap">
-                    <textarea type="text" asp-for="Remarks" class="floating-label-field floating-label-field--s3"></textarea>
+                    <textarea disabled type="text" asp-for="Remarks" class="floating-label-field floating-label-field--s3"></textarea>
                     <label class="floating-label">Remarks</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <textarea type="text" asp-for="BriefDetailsOfDescription" disabled class="floating-label-field floating-label-field--s3"></textarea>
+                    <label class="floating-label">Brief Details Of Description</label>
                 </div>
             </div>
         </div>
         <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3" asp-for="IsActive">
+                    <select disabled class="floating-label-field floating-label-field--s3" asp-for="IsActive">
                         <option value="1" selected="selected">Active</option>
                         <option value="0">InActive</option>
                     </select>
@@ -314,9 +334,9 @@
 
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 
-<environment include="Development">
+@*<environment include="Development">
     <script src="~/js/legalmanagementsystemcreate.js"></script>
 </environment>
 <environment exclude="Development">
     <script src="~/js/legalmanagementsystemcreate.js" asp-append-version="true"></script>
-</environment>
+</environment>*@

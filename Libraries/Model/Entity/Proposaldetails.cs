@@ -26,7 +26,7 @@ namespace Libraries.Model.Entity
         public string Name { get; set; }
         [Required (ErrorMessage ="Scheme is mandatory")]
         public int? SchemeId { get; set; }
-        [Required(ErrorMessage = "Scheme is mandatory")]
+        [Required(ErrorMessage = "Required Agency is mandatory")]
         public string RequiredAgency { get; set; }
 
         [Required(ErrorMessage = "Proposal File No is mandatory")]

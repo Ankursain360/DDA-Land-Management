@@ -307,7 +307,7 @@ namespace AcquiredLandInformationManagement.Controllers
                         VillageName = result[i].Village == null ? "" : result[i].Village.Name,
                         KhasraNo = result[i].Khasra == null ? "" : result[i].Khasra.Name,
                         Date = Convert.ToDateTime(result[i].PossDate).ToString("dd-MMM-yyyy"),
-                        PlotNo = result[i].PlotNo,
+                        typeofpossession = result[i].PlotNo,
                        
                         Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
                     }); ;

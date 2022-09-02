@@ -239,7 +239,7 @@ namespace AcquiredLandInformationManagement.Controllers
                     {
                         Id = result[i].Id,
                         NotificationNo = result[i].Number,
-                        NotificationDate = Convert.ToDateTime(result[i].NotificationDate).ToString("dd-MMM-yyyy"),
+                        NotificationNo_US_17 = Convert.ToDateTime(result[i].NotificationDate).ToString("dd-MMM-yyyy"),
                         NotificationUS6 = result[i].UnderSection6 == null ? "" : result[i].UnderSection6.Number,
                         
                         Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",

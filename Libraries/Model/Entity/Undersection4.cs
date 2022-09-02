@@ -21,9 +21,9 @@ namespace Libraries.Model.Entity
         }
         [Required(ErrorMessage = "Proposal is mandatory")]
         public int ProposalId { get; set; }
-        [Required(ErrorMessage = "Notification No is mandatory")]
+        [Required(ErrorMessage = "Notification No(U/S-4) is mandatory")]
         public string Number { get; set; }
-        [Required(ErrorMessage = "The Notification is mandatory")]
+        [Required(ErrorMessage = "Notification Date is mandatory")]
         public DateTime? Ndate { get; set; }
         [Required(ErrorMessage = "Purpose is mandatory")]
         public string Npurpose { get; set; }

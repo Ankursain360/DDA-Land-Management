@@ -12,7 +12,7 @@ namespace Dto.Master
 
         public string Date { get; set; }
        
-        public string PlotNo { get; set; }
+        public string typeofpossession { get; set; }
         public string Status { get; set; }
     }
 }

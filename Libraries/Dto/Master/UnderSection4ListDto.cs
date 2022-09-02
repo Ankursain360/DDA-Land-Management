@@ -10,9 +10,9 @@ namespace Dto.Master
         public int Id { get; set; }
 
         public string ProposalName { get; set; }
-        public string NotificationNo { get; set; }
+        public string NotificationNo_US_4 { get; set; }
         public string NotificationDate { get; set; }
-        public string Type { get; set; }
+      //  public string Type { get; set; }
         public string Status { get; set; }
     }
 }

@@ -95,3 +95,4 @@ function onChangePageSize(pageSize) {
     GetLms(parseInt(currentPageNumber), parseInt(pageSize), sortby);
     currentPageSize = pageSize;
 }
+

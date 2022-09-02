@@ -35,7 +35,13 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<Khasra>> BindKhasra(int villageid)
         {
-            List<Khasra> KhasraList = await _dbContext.Khasra.Where(x => x.IsActive == 1 && x.AcquiredlandvillageId== villageid).ToListAsync();
+            List<Khasra> result = await _dbContext.Khasra.Where(x => x.IsActive == 1 && x.AcquiredlandvillageId== villageid).ToListAsync();
+            List<Khasra> KhasraList = result
+                .Select(o => new Khasra
+                {
+                    Id = o.Id,
+                    Name = o.Name
+                }).ToList();
             return KhasraList;
         }
 

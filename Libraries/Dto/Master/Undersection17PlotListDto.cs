@@ -12,7 +12,7 @@ namespace Dto.Master
         public string Village { get; set; }
         public string Khasra { get; set; }
         public string ActualArea { get; set; }
-        public string Area { get; set; }
+        public string NotifyArea { get; set; }
         public string Status { get; set; }
     }
 }

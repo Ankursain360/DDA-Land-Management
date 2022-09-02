@@ -7,6 +7,8 @@ namespace Dto.Master
     {
         public int Id { get; set; }
         public string Village { get; set; }
+        public string Bigha_biswa_biswanshi { get; set; } 
+       
         //public string JaraiSakni { get; set; }
 
         //public string Language { get; set; }

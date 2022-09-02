@@ -233,9 +233,9 @@ namespace AcquiredLandInformationManagement.Controllers
                     {
                         Id = result[i].Id,
                         ProposalName = result[i].Proposal == null ? "" : result[i].Proposal.Name,
-                        NotificationNo = result[i].Number,
+                        NotificationNo_US_4 = result[i].Number,
                         NotificationDate = Convert.ToDateTime(result[i].Ndate).ToString("dd-MMM-yyyy"),
-                        Type = result[i].TypeDetails,
+                      //  Type = result[i].TypeDetails,
                         Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
                     }); ;
                 }

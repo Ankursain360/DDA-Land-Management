@@ -74,18 +74,18 @@ namespace AcquiredLandInformationManagement.Controllers
         [DisableRequestSizeLimit]
         public async Task<IActionResult> Create(Demandlistdetails demandlistdetails)
         {
-            bool IsValidpdf = CheckMimeType(demandlistdetails);
-            bool IsValidpdf1 = CheckMimeType1(demandlistdetails);
-            await BindDropDown(demandlistdetails);
+            //bool IsValidpdf = CheckMimeType(demandlistdetails);
+            //bool IsValidpdf1 = CheckMimeType1(demandlistdetails);
+           // await BindDropDown(demandlistdetails);
             demandlistdetails.VillageList = await _demandListDetailsService.GetVillageList();
             demandlistdetails.KhasraNoList = await _demandListDetailsService.GetKhasraList(demandlistdetails.VillageId);
           
             if (ModelState.IsValid)
             {
-                if (IsValidpdf == true)
-                {
-                    if (IsValidpdf1 == true)
-                    {
+                //if (IsValidpdf == true)
+                //{
+                //    if (IsValidpdf1 == true)
+                //    {
                         FileHelper fileHelper = new FileHelper();
                         demandlistdetails.ENMDocumentName = demandlistdetails.ENMDocumentIFormFile == null ? demandlistdetails.ENMDocumentName : fileHelper.SaveFile1(ENMDocumentFilePath, demandlistdetails.ENMDocumentIFormFile);
 
@@ -159,20 +159,20 @@ namespace AcquiredLandInformationManagement.Controllers
                             return View(demandlistdetails);
 
                         }
-                    }
-                    else
-                    {
-                        ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
-                        await BindDropDown(demandlistdetails);
-                        return View(demandlistdetails);
-                    }
-                }
-                else
-                {
-                    ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
-                    await BindDropDown(demandlistdetails);
-                    return View(demandlistdetails);
-                }
+                //    }
+                //    else
+                //    {
+                //        ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
+                //        await BindDropDown(demandlistdetails);
+                //        return View(demandlistdetails);
+                //    }
+                //}
+                //else
+                //{
+                //    ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
+                //    await BindDropDown(demandlistdetails);
+                //    return View(demandlistdetails);
+                //}
             }
             else
             {

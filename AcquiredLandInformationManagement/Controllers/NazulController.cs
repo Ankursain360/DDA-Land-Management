@@ -232,6 +232,7 @@ namespace AcquiredLandInformationManagement.Controllers
                     {
                         Id = result[i].Id,
                         Village = result[i].Village == null ? "" : result[i].Village.Name,
+                        Bigha_biswa_biswanshi = result[i].Bigha.ToString() +" - "+result[i].Biswa.ToString() +" - "+result[i].Biswanshi.ToString(),
                         //JaraiSakni = result[i].JaraiSakani,
                         //Language = result[i].Language,
                         //DateOfConsolidation = Convert.ToDateTime(result[i].DateOfNotification).ToString("dd-MMM-yyyy"),

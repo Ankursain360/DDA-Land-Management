@@ -23,13 +23,24 @@
             </div>
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input asp-for="LMFileNO" placeholder="LegalFileNo" type="text" class="floating-label-field floating-label-field--s3" limit="100" />
+
+                    <span asp-validation-for="LMFileNO" class="text-danger"></span>
+
+                    <label class="floating-label">Legal File No.<span style="color:red"></span>   </label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="CourtCaseNo" placeholder="CourtCaseNo" type="text" class="floating-label-field floating-label-field--s3" limit="100" />
                     <span asp-validation-for="CourtCaseNo" class="text-danger"></span>
                     <label class="floating-label"> Court Case No   </label>
                 </div>
             </div>
-        </div>
-        <div class="row mt-md-3">
+
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="CourtCaseTitle" placeholder="CourtCaseTitle" class="floating-label-field floating-label-field--s3" type="text" limit="100" />
@@ -37,6 +48,9 @@
                     <label class="floating-label"> Court Case Title   </label>
                 </div>
             </div>
+           
+        </div>
+        <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="Subject" placeholder="Subject" type="text" class="floating-label-field floating-label-field--s3" />
@@ -147,7 +161,7 @@
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label class="radio-inline  ">
-                            <input type="radio" name="grpCaseType" id="Case" checked="checked" asp-for="CaseType" value="24(2) Case" />24(2) Case
+                            <input type="radio" name="grpCaseType" id="Case" asp-for="CaseType" value="24(2) Case" />24(2) Case
                         </label>
                     </div>
                     <div class="form-group col-md-4">
@@ -165,7 +179,7 @@
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label class="radio-inline  ">
-                            <input type="radio" name="grpInfavour" id="DDA" checked="checked" asp-for="InFavour" value="DDA" />DDA
+                            <input type="radio" name="grpInfavour" id="DDA"  asp-for="InFavour" value="DDA" />DDA
                         </label>
                     </div>
                     <div class="form-group col-md-4">
@@ -288,10 +302,16 @@
         </div>
 
         <div class="row mt-md-3">
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <div class="floating-label-wrap">
                     <textarea type="text" asp-for="Remarks" class="floating-label-field floating-label-field--s3"></textarea>
                     <label class="floating-label">Remarks</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <textarea type="text" asp-for="BriefDetailsOfDescription" limit="200" class="floating-label-field floating-label-field--s3"></textarea>
+                    <label class="floating-label">Brief Details Of Description</label>
                 </div>
             </div>
         </div>

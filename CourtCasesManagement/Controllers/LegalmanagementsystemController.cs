@@ -429,7 +429,8 @@ namespace CourtCasesManagement.Controllers
             }
 
             var memory = ExcelHelper.CreateExcel(data);
-            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            var file = File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            return file;
         }
 
 

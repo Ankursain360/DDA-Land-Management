@@ -121,8 +121,8 @@ namespace AcquiredLandInformationManagement.Controllers
         [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
-            Jointsurvey jointsurvey = new Jointsurvey();
-            jointsurvey = await _jointsurveyService.FetchSingleResult(id);
+           
+           var jointsurvey = await _jointsurveyService.FetchSingleResult(id);
 
             jointsurvey.KhasraList = await _jointsurveyService.BindKhasra(jointsurvey.VillageId);
             jointsurvey.VillageList = await _jointsurveyService.GetAllVillage();
@@ -238,10 +238,10 @@ namespace AcquiredLandInformationManagement.Controllers
         public async Task<IActionResult> View(int id)
         {
 
-            Jointsurvey jointsurvey = new Jointsurvey();
-            jointsurvey = await _jointsurveyService.FetchSingleResult(id);
+          
+            var jointsurvey = await _jointsurveyService.FetchSingleResult(id);
 
-            jointsurvey.KhasraList = await _jointsurveyService.BindKhasra(jointsurvey.ZoneId);
+            jointsurvey.KhasraList = await _jointsurveyService.BindKhasra(jointsurvey.VillageId);
             jointsurvey.VillageList = await _jointsurveyService.GetAllVillage();
             if (jointsurvey.SitePosition != "")
             {
@@ -262,6 +262,7 @@ namespace AcquiredLandInformationManagement.Controllers
             {
                 return NotFound();
             }
+           
             return View(jointsurvey);
         }
 

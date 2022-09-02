@@ -9,7 +9,7 @@ namespace Dto.Master
 
         public int Id { get; set; }
         public string UnderSection4No { get; set; }
-        public string NotificationNo { get; set; }
+        public string NotificationNo_US_6 { get; set; }
 
         public string NotificationDate { get; set; }
        

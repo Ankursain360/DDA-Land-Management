@@ -15,6 +15,8 @@ namespace Libraries.Model.Entity
         }
         [Required(ErrorMessage = "File number is mandatory")]
         public string FileNo { get; set; }
+        public string LMFileNO { get; set; }
+        public string BriefDetailsOfDescription { get; set; }
         public string CourtCaseNo { get; set; }
         public string CourtCaseTitle { get; set; }
         public string Subject { get; set; }

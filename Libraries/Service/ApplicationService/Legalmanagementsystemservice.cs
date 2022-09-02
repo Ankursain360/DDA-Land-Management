@@ -112,10 +112,10 @@ namespace Service.ApplicationService
             return await _legalmanagementsystemRepository.GetPagedLegalReport(model);
         }
 
-        //public async Task<PagedResult<Legalmanagementsystem>> GetPagedLegalReportForDownload()
-        //{
-        //    return await _legalmanagementsystemRepository.GetPagedLegalReportForDownload();
-        //}
+        public async Task<PagedResult<Legalmanagementsystem>> GetPagedLegalReportForDownload(LegalReportSearchDto model)
+        {
+            return await _legalmanagementsystemRepository.GetPagedLegalReportForDownload(model);
+        }
 
         public async Task<PagedResult<Legalmanagementsystem>> GetLegalmanagementsystemReportData(HearingReportSearchDto hearingReportSearchDto)
         {
@@ -138,6 +138,8 @@ namespace Service.ApplicationService
             Legalmanagementsystem model = result.FirstOrDefault();
             model.FileNo = legalmanagementsystem.FileNo;
             model.CourtCaseNo = legalmanagementsystem.CourtCaseNo;
+            model.LMFileNO = legalmanagementsystem.LMFileNO;
+            model.BriefDetailsOfDescription = legalmanagementsystem.BriefDetailsOfDescription;
             model.CourtCaseTitle = legalmanagementsystem.CourtCaseTitle;
             model.Subject = legalmanagementsystem.Subject;
             model.HearingDate = legalmanagementsystem.HearingDate;

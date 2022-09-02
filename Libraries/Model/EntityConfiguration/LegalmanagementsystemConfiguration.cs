@@ -61,6 +61,12 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.FileNo)
                 .HasMaxLength(500)
                 .IsUnicode(false);
+            builder.Property(e => e.LMFileNO) 
+                .HasMaxLength(500)
+                .IsUnicode(false);
+            builder.Property(e => e.BriefDetailsOfDescription)
+               .HasMaxLength(500)
+               .IsUnicode(false);
 
             builder.Property(e => e.HearingDate).HasColumnType("date");
 
