@@ -3,7 +3,7 @@ var currentPageSize = 5;
 var sortby = 1;//default Ascending 
 
 $(document).ready(function () {
-
+    GetProposaldetails(currentPageNumber, currentPageSize, sortOrder);
 })
 
 $("#btnGenerate").click(function () {
@@ -86,4 +86,17 @@ function onChangePageSize(pageSize) {
     currentPageSize = pageSize;
 }
 
+$("#btnAscending").click(function () {
+    $("#btnDescending").removeClass("active");
+    $("#btnAscending").addClass("active");
+    sortOrder = 1;//for Ascending
+    GetProposaldetails(currentPageNumber, currentPageSize, sortOrder);
+});
 
+
+$("#btnDescending").click(function () {
+    $("#btnAscending").removeClass("active");
+    $("#btnDescending").addClass("active");
+    sortOrder = 2;//for Descending
+    GetProposaldetails(currentPageNumber, currentPageSize, sortOrder);
+});
