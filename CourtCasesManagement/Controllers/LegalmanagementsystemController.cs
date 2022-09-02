@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-
+using System.Threading.Tasks; 
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
 using Microsoft.AspNetCore.Authorization;
@@ -48,7 +47,7 @@ namespace CourtCasesManagement.Controllers
         {
             //ViewBag.courtType = await _legalmanagementsystemService.GetCourttypeList();
             Legalmanagementsystem model = new Legalmanagementsystem();
-            
+
             await BindDropDownView(model);
             return View(model);
         }
@@ -407,11 +406,11 @@ namespace CourtCasesManagement.Controllers
                         Id = result[i].Id,
                         fileNo = result[i].FileNo,
                         courtCaseNo = result[i].CourtCaseNo,
-                        courtCaseTitle =result[i].CourtCaseTitle,
+                        courtCaseTitle = result[i].CourtCaseTitle,
                         Subject = result[i].Subject,
-                        HearingDate=Convert.ToDateTime(result[i].HearingDate).ToString("dd-MMM-yyyy")==null ? "" :Convert.ToDateTime(result[i].HearingDate).ToString("dd-MMM-yyyyy"),
-                        NextHearingDate = Convert.ToDateTime(result[i].NextHearingDate).ToString("dd-MMM-yyyy") == null ? "" : Convert.ToDateTime(result[i].NextHearingDate).ToString("dd-MMM-yyyy"),
-                        ContemptOfCourt = result[i].ContemptOfCourt.ToString() == "1" ? "Yes" : "No",
+                        HearingDate = result[i].HearingDate.HasValue ? Convert.ToDateTime(result[i].HearingDate).ToString("dd-MMM-yyyyy") : "",
+                        NextHearingDate = result[i].NextHearingDate.HasValue ? Convert.ToDateTime(result[i].NextHearingDate).ToString("dd-MMM-yyyy") : "",
+                        ContemptOfCourt = result[i].ContemptOfCourt == null ? "" : result[i].ContemptOfCourt.ToString() == "1" ? "Yes" : "No",
                         Courttype = result[i].CourtType.CourtType == null ? "" : result[i].CourtType.CourtType,
                         Casestatus = result[i].CaseStatus.CaseStatus == null ? "" : result[i].CaseStatus.CaseStatus,
                         LastDecision = result[i].LastDecision,
@@ -420,7 +419,7 @@ namespace CourtCasesManagement.Controllers
                         CaseType = result[i].CaseType,
                         InFavour = result[i].InFavour,
                         PanelLawyer = result[i].PanelLawyer,
-                        StayInterimGranted = result[i].StayInterimGranted.ToString() == "1" ? "Yes" : "No",
+                        StayInterimGranted = result[i].StayInterimGranted == null ? "" : result[i].StayInterimGranted.ToString() == "1" ? "Yes" : "No",
                         Judgement = result[i].Judgement.ToString() == "1" ? "Yes" : "No",
                         Remarks = result[i].Remarks,
                         Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
