@@ -23,6 +23,22 @@ $('#ddlStayInterim').change(function () {
     }
    // debugger
 });
+
+$(document).ready(function () {
+
+    if ($("#Case").is(":checked")) {
+        $('#CaseType').val('24(2) Case');
+    } else {
+        $('#CaseType').val('Other');
+    }
+
+    if ($("#DDA").is(":checked")) {
+        $('#InFavour').val('DDA');
+    } else {
+        $('#InFavour').val('Against DDA');
+    }
+});
+
 $(function () {
     $("input[name='grpCaseType']").click(function () {
         if ($("#Case").is(":checked")) {

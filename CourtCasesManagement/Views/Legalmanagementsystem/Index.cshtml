@@ -12,29 +12,30 @@
             </div>
             <div class="col-md-3">
                 <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="text" id="txtlmfileno" class="floating-label-field floating-label-field--s3" placeholder="Name" />
+                    <label for="txtlmfileno" class="floating-label">LM File No</label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="floating-label-wrap mb-3 mb-md-0">
                     <input type="text" id="txtCaseNo" class="floating-label-field floating-label-field--s3" placeholder="Name" />
                     <label for="txtCaseNo" class="floating-label">Court Case No</label>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    @*<select class="floating-label-field floating-label-field--s3" id="txtLocalityId"
-                            asp-items="@(new SelectList(ViewBag.courtType,"Id","CourtType"))">
-                        <option selected="selected" disabled="disabled" value="0">--Select-- </option>
-
-                    </select>*@
                     <input type="text" id="ddlCaseStatus" class="floating-label-field floating-label-field--s3" placeholder="Name" />
                     <label for="ddlCaseStatus" class="floating-label">Case Status</label>
                 </div>
             </div>
+        </div>
+        <div class="row mt-md-3">
             <div class="col-md-3">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input type="text" id="ddlCourtName" class="floating-label-field floating-label-field--s3" placeholder="Name" />
                     <label for="ddlCourtName" class="floating-label">Court Name</label>
                 </div>
             </div>
-        </div>
-        <div class="row mt-md-3">
             <div class="col-md-3">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input type="text" id="txtCaseTitle" class="floating-label-field floating-label-field--s3" placeholder="Name" />
