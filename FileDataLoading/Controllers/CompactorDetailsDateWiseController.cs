@@ -69,14 +69,14 @@ namespace FileDataLoading.Controllers
         }
 
         [AuthorizeContext(ViewAction.Download)]
-        public async Task<IActionResult> DateWiseCompactordetailsList(DateTime fromdate,  DateTime todate)
+        public async Task<IActionResult> DateWiseCompactordetailsList(DateTime fromdate, DateTime todate)
 
         {
             List<DateWiseCompactorListDto> data = new List<DateWiseCompactorListDto>();
             using (var httpClient = new HttpClient())
             {
                 using (var response = await httpClient.GetAsync(_configuration.GetSection("compactorDateWiseApi").Value + "fromdate_mm_dd_yyyy=" + Convert.ToDateTime(fromdate).ToString("MM-dd-yyyy") + "&todate_mm_dd_yyyy=" + Convert.ToDateTime(todate).ToString("MM-dd-yyyy")))
-              
+
 
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
@@ -89,7 +89,7 @@ namespace FileDataLoading.Controllers
                         {
                             data.Add(new DateWiseCompactorListDto()
                             {
-                                SNO = result.cargo[i].SNO,
+                                SNO = i + 1,
                                 DEPT_NAME = result.cargo[i].DEPT_NAME,
                                 FINALLY = result.cargo[i].FINALLY,
                                 TOTAL = result.cargo[i].TOTAL,

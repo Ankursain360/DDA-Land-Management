@@ -60,7 +60,7 @@ namespace FileDataLoading.Controllers
                         {
                             data.Add(new ZoneWiseCompactorListDto()
                             {
-                                SNO = result.cargo[i].SNO,
+                                SNO = i + 1,
                                 DEPT_NAME = result.cargo[i].DEPT_NAME,
                                 BRANCH_NAME = result.cargo[i].BRANCH_NAME,
                                 ISSUED = result.cargo[i].ISSUED,
