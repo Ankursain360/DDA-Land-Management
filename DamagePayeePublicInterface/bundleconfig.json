@@ -58,5 +58,11 @@
     "inputFiles": [
       "wwwroot/js/newdamageselfview.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/villageMapsIndex.min.js",
+    "inputFiles": [
+      "wwwroot/js/villageMapsIndex.js"
+    ]
   }
 ]

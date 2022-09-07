@@ -21,6 +21,8 @@ namespace DamagePayeePublicInterface.Infrastructure.Extensions
             services.AddScoped<ISiteContext, SiteContext>();
 
             /* Respository */
+            
+            services.AddScoped<IAcquiredlandvillageRepository, AcquiredlandvillageRepository>();
             services.AddScoped<IUserProfileRepository, UserProfileRepository>();
             services.AddScoped<IWorkflowTemplateRepository, WorkflowTemplateRepository>();
             services.AddScoped<IApprovalProccessRepository, ApprovalProccessRepository>();
@@ -40,6 +42,7 @@ namespace DamagePayeePublicInterface.Infrastructure.Extensions
 
 
             /* Application Services */
+            services.AddScoped<IAcquiredlandvillageService, AcquiredlandvillageService>();
             services.AddScoped<IUserProfileService, UserProfileService>();
             services.AddScoped<IPermissionsService, PermissionsService>();
             services.AddScoped<IWorkflowTemplateService, WorkflowTemplateService>();
