@@ -32,25 +32,32 @@
                 <tbody>
                     @if (Model != null)
                     {
-                        @foreach (var item in Model.cargo)
+                        @if (Model.cargo != null)
                         {
+                            @foreach (var item in Model.cargo)
+                            {
+                                <tr>
+                                    <td>@item.MAIN_FILE_NO</td>
+                                    <td>@item.PART_FILE_NO</td>
+                                    <td>@item.SUBJECT</td>
+                                    <td>@item.NAME</td>
+                                    <td>@item.RM_NO</td>
+                                    <td>@item.CMPCTR_NO</td>
+                                    <td>@item.RW_NO</td>
+                                    <td>@item.CLMN_NO</td>
+                                    <td>@item.ALMRH_NO</td>
+                                    <td>@item.FLT_CTGRY_ID</td>
+                                    <td>@item.LCLTY_HDR</td>
+                                    <td>@item.SQNC_NO</td>
+                                    <td>@item.YR</td>
 
+                                </tr>
+                            }
+                        }
+                        else
+                        {
                             <tr>
-
-                                <td>@item.MAIN_FILE_NO</td>
-                                <td>@item.PART_FILE_NO</td>
-                                <td>@item.SUBJECT</td>
-                                <td>@item.NAME</td>
-                                <td>@item.RM_NO</td>
-                                <td>@item.CMPCTR_NO</td>
-                                <td>@item.RW_NO</td>
-                                <td>@item.CLMN_NO</td>
-                                <td>@item.ALMRH_NO</td>
-                                <td>@item.FLT_CTGRY_ID</td>
-                                <td>@item.LCLTY_HDR</td>
-                                <td>@item.SQNC_NO</td>
-                                <td>@item.YR</td>
-
+                                <th colspan="13" style="text-align:center"> No Record Available! </th>
                             </tr>
                         }
                     }

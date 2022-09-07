@@ -60,9 +60,9 @@
     ]
   },
   {
-    "outputFileName": "wwwroot/js/villageMapsIndex.min.js",
+    "outputFileName": "wwwroot/js/newDamageSelfIndex.min.js",
     "inputFiles": [
-      "wwwroot/js/villageMapsIndex.js"
+      "wwwroot/js/newDamageSelfIndex.js"
     ]
   }
 ]

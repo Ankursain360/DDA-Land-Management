@@ -28,11 +28,27 @@ namespace FileDataLoading.Controllers
             {
                 using (var response = await httpClient.GetAsync(_configuration.GetSection("compactorallApi").Value))
                {
-                    string apiResponse = await response.Content.ReadAsStringAsync();
-                
-                    var data2 = JsonSerializer.Deserialize<ApiResponseCompactor>(apiResponse);
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        string apiResponse = await response.Content.ReadAsStringAsync();
+                        if (!apiResponse.Contains("No Record Found"))
+                        {
+                            var data2 = JsonSerializer.Deserialize<ApiResponseCompactor>(apiResponse);
 
-                    return View(data2);
+                            return View(data2);
+                        }
+                        else
+                        {
+                            ApiResponseCompactor data = new ApiResponseCompactor();
+                            return View(data);
+
+                        }
+                    }
+                    else
+                    {
+                        ApiResponseCompactor data = new ApiResponseCompactor();
+                        return View(data);
+                    }
                 }
             }
         }

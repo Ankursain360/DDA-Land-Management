@@ -226,5 +226,11 @@
     "inputFiles": [
       "wwwroot/js/dashboardForDamageForm.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/newdamageselfassessmentview.min.js",
+    "inputFiles": [
+      "wwwroot/js/newdamageselfassessmentview.js"
+    ]
   }
 ]

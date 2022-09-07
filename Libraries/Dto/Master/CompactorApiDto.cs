@@ -16,7 +16,7 @@ namespace Dto.Master
         public string PART_FILE_NO { get; set; }
         public string SUBJECT { get; set; }
         public string NAME { get; set; }
-        public int RM_NO { get; set; }
+        public string RM_NO { get; set; }
         public string CMPCTR_NO { get; set; }
         public int RW_NO { get; set; }
         public string CLMN_NO { get; set; }

@@ -57,11 +57,26 @@ namespace DamagePayee.Controllers
                 string url = _configuration.GetSection("VerifyPaymentStatusApi").Value + fileno;
                 using (var response = await httpClient.GetAsync(url))
                 {
-                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        string apiResponse = await response.Content.ReadAsStringAsync();
+                        if (!apiResponse.Contains("No Record Found"))
+                        {
+                            var data2 = JsonSerializer.Deserialize<ApiResponseVerifyPaymentApiStatus>(apiResponse);
 
-                    var data2 = JsonSerializer.Deserialize<ApiResponseVerifyPaymentApiStatus>(apiResponse);
-
-                    return PartialView("_List", data2);
+                            return PartialView("_List", data2);
+                        }
+                        else
+                        {
+                            ApiResponseVerifyPaymentApiStatus data = new ApiResponseVerifyPaymentApiStatus();
+                            return PartialView("_List", data);
+                        }
+                    }
+                    else
+                    {
+                        ApiResponseVerifyPaymentApiStatus data = new ApiResponseVerifyPaymentApiStatus();
+                        return PartialView("_List", data);
+                    }
                 }
             }
         }
@@ -72,7 +87,7 @@ namespace DamagePayee.Controllers
             using (var httpClient = new HttpClient())
             {
                 var fileno = model.fileNo;
-                string Propertyno= _damagepayeeregisterService.GetPropertyNo(fileno);
+                string Propertyno = _damagepayeeregisterService.GetPropertyNo(fileno);
                 using (var response = await httpClient.GetAsync(_configuration.GetSection("VerifyPaymentStatusApi").Value + fileno))
                 {
                     if (response.StatusCode == System.Net.HttpStatusCode.OK)
@@ -90,16 +105,16 @@ namespace DamagePayee.Controllers
                                     PayeeName = result2.cargo[i].APPLICANT_NAME_PAYMENT == null ? "N/A" : result2.cargo[i].APPLICANT_NAME_PAYMENT,
                                     PaymentMode = result2.cargo[i].PAYMENT_MODE == null ? "N/A" : result2.cargo[i].PAYMENT_MODE,
                                     BankTransactionId = result2.cargo[i].BANK_TRANSACTIONID == null ? "N/A" : result2.cargo[i].BANK_TRANSACTIONID,
-                                    AmountPaid =Convert.ToDecimal(result2.cargo[i].AMOUNT_RECIEVED),
+                                    AmountPaid = Convert.ToDecimal(result2.cargo[i].AMOUNT_RECIEVED),
                                     BankName = result2.cargo[i].BANK.ToString() == null ? "N/A" : result2.cargo[i].BANK.ToString(),
                                     FileNo = result2.cargo[i].FILENO == null ? "N/A" : result2.cargo[i].FILENO,
                                     TransactionId = result2.cargo[i].PG_TRANSACTIONID == null ? "N/A" : result2.cargo[i].PG_TRANSACTIONID,
                                     PropertyNo = Propertyno,
-                                    InterestPaid=0,
-                                    TotalAmount= Convert.ToDecimal(result2.cargo[i].AMOUNT_RECIEVED)+ 0,
-                                    IsVerified =0,
-                                    CreatedBy=1,
-                                    CreatedDate=DateTime.Now
+                                    InterestPaid = 0,
+                                    TotalAmount = Convert.ToDecimal(result2.cargo[i].AMOUNT_RECIEVED) + 0,
+                                    IsVerified = 0,
+                                    CreatedBy = 1,
+                                    CreatedDate = DateTime.Now
                                 });
                             }
 
@@ -108,7 +123,7 @@ namespace DamagePayee.Controllers
                                 var result3 = await _paymentverificationService.SaveDemandPaymentAPIDetails(item);
                                 ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
                             }
-                          
+
                         }
 
 
