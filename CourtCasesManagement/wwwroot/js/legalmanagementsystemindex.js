@@ -18,6 +18,7 @@ function GetSearchParam(pageNumber, pageSize, sortOrder) {
     debugger;
     var model = {
         fileNo: $('#txtfileno').val(),
+        lmfileno: $('#txtlmfileno').val(),
         courtCaseNo: $('#txtCaseNo').val(),
        /* CourtType: parseInt($('#ddlCaseStatus option:selected').val()),*/
         caseStatus: $('#ddlCaseStatus').val(),
@@ -78,6 +79,7 @@ function GetLmsOrderby(pageNumber, pageSize, order) {
 
 $("#btnReset").click(function () {
     $("#txtfileno").val('');
+    $("#txtlmfileno").val('');
     $("#txtCaseNo").val('');
    /* $('#ddlCaseStatus').val('0').trigger('change');*/
     $("#ddlCaseStatus").val('');

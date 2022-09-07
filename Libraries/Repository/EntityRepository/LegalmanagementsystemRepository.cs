@@ -312,6 +312,7 @@ namespace Libraries.Repository.EntityRepository
                      .Include(x => x.CaseStatus)
                       .Include(x => x.CourtType)
                      .Where(x => (string.IsNullOrEmpty(model.fileNo) || x.FileNo.Contains(model.fileNo))
+                          &&(string.IsNullOrEmpty(model.lmfileno)|| x.LMFileNO.Contains(model.lmfileno))
                           && (string.IsNullOrEmpty(model.courtCaseNo)||x.CourtCaseNo.Contains(model.courtCaseNo))
                           &&(string.IsNullOrEmpty(model.courtType)||x.CourtType.CourtType.Trim().Contains(model.courtType))
                           && (string.IsNullOrEmpty(model.courtCaseTitle) || x.CourtCaseTitle.Contains(model.courtCaseTitle))

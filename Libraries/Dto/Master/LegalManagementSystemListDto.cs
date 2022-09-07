@@ -6,6 +6,7 @@ namespace Dto.Master
     {
         public int Id { get; set; }
         public string fileNo { get; set; }
+        public string LMFileNo { get; set; }
         public string courtCaseNo { get; set; }
         public string courtCaseTitle { get; set; }
         public string Subject { get; set; }

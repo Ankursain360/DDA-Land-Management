@@ -4,6 +4,7 @@
     <thead class="text-nowrap">
         <tr>
             <th>File No</th>
+            <th>LM File No</th>
             <th>Court Case No</th>
             <th>Case Status</th>
             <th>Court Name</th>
@@ -21,6 +22,7 @@
             <tr>
 
                 <td>@item.FileNo</td>
+                <td>@item.LMFileNO</td>
                 <td>@item.CourtCaseNo</td>
                 <td>@(item.CaseStatus == null ? "" : item.CaseStatus.CaseStatus)</td>
                 <td>@(item.CourtType == null ? "" : item.CourtType.CourtType)</td>

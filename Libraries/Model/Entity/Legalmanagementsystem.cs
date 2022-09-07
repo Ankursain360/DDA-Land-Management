@@ -15,6 +15,8 @@ namespace Libraries.Model.Entity
         }
         [Required(ErrorMessage = "File number is mandatory")]
         public string FileNo { get; set; }
+
+        [StringLength(200, ErrorMessage = "Do not enter more than 200 characters")]
         public string LMFileNO { get; set; }
         public string BriefDetailsOfDescription { get; set; }
         public string CourtCaseNo { get; set; }
