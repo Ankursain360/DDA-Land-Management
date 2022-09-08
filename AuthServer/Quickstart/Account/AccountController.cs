@@ -60,7 +60,7 @@ namespace IdentityServerHost.Quickstart.UI
             IConfiguration configuration,
              IPasswordhistoryService passwordhistoryService,
             IHttpContextAccessor httpContextAccessor, IHostingEnvironment en)
-           
+
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -79,7 +79,7 @@ namespace IdentityServerHost.Quickstart.UI
         /// </summary>
         [HttpGet]
         public async Task<IActionResult> Login(string returnUrl)
-        
+
         {
             // build a model so we know what to show on the login page
             var vm = await BuildLoginViewModelAsync(returnUrl);
@@ -153,7 +153,7 @@ namespace IdentityServerHost.Quickstart.UI
                 {
                     var user = await _userManager.FindByNameAsync(model.Username);
 
-                    if (user.ChangePasswordStatus == "T") 
+                    if (user.ChangePasswordStatus == "T")
                     {
                         var token = await _userManager.GeneratePasswordResetTokenAsync(user);
                         var callback = Url.Action(nameof(ResetPassword), "Account", new { token, username = user.UserName }, Request.Scheme);
@@ -161,7 +161,7 @@ namespace IdentityServerHost.Quickstart.UI
                         //At successfull completion send mail and sms
                         string DisplayName = model.Username.ToString();
                         string EmailID = user.Email.ToString();
-                       // string Id = "";
+                        // string Id = "";
                         string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "MailDetails1.html");
 
                         #region Mail Generation Added By Renu
@@ -200,7 +200,7 @@ namespace IdentityServerHost.Quickstart.UI
 
                         }
 
-                        
+
                     }
 
                     await _events.RaiseAsync(new UserLoginSuccessEvent(user.UserName, user.Id.ToString(), user.UserName, clientId: context?.Client.ClientId));
@@ -210,7 +210,7 @@ namespace IdentityServerHost.Quickstart.UI
                     options.Expires = DateTime.Now.AddMinutes(Convert.ToInt32(_configuration.GetSection("CookiesSettings:CookiesTimeout").Value));
                     options.HttpOnly = true;
                     //options.Secure = true;
-                     options.Domain = _configuration.GetSection("CookiesSettings:CookiesDomain").Value.ToString();                   
+                    options.Domain = _configuration.GetSection("CookiesSettings:CookiesDomain").Value.ToString();
                     // options.Path = new PathString(_configuration.GetSection("CookiesSettings:CookiesPath").Value.ToString());
 
                     string _browserInfo = _httpContextAccessor.HttpContext.Request.Headers["User-Agent"].ToString() + "~" + _httpContextAccessor.HttpContext.Connection.RemoteIpAddress.ToString();
@@ -314,12 +314,12 @@ namespace IdentityServerHost.Quickstart.UI
             _httpContextAccessor.HttpContext.Response.Cookies.Delete(".AspNetCore.Identity.Application");
             _httpContextAccessor.HttpContext.Response.Cookies.Delete("idserv.external");
             _httpContextAccessor.HttpContext.Response.Cookies.Delete("idserv.session");
-           // _httpContextAccessor.HttpContext.Response.Cookies.Delete("AuthToken");
+            // _httpContextAccessor.HttpContext.Response.Cookies.Delete("AuthToken");
             _httpContextAccessor.HttpContext.Response.Cookies.Delete("ASP.NET_SessionId");
             _httpContextAccessor.HttpContext.Response.Cookies.Delete("encryptedSession");
             _httpContextAccessor.HttpContext.Response.Cookies.Delete(".AspNetCore.Session");
             _httpContextAccessor.HttpContext.Response.Cookies.Delete(".AspNetCore.Cookies");
-           // _httpContextAccessor.HttpContext.Response.Cookies.Delete("Auth-cookie");
+            // _httpContextAccessor.HttpContext.Response.Cookies.Delete("Auth-cookie");
             // check if we need to trigger sign-out at an upstream identity provider
             if (vm.TriggerExternalSignout)
             {
@@ -616,7 +616,7 @@ namespace IdentityServerHost.Quickstart.UI
                     if (user == null)
                     {
                         ModelState.AddModelError("Username", "No Authenticated User with username - " + resetPasswordDto.Username + ".");
-                       // ViewBag.Message = Alert.Show("No Authenticated User", "", AlertType.Error);
+                        // ViewBag.Message = Alert.Show("No Authenticated User", "", AlertType.Error);
                         return View(resetPasswordDto);
                     }
                     //chk previous  passwords 
@@ -637,11 +637,12 @@ namespace IdentityServerHost.Quickstart.UI
                             //ViewBag.Message = Alert.Show(error.Description, "", AlertType.Error);
                             ModelState.AddModelError("", error.Description);
                         }
-                         return View(resetPasswordDto);
+                        return View(resetPasswordDto);
                     }
                     user.ChangePasswordStatus = "F";
+
                     IdentityResult result = await _userManager.UpdateAsync(user);
-                    var res= result.Succeeded ? true : false;
+                    var res = result.Succeeded ? true : false;
                     #region
                     //insert into password history table
 
