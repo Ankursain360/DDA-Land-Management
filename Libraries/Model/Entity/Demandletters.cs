@@ -17,7 +17,7 @@ namespace Libraries.Model.Entity
         public string PropertyNo { get; set; }
       //  [Required(ErrorMessage = " The Demand No field is required")]
         public string DemandNo { get; set; }
-    //   [Required(ErrorMessage = " The File No field is required")]
+    //  [Required(ErrorMessage = " The File No field is required")]
         public DateTime GenerateDate { get; set; }
         [Required(ErrorMessage = " The Name field is mandatory")]
         public string Name { get; set; }

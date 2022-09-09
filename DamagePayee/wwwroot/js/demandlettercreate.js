@@ -129,7 +129,7 @@ $("#btnCalculate").click(function () {
     }
     if (checkresult) {
         var param = GetSearchParam();
-        HttpPost(`/DamageCalculator/DamageCalculate`, 'html', param, function (response) {
+        HttpPost(`/DemandsLetter/SetInitialRowBetweenTwoDates`, 'html', param, function (response) {
             $('#LoadView').html("");
             $('#LoadView').html(response);
         });
@@ -137,6 +137,7 @@ $("#btnCalculate").click(function () {
 
 });
 function GetSearchParam() {
+    debugger;
     var model = {
         PropertyTypeId: $("#PropertyTypeId").children("option:selected").val(),
         EncroachmentDate: $("#EncroachmentDate").val(),
@@ -145,6 +146,6 @@ function GetSearchParam() {
         LocalityId: $("#LocalityId").children("option:selected").val(),
         Area: $("#Area").val(),
     }
-    debugger
+   
     return model;
 }
