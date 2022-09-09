@@ -139,7 +139,7 @@
                 <div class="form-group col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input placeholder="Date of Encroachment" type="text"
-                               class="floating-label-field floating-label-field--s3 numbers" value="0" asp-for="DamageCharges" limit="15" />
+                               class="floating-label-field floating-label-field--s3 numbers"  asp-for="DamageCharges" limit="15" value="@(ViewBag.GrandDamageTotoal)" />
                         <span asp-validation-for="DamageCharges" class="text-danger"></span>
                         <label class="floating-label">Damage Charges(Principle Amount)<span style="color:red">*</span></label>
                     </div>
@@ -147,11 +147,12 @@
                 <div class="form-group col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input placeholder="Date of Encroachment" type="text"
-                               class="floating-label-field floating-label-field--s3 numbers" value="0" asp-for="Penalty" limit="15" />
-                        <span asp-validation-for="Penalty" class="text-danger"></span>
-                        <label class="floating-label">Penalty <span style="color:red">*</span></label>
+                               class="floating-label-field floating-label-field--s3 numbers"  asp-for="InterestAmount" limit="15" value="@(ViewBag.GrandCompoundInterest )" />
+                        <span asp-validation-for="InterestAmount" class="text-danger"></span>
+                        <label class="floating-label">Interest Amount <span style="color:red">*</span></label>
                     </div>
                 </div>
+               
 
             </div>
 
@@ -159,9 +160,9 @@
                 <div class="form-group col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input placeholder="Date of Encroachment" type="text"
-                               class="floating-label-field floating-label-field--s3 numbers" value="0" asp-for="InterestAmount" limit="15" />
-                        <span asp-validation-for="InterestAmount" class="text-danger"></span>
-                        <label class="floating-label">Interest Amount <span style="color:red">*</span></label>
+                               class="floating-label-field floating-label-field--s3 numbers" value="0" asp-for="Penalty" limit="15" />
+                        <span asp-validation-for="Penalty" class="text-danger"></span>
+                        <label class="floating-label">Penalty <span style="color:red">*</span></label>
                     </div>
                 </div>
                 <div class="form-group col-md-6">
