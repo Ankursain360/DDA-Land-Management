@@ -32,33 +32,49 @@ namespace DamagePayeePublicInterface.Controllers
     public class MyPaymentController : BaseController
     {
         public IConfiguration _configuration;
-      
-        private readonly IDamagepayeeregisterService _damagepayeeregisterService;
-       
 
-        public MyPaymentController(IConfiguration configuration,IDamagepayeeregisterService damagepayeeregisterService)
+        private readonly IDamagepayeeregisterService _damagepayeeregisterService;
+
+
+        public MyPaymentController(IConfiguration configuration, IDamagepayeeregisterService damagepayeeregisterService)
         {
-            _configuration = configuration;           
+            _configuration = configuration;
             _damagepayeeregisterService = damagepayeeregisterService;
         }
 
         public async Task<IActionResult> Index()
         {
             string FileNo = _damagepayeeregisterService.GetFileNo(SiteContext.UserId);
-            if (FileNo != null || FileNo!="")
+            if (!string.IsNullOrEmpty(FileNo))
             {
                 using (var httpClient = new HttpClient())
                 {
-                  
+
                     List<VerifyPaymentApiStatusDto> damagecalculation = new List<VerifyPaymentApiStatusDto>();
                     string url = _configuration.GetSection("VerifyPaymentStatusApi").Value + FileNo;
                     using (var response = await httpClient.GetAsync(url))
                     {
-                        string apiResponse = await response.Content.ReadAsStringAsync();
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+                            string apiResponse = await response.Content.ReadAsStringAsync();
+                            if (!apiResponse.Contains("No Record Found"))
+                            {
+                                var data = JsonSerializer.Deserialize<ApiResponseVerifyPaymentApiStatus>(apiResponse);
 
-                        var data = JsonSerializer.Deserialize<ApiResponseVerifyPaymentApiStatus>(apiResponse);
+                                return View(data);
+                            }
+                            else
+                            {
+                                ApiResponseVerifyPaymentApiStatus data = new ApiResponseVerifyPaymentApiStatus();
+                                return View(data);
 
-                        return View(data);
+                            }
+                        }
+                        else
+                        {
+                            ApiResponseVerifyPaymentApiStatus data = new ApiResponseVerifyPaymentApiStatus();
+                            return View(data);
+                        }
                     }
                 }
             }
