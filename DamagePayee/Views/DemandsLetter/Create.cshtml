@@ -6,7 +6,7 @@
 <div class="pt-3">
 
     <form asp-action="Create" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
-      
+
         <h3 class="mb-3 d-flex">Add Details <span class="ms-auto"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span> </h3>
 
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -17,17 +17,13 @@
 
             <div class="row mt-md-3">
                 <div class="form-group col-md-6">
-                    <div class="floating-label-wrap">
-                        <select class="floating-label-field floating-label-field--s3" style="width:100%;" asp-for="LocalityId"
-                                asp-items="@(new SelectList(Model.LocalityList, "Id","Name"))">
-                            <option selected="selected" disabled="disabled" value="">--Select-- </option>
-                        </select>
-                        <span asp-validation-for="LocalityId" class="text-danger"></span>
-                        <label class="floating-label">Locality (Village) Name <span style="color:red">*</span></label>
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input id="txtfileno" placeholder="Date of Encroachment" type="search"
+                               class="floating-label-field floating-label-field--s3" asp-for="FileNo" />
+                        <span asp-validation-for="FileNo" class="text-danger"></span>
+                        <label class="floating-label"> File No <span style="color:red">*</span></label>
                     </div>
                 </div>
-
-
                 <div class="form-group col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input placeholder="Date of Encroachment" type="text"
@@ -36,23 +32,18 @@
                         <label class="floating-label"> Property No <span style="color:red">*</span></label>
                     </div>
                 </div>
+
             </div>
 
-
-
-
             <div class="row mt-md-3">
-
-
                 <div class="form-group col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input placeholder="Date of Encroachment" type="text"
-                               class="floating-label-field floating-label-field--s3" asp-for="FileNo" />
-                        <span asp-validation-for="FileNo" class="text-danger"></span>
-                        <label class="floating-label"> File No <span style="color:red">*</span></label>
+                        <input asp-for="Area" placeholder="Area in sq. yds." type="text"
+                               class="floating-label-field floating-label-field--s3 numbers" />
+                        <span asp-validation-for="Area" class="text-danger" id="AreaMsg" style="display:none;">Type is Mandatory Field</span>
+                        <label class="floating-label">Area in sq. yds.<span style="color:red">*</span></label>
                     </div>
                 </div>
-
                 <div class="form-group col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input placeholder="Date of Encroachment" type="text"
@@ -61,12 +52,9 @@
                         <label class="floating-label"> Name <span style="color:red">*</span></label>
                     </div>
                 </div>
-
             </div>
 
             <div class="row mt-md-3">
-
-
                 <div class="form-group col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input placeholder="Date of Encroachment" type="text"
@@ -86,11 +74,68 @@
                 </div>
 
             </div>
+            <div class="row mt-md-3">
+                <div class="form-group col-md-6">
+                    <div class="floating-label-wrap">
+                        <select class="floating-label-field floating-label-field--s3" style="width:100%;" asp-for="PropertyTypeId"
+                                asp-items="@(new SelectList(Model.propertyTypeList,"Id","Name"))">
+                            <option selected="selected" disabled value="">---Select---</option>
+                        </select>
+                        <span asp-validation-for="PropertyTypeId" class="text-danger" id="PropertyTypeIdMsg" style="display:none;">Property Type is Mandatory Field</span>
+                        <label class="floating-label">Property Type <span style="color:red">*</span></label>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <div class="floating-label-wrap">
+                        <select class="floating-label-field floating-label-field--s3" style="width:100%;" asp-for="LocalityId"
+                                asp-items="@(new SelectList(Model.LocalityList, "Id","Name"))">
+                            <option selected="selected" disabled="disabled" value="">--Select-- </option>
+                        </select>
+                        <span asp-validation-for="LocalityId" class="text-danger" id="LocalityIdMsg" style="display:none;">Locality is Mandatory Field</span>
+                        <label class="floating-label">Locality (Village) Name <span style="color:red">*</span></label>
+                    </div>
+                </div>
 
+            </div>
 
 
             <div class="row mt-md-3">
+                <div class="form-group col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input placeholder="Date of Encroachment" required asp-for="EncroachmentDate" type="date"
+                               class="floating-label-field floating-label-field--s3" onkeypress="return false;" />
+                        <span asp-validation-for="EncroachmentDate" class="text-danger" id="EncroachmentDateMsg " style="display:none;">Encroachment Date is Mandatory Field</span>
+                        <label class="floating-label"> Date of Encroachment <span style="color:red">*</span></label>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input placeholder="Date of Encroachment" type="date" value=""
+                               class="floating-label-field floating-label-field--s3" asp-for="DemandPeriodFromDate" />
+                        <span asp-validation-for="DemandPeriodFromDate" class="text-danger" id="FromDateMsg" style="display:none;">From Date is Mandatory Field</span>
+                        <label class="floating-label">Demand Period (From Date)<span style="color:red">*</span></label>
+                    </div>
+                </div>
 
+            </div>
+
+
+            <div class="row mt-md-3">
+                <div class="form-group col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input placeholder="Date of Encroachment" type="date" value=""
+                               class="floating-label-field floating-label-field--s3" asp-for="DemandPeriodToDate" />
+                        <span asp-validation-for="DemandPeriodToDate" class="text-danger" id="ToDateMsg" style="display:none;">To Date is Mandatory Field</span>
+                        <label class="floating-label">Demand Period (To Date)<span style="color:red">*</span></label>
+                    </div>
+                </div>
+                <div class="col-4 col-md-4 col-xl-4">
+                    <input type="submit" id="btnCalculate" value="Calculate" class="btn btn-theme" />
+                </div>
+            </div>
+
+
+            <div class="row mt-md-3">
                 <div class="form-group col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input placeholder="Date of Encroachment" type="text"
@@ -99,7 +144,6 @@
                         <label class="floating-label">Damage Charges(Principle Amount)<span style="color:red">*</span></label>
                     </div>
                 </div>
-
                 <div class="form-group col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input placeholder="Date of Encroachment" type="text"
@@ -111,9 +155,7 @@
 
             </div>
 
-
             <div class="row mt-md-3">
-
                 <div class="form-group col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input placeholder="Date of Encroachment" type="text"
@@ -122,7 +164,6 @@
                         <label class="floating-label">Interest Amount <span style="color:red">*</span></label>
                     </div>
                 </div>
-
                 <div class="form-group col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input placeholder="Date of Encroachment" type="text"
@@ -136,10 +177,7 @@
 
             </div>
 
-
             <div class="row mt-md-3">
-
-
                 <div class="form-group col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
 
@@ -149,7 +187,6 @@
                         <label class="floating-label"> UnderSigned Date <span style="color:red">*</span></label>
                     </div>
                 </div>
-
                 <div class="form-group col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input placeholder="Date of Encroachment" type="time"
@@ -160,28 +197,6 @@
                 </div>
 
             </div>
-
-            <div class="row mt-md-3">
-
-                <div class="form-group col-md-6">
-                    <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input placeholder="Date of Encroachment" type="date" value=""
-                               class="floating-label-field floating-label-field--s3" asp-for="DemandPeriodFromDate" />
-                        <span asp-validation-for="DemandPeriodFromDate" class="text-danger"></span>
-                        <label class="floating-label">Demand Period (From Date)<span style="color:red">*</span></label>
-                    </div>
-                </div>
-                <div class="form-group col-md-6">
-                    <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input placeholder="Date of Encroachment" type="date" value=""
-                               class="floating-label-field floating-label-field--s3" asp-for="DemandPeriodToDate" />
-                        <span asp-validation-for="DemandPeriodToDate" class="text-danger"></span>
-                        <label class="floating-label">Demand Period (To Date)<span style="color:red">*</span></label>
-                    </div>
-                </div>
-
-            </div>
-
             <div class="row mt-md-3">
                 <div class="form-group col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
@@ -191,7 +206,6 @@
                         <label class="floating-label"> Total Amount Due <span style="color:red">*</span></label>
                     </div>
                 </div>
-
                 <div class="form-group col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input placeholder="Date of Encroachment" type="date" value=""
@@ -200,15 +214,11 @@
                         <label class="floating-label">Due Date<span style="color:red">*</span></label>
                     </div>
                 </div>
-
             </div>
-
-
-
 
             <div class="row mt-md-3">
                 <div class="col-md-12">
-                    <input type="submit" value="Generate" class="btn btn-theme " />
+                    <input type="submit" id="btnCalculate" value="Generate" class="btn btn-theme " />
 
                     @Html.ActionLink("Back", "Index", "DemandsLetter", null, new { @class = "btn btn-theme " })
                 </div>
@@ -261,6 +271,7 @@
 
         <div id="LoadView">
         </div>
+       
     </form>
 
 </div>
@@ -268,4 +279,24 @@
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 
 
-<script src="~/js/demandlettercreate.js"></script>
+@*<script src="~/js/demandlettercreate.js"></script>*@
+<environment include="Development">
+    <script src="~/js/demandlettercreate.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/demandlettercreate.min.js" asp-append-version="true"></script>
+</environment>
+@*Jquery for Autocomplete Start*@
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+@*Jquery for Autocomplete End*@
+
+<style>
+    .ui-autocomplete {
+        max-height: 400px;
+        overflow-y: auto; /* prevent horizontal scrollbar */
+        overflow-x: hidden; /* add padding to account for vertical scrollbar */
+        z-index: 1000 !important;
+    }
+</style>

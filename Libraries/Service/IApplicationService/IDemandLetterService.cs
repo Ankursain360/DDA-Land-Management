@@ -5,6 +5,7 @@ using Libraries.Service.Common;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Dto.Master;
+using System;
 
 namespace Libraries.Service.IApplicationService
 {
@@ -31,6 +32,7 @@ namespace Libraries.Service.IApplicationService
         /*-----------------Relief Report End------------------*/
         //*******   Penalty Imposition Report**********
         Task<List<Locality>> GetLocalityList();
+        Task<List<PropertyType>> GetPropertyType();
         Task<List<Demandletters>> GetFileNoList();
         Task<PagedResult<Demandletters>> GetPagedPenaltyImpositionReport(PenaltyImpositionReportSearchDto model);
         Task<PagedResult<Demandletters>> GetPagedImpositionReportOfCharges(ImpositionOfChargesSearchDto model);
@@ -41,5 +43,21 @@ namespace Libraries.Service.IApplicationService
         /*-----------------Demand Collection Ledger Report Start------------------*/
 
         Task<List<DuesVsPaidAmountDto>> GetDuesVsPaidAmountListDto(DuesVsPaidAmountSearchDto model);
+
+
+        Task<List<FileNODto>> GetFileAutoCompleteDetails(string prefix);
+        Task<DemandAutoFillDto> GetFileNODetail(int fileid);
+        Task<Encrochmenttype> FetchResultEncroachmentType(DateTime date1);
+        Task<List<Resratelisttypea>> RateListTypeA(DateTime date1, string localityId, int[] subEncroachersId);
+        Task<List<Resratelisttypeb>> RateListTypeB(DateTime date1, string localityId, int[] subEncroachersId);
+        Task<List<Resratelisttypec>> RateListTypeC(DateTime date1, string localityId, int[] subEncroachersId);
+        Task<List<Resratelisttypeb>> RateListTypeBSpecific(DateTime dateTimeSpecific, DateTime date1, string localityId, int[] subEncroachersId);
+        Task<List<Resratelisttypea>> RateListTypeASpecific(DateTime specificDateTime, DateTime date1, string localityId, int[] subEncroachersId);
+        Task<Comencrochmenttype> FetchResultCOMEncroachmentType(DateTime date1);
+        Task<List<Comratelisttypea>> ComRateListTypeA(DateTime date1, string localityId, int[] subEncroachersId);
+        Task<List<Comratelisttypeb>> ComRateListTypeB(DateTime date1, string localityId, int[] subEncroachersId);
+        Task<List<Comratelisttypec>> ComRateListTypeC(DateTime date1, string localityId, int[] subEncroachersId);
+        Task<List<Comratelisttypea>> ComRateListTypeASpecific(DateTime specificDateTime, DateTime dateTime, string localityId, int[] subEncroachersId);
+        Task<List<Comratelisttypeb>> ComRateListTypeBSpecific(DateTime dateTimeSpecific, DateTime date1, string localityId, int[] subEncroachersId);
     }
 }

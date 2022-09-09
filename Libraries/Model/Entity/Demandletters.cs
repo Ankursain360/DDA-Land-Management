@@ -46,8 +46,15 @@ namespace Libraries.Model.Entity
         public byte IsActive { get; set; }
 
         [Required(ErrorMessage = " The Penalty field is mandatory")]
-
         public decimal? Penalty { get; set; }
+
+        [Required(ErrorMessage = "Area is Mandatory Field")]
+        public decimal? Area { get; set; }
+        public int? PropertyTypeId { get; set; }
+
+        [Required(ErrorMessage = "Encroachment Date is Mandatory Field")]
+        public DateTime? EncroachmentDate { get; set; }
+        public PropertyType PropertyType { get; set; }
         public Locality Locality { get; set; }
         [NotMapped]
         public List<Locality> LocalityList { get; set; }
@@ -58,6 +65,8 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public List<Demandletters> propertNoList { get; set; }
-
+        [NotMapped]
+        public List<PropertyType> propertyTypeList { get; set; }
+         
     }
 }

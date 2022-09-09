@@ -17,12 +17,14 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.HasIndex(e => e.LocalityId)
                 .HasName("fk_localityIdDemandLetters_idx");
+            builder.HasIndex(e => e.PropertyTypeId)
+                   .HasName("fkPropertyType_idx");
 
             builder.Property(e => e.Address)
                 .IsRequired()
                 .HasMaxLength(500)
                 .IsUnicode(false);
-
+            builder.Property(e => e.Area).HasColumnType("decimal(18,3)");
             builder.Property(e => e.CreatedDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
 
             builder.Property(e => e.DamageCharges)
@@ -84,7 +86,10 @@ namespace Libraries.Model.EntityConfiguration
                 .WithMany(p => p.Demandletters)
                 .HasForeignKey(d => d.LocalityId)
                 .HasConstraintName("fk_localityIdDemandLetters");
-
+            builder.HasOne(d => d.PropertyType)
+                   .WithMany(p => p.Demandletters)
+                   .HasForeignKey(d => d.PropertyTypeId)
+                   .HasConstraintName("fkPropertyType");
         }
     }
 }
