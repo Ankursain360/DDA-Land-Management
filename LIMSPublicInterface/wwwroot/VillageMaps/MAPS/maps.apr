@@ -1,0 +1,401 @@
+/3.1
+(ODB.1
+	FirstRootClassName:	"Project"
+	Roots:	2
+	Version:	31
+)
+
+(Project.2
+	Name:	"maps.apr"
+	CreationDate:	"Wednesday, July 21, 2004 09:51:13 AM"
+	GUIName:	"Project"
+	Win:	3
+	CSMgr:	4
+	DocExts:	5
+	VisGUIWidth:	70
+	Doc:	6
+	ActiveDoc:	6
+	Buttons:	48
+	Buttons:	49
+	Buttons:	50
+	Scripts:	51
+	Prefs:	52
+	WorkDir:	879
+	WinX:	-4
+	WinY:	-3
+	WinW:	808
+	WinH:	579
+	SerialNumber:	"798481103576"
+	SelColor:	880
+	GUINames:	881
+	GUINames:	882
+	GUINames:	883
+	GUINames:	884
+	GUINames:	885
+	GUINames:	886
+	GUINames:	887
+	TocWidthScale:	1.00000000000000
+)
+
+(DocWin.3
+	Owner:	2
+	Open:	1
+	X:	5
+	Y:	5
+	W:	238
+	H:	317
+)
+
+(CSMgr.4
+)
+
+(DocAct.5
+	Doc:	2
+)
+
+(View.6
+	Name:	"View1"
+	CreationDate:	"Wednesday, July 21, 2004 09:51:30 AM"
+	GUIName:	"View"
+	Win:	7
+	CSMgr:	8
+	DocExts:	10
+	DocExts:	11
+	Graphics:	12
+	Theme:	19
+	Dpy:	13
+	TOCWidth:	150
+	CoordPrecision:	2
+)
+
+(DocWin.7
+	Owner:	6
+	Open:	1
+	X:	114
+	Y:	32
+	W:	608
+	H:	275
+)
+
+(CSMgr.8
+	Client:	9
+)
+
+(CSClient.9
+	Client:	10
+	ReqName:	"ClientNfy"
+)
+
+(PanMgr.10
+	Doc:	6
+)
+
+(DocAct.11
+	Doc:	6
+)
+
+(GList.12
+	Dpy:	13
+	FormatNumb:	18
+)
+
+(MapDpy.13
+	Left:	-858.46368526639344
+	Bottom:	-739.88465370834467
+	Top:	714.77918112772113
+	Right:	729.01728231557399
+	Scale:	14
+	FrameTop:	2.54166666666667
+	FrameRight:	4.61458333333333
+	PageDpy:	15
+	FitToPage:	1
+	MouseLoc:	17
+)
+
+(Numb.14
+	N:	0.00174725363056
+)
+
+(PageDpy.15
+	Top:	2.54166666666667
+	Right:	4.61458333333333
+	ReportUnits:	1
+	Units:	1
+	Scale:	16
+	ZoomRight:	4.61458333333333
+	ZoomTop:	2.54166666666667
+	GridSpacingX:	0.25000000000000
+	GridSpacingY:	0.25000000000000
+)
+
+(Numb.16
+	N:	96.00000000000000
+)
+
+(PointD.17
+	x:	-1081.19936475225060
+	y:	-441.79780230751169
+)
+
+(Numb.18
+)
+
+(FTheme.19
+	Name:	"133.shp"
+	Source:	20
+	Flags:	0x07
+	Legend:	31
+	Threshold:	45
+	View:	6
+	GSet:	46
+	LegEditScript:	"View.EditLegend"
+	TxPos:	47
+	LabelField:	26
+	SnapTolCursor:	1
+)
+
+(ShpSrc.20
+	Name:	21
+	FTab:	23
+)
+
+(SrcName.21
+	FileName:	22
+	Name:	"133.shp"
+	SubName:	"Polygon"
+	OwnerClass:	"ShpSrc"
+)
+
+(FN.22
+	Path:	"c:/lmis/shp/133.shp"
+)
+
+(FTab.23
+	Name:	"133.dbf"
+	BTab:	24
+	Fields:	29
+	Fields:	25
+	Fields:	26
+	Fields:	27
+	SelBits:	30
+	FSrc:	20
+)
+
+(dBASE.24
+	Name:	"133.dbf"
+	Fields:	25
+	Fields:	26
+	Fields:	27
+	FileName:	28
+)
+
+(Field.25
+	Name:	"Id"
+	Btab:	24
+	Alias:	"Id"
+	Visible:	1
+	Type:	9
+	Order:	-1
+)
+
+(Field.26
+	Name:	"Plot_no"
+	Btab:	24
+	Alias:	"Plot_no"
+	Visible:	1
+	Type:	4
+	Order:	-1
+)
+
+(Field.27
+	Name:	"Map_id"
+	Btab:	24
+	Alias:	"Map_id"
+	Visible:	1
+	Type:	4
+	Order:	-1
+)
+
+(FN.28
+	Path:	"c:/lmis/shp/133.dbf"
+)
+
+(Field.29
+	Name:	"Shape"
+	Alias:	"Shape"
+	Visible:	1
+	Type:	19
+	Order:	-1
+)
+
+(Bitmap.30
+	NumBits:	2303
+
+)
+
+(Legend.31
+	SymType:	0x02
+	LegType:	0x01
+	ClassType:	0x03
+	Symbols:	32
+	Class:	38
+	StdDevs:	1.00000000000000
+	NullSym:	39
+	NullValues:	43
+	StatValues:	44
+	Precision:	-3
+)
+
+(SymList.32
+	Child:	33
+)
+
+(BShSym.33
+	Color:	34
+	Outline:	1
+	OutlineColor:	35
+	OutlineWidth:	0.10000000000000
+	BgColor:	36
+	Style:	0x01
+	Stipple:	37
+)
+
+(TClr.34
+	Red:	0x92a0
+	Green:	0xbf24
+	Blue:	0x3cdc
+)
+
+(TClr.35
+)
+
+(TClr.36
+	Red:	0xffff
+	Green:	0xffff
+	Blue:	0xffff
+)
+
+(Stipple.37
+	Columns:	8
+	Rows:	8
+	Bits:	00000000 00000000 
+)
+
+(LClass.38
+	IsText:	1
+	Precision:	-3
+)
+
+(BShSym.39
+	Color:	40
+	Outline:	1
+	OutlineColor:	41
+	OutlineWidth:	0.10000000000000
+	BgColor:	42
+)
+
+(TClr.40
+	Name:	"Transparent"
+)
+
+(TClr.41
+	Name:	"Transparent"
+)
+
+(TClr.42
+	Red:	0xffff
+	Green:	0xffff
+	Blue:	0xffff
+)
+
+(NameDict.43
+)
+
+(NameDict.44
+)
+
+(Thresh.45
+)
+
+(GSet.46
+)
+
+(TxPosPly.47
+	HAlign:	3
+	VAlign:	3
+)
+
+(LButn.48
+	HelpTopic:	"New_button"
+	Update:	"Doc.NewUpdate"
+	Label:	"&New"
+	Click:	"View.New"
+)
+
+(LButn.49
+	HelpTopic:	"Open_button"
+	Update:	"Doc.OpenUpdate"
+	Label:	"&Open"
+	Click:	"Doc.Open"
+)
+
+(LButn.50
+	HelpTopic:	"Print_button"
+	Update:	"Doc.ActionUpdate"
+	Label:	"P&rint"
+	Click:	"Doc.Action"
+)
+
+(NameDict.51
+)
+
+(NameDict.52
+	Obj:	53
+	Obj:	54
+)
+
+(AVDict.53
+	InternalName:	"Table of Contents Defaults Dialog"
+)
+
+(AVDict.54
+	InternalName:	"_Thor_"
+)
+
+(FN.879
+	Path:	"$HOME"
+)
+
+(TClr.880
+	Red:	0xffff
+	Green:	0xffff
+)
+
+(AVStr.881
+	S:	"View"
+)
+
+(AVStr.882
+	S:	"Table"
+)
+
+(AVStr.883
+	S:	"Chart"
+)
+
+(AVStr.884
+	S:	"Layout"
+)
+
+(AVStr.885
+	S:	"Script"
+)
+
+(AVStr.886
+	S:	"Project"
+)
+
+(AVStr.887
+	S:	"Appl"
+)
+
