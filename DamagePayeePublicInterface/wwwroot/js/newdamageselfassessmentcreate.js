@@ -437,4 +437,55 @@ $("input[name='DeclarationStatus3']").click(function () {/* -----------Added by 
         $("#Declaration3").val(0);
 
 });
+$('#Assignfile').change(function () {
+    var fileInput = document.getElementById('Assignfile');
+    var filePath = fileInput.value;
+    const size = (Assignfile.files[0].size);
+    fileValidation(filePath, fileInput, size);
+});
+function fileValidation(filePath, fileInput, size) {
+    var allowedExtensions = /(\.pdf)$/i;
+    if (!allowedExtensions.exec(filePath)) {
+        alert('Invalid file type');
+        fileInput.value = '';
+        return false;
+    }
+    if (size > 10535049) {
+        alert("File must be of 10 MB or Lesser Than 10 MB");
+        fileInput.value = '';
+        return false;
+    }
+
+}
+function callSelect2() {
+    $("select").select2({
+        placeholder: "Select",
+        allowClear: true
+    });
+}
+$('#divWhetherSub_Property').change(function () {
+    var value = $('#divWhetherSub_Property option:selected').val();
+    if (value == 'No') {
+        $('#divWhetherSub_PropertyYesSeceltion').hide(); 
+       /* $('#pdffileid').hide();*/
+    }
+    else {
+        $('#divWhetherSub_PropertyYesSeceltion').show();
+        //$('#pdffileid').show();
+        callSelect2();
+    }
+});
+$('#pdffilehide').change(function () {
+    var value = $('#pdffilehide option:selected').val();
+    if (value == 'No') {
+        
+        $('#pdffileid').hide();
+    }
+    else {
+        
+        $('#pdffileid').show();
+        callSelect2();
+    }
+});
+
 
