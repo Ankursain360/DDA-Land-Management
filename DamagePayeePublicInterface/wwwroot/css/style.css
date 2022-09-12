@@ -1766,3 +1766,7 @@ textarea.floating-label-field--s3 {
         border-left: 0;
     }
 }
+/*Remove Cross icon from dropdown*/
+span.select2-selection__clear {
+    display: none;
+}

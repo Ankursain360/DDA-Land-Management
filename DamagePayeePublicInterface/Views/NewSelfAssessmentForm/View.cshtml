@@ -107,8 +107,8 @@
                         @*<input asp-for="TypeProperty" type="text" class="floating-label-field floating-label-field--s3" placeholder="Property Type" />*@
                         <select asp-for="TypeOfProperty" class="floating-label-field floating-label-field--s3">
                             <option value="">---Select---</option>
-                            <option value="Residential">Built-up</option>
-                            <option value="Commercial">Vacant</option>
+                            <option value="Built-up">Built-up</option>
+                            <option value="Vacant">Vacant</option>
                         </select>
                         <span asp-validation-for="TypeOfProperty" class="d-block text-danger field-validation-valid"></span>
                         <label class="floating-label">Type of property<span style="color:red">*</span></label>
@@ -343,17 +343,26 @@
                                 <option value="No">No</option>
                                 <option value="Yes">Yes</option>
                             </select>
-                            <label class="floating-label">Copy of lease is available</label>
+                            <label class="floating-label">Copy of the lease is available</label>
                         </div>
                     </div>
 
                     <div class="col-md-6" style="display:none" id="pdffileid">
                         <div class="floating-label-wrap">
-                            <input asp-for="LeaseDocumentFile" type="file" class="floating-label-field floating-label-field--s3" placeholder="Please upload pdf documents" id="Assignfile" name="Assignfile" accept="application/pdf" />
-                            <label class="floating-label">Please upload pdf documents<span style="color:red">(.pdf only)</span></label>
+
+                            @if (Model.LeaseDocumentFilePath != null)
+                            {
+                                <input disabled type="file" asp-for="LeaseDocumentFile" class="floating-label-field floating-label-field--s3">
+                                <a class="badge bg-primary px-2" asp-action="LeasePdfFile" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
+                            }
+                            else
+                            {
+                                <input disabled type="file" asp-for="LeaseDocumentFile" class="floating-label-field floating-label-field--s3">
+                            }
+                            <label for="field-1" class="floating-label"> Photograph of the Property <span style="color:red">(.pdf only)</span></label>
+
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>

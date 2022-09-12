@@ -1,7 +1,7 @@
 ﻿@model Libraries.Model.Entity.Newdamagepayeeregistration
 @await Component.InvokeAsync("PageHeader", new { pageName = "New Damage Property Registration Form" })
 <div class="pt-3">
-    <form asp-action="Create" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
+    <form asp-action="Create" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
         <input type="hidden" asp-for="ApprovedStatus" />
@@ -113,8 +113,8 @@
                         @*<input asp-for="TypeProperty" type="text" class="floating-label-field floating-label-field--s3" placeholder="Property Type" />*@
                         <select asp-for="TypeOfProperty" class="floating-label-field floating-label-field--s3">
                             <option value="">---Select---</option>
-                            <option value="Residential">Built-up</option>
-                            <option value="Commercial">Vacant</option>
+                            <option value="Built-up">Built-up</option>
+                            <option value="Vacant">Vacant</option>
                         </select>
                         <span asp-validation-for="TypeOfProperty" class="d-block text-danger field-validation-valid"></span>
                         <label class="floating-label">Type of property<span style="color:red">*</span></label>
@@ -342,20 +342,20 @@
                         </div>
                     </div>
                 </div>
-                <div class="row pt-3" id="pdffilehide">
+                <div class="row pt-3" id="ddlpdffilehide"> 
                     <div class="col-md-6">
                         <div class="floating-label-wrap">
                             <select asp-for="CopyOfLease" class="floating-label-field floating-label-field--s3">
                                 <option value="No">No</option>
                                 <option value="Yes">Yes</option>
                             </select>
-                            <label class="floating-label">Copy of lease is available</label>
+                            <label class="floating-label">Copy of the lease is available</label>
                         </div>
                     </div>
 
                     <div class="col-md-6" style="display:none" id="pdffileid">
                         <div class="floating-label-wrap">
-                            <input asp-for="LeaseDocumentFile" type="file" class="floating-label-field floating-label-field--s3" placeholder="Please upload pdf documents" id="Assignfile" name="Assignfile" accept="application/pdf" />
+                            <input asp-for="LeaseDocumentFile" type="file" class="floating-label-field floating-label-field--s3" placeholder="Please upload pdf documents" id="Assignfile" accept="application/pdf" />
                             <label class="floating-label">Please upload pdf documents<span style="color:red">(.pdf only)</span></label>
                         </div>
                     </div>

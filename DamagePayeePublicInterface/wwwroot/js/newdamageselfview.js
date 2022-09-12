@@ -34,9 +34,35 @@ $(document).ready(function () {
         $('#divotherColony').hide();
     }
 
-   
-    // FillAllotteAtEdit();
-    //FillPaymentHistoryAtEdit();
+    
+        var value = $('#divWhetherSub_Property option:selected').val();
+        if (value == 'No') {
+            $('#divWhetherSub_PropertyYesSeceltion').hide();
+            
+        }
+        else {
+            $('#divWhetherSub_PropertyYesSeceltion').show();
+            $("select").select2({
+                placeholder: "Select",
+                allowClear: true
+            });
+        }
+    
+  
+        var value = $('#pdffilehide option:selected').val();
+        if (value == 'No') {
+
+            $('#pdffileid').hide();
+        }
+        else {
+
+            $('#pdffileid').show();
+            $("select").select2({
+                placeholder: "Select",
+                allowClear: true
+            });
+        }
+    
 });
 
 /*--------repeator for floor details--------------*/

@@ -33,7 +33,33 @@ $(document).ready(function () {
     else {
         $('#divotherColony').hide();
     }
+    var value = $('#divWhetherSub_Property option:selected').val();
+    if (value == 'No') {
+        $('#divWhetherSub_PropertyYesSeceltion').hide();
 
+    }
+    else {
+        $('#divWhetherSub_PropertyYesSeceltion').show();
+        $("select").select2({
+            placeholder: "Select",
+            allowClear: true
+        });
+    }
+
+
+    var value = $('#pdffilehide option:selected').val();
+    if (value == 'No') {
+
+        $('#pdffileid').hide();
+    }
+    else {
+
+        $('#pdffileid').show();
+        $("select").select2({
+            placeholder: "Select",
+            allowClear: true
+        });
+    }
 
     // FillAllotteAtEdit();
     //FillPaymentHistoryAtEdit();
@@ -302,3 +328,33 @@ function OccupantRepeator() {/* -----------Added by Ankur  --------------- */
         }
     });
 }
+function callSelect2() {
+    $("select").select2({
+        placeholder: "Select",
+        allowClear: true
+    });
+}
+$('#divWhetherSub_Property').change(function () {
+    var value = $('#divWhetherSub_Property option:selected').val();
+    if (value == 'No') {
+        $('#divWhetherSub_PropertyYesSeceltion').hide();
+        /* $('#pdffileid').hide();*/
+    }
+    else {
+        $('#divWhetherSub_PropertyYesSeceltion').show();
+        //$('#pdffileid').show();
+        callSelect2();
+    }
+});
+$('#pdffilehide').change(function () {
+    var value = $('#pdffilehide option:selected').val();
+    if (value == 'No') {
+
+        $('#pdffileid').hide();
+    }
+    else {
+
+        $('#pdffileid').show();
+        callSelect2();
+    }
+});

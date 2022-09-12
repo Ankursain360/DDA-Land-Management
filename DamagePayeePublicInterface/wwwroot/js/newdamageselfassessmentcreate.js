@@ -465,8 +465,26 @@ function callSelect2() {
 }
 $('#divWhetherSub_Property').change(function () {
     var value = $('#divWhetherSub_Property option:selected').val();
-    if (value == 'No') {
-        $('#divWhetherSub_PropertyYesSeceltion').hide(); 
+    if (value.toLowerCase() == 'no') {
+        $('#NameOfOriginalLessee').val('');
+        $('#TenureTermOfLease').val('');
+        $('#DateOfLeaseCommenced').val('');
+        $('#UseLeaseDeed').val('');
+        $('#SpecifyUse').val('');
+        $('#AreaLeaseDeed').val('');
+        $('#CopyOfLease').val('No'); 
+        var valuess = $('#CopyOfLease option:selected').val();
+        if (valuess.toLowerCase() == 'no') {
+            $('#Assignfile').val('');
+            $('#pdffileid').hide();
+        }
+        else {
+
+            $('#pdffileid').show();
+            callSelect2();
+        }
+        $('#divWhetherSub_PropertyYesSeceltion').hide();
+
        /* $('#pdffileid').hide();*/
     }
     else {
@@ -475,10 +493,10 @@ $('#divWhetherSub_Property').change(function () {
         callSelect2();
     }
 });
-$('#pdffilehide').change(function () {
-    var value = $('#pdffilehide option:selected').val();
-    if (value == 'No') {
-        
+$('#CopyOfLease').change(function () {
+    var value = $('#CopyOfLease option:selected').val();
+    if (value.toLowerCase() == 'no') {
+        $('#Assignfile').val(''); 
         $('#pdffileid').hide();
     }
     else {

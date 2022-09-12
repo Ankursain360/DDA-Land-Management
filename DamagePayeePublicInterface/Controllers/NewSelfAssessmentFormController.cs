@@ -80,7 +80,7 @@ namespace DamagePayeePublicInterface.Controllers
                 string strAtsFilePath = _configuration.GetSection("FilePaths:NewDamagePayeeAssmt:AtsFilePath").Value.ToString();
 
                 string strPaymentDocumentFilePath = _configuration.GetSection("FilePaths:NewDamagePayeeAssmt:PaymentDocumentFilePath").Value.ToString();
-                string strLeaseDocumentFilePath = _configuration.GetSection("FilePaths:NewDamagePayeeAssmt:LeaseDocumentFilePath").Value.ToString();
+                string strLeaseDocumentFilePath = _configuration.GetSection("FilePaths:NewDamagePayeeAssmt:LeaseDocument").Value.ToString();
 
                 if (ModelState.IsValid)
                 {
@@ -441,6 +441,14 @@ namespace DamagePayeePublicInterface.Controllers
             FileHelper file = new FileHelper();
             Newdamagepayeeregistration data = await _selfAssessmentService.FetchSingleResult(Id);
            string path = data.PropertyTaxReceiptFilePath;
+            byte[] fileBytes = System.IO.File.ReadAllBytes(path);
+            return File(fileBytes, file.GetContentType(path));
+        }
+        public async Task<FileResult> LeasePdfFile(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Newdamagepayeeregistration data = await _selfAssessmentService.FetchSingleResult(Id);
+            string path = data.LeaseDocumentFilePath;
             byte[] fileBytes = System.IO.File.ReadAllBytes(path);
             return File(fileBytes, file.GetContentType(path));
         }
