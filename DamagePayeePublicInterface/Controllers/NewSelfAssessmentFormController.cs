@@ -80,9 +80,14 @@ namespace DamagePayeePublicInterface.Controllers
                 string strAtsFilePath = _configuration.GetSection("FilePaths:NewDamagePayeeAssmt:AtsFilePath").Value.ToString();
 
                 string strPaymentDocumentFilePath = _configuration.GetSection("FilePaths:NewDamagePayeeAssmt:PaymentDocumentFilePath").Value.ToString();
+                string strLeaseDocumentFilePath = _configuration.GetSection("FilePaths:NewDamagePayeeAssmt:LeaseDocumentFilePath").Value.ToString();
 
                 if (ModelState.IsValid)
                 {
+                    if (selfAssessment.LeaseDocumentFile != null)
+                    {
+                        selfAssessment.LeaseDocumentFilePath = fileHelper.SaveFile(strLeaseDocumentFilePath, selfAssessment.LeaseDocumentFile);
+                    }
                     if (selfAssessment.FilePropertyPhoto != null)
                     {
                         selfAssessment.PropertyPhotographFilePath = fileHelper.SaveFile(strPhotographProperty, selfAssessment.FilePropertyPhoto);

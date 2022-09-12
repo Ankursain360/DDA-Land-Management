@@ -1,0 +1,248 @@
+﻿using System;
+using System.Threading.Tasks;
+using Dto.Search;
+using Microsoft.AspNetCore.Mvc;
+using Notification;
+using Notification.Constants;
+using Notification.OptionEnums;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Http.Extensions;
+using Microsoft.AspNetCore.Authorization;
+using Utility.Helper;
+using Microsoft.Extensions.Configuration;
+using System.Text.Encodings.Web;
+using System.Linq;
+using Microsoft.AspNetCore.Http;
+using Dto.Master;
+using Microsoft.AspNetCore.WebUtilities;
+using System.Text;
+using IdentityServerAspNetIdentity.Models;
+using Libraries.Service.IApplicationService;
+using Libraries.Model.Entity;
+namespace AuthServer.Quickstart
+{
+    public class ChangePasswordController : Controller
+    {
+        public string Email { get; set; }
+        private readonly IHostingEnvironment _hostingEnvironment;
+        public readonly IConfiguration _configuration;
+        private readonly IPasswordhistoryService _passwordhistoryService;
+        private readonly UserManager<IdentityServerAspNetIdentity.Models.ApplicationUser> _userManager;
+
+        public ChangePasswordController(IConfiguration configuration, IHostingEnvironment en,
+             IPasswordhistoryService passwordhistoryService,
+            UserManager<IdentityServerAspNetIdentity.Models.ApplicationUser> userManager)
+        {
+            _passwordhistoryService = passwordhistoryService;
+            _userManager = userManager;
+            _configuration = configuration;
+            _hostingEnvironment = en;
+        }
+        public IActionResult Index()
+        {
+            return View();
+        }
+        
+        [AllowAnonymous]
+        public IActionResult Create()
+        {
+            var Msg = TempData["Message"] as string;
+            if (Msg != null)
+                ViewBag.Message = Msg;
+            return View();
+        }
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(ForgetPasswordMailDto model)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    //    // Validate Captcha Code
+                    if (!Captcha.ValidateCaptchaCode(model.CaptchaCode, HttpContext))
+                    {
+                        //ViewBag.Message = Alert.Show("Invalid Catacha.", "", AlertType.Error);
+                        ModelState.AddModelError("CaptchaCode", "Invalid Captcha.");
+                        return View(model);
+                    }
+
+
+                    var user = await _userManager.FindByNameAsync(model.Username);
+                    if (user == null)
+                    {
+                        // ViewBag.Message = Alert.Show("Unable to load user " + model.Username + ".", "", AlertType.Warning);
+                        ModelState.AddModelError("Username", "Unable to load user " + model.Username + ".");
+                        return View(model);
+                    }
+
+                    Email = model.Username;
+                    var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+                    var callback = Url.Action(nameof(ResetPassword), "ChangePassword", new { token, username = user.UserName }, Request.Scheme);
+
+                    if (user != null)
+                    {
+                        //At successfull completion send mail and sms
+                        string DisplayName = model.Username.ToString();
+                        string EmailID = user.Email.ToString();
+                        string Id = "";
+                        string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "MailDetails.html");
+
+                        #region Mail Generation Added By Renu
+
+                        MailSMSHelper mailG = new MailSMSHelper();
+
+                        #region HTML Body Generation
+                        RegisterationBodyDTO bodyDTO = new RegisterationBodyDTO();
+                        bodyDTO.displayName = DisplayName;
+                        bodyDTO.loginName = DisplayName;
+                        bodyDTO.password = "";
+                        bodyDTO.link = callback;
+                        bodyDTO.action = "";
+                        bodyDTO.path = path;
+                        string strBodyMsg = mailG.PopulateBody(bodyDTO);
+                        #endregion
+
+                        #region Common Mail Genration
+                        SentMailGenerationDto maildto = new SentMailGenerationDto();
+                        maildto.strMailSubject = "Change Password";
+                        maildto.strMailCC = ""; maildto.strMailBCC = ""; maildto.strAttachPath = "";
+                        maildto.strBodyMsg = strBodyMsg;
+                        maildto.defaultPswd = (_configuration.GetSection("EmailConfiguration:defaultPswd").Value).ToString();
+                        maildto.fromMail = (_configuration.GetSection("EmailConfiguration:fromMail").Value).ToString();
+                        maildto.fromMailPwd = (_configuration.GetSection("EmailConfiguration:fromMailPwd").Value).ToString();
+                        maildto.mailHost = (_configuration.GetSection("EmailConfiguration:mailHost").Value).ToString();
+                        maildto.port = Convert.ToInt32(_configuration.GetSection("EmailConfiguration:port").Value);
+
+                        maildto.strMailTo = EmailID;
+                        var sendMailResult = mailG.SendMailWithAttachment(maildto);
+                        #endregion
+                        #endregion
+
+                        if (sendMailResult)
+                            TempData["Message"] = Alert.Show("Dear User,<br/>" + DisplayName + " a link for password Change sent on your registered email and mobile no., Please check!", "", AlertType.Success);
+                        else
+                            TempData["Message"] = Alert.Show("Dear User,<br/>" + DisplayName + " Enable to send mail or sms ", "", AlertType.Info);
+
+                        // return RedirectToAction("Create", "ForgetPassword");
+                        return RedirectToAction("ForgetPasswordMail", "ChangePassword", new { username = user.UserName });
+
+                    }
+                    else
+                    {
+                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                        return View(model);
+
+                    }
+                }
+                else
+                {
+                    return View(model);
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                return View(model);
+            }
+        }
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult ResetPassword(string token, string username)
+        {
+            var model = new ResetPasswordDto { Token = token, Username = username };
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [AllowAnonymous]
+        public async Task<IActionResult> ResetPassword(ResetPasswordDto resetPasswordDto)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    //    // Validate Captcha Code
+                    if (!Captcha.ValidateCaptchaCode(resetPasswordDto.CaptchaCode, HttpContext))
+                    {
+                        ModelState.AddModelError("CaptchaCode", "Invalid Captcha.");
+                        // ViewBag.Message = Alert.Show("Invalid Catacha.", "", AlertType.Error);
+                        return View(resetPasswordDto);
+                    }
+                    var user = await _userManager.FindByNameAsync(resetPasswordDto.Username);
+                    if (user == null)
+                    {
+                        ModelState.AddModelError("Username", "No user found with username" + resetPasswordDto.Username + ".");
+                        // ViewBag.Message = Alert.Show("No Authenticated User", "", AlertType.Error);
+                        return View(resetPasswordDto);
+                    }
+                    //chk previous  passwords 
+
+                    var encodedpassword = (new EncryptionHelper()).Base64Encode(resetPasswordDto.Password);
+                    var result1 = await _passwordhistoryService.IsPreviousPassword(user.Id, encodedpassword);
+                    if (result1)
+                    {
+                        ModelState.AddModelError("Password", "You Cannot Reuse Previous 5 Password");
+                        return View(resetPasswordDto);
+                    }
+
+                    var resetPassResult = await _userManager.ResetPasswordAsync(user, resetPasswordDto.Token, resetPasswordDto.Password);
+                    if (!resetPassResult.Succeeded)
+                    {
+                        foreach (var error in resetPassResult.Errors)
+                        {
+                            ModelState.TryAddModelError(error.Code, error.Description);
+                            // ViewBag.Message = Alert.Show(error.Description, "", AlertType.Error);
+                            ModelState.AddModelError("", error.Description);
+                        }
+                        return View(resetPasswordDto);
+                    }
+                    //insert into password history table
+
+                    Passwordhistory history = new Passwordhistory();
+
+                    history.UserId = user.Id;
+                    history.UserName = user.UserName;
+
+                    // history.Password = _userManager.PasswordHasher.HashPassword(user, resetPasswordDto.Password);
+                    // history.Password = resetPasswordDto.Password;
+                    history.Password = encodedpassword;
+                    history.CreatedBy = user.Id;
+                    history.IpAddress = HttpContext.Connection.RemoteIpAddress.ToString();
+
+                    var result = await _passwordhistoryService.Create(history);
+
+                    return RedirectToAction(nameof(ResetPasswordConfirmation));
+                }
+                else
+                {
+                    ViewBag.Message = Alert.Show("Please Enter fields correctly", "", AlertType.Error);
+                    return View(resetPasswordDto);
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                return View(resetPasswordDto);
+            }
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult ResetPasswordConfirmation(string token, string username)
+        {
+            var model = new ResetPasswordDto { Token = token, Username = username };
+            return View(model);
+        }
+
+        public IActionResult ForgetPasswordMail(string username)
+        {
+            ViewBag.name = username;
+            return View();
+        }
+    }
+}

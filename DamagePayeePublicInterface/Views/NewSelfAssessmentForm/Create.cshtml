@@ -11,7 +11,8 @@
         <div id="COLONYDETAILS">
             <div class="row">
                 <div class="col-md-4">
-                    <span style="color: #2196F3"> Whether property is damage Payee :</span><span style="color:red">*</span> <select asp-for="WhetherDamageProp" class="floating-label-field floating-label-field--s3">
+                    <span style="color: #2196F3"> Whether property is damage Payee :</span><span style="color:red">*</span>
+                    <select asp-for="WhetherDamageProp" class="floating-label-field floating-label-field--s3">
                         <option value="">---Select---</option>
                         <option value="Yes">Yes</option>
                         <option value="No">No</option>
@@ -281,8 +282,89 @@
 
             </div>
         </div>
+        <div id="divWhetherSub_Property">
+            <h2 class="my-3 sub-heading"> Whether the subject property was on lease.</h2>
+            <div class="row mt-md-3">
+                <div class="col-md-6">
+                    <div class="floating-label-wrap">
+                        <select asp-for="WhetherSubProperty" class="floating-label-field floating-label-field--s3">
+                            <option value="No">No</option>
+                            <option value="Yes">Yes</option>
+                        </select>
+                        <label class="floating-label"></label>
+                    </div>
+                </div>
+            </div>
+            <div id="divWhetherSub_PropertyYesSeceltion" style="display:none">
+                <div class="row pt-3">
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap">
+                            <input asp-for="NameOfOriginalLessee" type="text" class="floating-label-field floating-label-field--s3" placeholder="Name of the original lessee (As per the lease deed)" />
+                            <label class="floating-label">Name of the original lessee (As per the lease deed)</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap">
+                            <input asp-for="TenureTermOfLease" type="text" class="floating-label-field floating-label-field--s3" placeholder="Tenure/term of lease (As per the lease deed)" />
+                            <label class="floating-label">Tenure/term of lease (As per the lease deed)</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row pt-3">
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap">
+                            <input asp-for="DateOfLeaseCommenced" type="date" class="floating-label-field floating-label-field--s3" placeholder="Date from which lease commenced." />
+                            <label class="floating-label">Date from which lease commenced.</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap">
+                            <select asp-for="UseLeaseDeed" class="floating-label-field floating-label-field--s3">
+                                <option value="">---Select---</option>
+                                <option value="Residential">Residential</option>
+                                <option value="Commercial">Commercial</option>
+                            </select>
+                            <label class="floating-label">Use as per the lease deed</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row pt-3">
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap">
+                            <input asp-for="SpecifyUse" type="text" class="floating-label-field floating-label-field--s3" placeholder="Specify use as mentioned in the lease deed" />
+                            <label class="floating-label">Specify use as mentioned in the lease deed</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap">
+                            <input asp-for="AreaLeaseDeed" type="text" class="floating-label-field floating-label-field--s3 numbers" placeholder="Area as mentioned in the lease deed" />
+                            <label class="floating-label">Area as mentioned in the lease deed</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row pt-3" id="pdffilehide">
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap">
+                            <select asp-for="CopyOfLease" class="floating-label-field floating-label-field--s3">
+                                <option value="No">No</option>
+                                <option value="Yes">Yes</option>
+                            </select>
+                            <label class="floating-label">Copy of lease is available</label>
+                        </div>
+                    </div>
 
+                    <div class="col-md-6" style="display:none" id="pdffileid">
+                        <div class="floating-label-wrap">
+                            <input asp-for="LeaseDocumentFile" type="file" class="floating-label-field floating-label-field--s3" placeholder="Please upload pdf documents" id="Assignfile" name="Assignfile" accept="application/pdf" />
+                            <label class="floating-label">Please upload pdf documents<span style="color:red">(.pdf only)</span></label>
+                        </div>
+                    </div>
 
+                </div>
+            </div>
+        </div>
+     
+       
         <div id="FLOORDETAILS" style="margin-top:-15px;">
             <h3 class="my-3 d-flex sub-heading">FLOOR DETAILS</h3>
 
@@ -296,7 +378,7 @@
                                 <th>Floor Name</th>
                                 <th>Carpet Area</th>
                                 <th>Electricity K Number</th>
-                                <th>MCD Property Tax ID</th> 
+                                <th>MCD Property Tax ID</th>
                                 <th>Water (KNO.No)</th>
                                 <th>Current Use</th>
                                 <th>Operation</th>
@@ -320,10 +402,10 @@
                                     <input asp-for="ElectricityKno" type="text" class="floating-label-field floating-label-field--s3" maxlength="12" />
                                 </td>
                                 <td>
-                                    <input asp-for="McdpropertyTaxId" type="text" class="floating-label-field floating-label-field--s3" maxlength="15"/>
+                                    <input asp-for="McdpropertyTaxId" type="text" class="floating-label-field floating-label-field--s3" maxlength="15" />
                                 </td>
                                 <td>
-                                    <input asp-for="WaterKno" type="text" class="floating-label-field floating-label-field--s3" maxlength="15"/>
+                                    <input asp-for="WaterKno" type="text" class="floating-label-field floating-label-field--s3" maxlength="15" />
                                 </td>
                                 <td>
                                     <select asp-for="CurrentUse" class="floating-label-field floating-label-field--s3">
@@ -576,10 +658,10 @@
                         </div>
 
                         <!--<div class="col-md-6">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-                            <a id="viewGpaFile" asp-action="GpaFile" class="badge bg-primary px-2" target="_blank" style="display:none;">(View File)</a>
-                            <input asp-for="FileGpafile" class="floating-label-field floating-label-field--s3 checkExtension" type="file" />
-                            <input type="hidden" asp-for="GpafilePath" />-->
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <a id="viewGpaFile" asp-action="GpaFile" class="badge bg-primary px-2" target="_blank" style="display:none;">(View File)</a>
+                        <input asp-for="FileGpafile" class="floating-label-field floating-label-field--s3 checkExtension" type="file" />
+                        <input type="hidden" asp-for="GpafilePath" />-->
                         @*<span asp-validation-for="GpafilePath" class="d-block text-danger field-validation-valid"></span>*@
                         <!--<label class="floating-label">GPA</label>
                         </div>

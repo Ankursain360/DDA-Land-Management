@@ -116,6 +116,29 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.Occupanttype)
                 .HasMaxLength(100)
                 .IsUnicode(false);
+            builder.Property(e => e.WhetherSubProperty)
+               .HasMaxLength(45)
+               .IsUnicode(false);
+            builder.Property(e => e.NameOfOriginalLessee)
+              .HasMaxLength(200)
+              .IsUnicode(false);
+            builder.Property(e => e.TenureTermOfLease)
+              .HasMaxLength(200)
+              .IsUnicode(false);
+            builder.Property(e => e.DateOfLeaseCommenced)
+               .HasColumnName("DateOfLeaseCommenced")
+               .HasColumnType("date");
+            builder.Property(e => e.UseLeaseDeed)
+              .HasMaxLength(45)
+              .IsUnicode(false);
+            builder.Property(e => e.SpecifyUse)
+              .HasMaxLength(200)
+              .IsUnicode(false);
+            builder.Property(e => e.AreaLeaseDeed).HasColumnType("decimal(10,0)");
+            builder.Property(e => e.CopyOfLease)
+              .HasMaxLength(45)
+              .IsUnicode(false);
+            builder.Property(e => e.LeaseDocumentFilePath).HasColumnType("longtext");
 
             builder.Property(e => e.OppositeParty)
                 .HasMaxLength(100)

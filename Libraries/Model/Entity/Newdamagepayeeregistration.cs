@@ -79,6 +79,17 @@ namespace Libraries.Model.Entity
         public string PendingAt { get; set; }
         public int? ApprovalZoneId { get; set; }
         public string UserId { get; set; }
+        public string WhetherSubProperty { get; set; }
+        public string NameOfOriginalLessee { get; set; }
+        public string TenureTermOfLease { get; set; }
+        public DateTime? DateOfLeaseCommenced { get; set; }
+        public string UseLeaseDeed { get; set; }
+        public string SpecifyUse { get; set; }
+        public decimal? AreaLeaseDeed { get; set; }
+        public string CopyOfLease { get; set; }
+        public string LeaseDocumentFilePath { get; set; }
+        [NotMapped]
+        public IFormFile LeaseDocumentFile { get; set; } 
 
         //documents
         [NotMapped]
