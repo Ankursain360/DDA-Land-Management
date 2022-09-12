@@ -55,7 +55,7 @@ $(function () {
         select: function (event, ui) {
             event.preventDefault();
             $("#txtfileno").val(ui.item.label);
-            
+
             HttpGet(`/DemandsLetter/GetFileDetails?fileid=${parseInt(ui.item.value)}`, 'json', function (response) {
                 //showDisBoundariesVillage(response[0].polygon, response[0].xcoordinate, response[0].ycoordinate, response[0].id);
                 $("#PropertyNo").val(response.propertyNo);
@@ -90,6 +90,7 @@ $("#btnCalculate").click(function () {
     if (EncroachmentDate == "") {
         $("#EncroachmentDateMsg").show();
     } else {
+        EncroachmentDate = new Date(EncroachmentDate);
         $("#EncroachmentDateMsg").hide();
         checkresult = true;
     }
@@ -99,6 +100,7 @@ $("#btnCalculate").click(function () {
         checkresult = false;
         $("#FromDateMsg").show();
     } else {
+        StartDate = new Date(StartDate);
         $("#FromDateMsg").hide();
         checkresult = true;
     }
@@ -107,6 +109,7 @@ $("#btnCalculate").click(function () {
         checkresult = false;
         $("#ToDateMsg").show();
     } else {
+        EndDate = new Date(EndDate);
         $("#ToDateMsg").hide();
         checkresult = true;
     }
@@ -125,13 +128,23 @@ $("#btnCalculate").click(function () {
         checkresult = false;
     }
     else {
+        checkresult = false;
+        if (StartDate < EncroachmentDate) {
+            alert('From Date can not be smaller than EncroachDate');
+        }
+        else if (EndDate < EncroachmentDate || EndDate < StartDate) {
+            alert('To Date can not be smaller than EncroachDate/FromDate');
+        }
+        else if (EncroachmentDate.getFullYear() < 1952) {
+            alert('Encroachment Date start from 1952');
+        }
         checkresult = true;
     }
     if (checkresult) {
         var param = GetSearchParam();
-        HttpPost(`/DemandsLetter/SetInitialRowBetweenTwoDates`, 'html', param, function (response) {
-            $('#LoadView').html("");
-            $('#LoadView').html(response);
+        HttpPost(`/DemandsLetter/DamageCalculate`, 'json', param, function (response) {
+            $("#DamageCharges").val(response[0]);
+            $("#InterestAmount").val(response[1]);
         });
     }
 
@@ -146,6 +159,6 @@ function GetSearchParam() {
         LocalityId: $("#LocalityId").children("option:selected").val(),
         Area: $("#Area").val(),
     }
-   
+
     return model;
 }
