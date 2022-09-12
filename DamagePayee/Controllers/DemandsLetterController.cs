@@ -14,6 +14,7 @@ using Dto.Master;
 using Utility.Helper;
 using System.Collections.Generic;
 using System.Linq;
+using System.Globalization;
 
 namespace DamagePayee.Controllers
 {
@@ -39,7 +40,7 @@ namespace DamagePayee.Controllers
         {
             demandletters.LocalityList = await _demandLetterService.GetLocalityList();
             demandletters.propertyTypeList = await _demandLetterService.GetPropertyType();
-           
+
         }
 
 
@@ -71,7 +72,7 @@ namespace DamagePayee.Controllers
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                       
+
                         return View("_List", demandletter);
                     }
                     else
@@ -101,7 +102,8 @@ namespace DamagePayee.Controllers
                 var result = await _demandLetterService.GetPagedDemandletter(model);
 
                 return PartialView("_List1", result);
-            } catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 return PartialView(ex);
             }
@@ -205,11 +207,68 @@ namespace DamagePayee.Controllers
         {
             return Json(await _demandLetterService.GetFileAutoCompleteDetails(prefix));
         }
-        public async Task<JsonResult> GetFileDetails(int fileid) 
+        public async Task<JsonResult> GetFileDetails(int fileid)
         {
             return Json(await _demandLetterService.GetFileNODetail(fileid));
         }
 
+        #region damage Calculation
+        [HttpPost]
+        public async Task<JsonResult> DamageCalculate([FromBody] DamageCalculationDto dto)
+        {
+            List<DamageChargesCalculation> damagecalculation = new List<DamageChargesCalculation>();
+
+            int yr = 0;
+            yr = CalculateYearBetweenTwoDates(dto);
+            try
+            {
+
+                SetInitialRowBetweenTwoDates(yr, dto, damagecalculation);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            var list = new List<string>();
+            list.Add(damagecalculation.Sum(x => x.DamageCharges).ToString());
+            list.Add(damagecalculation.Sum(x => x.TotalInterest).ToString());
+            return Json(list);
+        }
+        public int CalculateYearBetweenTwoDates(DamageCalculationDto dto)
+        {
+            int YrRes = 0;
+            DateTime startDate = dto.FromDate;
+            DateTime EndDate = dto.ToDate;
+
+            //Excel documentation says "COMPLETE calendar years in between dates"
+            if (EndDate.Month > 3)
+            {
+                string ddtt = "31/03/" + ((EndDate.Year) + 1).ToString();
+                //  ddtt = Convert.ToDateTime(ddtt).ToString("d/M/yyyy");
+                EndDate = DateTime.ParseExact(ddtt, "d/M/yyyy", CultureInfo.InvariantCulture);
+            }
+
+            int years = EndDate.Year - startDate.Year;
+
+            if (startDate.Month == EndDate.Month &&// if the start month and the end month are the same
+                EndDate.Day < startDate.Day// AND the end day is less than the start day
+                || EndDate.Month < startDate.Month)// OR if the end month is less than the start month
+            {
+                years--;
+            }
+
+            if (startDate.Year <= 2015 && EndDate.Year >= 2015)
+            {
+                YrRes = years + 2;
+            }
+            else
+            {
+                YrRes = years + 1;
+            }
+            return YrRes;
+
+        }
         private async void SetInitialRowBetweenTwoDates(int year, DamageCalculationDto dto, List<DamageChargesCalculation> damagecalculation)
         {
 
@@ -529,6 +588,8 @@ namespace DamagePayee.Controllers
 
             return (Math.Abs(TotalMonths) + 1);
         }
+
+
         public async Task<List<DamageCalculatorRateMappingDto>> BindStartAndEndDate(string s_date, string e_date, DamageCalculationDto dto)
         {
             DateTime date1 = dto.EncroachmentDate;
@@ -802,5 +863,6 @@ namespace DamagePayee.Controllers
 
             return damageCalculatorRateMappingDto;
         }
+        #endregion
     }
 }
