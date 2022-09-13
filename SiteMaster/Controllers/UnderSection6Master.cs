@@ -196,7 +196,7 @@ namespace SiteMaster.Controllers
                     {
                         Id = result[i].Id,
                         UnderSection4No = result[i].Undersection4 == null ? "" : result[i].Undersection4.Number,
-                        NotificationNo = result[i].Number,
+                        NotificationNo_US_6 = result[i].Number,
                         NotificationDate = Convert.ToDateTime(result[i].Ndate).ToString("dd-MMM-yyyy"),
                         Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
                     }); ;

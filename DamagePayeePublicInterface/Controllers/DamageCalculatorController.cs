@@ -490,15 +490,22 @@ namespace DamagePayeePublicInterface.Controllers
             }
         }
 
-        public int CalMonth(string from_dt, string to_dt)
+        public double CalMonth(string from_dt, string to_dt)
         {
             //log
             this.WriteToFile("from_dt, to_dt line number 489: fromdate" + from_dt + "  todate:" + to_dt);
-            int TotalMonths = 0;
+            double TotalMonths = 0;
             DateTime startdate = DateTime.ParseExact(from_dt, "dd/MM/yyyy", CultureInfo.InvariantCulture); // Convert.ToDateTime(from_dt.ToString());
             DateTime enddate = DateTime.ParseExact(to_dt, "dd/MM/yyyy", CultureInfo.InvariantCulture); // Convert.ToDateTime(to_dt.ToString());
             this.WriteToFile("startdate, enddate line number 489: startdate" + startdate.ToString() + "  enddate:" + enddate.ToString());
-            TotalMonths = (12 * (startdate.Year - enddate.Year) + (startdate.Month - enddate.Month));
+            if (startdate.Day >= 16 && startdate.Day <= 31)
+            {
+                TotalMonths = (12 * (startdate.Year - enddate.Year) + (startdate.Month - enddate.Month) + (0.5));
+            }
+            else
+            {
+                TotalMonths = (12 * (startdate.Year - enddate.Year) + (startdate.Month - enddate.Month));
+            }
             return (Math.Abs(TotalMonths) + 1);
         }
 
