@@ -46,12 +46,14 @@ namespace AuthServer.Quickstart
         }
         
         [AllowAnonymous]
-        public IActionResult Create()
-        {
+        public IActionResult Create(string username)
+       {
+            ForgetPasswordMailDto dto = new ForgetPasswordMailDto();
+            dto.Username = username;
             var Msg = TempData["Message"] as string;
             if (Msg != null)
                 ViewBag.Message = Msg;
-            return View();
+            return View(dto);
         }
         [HttpPost]
         [AllowAnonymous]
