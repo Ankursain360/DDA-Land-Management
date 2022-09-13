@@ -45,3 +45,14 @@ function resetCaptchaImage() {
     d = new Date();
     $("#img-captcha").attr("src", "/get-captcha-image?" + d.getTime());
 }
+$("#showpassword").click(function (){
+    var value = $('#Password');
+    if (value[0].type== 'password') {
+        value[0].type = "text";
+    }
+    else {
+
+        value[0].type = "password";
+    }
+});
+
