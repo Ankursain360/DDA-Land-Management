@@ -21,6 +21,8 @@ using System.Text;
 using IdentityServerAspNetIdentity.Models;
 using Libraries.Service.IApplicationService;
 using Libraries.Model.Entity;
+using System.Text.RegularExpressions;
+
 namespace AuthServer.Quickstart
 {
     public class ChangePasswordController : Controller
@@ -44,10 +46,10 @@ namespace AuthServer.Quickstart
         {
             return View();
         }
-        
+
         [AllowAnonymous]
         public IActionResult Create(string username)
-       {
+        {
             ForgetPasswordMailDto dto = new ForgetPasswordMailDto();
             dto.Username = username;
             var Msg = TempData["Message"] as string;
@@ -120,6 +122,7 @@ namespace AuthServer.Quickstart
                         maildto.port = Convert.ToInt32(_configuration.GetSection("EmailConfiguration:port").Value);
 
                         maildto.strMailTo = EmailID;
+                        string maskedemailid = MaskEmail(EmailID);
                         var sendMailResult = mailG.SendMailWithAttachment(maildto);
                         #endregion
                         #endregion
@@ -130,7 +133,7 @@ namespace AuthServer.Quickstart
                             TempData["Message"] = Alert.Show("Dear User,<br/>" + DisplayName + " Enable to send mail or sms ", "", AlertType.Info);
 
                         // return RedirectToAction("Create", "ForgetPassword");
-                        return RedirectToAction("ForgetPasswordMail", "ChangePassword", new { username = user.UserName });
+                        return RedirectToAction("ForgetPasswordMail", "ChangePassword", new { username = user.UserName ,email= maskedemailid });
 
                     }
                     else
@@ -157,6 +160,18 @@ namespace AuthServer.Quickstart
         {
             var model = new ResetPasswordDto { Token = token, Username = username };
             return View(model);
+        }
+
+
+
+        public string MaskEmail(string s)
+        {
+            string _PATTERN = @"(?<=[\w]{1})[\w-\._\+%\\]*(?=[\w]{1}@)|(?<=@[\w]{1})[\w-_\+%]*(?=\.)";
+            if (!s.Contains("@"))
+                return new String('*', s.Length);
+            if (s.Split('@')[0].Length < 4)
+                return @"*@*.*";
+            return Regex.Replace(s, _PATTERN, m => new string('*', m.Length));
         }
 
         [HttpPost]
@@ -241,9 +256,10 @@ namespace AuthServer.Quickstart
             return View(model);
         }
 
-        public IActionResult ForgetPasswordMail(string username)
+        public IActionResult ForgetPasswordMail(string username,string email)
         {
             ViewBag.name = username;
+            ViewBag.email = email;
             return View();
         }
     }
