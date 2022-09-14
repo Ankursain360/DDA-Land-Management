@@ -6,9 +6,9 @@
     <form class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
         <h3 class="mb-3 d-flex">Search</h3>
         <div class="row">
-            <div class="col-md-3    ">
+            <div class="col-md-3">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input type="text" id="txtLocation" class="floating-label-field floating-label-field--s3"/>
+                    <input type="text" id="txtLocation" class="floating-label-field floating-label-field--s3" />
                     <label for="txtName" class="floating-label">Location/Address of Property</label>
                 </div>
             </div>
@@ -17,6 +17,39 @@
                     <input type="text" id="txtOccupantName" class="floating-label-field floating-label-field--s3">
                     <label for="txtPhoneNumber" class="floating-label">Occupant Name</label>
                 </div>
+            </div>
+            <div class="col-md-3    ">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="text" id="txtmobile" class="floating-label-field floating-label-field--s3" />
+                    <label for="txtmobile" class="floating-label">Mobile Number</label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="text" id="txtpresentuse" class="floating-label-field floating-label-field--s3">
+                    <label for="txtpresentuse" class="floating-label">Present Use</label>
+                </div>
+            </div>
+        </div>
+        <div class="row pt-3">
+            <div class="col-md-3">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="text" id="txtcreatedbynavigation" class="floating-label-field floating-label-field--s3">
+                    <label for="txtcreatedbynavigation" class="floating-label">Submitted By</label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="date" placeholder="Date" id="txtFromDate" class="floating-label-field floating-label-field--s3" value="" />
+                    <label class="floating-label">From Date</label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="date" placeholder="Date" id="txtToDate" class="floating-label-field floating-label-field--s3" value="" />
+                    <label class="floating-label">To Date</label>
+                </div>
+
             </div>
         </div>
         <div class="row mt-md-3">
@@ -41,7 +74,7 @@
             <div class="p-3 d-flex align-items-end me-auto">
                 <div class="floating-label-wrap">
                     <select id="ddlSort" class="floating-label-field floating-label-field--s3">
-                        <option value="Location">Location/Address of Property</option>
+                        <option value="LOCATION">Location/Address of Property</option>
                         <option value="OCCUPANTNAME">Occupant Name</option>
                         <option value="STATUS">Status</option>
                     </select>

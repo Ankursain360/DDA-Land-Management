@@ -25,7 +25,7 @@
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row pt-3">
         <div class="col-md-6">
             <div class="floating-label-wrap mb-3 mb-md-0">
 
@@ -54,127 +54,149 @@
                 <label class="floating-label">Approx Area of the Property<span style="color:red">*</span></label>
             </div>
         </div>
+
+        <div class="col-md-6">
+            <div class="floating-label-wrap mb-3 mb-md-0">
+                <select class="floating-label-field floating-label-field--s3" asp-for="AreaUnit" asp-items="@(new SelectList(Model.GetAreaunitList,"Id","Name"))">
+                    <option selected="selected" disabled="disabled" value="">---Select---</option>
+                </select>
+                <span asp-validation-for="AreaUnit" class="text-danger"></span>
+                <label class="floating-label">Area Unit</label>
+            </div>
+        </div>
+
+    </div>
+    <div class="row pt-3">
         <div class="col-md-6">
             <div class="floating-label-wrap mb-3 mb-md-0">
 
-                <input type="text" asp-for="NumberOfFloors" class="floating-label-field floating-label-field--s3 onlynumbers" onpaste="return false;" />
+                <select class="floating-label-field floating-label-field--s3" asp-for="NumberOfFloors" asp-items="@(new SelectList(Model.GetFloorList,"Id","Name"))">
+                    <option selected="selected" disabled="disabled" value="">---Select---</option>
+                </select>
                 <span asp-validation-for="NumberOfFloors" class="text-danger"></span>
                 <label class="floating-label">Number of Floors<span style="color:red">*</span></label>
             </div>
         </div>
-    </div>
-    <div class="row pt-3">
         <div class="col-md-6">
             <div class="floating-label-wrap mb-3 mb-md-0">
-                <input type="text" asp-for="CaelectricityNo" class="floating-label-field floating-label-field--s3" limit="30" />
-                <span asp-validation-for="CaelectricityNo" class="text-danger"></span>
-                <label class="floating-label">CA-Number of Electricity Connection(s)</label>
+                <input type="text" asp-for="FileNo" class="floating-label-field floating-label-field--s3" limit="30" />
+                <span asp-validation-for="FileNo" class="text-danger"></span>
+                <label class="floating-label">File No</label>
             </div>
         </div>
-        <div class="col-md-6">
-            <div class="floating-label-wrap mb-3 mb-md-0">
+    </div>
+        <div class="row pt-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="text" asp-for="CaelectricityNo" class="floating-label-field floating-label-field--s3" limit="30" />
+                    <span asp-validation-for="CaelectricityNo" class="text-danger"></span>
+                    <label class="floating-label">CA-Number of Electricity Connection(s)</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
 
-                <input type="text" asp-for="KwaterNo" class="floating-label-field floating-label-field--s3" limit="30" />
-                <span asp-validation-for="KwaterNo" class="text-danger"></span>
-                <label class="floating-label">K-Number of Water Connection(s)</label>
+                    <input type="text" asp-for="KwaterNo" class="floating-label-field floating-label-field--s3" limit="30" />
+                    <span asp-validation-for="KwaterNo" class="text-danger"></span>
+                    <label class="floating-label">K-Number of Water Connection(s)</label>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="row pt-3">
-        <div class="col-md-6">
-            <div class="floating-label-wrap mb-3 mb-md-0">
+        <div class="row pt-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
 
-                <input type="text" asp-for="PropertyHouseTaxNo" class="floating-label-field floating-label-field--s3" limit="30" />
-                <span asp-validation-for="PropertyHouseTaxNo" class="text-danger"></span>
-                <label class="floating-label">Property/House Tax Number issued by MCD/local body if any</label>
+                    <input type="text" asp-for="PropertyHouseTaxNo" class="floating-label-field floating-label-field--s3" limit="30" />
+                    <span asp-validation-for="PropertyHouseTaxNo" class="text-danger"></span>
+                    <label class="floating-label">Property/House Tax Number issued by MCD/local body if any</label>
+                </div>
             </div>
-        </div>
-        <div class="col-md-6">
-            <div class="floating-label-wrap mb-3 mb-md-0">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
 
-                <input type="text" asp-for="OccupantName" class="floating-label-field floating-label-field--s3" limit="100" />
-                <span asp-validation-for="OccupantName" class="text-danger"></span>
-                <label class="floating-label">Name of Occupant<span style="color:red">*</span></label>
+                    <input type="text" asp-for="OccupantName" class="floating-label-field floating-label-field--s3" limit="100" />
+                    <span asp-validation-for="OccupantName" class="text-danger"></span>
+                    <label class="floating-label">Name of Occupant<span style="color:red">*</span></label>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="row pt-3">
-        <div class="col-md-6">
-            <div class="floating-label-wrap mb-3 mb-md-0">
-                <input type="text" asp-for="Email" class="floating-label-field floating-label-field--s3" limit="50" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-                <label class="floating-label">E-mail</label>
+        <div class="row pt-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="text" asp-for="Email" class="floating-label-field floating-label-field--s3" limit="50" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                    <label class="floating-label">E-mail</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="text" asp-for="MobileNo" class="floating-label-field floating-label-field--s3" limit="12" />
+                    <span asp-validation-for="MobileNo" class="text-danger"></span>
+                    <label class="floating-label">Mobile<span style="color:red">*</span></label>
+                </div>
             </div>
         </div>
-        <div class="col-md-6">
-            <div class="floating-label-wrap mb-3 mb-md-0">
-                <input type="text" asp-for="MobileNo" class="floating-label-field floating-label-field--s3" limit="12" />
-                <span asp-validation-for="MobileNo" class="text-danger"></span>
-                <label class="floating-label">Mobile<span style="color:red">*</span></label>
+        <div class="row pt-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="text" asp-for="OccupantAadharNo" class="floating-label-field floating-label-field--s3" limit="15" />
+                    <span asp-validation-for="OccupantAadharNo" class="text-danger"></span>
+                    <label class="floating-label">Aadhar Number of Occupant<span style="color:red">*</span></label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="text" asp-for="VoterIdNo" class="floating-label-field floating-label-field--s3" limit="15" />
+                    <span asp-validation-for="VoterIdNo" class="text-danger"></span>
+                    <label class="floating-label">Voter ID Number<span style="color:red">*</span></label>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="row pt-3">
-        <div class="col-md-6">
-            <div class="floating-label-wrap mb-3 mb-md-0">
-                <input type="text" asp-for="OccupantAadharNo" class="floating-label-field floating-label-field--s3" limit="15" />
-                <span asp-validation-for="OccupantAadharNo" class="text-danger"></span>
-                <label class="floating-label">Aadhar Number of Occupant<span style="color:red">*</span></label>
+        <div class="row pt-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="file" asp-for="DocumentPhoto" class="floating-label-field floating-label-field--s3 checkExtension" multiple accept="image/jpeg" />
+                    <span asp-validation-for="OccupantIdentityPrrofFilePath" class="text-danger"></span>
+                    <label class="floating-label">Identity Proof of the Occupants; Aadhar,Voter Card, DL, Passport<span style="color:red">(.pdf only)</span></label>
+                </div>
             </div>
-        </div>
-        <div class="col-md-6">
-            <div class="floating-label-wrap mb-3 mb-md-0">
-                <input type="text" asp-for="VoterIdNo" class="floating-label-field floating-label-field--s3" limit="15" />
-                <span asp-validation-for="VoterIdNo" class="text-danger"></span>
-                <label class="floating-label">Voter ID Number<span style="color:red">*</span></label>
-            </div>
-        </div>
-    </div>
-    <div class="row pt-3">
-        <div class="col-md-6">
-            <div class="floating-label-wrap mb-3 mb-md-0">
-                <input type="file" asp-for="DocumentPhoto" class="floating-label-field floating-label-field--s3 checkExtension" multiple accept="image/jpeg" />
-                <span asp-validation-for="OccupantIdentityPrrofFilePath" class="text-danger"></span>
-                <label class="floating-label">Identity Proof of the Occupants; Aadhar,Voter Card, DL, Passport<span style="color:red">(.pdf only)</span></label>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="floating-label-wrap mb-3 mb-md-0">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
 
-                <input type="text" asp-for="DamagePaidPast" class="floating-label-field floating-label-field--s3" limit="45" />
-                <span asp-validation-for="DamagePaidPast" class="text-danger"></span>
-                <label class="floating-label">Damage Paid in the Past, if any </label>
+                    <input type="text" asp-for="DamagePaidPast" class="floating-label-field floating-label-field--s3" limit="45" />
+                    <span asp-validation-for="DamagePaidPast" class="text-danger"></span>
+                    <label class="floating-label">Damage Paid in the Past, if any </label>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="row pt-3">
-        <div class="col-md-6">
-            <div class="floating-label-wrap mb-3 mb-md-0">
+        <div class="row pt-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
 
-                <input type="file" asp-for="PropertyPhoto" class="floating-label-field floating-label-field--s3 checkExtension" multiple accept="image/jpeg" />
-                <span asp-validation-for="PropertyPhoto" class="text-danger"></span>
-                <label class="floating-label">Document of Property, if any<span style="color:red">(.pdf only)</span></label>
+                    <input type="file" asp-for="PropertyPhoto" class="floating-label-field floating-label-field--s3 checkExtension" multiple accept="image/jpeg" />
+                    <span asp-validation-for="PropertyPhoto" class="text-danger"></span>
+                    <label class="floating-label">Document of Property, if any<span style="color:red">(.pdf only)</span></label>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="row pt-3">
-        <div class="col-md-12">
-            <div class="floating-label-wrap mb-3 mb-md-0">
-                <textarea type="text" asp-for="Remarks" class="floating-label-field floating-label-field--s3" limit="500"></textarea>
-                <span asp-validation-for="Remarks" class="text-danger"></span>
-                <label class="floating-label">Remarks</label>
+        <div class="row pt-3">
+            <div class="col-md-12">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <textarea type="text" asp-for="Remarks" class="floating-label-field floating-label-field--s3" limit="500"></textarea>
+                    <span asp-validation-for="Remarks" class="text-danger"></span>
+                    <label class="floating-label">Remarks</label>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="row pt-3">
-        <div class="col-md-12">
-            <input type="submit" value="Submit" class="btn btn-theme " />
+        <div class="row pt-3">
+            <div class="col-md-12">
+                <input type="submit" value="Submit" class="btn btn-theme " />
 
-            @Html.ActionLink("Back", "Index", "Door2DoorSurvey", null, new { @class = "btn btn-theme " })
+                @Html.ActionLink("Back", "Index", "Door2DoorSurvey", null, new { @class = "btn btn-theme " })
+            </div>
         </div>
-    </div>
 
 </form>
 

@@ -48,6 +48,14 @@ namespace Libraries.Service.ApplicationService
             List<Presentuse> presentuseList = await _doortodoorsurveyRepository.GetAllPresentuse();
             return presentuseList;
         }
+        public async Task<List<Areaunit>> GetAllAreaunit()
+        {
+            return await _doortodoorsurveyRepository.GetAllAreaunit();
+        }
+         public async Task<List<Floors>> GetAllFloor()
+        {
+            return await _doortodoorsurveyRepository.GetAllFloor();
+        }
         public async Task<List<Doortodoorsurvey>> GetDoortodoorsurveyUsingRepo()
         {
             return await _doortodoorsurveyRepository.GetDoortodoorsurvey();

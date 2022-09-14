@@ -4,6 +4,7 @@ using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using Libraries.Repository.IEntityRepository;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -24,8 +25,16 @@ namespace Libraries.Repository.EntityRepository
             List<Presentuse> presentuseList = await _dbContext.Presentuse.Where(x => x.IsActive == 1).ToListAsync();
             return presentuseList;
         }
-
-
+        public async Task<List<Areaunit>> GetAllAreaunit()
+        {
+            var list = await _dbContext.Areaunit.Where(x => x.IsActive == 1).ToListAsync();
+            return list;
+        }
+        public async Task<List<Floors>> GetAllFloor()
+        {
+            var list = await _dbContext.Floors.Where(x => x.IsActive == 1).ToListAsync();
+            return list;
+        }
         public async Task<List<Doortodoorsurvey>> GetDoortodoorsurvey()
         {
             //return await _dbContext.Doortodoorsurvey.Where(x => x.IsActive == 1).Include(x => x.PresentUseNavigation).OrderByDescending(x => x.Id).ToListAsync();
@@ -42,6 +51,11 @@ namespace Libraries.Repository.EntityRepository
                                         .Include(a => a.NumberOfFloorsNavigation)
                                         .Where(x => (string.IsNullOrEmpty(model.location) || x.PropertyAddress.Contains(model.location))
                                            && (string.IsNullOrEmpty(model.occupantname) || x.OccupantName.Contains(model.occupantname))
+                                           && (string.IsNullOrEmpty(model.Mobileno) || x.MobileNo.Contains(model.Mobileno))
+                                           && (string.IsNullOrEmpty(model.presentuse) || x.PresentUseNavigation.Name.Contains(model.presentuse))
+                                           && (string.IsNullOrEmpty(model.createdByNavigation) || x.CreatedByNavigation.UserName.Contains(model.createdByNavigation))
+                                            && (x.CreatedDate.Date >= ((model.FromDate.HasValue) ? Convert.ToDateTime(model.FromDate).Date : x.CreatedDate.Date))
+                                  && (x.CreatedDate.Date <= ((model.ToDate.HasValue) ? Convert.ToDateTime(model.ToDate).Date : x.CreatedDate.Date))
                                          )
                                         .GetPaged<Doortodoorsurvey>(model.PageNumber, model.PageSize);
 
@@ -52,41 +66,54 @@ namespace Libraries.Repository.EntityRepository
                 switch (model.SortBy.ToUpper())
                 {
                     case ("LOCATION"):
-                        data = null;
-                        data = await _dbContext.Doortodoorsurvey.Include(x => x.PresentUseNavigation)
-                                                .Include(x => x.CreatedByNavigation)
-                                                .Include(x => x.AreaUnitNavigation)
-                                                .Include(a => a.NumberOfFloorsNavigation)
-                               .Where(x => (string.IsNullOrEmpty(model.location) || x.PropertyAddress.Contains(model.location))
-                                           && (string.IsNullOrEmpty(model.occupantname) || x.OccupantName.Contains(model.occupantname))
-                                  )
-                                .OrderBy(s => s.PropertyAddress)
-                                .GetPaged<Doortodoorsurvey>(model.PageNumber, model.PageSize);
+                        data.Results = data.Results.OrderBy(x => x.PropertyAddress).ToList();
+                        //data = null;
+                        //data = await _dbContext.Doortodoorsurvey.Include(x => x.PresentUseNavigation)
+                        //                        .Include(x => x.CreatedByNavigation)
+                        //                        .Include(x => x.AreaUnitNavigation)
+                        //                        .Include(a => a.NumberOfFloorsNavigation)
+                        //       .Where(x => (string.IsNullOrEmpty(model.location) || x.PropertyAddress.Contains(model.location))
+                        //                   && (string.IsNullOrEmpty(model.occupantname) || x.OccupantName.Contains(model.occupantname))
+                        //          )
+                        //        .OrderBy(s => s.PropertyAddress)
+                        //        .GetPaged<Doortodoorsurvey>(model.PageNumber, model.PageSize);
                         break;
                     case ("OCCUPANTNAME"):
-                        data = null;
-                        data = await _dbContext.Doortodoorsurvey.Include(x => x.PresentUseNavigation)
-                                                .Include(x => x.CreatedByNavigation)
-                                                .Include(x => x.AreaUnitNavigation)
-                                                .Include(a => a.NumberOfFloorsNavigation)
-                                    .Where(x => (string.IsNullOrEmpty(model.location) || x.PropertyAddress.Contains(model.location))
-                                           && (string.IsNullOrEmpty(model.occupantname) || x.OccupantName.Contains(model.occupantname))
-                                  )
-                                .OrderBy(s => s.OccupantName)
-                                .GetPaged<Doortodoorsurvey>(model.PageNumber, model.PageSize);
+                        data.Results = data.Results.OrderBy(x => x.OccupantName).ToList();
+                        //data = null;
+                        //data = await _dbContext.Doortodoorsurvey.Include(x => x.PresentUseNavigation)
+                        //                        .Include(x => x.CreatedByNavigation)
+                        //                        .Include(x => x.AreaUnitNavigation)
+                        //                        .Include(a => a.NumberOfFloorsNavigation)
+                        //            .Where(x => (string.IsNullOrEmpty(model.location) || x.PropertyAddress.Contains(model.location))
+                        //                   && (string.IsNullOrEmpty(model.occupantname) || x.OccupantName.Contains(model.occupantname))
+                        //          )
+                        //        .OrderBy(s => s.OccupantName)
+                        //        .GetPaged<Doortodoorsurvey>(model.PageNumber, model.PageSize);
 
                         break;
+                    case ("MOBILE"):
+                        data.Results = data.Results.OrderBy(X => X.MobileNo).ToList();
+                        break; 
+                    case ("PRESENTUSE"):
+                        data.Results = data.Results.OrderBy(x => x.PresentUseNavigation.Name).ToList();
+                        break;
+                    case ("CREATEDBYNAVIGATION"):
+                        data.Results = data.Results.OrderBy(x => x.CreatedByNavigation.UserName).ToList();
+                        break; 
+                        
                     case ("STATUS"):
-                        data = null;
-                        data = await _dbContext.Doortodoorsurvey.Include(x => x.PresentUseNavigation)
-                                                .Include(x => x.CreatedByNavigation)
-                                                .Include(x => x.AreaUnitNavigation)
-                                                .Include(a => a.NumberOfFloorsNavigation)
-                                .Where(x => (string.IsNullOrEmpty(model.location) || x.PropertyAddress.Contains(model.location))
-                                           && (string.IsNullOrEmpty(model.occupantname) || x.OccupantName.Contains(model.occupantname))
-                                  )
-                                .OrderByDescending(s => s.IsActive)
-                                .GetPaged<Doortodoorsurvey>(model.PageNumber, model.PageSize);
+                        //data = null;
+                        //data = await _dbContext.Doortodoorsurvey.Include(x => x.PresentUseNavigation)
+                        //                        .Include(x => x.CreatedByNavigation)
+                        //                        .Include(x => x.AreaUnitNavigation)
+                        //                        .Include(a => a.NumberOfFloorsNavigation)
+                        //        .Where(x => (string.IsNullOrEmpty(model.location) || x.PropertyAddress.Contains(model.location))
+                        //                   && (string.IsNullOrEmpty(model.occupantname) || x.OccupantName.Contains(model.occupantname))
+                        //          )
+                        //        .OrderByDescending(s => s.IsActive)
+                        //        .GetPaged<Doortodoorsurvey>(model.PageNumber, model.PageSize);
+                        data.Results = data.Results.OrderByDescending(x => x.IsActive).ToList();
                         break;
 
                 }
@@ -96,41 +123,54 @@ namespace Libraries.Repository.EntityRepository
                 switch (model.SortBy.ToUpper())
                 {
                     case ("LOCATION"):
-                        data = null;
-                        data = await _dbContext.Doortodoorsurvey.Include(x => x.PresentUseNavigation)
-                                                .Include(x => x.CreatedByNavigation)
-                                                .Include(x => x.AreaUnitNavigation)
-                                                .Include(a => a.NumberOfFloorsNavigation)
-                                .Where(x => (string.IsNullOrEmpty(model.location) || x.PropertyAddress.Contains(model.location))
-                                           && (string.IsNullOrEmpty(model.occupantname) || x.OccupantName.Contains(model.occupantname))
-                                  )
-                                .OrderByDescending(s => s.PropertyAddress)
-                                .GetPaged<Doortodoorsurvey>(model.PageNumber, model.PageSize);
+                        data.Results = data.Results.OrderByDescending(x => x.PropertyAddress).ToList();
+                        //data = null;
+                        //data = await _dbContext.Doortodoorsurvey.Include(x => x.PresentUseNavigation)
+                        //                        .Include(x => x.CreatedByNavigation)
+                        //                        .Include(x => x.AreaUnitNavigation)
+                        //                        .Include(a => a.NumberOfFloorsNavigation)
+                        //       .Where(x => (string.IsNullOrEmpty(model.location) || x.PropertyAddress.Contains(model.location))
+                        //                   && (string.IsNullOrEmpty(model.occupantname) || x.OccupantName.Contains(model.occupantname))
+                        //          )
+                        //        .OrderBy(s => s.PropertyAddress)
+                        //        .GetPaged<Doortodoorsurvey>(model.PageNumber, model.PageSize);
                         break;
                     case ("OCCUPANTNAME"):
-                        data = null;
-                        data = await _dbContext.Doortodoorsurvey.Include(x => x.PresentUseNavigation)
-                                                .Include(x => x.CreatedByNavigation)
-                                                .Include(x => x.AreaUnitNavigation)
-                                                .Include(a => a.NumberOfFloorsNavigation)
-                               .Where(x => (string.IsNullOrEmpty(model.location) || x.PropertyAddress.Contains(model.location))
-                                           && (string.IsNullOrEmpty(model.occupantname) || x.OccupantName.Contains(model.occupantname))
-                                  )
-                                .OrderByDescending(s => s.OccupantName)
-                                .GetPaged<Doortodoorsurvey>(model.PageNumber, model.PageSize);
+                        data.Results = data.Results.OrderByDescending(x => x.OccupantName).ToList();
+                        //data = null;
+                        //data = await _dbContext.Doortodoorsurvey.Include(x => x.PresentUseNavigation)
+                        //                        .Include(x => x.CreatedByNavigation)
+                        //                        .Include(x => x.AreaUnitNavigation)
+                        //                        .Include(a => a.NumberOfFloorsNavigation)
+                        //            .Where(x => (string.IsNullOrEmpty(model.location) || x.PropertyAddress.Contains(model.location))
+                        //                   && (string.IsNullOrEmpty(model.occupantname) || x.OccupantName.Contains(model.occupantname))
+                        //          )
+                        //        .OrderBy(s => s.OccupantName)
+                        //        .GetPaged<Doortodoorsurvey>(model.PageNumber, model.PageSize);
 
                         break;
+                    case ("MOBILE"):
+                        data.Results = data.Results.OrderByDescending(X => X.MobileNo).ToList();
+                        break;
+                    case ("PRESENTUSE"):
+                        data.Results = data.Results.OrderByDescending(x => x.PresentUseNavigation.Name).ToList();
+                        break;
+                    case ("CREATEDBYNAVIGATION"):
+                        data.Results = data.Results.OrderByDescending(x => x.CreatedByNavigation.UserName).ToList();
+                        break;
+
                     case ("STATUS"):
-                        data = null;
-                        data = await _dbContext.Doortodoorsurvey.Include(x => x.PresentUseNavigation)
-                                                .Include(x => x.CreatedByNavigation)
-                                                .Include(x => x.AreaUnitNavigation)
-                                                .Include(a => a.NumberOfFloorsNavigation)
-                                .Where(x => (string.IsNullOrEmpty(model.location) || x.PropertyAddress.Contains(model.location))
-                                           && (string.IsNullOrEmpty(model.occupantname) || x.OccupantName.Contains(model.occupantname))
-                                           )
-                                .OrderBy(s => s.IsActive)
-                                .GetPaged<Doortodoorsurvey>(model.PageNumber, model.PageSize);
+                        //data = null;
+                        //data = await _dbContext.Doortodoorsurvey.Include(x => x.PresentUseNavigation)
+                        //                        .Include(x => x.CreatedByNavigation)
+                        //                        .Include(x => x.AreaUnitNavigation)
+                        //                        .Include(a => a.NumberOfFloorsNavigation)
+                        //        .Where(x => (string.IsNullOrEmpty(model.location) || x.PropertyAddress.Contains(model.location))
+                        //                   && (string.IsNullOrEmpty(model.occupantname) || x.OccupantName.Contains(model.occupantname))
+                        //          )
+                        //        .OrderByDescending(s => s.IsActive)
+                        //        .GetPaged<Doortodoorsurvey>(model.PageNumber, model.PageSize);
+                        data.Results = data.Results.OrderBy(x => x.IsActive).ToList();
                         break;
 
                 }
@@ -287,6 +327,7 @@ namespace Libraries.Repository.EntityRepository
                                     .Include(x=> x.NumberOfFloorsNavigation)
                                     .Include(x => x.Doortodoorsurveyidentityproof)
                                     .Include(x => x.Doortodoorsurveypropertyproof)
+                                    .Include(x=>x.AreaUnitNavigation)
                                     .Where(x => x.Id == id && x.IsActive == 1)
                                     .FirstOrDefaultAsync();
         }

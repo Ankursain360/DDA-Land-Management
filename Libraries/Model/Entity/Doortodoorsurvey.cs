@@ -73,7 +73,11 @@ namespace Libraries.Model.Entity
         public Surveyuserdetail CreatedByNavigation { get; set; }
         public Presentuse PresentUseNavigation { get; set; }
         public Areaunit AreaUnitNavigation { get; set; }
+        [NotMapped]
+        public List<Areaunit> GetAreaunitList { get; set; } 
         public Floors NumberOfFloorsNavigation { get; set; }
+        [NotMapped]
+        public List<Floors> GetFloorList { get; set; }
 
         [NotMapped]
         public List<IFormFile> DocumentPhoto { get; set; }

@@ -69,6 +69,8 @@ namespace DamagePayee.Controllers
             Doortodoorsurvey doortodoorsurvey = new Doortodoorsurvey();
 
             doortodoorsurvey.PresentuseList = await _doortodoorsurveyService.GetAllPresentuse();
+            doortodoorsurvey.GetAreaunitList = await _doortodoorsurveyService.GetAllAreaunit();
+            doortodoorsurvey.GetFloorList = await _doortodoorsurveyService.GetAllFloor();
             return View(doortodoorsurvey);
         }
 
@@ -83,6 +85,8 @@ namespace DamagePayee.Controllers
             try
             {
                 doortodoorsurvey.PresentuseList = await _doortodoorsurveyService.GetAllPresentuse();
+                doortodoorsurvey.GetAreaunitList = await _doortodoorsurveyService.GetAllAreaunit();
+                doortodoorsurvey.GetFloorList = await _doortodoorsurveyService.GetAllFloor();
                 if (ModelState.IsValid)
                 {
                     if (IsValidpdf == true)
@@ -175,6 +179,8 @@ namespace DamagePayee.Controllers
         {
             var Data = await _doortodoorsurveyService.FetchSingleResult(id);
             Data.PresentuseList = await _doortodoorsurveyService.GetAllPresentuse();
+            Data.GetAreaunitList = await _doortodoorsurveyService.GetAllAreaunit();
+            Data.GetFloorList = await _doortodoorsurveyService.GetAllFloor();
 
             if (Data == null)
             {
@@ -191,9 +197,13 @@ namespace DamagePayee.Controllers
             bool IsValidpdf = CheckMimeType(doortodoorsurvey);
             bool IsValidpdf1 = CheckMimeType1(doortodoorsurvey);
             doortodoorsurvey.PresentuseList = await _doortodoorsurveyService.GetAllPresentuse();
+            doortodoorsurvey.GetAreaunitList = await _doortodoorsurveyService.GetAllAreaunit();
+            doortodoorsurvey.GetFloorList = await _doortodoorsurveyService.GetAllFloor();
             try
             {
                 doortodoorsurvey.PresentuseList = await _doortodoorsurveyService.GetAllPresentuse();
+                doortodoorsurvey.GetAreaunitList = await _doortodoorsurveyService.GetAllAreaunit();
+                doortodoorsurvey.GetFloorList = await _doortodoorsurveyService.GetAllFloor();
 
                 if (ModelState.IsValid)
                 {
@@ -320,6 +330,8 @@ namespace DamagePayee.Controllers
         {
             var Data = await _doortodoorsurveyService.FetchSingleResult(id);
             Data.PresentuseList = await _doortodoorsurveyService.GetAllPresentuse();
+            Data.GetAreaunitList = await _doortodoorsurveyService.GetAllAreaunit();
+            Data.GetFloorList = await _doortodoorsurveyService.GetAllFloor();
 
             if (Data == null)
             {

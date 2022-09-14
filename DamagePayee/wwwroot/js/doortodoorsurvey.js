@@ -15,6 +15,12 @@ $("#btnSearch").click(function () {
 $("#btnReset").click(function () {
     $('#txtLocation').val('');
     $('#txtOccupantName').val('')
+    $('#txtmobile').val('');
+    $('#txtpresentuse').val('')
+    $('#txtcreatedbynavigation').val('');
+    $('#txtFromDate').val('')
+    $('#txtToDate').val('');
+   // $('#txtOccupantName').val('')
     GetDivision(currentPageNumber, currentPageSize, sortOrder);
 });
 
@@ -50,6 +56,11 @@ function GetSearchParam(pageNumber, pageSize, sortOrder) {
     var model = {
         location: $('#txtLocation').val(),
         occupantname: $('#txtOccupantName').val(),
+        Mobileno: $('#txtmobile').val(),
+        presentuse: $('#txtpresentuse').val(),
+        createdByNavigation: $('#txtcreatedbynavigation').val(),
+        FromDate: $('#txtFromDate').val(),
+        ToDate: $('#txtToDate').val(),
         sortBy: $("#ddlSort").children("option:selected").val(),
         sortOrder: parseInt(sortOrder),
         pageSize: parseInt(pageSize),
