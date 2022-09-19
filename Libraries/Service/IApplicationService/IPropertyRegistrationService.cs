@@ -66,5 +66,7 @@ namespace Libraries.Service.IApplicationService
 
         string GetMobileNo(int UserId);
 
+        Task<List<Landbankdetails>> GetLandBankdata(string landCategory);
+
     }
 }

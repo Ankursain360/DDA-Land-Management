@@ -51,5 +51,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<PagedResult<Propertyregistration>> GetDeletedLandReportData(PropertyRegisterationSearchDto model);
         Task<List<Propertyregistration>> GetPrimaryListForAPI(int deptid, int zoneid, int divisionid);// for api added by renu
         string GetMobileNo(int UseId);
+
+        Task<List<Landbankdetails>> GetLandBankdata(string landCategory);
     }
 }

@@ -427,5 +427,10 @@ namespace Libraries.Service.ApplicationService
         {
             return _propertyregistrationRepository.GetMobileNo(MobileNo);
         }
+
+        public async Task<List<Landbankdetails>> GetLandBankdata(string landCategory)
+        {
+            return await _propertyregistrationRepository.GetLandBankdata(landCategory);
+        }
     }
 }
