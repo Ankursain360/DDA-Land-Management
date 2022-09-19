@@ -955,6 +955,7 @@ function showKhasraBasisOtherDetailsForCourtCases(resp) {
         $('#RouteDetailShow').show();
     }
     else {
+        $("#CourtCaseData").html('');
         //  $('#RouteDetailShow').hide();
     }
 
