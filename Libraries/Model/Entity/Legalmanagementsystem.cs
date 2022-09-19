@@ -76,5 +76,17 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public List<Legalmanagementsystem> legalmanagementsytemlist { get; set; }
         public ICollection<Courtcasesmapping> Courtcasesmapping { get; set; }
-    }
+
+        //******** CourtCaseMapping ********//
+        [NotMapped]
+        public List<Courtcasesmapping> GetCourtcasesmappingList { get; set; }
+        [NotMapped]
+        public int? acquiredVillageId { get; set; }
+        [NotMapped]
+        public List<Acquiredlandvillage> GetAcquiredlandvillageList { get; set; }
+        [NotMapped]
+        public int? khasraId { get; set; }
+        [NotMapped]
+        public List<Khasra> GetKhasraList { get; set; } 
+    }  
 }

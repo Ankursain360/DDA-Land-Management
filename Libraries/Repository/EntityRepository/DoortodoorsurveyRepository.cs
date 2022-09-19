@@ -37,9 +37,24 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<List<Doortodoorsurvey>> GetDoortodoorsurvey()
         {
-            //return await _dbContext.Doortodoorsurvey.Where(x => x.IsActive == 1).Include(x => x.PresentUseNavigation).OrderByDescending(x => x.Id).ToListAsync();
-            return await _dbContext.Doortodoorsurvey.Where(x => x.IsActive == 1).Include(x => x.PresentUseNavigation).Include(x => x.AreaUnitNavigation).Include(x => x.NumberOfFloorsNavigation)
-               .OrderByDescending(x => x.Id).ToListAsync();
+            //return await _dbContext.Doortodoorsurvey.Where(x => x.IsActive == 1).Include(x => x.PresentUseNavigation).Include(x => x.AreaUnitNavigation).Include(x => x.NumberOfFloorsNavigation)
+            //   .OrderByDescending(x => x.Id).ToListAsync();
+            DoortodoorsurveySearchDto model = new DoortodoorsurveySearchDto();
+            var data = await _dbContext.Doortodoorsurvey.Where(x => x.IsActive == 1)
+                                       .Include(x => x.PresentUseNavigation)
+                                       .Include(x => x.CreatedByNavigation)
+                                       .Include(x => x.AreaUnitNavigation)
+                                       .Include(a => a.NumberOfFloorsNavigation)
+                                       .Where(x => (string.IsNullOrEmpty(model.location) || x.PropertyAddress.Contains(model.location))
+                                          && (string.IsNullOrEmpty(model.occupantname) || x.OccupantName.Contains(model.occupantname))
+                                          && (string.IsNullOrEmpty(model.Mobileno) || x.MobileNo.Contains(model.Mobileno))
+                                          && (string.IsNullOrEmpty(model.presentuse) || x.PresentUseNavigation.Name.Contains(model.presentuse))
+                                          && (string.IsNullOrEmpty(model.createdByNavigation) || x.CreatedByNavigation.UserName.Contains(model.createdByNavigation))
+                                           && (x.CreatedDate.Date >= ((model.FromDate.HasValue) ? Convert.ToDateTime(model.FromDate).Date : x.CreatedDate.Date))
+                                 && (x.CreatedDate.Date <= ((model.ToDate.HasValue) ? Convert.ToDateTime(model.ToDate).Date : x.CreatedDate.Date))
+                                        ).ToListAsync();
+                                      
+            return data;
         }
 
 

@@ -150,7 +150,23 @@ namespace Libraries.Repository.EntityRepository
 
             return localityList;
         }
-       public async Task<List<Locality>> GetAllLocalityList()
+        public async Task<List<Acquiredlandvillage>> GetAcquiredlandvillageList()
+        {
+            var list = await _dbContext.Acquiredlandvillage.Where(x => x.IsActive == 1).ToListAsync();
+            return list;
+        }
+        public async Task<List<Khasra>> GetKhasralist(int acquiredVillageId)
+        {
+            var data = await _dbContext.Khasra.Where(x => x.AcquiredlandvillageId == acquiredVillageId && x.IsActive == 1).ToListAsync();
+            List<Khasra> list = data
+                        .Select(o => new Khasra
+                        {
+                            Id = o.Id,
+                            Name = o.Name
+                        }).ToList();
+            return list;
+        }
+        public async Task<List<Locality>> GetAllLocalityList()
         { 
              List < Locality > List = await _dbContext.Locality.Where(x => x.IsActive == 1).ToListAsync();
             return List;
@@ -311,6 +327,7 @@ namespace Libraries.Repository.EntityRepository
                      .Include(x => x.Locality)
                      .Include(x => x.CaseStatus)
                       .Include(x => x.CourtType)
+                      
                      .Where(x => (string.IsNullOrEmpty(model.fileNo) || x.FileNo.Contains(model.fileNo))
                           &&(string.IsNullOrEmpty(model.lmfileno)|| x.LMFileNO.Contains(model.lmfileno))
                           && (string.IsNullOrEmpty(model.courtCaseNo)||x.CourtCaseNo.Contains(model.courtCaseNo))
@@ -360,7 +377,36 @@ namespace Libraries.Repository.EntityRepository
                     .Include(x => x.CourtType)
                     .ToListAsync();
         }
-       
+
+
+        //********CourtCaseMapping************//
+        public async Task<bool> SaveDetails(Courtcasesmapping courtCaseDetails)
+        {
+            _dbContext.Courtcasesmapping.Add(courtCaseDetails);
+            var Result = await _dbContext.SaveChangesAsync();
+            _dbContext.Entry(courtCaseDetails).State = EntityState.Detached;
+            return Result > 0 ? true : false;
+        }
+        public async Task<Courtcasesmapping> fetchSingleRecord(int id)
+        {
+            return await _dbContext.Courtcasesmapping.Where(x => x.LegalManagementId == id).FirstOrDefaultAsync();
+        }
+        public async Task<List<Courtcasesmapping>> GetvillageKhasraDetails(int id)
+        {
+            return await _dbContext.Courtcasesmapping.Where(x => x.LegalManagementId == id && x.IsActive == 1).ToListAsync();
+        }
+        public async Task<bool> Deleteddl(int Id)
+        {
+            _dbContext.RemoveRange(_dbContext.Courtcasesmapping.Where(x => x.LegalManagementId==Id));
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
+        public async Task<bool> Saveddl(Courtcasesmapping data)
+        {
+            _dbContext.Courtcasesmapping.Add(data);
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
         public string GetDownload(int id)
         {
             var File = (from f in _dbContext.Legalmanagementsystem

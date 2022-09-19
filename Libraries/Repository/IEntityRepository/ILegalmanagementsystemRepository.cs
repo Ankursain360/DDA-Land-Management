@@ -17,6 +17,8 @@ namespace Libraries.Repository.IEntityRepository
         int GetVillgeByName(string name);
         Task<Legalmanagementsystem> fetchLegalAllRecord(int id);
         Task<List<Zone>> GetZoneList();
+        Task<List<Acquiredlandvillage>> GetAcquiredlandvillageList();
+        Task<List<Khasra>> GetKhasralist(int acquiredVillageId);
         Task<List<Locality>> GetLocalityList (int zoneId);
         Task<List<Locality>> GetAllLocalityList();
         Task<List<Casestatus>> GetCasestatusList();
@@ -40,5 +42,13 @@ namespace Libraries.Repository.IEntityRepository
         Task<bool> AnyCode(int id, string name);
         Task<int> checkUniqueUpload(string fileno , string caseno);
         Task<List<Legalmanagementsystem>> GetAllLegalmanagementsystem();
+
+        //********CourtCaseMapping************//
+        Task<bool> SaveDetails(Courtcasesmapping courtCaseDetails);
+        Task<Courtcasesmapping> fetchSingleRecord(int id);
+        Task<List<Courtcasesmapping>> GetvillageKhasraDetails(int id);
+        Task<bool> Deleteddl(int Id);
+        Task<bool> Saveddl(Courtcasesmapping data);
+
     }
 }

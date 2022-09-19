@@ -18,6 +18,7 @@ namespace Libraries.Model
 
         //new Damage Form tables
         public virtual DbSet<Newdamagepayeeregistration> newdamagepayeeregistration { get; set; }
+        public virtual DbSet<Landbankdetails> landbankdetails { get; set; } 
         public virtual DbSet<Newdamagepaymenthistory> newdamagepaymenthistory { get; set; } 
         public virtual DbSet<Newdamageselfassessmentatsdetail> newdamageselfassessmentatsdetail { get; set; }
         public virtual DbSet<Newdamageselfassessmentfloordetail> newdamageselfassessmentfloordetail { get; set; } 
@@ -372,6 +373,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new Undersection17plotdetailConfiguration());
             //new damage Page
             modelBuilder.ApplyConfiguration(new NewdamagepayeeregistrationConfiguration());
+            modelBuilder.ApplyConfiguration(new LandbankdetailsConfiguration());
             modelBuilder.ApplyConfiguration(new NewdamagepaymenthistoryConfiguration());
             modelBuilder.ApplyConfiguration(new NewdamageselfassessmentatsdetailConfiguration());
             modelBuilder.ApplyConfiguration(new NewdamageselfassessmentfloordetailConfiguration());

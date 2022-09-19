@@ -29,7 +29,7 @@
                     <label class="floating-label">LM File No.<span style="color:red"></span>   </label>
                 </div>
             </div>
-           
+
         </div>
         <div class="row mt-md-3">
             <div class="col-md-6">
@@ -46,7 +46,7 @@
                     <label class="floating-label"> Court Case Title   </label>
                 </div>
             </div>
-            
+
         </div>
         <div class="row mt-md-3">
             <div class="col-md-6">
@@ -124,13 +124,9 @@
         <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3"
-                            asp-for="ZoneId"
-                            asp-items="@(new SelectList(Model.ZoneList, "Id","Name"))"
+                    <select class="floating-label-field floating-label-field--s3" asp-for="ZoneId" asp-items="@(new SelectList(Model.ZoneList, "Id","Name"))"
                             onchange="return GetLocalityList(this.options[this.selectedIndex].value);">
-
                         <option selected="selected" disabled="disabled" value="">--Select-- </option>
-
                     </select>
                     <span class="d-block text-danger field-validation-valid" asp-validation-for="ZoneId"></span>
                     <label asp-for="ZoneId" class="floating-label">Zone </label>
@@ -139,13 +135,32 @@
             </div>
             <div class="col-md-6">
                 <div class="floating-label-wrap">
-
-                    <select class="floating-label-field floating-label-field--s3" asp-for="LocalityId">
-                        <option selected="selected" disabled="disabled" value="">--Select-- </option>
-
+                    <select class="floating-label-field floating-label-field--s3" asp-for="LocalityId"><option selected="selected" disabled="disabled" value="">--Select-- </option>
                     </select>
                     <span class="d-block text-danger field-validation-valid" asp-validation-for="LocalityId"></span>
                     <label class="floating-label">Locality (Village) Name </label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <select asp-for="acquiredVillageId" class="floating-label-field floating-label-field--s3" asp-items="@(new SelectList(Model.GetAcquiredlandvillageList,"Id","Name"))" 
+                            onchange="return getKhasraList(this.options[this.selectedIndex].value)">
+                        <option selected="selected"  disabled="disabled" value="">--Select-- </option>
+                    </select>
+                    @*<span class="d-block text-danger field-validation-valid" asp-validation-for="ZoneId"></span>*@
+                    <label class="floating-label">AcquiredVillage </label>
+
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <select asp-for="khasraId" class="floating-label-field floating-label-field--s3" asp-items="@(new SelectList(Model.GetKhasraList,"Id","Name"))">
+                        <option selected="selected" disabled="disabled" value="">--Select-- </option>
+                    </select>
+                    <span class="d-block text-danger field-validation-valid" ></span>
+                    <label class="floating-label">Khasra </label>
                 </div>
             </div>
         </div>
@@ -174,7 +189,7 @@
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label class="radio-inline  ">
-                            <input type="radio" name="grpInfavour" id="DDA"  />DDA
+                            <input type="radio" name="grpInfavour" id="DDA" />DDA
                         </label>
                     </div>
                     <div class="form-group col-md-4">
@@ -265,7 +280,7 @@
             </div>
             <div class="col-md-6">
                 <div class="floating-label-wrap">
-                    <textarea type="text" asp-for="BriefDetailsOfDescription" class="floating-label-field floating-label-field--s3" limit="200" ></textarea>
+                    <textarea type="text" asp-for="BriefDetailsOfDescription" class="floating-label-field floating-label-field--s3" limit="200"></textarea>
                     <label class="floating-label">Brief Description Of Case </label>
                 </div>
             </div>
