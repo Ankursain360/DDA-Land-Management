@@ -20,6 +20,7 @@ namespace Dto.Master
         public string ApproxAreaoftheProperty { get; set; }
         public string AreaUnit { get; set; }
         public string NumberofFloors { get; set; }
+        public string FileNo { get; set; } 
         public string CA_NumberOfElectricityConnection { get; set; }
         public string k_NumberOfWaterConnection { get; set; }
         public string HouseTaxNumberIssueBy_MCD { get; set; }

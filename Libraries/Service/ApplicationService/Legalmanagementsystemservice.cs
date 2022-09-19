@@ -74,6 +74,40 @@ namespace Service.ApplicationService
             List<Zone> zoneList = await _legalmanagementsystemRepository.GetZoneList();
             return zoneList;
         }
+        public async Task<List<Acquiredlandvillage>> GetAcquiredlandvillageList()
+        {
+            return await _legalmanagementsystemRepository.GetAcquiredlandvillageList();
+        }
+        public async Task<List<Khasra>> GetKhasralist(int acquiredVillageId)
+        {
+            return await _legalmanagementsystemRepository.GetKhasralist(acquiredVillageId);
+        }
+
+        //********CourtCaseMapping************//
+        public async Task<bool> SaveDetails(Courtcasesmapping courtCaseDetails)
+        {
+            return await _legalmanagementsystemRepository.SaveDetails(courtCaseDetails);
+        }
+        public async Task<Courtcasesmapping> fetchSingleRecord(int id)
+        {
+           return await _legalmanagementsystemRepository.fetchSingleRecord(id);
+            
+        }
+        public async Task<bool> Deleteddl(int Id)
+        {
+            return await _legalmanagementsystemRepository.Deleteddl(Id);
+        }
+        public async Task<bool> Saveddl(Courtcasesmapping data)
+        {
+            data.CreatedBy = data.CreatedBy;
+            data.CreatedDate = DateTime.Now;
+            data.IsActive = 1;
+            return await _legalmanagementsystemRepository.Saveddl(data);
+        }
+        public async Task<List<Courtcasesmapping>> GetvillageKhasraDetails(int id)
+        {
+            return await _legalmanagementsystemRepository.GetvillageKhasraDetails(id);
+        }
         public async Task<List<Locality>> GetLocalityList(int zoneId)    
         {
             List<Locality> localityList = await _legalmanagementsystemRepository.GetLocalityList(zoneId);
@@ -128,7 +162,8 @@ namespace Service.ApplicationService
         }
         public async Task<Legalmanagementsystem> FetchSingleResult(int id)
         {
-            var result = await _legalmanagementsystemRepository.FindBy(a => a.Id == id);
+            var result = await _legalmanagementsystemRepository               
+                .FindBy(a => a.Id == id);
             Legalmanagementsystem model = result.FirstOrDefault();
             return model;
         }

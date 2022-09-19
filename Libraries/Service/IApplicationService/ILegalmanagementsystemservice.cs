@@ -22,6 +22,15 @@ namespace Libraries.Service.IApplicationService
         Task<Legalmanagementsystem> fetchLegalRecord(int id);
         Task<bool> UpdateBulkUploadFile(int id, Legalmanagementsystem legalmanagementsystem);
         Task<List<Zone>> GetZoneList();
+        Task<List<Acquiredlandvillage>> GetAcquiredlandvillageList();
+        Task<List<Khasra>> GetKhasralist(int acquiredVillageId);
+
+        //********CourtCaseMapping************//
+        Task<bool> SaveDetails(Courtcasesmapping courtCaseDetails);
+        Task<Courtcasesmapping> fetchSingleRecord(int id);
+        Task<List<Courtcasesmapping>> GetvillageKhasraDetails(int id);
+        Task<bool> Deleteddl(int Id);
+        Task<bool> Saveddl(Courtcasesmapping data);
         Task<List<Locality>> GetLocalityList(int zoneId);
         Task<List<Locality>> GetAllLocalityList();
         Task<List<Casestatus>> GetCasestatusList();

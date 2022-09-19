@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks; 
+using System.Threading.Tasks;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
 using Microsoft.AspNetCore.Authorization;
@@ -39,6 +39,8 @@ namespace CourtCasesManagement.Controllers
             legalmanagementsystem.CasestatusList = await _legalmanagementsystemService.GetCasestatusList();
             legalmanagementsystem.CourttypeList = await _legalmanagementsystemService.GetCourttypeList();
             legalmanagementsystem.LocalityList = await _legalmanagementsystemService.GetLocalityList(Convert.ToInt32(legalmanagementsystem.ZoneId));
+            legalmanagementsystem.GetAcquiredlandvillageList = await _legalmanagementsystemService.GetAcquiredlandvillageList();
+            legalmanagementsystem.GetKhasraList = await _legalmanagementsystemService.GetKhasralist(Convert.ToInt32(legalmanagementsystem.acquiredVillageId));
         }
 
 
@@ -66,6 +68,12 @@ namespace CourtCasesManagement.Controllers
             return Json(await _legalmanagementsystemService.GetLocalityList(Convert.ToInt32(zoneId)));
         }
 
+        [HttpGet]
+        public async Task<JsonResult> getKhasraList(int? acquiredVillageId)
+        {
+            acquiredVillageId = acquiredVillageId ?? 0;
+            return Json(await _legalmanagementsystemService.GetKhasralist(Convert.ToInt32(acquiredVillageId)));
+        }
         [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
@@ -109,6 +117,22 @@ namespace CourtCasesManagement.Controllers
                         }
 
                         var result = await _legalmanagementsystemService.Create(legalmanagementsystem);
+                        if (result)
+                        {
+                            if (legalmanagementsystem.acquiredVillageId != null && legalmanagementsystem.khasraId != null)
+                            {
+                                Courtcasesmapping data = new Courtcasesmapping();
+
+
+                                data.VillageId = legalmanagementsystem.acquiredVillageId;
+                                data.KhasraNoId = legalmanagementsystem.khasraId;
+                                data.LegalManagementId = legalmanagementsystem.Id;
+                                result = await _legalmanagementsystemService.SaveDetails(data);
+
+                            }
+
+                        }
+
                         if (result == true)
                         {
                             ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
@@ -143,10 +167,17 @@ namespace CourtCasesManagement.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _legalmanagementsystemService.FetchSingleResult(id);
+            //Data = await _legalmanagementsystemService.fetchSingleRecord(id);
             Data.ZoneList = await _legalmanagementsystemService.GetZoneList();
             Data.LocalityList = await _legalmanagementsystemService.GetLocalityList(Convert.ToInt32(Data.ZoneId));
             Data.CourttypeList = await _legalmanagementsystemService.GetCourttypeList();
             Data.CasestatusList = await _legalmanagementsystemService.GetCasestatusList();
+            Data.GetAcquiredlandvillageList = await _legalmanagementsystemService.GetAcquiredlandvillageList();
+
+            var mappingdata = await _legalmanagementsystemService.GetvillageKhasraDetails(id);
+            Data.acquiredVillageId = mappingdata.Select(x => x.VillageId).FirstOrDefault();
+            Data.khasraId = mappingdata.Select(x => x.KhasraNoId).FirstOrDefault();
+            Data.GetKhasraList = await _legalmanagementsystemService.GetKhasralist(Convert.ToInt32(mappingdata.Select(x => x.VillageId).FirstOrDefault()));
             ViewBag.ExistDocFile = Data.DocumentFilePath;
             ViewBag.ExistJFile = Data.JudgementFilePath;
             ViewBag.ExistStayFile = Data.StayInterimGrantedDocument;
@@ -163,6 +194,12 @@ namespace CourtCasesManagement.Controllers
             Data.LocalityList = await _legalmanagementsystemService.GetLocalityList(Convert.ToInt32(Data.ZoneId));
             Data.CourttypeList = await _legalmanagementsystemService.GetCourttypeList();
             Data.CasestatusList = await _legalmanagementsystemService.GetCasestatusList();
+            Data.GetAcquiredlandvillageList = await _legalmanagementsystemService.GetAcquiredlandvillageList();
+
+            var mappingdata = await _legalmanagementsystemService.GetvillageKhasraDetails(id);
+            Data.acquiredVillageId = mappingdata.Select(x => x.VillageId).FirstOrDefault();
+            Data.khasraId = mappingdata.Select(x => x.KhasraNoId).FirstOrDefault();
+            Data.GetKhasraList = await _legalmanagementsystemService.GetKhasralist(Convert.ToInt32(mappingdata.Select(x => x.VillageId).FirstOrDefault()));
             ViewBag.ExistDocFile = Data.DocumentFilePath;
             ViewBag.ExistJFile = Data.JudgementFilePath;
             ViewBag.ExistStayFile = Data.StayInterimGrantedDocument;
@@ -257,6 +294,19 @@ namespace CourtCasesManagement.Controllers
 
 
                     var result = await _legalmanagementsystemService.Update(id, legalmanagementsystem);
+                    if (result == true)
+                    {
+                        if (legalmanagementsystem.acquiredVillageId != null && legalmanagementsystem.khasraId != null)
+                        {
+                            result = await _legalmanagementsystemService.Deleteddl(id);
+                            Courtcasesmapping data = new Courtcasesmapping();
+                            data.VillageId = legalmanagementsystem.acquiredVillageId;
+                            data.KhasraNoId = legalmanagementsystem.khasraId;
+                            data.LegalManagementId = legalmanagementsystem.Id;
+                            result = await _legalmanagementsystemService.Saveddl(data);
+                        }
+
+                    }
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);

@@ -1,4 +1,5 @@
-﻿function GetLocalityList(id) {
+﻿ 
+function GetLocalityList(id) {
     //debugger;
     HttpGet(`/Legalmanagementsystem/GetLocalityList/?ZoneId=${id}`, 'json', function (response) {
                var html = '<option value="">Select</option>';
@@ -207,4 +208,17 @@ function ValidateFileSize(fileid, file) {
         alert("Error is :" + e);
     }
 }
+function getKhasraList(id) {
+    debugger;
+    HttpGet(`/Legalmanagementsystem/getKhasraList/?acquiredVillageId=${id}`, 'json', function (response) {
+        var html = '<option value="">Select</option>';
+        for (var i = 0; i < response.length; i++) {
+            html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
+        }
+        $("#divId #khasraId").val('').trigger('change');
+        $("#khasraId").empty().html(html);
+    });
+
+};
+ 
 
