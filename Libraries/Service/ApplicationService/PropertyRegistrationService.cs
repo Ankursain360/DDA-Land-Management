@@ -9,6 +9,7 @@ using System.Linq;
 using System;
 using Libraries.Model;
 using Dto.Search;
+using Dto.Master;
 
 namespace Libraries.Service.ApplicationService
 {
@@ -433,9 +434,9 @@ namespace Libraries.Service.ApplicationService
             return await _propertyregistrationRepository.GetLandBankdata(landCategory);
         }
 
-        public async Task<Landbankdetails> GetLandBankdata()
+        public async Task<List<LandDashboardDataDto>> GetLandDashboardData()
         {
-            return await _propertyregistrationRepository.GetLandBankdata();
+            return await _propertyregistrationRepository.GetLandDashboardData();
         }
     }
 }

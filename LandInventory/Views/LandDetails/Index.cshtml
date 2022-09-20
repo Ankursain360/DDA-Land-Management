@@ -9,18 +9,29 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
-                    <h3 class="mb-3 d-flex">DDA Land Details</h3>
+                    <h3 class="mb-3 d-flex">
+                        DDA Land Details <span class="ms-auto pull-right">
+                            Chart Type:
+                            <select id="ddlcharttype">
+                                <option value="pie" selected="selected">Pie Chart</option>
+                                <option value="doughnut">Doughnut Chart</option>
+                                <option value="bar">bar Chart</option>
+                            </select>
+                        </span>
+                    </h3>
+
+
                     <canvas id="chartlandDetails" aria-label="chart" role="img" width="700" height="500">
                     </canvas>
                 </div>
             </div>
         </div>
     </div>
-    <div class="table-section bg-white border shadow rounded">
-        <div class="table-responsive px-2">
-            <div id="divTable">
+</div>
+<div class="table-section bg-white border shadow rounded">
+    <div class="table-responsive px-2">
+        <div id="divTable">
 
-            </div>
         </div>
     </div>
 </div>
