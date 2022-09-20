@@ -4,9 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Model.Entity
+namespace Libraries.Model.Entity
 {
-    public class Landbankdetails:AuditableEntity<int>
+    public class Landbankdetails : AuditableEntity<int>
     {
         public string ZoneName { get; set; }
         public string VillageName { get; set; }
