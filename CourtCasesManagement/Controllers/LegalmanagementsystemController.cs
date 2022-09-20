@@ -443,7 +443,7 @@ namespace CourtCasesManagement.Controllers
         }
 
 
-        public async Task<IActionResult> LegalManagementSystemList(LegalManagementSystemSearchDto model)
+        public async Task<IActionResult> LegalManagementSystemList([FromBody] LegalManagementSystemSearchDto model)
         {
             var result = await _legalmanagementsystemService.getlegalmanagementlist(model);
             List<LegalManagementSystemListDto> data = new List<LegalManagementSystemListDto>();
@@ -453,7 +453,7 @@ namespace CourtCasesManagement.Controllers
                 {
                     data.Add(new LegalManagementSystemListDto()
                     {
-                        Id = result[i].Id,
+                        Id = i + 1,
                         fileNo = result[i].FileNo,
                         LMFileNo = result[i].LMFileNO,
                         courtCaseNo = result[i].CourtCaseNo,
@@ -479,8 +479,10 @@ namespace CourtCasesManagement.Controllers
             }
 
             var memory = ExcelHelper.CreateExcel(data);
-            var file = File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-            return file;
+            TempData["file"] = memory;
+            //var file = File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            //return file;
+            return Ok();
         }
 
 
@@ -871,5 +873,11 @@ namespace CourtCasesManagement.Controllers
 
         }
 
+        [HttpGet]
+        public virtual ActionResult Download()
+        {
+            byte[] data = TempData["file"] as byte[];
+            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "LegalManagementSystemData.xlsx");
+        }
     }
 }

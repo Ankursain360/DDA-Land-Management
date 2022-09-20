@@ -1,25 +1,26 @@
 ﻿var currentPageNumber = 1;
 var currentPageSize = 5;
 var sortby = 1;
-$(document).ready(function () { 
+$(document).ready(function () {
     GetLms(currentPageNumber, currentPageSize, sortby);
 
 });
 
 function GetExcel(pageNumber, pageSize, order) {
-    debugger;
-    $.post(`/Legalmanagementsystem/LegalManagementSystemList`, function (data) {
-        var param = GetSearchParam(pageNumber, pageSize, order);
-        var w = window.open('about:blank');
-        w.document.open();
-        w.document.write(param);
-        w.document.close();
+
+    var param = GetSearchParam(pageNumber, pageSize, order);
+    HttpPost(`/Legalmanagementsystem/LegalManagementSystemList`, 'html', param, function (response) {
+        var a = document.createElement("a");
+        a.target = '_blank';
+        a.href = '/Legalmanagementsystem/Download';
+        a.click();
+
     });
 }
 
 function GetLms(pageNumber, pageSize, order) {
     var param = GetSearchParam(pageNumber, pageSize, order);
-       HttpPost(`/Legalmanagementsystem/List`, 'html', param, function (response) {
+    HttpPost(`/Legalmanagementsystem/List`, 'html', param, function (response) {
         $('#divLegalmanagementsystemTable').html("");
         $('#divLegalmanagementsystemTable').html(response);
 
@@ -32,7 +33,7 @@ function GetSearchParam(pageNumber, pageSize, sortOrder) {
         fileNo: $('#txtfileno').val(),
         lmfileno: $('#txtlmfileno').val(),
         courtCaseNo: $('#txtCaseNo').val(),
-       /* CourtType: parseInt($('#ddlCaseStatus option:selected').val()),*/
+        /* CourtType: parseInt($('#ddlCaseStatus option:selected').val()),*/
         caseStatus: $('#ddlCaseStatus').val(),
         courtType: $('#ddlCourtName').val(),
         courtCaseTitle: $('#txtCaseTitle').val(),
@@ -80,7 +81,7 @@ $("#btnReset").click(function () {
     $("#txtfileno").val('');
     $("#txtlmfileno").val('');
     $("#txtCaseNo").val('');
-   /* $('#ddlCaseStatus').val('0').trigger('change');*/
+    /* $('#ddlCaseStatus').val('0').trigger('change');*/
     $("#ddlCaseStatus").val('');
     $("#ddlCourtName").val('');
     $("#txtCaseTitle").val('');
