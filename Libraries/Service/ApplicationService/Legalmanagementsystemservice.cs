@@ -275,7 +275,7 @@ namespace Service.ApplicationService
         //{
         //    throw new NotImplementedException();
         //}
-        public async Task<List<Legalmanagementsystem>> getlegalmanagementlist(legalmanagementdto model)
+        public async Task<List<Legalmanagementsystem>> getlegalmanagementlist(LegalManagementSystemSearchDto model)
         {
             var list = await _legalmanagementsystemRepository.getlegalmanagementlist(model);
             return list;

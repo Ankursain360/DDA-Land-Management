@@ -443,7 +443,7 @@ namespace CourtCasesManagement.Controllers
         }
 
 
-        public async Task<IActionResult> LegalManagementSystemList(legalmanagementdto model)
+        public async Task<IActionResult> LegalManagementSystemList(LegalManagementSystemSearchDto model)
         {
             var result = await _legalmanagementsystemService.getlegalmanagementlist(model);
             List<LegalManagementSystemListDto> data = new List<LegalManagementSystemListDto>();

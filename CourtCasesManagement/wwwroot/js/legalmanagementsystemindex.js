@@ -3,7 +3,19 @@ var currentPageSize = 5;
 var sortby = 1;
 $(document).ready(function () { 
     GetLms(currentPageNumber, currentPageSize, sortby);
+
 });
+
+function GetExcel(pageNumber, pageSize, order) {
+    debugger;
+    $.post(`/Legalmanagementsystem/LegalManagementSystemList`, function (data) {
+        var param = GetSearchParam(pageNumber, pageSize, order);
+        var w = window.open('about:blank');
+        w.document.open();
+        w.document.write(param);
+        w.document.close();
+    });
+}
 
 function GetLms(pageNumber, pageSize, order) {
     var param = GetSearchParam(pageNumber, pageSize, order);
@@ -36,6 +48,10 @@ function GetSearchParam(pageNumber, pageSize, sortOrder) {
 $("#btnSearch").click(function () {
     GetLms(currentPageNumber, currentPageSize, sortby);
 });
+$("#btndownload").click(function () {
+    GetExcel(currentPageNumber, currentPageSize, sortby);
+});
+
 
 
 function Descending() {
@@ -59,23 +75,6 @@ function GetLmsOrderby(pageNumber, pageSize, order) {
 
     });
 }
-//function GetSearchParamOrderby(pageNumber, pageSize, sortOrder) {
-//    var model = {
-//      /*  name: $('#txtName').val(),*/
-//        fileNo: $('#txtfileno').val(),
-//        courtCaseNo: $('#txtCaseNo').val(),
-//        /* CourtType: parseInt($('#ddlCaseStatus option:selected').val()),*/
-//        courtType: $('#ddlCaseStatus').val(),
-//        courtCaseTitle: $('#ddlCourtName').val(),
-//        caseStatus: $('#txtCaseTitle').val(),
-//        sortBy: $("#ddlSort").children("option:selected").val(),
-//        sortOrder: parseInt(sortOrder),
-//        pageSize: pageSize,
-//        pageNumber: pageNumber
-//    }
-//    return model;
-//}
-
 
 $("#btnReset").click(function () {
     $("#txtfileno").val('');
