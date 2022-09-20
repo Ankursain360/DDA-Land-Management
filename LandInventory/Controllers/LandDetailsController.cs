@@ -49,8 +49,8 @@ namespace LandInventory.Controllers
         [HttpGet]
         public async Task<JsonResult> GetLandDashboardData()
         {
-            var result = await _propertyregistrationService.GetLandBankdata();
-            return PartialView("_LandData", result);
+            var result = await _propertyregistrationService.GetLandDashboardData();
+            return Json(result);
         }
     }
 }

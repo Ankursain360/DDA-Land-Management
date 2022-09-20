@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Dto.Master;
 using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Repository.Common;
@@ -67,7 +68,7 @@ namespace Libraries.Service.IApplicationService
         string GetMobileNo(int UserId);
 
         Task<List<Landbankdetails>> GetLandBankdata(string landCategory);
-        Task <Landbankdetails> GetLandBankdata();
+        Task<List<LandDashboardDataDto>> GetLandDashboardData();
         
 
     }

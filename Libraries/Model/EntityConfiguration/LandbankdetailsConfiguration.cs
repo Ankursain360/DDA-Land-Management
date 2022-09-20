@@ -1,11 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Libraries.Model.Entity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Model.Entity;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Model.EntityConfiguration
+namespace Libraries.Model.EntityConfiguration
 {
     public class LandbankdetailsConfiguration : IEntityTypeConfiguration<Landbankdetails>
     {

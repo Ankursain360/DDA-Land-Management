@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Dto.Master;
 using Dto.Search;
 using Libraries.Model;
 using Libraries.Model.Entity;
@@ -1284,13 +1285,23 @@ namespace Libraries.Repository.EntityRepository
                                  .ToListAsync();
         }
 
-        public async Task<Landbankdetails> GetLandBankdata()
+        public async Task <List<LandDashboardDataDto>> GetLandDashboardData()
         {
-            var data= await _dbContext.landbankdetails.Include(y => y.LandCategoryNavigation)
-                                 .Where(x=> x.IsActive == 1 ).Take(1).FirstOrDefaultAsync();
-            return data;
+            var data = await _dbContext.landbankdetails
+                                        .Include(y => y.LandCategoryNavigation)
+                                        .GroupBy(x => x.LandCategoryNavigation.Name)
+                                        .Select(x => new { landtype = x.Key, area = x.Sum(x => x.Area) }).ToListAsync();
 
-
+            List<LandDashboardDataDto> list = new List<LandDashboardDataDto>();
+            
+            foreach (var p in data)
+            {
+                LandDashboardDataDto dto = new LandDashboardDataDto();
+                dto.LandType = p.landtype;
+                dto.Area = p.area;
+                list.Add(dto);
+            } 
+            return list; 
         }
     }
 
