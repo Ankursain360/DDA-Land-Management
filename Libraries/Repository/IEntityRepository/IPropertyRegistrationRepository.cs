@@ -53,5 +53,6 @@ namespace Libraries.Repository.IEntityRepository
         string GetMobileNo(int UseId);
 
         Task<List<Landbankdetails>> GetLandBankdata(string landCategory);
+        Task<Landbankdetails> GetLandBankdata();
     }
 }

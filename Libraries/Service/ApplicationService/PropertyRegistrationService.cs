@@ -432,5 +432,10 @@ namespace Libraries.Service.ApplicationService
         {
             return await _propertyregistrationRepository.GetLandBankdata(landCategory);
         }
+
+        public async Task<Landbankdetails> GetLandBankdata()
+        {
+            return await _propertyregistrationRepository.GetLandBankdata();
+        }
     }
 }

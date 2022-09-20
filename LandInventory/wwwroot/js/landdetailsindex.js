@@ -1,10 +1,10 @@
 ﻿$(document).ready(function () {
-
-    getlandDetails();
+    var chartType = 'pie'; //doughnut  pie bar
+    getlandDetails(chartType);
 
 });
 
-function getlandDetails() {
+function getlandDetails(chartType) {
     debugger;
 
     var ctx = document.getElementById('chartlandDetails').getContext('2d');
@@ -15,59 +15,62 @@ function getlandDetails() {
         "#e8c3b9",
         "#1e7145"
     ];
-    var chartForKycForm = new Chart(ctx, {
-        type: 'pie',//doughnut  pie bar
-        data: {
-            labels: ['DIT/Nazul-1 Land', 'Acquired/Nazul-2 Land', 'MOR Land', 'L&DO Land', 'Gram Sabha Land'],
-            datasets: [{
-                //data: [response[0].kycApplicationInTotal, response[0].kycApplicaionPending, response[0].kycApplicaionApprove, response[0].kycApplicationDeficiency, response[0].kycApplicationInRejected],
-                data: [5001.23, 2003.90, 1009.33, 319.33, 323.44],
-                backgroundColor: barColors,
 
-                borderWidth: 1
-            }]
-        },
-        options: {
-            responsive: false,
-            plugins: {
-                legend: {
-                    position: 'top',
-                },
-                datalabels: {
-                    display: true,
-                    formatter: (value) => {
-                        return value + '%';
+
+    HttpGet(`/LandDetails/GetLandDashboardData/`, 'json', function (response) {
+        var chartForKycForm = new Chart(ctx, {
+            type: chartType,
+            data: {
+                labels: ['DIT/Nazul-1 Land', 'Acquired/Nazul-2 Land', 'MOR Land', 'L&DO Land', 'Gram Sabha Land'],
+                datasets: [{
+                    //data: [response[0].kycApplicationInTotal, response[0].kycApplicaionPending, response[0].kycApplicaionApprove, response[0].kycApplicationDeficiency, response[0].kycApplicationInRejected],
+                    data: [5001.23, 2003.90, 1009.33, 319.33, 323.44],
+                    backgroundColor: barColors,
+
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    datalabels: {
+                        display: true,
+                        formatter: (value) => {
+                            return value + '%';
+                        }
                     }
+
                 }
-
-            }
-        }
-    });
-
-
-    $("#chartlandDetails").click(
-        function (event) {
-            debugger;
-            var activepoints = chartForKycForm.getElementAtEvent(event);
-
-            if (activepoints.length > 0) {
-                var clickedIndex = activepoints[0]["_index"];
-                var landtype = chartForKycForm.data.labels[clickedIndex];
-                var approvalCount = chartForKycForm.data.datasets[0].data[clickedIndex];
-                //window.location.href = "KycFormDetails/Index?ApprovalType=" + approvalType + "&ApprovalCount=" + approvalCount;
-              //  var url = "../KycFormDetails/Index?ApprovalType=" + approvalType + "&ApprovalCount=" + approvalCount;
-
-                HttpGet(`/LandDetails/List/?name=${landtype}`, 'html', function (response) {
-                    $('#divTable').html("");
-                    $('#divTable').html(response);
-                });
-
-            }
-            else {
-                $('#divTable').html("");
             }
         });
 
+
+        $("#chartlandDetails").click(
+            function (event) {
+                debugger;
+                var activepoints = chartForKycForm.getElementAtEvent(event);
+
+                if (activepoints.length > 0) {
+                    var clickedIndex = activepoints[0]["_index"];
+                    var landtype = chartForKycForm.data.labels[clickedIndex];
+                    var approvalCount = chartForKycForm.data.datasets[0].data[clickedIndex];
+                    //window.location.href = "KycFormDetails/Index?ApprovalType=" + approvalType + "&ApprovalCount=" + approvalCount;
+                    //  var url = "../KycFormDetails/Index?ApprovalType=" + approvalType + "&ApprovalCount=" + approvalCount;
+
+                    HttpGet(`/LandDetails/List/?name=${landtype}`, 'html', function (response) {
+                        $('#divTable').html("");
+                        $('#divTable').html(response);
+                    });
+
+                }
+                else {
+                    $('#divTable').html("");
+                }
+            });
+    });
     //HttpGet(`/Home/KycApplicationDetails/?Id=${$("#Id").val() == null ? "" : $("#Id").val()}`, 'json', function (response) {
 
     //    var ctx = document.getElementById('chartlandDetails').getContext('2d');

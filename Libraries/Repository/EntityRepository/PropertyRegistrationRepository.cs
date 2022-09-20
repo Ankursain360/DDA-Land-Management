@@ -1284,7 +1284,14 @@ namespace Libraries.Repository.EntityRepository
                                  .ToListAsync();
         }
 
+        public async Task<Landbankdetails> GetLandBankdata()
+        {
+            var data= await _dbContext.landbankdetails.Include(y => y.LandCategoryNavigation)
+                                 .Where(x=> x.IsActive == 1 ).Take(1).FirstOrDefaultAsync();
+            return data;
 
+
+        }
     }
 
 
