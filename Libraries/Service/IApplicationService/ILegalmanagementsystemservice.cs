@@ -57,5 +57,6 @@ namespace Libraries.Service.IApplicationService
         // leTask GetAllLegalmanagementsystem();
         Task<int> checkUniqueUpload(string fileno, string caseno );
         Task<bool> Delete(int id);
+        Task<List<Legalmanagementsystem>> getlegalmanagementlist(legalmanagementdto model);
     }
 }

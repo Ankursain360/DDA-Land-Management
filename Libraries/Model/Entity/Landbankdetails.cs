@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Libraries.Model.Entity
+namespace Model.Entity
 {
     public class Landbankdetails:AuditableEntity<int>
     {

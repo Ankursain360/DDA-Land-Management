@@ -160,6 +160,7 @@ namespace Service.ApplicationService
             List<Legalmanagementsystem> legalmanagementsytemlist = await _legalmanagementsystemRepository.GetLegalmanagementsystemList();
             return legalmanagementsytemlist;
         }
+
         public async Task<Legalmanagementsystem> FetchSingleResult(int id)
         {
             var result = await _legalmanagementsystemRepository               
@@ -274,5 +275,10 @@ namespace Service.ApplicationService
         //{
         //    throw new NotImplementedException();
         //}
+        public async Task<List<Legalmanagementsystem>> getlegalmanagementlist(legalmanagementdto model)
+        {
+            var list = await _legalmanagementsystemRepository.getlegalmanagementlist(model);
+            return list;
+        }
     }
 }

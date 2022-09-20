@@ -38,6 +38,7 @@ $(document).ready(function () {
     } else {
         $('#InFavour').val('Against DDA');
     }
+   
 });
 
 $(function () {
@@ -209,7 +210,7 @@ function ValidateFileSize(fileid, file) {
     }
 }
 function getKhasraList(id) {
-    debugger;
+    //debugger;
     HttpGet(`/Legalmanagementsystem/getKhasraList/?acquiredVillageId=${id}`, 'json', function (response) {
         var html = '<option value="">Select</option>';
         for (var i = 0; i < response.length; i++) {
@@ -220,5 +221,15 @@ function getKhasraList(id) {
     });
 
 };
- 
+function empty() {
+    debugger;
+    var village = $('#acquiredVillageId option:selected').val();
+    if (village != "") {
+        alert("Khasra is mandatory");
+        return false;
+    }
+    else {
+        return true;
+    }
 
+};

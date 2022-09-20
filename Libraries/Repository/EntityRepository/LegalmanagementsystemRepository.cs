@@ -1,4 +1,5 @@
-﻿using Dto.Search;
+﻿using Dto.Master;
+using Dto.Search;
 using Libraries.Model;
 using Libraries.Model.Entity;
 using Libraries.Repository.Common;
@@ -370,12 +371,71 @@ namespace Libraries.Repository.EntityRepository
         public async Task<List<Legalmanagementsystem>> GetAllLegalmanagementsystem()
         {
             return await _dbContext.Legalmanagementsystem
-                    .Where(x=>x.IsActive == 1)
+                    .Where(x => x.IsActive == 1)
                     .Include(x => x.Zone)
                     .Include(x => x.Locality)
                     .Include(x => x.CaseStatus)
                     .Include(x => x.CourtType)
-                    .ToListAsync();
+                    .ToListAsync(); 
+        }
+        public async Task<List<Legalmanagementsystem>> getlegalmanagementlist(legalmanagementdto model)
+        {
+            
+            var data = await _dbContext.Legalmanagementsystem
+                                         .Include(x => x.CaseStatus)
+                                         .Include(x => x.CourtType)
+                                         .Include(x => x.Locality)
+                                         .Include(x => x.Zone)
+                 .Where(x => (string.IsNullOrEmpty(model.fileNo) || x.FileNo.Contains(model.fileNo))
+                 && (string.IsNullOrEmpty(model.LMFileNo) || x.LMFileNO.Contains(model.LMFileNo))
+                 && (string.IsNullOrEmpty(model.courtCaseNo) || x.CourtCaseNo.Contains(model.courtCaseNo))
+                 && (string.IsNullOrEmpty(model.courtCaseTitle) || x.CourtCaseTitle.Contains(model.courtCaseTitle))
+                 && (string.IsNullOrEmpty(model.Subject) || x.Subject.Contains(model.Subject))
+                 && x.HearingDate == model.HearingDate
+                 && x.NextHearingDate == model.NextHearingDate
+                 && (x.ContemptOfCourt == (model.ContemptOfCourt == 0 ? x.ContemptOfCourt : model.ContemptOfCourt))
+                 && (string.IsNullOrEmpty(model.Courttype) || x.CourtType.CourtType.Contains(model.Courttype))
+                 && (string.IsNullOrEmpty(model.Casestatus) || x.CaseStatus.CaseStatus.Contains(model.Casestatus))
+                 && (string.IsNullOrEmpty(model.LastDecision) || x.LastDecision.Contains(model.LastDecision))
+                 && (string.IsNullOrEmpty(model.Zone) || x.Zone.Name.Contains(model.Zone))
+                 && (string.IsNullOrEmpty(model.Locality) || x.Locality.Name.Contains(model.Locality))
+                 && (string.IsNullOrEmpty(model.CaseType) || x.CaseType.Contains(model.CaseType))
+                 && (string.IsNullOrEmpty(model.InFavour) || x.InFavour.Contains(model.InFavour))
+                 && (string.IsNullOrEmpty(model.PanelLawyer) || x.PanelLawyer.Contains(model.PanelLawyer))
+                 && (x.StayInterimGranted == (model.StayInterimGranted == 0 ? x.StayInterimGranted : model.StayInterimGranted))
+                 && (string.IsNullOrEmpty(model.Remarks) || x.Remarks.Contains(model.Remarks))).ToListAsync();
+
+            return data;
+
+
+            //var data = await _dbContext.Legalmanagementsystem
+            //                             .Include(x => x.CaseStatus)
+            //                             .Include(x => x.CourtType)
+            //                             .Include(x => x.Locality)
+            //                             .Include(x => x.Zone)
+            //     .Where(x => (string.IsNullOrEmpty(model.fileNo) || x.FileNo.Contains(model.fileNo))
+            //     && (string.IsNullOrEmpty(model.LMFileNo) || x.LMFileNO.Contains(model.LMFileNo))
+            //     && (string.IsNullOrEmpty(model.courtCaseNo) || x.CourtCaseNo.Contains(model.courtCaseNo))
+            //     && (string.IsNullOrEmpty(model.courtCaseTitle) || x.CourtCaseTitle.Contains(model.courtCaseTitle))
+            //     && (string.IsNullOrEmpty(model.Subject) || x.Subject.Contains(model.Subject))
+            //     && (x.HearingDate==(model.HearingDate))
+            //     //&& x.HearingDate.HasValue ?null:x.HearingDate
+            //     //&& x.NextHearingDate == model.NextHearingDate
+            //     && (string.IsNullOrEmpty(model.LastDecision) || x.LastDecision.Contains(model.LastDecision))
+            //     && (string.IsNullOrEmpty(model.CaseType) || x.CaseType.Contains(model.CaseType))
+            //     && (string.IsNullOrEmpty(model.InFavour) || x.InFavour.Contains(model.InFavour))
+            //     && (string.IsNullOrEmpty(model.PanelLawyer) || x.PanelLawyer.Contains(model.PanelLawyer))
+            //     && (string.IsNullOrEmpty(model.Remarks) || x.Remarks.Contains(model.Remarks))
+            //      && (string.IsNullOrEmpty(model.LMFileNO) || x.LMFileNO.Contains(model.LMFileNO))
+            //     && (string.IsNullOrEmpty(model.BriefDetailsOfDescription) || x.BriefDetailsOfDescription.Contains(model.BriefDetailsOfDescription))
+            //     && (x.ZoneId == (model.Zone == 0 ? x.ZoneId : model.Zone))
+            //     && (x.LocalityId == (model.Locality == 0 ? x.LocalityId : model.Locality))
+            //     && (x.StayInterimGranted == (model.StayInterimGranted == 0 ? x.StayInterimGranted : model.StayInterimGranted))
+            //     && (x.Judgement == (model.Judgement == 0 ? x.Judgement : model.Judgement))
+            //     && x.CreatedDate >= model.FromDate
+            //     && x.CreatedDate <= model.ToDate)
+            //     .OrderByDescending(x => x.Id);
+            //return data;
         }
 
 
@@ -384,7 +444,7 @@ namespace Libraries.Repository.EntityRepository
         {
             _dbContext.Courtcasesmapping.Add(courtCaseDetails);
             var Result = await _dbContext.SaveChangesAsync();
-            _dbContext.Entry(courtCaseDetails).State = EntityState.Detached;
+           // _dbContext.Entry(courtCaseDetails).State = EntityState.Detached;
             return Result > 0 ? true : false;
         }
         public async Task<Courtcasesmapping> fetchSingleRecord(int id)

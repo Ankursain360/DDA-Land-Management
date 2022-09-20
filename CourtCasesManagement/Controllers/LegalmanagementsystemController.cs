@@ -127,6 +127,7 @@ namespace CourtCasesManagement.Controllers
                                 data.VillageId = legalmanagementsystem.acquiredVillageId;
                                 data.KhasraNoId = legalmanagementsystem.khasraId;
                                 data.LegalManagementId = legalmanagementsystem.Id;
+                                data.IsActive = 1;
                                 result = await _legalmanagementsystemService.SaveDetails(data);
 
                             }
@@ -167,7 +168,6 @@ namespace CourtCasesManagement.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _legalmanagementsystemService.FetchSingleResult(id);
-            //Data = await _legalmanagementsystemService.fetchSingleRecord(id);
             Data.ZoneList = await _legalmanagementsystemService.GetZoneList();
             Data.LocalityList = await _legalmanagementsystemService.GetLocalityList(Convert.ToInt32(Data.ZoneId));
             Data.CourttypeList = await _legalmanagementsystemService.GetCourttypeList();
@@ -443,9 +443,9 @@ namespace CourtCasesManagement.Controllers
         }
 
 
-        public async Task<IActionResult> LegalManagementSystemList()
+        public async Task<IActionResult> LegalManagementSystemList(legalmanagementdto model)
         {
-            var result = await _legalmanagementsystemService.GetAllLegalmanagementsystem();
+            var result = await _legalmanagementsystemService.getlegalmanagementlist(model);
             List<LegalManagementSystemListDto> data = new List<LegalManagementSystemListDto>();
             if (result != null)
             {
