@@ -443,9 +443,9 @@ namespace CourtCasesManagement.Controllers
         }
 
 
-        public async Task<IActionResult> LegalManagementSystemList()
+        public async Task<IActionResult> LegalManagementSystemList(legalmanagementdto model)
         {
-            var result = await _legalmanagementsystemService.GetAllLegalmanagementsystem();
+            var result = await _legalmanagementsystemService.getlegalmanagementlist(model);
             List<LegalManagementSystemListDto> data = new List<LegalManagementSystemListDto>();
             if (result != null)
             {

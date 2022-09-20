@@ -221,4 +221,15 @@ function getKhasraList(id) {
     });
 
 };
+function empty() {
+    debugger;
+    var village = $('#acquiredVillageId option:selected').val();
+    if (village != "") {
+        alert("Khasra is mandatory");
+        return false;
+    }
+    else {
+        return true;
+    }
 
+};

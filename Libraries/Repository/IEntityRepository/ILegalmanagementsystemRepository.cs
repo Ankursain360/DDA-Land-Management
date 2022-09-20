@@ -42,7 +42,8 @@ namespace Libraries.Repository.IEntityRepository
         Task<bool> AnyCode(int id, string name);
         Task<int> checkUniqueUpload(string fileno , string caseno);
          Task<List<Legalmanagementsystem>> GetAllLegalmanagementsystem();
-      
+        Task<List<Legalmanagementsystem>> getlegalmanagementlist(legalmanagementdto model);
+
         //********CourtCaseMapping************//
         Task<bool> SaveDetails(Courtcasesmapping courtCaseDetails);
         Task<Courtcasesmapping> fetchSingleRecord(int id);

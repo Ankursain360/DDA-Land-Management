@@ -51,12 +51,12 @@ namespace Libraries.Service.IApplicationService
         //Task<bool> AnyCode(int id, string name);
         Task<bool> CheckUniqueName(int id, string legalmanagementsystem);
         Task<List<Legalmanagementsystem>> GetAllLegalmanagementsystem();
-        Task<List<Legalmanagementsystem>> getlegalmanagementlist();
         Task<Legalmanagementsystem> FetchSingleResult(int id);
         Task<bool> Update(int id, Legalmanagementsystem legalmanagementsystem);
         Task<bool> Create(Legalmanagementsystem legalmanagementsystem);
         // leTask GetAllLegalmanagementsystem();
         Task<int> checkUniqueUpload(string fileno, string caseno );
         Task<bool> Delete(int id);
+        Task<List<Legalmanagementsystem>> getlegalmanagementlist(legalmanagementdto model);
     }
 }
