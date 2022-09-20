@@ -160,11 +160,7 @@ namespace Service.ApplicationService
             List<Legalmanagementsystem> legalmanagementsytemlist = await _legalmanagementsystemRepository.GetLegalmanagementsystemList();
             return legalmanagementsytemlist;
         }
-        public async Task<List<Legalmanagementsystem>> getlegalmanagementlist()
-        {
-            var list = await _legalmanagementsystemRepository.getlegalmanagementlist();
-            return list;
-        }
+
         public async Task<Legalmanagementsystem> FetchSingleResult(int id)
         {
             var result = await _legalmanagementsystemRepository               
