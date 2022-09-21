@@ -216,8 +216,9 @@ function getKhasraList(id) {
         for (var i = 0; i < response.length; i++) {
             html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
         }
-        $("#khasraId").empty().html(html);
+       
         $("#khasraId").val('').trigger('change');
+         $("#khasraId").empty().html(html);
        
     });
 
@@ -225,7 +226,8 @@ function getKhasraList(id) {
 function empty() {
     debugger;
     var village = $('#acquiredVillageId option:selected').val();
-    if (village != "") {
+    var khasra = $('#khasraId option:selected').val();
+    if (village != "" && khasra == "") {
         alert("Khasra is mandatory");
         return false;
     }

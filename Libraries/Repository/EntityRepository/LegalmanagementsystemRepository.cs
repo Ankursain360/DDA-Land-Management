@@ -391,27 +391,6 @@ namespace Libraries.Repository.EntityRepository
                   && (string.IsNullOrEmpty(model.courtType) || x.CourtType.CourtType.Trim().Contains(model.courtType))
                  && (string.IsNullOrEmpty(model.courtCaseTitle) || x.CourtCaseTitle.Contains(model.courtCaseTitle))
                  && (string.IsNullOrEmpty(model.caseStatus) || x.CaseStatus.CaseStatus.Contains(model.caseStatus))).ToListAsync();
-
-
-
-            //&& (string.IsNullOrEmpty(model.LMFileNo) || x.LMFileNO.Contains(model.LMFileNo))
-            //&& (string.IsNullOrEmpty(model.courtCaseNo) || x.CourtCaseNo.Contains(model.courtCaseNo))
-            //&& (string.IsNullOrEmpty(model.courtCaseTitle) || x.CourtCaseTitle.Contains(model.courtCaseTitle))
-            //&& (string.IsNullOrEmpty(model.Subject) || x.Subject.Contains(model.Subject))
-            //&& x.HearingDate == model.HearingDate
-            //&& x.NextHearingDate == model.NextHearingDate
-            //&& (x.ContemptOfCourt == (model.ContemptOfCourt == 0 ? x.ContemptOfCourt : model.ContemptOfCourt))
-            //&& (string.IsNullOrEmpty(model.Courttype) || x.CourtType.CourtType.Contains(model.Courttype))
-            //&& (string.IsNullOrEmpty(model.Casestatus) || x.CaseStatus.CaseStatus.Contains(model.Casestatus))
-            //&& (string.IsNullOrEmpty(model.LastDecision) || x.LastDecision.Contains(model.LastDecision))
-            //&& (string.IsNullOrEmpty(model.Zone) || x.Zone.Name.Contains(model.Zone))
-            //&& (string.IsNullOrEmpty(model.Locality) || x.Locality.Name.Contains(model.Locality))
-            //&& (string.IsNullOrEmpty(model.CaseType) || x.CaseType.Contains(model.CaseType))
-            //&& (string.IsNullOrEmpty(model.InFavour) || x.InFavour.Contains(model.InFavour))
-            //&& (string.IsNullOrEmpty(model.PanelLawyer) || x.PanelLawyer.Contains(model.PanelLawyer))
-            //&& (x.StayInterimGranted == (model.StayInterimGranted == 0 ? x.StayInterimGranted : model.StayInterimGranted))
-            //&& (string.IsNullOrEmpty(model.Remarks) || x.Remarks.Contains(model.Remarks))).ToListAsync();
-
             return data;
 
         }
