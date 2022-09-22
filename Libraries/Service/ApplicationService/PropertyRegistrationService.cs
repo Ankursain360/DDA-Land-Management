@@ -286,7 +286,10 @@ namespace Libraries.Service.ApplicationService
         {
             return await _propertyregistrationRepository.GetPagedPropertyRegisteration(model, UserId);
         }
-
+        public async Task<List<Propertyregistration>> GetAllPropertInventory(PropertyRegisterationSearchDto model)
+        {
+            return await _propertyregistrationRepository.GetAllPropertInventory(model);
+        }
         public async Task<List<Department>> GetTakenDepartmentDropDownList()
         {
             return await _propertyregistrationRepository.GetTakenDepartmentDropDownList();
