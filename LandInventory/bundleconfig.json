@@ -160,5 +160,11 @@
     "inputFiles": [
       "wwwroot/js/PlanningVerification.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/landdetailsindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/landdetailsindex.js"
+    ]
   }
 ]
