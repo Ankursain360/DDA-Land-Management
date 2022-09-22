@@ -45,7 +45,7 @@ var CALVERT_LAYER = [];
 var MICK_LAYER = [];
 var LINE_LAYER = [];
 var DDA_VACANT_LAYER = [];
-
+var highlighted_khasra_LAYER = [];
 
 
 $(document).ready(function () {
@@ -853,6 +853,15 @@ function showDisBoundariesRectWithKhasraNo(response, villageid) {
         mapLabel.villageid = rectkhasrano[ak].villageId;
 
         google.maps.event.addListener(mapLabel, 'dblclick', function () {
+            // Change the color of label when clicks on it
+            this.set('fontSize', 16);
+            this.set('fontColor', 'red');
+            this.set('strokeWeight', 6);
+            this.set('strokeColor', '#ffffff');
+            this.set('align', 'center');
+            this.set('fontWeight', 'bolder');
+            clearhighlightedkhasra(this);
+
             getInfo(this.villageid, this.khasrano, this.Rectno, this.id);
         });
 
@@ -860,6 +869,21 @@ function showDisBoundariesRectWithKhasraNo(response, villageid) {
 
         Polys.push(mapLabel);
     }
+}
+function clearhighlightedkhasra(_label) {
+
+    $.each(highlighted_khasra_LAYER, function (index, value) {
+        value.set('fontFamily', 'sans-serif');
+        value.set('fontSize', 12);
+        value.set('fontColor', '#AC8373');
+        value.set('strokeWeight', 4);
+        value.set('strokeColor', '#ffffff');
+        value.set('align', 'center');
+        value.set('zIndex', 1e3);
+        highlighted_khasra_LAYER.splice(index, 1);
+    });
+    highlighted_khasra_LAYER.push(_label);
+
 }
 
 function showDisBoundariesWell(response, villageid) {
@@ -940,6 +964,7 @@ function showKhasraBasisOtherDetailsForCourtCases(resp) {
     debugger;
     var html = '';
     var tbl = '';
+    $("#CourtCaseData").html('');
     if (resp.length > 0) {
         for (var i = 0; i < resp.length; i++) {
             html = html + '<div class="accordion-item"><h5 class="accordion-header" id="headingCourt' + i + '"><button id="ZCourt' + i + '" class="accordion-button collapsed py-2 bg-primary text-white" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCourt' + i + '" aria-expanded="true" aria-controls="collapseCourt' + i + '"><i class="ri-arrow-right-s-fill text-white"></i> Case No : ' + resp[i].name + '</button></h5><div id="collapseCourt' + i + '" class="accordion-collapse collapse" aria-labelledby="headingCourt' + i + '" data-bs-parent="#accordionData"><div class="accordion-body"><div class="list-group"><table style="border-collapse: collapse; font-size:11px !important; margin-bottom: 0px;" class="table table-bordererd table-primary table-responsive"><tbody>';
@@ -955,7 +980,7 @@ function showKhasraBasisOtherDetailsForCourtCases(resp) {
         $('#RouteDetailShow').show();
     }
     else {
-        //  $('#RouteDetailShow').hide();
+        $("#CourtCaseData").html('');
     }
 
 }
