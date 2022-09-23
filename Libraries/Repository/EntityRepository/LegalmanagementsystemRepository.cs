@@ -174,7 +174,7 @@ namespace Libraries.Repository.EntityRepository
                         .Select(o => new Khasra
                         {
                             Id = o.Id,
-                            Name = o.Name
+                            Name = o.RectNo+" // " + o.Name
                         }).ToList();
             return list;
         }

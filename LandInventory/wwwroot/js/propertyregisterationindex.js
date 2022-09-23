@@ -10,7 +10,7 @@ $("#btnSearch").click(function () {
     GetDetails(currentPageNumber, currentPageSize, sortOrder);
 });
 function GetExcel(pageNumber, pageSize, order) {
-
+    debugger;
     var param = GetSearchParam(pageNumber, pageSize, order);
     HttpPost(`/PropertyRegistration/DownloadIndex`, 'html', param, function (response) {
         var a = document.createElement("a");
@@ -21,7 +21,8 @@ function GetExcel(pageNumber, pageSize, order) {
     });
 }
 $("#btndownload").click(function () {
-    GetExcel(currentPageNumber, currentPageSize, sortby);
+    debugger;
+    GetExcel(currentPageNumber, currentPageSize, sortOrder);
 });
 
 

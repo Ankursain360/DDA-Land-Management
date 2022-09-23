@@ -920,24 +920,6 @@ namespace LandInventory.Controllers
                     });
                 }
             }
-            //List<PropertyRegisterationDownloadDto> data = new List<PropertyRegisterationDownloadDto>();
-            //if (result != null)
-            //{
-            //    for (int i = 0; i < result.Results.Count; i++)
-            //    {
-            //        data.Add(new PropertyRegisterationDownloadDto()
-            //        {
-            //            Id = result.Results[i].Id,
-            //            InventoriedInId = result.Results[i].InventoriedInId.ToString() == "1" ? "VLMS" : "Used",
-            //            PlannedUnplannedLand = result.Results[i].PlannedUnplannedLand,
-            //            ClassificationOfLand = result.Results[i].ClassificationOfLand.Name,
-            //            Department = result.Results[i].Department.Name,
-            //            Zone = result.Results[i].Zone.Name,
-            //            Division = result.Results[i].Division == null ? "" : result.Results[i].Division.Name,
-            //            PrimaryListNo = result.Results[i].PrimaryListNo == null ? "" : result.Results[i].PrimaryListNo
-            //        });
-            //    }
-            //}
 
             var memory = ExcelHelper.CreateExcel(data);
             //string sFileName = @"LandInventory.xlsx";
