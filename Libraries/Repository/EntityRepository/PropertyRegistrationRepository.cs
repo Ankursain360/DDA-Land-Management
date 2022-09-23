@@ -461,7 +461,24 @@ namespace Libraries.Repository.EntityRepository
                    .ToListAsync();
             return data;
         }
-
+        public async  Task<List<Propertyregistration>> GetAllPropertInventory(PropertyRegisterationSearchDto model )
+        {
+            var data = await _dbContext.Propertyregistration
+                           .Include(x => x.ClassificationOfLand)
+                           .Include(x => x.Department)
+                           .Include(x => x.Division)
+                           .Include(x => x.DisposalType)
+                           .Include(x => x.MainLandUse)
+                           .Include(x => x.Zone)
+                           .Include(x => x.Locality)
+                               .Where(x => x.ClassificationOfLandId == (model.classificationOfLandId == 0 ? x.ClassificationOfLandId : model.classificationOfLandId)
+                               && (x.DepartmentId == (model.departmentId == 0 ? x.DepartmentId : model.departmentId))
+                               && (x.ZoneId == (model.zoneId == 0 ? x.ZoneId : model.zoneId))
+                               && (x.DivisionId == (model.divisionId == 0 ? x.DivisionId : model.divisionId))
+                               && (x.InventoriedInId == (model.inventoriedId == 0 ? x.InventoriedInId : model.inventoriedId))
+                               && (x.PlannedUnplannedLand == (model.plannedUnplannedLand == "0" ? x.PlannedUnplannedLand : model.plannedUnplannedLand))).ToListAsync();
+            return data;
+        }
 
         public async Task<PagedResult<Propertyregistration>> GetPagedPropertyRegisteration(PropertyRegisterationSearchDto model, int UserId)
         {

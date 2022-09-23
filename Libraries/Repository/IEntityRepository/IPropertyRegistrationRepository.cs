@@ -19,6 +19,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Propertyregistration>> GetAllPropertyregistration(int UserId);
         Task<List<Propertyregistration>> GetUnverifiedList(int UserId);
         Task<List<Propertyregistration>> GetAllPropertInventorylist(int UserId);
+        Task<List<Propertyregistration>> GetAllPropertInventory(PropertyRegisterationSearchDto model);
         Task<List<Propertyregistration>> GetAllDeletedPropertyList();
         string GetFile(int id);
         string GetGeoFile(int id);

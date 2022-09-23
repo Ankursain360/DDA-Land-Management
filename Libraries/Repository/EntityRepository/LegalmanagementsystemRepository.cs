@@ -153,8 +153,19 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<List<Acquiredlandvillage>> GetAcquiredlandvillageList()
         {
-            var list = await _dbContext.Acquiredlandvillage.Where(x => x.IsActive == 1).ToListAsync();
-            return list;
+
+            var data = (from d in _dbContext.Acquiredlandvillage
+                         join c in _dbContext.Khasra
+                         on d.Id equals c.AcquiredlandvillageId
+                         select new { d.Id, d.Name }).Distinct();
+            var list = await data.ToListAsync();
+            List<Acquiredlandvillage> model = data
+                        .Select(o => new Acquiredlandvillage
+                        {
+                            Id = o.Id,
+                            Name = o.Name
+                        }).ToList();
+            return model;
         }
         public async Task<List<Khasra>> GetKhasralist(int acquiredVillageId)
         {
@@ -163,7 +174,7 @@ namespace Libraries.Repository.EntityRepository
                         .Select(o => new Khasra
                         {
                             Id = o.Id,
-                            Name = o.Name
+                            Name = o.RectNo+" // " + o.Name
                         }).ToList();
             return list;
         }

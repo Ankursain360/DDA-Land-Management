@@ -47,6 +47,7 @@ namespace Libraries.Service.IApplicationService
         string GetTakenOverFile(int id);
         Task<bool> InsertInDeletedProperty(int id, Deletedproperty model);
         Task<PagedResult<Propertyregistration>> GetPagedPropertyRegisteration(PropertyRegisterationSearchDto model, int UserId);
+        Task<List<Propertyregistration>> GetAllPropertInventory(PropertyRegisterationSearchDto model);
         Task<List<Classificationofland>> GetClassificationOfLandDropDownListMOR();
         Task<bool> InsertInRestoreProperty(int id, Restoreproperty model);
         Task<List<Department>> GetTakenDepartmentDropDownList();
