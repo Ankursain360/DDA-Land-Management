@@ -1,11 +1,7 @@
 ﻿@model Libraries.Model.Entity.Propertyregistration
 @await Component.InvokeAsync("PageHeader", new { pageName = "Property Inventory" })
 
-<div class="pt-3">
-
-    
-       
-        
+<div class="pt-3"> 
             
     <form asp-action="Dispose" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
         <h3 class="mb-3 d-flex">
@@ -17,17 +13,7 @@
             <input type="hidden" asp-for="Id" />
         </h3>
 
-
-
         <div class="row">
-
-
-
-
-
-
-
-
 
             <div class="col-md-4">
 
@@ -42,9 +28,6 @@
                     <span asp-validation-for="DisposalTypeId" class="text-danger"></span>
                     <label asp-for="DisposalTypeId" class="floating-label">Type</label>
                 </div>
-
-
-
 
                 @*<label class="control-label lb-sm" asp-for="DisposalTypeId">Type</label>
                 <select class="form-control dda-dropdown" asp-for="DisposalTypeId" asp-items="@(new SelectList(Model.DisposalTypeList, "Id","Name"))">
@@ -91,7 +74,7 @@
                     <textarea asp-for="DisposalComments" class="floating-label-field floating-label-field--s3" maxlength="4000" limit="4000"></textarea>
 
                     <span asp-validation-for="DisposalComments" class="text-danger"></span>
-                    <label class="floating-label">Comments</label>
+                    <label class="floating-label">Reason</label>
                     <div id="feedbackDisposalComments"></div>
                 </div>
                 </div>
@@ -108,8 +91,6 @@
         </div>
 
 
-
-
         @*<div class="form-row ">
             <div class="form-group col-md-12" style="margin-bottom:40px;">
                 <input type="submit" value="Dispose" class="btn btn-primary dda-pageheading" />
@@ -118,10 +99,5 @@
         </div>*@
 
     </form>
-           
-     
-    
-
-
 
     </div>

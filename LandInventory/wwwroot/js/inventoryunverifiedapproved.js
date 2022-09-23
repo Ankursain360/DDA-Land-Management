@@ -6,6 +6,21 @@ $(document).ready(function () {
     GetDetails(currentPageNumber, currentPageSize, sortOrder);
    
 });
+function GetExcel(pageNumber, pageSize, order) {
+    debugger;
+    var param = GetSearchParam(pageNumber, pageSize, order);
+    HttpPost(`/PropertyRegistration/DownloadIndex`, 'html', param, function (response) {
+        var a = document.createElement("a");
+        a.target = '_blank';
+        a.href = '/PropertyRegistration/DownloadIndex1';
+        a.click();
+
+    });
+}
+$("#btndownload").click(function () {
+    debugger;
+    GetExcel(currentPageNumber, currentPageSize, sortOrder);
+});
 
 $("#btnGenerate").click(function () {
     GetDetails(currentPageNumber, currentPageSize, sortOrder);
