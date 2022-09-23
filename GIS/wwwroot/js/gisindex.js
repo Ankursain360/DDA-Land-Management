@@ -873,13 +873,15 @@ function showDisBoundariesRectWithKhasraNo(response, villageid) {
 function clearhighlightedkhasra(_label) {
 
     $.each(highlighted_khasra_LAYER, function (index, value) {
-        value.set('fontFamily', 'sans-serif');
-        value.set('fontSize', 12);
-        value.set('fontColor', '#AC8373');
-        value.set('strokeWeight', 4);
-        value.set('strokeColor', '#ffffff');
-        value.set('align', 'center');
-        value.set('zIndex', 1e3);
+        if (_label != value) {
+            value.set('fontFamily', 'sans-serif');
+            value.set('fontSize', 12);
+            value.set('fontColor', '#AC8373');
+            value.set('strokeWeight', 4);
+            value.set('strokeColor', '#ffffff');
+            value.set('align', 'center');
+            value.set('zIndex', 1e3);
+        }
         highlighted_khasra_LAYER.splice(index, 1);
     });
     highlighted_khasra_LAYER.push(_label);
@@ -912,7 +914,7 @@ function getInfo(villageid, khasrano, RectNo, khasraid) {
 
 function showKhasraBasisOtherDetails(resp, khasraid, khasrano) {
     debugger;
-    var tbl = $('#RouteDetailShow table').empty();
+    var tbl = $('#RouteDetailShow #tblVillageData').empty();
     tbl.empty();
 
     if (resp.length > 0) {
