@@ -78,6 +78,10 @@ namespace Libraries.Service.ApplicationService
         {
             return await _propertyregistrationRepository.GetUnverifiedList(UserId);
         }
+        public async Task<List<Propertyregistration>> GetAllUnverified(PropertyRegisterationSearchDto model, int UserId)
+        {
+            return await _propertyregistrationRepository.GetAllUnverified(model,UserId);
+        }
 
         public async Task<Propertyregistration> FetchSingleResult(int id)
         {
@@ -286,9 +290,9 @@ namespace Libraries.Service.ApplicationService
         {
             return await _propertyregistrationRepository.GetPagedPropertyRegisteration(model, UserId);
         }
-        public async Task<List<Propertyregistration>> GetAllPropertInventory(PropertyRegisterationSearchDto model)
+        public async Task<List<Propertyregistration>> GetAllPropertInventory(PropertyRegisterationSearchDto model, int UserId)
         {
-            return await _propertyregistrationRepository.GetAllPropertInventory(model);
+            return await _propertyregistrationRepository.GetAllPropertInventory(model,UserId);
         }
         public async Task<List<Department>> GetTakenDepartmentDropDownList()
         {

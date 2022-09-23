@@ -47,7 +47,7 @@ namespace Libraries.Service.IApplicationService
         string GetTakenOverFile(int id);
         Task<bool> InsertInDeletedProperty(int id, Deletedproperty model);
         Task<PagedResult<Propertyregistration>> GetPagedPropertyRegisteration(PropertyRegisterationSearchDto model, int UserId);
-        Task<List<Propertyregistration>> GetAllPropertInventory(PropertyRegisterationSearchDto model);
+        Task<List<Propertyregistration>> GetAllPropertInventory(PropertyRegisterationSearchDto model, int UserId);
         Task<List<Classificationofland>> GetClassificationOfLandDropDownListMOR();
         Task<bool> InsertInRestoreProperty(int id, Restoreproperty model);
         Task<List<Department>> GetTakenDepartmentDropDownList();
@@ -59,6 +59,7 @@ namespace Libraries.Service.IApplicationService
         Task<bool> UpdatePropertyRegistrationForLandTransfer(int id, Propertyregistration propertyregistration);
         Task<List<Propertyregistration>> GetAllPropertInventorylist(int UserId);
         Task<List<Propertyregistration>> GetUnverifiedList(int UserId);
+        Task<List<Propertyregistration>> GetAllUnverified(PropertyRegisterationSearchDto model, int UserId);
         Task<List<Propertyregistration>> GetAllDeletedPropertyList();
         Task<List<Propertyregistration>> GetAllRestoreLandReportData();
         Task<List<Propertyregistration>> GetAllPropertyRegistrationReportList();

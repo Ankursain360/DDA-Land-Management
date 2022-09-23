@@ -18,8 +18,9 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Disposaltype>> GetDisposalTypeDropDownList();
         Task<List<Propertyregistration>> GetAllPropertyregistration(int UserId);
         Task<List<Propertyregistration>> GetUnverifiedList(int UserId);
+        Task<List<Propertyregistration>> GetAllUnverified(PropertyRegisterationSearchDto model, int UserId);
         Task<List<Propertyregistration>> GetAllPropertInventorylist(int UserId);
-        Task<List<Propertyregistration>> GetAllPropertInventory(PropertyRegisterationSearchDto model);
+        Task<List<Propertyregistration>> GetAllPropertInventory(PropertyRegisterationSearchDto model, int UserId);
         Task<List<Propertyregistration>> GetAllDeletedPropertyList();
         string GetFile(int id);
         string GetGeoFile(int id);

@@ -860,7 +860,7 @@ namespace LandInventory.Controllers
         [HttpPost]
         public async Task<IActionResult> DownloadIndex([FromBody] PropertyRegisterationSearchDto model)
         {
-            var result = await _propertyregistrationService.GetAllPropertInventory(model);
+            var result = await _propertyregistrationService.GetAllPropertInventory(model, SiteContext.UserId);
             List<PropertyInventoryListDto> data = new List<PropertyInventoryListDto>();
             if (result != null)
             {
@@ -916,6 +916,7 @@ namespace LandInventory.Controllers
                         LitigationStatusRemarks = result[i].LitigationStatusRemarks,
                         GeoReferencing = result[i].GeoReferencing == 0 ? "No" : "Yes",
                         Remarks = result[i].Remarks,
+
 
                     });
                 }

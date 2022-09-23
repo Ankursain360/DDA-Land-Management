@@ -50,7 +50,7 @@
             {
                 <td>@item.KhasraNo</td>
 }
-            <td>@(item.Reason == null ? "" : item.Deletedproperty.Reason)</td>
+            <td>@(item.Deletedproperty == null ? "" : item.Deletedproperty.Reason)</td>
             <td>@(item.Deletedproperty == null ? "" : item.Deletedproperty.DeletedDate.ToString("dd-MMM-yyyy"))</td>
 
             <td>
