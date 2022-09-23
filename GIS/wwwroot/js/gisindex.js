@@ -854,9 +854,9 @@ function showDisBoundariesRectWithKhasraNo(response, villageid) {
 
         google.maps.event.addListener(mapLabel, 'dblclick', function () {
             // Change the color of label when clicks on it
-            this.set('fontSize', 16);
+            this.set('fontSize', 22);
             this.set('fontColor', 'red');
-            this.set('strokeWeight', 6);
+            this.set('strokeWeight', 3);
             this.set('strokeColor', '#ffffff');
             this.set('align', 'center');
             this.set('fontWeight', 'bolder');

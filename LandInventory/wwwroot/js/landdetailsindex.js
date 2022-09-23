@@ -1,4 +1,4 @@
-﻿var chartForKycForm;
+﻿var chart;
 $(document).ready(function () {
     var chartType = 'pie'; //doughnut  pie bar 
     getlandDetails(chartType);
@@ -7,24 +7,16 @@ $(document).ready(function () {
 
 $('#ddlcharttype').change(function () {
     var type = $('#ddlcharttype option:selected').val();
-    chartForKycForm.destroy();
+    chart.destroy(); 
     getlandDetails(type);
 
 });
 
 function getlandDetails(chartType) {
     debugger;
-    var ctx = document.getElementById('chartlandDetails').getContext('2d');
-    var barColors = [
-        "#b91d47",
-        "#00aba9",
-        "#2b5797",
-        "#e8c3b9",
-        "#1e7145"
-    ];
     var landtype = [];
     var landarea = [];
-
+    var tr;
 
     HttpGet(`/LandDetails/GetLandDashboardData/`, 'json', function (response) {
 
@@ -33,62 +25,92 @@ function getlandDetails(chartType) {
             landarea.push(response[i].area);
         }
 
-        chartForKycForm = new Chart(ctx, {
-            type: chartType,
-            data: {
-                // labels: ['DIT/Nazul-1 Land', 'Acquired/Nazul-2 Land', 'MOR Land', 'L&DO Land', 'Gram Sabha Land'],
-                labels: landtype,
-                datasets: [{
-                    data: landarea,
-                    //  data: [5001.23, 2003.90, 1009.33, 319.33, 323.44],
-                    backgroundColor: barColors,
-
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                legend: {
-                    position: 'top',
-                    display: true,
+        if (chartType == 'pie') {
+            var options = {
+                series: landarea,
+                chart: {
+                    width: 700,
+                    type: chartType,
+                    events: {
+                        dataPointSelection: (event, chartContext, config) => {
+                            landtype = encodeURIComponent(config.w.config.labels[config.dataPointIndex]);
+                            $('#divTable').html("");
+                            HttpGet(`/LandDetails/List/?name=${landtype}`, 'html', function (response) {
+                                $('#divTable').html("");
+                                $('#divTable').html(response);
+                                $('#divTable').animate({
+                                    scrollTop: $("#divTable").offset().top
+                                }, 1000);
+                            });
+                        }
+                    }
                 },
-                plugins: {
-                    datalabels: {
-                        //anchor: 'center',
-                        //align: 'center',
-                        //color: 'white',
-                        //font: {
-                        //    weight: 'bold'
-                        //},
-                        //formatter: Math.round
+                labels: landtype,
+                dataLabels: {
+                    enabled: true,
+                    enabledOnSeries: undefined,
+                    formatter: function (val, opts) {
+                        const name = opts.w.globals.series[opts.seriesIndex]
+                        return [name, ' acre']
                     },
                 },
-            }
-        });
 
+                responsive: [{
+                    breakpoint: 480,
+                    options: {
+                        chart: {
+                            width: 500
+                        },
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }]
+            };
 
-        $("#chartlandDetails").click(
-            function (event) {
-                debugger;
-                var activepoints = chartForKycForm.getElementAtEvent(event);
-
-                if (activepoints.length > 0) {
-                    var clickedIndex = activepoints[0]["_index"];
-                    var landtype = chartForKycForm.data.labels[clickedIndex];
-                    var area = chartForKycForm.data.datasets[0].data[clickedIndex];
-
-                    HttpGet(`/LandDetails/List/?name=${landtype}`, 'html', function (response) {
-                        $('#divTable').html("");
-                        $('#divTable').html(response);
-                        $('#divTable').animate({
-                            scrollTop: $("#divTable").offset().top
-                        }, 1000);
-                    });
-
+            chart = new ApexCharts(document.querySelector("#apexchart"), options);
+            chart.render();
+        }
+        else {
+            var options = {
+                series: [{
+                    data: landarea
+                }],
+                chart: {
+                    height: 350,
+                    type: 'bar',
+                    events: {
+                        click: function (chart, w, e) {
+                            // console.log(chart, w, e)
+                        }
+                    }
+                },
+                plotOptions: {
+                    bar: {
+                        columnWidth: '45%',
+                        distributed: true,
+                    }
+                },
+                dataLabels: {
+                    enabled: false
+                },
+                legend: {
+                    show: false
+                },
+                xaxis: {
+                    categories: landtype,
+                    labels: {
+                        style: {
+                            fontSize: '12px'
+                        }
+                    }
                 }
-                else {
-                    $('#divTable').html("");
-                }
-            });
+            };
+
+            chart = new ApexCharts(document.querySelector("#apexchart"), options);
+            chart.render();
+        }
+
     });
 
 }

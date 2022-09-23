@@ -2,7 +2,6 @@
 
 @await Component.InvokeAsync("PageHeader", new { pageName = "DDA Land Details" })
 
-<link href="~/lib/chart.js/dist/Chart.css" rel="stylesheet" />
 <div class="pt-3">
     <div class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
         <h3 class="mb-3 d-flex">Search</h3>
@@ -18,11 +17,10 @@
                                 <option value="bar">bar Chart</option>
                             </select>
                         </span>
-                    </h3>
+                    </h3> 
+                    <div  id="apexchart" class="text-center">
 
-
-                    <canvas id="chartlandDetails" aria-label="chart" role="img" width="700" height="500">
-                    </canvas>
+                    </div> 
                 </div>
             </div>
         </div>
@@ -35,9 +33,7 @@
         </div>
     </div>
 </div>
-<script src="~/lib/chart.js/dist/Chart.min.js"></script>
-    <script src="~/lib/chart.js/dist/chartjs-plugin-datalabels.js"></script>
-    @*<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.4.0/dist/chartjs-plugin-datalabels.min.js"></script>*@
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>  
 
 <environment include="Development">
     <script src="~/js/landdetailsindex.js"></script>
@@ -45,5 +41,3 @@
 <environment exclude="Development">
     <script src="~/js/landdetailsindex.min.js" asp-append-version="true"></script>
 </environment>
-@*<script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.0/dist/chart.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>*@
