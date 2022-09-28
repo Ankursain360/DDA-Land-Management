@@ -94,6 +94,7 @@ namespace LandInventory.Controllers
         [DisableRequestSizeLimit]
         public async Task<IActionResult> Create(Propertyregistration propertyregistration, IFormFile Assignfile, IFormFile GeoAssignfile, IFormFile TakenOverAssignFile, IFormFile HandedOverAssignFile, IFormFile DisposalTypeAssignFile)
         {
+            FileHelper fileHelper = new FileHelper();
             bool IsValidpdf = CheckMimeType(propertyregistration);
             await BindDropDown(propertyregistration);
             propertyregistration.ZoneList = await _propertyregistrationService.GetZoneDropDownList(propertyregistration.DepartmentId);
@@ -241,19 +242,27 @@ namespace LandInventory.Controllers
                     targetPathDisposal = _Configuration.GetSection("FilePaths:PropertyRegistration:DisposalTypeDocs").Value.ToString();
                     if (propertyregistration.DisposalTypeFileData != null)
                     {
-                        if (!Directory.Exists(targetPathDisposal))
-                        {
-                            // Try to create the directory.
-                            DirectoryInfo di = Directory.CreateDirectory(targetPathDisposal);
-                        }
-                        DisposalTypeFileName = Guid.NewGuid().ToString() + "_" + propertyregistration.DisposalTypeFileData.FileName;
-                        DisposalTypefilePath = Path.Combine(targetPathDisposal, DisposalTypeFileName);
-                        using (var stream = new FileStream(DisposalTypefilePath, FileMode.Create))
-                        {
-                            propertyregistration.DisposalTypeFileData.CopyTo(stream);
-                        }
-                        propertyregistration.DisposalTypeFilePath = DisposalTypefilePath;
+                        //if (!Directory.Exists(targetPathDisposal))
+                        //{
+                        //    // Try to create the directory.
+                        //    DirectoryInfo di = Directory.CreateDirectory(targetPathDisposal);
+                        //}
+                        //DisposalTypeFileName = Guid.NewGuid().ToString() + "_" + propertyregistration.DisposalTypeFileData.FileName;
+                        //DisposalTypefilePath = Path.Combine(targetPathDisposal, DisposalTypeFileName);
+                        //using (var stream = new FileStream(DisposalTypefilePath, FileMode.Create))
+                        //{
+                        //    propertyregistration.DisposalTypeFileData.CopyTo(stream);
+                        //}
+                        //propertyregistration.DisposalTypeFilePath = DisposalTypefilePath;
+                        propertyregistration.DisposalTypeFilePath = fileHelper.SaveFile(targetPathDisposal, propertyregistration.DisposalTypeFileData);
                     }
+
+                    //string strDisposalTypeFilePath = _Configuration.GetSection("FilePaths:PropertyRegistration:DisposalTypeDocs").Value.ToString();
+                    //if (propertyregistration.DisposalTypeFileData !=null)
+                    //{
+                    //    propertyregistration.DisposalTypeFilePath = fileHelper.SaveFile(strDisposalTypeFilePath, propertyregistration.DisposalTypeFileData);
+
+                    //}
 
                     /* For Handed Over Copy of Order*/
                     string HandedOverCopyOrderFileName = "";
@@ -832,9 +841,16 @@ namespace LandInventory.Controllers
         [AuthorizeContext(ViewAction.Dispose)]
         public async Task<IActionResult> Dispose(int id, Propertyregistration propertyregistration)
         {
+            FileHelper fileHelper = new FileHelper();
             Disposedproperty model = new Disposedproperty();
             model.DisposalTypeId = propertyregistration.DisposalTypeId;
             model.DisposalDate = propertyregistration.DisposalDate;
+            //string strDisposalTypeFilePath = _Configuration.GetSection("FilePaths:PropertyRegistration:DisposalTypeDocs").Value.ToString();
+            //if (propertyregistration.DisposalTypeFileData != null)
+            //{
+            //    propertyregistration.DisposalTypeFilePath = fileHelper.SaveFile(strDisposalTypeFilePath, propertyregistration.DisposalTypeFileData);
+
+            //}
             model.DisposalTypeFilePath = propertyregistration.DisposalTypeFilePath;
             model.DisposalComments = propertyregistration.DisposalComments;
             model.DisposedBy = SiteContext.UserId;
