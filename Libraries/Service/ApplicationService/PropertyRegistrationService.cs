@@ -341,7 +341,10 @@ namespace Libraries.Service.ApplicationService
             _propertyregistrationRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
-
+        public async Task<Disposedproperty> FetchSingleRecord(int id)
+        {
+            return await _propertyregistrationRepository.FetchSingleRecord(id);
+        }
         public async Task<bool> InsertInDisposedProperty(int id, Disposedproperty model)
         {
             model.PropertyRegistrationId = id;

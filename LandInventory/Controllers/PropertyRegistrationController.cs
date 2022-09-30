@@ -239,8 +239,9 @@ namespace LandInventory.Controllers
                     string DisposalTypeFileName = "";
                     string DisposalTypefilePath = "";
                     propertyregistration.DisposalTypeFileData = DisposalTypeAssignFile;
-                    targetPathDisposal = _Configuration.GetSection("FilePaths:PropertyRegistration:DisposalTypeDocs").Value.ToString();
-                    if (propertyregistration.DisposalTypeFileData != null)
+                    //targetPathDisposal = _Configuration.GetSection("FilePaths:PropertyRegistration:DisposalTypeDocs").Value.ToString();
+                   string strPathDisposal = _Configuration.GetSection("FilePaths:PropertyRegistration:DisposalTypeDocs").Value.ToString();
+                    if (propertyregistration.DisposalTypeFileData != null) 
                     {
                         //if (!Directory.Exists(targetPathDisposal))
                         //{
@@ -254,7 +255,7 @@ namespace LandInventory.Controllers
                         //    propertyregistration.DisposalTypeFileData.CopyTo(stream);
                         //}
                         //propertyregistration.DisposalTypeFilePath = DisposalTypefilePath;
-                        propertyregistration.DisposalTypeFilePath = fileHelper.SaveFile(targetPathDisposal, propertyregistration.DisposalTypeFileData);
+                        propertyregistration.DisposalTypeFilePath = fileHelper.SaveFile(strPathDisposal, propertyregistration.DisposalTypeFileData);
                     }
 
                     //string strDisposalTypeFilePath = _Configuration.GetSection("FilePaths:PropertyRegistration:DisposalTypeDocs").Value.ToString();
@@ -845,13 +846,13 @@ namespace LandInventory.Controllers
             Disposedproperty model = new Disposedproperty();
             model.DisposalTypeId = propertyregistration.DisposalTypeId;
             model.DisposalDate = propertyregistration.DisposalDate;
-            //string strDisposalTypeFilePath = _Configuration.GetSection("FilePaths:PropertyRegistration:DisposalTypeDocs").Value.ToString();
-            //if (propertyregistration.DisposalTypeFileData != null)
-            //{
-            //    propertyregistration.DisposalTypeFilePath = fileHelper.SaveFile(strDisposalTypeFilePath, propertyregistration.DisposalTypeFileData);
+            string strDisposalTypeFilePath = _Configuration.GetSection("FilePaths:PropertyRegistration:DisposalTypeDocs").Value.ToString();
+            if (propertyregistration.DisposalTypeFileData != null)
+            {
+                model.DisposalTypeFilePath = fileHelper.SaveFile(strDisposalTypeFilePath, propertyregistration.DisposalTypeFileData);
 
-            //}
-            model.DisposalTypeFilePath = propertyregistration.DisposalTypeFilePath;
+            }
+           // model.DisposalTypeFilePath = propertyregistration.DisposalTypeFileData.ToString(); 
             model.DisposalComments = propertyregistration.DisposalComments;
             model.DisposedBy = SiteContext.UserId;
             var result = await _propertyregistrationService.DisposeDetails(id, model);
@@ -871,7 +872,7 @@ namespace LandInventory.Controllers
                 return View("Index");
             }
         }
-       
+
         [AuthorizeContext(ViewAction.Download)]
         [HttpPost]
         public async Task<IActionResult> DownloadIndex([FromBody] PropertyRegisterationSearchDto model)

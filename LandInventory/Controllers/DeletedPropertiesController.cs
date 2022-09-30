@@ -115,7 +115,14 @@ namespace LandInventory.Controllers
             return View(Data);
         }
 
-
+        public async Task<FileResult> DisposePdfFile(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Disposedproperty data = await _propertyregistrationService.FetchSingleRecord(Id);
+            string path = data.DisposalTypeFilePath;
+            byte[] fileBytes = System.IO.File.ReadAllBytes(path);
+            return File(fileBytes, file.GetContentType(path));
+        }
 
 
 

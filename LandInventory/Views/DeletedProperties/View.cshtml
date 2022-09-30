@@ -829,17 +829,34 @@
                     <div class="col-md-4">
                         <div class="floating-label-wrap">
 
-                            <input disabled asp-for="DisposalDate" type="date"  class="floating-label-field floating-label-field--s3" />
+                            <input disabled asp-for="DisposalDate" type="date" class="floating-label-field floating-label-field--s3" />
                             <span asp-validation-for="DisposalDate" class="text-danger"></span>
                             <label class="floating-label">Date</label>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <!--<div class="col-md-4">
+        <div class="floating-label-wrap">
+
+            <input disabled type="file" id="DisposalTypeAssignFile" class="floating-label-field floating-label-field--s3" name="DisposalTypeAssignFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />-->
+                    @*onchange="return fileValidation()"*@
+                    <!--<span asp-validation-for="DisposalTypeFileData" class="text-danger"></span>
+            <label class="floating-label" asp-for="DisposalTypeFileData">Document</label>
+        </div>
+    </div>-->
+                    <div class="col-md-4" >
                         <div class="floating-label-wrap">
 
-                            <input disabled type="file" id="DisposalTypeAssignFile" class="floating-label-field floating-label-field--s3" name="DisposalTypeAssignFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />@*onchange="return fileValidation()"*@
-                            <span asp-validation-for="DisposalTypeFileData" class="text-danger"></span>
-                            <label class="floating-label" asp-for="DisposalTypeFileData">Document</label>
+                            @if (Model.DisposalTypeFilePath != null)
+                            {
+                                <input disabled type="file" asp-for="DisposalTypeFileData" class="floating-label-field floating-label-field--s3">
+                                <a class="badge bg-primary px-2" asp-action="DisposePdfFile" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
+                            }
+                            else
+                            {
+                                <input disabled type="file" asp-for="DisposalTypeFileData" class="floating-label-field floating-label-field--s3">
+                            }
+                        <label for="field-1" class="floating-label"> Document <span style="color:red">(.pdf only)</span></label>
+
                         </div>
                     </div>
 

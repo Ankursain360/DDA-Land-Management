@@ -55,6 +55,7 @@ namespace Libraries.Service.IApplicationService
         string GetEncroachAtr(int id);
         string GetHandedOverCopyofOrderFile(int id);
         Task<bool> DisposeDetails(int id, Disposedproperty model);
+        Task<Disposedproperty> FetchSingleRecord(int id); 
         Task<bool> InsertInDisposedProperty(int id, Disposedproperty model);
         Task<bool> UpdatePropertyRegistrationForLandTransfer(int id, Propertyregistration propertyregistration);
         Task<List<Propertyregistration>> GetAllPropertInventorylist(int UserId);

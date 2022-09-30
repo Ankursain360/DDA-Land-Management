@@ -1021,7 +1021,11 @@ namespace Libraries.Repository.EntityRepository
             var result = _dbContext.Disposedproperty.Add(model);
             return await _dbContext.SaveChangesAsync() > 0;
         }
-
+        public async Task<Disposedproperty> FetchSingleRecord(int id)
+        {
+            var data = await _dbContext.Disposedproperty.Where(x => x.PropertyRegistrationId == id).FirstOrDefaultAsync();
+            return data;
+        }
         public async Task<List<Propertyregistration>> GetKhasraReportList()
         {
             return await _dbContext.Propertyregistration.Where(x => x.IsActive == 1 && x.KhasraNo != null).Distinct().ToListAsync();

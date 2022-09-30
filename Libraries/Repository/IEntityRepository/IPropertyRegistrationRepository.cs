@@ -45,6 +45,7 @@ namespace Libraries.Repository.IEntityRepository
         string GetEncroachAtr(int id);
         string GetHandedOverCopyofOrderFile(int id);
         Task<bool> InsertInDisposedProperty(Disposedproperty model);
+        Task<Disposedproperty> FetchSingleRecord(int id);
         Task<List<Propertyregistration>> GetKhasraReportList();
         Task<List<Propertyregistration>> GetAllRestorePropertyReportList();
         Task<List<Propertyregistration>> GetAllRestoreLandReportData();
