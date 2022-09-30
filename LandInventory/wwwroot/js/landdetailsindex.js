@@ -1,8 +1,8 @@
 ﻿var chart;
 $(document).ready(function () {
     var chartType = 'pie'; //doughnut  pie bar 
-    getlandDetails(chartType);
-
+    getlandDetails(chartType); 
+    $("#apexchart").css("margin-left", "100px");
 });
 
 $('#ddlcharttype').change(function () {
@@ -33,9 +33,9 @@ function getlandDetails(chartType) {
                     type: chartType,
                     events: {
                         dataPointSelection: (event, chartContext, config) => {
-                            landtype = encodeURIComponent(config.w.config.labels[config.dataPointIndex]);
+                           var landtypes = encodeURIComponent(config.w.config.labels[config.dataPointIndex]);
                             $('#divTable').html("");
-                            HttpGet(`/LandDetails/List/?name=${landtype}`, 'html', function (response) {
+                            HttpGet(`/LandDetails/List/?name=${landtypes}`, 'html', function (response) {
                                 $('#divTable').html("");
                                 $('#divTable').html(response);
                                 $('#divTable').animate({
@@ -45,13 +45,60 @@ function getlandDetails(chartType) {
                         }
                     }
                 },
+                legend: {
+                    show: true,
+                    showForSingleSeries: false,
+                    showForNullSeries: true,
+                    showForZeroSeries: true,
+                    position: 'top',
+                    horizontalAlign: 'center',
+                    floating: false,
+                    fontSize: '16px',
+                    fontFamily: 'Helvetica, Arial',
+                    fontWeight: 400,
+                    formatter: undefined,
+                    inverseOrder: false,
+                    width: undefined,
+                    height: undefined,
+                    tooltipHoverFormatter: undefined,
+                    customLegendItems: [],
+                    offsetX: 0,
+                    offsetY: 0,
+                    labels: {
+                        colors: undefined,
+                        useSeriesColors: false
+                    },
+                    markers: {
+                        width: 12,
+                        height: 12,
+                        strokeWidth: 0,
+                        strokeColor: '#fff',
+                        fillColors: undefined,
+                        radius: 12,
+                        customHTML: undefined,
+                        onClick: undefined,
+                        offsetX: 0,
+                        offsetY: 0
+                    },
+                    itemMargin: {
+                        horizontal: 5,
+                        vertical: 0
+                    },
+                    onItemClick: {
+                        toggleDataSeries: true
+                    },
+                    onItemHover: {
+                        highlightDataSeries: true
+                    },
+                },
                 labels: landtype,
                 dataLabels: {
                     enabled: true,
                     enabledOnSeries: undefined,
                     formatter: function (val, opts) {
                         const name = opts.w.globals.series[opts.seriesIndex]
-                        return [name, ' acre']
+                        const label = opts.w.globals.labels[opts.seriesIndex]
+                        return [label, name, ' acre', '  ', val.toFixed(1)+'%']
                     },
                 },
 
@@ -60,10 +107,7 @@ function getlandDetails(chartType) {
                     options: {
                         chart: {
                             width: 500
-                        },
-                        legend: {
-                            position: 'bottom'
-                        }
+                        } 
                     }
                 }]
             };
@@ -80,8 +124,16 @@ function getlandDetails(chartType) {
                     height: 350,
                     type: 'bar',
                     events: {
-                        click: function (chart, w, e) {
-                            // console.log(chart, w, e)
+                        click: function (event, chartContext, config) {
+                            var landtypes = encodeURIComponent(config.w.config.labels[config.dataPointIndex]);
+                            $('#divTable').html("");
+                            HttpGet(`/LandDetails/List/?name=${landtypes}`, 'html', function (response) {
+                                $('#divTable').html("");
+                                $('#divTable').html(response);
+                                $('#divTable').animate({
+                                    scrollTop: $("#divTable").offset().top
+                                }, 1000);
+                            });
                         }
                     }
                 },
