@@ -133,16 +133,16 @@
             </div>*@
             <div class="col-md-6">
                 <div class="floating-label-wrap">
-                    <input disabled type="hidden" asp-for="LayoutPlan" />
+                    @*<input disabled type="hidden" asp-for="LayoutPlan" />*@
                     @{
-                        @if (Model.RequestPhotos != null)
+                        @if (Model.LayoutPlan != null)
                         {
-                            <input disabled type="file" asp-for="RequestPhotos" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                            <input disabled type="file" asp-for="RequestPhotos" class="floating-label-field floating-label-field--s3" >
                             <a class="badge bg-primary px-2" asp-action="ViewLetter" asp-route-id="@Model.Id" target="_blank"> (View Photo)</a>
                         }
                         else
                         {
-                            <input disabled type="file" asp-for="RequestPhotos" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                            <input disabled type="file" asp-for="RequestPhotos" class="floating-label-field floating-label-field--s3" >
                         }
                     }
                     <label class="floating-label">Property Tax Receipt<span style="color:red">*</span></label>

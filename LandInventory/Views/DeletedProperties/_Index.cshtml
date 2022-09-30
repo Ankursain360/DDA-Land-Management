@@ -50,8 +50,8 @@
             {
                 <td>@item.KhasraNo</td>
 }
-            <td>@(item.Deletedproperty == null ? "" : item.Deletedproperty.Reason)</td>
-            <td>@(item.Deletedproperty == null ? "" : item.Deletedproperty.DeletedDate.ToString("dd-MMM-yyyy"))</td>
+            <td>@(item.Deletedproperty == null ? item.DisposalComments : item.Deletedproperty.Reason)</td>
+            <td>@(item.Deletedproperty == null ? item.DisposalDate.HasValue ? item.DisposalDate.Value.ToString("dd-MMM-yyyy"):"" : item.Deletedproperty.DeletedDate.ToString("dd-MMM-yyyy"))</td>
 
             <td>
                 <div class="action-btns">
