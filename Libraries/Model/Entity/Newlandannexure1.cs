@@ -79,7 +79,7 @@ namespace Libraries.Model.Entity
         public List<Muncipality> MunicipalityList { get; set; }
 
         //****** Khasra details repeater *****
-       // [Required(ErrorMessage = "KhasraNo is mandatory")]
+        [Required(ErrorMessage = "KhasraNo is mandatory")]
         [NotMapped]
         
         public List<string?> KhasraNo { get; set; }
