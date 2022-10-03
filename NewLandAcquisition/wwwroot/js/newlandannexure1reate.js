@@ -60,8 +60,8 @@ function FillKhasraAtEdit() {
 }
 
 $(document).delegate('a.add-record', 'click', function (e) {
-   
 
+    debugger;
     if ($("#tbl_posts #add #OwnershipStatus").children("option:selected").val() != ''
         && $("#tbl_posts #add #OwnershipStatus").children("option:selected").val() != undefined
         && $("#tbl_posts #add #KhasraNo").val() != ''
@@ -87,6 +87,7 @@ $(document).delegate('a.add-record', 'click', function (e) {
         $("#tbl_posts #add .add").remove();
         $("#tbl_posts #add #OwnershipStatus").select2('val', '');
         $("#tbl_posts #tbl_posts_body .floating-label-field").attr("readonly", true);
+
         element.find(".add-record").hide();
         element.find(".delete-record").show();
        
@@ -145,3 +146,64 @@ function GetRequestData(id) {
 
    
 };
+function empty() {
+    debugger;
+    if ($("#rdbHA").is(":checked")) {
+        var HA = $('#AreaUnit').val('HA');
+    }
+    else if ($("#rdbAcre").is(":checked")) {
+        var ACRE = $('#AreaUnit').val('Acre');
+    }
+    else if ($("#rdbSqm").is(":checked")) {
+           var SQM = $('#AreaUnit').val('Sq Meters');
+    }
+    
+        if (HA == undefined && ACRE == undefined && SQM == undefined) {
+        alert("AreaUnit is mandatory");
+        return false;
+        }
+   else {
+           return true;
+        }
+    
+};
+
+
+//function KhasraDetailsEmpty() {
+//    debugger;
+//    var Khasra = $('#KhasraNo').val();
+//    var bigha = $('#Bigha').val();
+//    var biswa = $('#Biswa').val();
+//    var biswanshi = $('#Biswanshi').val();
+//    var ownershipStatus = $('#OwnershipStatus option:selected').val();
+//    if (Khasra == "" || bigha == "" || biswa == "" || biswanshi == "" || ownershipStatus == "") {
+//        alert("KhasraDetails is mandatory");
+//        return false;
+//    }
+//    else {
+//        return true;
+//    }
+
+//};
+//function KhasraDetailsEmpty() {
+//    debugger;
+//    var AllTxtBoxes = new Array;
+
+//    AllTxtBoxes = document.getElementsByTagName("tbody")[1];
+//    for (var i = 0; i <= AllTxtBoxes.length; i++) {
+//        var Khasra = $('#KhasraNo').val().AllTxtBoxes;
+//        var bigha = $('#Bigha').val().AllTxtBoxes;
+//        var biswa = $('#Biswa').val().AllTxtBoxes;
+//        var biswanshi = $('#Biswanshi').val().AllTxtBoxes;
+//        var ownershipStatus = $('#OwnershipStatus option:selected').val().AllTxtBoxes;
+//        if (AllTxtBoxes[i].type == undefined) {
+//            alert("KhasraDetails is mandatory");
+//            return false;
+//        }
+
+//        else {
+//            return true;
+//        }
+    
+//    }
+//}
