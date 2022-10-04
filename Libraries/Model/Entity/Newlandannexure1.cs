@@ -79,19 +79,27 @@ namespace Libraries.Model.Entity
         public List<Muncipality> MunicipalityList { get; set; }
 
         //****** Khasra details repeater *****
+        [Required(ErrorMessage = "KhasraNo is mandatory")]
+        [NotMapped]
+        
+        public List<string?> KhasraNo { get; set; }
+      //  [Required(ErrorMessage = "Bigha is mandatory")]
+        [NotMapped]
+        
+        public List<decimal?> Bigha { get; set; }
 
+       // [Required(ErrorMessage = "Biswa is mandatory")]
         [NotMapped]
-        public List<string> KhasraNo { get; set; }
+        public List<decimal?> Biswa { get; set; }
 
+       // [Required(ErrorMessage = "Biswanshi is mandatory")]
         [NotMapped]
-        public List<decimal> Bigha { get; set; }
+       
+        public List<decimal?> Biswanshi { get; set; }
 
+       // [Required(ErrorMessage = "OwnershipStatus is mandatory")]
         [NotMapped]
-        public List<decimal> Biswa { get; set; }
-        [NotMapped]
-        public List<decimal> Biswanshi { get; set; }
-        [NotMapped]
-        public List<string> OwnershipStatus { get; set; }
+        public List<string?> OwnershipStatus { get; set; }
         [NotMapped]
         public List<string> OwnerName { get; set; }
 

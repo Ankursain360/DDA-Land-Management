@@ -24,18 +24,19 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<PagedResult<Request>> GetPagedProcessRequest(RequestApprovalSearchDto model, int userId)
         {
-            var AllDataList = await _dbContext.Request.ToListAsync();
-            var UserWiseDataList = AllDataList.Where(x => x.PendingAt.Split(',').Contains(userId.ToString()));
-            List<int> myIdList = new List<int>();
-            foreach (Request myLine in UserWiseDataList)
-                myIdList.Add(myLine.Id);
-            int[] myIdArray = myIdList.ToArray();
+            //var AllDataList = await _dbContext.Request.ToListAsync();
+            //var UserWiseDataList = AllDataList.Where(x => x.PendingAt.Split(',').Contains(userId.ToString()));
+            //List<int> myIdList = new List<int>();
+            //foreach (Request myLine in UserWiseDataList)
+            //    myIdList.Add(myLine.Id);
+            //int[] myIdArray = myIdList.ToArray();
 
             var data = await _dbContext.Request
                                         .Include(x => x.ApprovedStatusNavigation)
                                         .Where(x => x.IsActive == 1
                                         && (model.StatusId == 0 ? x.PendingAt != "0" : x.PendingAt == "0")
-                                        && (model.StatusId == 0 ? (myIdArray).Contains(x.Id) : x.PendingAt == "0")
+                                        //&& (model.StatusId == 0 ? (myIdArray).Contains(x.Id) : x.PendingAt == "0")
+                                          && (x.CreatedBy == (userId == 0 ? x.CreatedBy : userId))
                                         && (model.approvalstatusId == 0 ? (x.ApprovedStatus == x.ApprovedStatus) : (x.ApprovedStatus == model.approvalstatusId))
                                         )
                                         .GetPaged<Request>(model.PageNumber, model.PageSize);

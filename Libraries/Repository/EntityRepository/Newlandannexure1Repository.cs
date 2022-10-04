@@ -172,6 +172,7 @@ namespace Libraries.Repository.EntityRepository
         {
             _dbContext.Newlandannexure1khasrarpt.Add(Khasra);
             var Result = await _dbContext.SaveChangesAsync();
+            _dbContext.Entry(Khasra).State = EntityState.Detached;
             return Result > 0 ? true : false;
         }
         public async Task<List<Newlandannexure1khasrarpt>> GetAllKhasraRpt(int id)

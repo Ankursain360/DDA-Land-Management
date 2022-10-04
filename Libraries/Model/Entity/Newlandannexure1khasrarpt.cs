@@ -10,11 +10,11 @@ namespace Libraries.Model.Entity
    
        
         public int NewLandAnnexure1Id { get; set; }
-        public string KhasraNo { get; set; }
-        public decimal Bigha { get; set; }
-        public decimal Biswa { get; set; }
-        public decimal Biswanshi { get; set; }
-        public string OwnershipStatus { get; set; }
+        public string? KhasraNo { get; set; }
+        public decimal? Bigha { get; set; }
+        public decimal? Biswa { get; set; }
+        public decimal? Biswanshi { get; set; }
+        public string? OwnershipStatus { get; set; }
         public string OwnerName { get; set; }
 
         [Required(ErrorMessage = "Status is mandatory")]

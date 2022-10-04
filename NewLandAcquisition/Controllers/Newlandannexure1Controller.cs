@@ -85,7 +85,7 @@ namespace NewLandAcquisition.Controllers
         //[AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(int id ,Newlandannexure1 Annexure1)
         {
-
+            ViewBag.Anexx1Id = id;
             await BindDropDown(Annexure1);
            
             if (ModelState.IsValid)
@@ -125,7 +125,7 @@ namespace NewLandAcquisition.Controllers
                                         OwnerName = Annexure1.OwnerName.Count <= i ? string.Empty : Annexure1.OwnerName[i],
                                         NewLandAnnexure1Id = Annexure1.Id,
                                         CreatedBy = SiteContext.UserId,
-                                        IsActive = 1
+                                        //IsActive = 1
                                     });
                                 }
                                 foreach (var item in khasra)
