@@ -4,8 +4,8 @@ var currentPageSize = 5;
 debugger;
 $(document).ready(function () {
     var id = $("#NotificationId").val();
-    $("#VillageId").val('');
-    $("#KhasraId").val('');
+    $("#VillageId").val();
+    $("#KhasraId").val();
     var param = {
         NotificationId: id,
         pageSize: parseInt(currentPageSize),
