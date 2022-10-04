@@ -5,7 +5,7 @@
     <link href="img/favicon.ico" rel="shortcut icon" type="image/x-icon" sizes="16x16" />
     <link rel="icon" href="~/images/favicon.png" type="image/png" sizes="16x16" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Admin Dashboard</title>
+    <title>File Data Loading Module</title>
     @********* Filedata Loading **********@
     <!--font css-->
     <link rel="stylesheet" href="~/font/open-sans/stylesheet.css" />
@@ -45,38 +45,39 @@
                         </a>
                     </div>
                     <div class="dropdown noti text-white my-2  me-3 order-md-3">
-                        <a href="#" role="button" id="notification" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class='p-2 d-block text-white no-dec'>
-                            <i class="ri-notification-2-line"></i>
-                            <small class="bg-success rounded-circle position-absolute nofi-active">99</small>
+                        <a href="https://ddalmis.org.in/" role="button" id="notification" title="Go back to modules!" class='p-2 d-block text-white no-dec'>
+                            @*<i class="ri-notification-2-line"></i>*@
+                            <i class="ri-home-3-fill" style="font-size:20px"></i>
+                            @*<small class="bg-success rounded-circle position-absolute nofi-active">99</small>*@
                         </a>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="notification">
-                            <ul class="list-unstyled m-0 p-0">
-                                <li class="px-3">
-                                    <a href="#" class="d-flex align-items-center py-2 border-bottom">
-                                        <div class="noti-time text-center pe-2">
-                                            <i class="ri-discuss-line"></i>
-                                            <small class="d-block w-100">12:00</small>
-                                        </div>
-                                        <p class="m-0 text-truncate text-left">
-                                            Some notification message new message
-                                            <small class="d-block text-truncate text-left">Lorem Ipsum is simply dummy text dummy text</small>
-                                        </p>
-                                    </a>
-                                </li>
-                                <li class="px-3">
-                                    <a href="#" class="d-flex align-items-center py-2 border-bottom read">
-                                        <div class="noti-time text-center pe-2">
-                                            <i class="ri-discuss-line"></i>
-                                            <small class="d-block w-100">2 Days</small>
-                                        </div>
-                                        <p class="m-0 text-truncate text-left">
-                                            Some notification message new message
-                                            <small class="d-block text-truncate text-left">Lorem Ipsum is simply dummy text dummy text</small>
-                                        </p>
-                                    </a>
-                                </li>
-                            </ul>
+                        @*<div class="dropdown-menu dropdown-menu-right" aria-labelledby="notification">
+            <ul class="list-unstyled m-0 p-0">
+                <li class="px-3">
+                    <a href="#" class="d-flex align-items-center py-2 border-bottom">
+                        <div class="noti-time text-center pe-2">
+                            <i class="ri-discuss-line"></i>
+                            <small class="d-block w-100">12:00</small>
                         </div>
+                        <p class="m-0 text-truncate text-left">
+                            Some notification message new message
+                            <small class="d-block text-truncate text-left">Lorem Ipsum is simply dummy text dummy text</small>
+                        </p>
+                    </a>
+                </li>
+                <li class="px-3">
+                    <a href="#" class="d-flex align-items-center py-2 border-bottom read">
+                        <div class="noti-time text-center pe-2">
+                            <i class="ri-discuss-line"></i>
+                            <small class="d-block w-100">2 Days</small>
+                        </div>
+                        <p class="m-0 text-truncate text-left">
+                            Some notification message new message
+                            <small class="d-block text-truncate text-left">Lorem Ipsum is simply dummy text dummy text</small>
+                        </p>
+                    </a>
+                </li>
+            </ul>
+        </div>*@
                     </div>
                     @await Component.InvokeAsync("SignInProfile")
                 </div>
