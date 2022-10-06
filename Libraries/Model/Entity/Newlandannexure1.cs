@@ -83,6 +83,7 @@ namespace Libraries.Model.Entity
         [NotMapped]
         
         public List<string?> KhasraNo { get; set; }
+
       //  [Required(ErrorMessage = "Bigha is mandatory")]
         [NotMapped]
         

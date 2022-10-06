@@ -20,7 +20,7 @@ $("input[name='unit']").click(function () {
 
 
 function FillKhasraAtEdit() {
-
+    debugger;
 
     HttpGet(`/Newlandannexure1/GetDetailsKhasra/?Id=${$("#Id").val() == null ? "" : $("#Id").val()}`, 'json', function (data) {
    
@@ -207,3 +207,22 @@ function empty() {
     
 //    }
 //}
+
+function KhasraDetailsEmpty() {
+
+    debugger;
+    if ($("#tbl_posts #add #OwnershipStatus").children("option:selected").val() != ''
+        && $("#tbl_posts #add #OwnershipStatus").children("option:selected").val() != undefined
+        && $("#tbl_posts #add #KhasraNo").val() != ''
+        && $("#tbl_posts #add #Bigha").val() != ''
+        && $("#tbl_posts #add #Biswa").val() != ''
+        && $("#tbl_posts #add #Biswanshi").val() != ''
+
+    ) {
+        return true;
+    }
+    else {
+        alert("Khasra Details is mandatory");
+            return false;
+    }
+}

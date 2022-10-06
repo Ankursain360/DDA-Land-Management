@@ -763,7 +763,7 @@ namespace Libraries.Repository.EntityRepository
 
 
         public async Task<List<Damagepayeeregister>> GetFileAutoCompleteDetails(string prefix) 
-       {
+        {
             var data = await _dbContext.Damagepayeeregister.Where(x => x.FileNo.Contains(prefix)).OrderBy(p => p.FileNo).ToListAsync();
             return data;
         } 
