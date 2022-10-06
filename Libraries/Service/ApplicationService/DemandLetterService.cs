@@ -182,10 +182,9 @@ namespace Service.ApplicationService
                 files.Id = item.Id;
                 ds.Add(files);
             }
-            //var result = _mapper.Map<List<FileNODto>>(fileno);
-            //return result;
+            
             return ds;
-            //return await _demandLetterRepository.GetFileAutoCompleteDetails(prefix);
+          
         }
         public async Task<DemandAutoFillDto> GetFileNODetail(int fileid)
         {

@@ -1,347 +1,350 @@
-﻿@model Libraries.Model.Entity.Newlandpossessiondetails
+﻿
+@model Libraries.Model.Entity.Newlandpossessiondetails
 @await Component.InvokeAsync("PageHeader", new { pageName = "Possession Detail" })
 
 <div class="container-fluid" id="MainContentForm">
     <div class="panel">
+        <div class="panel-body">
+            <form asp-action="Edit" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <h3 class="mb-3 d-flex">Edit Details <span class="ms-auto"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span> </h3>
 
-        <form asp-action="Edit" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <h3 class="mb-3 d-flex">Edit Details <span class="ms-auto"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span> </h3>
-
-            <div class="row mt-md-3">
-                <div class="col-md-6">
-                    <div class="floating-label-wrap">
-                        <select class="floating-label-field floating-label-field--s3" asp-for="VillageId" asp-items="@(new SelectList(Model.VillageList, "Id","Name"))"
-                                onchange="return onChange(this.options[this.selectedIndex].value);">
-                            <option selected disabled="disabled" value="">--Select--</option>
-                        </select>
-                        <span asp-validation-for="VillageId" class="text-danger"></span>
-                        <label asp-for="VillageId" class="floating-label">Village Name</label>
-                    </div>
-                </div>
-
-
-
-                <div class="col-md-6">
-                    <div class="floating-label-wrap">
-                        <select class="floating-label-field floating-label-field--s3" asp-for="KhasraId" asp-items="@(new SelectList(Model.KhasraList, "Id","Name"))">
-                            <option value="">---Select---</option>
-                        </select>
-                        <span asp-validation-for="KhasraId" class="text-danger"></span>
-                        <label class="floating-label">Khasra No</label>
-                    </div>
-                </div>
-            </div>
-
-
-
-            <div class="pt-3">
-                <h3 class="mb-3 d-flex">possession taken</h3>
-                <div class="row">
-                    <div class=" col-md-6">
+                <div class="row mt-md-3">
+                    <div class="col-md-6">
                         <div class="floating-label-wrap">
-                            <select class="floating-label-field floating-label-field--s3" asp-for="PossessionTake" onchange="funHideAnd(this.value);">
-                                <option value="Yes">Yes</option>
-                                <option value="No">No</option>
+                            <select class="floating-label-field floating-label-field--s3" asp-for="VillageId" asp-items="@(new SelectList(Model.VillageList, "Id","Name"))"
+                                    onchange="return onChange(this.options[this.selectedIndex].value);">
+                                <option selected disabled="disabled" value="">--Select--</option>
                             </select>
-                            <span asp-validation-for="PossessionTake" class="text-danger"></span>
-                            <label asp-for="PossessionTake" class="floating-label">Possession taken </label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-
-
-            <div class="pt-3">
-                <h3 class="mb-3 d-flex">Type of possession</h3>
-                <div class="row">
-                    <div class="col-md-3">
-                        <input type="hidden" asp-for="PossType" />
-                        <div class="form-check theme">
-                            <input class="form-check-input chkAction" type="checkbox" asp-for="IsVacant" />
-                            <label class="form-check-label">
-                                Vacant
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-check theme">
-                            <input class="form-check-input chkAction" type="checkbox" asp-for="IsBuiltup" />
-                            <label class="form-check-label">
-                                Built Up
-                            </label>
+                            <span asp-validation-for="VillageId" class="text-danger"></span>
+                            <label asp-for="VillageId" class="floating-label">Village Name</label>
                         </div>
                     </div>
 
-                    <span asp-validation-for="PossType" class="text-danger"></span>
-                </div>
-            </div>
-            @if (Model.PossessionTake == "No")
-            {
-                <div class="pt-3" style="display:block;" id="Show_1">
-
-                    <h3 class="mb-3 d-flex">Reason, if Possession not Taken</h3>
 
 
-
-                    <div class="row">
-
-                        <div class="col-md-3">
-                            <div class="form-check theme">
-
-
-                                <input class="form-check-input" type="radio" asp-for="ReasonNonPoss" value="B" />    <label class="radio-inline">
-                                    Built-Up
-                                </label>
-                            </div>
-                        </div>   <div class="col-md-3">
-                            <div class="form-check theme">
-
-
-                                <input class="form-check-input" type="radio" asp-for="ReasonNonPoss" value="L" />
-                                <label class="radio-inline">
-                                    Litigation
-                                </label>
-                            </div>
-                        </div>
-
-                        <div class="col-md-3">
-                            <div class="form-check theme">
-
-
-                                <input class="form-check-input" type="radio" asp-for="ReasonNonPoss" value="O" />
-                                <label class="radio-inline">
-                                    Others if Any
-                                </label>
-                            </div>
-                        </div>
-
-
-                    </div>
-
-                </div>
-                <div class="row mt-md-3" style="display:block;" id="Show_2">
                     <div class="col-md-6">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-                            <textarea asp-for="Reason" placeholder="Reason" class="floating-label-field floating-label-field--s3"></textarea>
-
-                            <span asp-validation-for="Reason" class="text-danger"></span>
-                            <label class="floating-label">Reason  </label>
+                        <div class="floating-label-wrap">
+                            <select class="floating-label-field floating-label-field--s3" asp-for="KhasraId" asp-items="@(new SelectList(Model.KhasraList, "Id","Name"))">
+                                <option value="">---Select---</option>
+                            </select>
+                            <span asp-validation-for="KhasraId" class="text-danger"></span>
+                            <label class="floating-label">Khasra No</label>
                         </div>
                     </div>
                 </div>
-            }
-            else
-            {
-                <div class="pt-3" style="display:none;" id="Show_1">
-
-                    <h3 class="mb-3 d-flex">Reason, if Possession not Taken</h3>
 
 
+
+                <div class="pt-3">
+                    <h3 class="mb-3 d-flex">possession taken</h3>
                     <div class="row">
-
-                        <div class="col-md-3">
-                            <div class="form-check theme">
-
-
-                                <input class="form-check-input" type="radio" asp-for="ReasonNonPoss" value="B" />    <label class="radio-inline">
-                                    Built-Up
-                                </label>
+                        <div class=" col-md-6">
+                            <div class="floating-label-wrap">
+                                <select class="floating-label-field floating-label-field--s3" asp-for="PossessionTake" onchange="funHideAnd(this.value);">
+                                    <option value="Yes">Yes</option>
+                                    <option value="No">No</option>
+                                </select>
+                                <span asp-validation-for="PossessionTake" class="text-danger"></span>
+                                <label asp-for="PossessionTake" class="floating-label">Possession taken </label>
                             </div>
-                        </div>   <div class="col-md-3">
-                            <div class="form-check theme">
-
-
-                                <input class="form-check-input" type="radio" asp-for="ReasonNonPoss" value="L" />
-                                <label class="radio-inline">
-                                    Litigation
-                                </label>
-                            </div>
-                        </div>
-
-                        <div class="col-md-3">
-                            <div class="form-check theme">
-
-
-                                <input class="form-check-input" type="radio" asp-for="ReasonNonPoss" value="O" />
-                                <label class="radio-inline">
-                                    Others if Any
-                                </label>
-                            </div>
-                        </div>
-
-
-                    </div>
-
-                </div>
-                <div class="row mt-md-3" style="display:none;" id="Show_2">
-                    <div class="col-md-6">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-                            <textarea asp-for="Reason" placeholder="Reason" class="floating-label-field floating-label-field--s3"></textarea>
-
-                            <span asp-validation-for="Reason" class="text-danger"></span>
-                            <label class="floating-label">Reason  </label>
                         </div>
                     </div>
                 </div>
-            }
 
-        </div>*@
-            <div class="row mt-md-3">
-                <div class="form-group col-md-6">
-                    <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input type="hidden" asp-for="DocumentName" />
-                        @{
-                            @if (Model.DocumentName != null)
-                            {
-                                <input type="file" asp-for="DocumentIFormFile" class="floating-label-field floating-label-field--s3 checkExtension" accept="application/pdf,  image/png, image/jpeg">
-                                <a class="badge bg-primary px-2" asp-action="ViewUploadedDocument" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
-                            }
-                            else
-                            {
-                                <input type="file" asp-for="DocumentIFormFile" class="floating-label-field floating-label-field--s3 checkExtension" accept="application/pdf,  image/png, image/jpeg">
-                            }
+
+
+
+                <div class="pt-3">
+                    <h3 class="mb-3 d-flex">Type of possession</h3>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <input type="hidden" asp-for="PossType" />
+                            <div class="form-check theme">
+                                <input class="form-check-input chkAction" type="checkbox" asp-for="IsVacant" />
+                                <label class="form-check-label">
+                                    Vacant
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-check theme">
+                                <input class="form-check-input chkAction" type="checkbox" asp-for="IsBuiltup" />
+                                <label class="form-check-label">
+                                    Built Up
+                                </label>
+                            </div>
+                        </div>
+
+                        <span asp-validation-for="PossType" class="text-danger"></span>
+                    </div>
+                </div>
+                @if (Model.PossessionTake == "No")
+                {
+                    <div class="pt-3" style="display:block;" id="Show_1">
+
+                        <h3 class="mb-3 d-flex">Reason, if Possession not Taken</h3>
+
+
+
+                        <div class="row">
+
+                            <div class="col-md-3">
+                                <div class="form-check theme">
+
+
+                                    <input class="form-check-input" type="radio" asp-for="ReasonNonPoss" value="B" />
+                                    <label class="radio-inline">
+                                        Built-Up
+                                    </label>
+                                </div>
+                            </div>   <div class="col-md-3">
+                                <div class="form-check theme">
+
+
+                                    <input class="form-check-input" type="radio" asp-for="ReasonNonPoss" value="L" />
+                                    <label class="radio-inline">
+                                        Litigation
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-check theme">
+
+
+                                    <input class="form-check-input" type="radio" asp-for="ReasonNonPoss" value="O" />
+                                    <label class="radio-inline">
+                                        Others if Any
+                                    </label>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                    <div class="row mt-md-3" style="display:block;" id="Show_2">
+                        <div class="col-md-6">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
+                                <textarea asp-for="Reason" placeholder="Reason" class="floating-label-field floating-label-field--s3"></textarea>
+
+                                <span asp-validation-for="Reason" class="text-danger"></span>
+                                <label class="floating-label">Reason  </label>
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="pt-3" style="display:none;" id="Show_1">
+
+                        <h3 class="mb-3 d-flex">Reason, if Possession not Taken</h3>
+
+
+                        <div class="row">
+
+                            <div class="col-md-3">
+                                <div class="form-check theme">
+
+
+                                    <input class="form-check-input" type="radio" asp-for="ReasonNonPoss" value="B" />    <label class="radio-inline">
+                                        Built-Up
+                                    </label>
+                                </div>
+                            </div>   <div class="col-md-3">
+                                <div class="form-check theme">
+
+
+                                    <input class="form-check-input" type="radio" asp-for="ReasonNonPoss" value="L" />
+                                    <label class="radio-inline">
+                                        Litigation
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-check theme">
+
+
+                                    <input class="form-check-input" type="radio" asp-for="ReasonNonPoss" value="O" />
+                                    <label class="radio-inline">
+                                        Others if Any
+                                    </label>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                    <div class="row mt-md-3" style="display:none;" id="Show_2">
+                        <div class="col-md-6">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
+                                <textarea asp-for="Reason" placeholder="Reason" class="floating-label-field floating-label-field--s3"></textarea>
+
+                                <span asp-validation-for="Reason" class="text-danger"></span>
+                                <label class="floating-label">Reason  </label>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+          
+        <div class="row mt-md-3">
+            <div class="form-group col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="hidden" asp-for="DocumentName" />
+                    @{
+                        @if (Model.DocumentName != null)
+                        {
+                            <input type="file" asp-for="DocumentIFormFile" class="floating-label-field floating-label-field--s3 checkExtension" accept="application/pdf,  image/png, image/jpeg">
+                            <a class="badge bg-primary px-2" asp-action="ViewUploadedDocument" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
                         }
-                        <span class="d-block text-danger field-validation-valid" asp-validation-for="DocumentName"></span>
-                        <label class="floating-label">Upload Copy Of Possession/Kabza Proceeding<span style="color:red">(.pdf only)</span></label>
+                        else
+                        {
+                            <input type="file" asp-for="DocumentIFormFile" class="floating-label-field floating-label-field--s3 checkExtension" accept="application/pdf,  image/png, image/jpeg">
+                        }
+                    }
+                    <span class="d-block text-danger field-validation-valid" asp-validation-for="DocumentName"></span>
+                    <label class="floating-label">Upload Copy Of Possession/Kabza Proceeding<span style="color:red">(.pdf only)</span></label>
+                </div>
+            </div>
+        </div>
+
+        <div class="pt-3">
+
+            <h3 class="mb-3 d-flex">Area</h3>
+
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+
+
+
+                        <input limit="4" type="text" asp-for="Bigha" class="floating-label-field floating-label-field--s3 onlynumbers" required />
+                        <span asp-validation-for="Bigha" class="text-danger"></span>
+                        <label class="floating-label">Bigha</label>
+
+                    </div>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+
+
+
+                        <input limit="2" type="text" asp-for="Biswa" class="floating-label-field floating-label-field--s3 onlynumbers" required />
+                        <span asp-validation-for="Biswa" class="text-danger"></span>
+                        <label class="floating-label">Biswa</label>
+                    </div>
+                </div>
+                <div class="form-group col-md-4">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+
+
+
+                        <input limit="2" type="text" asp-for="Biswanshi" class="floating-label-field floating-label-field--s3 onlynumbers" required />
+                        <span asp-validation-for="Biswanshi" class="text-danger"></span>
+                        <label class="floating-label">Biswanshi</label>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div id="DivNotification">
+            <div class="row" style="margin-bottom:35px;">
+                <div class="col-sm-12">
+                    <div class="dda-innerheading">
+                        <div class="col-md-12">
+                            <h3 class="pull-left" style="margin-top:5px;">Notification Details</h3>
+                        </div>
                     </div>
                 </div>
             </div>
-
-            <div class="pt-3">
-
-                <h3 class="mb-3 d-flex">Area</h3>
-
-
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-
-
-
-                            <input limit="4" type="text" asp-for="Bigha" class="floating-label-field floating-label-field--s3 onlynumbers" required />
-                            <span asp-validation-for="Bigha" class="text-danger"></span>
-                            <label class="floating-label">Bigha</label>
-
-                        </div>
-                    </div>
-
-                    <div class="form-group col-md-4">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-
-
-
-                            <input limit="2" type="text" asp-for="Biswa" class="floating-label-field floating-label-field--s3 onlynumbers" required />
-                            <span asp-validation-for="Biswa" class="text-danger"></span>
-                            <label class="floating-label">Biswa</label>
-                        </div>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-
-
-
-                            <input limit="2" type="text" asp-for="Biswanshi" class="floating-label-field floating-label-field--s3 onlynumbers" required />
-                            <span asp-validation-for="Biswanshi" class="text-danger"></span>
-                            <label class="floating-label">Biswanshi</label>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            <div id="DivNotification">
-                <div class="row" style="margin-bottom:35px;">
-                    <div class="col-sm-12">
-                        <div class="dda-innerheading">
-                            <div class="col-md-12">
-                                <h3 class="pull-left" style="margin-top:5px;">Notification Details</h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mt-md-3">
-                    <div class="col-md-6">
-                        <select class="floating-label-field floating-label-field--s3" asp-for="Us4id" asp-items="@(new SelectList(Model.us4List, "Id","Number"))">
-                            <option value="" selected="selected" disabled>Select</option>
-                        </select>
-                        <span asp-validation-for="Us4id" class="text-danger"></span>
-                        <label asp-for="Us4id" class="floating-label">Under section 4<span style="color:red">*</span> </label>
-                    </div>
-
-                    <div class="col-md-6">
-                        <select class="floating-label-field floating-label-field--s3" asp-for="Us6id" asp-items="@(new SelectList(Model.us6List, "Id","Number"))">
-                            <option value="" disabled selected="selected">Select</option>
-                        </select>
-                        <span asp-validation-for="Us6id" class="text-danger"></span>
-                        <label asp-for="Us6id" class="floating-label">Under section 6<span style="color:red">*</span> </label>
-                    </div>
-
-                </div>
-                <div class="row mt-md-3">
-                    <div class="col-md-6">
-                        <select class="floating-label-field floating-label-field--s3" asp-for="Us17id" asp-items="@(new SelectList(Model.us17List, "Id","Number"))">
-                            <option value="" selected="selected" disabled>Select</option>
-                        </select>
-                        <span asp-validation-for="Us17id" class="text-danger"></span>
-                        <label asp-for="Us17id" class="floating-label">Under section 17<span style="color:red">*</span> </label>
-                    </div>
-
-
-
-                </div>
-            </div>
-
-
             <div class="row mt-md-3">
-
+                <div class="col-md-6">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="Us4id" asp-items="@(new SelectList(Model.us4List, "Id","Number"))">
+                        <option value="" selected="selected" disabled>Select</option>
+                    </select>
+                    <span asp-validation-for="Us4id" class="text-danger"></span>
+                    <label asp-for="Us4id" class="floating-label">Under section 4<span style="color:red">*</span> </label>
+                </div>
 
                 <div class="col-md-6">
-                    <div class="floating-label-wrap mb-3 mb-md-0">
-
-                        <textarea type="text" asp-for="Remarks" class="floating-label-field floating-label-field--s3" placeholder="Remarks"></textarea>
-                        <label class="floating-label">Remarks</label>
-                    </div>
+                    <select class="floating-label-field floating-label-field--s3" asp-for="Us6id" asp-items="@(new SelectList(Model.us6List, "Id","Number"))">
+                        <option value="" disabled selected="selected">Select</option>
+                    </select>
+                    <span asp-validation-for="Us6id" class="text-danger"></span>
+                    <label asp-for="Us6id" class="floating-label">Under section 6<span style="color:red">*</span> </label>
                 </div>
-
-
-
-
-                <div class=" col-md-6">
-                    <div class="floating-label-wrap">
-                        <select class="floating-label-field floating-label-field--s3" asp-for="IsActive">
-                            <option value="1">Active</option>
-                            <option value="0">Inactive</option>
-                        </select>
-                        <span asp-validation-for="IsActive" class="text-danger"></span>
-                        <label asp-for="IsActive" class="floating-label">Status </label>
-                    </div>
-                </div>
-
-
 
             </div>
-
-
-
-
-
-
-
-
-
             <div class="row mt-md-3">
-                <div class=" col-md-12">
-                    <button class="btn btn-theme " type="submit">Update</button>
-                    @Html.ActionLink("Back", "Index", "NewlandPossesionDetails", null, new { @class = "btn btn-theme " })
+                <div class="col-md-6">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="Us17id" asp-items="@(new SelectList(Model.us17List, "Id","Number"))">
+                        <option value="" selected="selected" disabled>Select</option>
+                    </select>
+                    <span asp-validation-for="Us17id" class="text-danger"></span>
+                    <label asp-for="Us17id" class="floating-label">Under section 17<span style="color:red">*</span> </label>
+                </div>
+
+
+
+            </div>
+        </div>
+
+
+        <div class="row mt-md-3">
+
+
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <textarea type="text" asp-for="Remarks" class="floating-label-field floating-label-field--s3" placeholder="Remarks"></textarea>
+                    <label class="floating-label">Remarks</label>
                 </div>
             </div>
+
+
+
+
+            <div class=" col-md-6">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="IsActive">
+                        <option value="1">Active</option>
+                        <option value="0">Inactive</option>
+                    </select>
+                    <span asp-validation-for="IsActive" class="text-danger"></span>
+                    <label asp-for="IsActive" class="floating-label">Status </label>
+                </div>
+            </div>
+
+
+
+        </div>
+
+
+
+
+
+
+
+
+
+        <div class="row mt-md-3">
+            <div class=" col-md-12">
+                <button class="btn btn-theme " type="submit">Update</button>
+                @Html.ActionLink("Back", "Index", "NewlandPossesionDetails", null, new { @class = "btn btn-theme " })
+            </div>
+        </div>
 
 
 
         </form>
     </div>
+</div>
 </div>
 
 
@@ -357,8 +360,3 @@
 <environment exclude="Development">
     <script src="~/js/possessiondetailscreate.min.js" asp-append-version="true"></script>
 </environment>
-
-
-
-
-
