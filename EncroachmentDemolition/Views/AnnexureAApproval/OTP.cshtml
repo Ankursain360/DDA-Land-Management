@@ -1,8 +1,11 @@
-﻿
+﻿@{
+    ViewData["Title"] = "Demolition Approval | OTP";
+    Layout = "~/Views/Shared/_LayoutApproval.cshtml";
+}
 @model Libraries.Model.Entity.Fixingdemolition
-@await Component.InvokeAsync("PageHeader", new { pageName = "Enter OTP For Approval of Demolition" })
 
 <div class="pt-3">
+    @await Component.InvokeAsync("PageHeader", new { pageName = "Enter OTP For Approval of Demolition" })
 
     <form asp-action="OTP" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
         <h3 class="mb-3 d-flex">Add Details<span class="ms-auto"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span></h3>
@@ -22,11 +25,8 @@
             <div class=" col-md-12">
                 <button class="btn btn-theme " type="submit">Submit OTP</button>
                 @Html.ActionLink("Back", "index", "AnnexureAApproval", null, new { @class = "btn btn-theme " })
-
             </div>
         </div>
-
     </form>
-
 </div>
 
