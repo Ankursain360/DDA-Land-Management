@@ -386,6 +386,16 @@ namespace Libraries.Repository.EntityRepository
                 throw;
             }
         }
+        public async Task<List<Acquiredlandvillage>> GetAllAcquiredlandvillages(VillageReportSearchDto model) 
+        {
+            //var data = await _dbContext.Acquiredlandvillage.Where(x =>(string.IsNullOrEmpty(model.village)||x.Name.Contains(model.village))).ToListAsync();
+            //return data;
+            var data = await _dbContext.Acquiredlandvillage
+                          .Where(x => (x.IsActive == 1)
+                                  && (x.Id == (model.Name == 0 ? x.Id : model.Name))).ToListAsync();
+            return data;
+                                 
+        }
 
     }
 }

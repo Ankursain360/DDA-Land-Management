@@ -22,6 +22,23 @@ $(document).ready(function () {
     });
 });
 
+function GetExcel(pageNumber, pageSize, order) {
+    debugger;
+    var param = GetSearchParam(pageNumber, pageSize, order);
+    HttpPost(`/VillageReport/DownloadAllVillageReport`, 'html', param, function (response) {
+        var a = document.createElement("a");
+        a.target = '_blank';
+        a.href = '/VillageReport/Download';
+        a.click();
+
+    });
+}
+
+$("#btndownload").click(function () {
+    GetExcel(currentPageNumber, currentPageSize, sortby);
+});
+
+
 function GetDetails(pageNumber, pageSize, order) {
     var param = GetSearchParam(pageNumber, pageSize, order);
     debugger

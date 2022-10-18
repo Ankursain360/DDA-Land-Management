@@ -139,5 +139,9 @@ namespace Libraries.Service.ApplicationService
         {
             return await _acquiredlandvillageRepository.GetPagedvillagedetailsListByVillageId(model);
         }
+        public async Task<List<Acquiredlandvillage>> GetAllAcquiredlandvillages(VillageReportSearchDto model)
+        {
+            return await _acquiredlandvillageRepository.GetAllAcquiredlandvillages(model); 
+        }
     }
 }

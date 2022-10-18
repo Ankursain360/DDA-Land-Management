@@ -23,6 +23,7 @@ namespace Libraries.Service.IApplicationService
         Task<PagedResult<Khasra>> GetPagedKhasra(KhasraMasterSearchDto model);
         Task<PagedResult<Khasra>> GetPagedVillageKhasraReport(VillageDetailsKhasraWiseReportSearchDto model);
         Task<List<Khasra>> GetAllKhasraList(int? villageId);
+        Task<List<Khasra>> getAllVillageDetailsKhasraWise(VillageDetailsKhasraWiseReportSearchDto model);
 
 
 

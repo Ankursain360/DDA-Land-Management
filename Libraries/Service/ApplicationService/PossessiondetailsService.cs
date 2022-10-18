@@ -143,5 +143,9 @@ namespace Libraries.Service.ApplicationService
         {
             return await _possessiondetailsRepository.GetPagedKhasraDetails(model);
         }
+        public async Task<List<Possessiondetails>> GetAllPossessionReport(PossessionReportSearchDto model)
+        {
+            return await _possessiondetailsRepository.GetAllPossessionReport(model);
+        }
     }
 }

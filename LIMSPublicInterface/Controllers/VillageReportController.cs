@@ -12,6 +12,9 @@ using Notification.Constants;
 using Notification.OptionEnums;
 using LIMSPublicInterface.Filters;
 using Core.Enum;
+using Dto.Master;
+using Utility.Helper;
+
 namespace LIMSPublicInterface.Controllers
 {
     public class VillageReportController : BaseController
@@ -46,6 +49,39 @@ namespace LIMSPublicInterface.Controllers
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                 return PartialView();
             }
+        }
+        
+        public async Task<IActionResult> DownloadAllVillageReport([FromBody] VillageReportSearchDto model)
+        {
+            var result = await _acquiredlandvillageService.GetAllAcquiredlandvillages(model);
+            List<VillageReportDto> data = new List<VillageReportDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new VillageReportDto()
+                    {
+                        name = result[i].Name,
+                        yearofConsolidation = result[i].YearofConsolidation,
+                        totalNoOfSheet = result[i].TotalNoOfSheet,
+                        circle = result[i].Circle,
+                        acquired = result[i].Acquired
+                    });
+                   
+                }
+
+            }
+            var memory = ExcelHelper.CreateExcel(data);
+            TempData["file"] = memory;
+            return Ok();
+
+        }
+        [HttpGet]
+        public virtual ActionResult Download()
+        {
+            byte[] data = TempData["file"] as byte[];
+            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "VillageReport.xlsx");
+
         }
     }
 }

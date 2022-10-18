@@ -29,6 +29,7 @@ namespace Libraries.Service.IApplicationService
         Task<List<PossessionReportDtoProfile>> BindPossessionDateList();
         Task<List<VillageAndKhasraDetailListDto>> GetPagedvillageAndKhasradetailsList(VillageAndKhasraDetailsSearchDto model);
         Task<List<AcquiredLandVillageListSearchDto>> GetPagedKhasraDetails(VillageAndKhasraDetailsSearchDto model);
+        Task<List<Possessiondetails>> GetAllPossessionReport(PossessionReportSearchDto model);
 
     }
 }

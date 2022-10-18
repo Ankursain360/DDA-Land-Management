@@ -11,6 +11,9 @@ using Notification.Constants;
 using Notification.OptionEnums;
 using LIMSPublicInterface.Filters;
 using Core.Enum;
+using Dto.Master;
+using Utility.Helper;
+
 namespace LIMSPublicInterface.Controllers
 {
     public class VillageKhasraReportController : BaseController
@@ -53,6 +56,37 @@ namespace LIMSPublicInterface.Controllers
                 return PartialView();
             }
         }
+        public async Task<IActionResult> DownloadAllVillageWiseKhasra([FromBody] VillageDetailsKhasraWiseReportSearchDto model)
+        {
+            var result = await _khasraService.getAllVillageDetailsKhasraWise(model);
+            List<VillageWiseKhasraDetailsDto> data = new List<VillageWiseKhasraDetailsDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new VillageWiseKhasraDetailsDto()
+                    {
+                        Village = result[i].Acquiredlandvillage.Name,
+                        Khasra = result[i].Name,
+                        RectNo = result[i].RectNo
+
+                    });
+
+                }              
+            }
+            var memory = ExcelHelper.CreateExcel(data);
+            TempData["file"] = memory;
+            return Ok(); 
+        }
+
+        [HttpGet]
+        public virtual IActionResult download()
+        {
+            byte[] data = TempData["file"] as byte[];
+            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "VillageKhasraReport.xlsx");
+        }
+     
+
     }
 }
 
