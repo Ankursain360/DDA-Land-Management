@@ -28,6 +28,21 @@ $(document).ready(function () {
     });
 
 });
+function GetExcel(pageNumber, pageSize, order) {
+    debugger;
+    var data = GetSearchParam(pageNumber, pageSize, order);
+    HttpPost(`/VillageKhasraReport/DownloadAllVillageWiseKhasra`, 'html', data, function (response) {
+        var a = document.createElement("a");
+        a.target = "_blank";
+        a.href = '/VillageKhasraReport/download';
+        a.click();
+
+    });
+}
+
+$("#btndownload").click(function () {
+    GetExcel(currentPageNumber, currentPageSize, sortby);
+});
 
 function GetDetails(pageNumber, pageSize, order) {
     var param = GetSearchParam(pageNumber, pageSize, order);

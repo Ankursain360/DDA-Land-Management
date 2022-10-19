@@ -241,7 +241,16 @@ namespace Libraries.Repository.IEntityRepository
                 throw;
             }
         }
-
+        public async Task<List<Possessiondetails>> GetAllPossessionReport(PossessionReportSearchDto model)
+        {
+            var data = await _dbContext.Possessiondetails
+                                       .Include(x => x.Village)
+                                       .Include(x => x.Khasra)
+                                       .Where(x => x.PossDate == (model.PossessionDate == "0" ? x.PossDate : Convert.ToDateTime(model.PossessionDate))
+                                        && x.IsActive == 1
+                                        ).ToListAsync();
+            return data;
+        }
 
 
 

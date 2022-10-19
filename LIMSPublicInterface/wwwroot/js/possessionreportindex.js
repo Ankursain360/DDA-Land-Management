@@ -5,6 +5,20 @@ var sortOrder = 1;//default Ascending
 $(document).ready(function () {
     GetDetails(currentPageNumber, currentPageSize, sortOrder);
 });
+$("#Download").click(function () {
+    GetExcel(currentPageNumber, currentPageSize, sortOrder);
+});
+function GetExcel(pageNumber, pageSize, order) {
+    debugger;
+    var param = GetSearchParam(pageNumber, pageSize, order);
+    HttpPost(`/PossessionReport/GetAllPossionReportDetails`, 'html', param, function (response) {
+        var a = document.createElement("a");
+        a.target = '_blank';
+        a.href = '/PossessionReport/download';
+        a.click();
+
+    });
+}
 
 $("#btnGenerate").click(function () {
     GetDetails(currentPageNumber, currentPageSize, sortOrder);

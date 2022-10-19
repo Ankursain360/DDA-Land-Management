@@ -235,5 +235,16 @@ namespace Libraries.Repository.EntityRepository
                                         .GetPaged<Awardplotdetails>(model.PageNumber, model.PageSize);
             return data;
         }
+        public async Task<List<Awardplotdetails>> GetAllAwardplotdetails(AwardReportSearchDto model)
+        {
+            var data = await _dbContext.Awardplotdetails
+                                        .Include(x => x.AwardMaster)
+                                        .Include(x => x.Village)
+                                        .Include(x => x.Khasra)
+                                         .Where(x => x.AwardMasterId == (model.Id == 0 ? x.AwardMasterId : model.Id)
+                                        && x.IsActive == 1
+                                        ).ToListAsync();
+            return data;
+        }
     }
 }

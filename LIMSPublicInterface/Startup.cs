@@ -55,8 +55,11 @@ namespace LIMSPublicInterface
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
+            services.Configure<CookieTempDataProviderOptions>(options => {
+                options.Cookie.IsEssential = true;
+            });
 
-          
+
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<IFileProvider>(
             new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
@@ -73,10 +76,17 @@ namespace LIMSPublicInterface
                
              
             });
-
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(Convert.ToInt32(Configuration.GetSection("CookiesSettings:CookiesTimeout").Value));
+                options.Cookie.HttpOnly = true;
+                options.Cookie.Domain = HostEnvironment.IsProduction() ? (Configuration.GetSection("CookiesSettings:CookiesDomain").Value).ToString() : "localhost";
+                //options.Cookie.Path = "/Home";
+                options.Cookie.IsEssential = true;
+            });
             services.RegisterDependency();
             services.AddAutoMapperSetup();
-
+           
 
 
             //#if DEBUG
@@ -90,7 +100,7 @@ namespace LIMSPublicInterface
             //            }
             //#endif
 
-           
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -111,8 +121,9 @@ namespace LIMSPublicInterface
             app.UseStaticFiles();
             app.UseRouting();
             app.UseAuthentication();
-            app.UseAuthorization();
+            app.UseAuthorization();            
             app.UseCookiePolicy();
+            app.UseSession();
             //app.UseEndpoints(endpoints =>
             //{
             //    endpoints.MapDefaultControllerRoute().RequireAuthorization();

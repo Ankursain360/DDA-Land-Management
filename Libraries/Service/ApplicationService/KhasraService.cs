@@ -110,7 +110,10 @@ namespace Libraries.Service.ApplicationService
             List<Khasra> khasraList = await _khasraRepository.GetAllKhasraList(villageId);
             return khasraList;
         }
-
+        public async Task<List<Khasra>> getAllVillageDetailsKhasraWise(VillageDetailsKhasraWiseReportSearchDto model)
+        {
+            return await _khasraRepository.getAllVillageDetailsKhasraWise(model);
+        }
 
     }
 }

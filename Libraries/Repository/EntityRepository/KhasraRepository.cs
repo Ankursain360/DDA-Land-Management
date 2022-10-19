@@ -181,7 +181,7 @@ namespace Libraries.Repository.EntityRepository
                 .Include(x => x.Acquiredlandvillage)
                  .Where(x => (x.AcquiredlandvillageId == (model.villageId == 0 ? x.AcquiredlandvillageId : model.villageId))
                  && (x.Id == (model.Name == 0 ? x.Id : model.Name))
-                   && (x.IsActive == 1))
+                   && (x.IsActive == 1)).Distinct()
                  .GetPaged<Khasra>(model.PageNumber, model.PageSize);
 
             int SortOrder = (int)model.SortOrder;
@@ -242,7 +242,15 @@ namespace Libraries.Repository.EntityRepository
             return data;
         }
 
-
+        public async Task<List<Khasra>> getAllVillageDetailsKhasraWise(VillageDetailsKhasraWiseReportSearchDto model)
+        {
+            var data = await _dbContext.Khasra
+                                       .Include(x => x.Acquiredlandvillage)
+                                       .Where(x => (x.AcquiredlandvillageId == (model.villageId == 0 ? x.AcquiredlandvillageId : model.villageId))
+                                          && (x.Id == (model.Name == 0 ? x.Id : model.Name))
+                                          && (x.IsActive == 1)).ToListAsync();
+            return data; 
+        }
         public async Task<List<Khasra>> GetAllKhasraList(int? villageId)
         {
             List<Khasra> khasraList = await _dbContext.Khasra

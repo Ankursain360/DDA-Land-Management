@@ -39,7 +39,7 @@ namespace NewLandAcquisition.Controllers
         private readonly IHostingEnvironment _hostingEnvironment;
         private readonly IUserNotificationService _userNotificationService;
 
-        string ApprovalDocumentPath = "";
+        string ApprovalDocumentPath = string.Empty;
 
 
         public RequestApprovalProcess(IRequestApprovalProcessService requestApprovalProcessService,
@@ -57,7 +57,7 @@ namespace NewLandAcquisition.Controllers
             _userProfileService = userProfileService;
             _hostingEnvironment = hostingEnvironment;
             _userNotificationService = userNotificationService;
-            ApprovalDocumentPath = _configuration.GetSection("FilePaths:RequestPhoto:ApprovalDocumentPath").Value.ToString();
+            ApprovalDocumentPath = _configuration.GetSection("FilePaths:RequestPhoto:Photo").Value.ToString();
 
         }
         [AuthorizeContext(ViewAction.View)]
@@ -559,7 +559,7 @@ namespace NewLandAcquisition.Controllers
             {
                 FileHelper file = new FileHelper();
                 var Data = await _requestService.FetchSingleResult(Id);
-                string targetPhotoPathLayout = Data.LayoutPlan;
+                string targetPhotoPathLayout = ApprovalDocumentPath+Data.LayoutPlan;
                 byte[] FileBytes = System.IO.File.ReadAllBytes(targetPhotoPathLayout);
                 return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
             }
