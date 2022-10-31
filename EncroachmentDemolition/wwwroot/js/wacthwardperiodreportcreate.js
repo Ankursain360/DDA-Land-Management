@@ -27,6 +27,21 @@ $(document).ready(function () {
         return false;
     });
 });
+
+function GetExcel(pageNumber, pageSize, order) {
+
+    var param = GetSearchParam(pageNumber, pageSize, order);
+    HttpPost(`/WacthWardPeriodReport/GetAllWatchWardPeriodReportList`, 'html', param, function (response) {
+        var a = document.createElement("a");
+        a.target = '_blank';
+        a.href = '/WacthWardPeriodReport/download';
+        a.click();
+
+    });
+}
+$("#btndownload").click(function () {
+    GetExcel(currentPageNumber, currentPageSize, sortby);
+});
 function ValidateForm() {
     var fromDate = $('#txtFromDate').val();
     var toDate = $('#txtToDate').val();

@@ -12,7 +12,8 @@ namespace Libraries.Repository.IEntityRepository
     public interface IWatchandwardRepository : IGenericRepository<Watchandward>
     {
         Task<List<Watchandward>> GetWatchandward();
-        Task<List<Watchandward>> GetAllWatchandward();
+        Task<List<Watchandward>> GetAllWatchandward(int id);
+        Task<List<Watchandward>> GetAllWatchWardPeriodReport(WatchAndWardPeriodReportSearchDto watchAndWardPeriodReportSearchDto);
         Task<List<Locality>> GetAllLocality();
 
         Task<List<Khasra>> GetAllKhasra();

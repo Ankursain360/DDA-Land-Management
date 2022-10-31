@@ -54,6 +54,10 @@ namespace Libraries.Service.ApplicationService
         {
             return await _demolitionstructuredetailsRepository.GetAllDemolitionstructuredetailsList();
         }
+        public async Task<List<Fixingdemolition>> GetAllDemolitionstructuredetailsList1()
+        {
+            return await _demolitionstructuredetailsRepository.GetAllDemolitionstructuredetailsList1();
+        }
         public async Task<List<Locality>> GetAllLocalityList(int divisionId)
         {
             return await _demolitionstructuredetailsRepository.GetAllLocalityList(divisionId);
@@ -251,7 +255,10 @@ namespace Libraries.Service.ApplicationService
         {
             return await _demolitionstructuredetailsRepository.Getusername(Userid);
         }
-
+        public async Task<List<Demolitionstructuredetails>> GetAllDemolitionReport(DemolitionReportZoneDivisionLocalityWiseSearchDto model)
+        {
+            return await _demolitionstructuredetailsRepository.GetAllDemolitionReport(model);
+        }
     }
 
 }

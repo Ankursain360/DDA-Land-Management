@@ -13,6 +13,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<EncroachmentRegisteration>> GetAllEncroachmentRegisteration();
         Task<List<Watchandward>> GetAllEncroachmentRegisterlist(int approved);
         Task<List<EncroachmentRegisteration>> GetAllEncroachmentRegisterlistForDownload();
+        Task<List<EncroachmentRegisteration>> GetAllEncroachmentRegisterlistForDownload2(InspectionEncroachmentregistrationSearchDto dto); 
         Task<List<Zone>> GetAllZone(int departmentId);
         Task<List<DetailsOfEncroachment>> GetDetailsOfEncroachment(int encroachmentId);
         Task<EncroachmentPhotoFileDetails> GetEncroachmentPhotoFileDetails(int encroachmentId);
@@ -30,6 +31,8 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Division>> GetAllDivision(int zoneId);
         Task<List<Department>> GetAllDepartment();
         Task<List<EncroachmentRegisteration>> GetAllDownloadEncroachment();
+        Task<List<EncroachmentRegisteration>> GetAllDownloadEncroachmentList(EnchroachmentSearchDto dto);
+        Task<List<EncroachmentRegisteration>> GetAllDownloadEncroachmentList(DemolitionReportSearchDto model);
         Task<PagedResult<Watchandward>> GetPagedEncroachmentRegisteration(EncroachmentRegisterationDto model, int approved, int zoneId);
         Task<List<Locality>> GetAllLocalityList(int divisionId);
         Task<List<Locality>> GetAllLocalityList();//for demolition report -- ishu

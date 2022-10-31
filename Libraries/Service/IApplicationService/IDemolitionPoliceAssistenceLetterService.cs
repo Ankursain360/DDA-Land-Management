@@ -17,5 +17,6 @@ namespace Libraries.Service.IApplicationService
         Task<Demolitionpoliceassistenceletter> FetchSingleResultButOnAneexureId(int id);
         Task<Fixingdemolition> FetchSingleResultOfFixingDemolition(int id);
         Task<Demolitionpoliceassistenceletter> Fetchletterdetails(int id);
+        Task<List<Fixingdemolition>> GetAllDemolitionPoliceAssistenceLetterList(int approved);  //, int userId
     }
 }

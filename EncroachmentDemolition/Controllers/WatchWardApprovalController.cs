@@ -806,9 +806,9 @@ namespace EncroachmentDemolition.Controllers
             return View(Data);
         }
         #endregion
-        public async Task<IActionResult> WatchWardApprovalList()
+        public async Task<IActionResult> WatchWardApprovalList(int id)
         {
-            var result = await _watchandwardService.GetAllWatchandward();
+            var result = await _watchandwardService.GetAllWatchandward(id);
             List<WatchWardApprovalProcessListDto> data = new List<WatchWardApprovalProcessListDto>();
             if (result != null)
             {

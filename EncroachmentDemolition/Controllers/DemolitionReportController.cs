@@ -53,9 +53,9 @@ namespace EncroachmentDemolition.Controllers
 
 
         [AuthorizeContext(ViewAction.Download)]
-        public async Task<IActionResult> DemolationReporlist()
+        public async Task<IActionResult> DemolationReporlist([FromBody] DemolitionReportSearchDto model)
         {
-            var result = await _encroachmentRegisterationService.GetAllDownloadEncroachment();
+            var result = await _encroachmentRegisterationService.GetAllDownloadEncroachmentList(model);
             List<EncroachmentReportListDto> data = new List<EncroachmentReportListDto>();
             if (result != null)
             {
@@ -76,10 +76,14 @@ namespace EncroachmentDemolition.Controllers
                 }
             }
             var memory = ExcelHelper.CreateExcel(data);
-             
-           
-             return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            TempData["file"] = memory;
+            return Ok();
         }
-
+        [HttpGet]
+        public virtual ActionResult download()
+        {
+            byte[] data = TempData["file"] as byte[];
+            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        }
     }
 }

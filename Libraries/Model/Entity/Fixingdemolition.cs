@@ -72,6 +72,7 @@ namespace Libraries.Model.Entity
         public ICollection<Fixingdocument> Fixingdocument { get; set; }
         public ICollection<Demolitionpoliceassistenceletter> Demolitionpoliceassistenceletter { get; set; }
         public ICollection<Demolitionstructuredetails> Demolitionstructuredetails { get; set; }
+  
         [NotMapped]
         public string ApprovalStatus { get; set; }
 

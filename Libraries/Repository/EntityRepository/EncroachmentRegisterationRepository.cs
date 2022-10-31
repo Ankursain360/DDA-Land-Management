@@ -178,7 +178,23 @@ namespace Libraries.Repository.EntityRepository
                                        .Where(x => (x.IsActive == 1)).ToListAsync();
             return data;
         }
-
+       
+        public async Task<List<EncroachmentRegisteration>> GetAllEncroachmentRegisterlistForDownload2(InspectionEncroachmentregistrationSearchDto model) 
+        {
+            var data = await _dbContext.EncroachmentRegisteration
+                                        .Include(x => x.Locality)
+                                        .Include(x => x.Department)
+                                        .Include(x => x.Zone)
+                                        .Include(x => x.Division)
+                                        .Include(x => x.KhasraNoNavigation)
+                                        .Where(x => (x.DepartmentId == (model.departmentId == 0 ? x.DepartmentId : model.departmentId))
+                                         && (x.ZoneId == (model.zoneId == 0 ? x.ZoneId : model.zoneId))
+                                         && (x.DivisionId == (model.divisionId == 0 ? x.DivisionId : model.divisionId))
+                                          && (x.LocalityId == (model.localityId == 0 ? x.LocalityId : model.localityId))
+                                          && x.EncrochmentDate >= model.fromDate
+                                          && x.EncrochmentDate <= model.toDate && (x.IsActive == 1)).ToListAsync();
+            return data;
+        }
         public async Task<PagedResult<Watchandward>> GetPagedEncroachmentRegisteration(EncroachmentRegisterationDto model, int approved, int zoneId)
         {
             //try {
@@ -432,6 +448,32 @@ namespace Libraries.Repository.EntityRepository
 
 
                 .Where(x => x.IsActive == 1).ToListAsync();
+        }
+        public async Task<List<EncroachmentRegisteration>> GetAllDownloadEncroachmentList(EnchroachmentSearchDto dto)
+        {
+            var data = await _dbContext.EncroachmentRegisteration
+                .Include(x => x.Locality)
+                .Include(x => x.Department)
+                .Include(x => x.Zone)
+                .Include(x => x.Division)
+                 .Include(x => x.KhasraNoNavigation)
+                .Where(x => (x.DepartmentId == (dto.departmentId == 0 ? x.DepartmentId : dto.departmentId))
+                && (x.ZoneId == (dto.zoneId == 0 ? x.ZoneId : dto.zoneId))
+                && (x.DivisionId == (dto.divisionId == 0 ? x.DivisionId : dto.divisionId))
+                && (x.LocalityId == (dto.localityId == 0 ? x.LocalityId : dto.localityId)) && (x.IsActive == 1)).ToListAsync();
+            return data;
+        }
+        public async Task<List<EncroachmentRegisteration>> GetAllDownloadEncroachmentList(DemolitionReportSearchDto model) 
+        {
+                var data = await _dbContext.EncroachmentRegisteration
+                      .Include(x => x.Locality)
+                       .Include(x => x.Department)
+                       .Include(x => x.Zone)
+                        .Include(x => x.KhasraNoNavigation)
+                      .Where(x => (x.LocalityId == (model.localityId == 0 ? x.LocalityId : model.localityId))
+                     && x.EncrochmentDate >= model.fromDate
+                     && x.EncrochmentDate <= model.toDate).ToListAsync();
+                return data;
         }
         public async Task<PagedResult<EncroachmentRegisteration>> GetEncroachmentReportData(EnchroachmentSearchDto dto)//added by shalini
         {
@@ -777,14 +819,6 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<PagedResult<EncroachmentRegisteration>> GetPagedDemolitionReport(DemolitionReportSearchDto model)//added by ishu
         {
-            //return await _dbContext.EncroachmentRegisteration
-            //var data = await _dbContext.EncroachmentRegisteration
-            //   .Include(x => x.Locality)
-            //    .Where(x=>(x.LocalityId == (model.localityId == 0 ? x.LocalityId : model.localityId)
-            //     && x.EncrochmentDate >= model.FromDate  && x.EncrochmentDate <= model.ToDate))
-
-
-            //    .GetPaged<EncroachmentRegisteration>(model.PageNumber, model.PageSize);
             var data = await _dbContext.EncroachmentRegisteration
                   .Include(x => x.Locality)
                    .Include(x => x.Department)

@@ -34,6 +34,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Division>> GetAllDivision(int zoneId);
         Task<List<Department>> GetAllDepartment();
         Task<List<Demolitionstructuredetails>> GetAllDemolitionstructuredetailsList();
+        Task<List<Fixingdemolition>> GetAllDemolitionstructuredetailsList1();
         Task<PagedResult<Demolitionstructuredetails>> GetPagedDemolitionstructuredetails(DemolitionstructuredetailsDto model);
         Task<List<Demolitionstructuredetails>> GetPagedDemolitionstructuredetailsList(DemolitionstructuredetailsDto model);
         Task<List<Locality>> GetAllLocalityList(int localityId);
@@ -58,7 +59,9 @@ namespace Libraries.Repository.IEntityRepository
         Task<PagedResult<Fixingdemolition>> GetDashboardListData(DemolitionDasboardDataDto model);
         Task<List<Fixingdemolition>> DownloadDasboarddata(string filter, int Userid);
         Task<string> Getusername(int Userid);
-        
+        Task<List<Demolitionstructuredetails>> GetAllDemolitionReport(DemolitionReportZoneDivisionLocalityWiseSearchDto dto);
+
+
 
     }
 }

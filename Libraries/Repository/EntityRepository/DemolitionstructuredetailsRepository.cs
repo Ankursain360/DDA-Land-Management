@@ -77,6 +77,31 @@ namespace Libraries.Repository.EntityRepository
                                    .Include(x => x.Locality)
                 .ToListAsync();
         }
+        public async Task<List<Fixingdemolition>> GetAllDemolitionstructuredetailsList1()
+        {
+            //var data = await _dbContext.Demolitionstructuredetails
+            //                             //.Include(x => x.Encroachment.Locality)
+            //                             .Include(x => x.FixingDemolition.Encroachment)
+            //                             //.Include(x => x.Encroachment.Department)
+            //                             //.Include(x => x.Encroachment.Zone)                                     
+            //                             //.Include(x => x.ApprovedStatusNavigation)
+            //                             //.Include(x => x.Demolitionstructuredetails)
+            //                             .Include(x => x.FixingDemolition.Encroachment.KhasraNoNavigation)
+            //                             .Include(x => x.Locality)                                 
+            //                            .Include(x => x.Department)
+            //                            .Include(x => x.Zone)                                
+            //                            .Include(x=>x.Division)
+            //                       .ToListAsync();
+            var data = await _dbContext.Fixingdemolition.Include(x => x.Encroachment.Locality)
+                                        .Include(x => x.Encroachment)
+                                        .Include(x => x.Encroachment.Department)
+                                        .Include(x => x.Encroachment.Zone)
+                                        .Include(x => x.Encroachment.Division)
+                                        .Include(x => x.ApprovedStatusNavigation)
+                                        .Include(x => x.Demolitionstructuredetails)
+                                        .Include(x => x.Encroachment.KhasraNoNavigation).ToListAsync();
+            return data;
+        }
 
 
 
@@ -631,7 +656,22 @@ namespace Libraries.Repository.EntityRepository
             string name = data.User.UserName + "(" + data.Role.Name + ")";
             return name;
         }
-        
 
+        public async Task<List<Demolitionstructuredetails>> GetAllDemolitionReport(DemolitionReportZoneDivisionLocalityWiseSearchDto dto)
+        {
+           
+            var data = await _dbContext.Demolitionstructuredetails
+               .Include(x => x.Locality)
+               .Include(x => x.Department)
+               .Include(x => x.Zone) 
+               .Include(x => x.Division)
+                .Include(x => x.Areareclaimedrpt)
+                .Include(x => x.FixingDemolition.Encroachment.KhasraNoNavigation)
+               .Where(x => (x.DepartmentId == (dto.departmentId == 0 ? x.DepartmentId : dto.departmentId))
+               && (x.ZoneId == (dto.zoneId == 0 ? x.ZoneId : dto.zoneId))
+               && (x.DivisionId == (dto.divisionId == 0 ? x.DivisionId : dto.divisionId))
+               && (x.LocalityId == (dto.localityId == 0 ? x.LocalityId : dto.localityId)) && (x.IsActive == 1)).ToListAsync();
+            return data;
+        }
     }
 }

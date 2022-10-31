@@ -39,11 +39,14 @@ namespace Libraries.Service.ApplicationService
 
 
 
-        public async Task<List<Watchandward>> GetAllWatchandward()
+        public async Task<List<Watchandward>> GetAllWatchandward(int id)
         {
-            return await _watchandwardRepository.GetAllWatchandward();
+            return await _watchandwardRepository.GetAllWatchandward(id);
         }
-
+        public async Task<List<Watchandward>> GetAllWatchWardPeriodReport(WatchAndWardPeriodReportSearchDto watchAndWardPeriodReportSearchDto)
+        {
+            return await _watchandwardRepository.GetAllWatchWardPeriodReport(watchAndWardPeriodReportSearchDto);
+        }
         public async Task<List<Watchandward>> GetWatchandwardUsingRepo()
         {
             return await _watchandwardRepository.GetWatchandward();

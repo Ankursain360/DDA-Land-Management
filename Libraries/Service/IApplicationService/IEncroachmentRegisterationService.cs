@@ -23,10 +23,12 @@ namespace Libraries.Service.IApplicationService
         Task<List<Division>> GetAllDivisionList(int zone);
         Task<List<EncroachmentRegisteration>> GetAllEncroachmentRegisteration();
         Task<List<Watchandward>> GetAllEncroachmentRegisterlist(int approved);
-        Task<List<EncroachmentRegisteration>> GetAllEncroachmentRegisterlistForDownload(); 
+        Task<List<EncroachmentRegisteration>> GetAllEncroachmentRegisterlistForDownload();
+        Task<List<EncroachmentRegisteration>> GetAllEncroachmentRegisterlistForDownload2(InspectionEncroachmentregistrationSearchDto model); 
           Task<List<Khasra>> GetAllKhasraList(int localityId);
-
+         
         Task<List<EncroachmentRegisteration>> GetAllDownloadEncroachment();
+        Task<List<EncroachmentRegisteration>> GetAllDownloadEncroachmentList(DemolitionReportSearchDto model);
         Task<List<Propertyregistration>> GetAllKhasraListFromPropertyInventory(int ZoneId,int DepartmentId);
         Task<bool> SaveDetailsOfEncroachment(DetailsOfEncroachment detailsOfEncroachment);
         Task<bool> DeleteDetailsOfEncroachment(int Id);
@@ -41,6 +43,7 @@ namespace Libraries.Service.IApplicationService
         Task<EncroachmentLocationMapFileDetails> GetEncroachmentLocationMapFileDetails(int encroachmentId);
         Task<EncroachmentFirFileDetails> GetEncroachmentFirFileDetails(int encroachmentId);
         Task<PagedResult<EncroachmentRegisteration>> GetEncroachmentReportData(EnchroachmentSearchDto enchroachmentSearchDto);
+        Task<List<EncroachmentRegisteration>> GetAllDownloadEncroachmentList(EnchroachmentSearchDto dto);
         Task<PagedResult<EncroachmentRegisteration>> GetEncroachmentRegisterationReportData(InspectionEncroachmentregistrationSearchDto inspectionEncroachmentregistrationSearchDto);
         Task<bool> UpdateBeforeApproval(int id, EncroachmentRegisteration encroachmentRegisterations);
         Task<PagedResult<EncroachmentRegisteration>> GetPagedDemolitionReport(DemolitionReportSearchDto model);

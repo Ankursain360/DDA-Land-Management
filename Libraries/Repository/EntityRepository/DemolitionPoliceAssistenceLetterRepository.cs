@@ -158,5 +158,20 @@ namespace Repository.EntityRepository
                                    .Where(x => x.FixingDemolitionId == id)
                                    .FirstOrDefaultAsync();
         }
+        public async Task<List<Fixingdemolition>> GetAllDemolitionPoliceAssistenceLetterList(int approved) //,int userId
+        {
+           var data = await _dbContext.Fixingdemolition
+                                    .Include(x => x.Encroachment.Locality)
+                                    .Include(x => x.Encroachment)
+                                    .Include(x => x.Encroachment.Department)
+                                    .Include(x => x.Encroachment.Zone)
+                                    .Include(x => x.Encroachment.KhasraNoNavigation)
+                                    .Include(x => x.Demolitionpoliceassistenceletter)
+                                    .Include(x => x.ApprovedStatusNavigation)
+                                    .Where(x => x.IsActive == 1 && x.ApprovedStatusNavigation.StatusCode == approved).ToListAsync(); //
+
+            return data;
+
+        }
     }
 }

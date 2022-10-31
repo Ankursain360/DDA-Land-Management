@@ -99,5 +99,9 @@ namespace Libraries.Service.ApplicationService
             Demolitionpoliceassistenceletter model = await _demolitionPoliceAssistenceLetterRepository.Fetchletterdetails(id);
             return model;
         }
+        public async Task<List<Fixingdemolition>> GetAllDemolitionPoliceAssistenceLetterList(int approved) //, int userId
+        {
+            return await _demolitionPoliceAssistenceLetterRepository.GetAllDemolitionPoliceAssistenceLetterList(approved);   //,userId
+        }
     }
 }

@@ -28,6 +28,22 @@ $(document).ready(function () {
         return false;
     });
 });
+
+function GetExcel(pageNumber, pageSize, order) {
+
+    var param = GetSearchParam(pageNumber, pageSize, order);
+    HttpPost(`/InspectionRegisterPeriodReport/GetAllEncroachmentRegisterlistForDownload`, 'html', param, function (response) {
+        var a = document.createElement("a");
+        a.target = '_blank';
+        a.href = '/InspectionRegisterPeriodReport/download';
+        a.click();
+
+    });
+}
+
+$("#btndownload").click(function () {
+    GetExcel(currentPageNumber, currentPageSize, sortby);
+});
 function GetDetails(pageNumber, pageSize, order) {
     var param = GetSearchParam(pageNumber, pageSize, order);
     

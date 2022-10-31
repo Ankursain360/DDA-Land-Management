@@ -46,9 +46,12 @@ namespace Libraries.Service.ApplicationService
 
         public async Task<List<EncroachmentRegisteration>> GetAllDownloadEncroachment()
         {
-            return await _encroachmentRegisterationRepository.GetAllDownloadEncroachment();
+            return await _encroachmentRegisterationRepository.GetAllDownloadEncroachment(); 
         }
-
+        public async Task<List<EncroachmentRegisteration>> GetAllDownloadEncroachmentList(DemolitionReportSearchDto model)
+        {
+            return await _encroachmentRegisterationRepository.GetAllDownloadEncroachmentList(model);
+        }
         public async Task<List<Locality>> GetAllLocalityList()//for demolition report -- ishu
         {
             return await _encroachmentRegisterationRepository.GetAllLocalityList();
@@ -77,7 +80,11 @@ namespace Libraries.Service.ApplicationService
         }
         public async Task<List<EncroachmentRegisteration>> GetAllEncroachmentRegisterlistForDownload()
         {
-            return await _encroachmentRegisterationRepository.GetAllEncroachmentRegisterlistForDownload();
+            return await _encroachmentRegisterationRepository.GetAllEncroachmentRegisterlistForDownload(); 
+        }
+        public async Task<List<EncroachmentRegisteration>> GetAllEncroachmentRegisterlistForDownload2(InspectionEncroachmentregistrationSearchDto model)
+        {
+            return await _encroachmentRegisterationRepository.GetAllEncroachmentRegisterlistForDownload2( model);
         }
         public async Task<PagedResult<Watchandward>> GetPagedEncroachmentRegisteration(EncroachmentRegisterationDto model, int approved, int zoneId)
         {
@@ -199,6 +206,10 @@ namespace Libraries.Service.ApplicationService
         public async Task<PagedResult<EncroachmentRegisteration>> GetEncroachmentReportData(EnchroachmentSearchDto enchroachmentSearchDto)
         {
             return await _encroachmentRegisterationRepository.GetEncroachmentReportData(enchroachmentSearchDto);
+        }
+        public async Task<List<EncroachmentRegisteration>> GetAllDownloadEncroachmentList(EnchroachmentSearchDto dto)
+        {
+            return await _encroachmentRegisterationRepository.GetAllDownloadEncroachmentList(dto);
         }
         public async Task<PagedResult<EncroachmentRegisteration>> GetEncroachmentRegisterationReportData(InspectionEncroachmentregistrationSearchDto inspectionEncroachmentregistrationSearchDto)
         {

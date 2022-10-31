@@ -28,6 +28,35 @@ $(document).ready(function () {
     });
 });
 
+//function GetExcel(pageNumber, pageSize, order) {
+//    debugger;
+//    var param = GetSearchParam(pageNumber, pageSize, order);
+//    HttpPost(`/DemolitionReport2/getAllDemolitionReport`, 'html', param, function (response) {
+//        var a = document.createElement("a");
+//        a.target = '_blank';
+//        a.href = '/DemolitionReport2/download';
+//        a.click();
+//    });
+//}
+
+//$("#btndownload").click(function () {
+//    GetExcel(currentPageNumber, currentPageSize, sortby);
+//});
+
+function GetExcel(pageNumber, pageSize, order) {
+    var param = GetSearchParam(pageNumber, pageSize, order);
+    HttpPost(`/DemolitionReport/DemolationReporlist`, 'html', param, function (resorce) {
+        var a = document.createElement("a");
+        a.target = '_blank';
+        a.href = '/DemolitionReport/download';
+        a.click();
+    });
+}
+
+$("#btnDownload").click(function () {
+    GetExcel(currentPageNumber, currentPageSize, sortby);
+})
+
 function GetDetails(pageNumber, pageSize, order) {
     var param = GetSearchParam(pageNumber, pageSize, order);
     

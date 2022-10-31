@@ -206,15 +206,27 @@ namespace Libraries.Repository.EntityRepository
         {
             return await _dbContext.Watchandward.ToListAsync();
         }
-        public async Task<List<Watchandward>> GetAllWatchandward()
+        public async Task<List<Watchandward>> GetAllWatchandward(int zoneId)
         {
-            return await _dbContext.Watchandward.Where(x => x.IsActive == 1)
-              .Include(x => x.PrimaryListNoNavigation)
-              .Include(x => x.ApprovedStatusNavigation)
+            var data =  await _dbContext.Watchandward.Where(x =>x.IsActive == 1 && (x.PrimaryListNoNavigation.ZoneId == (zoneId == 0 ? x.PrimaryListNoNavigation.ZoneId : zoneId))) 
+                .Include(x => x.PrimaryListNoNavigation)
+                .Include(x => x.ApprovedStatusNavigation)
                 .Include(x => x.PrimaryListNoNavigation.Locality)
                 .Include(x => x.Locality)
                 .Include(x => x.Khasra)
                 .ToListAsync();
+            return data;
+        }
+        public async Task<List<Watchandward>> GetAllWatchWardPeriodReport(WatchAndWardPeriodReportSearchDto watchAndWardPeriodReportSearchDto)
+        {
+            var data = await _dbContext.Watchandward
+                                         .Include(x => x.PrimaryListNoNavigation)
+                                         .Include(x => x.PrimaryListNoNavigation.Locality)
+                                         .Where(x => (x.PrimaryListNoNavigation.LocalityId == (watchAndWardPeriodReportSearchDto.localityId == 0 ? x.PrimaryListNoNavigation.LocalityId : watchAndWardPeriodReportSearchDto.localityId))
+                                          && x.Date >= watchAndWardPeriodReportSearchDto.fromDate
+                                          && x.Date <= watchAndWardPeriodReportSearchDto.toDate)
+                 .ToListAsync();
+            return data;
         }
         public async Task<Watchandward> FetchSingleResult(int id)
         {

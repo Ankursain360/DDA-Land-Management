@@ -13,6 +13,20 @@ $(document).ready(function () {
         return false;
     });
 });
+
+
+function GetExcel(pageNumber, pageSize, order) {
+    var param = GetSearchParam(pageNumber, pageSize, order);
+    HttpPost(`/EncroachmentReport/Encroachmentreporlist`, 'html', param, function (resorce) {
+        var a = document.createElement("a");
+        a.target = '_blank';
+        a.href = '/EncroachmentReport/download';
+        a.click();
+    });
+}
+$("#btnDownload").click(function () {
+    GetExcel(currentPageNumber, currentPageSize, sortby);
+})
 function GetDetails(pageNumber, pageSize, order) {
     var param = GetSearchParam(pageNumber, pageSize, order);
     debugger

@@ -38,6 +38,7 @@ namespace Libraries.Service.IApplicationService
         Task<List<Demolitionstructure>> GetStructure();
         Task<List<Structure>> GetMasterStructure();
         Task<List<Demolitionstructuredetails>> GetAllDemolitionstructuredetailsList();
+        Task<List<Fixingdemolition>> GetAllDemolitionstructuredetailsList1();
 
         Task<PagedResult<Demolitionstructuredetails>> GetPagedDemolitionReportDataDepartmentZoneWise(DemolitionReportZoneDivisionLocalityWiseSearchDto demolitionReportZoneDivisionLocalityWiseSearchDto);
         Task<List<Demolitionstructuredetails>> GetDemolitionReportDataDepartmentZoneWise(int department, int zone, int division, int locality);
@@ -62,6 +63,8 @@ namespace Libraries.Service.IApplicationService
         Task<PagedResult<Fixingdemolition>> GetDashboardListData(DemolitionDasboardDataDto model);
         Task<List<Fixingdemolition>> DownloadDasboarddata(string filter, int Userid);
         Task<string> Getusername(int Userid);
-        
+        Task<List<Demolitionstructuredetails>> GetAllDemolitionReport(DemolitionReportZoneDivisionLocalityWiseSearchDto model);
+
+
     }
 }

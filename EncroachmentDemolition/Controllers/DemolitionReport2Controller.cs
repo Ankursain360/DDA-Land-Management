@@ -11,6 +11,9 @@ using Notification.Constants;
 using Notification.OptionEnums;
 using EncroachmentDemolition.Filters;
 using Core.Enum;
+using Dto.Master;
+using Utility.Helper;
+
 namespace EncroachmentDemolition.Controllers
 {
     public class DemolitionReport2Controller : Controller
@@ -66,6 +69,39 @@ namespace EncroachmentDemolition.Controllers
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                 return PartialView();
             }
+        }
+        public async Task<IActionResult> getAllDemolitionReport([FromBody] DemolitionReportZoneDivisionLocalityWiseSearchDto model)
+        {
+            var result = await _demolitionstructuredetailsService.GetAllDemolitionReport(model);
+            List<DemolitionReportListDto> data = new List<DemolitionReportListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new DemolitionReportListDto()
+                    {
+                        Department = result[i].Department ==null?"":result[i].Department.Name,
+                        Zone = result[i].Zone == null ? "": result[i].Zone.Name,
+                        Division = result[i].Division == null ? "" : result[i].Division.Name,
+                        Locality_VillageName = result[i].Locality == null ? "":result[i].Locality.Name,
+                        khasra_PlotNo = result[i].FixingDemolition.Encroachment.KhasraNoNavigation.LocalityId == null ? result[i].FixingDemolition.Encroachment.KhasraNoNavigation.PlotNo : result[i].FixingDemolition.Encroachment.KhasraNoNavigation.KhasraNo,
+                        DemolitionDate = result[i].EndOfDemolitionActionDate.HasValue ? Convert.ToDateTime(result[i].EndOfDemolitionActionDate).ToString("dd-MM-yyyy"):"",
+                        AreaReclaimed_Sq_mtr = result[i].Areareclaimedrpt.Count >0?result[i].Areareclaimedrpt.Select(x=>x.AreaReclaimed).Sum().ToString():"_",
+                        ReasonofDemolition = result[i].Remarks
+                    });
+
+                }
+
+            }
+            var memory = ExcelHelper.CreateExcel(data);
+            TempData["file"] = memory;
+            return Ok(); 
+        }
+        [HttpGet]
+        public virtual ActionResult download()
+        {
+            byte[] data = TempData["file"] as byte[];
+            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "DemolitionReport2Data.xlsx");
         }
     }
 }

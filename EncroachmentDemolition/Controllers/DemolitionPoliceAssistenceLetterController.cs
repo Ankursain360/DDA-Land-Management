@@ -18,6 +18,7 @@ using Microsoft.AspNetCore.Hosting;
 using EncroachmentDemolition.Filters;
 using Core.Enum;
 using System.Data;
+using Dto.Master;
 
 namespace EncroachmentDemolition.Controllers
 {
@@ -415,6 +416,30 @@ namespace EncroachmentDemolition.Controllers
 
         #endregion
 
+        public async Task<IActionResult> GetAllDemolitionPoliceAssistenceLetter()   //
+        {
+            var result = await _demolitionPoliceAssistenceLetterService.GetAllDemolitionPoliceAssistenceLetterList((int)ApprovalActionStatus.Approved);
+            List<DemolitionPoliceLetterDto> data = new List<DemolitionPoliceLetterDto>();
+            if (result != null)
+            {
 
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new DemolitionPoliceLetterDto()
+                    {
+                        InspectionDate = result[i].Encroachment.EncrochmentDate == null?"_":Convert.ToDateTime(result[i].Encroachment.EncrochmentDate).ToString("dd-MM-yyyy"),
+                        Department = result[i].Encroachment.Department == null ?"_":result[i].Encroachment.Department.Name,
+                        Zone = result[i].Encroachment.Zone != null ? result[i].Encroachment.Zone.Name : "_",
+                        KhasraNo_PlotNo = result[i].Encroachment.KhasraNoNavigation.LocalityId == null ?result[i].Encroachment.KhasraNoNavigation.PlotNo : result[i].Encroachment.KhasraNoNavigation.KhasraNo,
+                        Status = result[i].ApprovedStatus == 0 ? "Pending" : "Approved" ,
+                        LetterStatus = result[i].Demolitionpoliceassistenceletter.Count != 0 ? "Generated" : "Not Generated"
+
+                    });
+
+                }
+            }
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "DemolitionReport2Data.xlsx");
+        }
     }
 }

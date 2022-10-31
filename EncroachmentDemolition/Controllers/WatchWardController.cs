@@ -364,7 +364,7 @@ namespace EncroachmentDemolition.Controllers
                             }
                             #endregion
                             ViewBag.Message = Alert.Show(Messages.AddAndApprovalRecordSuccess, "", AlertType.Success);
-                            var result1 = await _watchandwardService.GetAllWatchandward();
+                            var result1 = await _watchandwardService.GetAllWatchandward(SiteContext.UserId);
                             return View("Index", result1);
                         }
                         else
@@ -501,7 +501,7 @@ namespace EncroachmentDemolition.Controllers
                     {
 
                         ViewBag.Message = Alert.Show(Messages.UpdateAndApprovalRecordSuccess, "", AlertType.Success);
-                        var result1 = await _watchandwardService.GetAllWatchandward();
+                        var result1 = await _watchandwardService.GetAllWatchandward(SiteContext.UserId);
 
                         return View("Index", result1);
                     }
@@ -552,7 +552,7 @@ namespace EncroachmentDemolition.Controllers
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
             }
-            var result1 = await _watchandwardService.GetAllWatchandward();
+            var result1 = await _watchandwardService.GetAllWatchandward(SiteContext.UserId);
             return View("Index", result1);
         }
 
@@ -722,10 +722,10 @@ namespace EncroachmentDemolition.Controllers
 
 
 
-        [AuthorizeContext(ViewAction.Download)]
+        //[AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> WatchWardList()
         {
-            var result = await _watchandwardService.GetAllWatchandward();
+            var result = await _watchandwardService.GetAllWatchandward(SiteContext.ZoneId??0);
             List<WatchWardListDto> data = new List<WatchWardListDto>();
             if (result != null)
             {
@@ -741,7 +741,7 @@ namespace EncroachmentDemolition.Controllers
                         LandMark = result[i].Landmark,
                         Encroachment = result[i].Encroachment.ToString() == "1" ? "Yes" : "No",
                         StatusOnGround = result[i].StatusOnGround.ToString(),
-                        Remarks = result[i].Remarks,
+                      //  Remarks = result[i].Remarks,
                         CreatedDate = Convert.ToDateTime(result[i].CreatedDate).ToString("dd-MMM-yyyy") == null ? "" : Convert.ToDateTime(result[i].CreatedDate).ToString("dd-MMM-yyyy"),
                         //IsActive = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
                     }); ;

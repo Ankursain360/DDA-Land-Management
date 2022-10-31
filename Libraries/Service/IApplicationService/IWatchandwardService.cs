@@ -12,7 +12,8 @@ namespace Libraries.Service.IApplicationService
 
     public interface IWatchandwardService : IEntityService<Watchandward>
     {
-        Task<List<Watchandward>> GetAllWatchandward();
+        Task<List<Watchandward>> GetAllWatchandward(int id);
+        Task<List<Watchandward>> GetAllWatchWardPeriodReport(WatchAndWardPeriodReportSearchDto watchAndWardPeriodReportSearchDto);
         Task<List<Watchandward>> GetWatchandwardUsingRepo();
         Task<List<Khasra>> GetAllKhasra();
 

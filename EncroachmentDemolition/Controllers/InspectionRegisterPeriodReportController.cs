@@ -70,9 +70,9 @@ namespace EncroachmentDemolition.Controllers
             }
         }
         [AuthorizeContext(ViewAction.Download)]
-        public async Task<IActionResult> Download()
+        public async Task<IActionResult> GetAllEncroachmentRegisterlistForDownload([FromBody] InspectionEncroachmentregistrationSearchDto model) 
         {
-            var result = await _encroachmentregistrationService.GetAllEncroachmentRegisterlistForDownload();
+            var result = await _encroachmentregistrationService.GetAllEncroachmentRegisterlistForDownload2(model);
             List<EncroachmentRegisterListDto> data = new List<EncroachmentRegisterListDto>();
             if (result != null)
             {
@@ -101,7 +101,14 @@ namespace EncroachmentDemolition.Controllers
             }
 
             var memory = ExcelHelper.CreateExcel(data);
-            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            TempData["file"] = memory;
+            return Ok();
+        }
+        [HttpGet]
+        public virtual ActionResult download()
+        {
+            byte[] data = TempData["file"] as byte[];
+            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
     }
 }

@@ -904,6 +904,47 @@ namespace EncroachmentDemolition.Controllers
             return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
 
+        public async Task<IActionResult> DemolitionDiaryList1()
+        {
+            var result = await _demolitionstructuredetailsService.GetAllDemolitionstructuredetailsList1();
+            List<DemolitionDiaryList1Dto> data = new List<DemolitionDiaryList1Dto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new DemolitionDiaryList1Dto()
+                    {
+                        InspectionDate = result[i].Encroachment.EncrochmentDate==null?"":Convert.ToDateTime(result[i].Encroachment.EncrochmentDate).ToString("dd-MM-yyyy"),
+                        //Department = result[i].Encroachment.Department ==null?"":result[i].Encroachment.Department.Name,
+                        //Zone = result[i].Encroachment.Zone == null ? "" : result[i].Encroachment.Zone.Name,
+                        KhasraNo_PlotNo = result[i].Encroachment.KhasraNoNavigation.LocalityId == null ? result[i].Encroachment.KhasraNoNavigation.PlotNo : result[i].Encroachment.KhasraNoNavigation.KhasraNo,
+                        //DemolitionStatus =result[i].Demolitionstructuredetails.Count==0?"-": result[i].Demolitionstructuredetails.Select(x=> x.DemolitionStatus).FirstOrDefault()
+                        Department = result[i].Encroachment.Department == null ? "" : result[i].Encroachment.Department.Name,
+                        Zone = result[i].Encroachment.Zone == null ? "" : result[i].Encroachment.Zone.Name,
+                        Division = result[i].Encroachment.Division == null ? "" : result[i].Encroachment.Division.Name,
+                        Locality_VillageName = result[i].Encroachment.Locality == null ? "" : result[i].Encroachment.Locality.Name,
+                        //KhasraNo_PlotNo = result[i].Zone == null ? "" : result[i].Zone.Name,
+                        FileNo = result[i].Demolitionstructuredetails.Count>0? result[i].Demolitionstructuredetails.Select(x=>x.FileNo).FirstOrDefault():"-",
+                        Date = result[i].Demolitionstructuredetails.Count>0?Convert.ToDateTime(result[i].Demolitionstructuredetails.Select(x=>x.Date).FirstOrDefault()).ToString("dd-MM.yyyy"):"_",
+                        Area_sq_meter = result[i].Demolitionstructuredetails.Count==0?"_":result[i].Demolitionstructuredetails.Select(x=>x.Area).FirstOrDefault(),
+                        PoliceStation = result[i].Demolitionstructuredetails.Count == 0 ? "_" : result[i].Demolitionstructuredetails.Select(x => x.PoliceStation).FirstOrDefault(),
+                        NameoftheArea_Site = result[i].Demolitionstructuredetails.Count == 0 ? "_" : result[i].Demolitionstructuredetails.Select(x => x.NameOfAreaSite).FirstOrDefault(),
+                        EncroachmentSince = result[i].Demolitionstructuredetails.Count > 0 ? Convert.ToDateTime(result[i].Demolitionstructuredetails.Select(x => x.EncroachmentSinceDate).FirstOrDefault()).ToString("dd-MM.yyyy") : "_",
+                        DateOfApprovalOfDemolition = result[i].Demolitionstructuredetails.Count > 0 ? Convert.ToDateTime(result[i].Demolitionstructuredetails.Select(x => x.DateOfApprovalDemolition).FirstOrDefault()).ToString("dd-MM.yyyy") : "_",                         
+                        NameOfEncroacher_if_any = result[i].Demolitionstructuredetails.Count>0?result[i].Demolitionstructuredetails.Select(x=>x.NameOfEncroacherIfAny).FirstOrDefault():"_",
+                        StartOfDemolitionAction = result[i].Demolitionstructuredetails.Count > 0 ? Convert.ToDateTime(result[i].Demolitionstructuredetails.Select(x => x.StartOfDemolitionActionDate).FirstOrDefault()).ToString("dd-MM.yyyy") : "_",
+                        EndOfDemolitionAction = result[i].Demolitionstructuredetails.Count > 0 ? Convert.ToDateTime(result[i].Demolitionstructuredetails.Select(x => x.EndOfDemolitionActionDate).FirstOrDefault()).ToString("dd-MM.yyyy") : "_",
+                        DemolitionStatus = result[i].Demolitionstructuredetails.Count > 0 ? result[i].Demolitionstructuredetails.Select(x=>x.DemolitionStatus).FirstOrDefault():"_",
+                        DemolitionRemarks_If_Any = result[i].Demolitionstructuredetails.Count>0 ? result[i].Demolitionstructuredetails.Select(x=>x.DemolitionRemarks).FirstOrDefault():"_",
+                        Remarks_If_Any = result[i].Demolitionstructuredetails.Count > 0 ? result[i].Demolitionstructuredetails.Select(x=>x.Remarks).FirstOrDefault():"_"
+
+                    });
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        }
 
         public async Task<IActionResult> ViewDemolitionReport(int Id)
         {

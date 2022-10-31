@@ -52,10 +52,10 @@ namespace EncroachmentDemolition.Controllers
         }
 
 
-        [AuthorizeContext(ViewAction.Download)]
-        public async Task<IActionResult> Download()
+       // [AuthorizeContext(ViewAction.Download)]
+        public async Task<IActionResult> GetAllWatchWardPeriodReportList([FromBody] WatchAndWardPeriodReportSearchDto model)
         {
-            var result = await _watchandwardService.GetAllWatchandward();
+            var result = await _watchandwardService.GetAllWatchWardPeriodReport(model);
             List<WatchWardListDto> data = new List<WatchWardListDto>();
             if (result != null)
             {
@@ -71,7 +71,7 @@ namespace EncroachmentDemolition.Controllers
                         LandMark= result[i].Landmark,
                         Encroachment = result[i].Encroachment.ToString() == "1" ? "Yes" : "No",
                         StatusOnGround = result[i].StatusOnGround.ToString(),
-                        Remarks = result[i].Remarks,                        
+                       // Remarks = result[i].Remarks,                        
                         CreatedDate = Convert.ToDateTime(result[i].CreatedDate).ToString("dd-MMM-yyyy") == null ? "" : Convert.ToDateTime(result[i].CreatedDate).ToString("dd-MMM-yyyy"),
 
                         //IsActive = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
@@ -80,7 +80,15 @@ namespace EncroachmentDemolition.Controllers
             }
 
             var memory = ExcelHelper.CreateExcel(data);
-            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            TempData["file"]  = memory;
+            return Ok();
+            //return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        }
+        [HttpGet]
+        public virtual ActionResult download()
+        {
+            byte[] data = TempData["file"] as byte[];
+            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
     }
 }
