@@ -16,8 +16,10 @@ namespace Libraries.Repository.IEntityRepository
 
         Task<List<Noticetodamagepayee>> GetFileNoList();
         Task<List<Noticetodamagepayee>> GetAllNoticetoDamagePayee();
+        Task<List<Noticetodamagepayee>> GetAllNoticeGenerationReportList(NoticeGenerationReportSearchDto model);
+        Task<List<Noticetodamagepayee>> GetAllNoticetoDamagePayeeList(NoticetodamagepayeeSearchDto model);
 
-  
+
 
         decimal GetRebateCharges();
     }

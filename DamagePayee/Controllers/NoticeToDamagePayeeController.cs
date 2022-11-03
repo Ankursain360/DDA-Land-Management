@@ -157,9 +157,9 @@ namespace DamagePayee.Controllers
         }
 
 
-        public async Task<IActionResult> NoticeToDamagePayeeList()
+        public async Task<IActionResult> NoticeToDamagePayeeList([FromBody] NoticetodamagepayeeSearchDto model)
         {
-            var result = await _noticeToDamagePayeeService.GetAllNoticetoDamagePayee();
+            var result = await _noticeToDamagePayeeService.GetAllNoticetoDamagePayeeList(model);
            List<NoticeToDamagePayeeListDto> data = new List<NoticeToDamagePayeeListDto>();
             if (result != null)
             {
@@ -180,15 +180,17 @@ namespace DamagePayee.Controllers
             }
 
             var memory = ExcelHelper.CreateExcel(data);
-            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            TempData["file"] = memory;
+            //return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            return Ok();
 
         }
-
-
-
-
-
-
+        [HttpGet]
+        public virtual ActionResult download()
+        {
+            byte[] data = TempData["file"] as byte[];
+            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        }
 
     }
 }

@@ -12,6 +12,9 @@ using Notification.Constants;
 using Notification.OptionEnums;
 using DamagePayee.Filters;
 using Core.Enum;
+using Dto.Master;
+using Utility.Helper;
+
 namespace DamagePayee.Controllers
 {
     public class DefaulterListingReportController : BaseController
@@ -46,6 +49,35 @@ namespace DamagePayee.Controllers
                 return PartialView();
             }
         }
+        public async Task<IActionResult> GetDefaultListingReportList([FromBody] DefaulterListingReportSearchDto model)
+        {
+            var result = await _demandLetterService.GetDefaultListingReportDataList(model);
+            List<DefaulterListingReportListDto> data = new List<DefaulterListingReportListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new DefaulterListingReportListDto()
+                    {
+                        Locality = result[i].Locality ==null?"":result[i].Locality.Name,
+                        FileNo = result[i].FileNo,
+                        DemandNo = result[i].DemandNo,
+                        DueAmount = result[i].DepositDue,
+                        PaymentDueDate = result[i].UptoDate
+                    });
 
+                }
+
+            }
+            var memory = ExcelHelper.CreateExcel(data);
+            TempData["file"] = memory;
+            return Ok();
+        }
+        [HttpGet]
+        public virtual ActionResult download()
+        {
+            byte[] data = TempData["file"] as byte[];
+            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        }
     }
 }

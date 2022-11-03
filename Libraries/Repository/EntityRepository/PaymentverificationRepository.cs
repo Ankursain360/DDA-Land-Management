@@ -161,12 +161,31 @@ namespace Libraries.Repository.EntityRepository
             return data;
 
         }
-
+        public async Task<List<Paymentverification>> GetAllPaymentVerificationList(ManualPaymentSearchDto model)
+        {
+            var data = await _dbContext.Paymentverification
+                  .Where(x => x.IsVerified == 0
+                  && (string.IsNullOrEmpty(model.fileno) || x.FileNo.Contains(model.fileno))
+                   && (x.PayeeName == (model.payeeName == "" ? x.PayeeName : model.payeeName))).ToListAsync();
+            return data;
+        }
         public async Task<List<Paymentverification>> GetAllPaymentList()
         {
             return await _dbContext.Paymentverification
            .Where(x => x.IsActive == 1)
            .ToListAsync();
+        }
+        public async Task<List<Paymentverification>> GetPaymentVerificationDoneByAccList(PaymentVerificationAccountSection model)
+        {
+            var data = await _dbContext.Paymentverification
+
+
+                 .Include(x => x.User)
+                           // .Where(a => a.IsVerified == 0)
+                           .Where(x =>
+                           (model.IsVerified == 1 ? (x.VerifiedOn >= model.fromdate && x.VerifiedOn <= model.todate) : (x.CreatedDate >= model.fromdate && x.VerifiedOn <= model.todate)) 
+                           &&(x.IsVerified == model.IsVerified)).ToListAsync();
+            return data;
         }
         public async Task<List<Locality>> GetAllLocality()
         {

@@ -29,10 +29,10 @@ namespace EncroachmentDemolition.Controllers
         [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
-            Watchandward model = new Watchandward();
-
-
-            model.LocalityList = await _watchandwardService.GetAllLocality();
+            WatchWardListDto model = new WatchWardListDto(); 
+            ViewBag.LocalityList = await _watchandwardService.GetAllLocality();
+            model.FromDate = DateTime.Now.AddDays(-30);
+            model.Todate = DateTime.Now;
             return View(model);
         }
 

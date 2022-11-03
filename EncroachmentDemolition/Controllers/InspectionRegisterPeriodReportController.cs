@@ -47,12 +47,22 @@ namespace EncroachmentDemolition.Controllers
 
         [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
-        {
+        {            
             EncroachmentRegisteration model = new EncroachmentRegisteration();
             model.DepartmentList = await _encroachmentregistrationService.GetAllDepartment();
             model.ZoneList = await _encroachmentregistrationService.GetAllZone(model.DepartmentId);
             model.DivisionList = await _encroachmentregistrationService.GetAllDivisionList(model.ZoneId);
             model.LocalityList = await _encroachmentregistrationService.GetAllLocalityList(model.DivisionId);
+            model.FromDate = DateTime.Now.AddDays(-30);
+            model.ToDate = DateTime.Now;
+            //EncroachmentRegisteration encroachment
+            //EncroachmentRegisterListDto model = new EncroachmentRegisterListDto();
+            //ViewBag.Department = await _encroachmentregistrationService.GetAllDepartment();
+            //ViewBag.Zone = await _encroachmentregistrationService.GetAllZone(encroachment.DepartmentId);
+            //ViewBag.Division = await _encroachmentregistrationService.GetAllDivisionList(encroachment.ZoneId);
+            //ViewBag.Loaclity = await _encroachmentregistrationService.GetAllLocalityList(encroachment.DivisionId);
+            //model.Fromdate = DateTime.Now.AddDays(-30);
+            //model.Todate = DateTime.Now;
             return View(model);
         }
         [HttpPost]

@@ -40,6 +40,14 @@ namespace Service.ApplicationService
         {
             return await _paymentverificationRepository.GetAllPaymentList();
         }
+        public async Task<List<Paymentverification>> GetPaymentVerificationDoneByAccList(PaymentVerificationAccountSection model)
+        {
+            return await _paymentverificationRepository.GetPaymentVerificationDoneByAccList(model);
+        }
+        public async Task<List<Paymentverification>> GetAllPaymentVerificationList(ManualPaymentSearchDto model)
+        {
+            return await _paymentverificationRepository.GetAllPaymentVerificationList(model);
+        }
         public async Task<PagedResult<Paymentverification>> GetPagedPaymentListUnverified(PaymentverificationSearchDto model)
         {
             return await _paymentverificationRepository.GetPagedPaymentListUnverified(model);

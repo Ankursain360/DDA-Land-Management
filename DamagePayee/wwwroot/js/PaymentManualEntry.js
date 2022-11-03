@@ -7,6 +7,20 @@ var sortOrder = 1;//default Ascending
 $(document).ready(function () {
     GetDetails(currentPageNumber, currentPageSize, sortOrder);
 });
+function GetExcel(pageNumber, pageSize, order) {
+    debugger;
+    var param = GetSearchParam(pageNumber, pageSize, order);
+    HttpPost(`/PaymentManualEntry/PaymentManaulEntryList`, 'html', param, function (response) {
+        var a = document.createElement("a");
+        a.target = '_blank';
+        a.href = '/PaymentManualEntry/download';
+        a.click();
+    });
+}
+
+$("#btndownload").click(function () {
+    GetExcel(currentPageNumber, currentPageSize, sortOrder);
+});
 
 $("#btnGenerate").click(function () {
     GetDetails(currentPageNumber, currentPageSize, sortOrder);

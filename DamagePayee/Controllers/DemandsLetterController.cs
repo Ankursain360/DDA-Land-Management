@@ -174,9 +174,9 @@ namespace DamagePayee.Controllers
 
 
 
-        public async Task<IActionResult> DemandsLetterList()
+        public async Task<IActionResult> DemandsLetterList([FromBody] DemandletterSearchDto model)
         {
-            var result = await _demandLetterService.GetAllDemandletter();
+            var result = await _demandLetterService.GetAllDemandletterList(model);
             List<DemandLetterListDto> data = new List<DemandLetterListDto>();
             if (result != null)
             {
@@ -199,10 +199,17 @@ namespace DamagePayee.Controllers
             }
 
             var memory = ExcelHelper.CreateExcel(data);
-            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            TempData["file"] = memory;
+            return Ok();
 
         }
 
+        [HttpGet]
+        public virtual ActionResult download()
+        {
+            byte[] data = TempData["file"] as byte[];
+            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        }
         [HttpPost]
         public async Task<JsonResult> AutoComplete(string prefix)
         {

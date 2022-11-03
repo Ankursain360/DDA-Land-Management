@@ -31,7 +31,10 @@ namespace Service.ApplicationService
             List<Noticetodamagepayee> DamageList = await _noticeToDamagePayeeRepository.GetAllNoticetoDamagePayee();
             return DamageList;
         }
-
+        public async Task<List<Noticetodamagepayee>> GetAllNoticetoDamagePayeeList(NoticetodamagepayeeSearchDto model)
+        {
+            return await _noticeToDamagePayeeRepository.GetAllNoticetoDamagePayeeList(model);
+        }
         public async Task<List<Noticetodamagepayee>> GetsingleData(int id)
         {
 
@@ -55,6 +58,10 @@ namespace Service.ApplicationService
         public async Task<PagedResult<Noticetodamagepayee>> GetPagedNoticeGenerationReport(NoticeGenerationReportSearchDto model)
         {
             return await _noticeToDamagePayeeRepository.GetPagedNoticeGenerationReport(model);
+        }
+        public async Task<List<Noticetodamagepayee>> GetAllNoticeGenerationReportList(NoticeGenerationReportSearchDto model)
+        {
+            return await _noticeToDamagePayeeRepository.GetAllNoticeGenerationReportList(model);
         }
         public async Task<PagedResult<Noticetodamagepayee>> GetPagedNoticetodamagepayee(NoticetodamagepayeeSearchDto model)
         {

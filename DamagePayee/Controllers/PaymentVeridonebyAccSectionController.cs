@@ -66,9 +66,9 @@ namespace DamagePayee.Controllers
 
 
         [AuthorizeContext(ViewAction.Download)]
-        public async Task<IActionResult> PaymentVerificationdetailsList()
+        public async Task<IActionResult> PaymentVerificationdetailsList([FromBody] PaymentVerificationAccountSection model)
         {
-            var result = await _paymentverificationService.GetAllPaymentList();
+            var result = await _paymentverificationService.GetPaymentVerificationDoneByAccList(model);
             List<PaymentVerificationListDto> data = new List<PaymentVerificationListDto>();
             if (result != null)
             {
@@ -102,8 +102,15 @@ namespace DamagePayee.Controllers
             }
 
             var memory = ExcelHelper.CreateExcel(data);
-            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            TempData["file"] = memory;
+            return Ok();
+        }
 
+        [HttpGet]
+        public virtual ActionResult download()
+        {
+            byte[] data = TempData["file"] as byte[];
+            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
     }
 }

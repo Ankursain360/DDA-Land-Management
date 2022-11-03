@@ -32,6 +32,14 @@ namespace Service.ApplicationService
             List<Demandletters> DamageList = await _demandLetterRepository.GetAllDemandletter();
             return DamageList;
         }
+        public async Task<List<Demandletters>> GetPenaltyImpositionReportList(PenaltyImpositionReportSearchDto model)
+        {
+            return await _demandLetterRepository.GetPenaltyImpositionReportList(model);
+        }
+        public async Task<List<Demandletters>> GetAllDemandletterList(DemandletterSearchDto model)
+        {
+            return await _demandLetterRepository.GetAllDemandletterList(model);
+        }
 
         public async Task<PagedResult<Demandletters>> GetPagedDemandletter(DemandletterSearchDto model)
         {
@@ -110,11 +118,20 @@ namespace Service.ApplicationService
         {
             return await _demandLetterRepository.GetDemandLetterReportList(report);
         }
+        public async Task<List<Demandletters>> GetDefaultListingReportDataList(DefaulterListingReportSearchDto model)
+        {
+            return await _demandLetterRepository.GetDefaultListingReportDataList(model);
+
+        }
 
         /*-----------------Relief Report Start------------------*/
         public async Task<PagedResult<Demandletters>> GetPagedReliefReport(ReliefReportSearchDto model)
         {
             return await _demandLetterRepository.GetPagedReliefReport(model);
+        }
+        public async Task<List<Demandletters>> GetAllReliefReportList(ReliefReportSearchDto model)
+        {
+            return await _demandLetterRepository.GetAllReliefReportList(model);
         }
 
         public async Task<List<Demandletters>> BindFileNoList()
@@ -152,6 +169,10 @@ namespace Service.ApplicationService
         public async Task<PagedResult<Demandletters>> GetPagedImpositionReportOfCharges(ImpositionOfChargesSearchDto model)
         {
             return await _demandLetterRepository.GetPagedImpositionReportOfCharges(model);
+        }
+        public async Task<List<Demandletters>> GetImpositionReportOfChargesList(ImpositionOfChargesSearchDto model)
+        {
+            return await _demandLetterRepository.GetImpositionReportOfChargesList(model);
         }
         /*-----------------Demand Collection Ledger Report Start------------------*/
         public async Task<PagedResult<Demandletters>> GetPagedDemandCollectionLedgerReport(DemandCollectionLedgerSearchDto model)

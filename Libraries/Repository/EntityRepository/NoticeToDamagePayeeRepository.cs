@@ -121,12 +121,32 @@ namespace Libraries.Repository.EntityRepository
             }
 
         }
-      
+        public async Task<List<Noticetodamagepayee>> GetAllNoticeGenerationReportList(NoticeGenerationReportSearchDto model)
+        {
+
+            var data = await _dbContext.Noticetodamagepayee
+                             .Where(x => x.Id == (model.FileNo == 0 ? x.Id : model.FileNo)
+                             && x.CreatedDate.Date >= model.FromDate.Date
+                             && x.CreatedDate.Date <= model.ToDate.Date).ToListAsync();
+            return data;
+
+        }
 
 
         public async Task<List<Noticetodamagepayee>> GetAllNoticetoDamagePayee()
         {
             return await _dbContext.Noticetodamagepayee.Where(x => x.IsActive == 1).ToListAsync();
+        }
+        public async Task<List<Noticetodamagepayee>> GetAllNoticetoDamagePayeeList(NoticetodamagepayeeSearchDto model)
+        { 
+            var data = await _dbContext.Noticetodamagepayee
+                 .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                   && (string.IsNullOrEmpty(model.address) || x.Address.Contains(model.address))
+                    && (string.IsNullOrEmpty(model.fileno) || x.FileNo.Contains(model.fileno))
+                        && (string.IsNullOrEmpty(model.area) || x.Area.Contains(model.area))
+                    && (x.IsActive == 1)
+                  ).ToListAsync();
+            return data;
         }
         public async Task<PagedResult<Noticetodamagepayee>> GetPagedNoticetodamagepayee(NoticetodamagepayeeSearchDto model)
         {

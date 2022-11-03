@@ -9,6 +9,7 @@ namespace Libraries.Service.IApplicationService
     public interface IDoortodoorsurveyService
     {
         Task<List<Doortodoorsurvey>> GetDoortodoorsurvey();
+        Task<List<Doortodoorsurvey>> GetDoortodoorsurveyList(DoortodoorsurveySearchDto model);
         Task<List<Presentuse>> GetAllPresentuse();
         Task<List<Areaunit>> GetAllAreaunit();
         Task<List<Floors>> GetAllFloor();

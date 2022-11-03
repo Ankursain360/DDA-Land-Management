@@ -8,7 +8,8 @@ namespace Dto.Master
     {
         public int Id { get; set; }
         public string Department { get; set; }
-
+        public DateTime FromDate { get; set; }
+        public DateTime ToDate { get; set; }
         public string Zone { get; set; }
         public string Division { get; set; }
         public string VillageName { get; set; }

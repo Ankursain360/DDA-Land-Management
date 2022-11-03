@@ -15,6 +15,8 @@ namespace Libraries.Service.IApplicationService
     {
 
         Task<List<Paymentverification>> GetAllPaymentList();
+        Task<List<Paymentverification>> GetPaymentVerificationDoneByAccList(PaymentVerificationAccountSection model);
+        Task<List<Paymentverification>> GetAllPaymentVerificationList(ManualPaymentSearchDto model);
         Task<PagedResult<Paymentverification>> GetPagedPaymentListUnverified(PaymentverificationSearchDto model);
         Task<PagedResult<Paymentverification>> GetPagedPaymentListVerified(PaymentverificationSearchDto model);
         Task<bool> Verify(int id,int userid);

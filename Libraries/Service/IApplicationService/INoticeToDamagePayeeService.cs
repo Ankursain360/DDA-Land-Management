@@ -11,7 +11,7 @@ namespace Libraries.Service.IApplicationService
     {
 
         Task<List<Noticetodamagepayee>> GetAllNoticetoDamagePayee();
-
+        Task<List<Noticetodamagepayee>> GetAllNoticetoDamagePayeeList(NoticetodamagepayeeSearchDto model);
         Task<bool> Create(Noticetodamagepayee noticetodamagepayee);
 
         Task<List<Noticetodamagepayee>> GetsingleData(int id);
@@ -24,6 +24,7 @@ namespace Libraries.Service.IApplicationService
     
         decimal GetRebateCharges();
         Task<PagedResult<Noticetodamagepayee>> GetPagedNoticeGenerationReport(NoticeGenerationReportSearchDto model);
+        Task<List<Noticetodamagepayee>> GetAllNoticeGenerationReportList(NoticeGenerationReportSearchDto model);
 
 
 

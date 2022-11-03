@@ -389,9 +389,9 @@ namespace DamagePayee.Controllers
 
 
 
-        public async Task<IActionResult> DoorToDoorSurveyList()
+        public async Task<IActionResult> DoorToDoorSurveyList([FromBody] DoortodoorsurveySearchDto model)
         {
-            var result = await _doortodoorsurveyService.GetDoortodoorsurvey();
+            var result = await _doortodoorsurveyService.GetDoortodoorsurveyList(model);
             List<DoorToDoorSurveyListDto> data = new List<DoorToDoorSurveyListDto>();
             if (result != null)
             {
@@ -428,10 +428,16 @@ namespace DamagePayee.Controllers
             }
 
             var memory = ExcelHelper.CreateExcel(data);
-            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            TempData["file"] = memory;
+            return Ok();
 
         }
-
+        [HttpGet]
+        public virtual ActionResult download()
+        {
+            byte[] data = TempData["file"] as byte[];
+            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        }
 
 
 

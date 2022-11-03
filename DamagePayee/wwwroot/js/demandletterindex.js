@@ -10,6 +10,21 @@ $("#btnSearch").click(function () {
     GetDamagePayeeRegister(currentPageNumber, currentPageSize, sortOrder);
 });
 
+function GetExcel(pageNumber, pageSize) {
+    var param = GetSearchParam(pageNumber, pageSize);
+    HttpPost(`/DemandsLetter/DemandsLetterList`, 'html', param, function (response) {
+        var a = document.createElement("a");
+        a.target = '_blank';
+        a.href = '/DemandsLetter/download';
+        a.click();
+    });
+}
+
+$("#Download").click(function () {
+    GetExcel(currentPageNumber, currentPageSize, sortOrder);
+});
+
+
 $("#btnReset").click(function () {
     $('#txtLocality').val('');
     $('#txtDemandNo').val('');

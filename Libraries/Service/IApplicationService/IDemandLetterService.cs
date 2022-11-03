@@ -14,8 +14,11 @@ namespace Libraries.Service.IApplicationService
         Task<PagedResult<Demandletters>> GetPagedDemandletter(DemandletterSearchDto model);
         Task<PagedResult<Demandletters>> GetPagedDuplicateDemandletter(DuplicateDemandLetterSearchDto model);
         Task<List<Demandletters>> GetAllDemandletter();
+        Task<List<Demandletters>> GetPenaltyImpositionReportList(PenaltyImpositionReportSearchDto model);
+        Task<List<Demandletters>> GetAllDemandletterList(DemandletterSearchDto model);
         Task<PagedResult<Demandletters>> GetDefaultListingReportData(DefaulterListingReportSearchDto defaulterListingReportSearchDto);
         Task<List<Demandletters>> GetDemandLetterReportList(DownloadDemandLetterReportDto report);
+        Task<List<Demandletters>> GetDefaultListingReportDataList(DefaulterListingReportSearchDto model);
         Task<bool> Update(int id, Demandletters demandletter);
         Task<bool> Create(Demandletters demandletter);
         Task <Demandletters> FetchSingleResult(int id);
@@ -26,6 +29,7 @@ namespace Libraries.Service.IApplicationService
 
         /*-----------------Relief Report Start------------------*/
         Task<PagedResult<Demandletters>> GetPagedReliefReport(ReliefReportSearchDto model);
+        Task<List<Demandletters>> GetAllReliefReportList(ReliefReportSearchDto model);
         Task<List<Demandletters>> BindFileNoList();
         Task<List<Locality>> BindLoclityList();
 
@@ -36,6 +40,7 @@ namespace Libraries.Service.IApplicationService
         Task<List<Demandletters>> GetFileNoList();
         Task<PagedResult<Demandletters>> GetPagedPenaltyImpositionReport(PenaltyImpositionReportSearchDto model);
         Task<PagedResult<Demandletters>> GetPagedImpositionReportOfCharges(ImpositionOfChargesSearchDto model);
+        Task<List<Demandletters>> GetImpositionReportOfChargesList(ImpositionOfChargesSearchDto model);
 
         /*-----------------Demand Collection Ledger Report Start------------------*/
         Task<PagedResult<Demandletters>> GetPagedDemandCollectionLedgerReport(DemandCollectionLedgerSearchDto model);

@@ -9,6 +9,20 @@ $("#btnSearch1").click(function () {
     GetDamagePayeeRegister(currentPageNumber, currentPageSize, sortOrder);
 });
 
+function GetExcel(pageNumber, pageSize, order) {
+    debugger;
+    var param = GetSearchParam(pageNumber, pageSize, order);
+    HttpPost(`/DamagePayeeRegister/DamagePayeeRegisterList`, 'html', param, function (response) {
+        var a = document.createElement("a");
+        a.target = '_blank';
+        a.href = '/DamagePayeeRegister/download';
+        a.click();
+    });
+}
+
+$("#Download").click(function () {
+    GetExcel(currentPageNumber, currentPageSize, sortOrder)
+})
 
 $("#btnAscending").click(function () {
     $("#btnDescending").removeClass("active");

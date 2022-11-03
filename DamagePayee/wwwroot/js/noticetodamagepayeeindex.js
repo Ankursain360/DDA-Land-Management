@@ -9,7 +9,18 @@ $(document).ready(function () {
 $("#btnSearch").click(function () {
     GetDamagePayeeRegister(currentPageNumber, currentPageSize, sortOrder);
 });
-
+function GetExcel(pageNumber, pageSize) {
+    var param = GetSearchParam(pageNumber, pageSize);
+    HttpPost(`/NoticeToDamagePayee/NoticeToDamagePayeeList`, 'html', param, function (response) {
+        var a = document.createElement("a");
+        a.target = '_blank';
+        a.href = '/NoticeToDamagePayee/download';
+        a.click();
+    })
+}
+$("#Download").click(function () {
+    GetExcel(currentPageNumber, currentPageSize, sortOrder);
+});
 $("#btnReset").click(function () {
     $('#txtFileNo').val('');
     $('#txtName').val('');

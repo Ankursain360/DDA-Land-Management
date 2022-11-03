@@ -18,6 +18,19 @@ $(document).ready(function () {
 
 });
 
+function GetExcel(pageNumber, pageSize) {
+    var param = GetSearchParam(pageNumber, pageSize);
+    HttpPost(`/ImpositionOfCharges/GetImpositionReportList`, 'html', param, function (response) {
+        var a = document.createElement("a");
+        a.target = '_blank';
+        a.href = '/ImpositionOfCharges/download';
+        a.click();
+    });
+}
+
+$("#btndownload").click(function () {
+    GetExcel(currentPageNumber, currentPageSize);
+});
 function GetDetails(pageNumber, pageSize) {
     var param = GetSearchParam(pageNumber, pageSize);
     var IsValid = ValidCheck();

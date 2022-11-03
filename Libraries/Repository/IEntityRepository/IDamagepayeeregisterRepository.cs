@@ -18,6 +18,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<Damagepayeeregister> GetPropertyPhotoPath(int Id);
 
         Task<List<Damagepayeeregister>> GetAllDamagepayeeregister();
+        Task<List<Damagepayeeregister>> GetAllDamagepayeeregisterList(DamagepayeeregistertempSearchDto model);
         Task<PagedResult<Damagepayeeregister>> GetPagedDamagepayeeregister(DamagepayeeregistertempSearchDto model);
 
         //********* rpt 1 Persolnal info of damage assesse ***********

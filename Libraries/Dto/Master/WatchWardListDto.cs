@@ -14,7 +14,9 @@ namespace Dto.Master
         public string PrimaryListNo { get; set; }
         public string Encroachment { get; set; }
         public string StatusOnGround{ get; set; }
-        public string CreatedDate { get; set; } 
-
+        public string CreatedDate { get; set; }
+        public DateTime FromDate { get; set; }
+        public DateTime Todate { get; set; }
+        public string LocalityId { get; set; }
     }
 }

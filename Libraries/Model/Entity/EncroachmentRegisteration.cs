@@ -175,6 +175,11 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public int ApprovalRoleId { get; set; }
 
+        [NotMapped]
+        public DateTime? FromDate { get; set; }
+        [NotMapped]
+        public DateTime? ToDate { get; set; }
+
 
     }
 }

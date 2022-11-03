@@ -29,10 +29,10 @@ namespace EncroachmentDemolition.Controllers
         [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
         {
-            EncroachmentRegisteration model = new EncroachmentRegisteration();
-
-
-            model.LocalityList = await _encroachmentRegisterationService.GetAllLocalityList();
+            EncroachmentReportListDto model = new EncroachmentReportListDto();
+            ViewBag.LocalityList = await _encroachmentRegisterationService.GetAllLocalityList();
+            model.FromDate = DateTime.Now.AddDays(-30);
+            model.ToDate = DateTime.Now;
             return View(model);
         }
 

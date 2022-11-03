@@ -1,0 +1,16 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Dto.Master
+{
+    public class ReliefReportListDto
+    {
+        public string FileNo { get; set; }
+        public string Locality { get; set; }
+        public string PropertyNo { get; set; }
+        public string DemandNumber { get; set; }
+        public string DemandAmount { get; set; }
+        public string Rebate_ReliefAmount { get; set; } 
+    }
+}

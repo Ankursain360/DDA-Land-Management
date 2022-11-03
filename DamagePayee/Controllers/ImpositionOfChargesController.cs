@@ -10,6 +10,9 @@ using Dto.Search;
 using Dto.Master;
 using DamagePayee.Filters;
 using Core.Enum;
+using System.Collections.Generic;
+using Utility.Helper;
+
 namespace DamagePayee.Controllers
 {
     public class ImpositionOfChargesController : BaseController
@@ -45,6 +48,39 @@ namespace DamagePayee.Controllers
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                 return PartialView();
             }
+        }
+
+        public async Task<IActionResult> GetImpositionReportList([FromBody] ImpositionOfChargesSearchDto model)
+        {
+            var result = await _demandLetterService.GetImpositionReportOfChargesList(model);
+            List<ImpositionOfChargesListDto> data = new List<ImpositionOfChargesListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new ImpositionOfChargesListDto()
+                    {
+                        Locality = result[i].Locality == null ?"":result[i].Locality.Name,
+                        FileNo = result[i].FileNo,
+                        PropertyNo = result[i].PropertyNo,
+                        DemandNumber = result[i].DemandNo,
+                        DemandAmount = result[i].DepositDue,
+                        Damagecharges = result[i].DamageCharges
+                    });
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            TempData["file"] = memory;            
+            return Ok();
+
+        }
+        [HttpGet]
+        public virtual ActionResult download()
+        {
+            byte[] data = TempData["file"] as byte[];
+            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+
         }
     }
 }

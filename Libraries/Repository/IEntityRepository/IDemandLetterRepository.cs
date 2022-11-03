@@ -13,12 +13,16 @@ namespace Libraries.Repository.IEntityRepository
         Task<PagedResult<Demandletters>> GetPagedDemandletter(DemandletterSearchDto model);
         Task<PagedResult<Demandletters>> GetPagedDuplicateDemandletter(DuplicateDemandLetterSearchDto model);
         Task<List<Demandletters>> GetAllDemandletter();
+        Task<List<Demandletters>> GetPenaltyImpositionReportList(PenaltyImpositionReportSearchDto model);
+        Task<List<Demandletters>> GetAllDemandletterList(DemandletterSearchDto model);
         Task<PagedResult<Demandletters>> GetDefaultListingReportData(DefaulterListingReportSearchDto defaulterListingReportSearchDto);
+        Task<List<Demandletters>> GetDefaultListingReportDataList(DefaulterListingReportSearchDto defaulterListingReportSearchDto);
         Task<List<Demandletters>> GetDemandLetterReportList(DownloadDemandLetterReportDto report);
         Task<List<Demandletters>> BindPropertyNoList();
         Task<PagedResult<Demandletters>> GetPagedDemandletterReport(DemandletterreportSearchDto model);
         /*-----------------Relief Report Start------------------*/
         Task<PagedResult<Demandletters>> GetPagedReliefReport(ReliefReportSearchDto model);
+        Task<List<Demandletters>> GetAllReliefReportList(ReliefReportSearchDto model);
         Task<List<Demandletters>> BindFileNoList();
         Task<List<Locality>> BindLoclityList();
         /*-----------------Relief Report End------------------*/
@@ -29,6 +33,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Demandletters>> GetFileNoList();
         Task<PagedResult<Demandletters>> GetPagedPenaltyImpositionReport(PenaltyImpositionReportSearchDto model);
         Task<PagedResult<Demandletters>> GetPagedImpositionReportOfCharges(ImpositionOfChargesSearchDto model);
+        Task<List<Demandletters>> GetImpositionReportOfChargesList(ImpositionOfChargesSearchDto model);
         Task<PagedResult<Demandletters>> GetPagedDemandCollectionLedgerReport(DemandCollectionLedgerSearchDto model);
         Task<List<DemandCollectionLedgerListDataDto>> GetPagedDemandCollectionLedgerReport1(DemandCollectionLedgerSearchDto model);
         Task<List<DuesVsPaidAmountDto>> GetDuesVsPaidAmountListDto(DuesVsPaidAmountSearchDto model);

@@ -1206,9 +1206,9 @@ namespace DamagePayee.Controllers
         }
       
 
-        public async Task<IActionResult> DamagePayeeRegisterList()
+        public async Task<IActionResult> DamagePayeeRegisterList([FromBody] DamagepayeeregistertempSearchDto model)
         {
-            var result = await _damagepayeeregisterService.GetAllDamagepayeeregister();
+            var result = await _damagepayeeregisterService.GetAllDamagepayeeregisterList(model);
             List<DamagePayeeRegisterListDto> data = new List<DamagePayeeRegisterListDto>();
             if (result != null)
             {
@@ -1224,13 +1224,21 @@ namespace DamagePayee.Controllers
                         IsDdadamagePayee = result[i].IsDdadamagePayee,
                         Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
                         ApprovalStatus = result[i].ApprovedStatusNavigation == null ? "" : result[i].ApprovedStatusNavigation.SentStatusName.ToString(),
-                    }); ;
+                    }); 
                 }
             }
 
             var memory = ExcelHelper.CreateExcel(data);
-            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            TempData["file"] = memory;
+            return Ok();
+            //return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
 
+        }
+        [HttpGet]
+        public virtual ActionResult download()
+        {
+            byte[] data = TempData["file"] as byte[];
+            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"); 
         }
         //view file
         public FileResult ViewDocument(string path)

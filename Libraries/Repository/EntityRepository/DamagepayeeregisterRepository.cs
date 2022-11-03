@@ -116,11 +116,23 @@ namespace Libraries.Repository.EntityRepository
         public async Task<List<Damagepayeeregister>> GetAllDamagepayeeregister()
         {
             return await _dbContext.Damagepayeeregister
-                   .Include(x => x.ApprovedStatusNavigation)
-           .Include(x => x.Locality)
-           .Include(x => x.District)
-           .ToListAsync();
+                                                   .Include(x => x.ApprovedStatusNavigation)
+                                                   .Include(x => x.Locality)
+                                                   .Include(x => x.District)
+                                                   .ToListAsync();
         }
+        public async Task<List<Damagepayeeregister>> GetAllDamagepayeeregisterList(DamagepayeeregistertempSearchDto model) 
+        {
+            var data = await _dbContext.Damagepayeeregister
+                                        .Include(x => x.Locality)
+                                        .Include(x => x.District)
+                                        .Include(x => x.ApprovedStatusNavigation)
+                                        .Where(x => x.LocalityId ==(model.locality == 0 ?x.LocalityId:model.locality )
+                                         && (string.IsNullOrEmpty(model.fileno) || x.FileNo.Contains(model.fileno))
+                                         && (string.IsNullOrEmpty(model.propertyno) || x.PropertyNo.Contains(model.propertyno))
+                                        ).ToListAsync(); 
+            return data;
+         }                               
 
         public async Task<List<Locality>> GetLocalityList()
         {

@@ -27,6 +27,21 @@ var sortOrder = 1;//default Ascending
   
 //});
 
+function GetExcel(pageNumber, pageSize) {
+    debugger;
+    var param = GetSearchParam(pageNumber, pageSize);
+    HttpPost(`/PaymentVeridonebyAccSection/PaymentVerificationdetailsList`, 'html', param, function (response) {
+        var a = document.createElement("a");
+        a.target = '_blank';
+        a.href = '/PaymentVeridonebyAccSection/download';
+        a.click();
+    });
+}
+
+$("#btndownload").click(function () {
+    GetExcel(currentPageNumber, currentPageSize);
+});
+
 function GetPaymentVerification(pageNumber, pageSize) {
     var param = GetSearchParam(pageNumber, pageSize);
     HttpPost(`/PaymentVeridonebyAccSection/ListPayemntVerification`, 'html', param, function (response) {

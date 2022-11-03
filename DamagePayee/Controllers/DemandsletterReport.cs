@@ -53,7 +53,7 @@ namespace DamagePayee.Controllers
             }
         }
         // [AuthorizeContext(ViewAction.Download)]
-        [HttpPost]
+        //[HttpPost]
         public async Task<IActionResult> DemandLetterReportList([FromBody] DownloadDemandLetterReportDto report)
         {
             var result = await _demandLetterService.GetDemandLetterReportList(report);
@@ -64,7 +64,7 @@ namespace DamagePayee.Controllers
                 {
                     data.Add(new DemandLetterReportListDto()
                     {
-                  
+
                         Id = i + 1,
                         Loaclity = result[i].Locality.Name == null ? "" : result[i].Locality.Name,
                         FileNo = result[i].FileNo == null ? "" : result[i].FileNo,
@@ -75,14 +75,21 @@ namespace DamagePayee.Controllers
                         DemandPeriodFromDate = Convert.ToDateTime(result[i].DemandPeriodFromDate).ToString("dd-MMM-yyyy") == null ? "" : Convert.ToDateTime(result[i].DemandPeriodFromDate).ToString("dd-MMM-yyyy"),
                         DemandPeriodToDate = Convert.ToDateTime(result[i].DemandPeriodToDate).ToString("dd-MMM-yyyy") == null ? "" : Convert.ToDateTime(result[i].DemandPeriodToDate).ToString("dd-MMM-yyyy"),
                         DemandAmount = result[i].DepositDue,
-                       
-                    }); ;
+
+                    });
                 }
             }
 
             var memory = ExcelHelper.CreateExcel(data);
-            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            TempData["file"] = memory;
+            return Ok();
         }
-
+        [HttpGet]
+        public virtual ActionResult download()
+        {
+            byte[] data = TempData["file"] as byte[];
+            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        }
+    
     }
 }

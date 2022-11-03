@@ -3,6 +3,14 @@ var currentPageSize = 5;
 var sortby = 1;//default Ascending 
 
 $(document).ready(function () {
+    debugger;
+    //const d = new Date();
+    //var day = d.getDate();
+    //var month = d.getMonth();
+    //var year = d.getFullYear();
+    //var date = day + "-" + month + "-" + year;
+    //$('#txtFromDate').val(date);
+    //$('#txtToDate').val(date);
     $("#btnGenerate").click(function () {
         var result = ValidateForm();
         var departmentid = $('#DepartmentId option:selected').val();

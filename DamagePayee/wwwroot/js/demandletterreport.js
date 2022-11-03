@@ -14,6 +14,20 @@ $(document).ready(function () {
     });
 
 });
+function GetExcel(pageNumber, pageSize) {
+    debugger;
+    var param = GetSearchParam(pageNumber, pageSize);
+    HttpPost(`/DemandsletterReport/DemandLetterReportList`, 'html', param, function (response) {
+        var a = document.createElement("a");
+        a.target = '_blank';
+        a.href = '/DemandsletterReport/download';
+        a.click();
+    });
+
+}
+$("#btnDownload").click(function () {
+    GetExcel(currentPageNumber, currentPageSize);
+});
 
 $("#btnReset").click(function () {
     $('#FileNo').val('');

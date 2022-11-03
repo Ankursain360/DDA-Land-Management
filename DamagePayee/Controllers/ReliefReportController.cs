@@ -10,6 +10,9 @@ using Dto.Search;
 using Dto.Master;
 using DamagePayee.Filters;
 using Core.Enum;
+using System.Collections.Generic;
+using Utility.Helper;
+
 namespace DamagePayee.Controllers
 {
     public class ReliefReportController : BaseController
@@ -46,5 +49,37 @@ namespace DamagePayee.Controllers
                 return PartialView();
             }
         }
+        public async Task<IActionResult> GetReliefReportList([FromBody] ReliefReportSearchDto model)
+        {
+            var result = await _demandLetterService.GetAllReliefReportList(model);
+            List<ReliefReportListDto> data = new List<ReliefReportListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new ReliefReportListDto()
+                    {
+                        Locality = result[i].Locality == null ? "" : result[i].Locality.Name,
+                        FileNo = result[i].FileNo,
+                        PropertyNo = result[i].PropertyNo,
+                        DemandNumber = result[i].DemandNo,
+                        DemandAmount = result[i].DepositDue,
+                        Rebate_ReliefAmount = result[i].ReliefAmount.ToString()
+                    });
+
+                }
+
+            }
+            var memory = ExcelHelper.CreateExcel(data);
+            TempData["file"] = memory;
+            return Ok();
+        }
+        [HttpGet]
+        public virtual ActionResult download()
+        {
+            byte[] data = TempData["file"] as byte[];
+            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        }
+    
     }
 }

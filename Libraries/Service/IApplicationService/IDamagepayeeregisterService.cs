@@ -13,7 +13,7 @@ namespace Libraries.Service.IApplicationService
      public interface IDamagepayeeregisterService : IEntityService<Damagepayeeregister>
     {
         Task<List<Damagepayeeregister>> GetAllDamagepayeeregister();
-      
+        Task<List<Damagepayeeregister>> GetAllDamagepayeeregisterList(DamagepayeeregistertempSearchDto model);
         Task<bool> Update(int id, Damagepayeeregister damagepayeeregister);
         Task<bool> UpdateUserId(int id, int UserId);
         Task<bool> Create(Damagepayeeregister damagepayeeregister);

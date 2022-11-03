@@ -57,9 +57,9 @@ namespace DamagePayee.Controllers
 
 
 
-        public async Task<IActionResult> PenaltyImpositionReportList()
+        public async Task<IActionResult> PenaltyImpositionReportList([FromBody] PenaltyImpositionReportSearchDto report)
         {
-            var result = await _demandLetterService.GetAllDemandletter();
+            var result = await _demandLetterService.GetPenaltyImpositionReportList(report);
             List<PenalityImpositionReportListDto> data = new List<PenalityImpositionReportListDto>();
             if (result != null)
             {
@@ -69,27 +69,28 @@ namespace DamagePayee.Controllers
                     {
                         Id = result[i].Id,
                         Locality = result[i].Locality == null ? "" : result[i].Locality.Name.ToString(),
-                      
-                     
                         FileNo = result[i].FileNo,
                         PropertyNumber = result[i].PropertyNo,
                         PayeeName = result[i].Name,
                         DemandNo = result[i].DemandNo,
-                        PenaltyInterestCharges = result[i].Penalty.ToString(),
+                        PenaltyInterestCharges = result[i].Penalty.ToString()
                        
-                    }); ;
+                    });
                 }
             }
 
             var memory = ExcelHelper.CreateExcel(data);
-            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            TempData["file"] = memory;
+            //return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            return Ok();
 
         }
-
-
-
-
-
+        [HttpGet]
+        public virtual ActionResult download()
+        {
+            byte[] data = TempData["file"] as byte[];
+            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        }
 
     }
 }

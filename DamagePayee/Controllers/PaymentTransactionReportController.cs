@@ -10,14 +10,17 @@ using Dto.Search;
 using Dto.Master;
 using DamagePayee.Filters;
 using Core.Enum;
+using System.Collections.Generic;
+using Utility.Helper;
+
 namespace DamagePayee.Controllers
-{ 
-    public class PaymentTransactionReportController : Controller
 {
+    public class PaymentTransactionReportController : Controller
+    {
         private readonly IPaymentverificationService _paymentverificationService;
 
         public PaymentTransactionReportController(IPaymentverificationService paymentverificationService)
-       {
+        {
             _paymentverificationService = paymentverificationService;
         }
 
@@ -49,6 +52,42 @@ namespace DamagePayee.Controllers
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                 return PartialView();
             }
+        }
+        public async Task<IActionResult> GetDetailsList([FromBody] PaymentTransactionReportSearchDto model)
+        {
+            var result = await _paymentverificationService.GetPagedPaymentTransactionReportData(model);
+            List<PaymentTransactionReportListDto> data = new List<PaymentTransactionReportListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new PaymentTransactionReportListDto()
+                    {
+                        FileNo = result[i].FileNo,
+                        Locality = result[i].LocalityName,
+                        PayeeName = result[i].PayeeName,
+                        PropertyNo = result[i].PropertyNo,
+                        Amountpaid = result[i].AmountPaid.ToString(),
+                        TransactionId =result[i].TransactionId,
+                        BankReference =result[i].BankReference,
+                        BankName = result[i].BankName,
+                        PaymentDate = result[i].CreatedDate,
+                        PaymentMode = result[i].PaymentMode
+                    });
+                }
+            }
+
+
+            var memory = ExcelHelper.CreateExcel(data);
+            TempData["file"] = memory;
+            return Ok();
+        }
+
+        [HttpGet]
+        public virtual ActionResult download()
+        {
+            byte[] data = TempData["file"] as byte[];
+            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
     }
 }

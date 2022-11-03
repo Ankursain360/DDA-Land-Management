@@ -1,4 +1,5 @@
 ﻿using Dto.Common;
+using System;
 
 namespace Dto.Master
 {
@@ -12,6 +13,8 @@ namespace Dto.Master
         public string Encroachment { get; set; }
         public string StatusOfLand { get; set; }
         public string Status { get; set; }
+        public DateTime Fromdate { get; set; }
+        public DateTime Todate { get; set; }
 
         public string Department { get; set; }
         public string Zone { get; set; }
@@ -21,7 +24,6 @@ namespace Dto.Master
 
         public string OfficerOnDuty { get; set; }
         public string Remarks { get; set; }
-
 
     }
 }

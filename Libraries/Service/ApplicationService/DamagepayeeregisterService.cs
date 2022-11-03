@@ -47,7 +47,10 @@ namespace Service.ApplicationService
             return await _damagepayeeregisterRepository.GetAllDamagepayeeregister();
         }
 
-
+        public async Task<List<Damagepayeeregister>> GetAllDamagepayeeregisterList(DamagepayeeregistertempSearchDto model)
+        {
+            return await _damagepayeeregisterRepository.GetAllDamagepayeeregisterList(model);
+        }
 
         public async Task<Damagepayeeregister> FetchSingleResult(int id)
         {

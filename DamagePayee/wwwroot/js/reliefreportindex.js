@@ -18,6 +18,20 @@ $(document).ready(function () {
     });
 
 });
+function GetExcel(pageNumber, pageSize) {
+    debugger;
+    var param = GetSearchParam(pageNumber, pageSize);
+    HttpPost(`/ReliefReport/GetReliefReportList`, 'html', param, function (response) {
+        var a = document.createElement("a");
+        a.target = '_blank';
+        a.href = '/ReliefReport/download';
+        a.click();
+    });
+}
+
+$("#btndownload").click(function () {
+    GetExcel(currentPageNumber, currentPageSize)
+})
 
 function GetDetails(pageNumber, pageSize) {
     var param = GetSearchParam(pageNumber, pageSize);

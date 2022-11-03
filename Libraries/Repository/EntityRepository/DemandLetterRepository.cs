@@ -25,6 +25,27 @@ namespace Libraries.Repository.EntityRepository
         {
             return await _dbContext.Demandletters.Where(x => x.IsActive == 1).Include(x => x.Locality).ToListAsync();
         }
+        public async Task<List<Demandletters>> GetPenaltyImpositionReportList(PenaltyImpositionReportSearchDto model)
+        {
+            var data = await _dbContext.Demandletters
+                    .Include(x => x.Locality)
+                    .Where(x => (x.Id == (model.fileNo == 0 ? x.Id : model.fileNo))
+                   && (x.LocalityId == (model.locality == 0 ? x.LocalityId : model.locality))).ToListAsync();
+            return data;
+        }
+        public async Task<List<Demandletters>> GetAllDemandletterList(DemandletterSearchDto model)
+        {
+            var data = await _dbContext.Demandletters
+                .Include(x => x.Locality)
+                .Include(x => x.PropertyType)
+
+                 .Where(x => (string.IsNullOrEmpty(model.locality) || x.Locality.Name.Contains(model.locality))
+                   && (string.IsNullOrEmpty(model.demandno) || x.DemandNo.Contains(model.demandno))
+                    && (string.IsNullOrEmpty(model.fileno) || x.FileNo.Contains(model.fileno))
+
+                    && (x.IsActive == 1)).ToListAsync();
+            return data;
+        }
         public async Task<PagedResult<Demandletters>> GetPagedDemandletter(DemandletterSearchDto model)
         {
             var data = await _dbContext.Demandletters 
@@ -195,10 +216,19 @@ namespace Libraries.Repository.EntityRepository
                         break; 
 
                 }
-            }
+            } 
             return data;
         }
+        public async Task<List<Demandletters>> GetDefaultListingReportDataList(DefaulterListingReportSearchDto defaulterListingReportSearchDto)
+        {
 
+            var data = await _dbContext.Demandletters
+               .Include(x => x.Locality)
+
+               .Where(x => x.UptoDate >= defaulterListingReportSearchDto.fromDate
+                   && x.UptoDate < defaulterListingReportSearchDto.toDate).ToListAsync();
+            return data;
+        }
 
         public async Task<List<Demandletters>> BindPropertyNoList()
         {
@@ -209,17 +239,16 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<List<Demandletters>> GetDemandLetterReportList(DownloadDemandLetterReportDto model)
         {
-             return await _dbContext.Demandletters
+             var data =  await _dbContext.Demandletters
                                     .Include(x => x.Locality)
                                     .Where(x => (x.IsActive == 1)
                                    && (x.Id == (model.PropertyNo == 0 ? x.Id : model.PropertyNo))
-
                                    && (x.LocalityId == (model.Locality == 0 ? x.LocalityId : model.Locality))
                                     && (string.IsNullOrEmpty(model.FileNo) || x.FileNo.Contains(model.FileNo))
-
                                     && (x.CreatedDate.Date >= model.FromDate.Date && x.CreatedDate.Date <= model.ToDate.Date)
                                    )
                                    .ToListAsync();
+            return data;
             
         }
 
@@ -326,7 +355,17 @@ namespace Libraries.Repository.EntityRepository
             }
             return data;
         }
-
+        public async Task<List<Demandletters>> GetAllReliefReportList(ReliefReportSearchDto model)
+        {
+            var data = await _dbContext.Demandletters
+                                 .Include(x => x.Locality)
+                                     .Where(x => (x.IsActive == 1)
+                                     && (x.Id == (model.FileNo == 0 ? x.Id : model.FileNo))
+                                     && (x.LocalityId == (model.Locality == 0 ? x.LocalityId : model.Locality))
+                                      && (x.GenerateDate.Date >= model.FromDate.Date && x.GenerateDate.Date <= model.ToDate.Date)
+                                     ).ToListAsync();
+            return (data);
+        }
         public async Task<List<Demandletters>> BindFileNoList()
         {
             var list =await _dbContext.Demandletters
@@ -519,6 +558,17 @@ namespace Libraries.Repository.EntityRepository
             return data;
         }
 
+        public async Task<List<Demandletters>> GetImpositionReportOfChargesList(ImpositionOfChargesSearchDto model)
+        {            
+            var data = await _dbContext.Demandletters
+                               .Include(x => x.Locality)
+                                   .Where(x => (x.IsActive == 1)
+                                   && (x.Id == (model.FileNo == 0 ? x.Id : model.FileNo))
+                                   && (x.LocalityId == (model.Locality == 0 ? x.LocalityId : model.Locality))
+                                    && (x.GenerateDate.Date >= model.FromDate.Date && x.GenerateDate.Date <= model.ToDate.Date)
+                                   ).ToListAsync();
+            return data;
+        }
         public async Task<PagedResult<Demandletters>> GetPagedDemandCollectionLedgerReport(DemandCollectionLedgerSearchDto model)
         {
             var data = await _dbContext.Demandletters
