@@ -19,6 +19,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<Newlandnotification> FetchSingleResult(int id);
         Task<bool> Any(int id, string name);
         Task<List<Newlandnotification>> GetAllNewlandNotification();
+        Task<List<Newlandnotification>> GetAllNewlandnotificationdetailsList(NewlandnotificationSearchDto model);
         Task<List<NewlandNotificationtype>> GetAllNotificationType();
         Task<List<Newlandnotificationfilepath>> GetAllfiledetails(int Id);
         Task<bool> SaveNewlandNotification(Newlandnotification newlandnotification);

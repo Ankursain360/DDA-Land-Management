@@ -196,9 +196,9 @@ namespace NewLandAcquisition.Controllers
         }
 
 
-        public async Task<IActionResult> NewLandNotificationList()
+        public async Task<IActionResult> NewLandNotificationList([FromBody] NewlandnotificationSearchDto model)
         {
-            var result = await _newlandnotificationService.GetAllNewlandNotification();
+            var result = await _newlandnotificationService.GetAllNewlandnotificationdetailsList(model);
             List<NewLandNotificationListDto> data = new List<NewLandNotificationListDto>();
             if (result != null)
             {
@@ -216,7 +216,15 @@ namespace NewLandAcquisition.Controllers
                 }
             }
             var memory = ExcelHelper.CreateExcel(data);
-            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            TempData["file"] = memory;
+            return Ok();
+
+        }
+        [HttpGet]
+        public virtual ActionResult download()
+        {
+            byte[] data = TempData["file"] as byte[];
+            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
 
 

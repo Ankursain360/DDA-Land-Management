@@ -43,7 +43,10 @@ namespace Libraries.Service.ApplicationService
         {
             return await _requestApprovalProcessRepository.GetAllRequest();
         }
-
+        public async Task<List<Request>> GetAllProcessRequestList(RequestApprovalSearchDto model, int userId)
+        {
+            return await _requestApprovalProcessRepository.GetAllProcessRequestList(model, userId);
+        }
 
     }
 }

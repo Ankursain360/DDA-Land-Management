@@ -109,6 +109,15 @@ namespace Libraries.Repository.EntityRepository
                                     .OrderByDescending(x => x.Id)
                                     .ToListAsync();
         }
-
+        public async Task<List<Request>> GetAllProcessRequestList(RequestApprovalSearchDto model, int userId)
+        {
+            var data = await _dbContext.Request
+                                        .Include(x => x.ApprovedStatusNavigation)
+                                        .Where(x => x.IsActive == 1
+                                        && (model.StatusId == 0 ? x.PendingAt != "0" : x.PendingAt == "0")
+                                          && (x.CreatedBy == (userId == 0 ? x.CreatedBy : userId))
+                                        && (model.approvalstatusId == 0 ? (x.ApprovedStatus == x.ApprovedStatus) : (x.ApprovedStatus == model.approvalstatusId))).ToListAsync();
+            return data;
+        }
     }
 }

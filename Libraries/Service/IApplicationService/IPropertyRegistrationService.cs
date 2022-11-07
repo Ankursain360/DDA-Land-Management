@@ -62,10 +62,14 @@ namespace Libraries.Service.IApplicationService
         Task<List<Propertyregistration>> GetUnverifiedList(int UserId);
         Task<List<Propertyregistration>> GetAllUnverified(PropertyRegisterationSearchDto model, int UserId);
         Task<List<Propertyregistration>> GetAllDeletedPropertyList();
+        Task<List<Propertyregistration>> GetAllDeletedLandReportDataList(PropertyRegisterationSearchDto model);
         Task<List<Propertyregistration>> GetAllRestoreLandReportData();
+        Task<List<Propertyregistration>> GetAllRestoreLandReportDataList(PropertyRegisterationSearchDto model);
         Task<List<Propertyregistration>> GetAllPropertyRegistrationReportList();
+        Task<List<Propertyregistration>> GetAllPropertyRegisterationReportDataList(PropertyRegisterationReportSearchDto model);
         Task<List<Propertyregistration>> GetAllRestorePropertyReportList();
-        Task<List<Propertyregistration>> GetAllPropertyRegistrationMORlist(int UserId);
+        Task<List<Propertyregistration>> GetAllRestorePropertyReportDataList(PropertyRegisterationSearchDto model);
+        Task<List<Propertyregistration>> GetAllPropertyRegistrationMORlist(PropertyRegisterationSearchDto model, int UserId);
         Task<List<Propertyregistration>> GetPrimaryListForAPI(int deptid, int zoneid, int divisionid); // for api added by renu
 
         string GetMobileNo(int UserId);

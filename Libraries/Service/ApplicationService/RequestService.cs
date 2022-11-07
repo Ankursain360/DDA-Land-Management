@@ -32,6 +32,10 @@ namespace Libraries.Service.ApplicationService
 
             return await _requestRepository.GetAllRequest();
         }
+        public async Task<List<Request>> GetAllRequestList(RequestSearchDto model)
+        {
+            return await _requestRepository.GetAllRequestList(model);
+        }
         public async Task<bool> Create(Request request)
         {
 

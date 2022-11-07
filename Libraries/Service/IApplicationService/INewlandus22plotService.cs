@@ -17,6 +17,7 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Delete(int id);
         Task<PagedResult<Newlandus22plot>> GetPagedUS22Plot(Newlandus22plotSearchDto model);
         Task<List<Newlandus22plot>> GetAllUS22Plot();
+        Task<List<Newlandus22plot>> GetAllUS22PlotList(Newlandus22plotSearchDto model);
         Task<List<Newlandus4plot>> GetAllUS4Plot(int? notificationId);
         Task<List<Newlandus6plot>> GetAllUS6Plot(int? notificationId);
         Task<List<Newlandus17plot>> GetAllUS17Plot(int? notificationId);

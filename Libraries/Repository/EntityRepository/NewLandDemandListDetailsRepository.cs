@@ -72,6 +72,17 @@ namespace Libraries.Repository.EntityRepository
                                    .Include(x => x.KhasraNo)
                                    .ToListAsync();
         }
+
+        public async Task<List<Newlanddemandlistdetails>> GetAllDMSFileUploadListList(NewLandDemandListDetailsSearchDto model)
+        {
+            var data = await _dbContext.Newlanddemandlistdetails 
+                                        .Include(x => x.Village)
+                                        .Include(x => x.KhasraNo)
+                                        .Where(x => x.VillageId == (model.villageId == 0 ? x.VillageId : model.villageId)
+                                        && (x.DemandListNo != null ? x.DemandListNo.Contains(model.demandlistno == "" ? x.DemandListNo : model.demandlistno) : true)
+                                        && (x.KhasraNoId == (model.KhasraId == 0 ? x.KhasraNoId : model.KhasraId))).ToListAsync();
+            return data;
+        }
         public async Task<Newlanddemandlistdetails> FetchSingleResult(int id)
         {
             return await _dbContext.Newlanddemandlistdetails
@@ -81,8 +92,6 @@ namespace Libraries.Repository.EntityRepository
                                    .Include(x => x.KhasraNo)
                                    .Where(x => x.Id == id)
                                    .FirstOrDefaultAsync();
-
-
         }
 
         public int GetLocalityByName(string name)

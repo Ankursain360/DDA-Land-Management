@@ -24,6 +24,7 @@ namespace Libraries.Service.IApplicationService
         int GetKhasraByName(string name);
         Task<bool> CheckUniqueName(int id, string fileNo);
         Task<List<Newlanddemandlistdetails>> GetAllDemandlistdetails();
+        Task<List<Newlanddemandlistdetails>> GetAllDMSFileUploadListList(NewLandDemandListDetailsSearchDto model);
         //*********  Appeali Khasra Details **********
 
         Task<bool> SaveAppeal(Newlandappealdetail newlandappealdetail);

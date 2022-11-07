@@ -8,6 +8,20 @@ $(document).ready(function () {
     GetSakni(currentPageNumber, currentPageSize, sortOrder);
 });
 
+function GetExcel(pageNumber, pageSize, order) {
+    var param = GetSearchParam(pageNumber, pageSize, order);
+    HttpPost(`/NewLandJointSurvey/NewLandJointSurveyList`, 'html', param, function (response) {
+        var a = document.createElement("a");
+        a.target = '_blank';
+        a.href = '/NewLandJointSurvey/download';
+        a.click();
+    });
+}
+
+$("#btndownload").click(function () {
+    GetExcel(currentPageNumber, currentPageSize, sortOrder);
+});
+
 function GetSakni(pageNumber, pageSize, order) {
     var param = GetSearchParam(pageNumber, pageSize, order);
     HttpPost(`/NewLandJointSurvey/List`, 'html', param, function (response) {

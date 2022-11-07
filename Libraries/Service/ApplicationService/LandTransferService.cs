@@ -231,7 +231,10 @@ namespace Libraries.Service.ApplicationService
         {
             return await _landTransferRepository.GetAllHandOverTakeOverList();
         }
-
+        public async Task<List<Propertyregistration>> GetAllPropertyRegisterationDataForLandTransferList(LandTransferSearchDto model)
+        {
+            return await _landTransferRepository.GetAllPropertyRegisterationDataForLandTransferList(model);
+        }
         public async Task<List<Propertyregistration>> GetAllUnverifiedTransferRecordList()
         {
             return await _landTransferRepository.GetAllUnverifiedTransferRecordList();

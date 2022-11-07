@@ -7,6 +7,19 @@ $(document).ready(function () {
     
 });
 
+function GetExcel(pageNumber, pageSize, order) {
+    var param = GetSearchParam(pageNumber, pageSize, order);
+    HttpPost(`/NewlandNotification/NewLandNotificationList`, 'html', param, function (response) {
+        var a = document.createElement("a");
+        a.target = '_blank';
+        a.href = '/NewlandNotification/download';
+        a.click();
+    });
+}
+
+$("#btndownload").click(function () {
+    GetExcel(currentPageNumber, currentPageSize, sortby);
+});
 
 $("#btnSearch").click(function () {
     GetDemolitionstructuredetails(currentPageNumber, currentPageSize, sortby);

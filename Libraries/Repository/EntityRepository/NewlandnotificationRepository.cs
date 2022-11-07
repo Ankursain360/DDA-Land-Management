@@ -49,7 +49,16 @@ namespace Libraries.Repository.EntityRepository
         {
             return await _dbContext.Newlandnotification.Where(x => x.IsActive == 1).ToListAsync();
         }
+        public async Task<List<Newlandnotification>> GetAllNewlandnotificationdetailsList(NewlandnotificationSearchDto model)
+        {
 
+            var data = await _dbContext.Newlandnotification
+                                 // .Include(x => x.Newlandnotificationfilepath)
+                                 //.Include(x => x.NewlandNotificationtype)
+                                 .Where(x => string.IsNullOrEmpty(model.name) || x.NotificationNo.Contains(model.name))
+                              .OrderByDescending(s => s.IsActive).ToListAsync();
+            return data;
+        }
 
         public async Task<Newlandnotification> NewLandNotificationFile(int Id)
         {

@@ -11,6 +11,7 @@ namespace Libraries.Repository.IEntityRepository
     public interface IRequestRepository : IGenericRepository<Request>
     {
         Task<List<Request>> GetAllRequest();
+        Task<List<Request>> GetAllRequestList(RequestSearchDto model);
         Task<PagedResult<Request>> GetPagedRequest(RequestSearchDto model);
         Task<List<TrackingListDataDto>> GetPagedTrackingList(TrackingListSearchDto model);
 

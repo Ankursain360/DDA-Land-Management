@@ -201,9 +201,9 @@ namespace NewLandAcquisition.Controllers
 
 
 
-        public async Task<IActionResult> NewLandUndersection4plotList()
+        public async Task<IActionResult> NewLandUndersection4plotList([FromBody] Newlandus4plotSearchDto model)
         {
-            var result = await _newlandus4plotService.GetAllUS4Plot();
+            var result = await _newlandus4plotService.GetAllUS4PlotList(model);
             List<NewLandUndersection4PlotListDto> data = new List<NewLandUndersection4PlotListDto>();
             if (result != null)
             {
@@ -228,9 +228,17 @@ namespace NewLandAcquisition.Controllers
             }
 
             var memory = ExcelHelper.CreateExcel(data);
-            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            TempData["file"] = memory;
+            return Ok();
 
         }
+        [HttpGet]
+        public virtual ActionResult download()
+        {
+            byte[] data = TempData["file"] as byte[];
+            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        }
+
 
 
     }

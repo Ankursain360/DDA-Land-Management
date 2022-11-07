@@ -308,9 +308,9 @@ namespace NewLandAcquisition.Controllers
         }
 
 
-        public async Task<IActionResult> NewLandPossessionDetailsList()
+        public async Task<IActionResult> NewLandPossessionDetailsList([FromBody] NewlandpossesiondetailsSearchDto model)
         {
-            var result = await _Possessiondetailservice.GetAllPossessiondetails();
+            var result = await _Possessiondetailservice.GetAllPossessiondetailsList(model);
             List<NewLandPossessionDetailsListDto> data = new List<NewLandPossessionDetailsListDto>();
             if (result != null)
             {
@@ -321,15 +321,23 @@ namespace NewLandAcquisition.Controllers
                         Id = result[i].Id,
                         VillageName = result[i].Village == null ? "" : result[i].Village.Name.ToString(),
                         KhasraNo = result[i].Khasra == null ? "" : result[i].Khasra.Name.ToString(),
-                        //Date = result[i].PossDate.ToString(),
-                      
-                        IsActive = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
-                    }); ;
+                        PossessionTake = result[i].PossessionTake,
+                        TypeofPossession = result[i].PossType,                      
+                        IsActive = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive"
+                    }); 
                 }
             }
 
             var memory = ExcelHelper.CreateExcel(data);
-            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            TempData["file"] = memory;
+            return Ok();
+
+        }
+        [HttpGet]
+        public virtual ActionResult download()
+        {
+            byte[] data = TempData["file"] as byte[];
+            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
 
         public async Task<IActionResult> ViewUploadedDocument(int Id)

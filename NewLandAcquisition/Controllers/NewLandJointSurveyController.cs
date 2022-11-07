@@ -460,9 +460,9 @@ namespace NewLandAcquisition.Controllers
         }
 
 
-        public async Task<IActionResult> NewLandJointSurveyList()
+        public async Task<IActionResult> NewLandJointSurveyList([FromBody] NewLandJointSurveySearchDto model)
         {
-            var result = await _newLandJointSurveyService.GetAllNewLandJointSurvey();
+            var result = await _newLandJointSurveyService.GetAllNewLandJointSurveyList(model);
             List<NewlandJoinSurveyListDto> data = new List<NewlandJoinSurveyListDto>();
             if (result != null)
             {
@@ -482,7 +482,15 @@ namespace NewLandAcquisition.Controllers
             }
 
             var memory = ExcelHelper.CreateExcel(data);
-            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            TempData["file"] = memory;
+            return Ok();
+
+        }
+        [HttpGet]
+        public virtual ActionResult download()
+        {
+            byte[] data = TempData["file"] as byte[];
+            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
 
 

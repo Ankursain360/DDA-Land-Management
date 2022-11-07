@@ -170,6 +170,17 @@ namespace Libraries.Repository.EntityRepository
                                    .Include(x => x.Notification)
                                    .ToListAsync();
         }
+        public async Task<List<Newlandus6plot>> GetAllUS6PlotList(Newlandus6plotSearchDto model)
+        {
+            var data = await _dbContext.Newlandus6plot 
+                                  .Include(x => x.Village)
+                                  .Include(x => x.Notification)
+                                  .Include(x => x.Khasra)
+                                  .Where(x => (string.IsNullOrEmpty(model.locality) || x.Village.Name.Contains(model.locality))
+                                   && (string.IsNullOrEmpty(model.notification) || x.Notification.NotificationNo.Contains(model.notification))
+                                   && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra))).ToListAsync();
+            return data;
+        }
 
         public async Task<List<Newlandnotification>> GetAllNotification()
         {

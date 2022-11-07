@@ -11,6 +11,21 @@ $(document).ready(function () {
    
 })
 
+function GetExcel(pageNumber, pageSize, order) {
+    debugger;
+    var param = GetSearchParam(pageNumber, pageSize, sortOrder);
+    HttpPost(`/DeletedProperties/DeletedPropertyList`, 'html', param, function (response) {
+        var a = document.createElement("a");
+        a.target = '_blank';
+        a.href = '/DeletedProperties/download';
+        a.click();
+    });
+}
+
+$("#btndownload").click(function () {
+    GetExcel(currentPageNumber, currentPageSize, sortOrder);
+});
+
 $("#btnGenerate").click(function () {
     GetDetails(currentPageNumber, currentPageSize, sortOrder);
 });

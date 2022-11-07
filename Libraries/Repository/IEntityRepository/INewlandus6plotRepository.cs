@@ -12,6 +12,7 @@ namespace Libraries.Repository.IEntityRepository
     {
         Task<PagedResult<Newlandus6plot>> GetPagedUS6Plot(Newlandus6plotSearchDto model);
         Task<List<Newlandus6plot>> GetAllUS6Plot();
+        Task<List<Newlandus6plot>> GetAllUS6PlotList(Newlandus6plotSearchDto model);
         Task<List<Newlandnotification>> GetAllNotification();
         Task<List<Newlandvillage>> GetAllVillage();
         Task<List<Newlandkhasra>> GetAllKhasra(int? villageId);

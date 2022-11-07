@@ -18,6 +18,7 @@ namespace Libraries.Service.IApplicationService
         Task<List<Undersection6>> GetAllus6();
         Task<List<Undersection4>> GetAllus4();
         Task<List<Newlandpossessiondetails>> GetAllPossessiondetails();
+        Task<List<Newlandpossessiondetails>> GetAllPossessiondetailsList(NewlandpossesiondetailsSearchDto model);
         Task<List<Newlandpossessiondetails>> GetPossessiondetailsUsingRepo();
         Task<bool> Update(int id, Newlandpossessiondetails possessiondetails);
         Task<bool> Create(Newlandpossessiondetails newlandpossessiondetails);

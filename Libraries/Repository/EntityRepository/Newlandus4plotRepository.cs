@@ -171,6 +171,17 @@ namespace Libraries.Repository.EntityRepository
                                    .ToListAsync();
         }
 
+        public async Task<List<Newlandus4plot>> GetAllUS4PlotList(Newlandus4plotSearchDto model)
+        {
+            var data = await _dbContext.Newlandus4plot
+                                  .Include(x => x.Village)
+                                  .Include(x => x.Notification)
+                                  .Include(x => x.Khasra)
+                                  .Where(x => (string.IsNullOrEmpty(model.locality) || x.Village.Name.Contains(model.locality))
+                                   && (string.IsNullOrEmpty(model.notification) || x.Notification.NotificationNo.Contains(model.notification))
+                                   && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra))).ToListAsync();
+            return data;
+        }
         public async Task<List<Newlandnotification>> GetAllNotification()
         {
             List<Newlandnotification> notificationList = await _dbContext.Newlandnotification

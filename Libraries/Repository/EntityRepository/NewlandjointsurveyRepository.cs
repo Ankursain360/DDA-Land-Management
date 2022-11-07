@@ -129,7 +129,17 @@ namespace Libraries.Repository.EntityRepository
         {
             return await _dbContext.Newlandjointsurvey.Include(x => x.Village).Include(x => x.Khasra).ToListAsync();
         }
+        public async Task<List<Newlandjointsurvey>> GetAllNewLandJointSurveyList(NewLandJointSurveySearchDto model)
+        {
+            var data = await _dbContext.Newlandjointsurvey
+                .Include(x => x.Zone)
+                                   .Include(x => x.Village)
 
+                                   .Include(x => x.Khasra)
+                                   .Where(x => (string.IsNullOrEmpty(model.village) || x.Village.Name.Contains(model.village))
+                                    && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra))).ToListAsync();
+            return data;
+        }
         public async Task<List<Zone>> GetAllZone()
         {
             List<Zone> zoneList = await _dbContext.Zone.Where(x => x.IsActive == 1).ToListAsync();

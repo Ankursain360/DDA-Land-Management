@@ -16,6 +16,7 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Create(Request request);
         Task<bool> Update(int id, Request request);
         Task<List<Request>> GetAllRequest();
+        Task<List<Request>> GetAllRequestList(RequestSearchDto model);
         Task<Request> FetchSingleResult(int id);
         Task<List<Request>> GetRequestUsingRepo();
         Task<bool> Delete(int id);

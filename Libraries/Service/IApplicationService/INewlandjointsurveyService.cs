@@ -35,6 +35,7 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Delete(int id);
         Task<PagedResult<Newlandjointsurvey>> GetPagedNewLandJointSurvey(NewLandJointSurveySearchDto model);
         Task<List<Newlandjointsurvey>> GetAllNewLandJointSurvey();
+        Task<List<Newlandjointsurvey>> GetAllNewLandJointSurveyList(NewLandJointSurveySearchDto model);
         Task<Newlandkhasra> FetchSingleKhasraResult(int? khasraId);
 
 

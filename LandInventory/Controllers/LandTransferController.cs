@@ -518,9 +518,9 @@ namespace LandInventory.Controllers
 
 
 
-        public async Task<IActionResult> HandoverTakeoverList()
+        public async Task<IActionResult> HandoverTakeoverList([FromBody] LandTransferSearchDto model)
         {
-            var result = await _landTransferService.GetAllHandOverTakeOverList();
+            var result = await _landTransferService.GetAllPropertyRegisterationDataForLandTransferList(model);
             List<HandoverTakeoverListDto> data = new List<HandoverTakeoverListDto>();
             if (result != null)
             {
@@ -532,36 +532,37 @@ namespace LandInventory.Controllers
                         InventoriedIn = result[i].InventoriedInId.ToString() == "1" ? "VLMS" : "Used",
                         PlannedUnplannedLand = result[i].PlannedUnplannedLand,
                         ClassificationofLand = result[i].ClassificationOfLand == null ? " " : result[i].ClassificationOfLand.Name,
-                      
-
-
                         Department = result[i].Department == null ? " " : result[i].Department.Name,
                         Zone = result[i].Zone == null ? " " : result[i].Zone.Name,
                         Division = result[i].Division == null ? " " : result[i].Division.Name,
                         PrimaryListNo = result[i].PrimaryListNo,
                         KhasraNo = result[i].KhasraNo,
                         Area = result[i].TotalArea.ToString(),
-                        EncroachmentStatus = result[i].EncroachedPartiallyFully.ToString() == "0" ? "Partially Encroached" : "Fully Encroached",
+                        EncroachmentStatus = result[i].EncroachedPartiallyFully == "0" ? "Partially Encroached" : "Fully Encroached",
                         ProtectionOfLand = result[i].Boundary.ToString() == "0" ? "Boundary Wall" : result[i].Boundary ==1? "Fencing" : "None",
-
-                            
-
-
 
                     }); ;
                 }
             }
 
             var memory = ExcelHelper.CreateExcel(data);
-            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            TempData["file"] = memory;
+            return Ok();
+        }
+        [HttpGet]
+        public virtual IActionResult download()
+        {
+            byte[] data = TempData["file"] as byte[];
+            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "MORLandInventory.xlsx");
+
         }
 
 
 
 
-        public async Task<IActionResult> UnverifiedTransferRecordsList()
+        public async Task<IActionResult> UnverifiedTransferRecordsList([FromBody] LandTransferSearchDto model)
         {
-            var result = await _landTransferService.GetAllUnverifiedTransferRecordList();
+            var result = await _landTransferService.GetAllPropertyRegisterationDataForLandTransferList(model);
             List<UnverifiedTransferRecordsListDto> data = new List<UnverifiedTransferRecordsListDto>();
             if (result != null)
             {
@@ -573,26 +574,27 @@ namespace LandInventory.Controllers
                         InventoriedIn = result[i].InventoriedInId.ToString() == "1" ? "VLMS" : "Used",
                         ClassificationofLand = result[i].ClassificationOfLand == null ? " " : result[i].ClassificationOfLand.Name,
                         PlannedUnplannedLand = result[i].PlannedUnplannedLand,
-
-
                         Department = result[i].Department == null ? " " : result[i].Department.Name,
                         Zone = result[i].Zone == null ? " " : result[i].Zone.Name,
                         Division = result[i].Division == null ? " " : result[i].Division.Name,
                         PrimaryListNo = result[i].PrimaryListNo,
-
-                    KhasraNo = result[i].PlannedUnplannedLand== "Planned Land" ? result[i].KhasraNo: result[i].PlotNo,
+                        KhasraNo = result[i].PlannedUnplannedLand== "Planned Land" ? result[i].KhasraNo: result[i].PlotNo,
                         AddressWithLandmark = result[i].Palandmark,
-                      
-
-
-                    }); ;
+                    
+                    }); 
                 }
             }
-
             var memory = ExcelHelper.CreateExcel(data);
-            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            TempData["file"] = memory;
+            return Ok();
         }
+        [HttpGet]
+        public virtual IActionResult download1() 
+        {
+            byte[] data = TempData["file"] as byte[];
+            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "MORLandInventory.xlsx");
 
+        }
 
 
 

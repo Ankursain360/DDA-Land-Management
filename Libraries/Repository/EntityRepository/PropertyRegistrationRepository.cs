@@ -152,7 +152,65 @@ namespace Libraries.Repository.EntityRepository
                                                 .ToListAsync();
             return LocalityList;
         }
+        public async Task<List<Propertyregistration>> GetAllPropertyRegisterationReportDataList(PropertyRegisterationReportSearchDto model)
+        {
 
+            if (model.plannedUnplannedLand == "Planned Land")
+            {
+                var data = await _dbContext.Propertyregistration.Include(x => x.ClassificationOfLand)
+                           .Include(x => x.Department)
+                           .Include(x => x.Zone)
+                           .Include(x => x.Division)
+                           .Include(x => x.Locality)
+                           .Include(x => x.DisposalType)
+                           .Include(x => x.MainLandUse)
+                           .Include(x => x.HandedOverDepartment)
+                           .Include(x => x.HandedOverZone)
+                           .Include(x => x.HandedOverDivision)
+                           .Include(x => x.TakenOverDepartment)
+                           .Include(x => x.TakenOverZone)
+                           .Include(x => x.TakenOverDivision)
+                               .Where(x => (x.IsDeleted == 1 && x.IsActive == 1 && x.IsDisposed != 0 && x.IsValidate == 1)
+                               && (x.ClassificationOfLandId == (model.classificationofland == 0 ? x.ClassificationOfLandId : model.classificationofland))
+                               && (x.DepartmentId == (model.department == 0 ? x.DepartmentId : model.department)) && (x.ZoneId == (model.zone == 0 ? x.ZoneId : model.zone))
+                               && (x.DivisionId == (model.division == 0 ? x.DivisionId : model.division))
+                               && (x.LocalityId == (model.locality == 0 ? x.LocalityId : model.locality))
+                               && (x.PlannedUnplannedLand == (model.plannedUnplannedLand == "0" ? x.PlannedUnplannedLand : model.plannedUnplannedLand))
+                               && (x.MainLandUseId == (model.mainLandUse == 0 ? x.MainLandUseId : model.mainLandUse))
+                               && (x.LitigationStatus == (model.litigation == 2 ? x.LitigationStatus : model.litigation))
+                               && (x.InventoriedInId == (model.inventoriedIn == 0 ? x.InventoriedInId : model.inventoriedIn))
+                               && (x.EncroachmentStatusId == (model.encroached == 2 ? x.EncroachmentStatusId : model.encroached))
+                               && (x.Colony != null ? x.Colony.Contains(model.colony == "" ? x.Colony : model.colony) : true)
+                               && (x.Sector != null ? x.Sector.Contains(model.sector == "" ? x.Sector : model.sector) : true)
+                               && (x.Block != null ? x.Block.Contains(model.block == "" ? x.Block : model.block) : true)
+                               && (x.Pocket != null ? x.Pocket.Contains(model.pocket == "" ? x.Pocket : model.pocket) : true)
+                               && (x.PlotNo != null ? x.PlotNo.Contains(model.plotNo == "" ? x.PlotNo : model.plotNo) : true)).ToListAsync();
+                return data;
+            }
+            else
+            {
+                var data = await _dbContext.Propertyregistration.Include(x => x.ClassificationOfLand)
+                           .Include(x => x.Department)
+                           .Include(x => x.Zone)
+                           .Include(x => x.Division)
+                           .Include(x => x.Locality)
+                           .Include(x => x.DisposalType)
+                           .Include(x => x.MainLandUse)
+                               .Where(x => (x.IsDeleted == 1 && x.IsValidate == 1)
+                               && (x.ClassificationOfLandId == (model.classificationofland == 0 ? x.ClassificationOfLandId : model.classificationofland))
+                               && (x.DepartmentId == (model.department == 0 ? x.DepartmentId : model.department)) && (x.ZoneId == (model.zone == 0 ? x.ZoneId : model.zone))
+                               && (x.DivisionId == (model.division == 0 ? x.DivisionId : model.division))
+                               && (x.LocalityId == (model.locality == 0 ? x.LocalityId : model.locality))
+                               && (x.PlannedUnplannedLand == (model.plannedUnplannedLand == "0" ? x.PlannedUnplannedLand : model.plannedUnplannedLand))
+                               && (x.MainLandUseId == (model.mainLandUse == 0 ? x.MainLandUseId : model.mainLandUse))
+                               && (x.LitigationStatus == (model.litigation == 2 ? x.LitigationStatus : model.litigation))
+                               && (x.InventoriedInId == (model.inventoriedIn == 0 ? x.InventoriedInId : model.inventoriedIn))
+                               && (x.EncroachmentStatusId == (model.encroached == 2 ? x.EncroachmentStatusId : model.encroached))
+                               && (x.KhasraNo.Contains(model.khasraNo == "" ? x.KhasraNo : model.khasraNo))).ToListAsync();
+                return data;
+            }
+
+        }
         public async Task<List<Propertyregistration>> GetAllPropertyRegistrationReportList()
         {
 
@@ -575,8 +633,30 @@ namespace Libraries.Repository.EntityRepository
             return data;
 
         }
-
-        public async Task<List<Propertyregistration>> GetAllPropertyRegistrationMORlist(int UserId)
+        //public async Task<PagedResult<Propertyregistration>> GetPagedPropertyRegisterationMOR(PropertyRegisterationSearchDto model, int UserId)
+        //{
+        //    var badCodes = new[] { 3, 5 };
+        //    var Iscreated = _dbContext.Propertyregistration.Where(x => x.CreatedBy == UserId).Count();
+        //    if (UserId == 14 || Iscreated > 0)
+        //    {
+        //        var data = await _dbContext.Propertyregistration
+        //                        .Include(x => x.ClassificationOfLand)
+        //                        .Include(x => x.Department)
+        //                        .Include(x => x.Division)
+        //                        .Include(x => x.DisposalType)
+        //                        .Include(x => x.MainLandUse)
+        //                        .Include(x => x.Zone)
+        //                        .Include(x => x.Locality)
+        //                            .Where(x => x.IsDeleted == 1 && x.IsActive == 1 && badCodes.Contains(x.ClassificationOfLand.Id)
+        //                            && (x.ClassificationOfLandId == (model.classificationOfLandId == 0 ? x.ClassificationOfLandId : model.classificationOfLandId))
+        //                            && (x.DepartmentId == (model.departmentId == 0 ? x.DepartmentId : model.departmentId))
+        //                            && (x.ZoneId == (model.zoneId == 0 ? x.ZoneId : model.zoneId))
+        //                            && (x.DivisionId == (model.divisionId == 0 ? x.DivisionId : model.divisionId))
+        //                            && (x.InventoriedInId == (model.inventoriedId == 0 ? x.InventoriedInId : model.inventoriedId))
+        //                            && (x.PlannedUnplannedLand == (model.plannedUnplannedLand == "0" ? x.PlannedUnplannedLand : model.plannedUnplannedLand))).ToListAsync();
+        //    }
+        //}
+        public async Task<List<Propertyregistration>> GetAllPropertyRegistrationMORlist(PropertyRegisterationSearchDto model, int UserId)
         {
             var badCodes = new[] { 3, 5 };
             var Iscreated = _dbContext.Propertyregistration.Where(x => x.CreatedBy == UserId).Count();
@@ -584,30 +664,40 @@ namespace Libraries.Repository.EntityRepository
             {
 
                 var data1 = await _dbContext.Propertyregistration
-       .Include(x => x.ClassificationOfLand)
+                                .Include(x => x.ClassificationOfLand)
                                 .Include(x => x.Department)
                                 .Include(x => x.Division)
                                 .Include(x => x.DisposalType)
                                 .Include(x => x.MainLandUse)
                                 .Include(x => x.Zone)
                                 .Include(x => x.Locality)
-                                    .Where(x => x.IsDeleted == 1 && x.IsActive == 1 && badCodes.Contains(x.ClassificationOfLand.Id))
-                 .ToListAsync();
+                                    .Where(x => x.IsDeleted == 1 && x.IsActive == 1 && badCodes.Contains(x.ClassificationOfLand.Id)
+                                    && (x.ClassificationOfLandId == (model.classificationOfLandId == 0 ? x.ClassificationOfLandId : model.classificationOfLandId))
+                                    && (x.DepartmentId == (model.departmentId == 0 ? x.DepartmentId : model.departmentId))
+                                    && (x.ZoneId == (model.zoneId == 0 ? x.ZoneId : model.zoneId))
+                                    && (x.DivisionId == (model.divisionId == 0 ? x.DivisionId : model.divisionId))
+                                    && (x.InventoriedInId == (model.inventoriedId == 0 ? x.InventoriedInId : model.inventoriedId))
+                                    && (x.PlannedUnplannedLand == (model.plannedUnplannedLand == "0" ? x.PlannedUnplannedLand : model.plannedUnplannedLand))).ToListAsync();
                 return data1;
             }
             else
             {
 
                 var data1 = await _dbContext.Propertyregistration
-       .Include(x => x.ClassificationOfLand)
+                             .Include(x => x.ClassificationOfLand)
                                 .Include(x => x.Department)
                                 .Include(x => x.Division)
                                 .Include(x => x.DisposalType)
                                 .Include(x => x.MainLandUse)
                                 .Include(x => x.Zone)
                                 .Include(x => x.Locality)
-                                    .Where(x => x.IsDeleted == 1 && badCodes.Contains(x.ClassificationOfLand.Id) && x.IsValidate == 1 && x.IsDisposed != 0)
-                 .ToListAsync();
+                                    .Where(x => x.IsDeleted == 1 && badCodes.Contains(x.ClassificationOfLand.Id) && x.IsValidate == 1 && x.IsDisposed != 0
+                                    && (x.ClassificationOfLandId == (model.classificationOfLandId == 0 ? x.ClassificationOfLandId : model.classificationOfLandId))
+                                    && (x.DepartmentId == (model.departmentId == 0 ? x.DepartmentId : model.departmentId))
+                                    && (x.ZoneId == (model.zoneId == 0 ? x.ZoneId : model.zoneId))
+                                    && (x.DivisionId == (model.divisionId == 0 ? x.DivisionId : model.divisionId))
+                                    && (x.InventoriedInId == (model.inventoriedId == 0 ? x.InventoriedInId : model.inventoriedId))
+                                    && (x.PlannedUnplannedLand == (model.plannedUnplannedLand == "0" ? x.PlannedUnplannedLand : model.plannedUnplannedLand))).ToListAsync();
                 return data1;
 
             }
@@ -786,6 +876,31 @@ namespace Libraries.Repository.EntityRepository
             return await _dbContext.Department.Where(x => x.IsActive == 1).ToListAsync();
         }
 
+        public async Task<List<Propertyregistration>> GetAllRestoreLandReportDataList(PropertyRegisterationSearchDto model)
+        {
+            var NonDeletedId = (from x in _dbContext.Propertyregistration
+                                where x.IsActive == 1 && x.IsDeleted != 0 || x.IsDisposed != 0
+                                select x.Id).ToArray();
+
+            var data = await _dbContext.Propertyregistration
+                                        .Include(x => x.Locality)
+                                        .Include(x => x.Department) 
+                                        .Include(x => x.Zone)
+                                        .Include(x => x.Division)
+                                        .Include(x => x.Deletedproperty)
+                                        .Include(x => x.ClassificationOfLand)
+                                        .Where(x => (x.IsDeleted == 0 || x.IsDisposed == 0)
+                                         && (x.InventoriedInId == (model.inventoriedId == 0 ? x.InventoriedInId : model.inventoriedId))
+                                         && (x.PlannedUnplannedLand == (model.plannedUnplannedLand == "0" ? x.PlannedUnplannedLand : model.plannedUnplannedLand))
+                                        && (x.ClassificationOfLandId == (model.classificationOfLandId == 0 ? x.ClassificationOfLandId : model.classificationOfLandId))
+                                        && (x.DepartmentId == (model.departmentId == 0 ? x.DepartmentId : model.departmentId))
+                                        && (x.ZoneId == (model.zoneId == 0 ? x.ZoneId : model.zoneId))
+                                        && (x.DivisionId == (model.divisionId == 0 ? x.DivisionId : model.divisionId))
+                                        && (x.LocalityId == (model.Id == 0 ? x.LocalityId : model.Id))
+                                        //&& !(NonDeletedId).Contains(x.Id)
+                                        ).ToListAsync();
+            return data;
+        }
         public async Task<List<Propertyregistration>> GetAllRestoreLandReportData()
         {
             var NonDeletedId = (from x in _dbContext.Propertyregistration
@@ -897,7 +1012,27 @@ namespace Libraries.Repository.EntityRepository
             return data;
         }
 
+        public async Task<List<Propertyregistration>> GetAllRestorePropertyReportDataList(PropertyRegisterationSearchDto model)
+        {
+            var data = await _dbContext.Propertyregistration.
+                Include(x => x.Department)
+                .Include(x => x.Zone)
+                .Include(x => x.Division)
+                .Include(x => x.Locality)
+                .Include(x => x.Restoreproperty)
+                .Include(x => x.ClassificationOfLand)
+                .Where(x => (x.Restoreproperty.RestoreReason != null)
+                //.Where(x => (x.IsDeleted == 1)
+                 && (x.InventoriedInId == (model.inventoriedId == 0 ? x.InventoriedInId : model.inventoriedId))
+                 && (x.PlannedUnplannedLand == (model.plannedUnplannedLand == "0" ? x.PlannedUnplannedLand : model.plannedUnplannedLand))
+                && (x.ClassificationOfLandId == (model.classificationOfLandId == 0 ? x.ClassificationOfLandId : model.classificationOfLandId))
 
+                && (x.DepartmentId == (model.departmentId == 0 ? x.DepartmentId : model.departmentId))
+                && (x.ZoneId == (model.zoneId == 0 ? x.ZoneId : model.zoneId))
+                && (x.DivisionId == (model.divisionId == 0 ? x.DivisionId : model.divisionId))
+                && (x.LocalityId == (model.Id == 0 ? x.LocalityId : model.Id))).ToListAsync();
+            return data;
+        }
         public async Task<List<Propertyregistration>> GetAllRestorePropertyReportList()
         {
             return await _dbContext.Propertyregistration.
@@ -1307,6 +1442,25 @@ namespace Libraries.Repository.EntityRepository
                                         .Include(x => x.Deletedproperty)
                                         .Include(x => x.ClassificationOfLand)
                                         .Where(x => (x.IsDeleted == 0 || x.IsDisposed == 0)).ToListAsync();
+        }
+        public async Task<List<Propertyregistration>> GetAllDeletedLandReportDataList(PropertyRegisterationSearchDto model) 
+        {
+            var data = await _dbContext.Propertyregistration 
+                                        .Include(x => x.Locality)
+                                        .Include(x => x.Department)
+                                        .Include(x => x.Zone)
+                                        .Include(x => x.Division)
+                                        .Include(x => x.Deletedproperty)
+                                        .Include(x => x.ClassificationOfLand)
+                                        .Where(x => (x.IsDeleted == 0 || x.IsDisposed == 0)
+                                         && (x.InventoriedInId == (model.inventoriedId == 0 ? x.InventoriedInId : model.inventoriedId))
+                                         && (x.PlannedUnplannedLand == (model.plannedUnplannedLand == "0" ? x.PlannedUnplannedLand : model.plannedUnplannedLand))
+                                        && (x.ClassificationOfLandId == (model.classificationOfLandId == 0 ? x.ClassificationOfLandId : model.classificationOfLandId))
+                                        && (x.DepartmentId == (model.departmentId == 0 ? x.DepartmentId : model.departmentId))
+                                        && (x.ZoneId == (model.zoneId == 0 ? x.ZoneId : model.zoneId))
+                                        && (x.DivisionId == (model.divisionId == 0 ? x.DivisionId : model.divisionId))
+                                        && (x.LocalityId == (model.Id == 0 ? x.LocalityId : model.Id))).ToListAsync();
+            return data;
         }
 
         public async Task<List<Propertyregistration>> GetPrimaryListForAPI(int deptid, int zoneid, int divisionid)// for api added by renu

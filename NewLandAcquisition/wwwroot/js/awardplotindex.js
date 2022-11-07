@@ -6,6 +6,23 @@ $(document).ready(function () {
     GetAward(currentPageNumber, currentPageSize, sortby);
 });
 
+
+
+function GetExcel(pageNumber, pageSize, order) {
+    var param = GetSearchParam(pageNumber, pageSize, order);
+    HttpPost(`/AwardPlotDetails/AwardPlotDetailsList`, 'html', param, function (response) {
+        var a = document.createElement("a");
+        a.target = '_blank';
+        a.href = '/AwardPlotDetails/download';
+        a.click();
+    });
+}
+
+$("#btndownload").click(function () {
+    GetExcel(currentPageNumber, currentPageSize, sortby);
+});
+
+
 $("#btnSearch").click(function () {
     GetAward(currentPageNumber, currentPageSize, sortby);
 });

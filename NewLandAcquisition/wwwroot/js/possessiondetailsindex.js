@@ -10,6 +10,20 @@ $(document).ready(function () {
     GetDivision(currentPageNumber, currentPageSize, sortOrder);
 });
 
+function GetExcel(pageNumber, pageSize, order) {
+    var param = GetSearchParam(pageNumber, pageSize, order);
+    HttpPost(`/NewlandPossesionDetails/NewLandPossessionDetailsList`, 'html', param, function (response) {
+        var a = document.createElement("a");
+        a.target = '_blank';
+        a.href = '/NewlandPossesionDetails/download';
+        a.click();
+    });
+}
+
+$("#btndownload").click(function () {
+    GetExcel(currentPageNumber, currentPageSize, sortOrder);
+});
+
 $("#btnSearch").click(function () {
     GetDivision(currentPageNumber, currentPageSize, sortOrder);
 });

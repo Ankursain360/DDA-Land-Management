@@ -217,9 +217,9 @@ namespace NewLandAcquisition.Controllers
         }
 
 
-        public async Task<IActionResult> NewLandUndersection22plotList()
+        public async Task<IActionResult> NewLandUndersection22plotList([FromBody] Newlandus22plotSearchDto model)
         {
-            var result = await _newlandus22plotService.GetAllUS22Plot();
+            var result = await _newlandus22plotService.GetAllUS22PlotList(model);
             List<NewLandUndersection22PlotListDto> data = new List<NewLandUndersection22PlotListDto>();
             if (result != null)
             {
@@ -244,12 +244,16 @@ namespace NewLandAcquisition.Controllers
             }
 
             var memory = ExcelHelper.CreateExcel(data);
-            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            TempData["file"] = memory;
+            return Ok();
 
         }
-
-
-
+        [HttpGet]
+        public virtual ActionResult download()
+        {
+            byte[] data = TempData["file"] as byte[];
+            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        }
 
     }
 }

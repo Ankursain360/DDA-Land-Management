@@ -6,6 +6,19 @@ $(document).ready(function () {
     GetDetails(currentPageNumber, currentPageSize, sortOrder);
 });
 
+function GetExcel(pageNumber, pageSize, order) {
+    var param = GetSearchParam(pageNumber, pageSize, order);
+    HttpPost(`/NewLandDemandListDetails/DemanddetailsList`, 'html', param, function (response) {
+        var a = document.createElement("a");
+        a.target = '_blank';
+        a.href = '/NewLandDemandListDetails/download';
+        a.click();
+    });
+}
+
+$("#btndownload").click(function () {
+    GetExcel(currentPageNumber, currentPageSize, sortOrder);
+});
 $("#btnSearch").click(function () {
     GetDetails(currentPageNumber, currentPageSize, sortOrder);
 });

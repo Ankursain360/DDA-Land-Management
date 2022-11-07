@@ -14,5 +14,6 @@ namespace Libraries.Repository.IEntityRepository
         Task<Request> FetchSingleResult(int id);
         Task<bool> IsApplicationPendingAtUserEnd(int id, int userId);
         Task<List<Request>> GetAllRequest();
+        Task<List<Request>> GetAllProcessRequestList(RequestApprovalSearchDto model, int userId);
     }
 }

@@ -233,9 +233,9 @@ namespace NewLandAcquisition.Controllers
 
      
 
-        public async Task<IActionResult> AwardMasterDetailsList()
+        public async Task<IActionResult> AwardMasterDetailsList([FromBody] NewlandawardmasterSearchDto model)
         {
-            var result = await _newlandawardmasterdetailService.Getawardmasterdetails();
+            var result = await _newlandawardmasterdetailService.GetAllawardmasterdetailsList(model);
             List<NewLandAwardMasterDetailsListDto> data = new List<NewLandAwardMasterDetailsListDto>();
             if (result != null)
             {
@@ -254,9 +254,16 @@ namespace NewLandAcquisition.Controllers
             }
 
             var memory = ExcelHelper.CreateExcel(data);
-            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-        }
+            TempData["file"] = memory;
+            return Ok();
 
+        }
+        [HttpGet]
+        public virtual ActionResult download()
+        {
+            byte[] data = TempData["file"] as byte[];
+            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        }
         public async Task<IActionResult> ViewUploadedDocument(int Id)
         {
             FileHelper file = new FileHelper();

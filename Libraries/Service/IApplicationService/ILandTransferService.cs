@@ -49,6 +49,7 @@ namespace Libraries.Service.IApplicationService
 
         Task<List<Propertyregistration>> GetAllUnverifiedTransferRecordList();
         Task<List<Propertyregistration>> GetAllHandOverTakeOverList();
+        Task<List<Propertyregistration>> GetAllPropertyRegisterationDataForLandTransferList(LandTransferSearchDto model);
 
     }
 }

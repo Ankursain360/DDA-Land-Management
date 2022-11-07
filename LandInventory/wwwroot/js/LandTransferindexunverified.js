@@ -7,6 +7,22 @@ $(document).ready(function () {
     GetLandTransfer(currentPageNumber, currentPageSize, sortOrder);
 });
 
+
+function GetExcel(pageNumber, pageSize, order) {
+    debugger;
+    var param = GetSearchParam(pageNumber, pageSize, sortOrder);
+    HttpPost(`/LandTransfer/UnverifiedTransferRecordsList`, 'html', param, function (response) {
+        var a = document.createElement("a");
+        a.target = '_blank';
+        a.href = '/LandTransfer/download1';
+        a.click();
+    });
+}
+
+$("#btndownload").click(function () {
+    GetExcel(currentPageNumber, currentPageSize, sortOrder);
+});
+
 function GetLandTransfer(pageNumber, pageSize, sortOrder) {
     var param = GetSearchParam(pageNumber, pageSize, sortOrder);
     HttpPost(`/LandTransfer/UnverifiedList`, 'html', param, function (response) {

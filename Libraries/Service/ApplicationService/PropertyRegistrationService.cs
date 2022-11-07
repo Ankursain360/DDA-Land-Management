@@ -362,24 +362,37 @@ namespace Libraries.Service.ApplicationService
         {
             return await _propertyregistrationRepository.GetAllDeletedPropertyList();
         }
-
+        public async Task<List<Propertyregistration>> GetAllDeletedLandReportDataList(PropertyRegisterationSearchDto model)
+        {
+            return await _propertyregistrationRepository.GetAllDeletedLandReportDataList(model);
+        }
         public async Task<List<Propertyregistration>> GetAllRestoreLandReportData()
         {
             return await _propertyregistrationRepository.GetAllRestoreLandReportData();
+        }
+        public async Task<List<Propertyregistration>> GetAllRestoreLandReportDataList(PropertyRegisterationSearchDto model)
+        {
+            return await _propertyregistrationRepository.GetAllRestoreLandReportDataList(model);
         }
         public async Task<List<Propertyregistration>> GetAllPropertyRegistrationReportList()
         {
             return await _propertyregistrationRepository.GetAllPropertyRegistrationReportList();
         }
-
+        public async Task<List<Propertyregistration>> GetAllPropertyRegisterationReportDataList(PropertyRegisterationReportSearchDto model)
+        {
+            return await _propertyregistrationRepository.GetAllPropertyRegisterationReportDataList(model);
+        }
         public async Task<List<Propertyregistration>> GetAllRestorePropertyReportList()
         {
             return await _propertyregistrationRepository.GetAllRestorePropertyReportList();
         }
-
-        public async Task<List<Propertyregistration>> GetAllPropertyRegistrationMORlist(int UserId)
+        public async Task<List<Propertyregistration>> GetAllRestorePropertyReportDataList(PropertyRegisterationSearchDto model)
         {
-            return await _propertyregistrationRepository.GetAllPropertyRegistrationMORlist( UserId);
+            return await _propertyregistrationRepository.GetAllRestorePropertyReportDataList(model);
+        }
+        public async Task<List<Propertyregistration>> GetAllPropertyRegistrationMORlist(PropertyRegisterationSearchDto model, int UserId)
+        {
+            return await _propertyregistrationRepository.GetAllPropertyRegistrationMORlist(model, UserId);
         }
 
 
@@ -392,27 +405,6 @@ namespace Libraries.Service.ApplicationService
         {
             var result = await _propertyregistrationRepository.FindBy(a => a.Id == id);
             Propertyregistration model = result.FirstOrDefault();
-            //model.TakenOverDepartmentId = propertyregistration.TakenOverDepartmentId;
-            //model.TakenOverZoneId = propertyregistration.TakenOverZoneId;
-            //model.TakenOverDivisionId = propertyregistration.TakenOverDivisionId;
-            //model.TakenOverName = propertyregistration.TakenOverName;
-            //model.TakenOverDate = propertyregistration.TakenOverDate;
-            //model.TakenOverEmailId = propertyregistration.TakenOverEmailId;
-            //model.TakenOverMobileNo = propertyregistration.TakenOverMobileNo;
-            //model.TakenOverLandlineNo = propertyregistration.TakenOverLandlineNo;
-            //model.TakenOverComments = propertyregistration.TakenOverComments;
-
-            //model.HandedOverDepartmentId = propertyregistration.HandedOverDepartmentId;
-            //model.HandedOverZoneId = propertyregistration.HandedOverZoneId;
-            //model.HandedOverDivisionId = propertyregistration.HandedOverDivisionId;
-            //model.HandedOverName = propertyregistration.HandedOverName;
-            //model.HandedOverDate = propertyregistration.HandedOverDate;
-            //model.HandedOverEmailId = propertyregistration.HandedOverEmailId;
-            //model.HandedOverMobileNo = propertyregistration.HandedOverMobileNo;
-            //model.HandedOverLandlineNo = propertyregistration.HandedOverLandlineNo;
-            //model.HandedOverComments = propertyregistration.HandedOverComments;
-
-
             model.DepartmentId = propertyregistration.DepartmentId;
             model.ZoneId = propertyregistration.ZoneId;
             model.DivisionId = propertyregistration.DivisionId;

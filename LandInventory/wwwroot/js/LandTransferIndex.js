@@ -6,6 +6,21 @@ $(document).ready(function () {
     GetLandTransfer(currentPageNumber, currentPageSize, sortOrder);
 });
 
+function GetExcel(pageNumber, pageSize, order) {
+    debugger;
+    var param = GetSearchParam(pageNumber, pageSize, sortOrder);
+    HttpPost(`/LandTransfer/HandoverTakeoverList`, 'html', param, function (response) {
+        var a = document.createElement("a");
+        a.target = '_blank';
+        a.href = '/LandTransfer/download';
+        a.click();
+    });
+}
+
+$("#btndownload").click(function () {
+    GetExcel(currentPageNumber, currentPageSize, sortOrder);
+});
+
 function GetLandTransfer(pageNumber, pageSize, sortOrder) {
     var param = GetSearchParam(pageNumber, pageSize, sortOrder);
     HttpPost(`/LandTransfer/List`, 'html', param, function (response) {

@@ -203,9 +203,9 @@ namespace AcquiredLandInformationManagement.Controllers
         }
 
 
-        public async Task<IActionResult> AwardPlotDetailsList()
+        public async Task<IActionResult> AwardPlotDetailsList([FromBody] NewlandawardplotdetailsSearchDto model)
         {
-            var result = await _awardplotDetailService.GetAwardplotdetails();
+            var result = await _awardplotDetailService.GetAllAwardplotdetailsList(model);
             List<NewLandAwardPlotDetailsListDto> data = new List<NewLandAwardPlotDetailsListDto>();
             if (result != null)
             {
@@ -223,7 +223,15 @@ namespace AcquiredLandInformationManagement.Controllers
             }
 
             var memory = ExcelHelper.CreateExcel(data);
-            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            TempData["file"] = memory;
+            return Ok();
+
+        }
+        [HttpGet]
+        public virtual ActionResult download()
+        {
+            byte[] data = TempData["file"] as byte[];
+            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
     }
 }

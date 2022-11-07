@@ -63,6 +63,15 @@ namespace Libraries.Repository.IEntityRepository
             return await _dbContext.Newlandpossessiondetails.Include(x => x.Village).Include(x => x.Khasra).OrderByDescending(x => x.Id).ToListAsync();
         }
 
+        public async Task<List<Newlandpossessiondetails>> GetAllPossessiondetailsList(NewlandpossesiondetailsSearchDto model)
+        {
+            var data = await _dbContext.Newlandpossessiondetails
+                .Include(x => x.Village).Include(x => x.Khasra)
+                .Include(x => x.Us17).Include(x => x.Us4)
+                .Include(x => x.Us6)
+                .Where(x => (string.IsNullOrEmpty(model.villageid) || x.Village.Name.Contains(model.villageid))).ToListAsync();
+            return data;
+        }
 
         public async Task<PagedResult<Newlandpossessiondetails>> GetPagedNoPossessiondetails(NewlandpossesiondetailsSearchDto model)
         {

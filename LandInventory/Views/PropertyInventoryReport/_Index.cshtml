@@ -89,7 +89,7 @@
                     }
                     <td>@item.TotalArea</td>
                     <td>@(item.EncroachmentStatusId== 0 ? "No" : "Yes")</td>
-                    <td>@(item.EncroachedPartiallyFully.ToString() == "0" ? "Partially Encroached" : "Fully Encroached")</td>
+                    <td>@(item.EncroachedPartiallyFully == "0" ? "Partially Encroached" : "Fully Encroached")</td>
                     <td>@item.EncrochedArea</td>
                     <td>@item.BuiltUpEncraochmentArea</td>
                     <td>@item.Vacant</td>

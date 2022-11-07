@@ -13,7 +13,7 @@ namespace Libraries.Repository.IEntityRepository
     {
 
         Task<List<Newlandpossessiondetails>> GetAllPossessiondetails();
-
+        Task<List<Newlandpossessiondetails>> GetAllPossessiondetailsList(NewlandpossesiondetailsSearchDto model);
         Task<List<Newlandvillage>> GetAllVillage();
         Task<List<Newlandkhasra>> GetAllPossKhasra();
         Task<List<Undersection17>> GetAllus17();

@@ -89,9 +89,9 @@ namespace LandInventory.Controllers
         #endregion
 
 
-        public async Task<IActionResult> PropertyInventoryReportList()
+        public async Task<IActionResult> PropertyInventoryReportList([FromBody] PropertyRegisterationReportSearchDto model)
         {
-            var result = await _propertyregistrationService.GetAllPropertyRegistrationReportList();
+            var result = await _propertyregistrationService.GetAllPropertyRegisterationReportDataList(model);
             List<PropertyInventoryReportListDto> data = new List<PropertyInventoryReportListDto>();
             if (result != null)
             {
@@ -151,10 +151,15 @@ namespace LandInventory.Controllers
             }
 
             var memory = ExcelHelper.CreateExcel(data);
-            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            TempData["file"] = memory;
+            return Ok();
         }
+        [HttpGet]
+        public virtual IActionResult download()
+        {
+            byte[] data = TempData["file"] as byte[];
+            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "PropertyInventoryReport.xlsx");
 
-
-
+        }
     }
 }

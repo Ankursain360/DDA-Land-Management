@@ -574,9 +574,9 @@ namespace NewLandAcquisition.Controllers
 
             }
         }
-        public async Task<IActionResult> RequestApprovalProcessList()
+        public async Task<IActionResult> RequestApprovalProcessList([FromBody] RequestApprovalSearchDto model)
         {
-            var result = await _requestApprovalProcessService.GetAllRequest();
+            var result = await _requestApprovalProcessService.GetAllProcessRequestList(model,SiteContext.UserId);
             List<RequestApprovalProcessListDto> data = new List<RequestApprovalProcessListDto>();
             if (result != null)
             {
@@ -596,7 +596,15 @@ namespace NewLandAcquisition.Controllers
             }
 
             var memory = ExcelHelper.CreateExcel(data);
-            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            TempData["file"] = memory;
+            return Ok();
+
+        }
+        [HttpGet]
+        public virtual ActionResult download()
+        {
+            byte[] data = TempData["file"] as byte[];
+            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
 
         #region History Details Only For Approval Page Added by Renu 16 march 2021

@@ -70,7 +70,10 @@ namespace Libraries.Service.ApplicationService
             return await _newlandawardplotdetailsRepository.GetAwardplotdetails();
         }
 
-
+        public async Task<List<Newlandawardplotdetails>> GetAllAwardplotdetailsList(NewlandawardplotdetailsSearchDto model)
+        {
+            return await _newlandawardplotdetailsRepository.GetAllAwardplotdetailsList(model);
+        }
 
         public async Task<List<Newlandawardplotdetails>> GetAwardplotdetailsUsingRepo()
         {

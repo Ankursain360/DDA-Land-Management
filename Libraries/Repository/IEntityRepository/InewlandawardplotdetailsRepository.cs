@@ -12,6 +12,7 @@ namespace Libraries.Repository.IEntityRepository
     public interface InewlandawardplotdetailsRepository : IGenericRepository<Newlandawardplotdetails>
     {
         Task<List<Newlandawardplotdetails>> GetAwardplotdetails();
+        Task<List<Newlandawardplotdetails>> GetAllAwardplotdetailsList(NewlandawardplotdetailsSearchDto model);
         Task<List<Newlandawardmasterdetail>> GetAllAWardmaster();
         Task<List<Newlandvillage>> GetAllVillage();
         Task<List<Newlandkhasra>> GetAllKhasra(int? villageId);

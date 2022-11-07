@@ -31,6 +31,15 @@ namespace Libraries.Repository.EntityRepository
                                     .Include(x => x.ApprovedStatusNavigation)
                                     .OrderByDescending(x => x.Id).ToListAsync();
         }
+        public async Task<List<Request>> GetAllRequestList(RequestSearchDto model)
+        {
+            var data = await _dbContext.Request
+                .Include(x => x.ApprovedStatusNavigation)
+              .Where(x => (string.IsNullOrEmpty(model.name) || x.PproposalName.Contains(model.name))
+                && (string.IsNullOrEmpty(model.area) || x.AreaLocality.Contains(model.area))
+                 && (string.IsNullOrEmpty(model.fileno) || x.PfileNo.Contains(model.fileno))).ToListAsync();
+            return data;
+        }
 
 
         public async Task<PagedResult<Request>> GetPagedRequest(RequestSearchDto model)

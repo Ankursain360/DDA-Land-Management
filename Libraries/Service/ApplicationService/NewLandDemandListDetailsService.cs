@@ -126,6 +126,11 @@ namespace Service.ApplicationService
         {
             return await _newLandDemandListDetailsRepository.GetAllDemandlistdetails();
         }
+        public async Task<List<Newlanddemandlistdetails>> GetAllDMSFileUploadListList(NewLandDemandListDetailsSearchDto model)
+        {
+            return await _newLandDemandListDetailsRepository.GetAllDMSFileUploadListList(model);
+        }
+
         //*********  appeal Details **********
 
         public async Task<bool> SaveAppeal(Newlandappealdetail newlandappealdetail)

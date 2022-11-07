@@ -400,9 +400,9 @@ namespace NewLandAcquisition.Controllers
 
         [AuthorizeContext(ViewAction.Download)]
 
-        public async Task<IActionResult> DemanddetailsList()
+        public async Task<IActionResult> DemanddetailsList([FromBody] NewLandDemandListDetailsSearchDto model)
         {
-            var result = await _newLandDemandListDetailsService.GetAllDemandlistdetails();
+            var result = await _newLandDemandListDetailsService.GetAllDMSFileUploadListList(model);
             List<NewLandDemanddetailsListDto> data = new List<NewLandDemanddetailsListDto>();
             if (result != null)
             {
@@ -424,8 +424,15 @@ namespace NewLandAcquisition.Controllers
             }
 
             var memory = ExcelHelper.CreateExcel(data);
-            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            TempData["file"] = memory;
+            return Ok();
 
+        }
+        [HttpGet]
+        public virtual ActionResult download()
+        {
+            byte[] data = TempData["file"] as byte[];
+            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
 
         public async Task<IActionResult> ViewENMDocument(int Id)

@@ -480,9 +480,9 @@ namespace NewLandAcquisition.Controllers
             }
         }
 
-        public async Task<IActionResult> RequestList()
+        public async Task<IActionResult> RequestList([FromBody] RequestSearchDto model)
         {
-            var result = await _requestService.GetAllRequest();
+            var result = await _requestService.GetAllRequestList(model);
             List<RequestListDto> data = new List<RequestListDto>();
             if (result != null)
             {
@@ -497,12 +497,20 @@ namespace NewLandAcquisition.Controllers
                         Area = result[i].AreaLocality,
 
                         IsActive = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
-                    }); ;
+                    });
                 }
             }
 
             var memory = ExcelHelper.CreateExcel(data);
-            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            TempData["file"] = memory;
+            return Ok();
+
+        }
+        [HttpGet]
+        public virtual ActionResult download()
+        {
+            byte[] data = TempData["file"] as byte[];
+            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
 
         #region Fetch workflow data for approval prrocess Added by Renu 04 May 2021

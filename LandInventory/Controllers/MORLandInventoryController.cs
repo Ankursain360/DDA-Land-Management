@@ -860,9 +860,9 @@ namespace LandInventory.Controllers
         }
 
 
-        public async Task<IActionResult> MORLandInventoryList()
+        public async Task<IActionResult> MORLandInventoryList([FromBody] PropertyRegisterationSearchDto model)
         {
-            var result = await _propertyregistrationService.GetAllPropertyRegistrationMORlist(SiteContext.UserId);
+            var result = await _propertyregistrationService.GetAllPropertyRegistrationMORlist(model,SiteContext.UserId);
             List<MorLandInventoryListDto> data = new List<MorLandInventoryListDto>();
             if (result != null)
             {
@@ -885,9 +885,16 @@ namespace LandInventory.Controllers
             }
 
             var memory = ExcelHelper.CreateExcel(data);
-            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            TempData["file"] = memory;
+            return Ok();
         }
+        [HttpGet]
+        public virtual IActionResult download()  
+        {
+            byte[] data = TempData["file"] as byte[];
+            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "MORLandInventory.xlsx");
 
+        }
 
 
 

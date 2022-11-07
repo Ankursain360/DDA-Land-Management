@@ -33,7 +33,15 @@ namespace Libraries.Repository.EntityRepository
             return await _dbContext.Newlandawardplotdetails.Include(x => x.NewlandAwardMaster).Include(x => x.NewlandVillage).Include(x => x.NewlandKhasra)
                 .OrderByDescending(x => x.Id).ToListAsync();
         }
-
+        public async Task<List<Newlandawardplotdetails>> GetAllAwardplotdetailsList(NewlandawardplotdetailsSearchDto model)
+        {
+            var data = await _dbContext.Newlandawardplotdetails
+                                    .Include(x => x.NewlandAwardMaster)
+                                    .Include(x => x.NewlandVillage)
+                                    .Include(x => x.NewlandKhasra)
+                                    .Where(x => string.IsNullOrEmpty(model.name) || x.NewlandAwardMaster.AwardNumber.Contains(model.name)).ToListAsync();
+            return data;
+        }
 
         public async Task<List<Newlandvillage>> GetAllVillage()
         {

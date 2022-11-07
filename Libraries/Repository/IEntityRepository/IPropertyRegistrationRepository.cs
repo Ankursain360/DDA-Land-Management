@@ -13,6 +13,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Classificationofland>> GetClassificationOfLandDropDownList();
         Task<List<Zone>> GetZoneDropDownList(int DepartmentId);
         Task<List<Locality>> GetLocalityDropDownList(int zoneId);
+        Task<List<Propertyregistration>> GetAllPropertyRegisterationReportDataList(PropertyRegisterationReportSearchDto model);
         Task<List<Locality>> GetLocalityDropDownList2(int divisionId);
         Task<List<Landuse>> GetLandUseDropDownList();
         Task<List<Disposaltype>> GetDisposalTypeDropDownList();
@@ -22,6 +23,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Propertyregistration>> GetAllPropertInventorylist(int UserId);
         Task<List<Propertyregistration>> GetAllPropertInventory(PropertyRegisterationSearchDto model, int UserId);
         Task<List<Propertyregistration>> GetAllDeletedPropertyList();
+        Task<List<Propertyregistration>> GetAllDeletedLandReportDataList(PropertyRegisterationSearchDto model);
         string GetFile(int id);
         string GetGeoFile(int id);
         Task<List<Department>> GetDepartmentDropDownList();
@@ -48,9 +50,11 @@ namespace Libraries.Repository.IEntityRepository
         Task<Disposedproperty> FetchSingleRecord(int id);
         Task<List<Propertyregistration>> GetKhasraReportList();
         Task<List<Propertyregistration>> GetAllRestorePropertyReportList();
+        Task<List<Propertyregistration>> GetAllRestorePropertyReportDataList(PropertyRegisterationSearchDto model);
+        Task<List<Propertyregistration>> GetAllRestoreLandReportDataList(PropertyRegisterationSearchDto model);
         Task<List<Propertyregistration>> GetAllRestoreLandReportData();
         Task<List<Propertyregistration>> GetAllPropertyRegistrationReportList();
-        Task<List<Propertyregistration>> GetAllPropertyRegistrationMORlist(int UserId);
+        Task<List<Propertyregistration>> GetAllPropertyRegistrationMORlist(PropertyRegisterationSearchDto model, int UserId);
         Task<PagedResult<Propertyregistration>> GetInventoryUnverifiedVerified(InvnentoryUnverifiedVerifiedSearchDto model, int userId,int? roleId);
         Task<PagedResult<Propertyregistration>> GetDeletedLandReportData(PropertyRegisterationSearchDto model);
         Task<List<Propertyregistration>> GetPrimaryListForAPI(int deptid, int zoneid, int divisionid);// for api added by renu

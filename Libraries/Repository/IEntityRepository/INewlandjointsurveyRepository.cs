@@ -11,6 +11,8 @@ namespace Libraries.Repository.IEntityRepository
     public interface INewLandJointSurveyRepository : IGenericRepository<Newlandjointsurvey>
     {
         Task<PagedResult<Newlandjointsurvey>> GetPagedNewLandJointSurvey(NewLandJointSurveySearchDto model);
+        Task<List<Newlandjointsurvey>> GetAllNewLandJointSurveyList(NewLandJointSurveySearchDto model);
+        
         Task<List<Newlandjointsurvey>> GetAllNewLandJointSurvey();
        
        

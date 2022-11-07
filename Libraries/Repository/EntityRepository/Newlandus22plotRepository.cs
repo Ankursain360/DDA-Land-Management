@@ -200,6 +200,20 @@ namespace Libraries.Repository.EntityRepository
                                    .Include(x => x.Us17)
                                    .ToListAsync();
         }
+        public async Task<List<Newlandus22plot>> GetAllUS22PlotList(Newlandus22plotSearchDto model)
+        {
+            var data = await _dbContext.Newlandus22plot
+                                  .Include(x => x.Village)
+                                  .Include(x => x.Notification)
+                                  .Include(x => x.Khasra)
+                                  .Include(x => x.Us4)
+                                  .Include(x => x.Us6)
+                                  .Include(x => x.Us17)
+                                  .Where(x => (string.IsNullOrEmpty(model.locality) || x.Village.Name.Contains(model.locality))
+                                   && (string.IsNullOrEmpty(model.notification) || x.Notification.NotificationNo.Contains(model.notification))
+                                   && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra))).ToListAsync();
+            return data;
+        }
         public async Task<List<Newlandus4plot>> GetAllUS4Plot(int? notificationId)
         {
             List<Newlandus4plot> notificationList = await _dbContext.Newlandus4plot

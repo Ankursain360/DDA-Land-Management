@@ -173,6 +173,18 @@ namespace Libraries.Repository.EntityRepository
                         .Where(x => x.IsActive == 1).ToListAsync();
             //return await _dbContext.casenature.OrderByDescending(s => s.IsActive).ToListAsync();
         }
+        public async Task<List<Newlandawardmasterdetail>> GetAllawardmasterdetailsList(NewlandawardmasterSearchDto model)
+        {
+
+            var data = await _dbContext.Newlandawardmasterdetail
+                               .Include(x => x.Newlandvillage)
+                                .Include(x => x.Proposal)
+                                 .Where(x => string.IsNullOrEmpty(model.name) || x.AwardNumber.Contains(model.name) && (x.IsActive == 1))
+                              .OrderByDescending(s => s.IsActive)
+                              .ThenBy(s => s.Newlandvillage.Name)
+                             .ThenBy(s => s.Proposal.Name).ToListAsync();
+            return data;
+        }
         public async Task<bool> Any(int id, string AwardNumber)
         {
             return await _dbContext.Newlandawardmasterdetail.AnyAsync(t => t.Id != id && t.AwardNumber.ToLower() == AwardNumber.ToLower());

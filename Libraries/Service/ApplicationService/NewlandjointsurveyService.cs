@@ -17,13 +17,13 @@ namespace Service.ApplicationService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly INewLandJointSurveyRepository _newLandJointSurveyRepository;
-       
+
         public NewLandJointSurveyService(IUnitOfWork unitOfWork, INewLandJointSurveyRepository newLandJointSurveyRepository)
         : base(unitOfWork, newLandJointSurveyRepository)
         {
             _unitOfWork = unitOfWork;
             _newLandJointSurveyRepository = newLandJointSurveyRepository;
-           
+
         }
         public async Task<List<Zone>> GetAllZone()
         {
@@ -42,18 +42,21 @@ namespace Service.ApplicationService
 
 
         public async Task<PagedResult<Newlandjointsurvey>> GetPagedNewLandJointSurvey(NewLandJointSurveySearchDto model)
-            {
-                return await _newLandJointSurveyRepository.GetPagedNewLandJointSurvey(model);
-            }
+        {
+            return await _newLandJointSurveyRepository.GetPagedNewLandJointSurvey(model);
+        }
 
+        public async Task<List<Newlandjointsurvey>> GetAllNewLandJointSurveyList(NewLandJointSurveySearchDto model)
+        {
+            return await _newLandJointSurveyRepository.GetAllNewLandJointSurveyList(model);
+        }
 
-            
-            public async Task<List<Newlandjointsurvey>> GetAllNewLandJointSurvey()
-            {
+        public async Task<List<Newlandjointsurvey>> GetAllNewLandJointSurvey()
+        {
 
                 return await _newLandJointSurveyRepository.GetAllNewLandJointSurvey();
-            }
-
+        }
+       
             public async Task<bool> Delete(int id)
             {
                 var form = await _newLandJointSurveyRepository.FindBy(a => a.Id == id);

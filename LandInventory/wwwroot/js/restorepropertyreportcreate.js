@@ -9,6 +9,21 @@ $(document).ready(function () {
     GetDetails(currentPageNumber, currentPageSize, sortOrder);
 });
 
+function GetExcel(pageNumber, pageSize, order) {
+    debugger;
+    var param = GetSearchParam(pageNumber, pageSize, sortOrder);
+    HttpPost(`/RestorePropertyReport/RestorePropertyReportList`, 'html', param, function (response) {
+        var a = document.createElement("a");
+        a.target = '_blank';
+        a.href = '/RestorePropertyReport/download';
+        a.click();
+    });
+}
+
+$("#btndownload").click(function () {
+    GetExcel(currentPageNumber, currentPageSize, sortOrder);
+});
+    
 $("#btnGenerate").click(function () {
     GetDetails(currentPageNumber, currentPageSize, sortOrder);
 });
