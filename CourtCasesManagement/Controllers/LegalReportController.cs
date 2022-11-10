@@ -73,28 +73,51 @@ namespace CourtCasesManagement.Controllers
         public async Task<IActionResult> LegalReportList([FromBody] LegalReportSearchDto report)
         {
 
-            var result = await _legalmanagementsystemservice.GetPagedLegalReportForDownload(report);
+            var result = await _legalmanagementsystemservice.GetAllLegalReportList(report);
             List<LegalManagementSystemListDto> data = new List<LegalManagementSystemListDto>();
             if (result != null)
             {
-                for (int i = 0; i < result.RowCount; i++)
+                for (int i = 0; i < result.Count; i++)
                 {
                     data.Add(new LegalManagementSystemListDto()
                     {
-                        Id = result.Results.Select(x => x.Id).FirstOrDefault(),
-                        fileNo = result.Results.Select(x => x.FileNo).FirstOrDefault(),
-                        courtCaseNo = result.Results.Select(x => x.CourtCaseNo).FirstOrDefault(),
-                        courtCaseTitle = result.Results.Select(x => x.CourtCaseTitle).FirstOrDefault(),
-                        Subject = result.Results.Select(x => x.Subject).FirstOrDefault(),
-                        // HearingDate = result.Results.Select(x=>x.HearingDate.HasValue?"" : Convert.ToDateTime(x.HearingDate)).FirstOrDefault(),
-                       // NextHearingDate = result.Results.Select(x => x.NextHearingDate.HasValue ? "" : Convert.ToDateTime(x.NextHearingDate)).FirstOrDefault(),
+                        Id = result.Select(x => x.Id).FirstOrDefault(),
+                        LegalfileNo = result[i].FileNo,
+                        LMFileNo = result[i].LMFileNO,
+                        courtCaseNo = result[i].CourtCaseNo,
+                        courtCaseTitle = result[i].CourtCaseTitle,
+                        Subject = result[i].Subject,
+                        HearingDate = result[i].HearingDate.HasValue ? Convert.ToDateTime(result[i].HearingDate).ToString("dd-MMM-yyyyy") : "",
+                        NextHearingDate = result[i].NextHearingDate.HasValue ? Convert.ToDateTime(result[i].NextHearingDate).ToString("dd-MMM-yyyy") : "",
+                        ContemptOfCourt = result[i].ContemptOfCourt == null ? "" : result[i].ContemptOfCourt.ToString() == "1" ? "Yes" : "No",
+                        Courttype = result[i].CourtType == null ? "" : result[i].CourtType.CourtType,
+                        Casestatus = result[i].CaseStatus == null ? "" : result[i].CaseStatus.CaseStatus,
+                        LastDecision = result[i].LastDecision,
+                        Zone = result[i].Zone == null ? "" : result[i].Zone.Name,
+                        Locality = result[i].Locality == null ? " " : result[i].Locality.Name,
+                        CaseType = result[i].CaseType,
+                        InFavour = result[i].InFavour,
+                        PanelLawyer = result[i].PanelLawyer,
+                        StayInterimGranted = result[i].StayInterimGranted == null ? "" : result[i].StayInterimGranted.ToString() == "1" ? "Yes" : "No",
+                        Judgement = result[i].Judgement.ToString() == "1" ? "Yes" : "No",
+                        Remarks = result[i].Remarks,
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
 
                     });
                 }
             }
 
             var memory = ExcelHelper.CreateExcel(data);
-            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            TempData["file"] = memory;
+            return Ok();
+
+        }
+
+        [HttpGet]
+        public virtual ActionResult download()
+        {
+            byte[] data = TempData["file"] as byte[];
+            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
 
 

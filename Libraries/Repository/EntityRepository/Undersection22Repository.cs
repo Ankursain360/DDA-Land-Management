@@ -100,11 +100,16 @@ namespace Libraries.Repository.EntityRepository
         {
             return await _dbContext.Undersection22.ToListAsync();
         }
-
+        public async Task<List<Undersection22>> GetAllUndersection22List(Undersection22SearchDto model) 
+        {
+            var data = await _dbContext.Undersection22
+                                       .Where(x => (string.IsNullOrEmpty(model.notification) || x.NotificationNo.Contains(model.notification))).ToListAsync();
+            return data;
+        }
 
         //public async Task<bool> Any(int id, string name)
         //{
         //    return await _dbContext.Module.AnyAsync(t => t.Id != id && t.Name.ToLower() == name.ToLower());
         //}
-     }
+        }
 }

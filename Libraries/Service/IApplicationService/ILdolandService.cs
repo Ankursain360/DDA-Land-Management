@@ -13,6 +13,7 @@ namespace Libraries.Service.IApplicationService
      public interface ILdolandService : IEntityService<Ldoland>
     {
         Task<List<Ldoland>> GetAllLdoland();
+        Task<List<Ldoland>> GetAllLdolandList(LdolandSearchDto model);
         Task<List<Ldoland>> GetLdolandUsingRepo();
 
         Task<List<LandNotification>> GetAllLandNotification();

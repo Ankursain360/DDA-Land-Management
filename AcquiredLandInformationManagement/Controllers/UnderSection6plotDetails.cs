@@ -220,9 +220,9 @@ namespace AcquiredLandInformationManagement.Controllers
             return PartialView("_ListNotification", Data);
         }
         [AuthorizeContext(ViewAction.Download)]
-        public async Task<IActionResult> Undersection6plotList()
+        public async Task<IActionResult> Undersection6plotList([FromBody] NotificationUndersection6plotDto model)
         {
-            var result = await _undersection6plotservice.GetAllUndersection6Plot();
+            var result = await _undersection6plotservice.GetAllNoUndersection6plotList(model);
             List<Undersection6plotListDto> data = new List<Undersection6plotListDto>();
             if (result != null)
             {
@@ -234,23 +234,31 @@ namespace AcquiredLandInformationManagement.Controllers
                         NotificationNo = result[i].Undersection6 == null ? "" : result[i].Undersection6.Number,
                         VillageName = result[i].Village == null ? "" : result[i].Village.Name,
                         KhasraNo = result[i].Khasra == null ? "" : result[i].Khasra.Name,
-                        ActualArea = result[i].Khasra.Bigha.ToString()
-                                  + '-' + result[i].Khasra.Biswa.ToString()
-                                  + '-' + result[i].Khasra.Biswanshi.ToString(),
+                        ActualArea = result[i].Khasra.Bigha
+                                  + '-' + result[i].Khasra.Biswa
+                                  + '-' + result[i].Khasra.Biswanshi,
 
-                        Area = result[i].Bigha.ToString() 
-                                  + '-' + result[i].Biswa.ToString() 
-                                  + '-' + result[i].Biswanshi.ToString(),
+                        Area = result[i].Bigha 
+                                  + '-' + result[i].Biswa
+                                  + '-' + result[i].Biswanshi,
 
                        
                         Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
-                    }); ;
+                    }); 
                 }
             }
 
             var memory = ExcelHelper.CreateExcel(data);
-            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            TempData["file"] = memory;
+            return Ok();
 
+        }
+
+        [HttpGet]
+        public virtual ActionResult download()
+        {
+            byte[] data = TempData["file"] as byte[];
+            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
 
 

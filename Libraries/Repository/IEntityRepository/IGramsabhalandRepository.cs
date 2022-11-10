@@ -10,6 +10,7 @@ namespace Libraries.Repository.IEntityRepository
     {
 
         Task<List<Gramsabhaland>> GetAllGramsabhaland();
+        Task<List<Gramsabhaland>> GetAllGramsabhalandList(GramsabhalandSearchDto model);
         Task<List<Zone>> GetAllZone();
         Task<List<Acquiredlandvillage>> GetAllVillage(int? zoneId);
         Task<PagedResult<Gramsabhaland>> GetPagedGramsabhaland(GramsabhalandSearchDto model);

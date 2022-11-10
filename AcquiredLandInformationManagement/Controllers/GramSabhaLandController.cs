@@ -334,9 +334,9 @@ namespace AcquiredLandInformationManagement.Controllers
 
 
         [AuthorizeContext(ViewAction.Download)]
-        public async Task<IActionResult> GramSabhaLanddetailsList()
+        public async Task<IActionResult> GramSabhaLanddetailsList([FromBody] GramsabhalandSearchDto model)
         {
-            var result = await _gramsabhalandService.GetAllGramsabhaland();
+            var result = await _gramsabhalandService.GetAllGramsabhalandList(model);
             List<GramSabhaLandListDto> data = new List<GramSabhaLandListDto>();
             if (result != null)
             {
@@ -352,15 +352,22 @@ namespace AcquiredLandInformationManagement.Controllers
                         US507NotificationNo = result[i].Us507notificationNo == null ? "" : result[i].Us507notificationNo,
 
                         Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive"
-                    }); ;
+                    }); 
                 }
             }
 
             var memory = ExcelHelper.CreateExcel(data);
-            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            TempData["file"] = memory;
+            return Ok();
 
         }
 
+        [HttpGet]
+        public virtual ActionResult download()
+        {
+            byte[] data = TempData["file"] as byte[];
+            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        }
 
         [HttpPost]
         public JsonResult CheckFile()

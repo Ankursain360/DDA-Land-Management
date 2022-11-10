@@ -10,8 +10,8 @@ namespace Dto.Master
         public string VillageName { get; set; }
 
         public string KhasraNo { get; set; }
-        public string ActualArea { get; set; }
-        public string Area { get; set; }
+        public int ActualArea { get; set; }
+        public int Area { get; set; }
         public string Status { get; set; }
     }
 }

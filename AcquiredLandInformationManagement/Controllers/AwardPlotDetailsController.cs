@@ -215,9 +215,9 @@ namespace AcquiredLandInformationManagement.Controllers
 
 
         [AuthorizeContext(ViewAction.Download)]
-        public async Task<IActionResult> AwardplotdetailsList()
+        public async Task<IActionResult> AwardplotdetailsList([FromBody] AwardPlotDetailSearchDto model)
         {
-            var result =  await _awardplotDetailService.GetAwardplotdetails();
+            var result =  await _awardplotDetailService.GetAllAwardplotdetailsList(model);
             List<AwardplotdetailsListtDto> data = new List<AwardplotdetailsListtDto>();
             if (result != null)
             {
@@ -230,14 +230,22 @@ namespace AcquiredLandInformationManagement.Controllers
                         VillageName = result[i].Village == null ? "" : result[i].Village.Name,
                         KhasraNo = result[i].Khasra == null ? "" : result[i].Khasra.Name,
 
-                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
-                    }); ;
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive"
+                    }); 
                 }
             }
 
             var memory = ExcelHelper.CreateExcel(data);
-            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            TempData["file"] = memory;
+            return Ok();
 
+        }
+
+        [HttpGet]
+        public virtual ActionResult download()
+        {
+            byte[] data = TempData["file"] as byte[];
+            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
     }
 }

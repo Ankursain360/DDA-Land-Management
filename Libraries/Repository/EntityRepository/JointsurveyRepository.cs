@@ -23,7 +23,15 @@ namespace Libraries.Repository.EntityRepository
         {
             return await _dbContext.Jointsurvey.Include(x => x.Village).Include(x => x.Khasra).OrderByDescending(x => x.Id).ToListAsync();
         }
-
+        public async Task<List<Jointsurvey>> GetAllJointsurveyList(JointSurveySearchDto model) 
+        {
+            var data = await _dbContext.Jointsurvey
+                                        .Include(x => x.Village)
+                                        .Include(x => x.Khasra)
+                                        .Where(x => x.Village.Name == (model.VillageName == "" ? x.Village.Name : model.VillageName)
+                                         && (x.Khasra.Name == (model.KhasraName == "" ? x.Khasra.Name : model.KhasraName))).ToListAsync();
+            return data;
+        }
 
         public async Task<List<Acquiredlandvillage>> GetAllVillage()
         {

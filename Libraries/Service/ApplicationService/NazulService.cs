@@ -52,7 +52,10 @@ namespace Libraries.Service.ApplicationService
 
             return await _nazulRepository.GetAllNazul();
         }
-
+        public async Task<List<Nazul>> GetAllNazulList(NazulSearchDto model)
+        {
+            return await _nazulRepository.GetAllNazulList(model);
+        }
 
 
         public async Task<List<Acquiredlandvillage>> GetAllVillageList()

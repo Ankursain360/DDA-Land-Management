@@ -23,7 +23,7 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Delete(int id);
         Task<PagedResult<Undersection22>> GetPagedUndersection22(Undersection22SearchDto model);
 
-
+        Task<List<Undersection22>> GetAllUndersection22List(Undersection22SearchDto model);
         //Task<bool> CheckUniqueName(int id, string Module);   // To check Unique Value  for designation
     }
 }

@@ -19,6 +19,7 @@ namespace Libraries.Repository.IEntityRepository
 
         Task<Khasra> FetchSingleKhasraResult(int? khasraId);
         Task<List<Proposalplotdetails>> GetAllProposalplotdetails();
+        Task<List<Proposalplotdetails>> GetAllProposalplotdetailsList(ProposalplotdetailSearchDto model);
         Task<PagedResult<Proposalplotdetails>> GetPagedProposalplotdetails(ProposalplotdetailSearchDto model);
     }
 }

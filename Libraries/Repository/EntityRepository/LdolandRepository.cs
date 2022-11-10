@@ -116,6 +116,13 @@ namespace Libraries.Repository.EntityRepository
               
                 .ToListAsync();
         }
+        public async Task<List<Ldoland>> GetAllLdolandList(LdolandSearchDto model)
+        {
+            var data = await _dbContext.Ldoland 
+                                       .Include(x => x.OtherLandNotification)
+                                       .Where(x => (string.IsNullOrEmpty(model.notification) || x.OtherLandNotification.NotificationNumber.Contains(model.notification))).ToListAsync();
+            return data;
+        }
         public async Task<List<LandNotification>> GetAllLandNotification()
         {
             List<LandNotification> landNotificationList = await _dbContext.LandNotification.Where(x => x.IsActive == 1).ToListAsync();

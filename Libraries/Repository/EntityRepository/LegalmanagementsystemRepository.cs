@@ -194,6 +194,28 @@ namespace Libraries.Repository.EntityRepository
 
             return caseNoList;
         }
+        public async Task<List<Legalmanagementsystem>> GetAllLegalReportList(LegalReportSearchDto model) 
+        {
+
+            var data = await _dbContext.Legalmanagementsystem
+                                        .Include(x => x.CaseStatus)
+                                        .Include(x => x.CourtType)
+                                        .Include(x => x.Locality)
+                                        .Include(x => x.Zone)
+                .Where(x => (x.Id == (model.FileNo == 0 ? x.Id : model.FileNo))
+                && (x.Id == (model.CaseNo == 0 ? x.Id : model.CaseNo))
+                && (x.ContemptOfCourt == (model.ContemptOfCourt == 0 ? x.ContemptOfCourt : model.ContemptOfCourt))
+                && (x.CourtTypeId == (model.CourtType == 0 ? x.CourtTypeId : model.CourtType))
+                && (x.CaseStatusId == (model.CaseStatus == 0 ? x.CaseStatusId : model.CaseStatus))
+                && (x.ZoneId == (model.Zone == 0 ? x.ZoneId : model.Zone))
+                && (x.LocalityId == (model.Locality == 0 ? x.LocalityId : model.Locality))
+                && (x.StayInterimGranted == (model.StayInterimGranted == 0 ? x.StayInterimGranted : model.StayInterimGranted))
+                && (x.Judgement == (model.Judgement == 0 ? x.Judgement : model.Judgement))
+                && x.CreatedDate >= (model.FromDate == null ? x.CreatedDate : model.FromDate)
+                && x.CreatedDate <= (model.ToDate == null ? x.CreatedDate : model.ToDate))
+                .OrderByDescending(x => x.Id).ToListAsync();
+            return data;
+        }
 
         public async Task<PagedResult<Legalmanagementsystem>> GetPagedLegalReportForDownload(LegalReportSearchDto model)
         {
@@ -388,6 +410,14 @@ namespace Libraries.Repository.EntityRepository
                     .Include(x => x.CaseStatus)
                     .Include(x => x.CourtType)
                     .ToListAsync(); 
+        }
+        public async Task<List<Legalmanagementsystem>> GetAllLegalReportDataList(HearingReportSearchDto hearingReportSearchDto) 
+        {
+            var data = await _dbContext.Legalmanagementsystem
+                    .Where(x => x.HearingDate >= (hearingReportSearchDto.hearingDate.HasValue ? hearingReportSearchDto.hearingDate : x.HearingDate)
+                    && x.HearingDate <= (hearingReportSearchDto.nextHearingDate.HasValue ? hearingReportSearchDto.nextHearingDate : x.HearingDate))
+                    .OrderByDescending(x => x.Id).ToListAsync();
+            return data;
         }
         public async Task<List<Legalmanagementsystem>> getlegalmanagementlist(LegalManagementSystemSearchDto model)
         {            

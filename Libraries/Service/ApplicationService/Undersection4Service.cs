@@ -55,8 +55,12 @@ namespace Libraries.Service.ApplicationService
             return await _undersection4Repository.GetAllUndersection4();
         }
 
-       
-      
+        public async Task<List<Undersection4>> GetAllUndersection4detailsList(Undersection4SearchDto model)
+        {
+            return await _undersection4Repository.GetAllUndersection4detailsList(model);
+        }
+
+
         public async Task<List<Undersection4>> GetUndersection4UsingRepo()
         {
             return await _undersection4Repository.GetAllUndersection4();

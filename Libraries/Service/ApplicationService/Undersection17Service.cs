@@ -56,7 +56,10 @@ namespace Libraries.Service.ApplicationService
 
             return await _undersection17Repository.GetAllUndersection17();
         }
-
+        public async Task<List<Undersection17>> GetAllUndersection17List(UnderSection17SearchDto model)
+        {
+            return await _undersection17Repository.GetAllUndersection17List(model);
+        }
         public async Task<PagedResult<Undersection17>> GetPagedUndersection17(UnderSection17SearchDto model)
         {
             return await _undersection17Repository.GetPagedUndersection17(model);

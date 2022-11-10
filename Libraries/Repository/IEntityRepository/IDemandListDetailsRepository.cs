@@ -19,6 +19,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Acquiredlandvillage>> GetVillageList();
         Task<List<Khasra>> GetKhasraList(int id);
         Task<List<Demandlistdetails>> GetAllDemandlistdetails();
+        Task<List<Demandlistdetails>> GetAllDMSFileUploadList(DemandListDetailsSearchDto model);
         //*********  Appeal Details **********
 
         Task<bool> SaveAppeal(Appealdetail appealdetail);

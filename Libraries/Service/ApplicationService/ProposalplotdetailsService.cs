@@ -29,7 +29,10 @@ namespace Libraries.Service.ApplicationService
         {
             return await _proposalplotdetailsRepository.GetAllProposalplotdetails();
         }
-
+        public async Task<List<Proposalplotdetails>> GetAllProposalplotdetailsList(ProposalplotdetailSearchDto model)
+        {
+            return await _proposalplotdetailsRepository.GetAllProposalplotdetailsList(model);
+        }
         public async Task<List<Proposalplotdetails>> GetProposalplotdetailsUsingRepo()
         {
             return await _proposalplotdetailsRepository.GetProposalplotdetails();

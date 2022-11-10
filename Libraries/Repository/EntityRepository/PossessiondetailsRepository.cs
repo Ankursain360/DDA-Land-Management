@@ -43,7 +43,12 @@ namespace Libraries.Repository.IEntityRepository
         {
             return await _dbContext.Possessiondetails.Include(x => x.Village).Include(x => x.Khasra).OrderByDescending(x => x.Id).ToListAsync();
         }
-
+        public async Task<List<Possessiondetails>> GetAllNoPossessiondetailsList(PossessiondetailsSearchDto model) 
+        {
+            var data = await _dbContext.Possessiondetails
+                .Include(x => x.Village).Include(x => x.Khasra).Where(x => (string.IsNullOrEmpty(model.villageid) || x.Village.Name.Contains(model.villageid))).ToListAsync();
+            return data;
+        }
 
         public async Task<PagedResult<Possessiondetails>> GetPagedNoPossessiondetails(PossessiondetailsSearchDto model)
         {

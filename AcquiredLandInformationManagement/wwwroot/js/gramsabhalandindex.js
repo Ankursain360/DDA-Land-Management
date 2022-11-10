@@ -6,6 +6,21 @@ $(document).ready(function () {
    
     GetDetails(currentPageNumber, currentPageSize, sortOrder);
 });
+
+function GetExcel(pageNumber, pageSize, order) {
+    var param = GetSearchParam(pageNumber, pageSize, order);
+    HttpPost(`/GramSabhaLand/GramSabhaLanddetailsList`, 'html', param, function (response) {
+        var a = document.createElement("a");
+        a.target = '_blank';
+        a.href = '/GramSabhaLand/download';
+        a.click();
+    });
+}
+
+$("#btndownload").click(function () {
+    GetExcel(currentPageNumber, currentPageSize, sortOrder);
+});
+
 function GetDetails(pageNumber, pageSize, sortOrder) {
     var param = GetSearchParam(pageNumber, pageSize, sortOrder);
     HttpPost(`/GramSabhaLand/List`, 'html', param, function (response) {

@@ -49,8 +49,12 @@ namespace Libraries.Service.ApplicationService
             return await _undersection17plotdetailRepository.GetAllUndersection17plotdetail();
         }
 
+        public async Task<List<Undersection17plotdetail>> GetAllUndersection17plotdetailList(Undersection17plotdetailSearchDto model)
+        {
+            return await _undersection17plotdetailRepository.GetAllUndersection17plotdetailList(model);
+        }
 
-        
+
         public async Task<List<Khasra>> BindKhasra(int? villageId)
         {
             List<Khasra> khasraList = await _undersection17plotdetailRepository.BindKhasra(villageId);

@@ -13,7 +13,7 @@ namespace Libraries.Repository.IEntityRepository
     {
         Task<List<Booktransferland>> GetBooktransferland();
         Task<List<Booktransferland>> GetAllBooktransferland();
-
+        Task<List<Booktransferland>> GetALlBooktransferlandList(BooktransferlandSearchDto model);
         Task<List<LandNotification>> GetAllLandNotification();
         Task<List<Otherlandnotification>> GetAllOtherLandNotification();
 

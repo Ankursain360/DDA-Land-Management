@@ -29,7 +29,13 @@ namespace Libraries.Repository.EntityRepository
         {
             return await _dbContext.Undersection6.Include(x => x.Undersection4).OrderByDescending(x => x.Id).ToListAsync();
         }
-
+        public async Task<List<Undersection6>> GetAllUndersection6detailsList(Undersection6SearchDto model)
+        { 
+            var data = await _dbContext.Undersection6.Include(x => x.Undersection4)
+                .Where(x => (string.IsNullOrEmpty(model.numbernotification4) || x.Undersection4.Number.Contains(model.numbernotification4))
+                && (string.IsNullOrEmpty(model.notificationno) || x.Number.Contains(model.notificationno))).ToListAsync();
+            return data;
+        }
         public async Task<PagedResult<Undersection6>> GetPagedUndersection6details(Undersection6SearchDto model)
         {
             var data = await _dbContext.Undersection6.Include(x => x.Undersection4)

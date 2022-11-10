@@ -220,9 +220,9 @@ namespace AcquiredLandInformationManagement.Controllers
         [AuthorizeContext(ViewAction.Download)]
 
 
-        public async Task<IActionResult> Undersection6List()
+        public async Task<IActionResult> Undersection6List([FromBody] Undersection6SearchDto model)
         {
-            var result = await _undersection4service.GetAllUndersection6();
+            var result = await _undersection4service.GetAllUndersection6detailsList(model);
             List<Undersection6ListDto> data = new List<Undersection6ListDto>();
             if (result != null)
             {
@@ -240,8 +240,16 @@ namespace AcquiredLandInformationManagement.Controllers
             }
 
             var memory = ExcelHelper.CreateExcel(data);
-            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            TempData["file"] = memory;
+            return Ok();
 
+        }
+
+        [HttpGet]
+        public virtual ActionResult download()
+        {
+            byte[] data = TempData["file"] as byte[];
+            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
 
 

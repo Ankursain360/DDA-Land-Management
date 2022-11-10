@@ -227,9 +227,9 @@ namespace AcquiredLandInformationManagement.Controllers
 
 
         [AuthorizeContext(ViewAction.Download)]
-        public async Task<IActionResult> Undersection17List()
+        public async Task<IActionResult> Undersection17List([FromBody] UnderSection17SearchDto model)
         {
-            var result = await _undersection17Service.GetAllUndersection17();
+            var result = await _undersection17Service.GetAllUndersection17List(model);
             List<Undersection17ListDto> data = new List<Undersection17ListDto>();
             if (result != null)
             {
@@ -238,18 +238,26 @@ namespace AcquiredLandInformationManagement.Controllers
                     data.Add(new Undersection17ListDto()
                     {
                         Id = result[i].Id,
-                        NotificationNo = result[i].Number,
-                        NotificationNo_US_17 = Convert.ToDateTime(result[i].NotificationDate).ToString("dd-MMM-yyyy"),
+                        NotificationNo_US_17 = result[i].Number,
+                        NotificationDate = Convert.ToDateTime(result[i].NotificationDate).ToString("dd-MMM-yyyy"),
                         NotificationUS6 = result[i].UnderSection6 == null ? "" : result[i].UnderSection6.Number,
                         
-                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
-                    }); ;
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive"
+                    });
                 }
             }
 
             var memory = ExcelHelper.CreateExcel(data);
-            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            TempData["file"] = memory;
+            return Ok();
 
+        }
+
+        [HttpGet]
+        public virtual ActionResult download()
+        {
+            byte[] data = TempData["file"] as byte[];
+            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
 
         public async Task<IActionResult> ViewUploadedDocument(int Id)

@@ -12,7 +12,7 @@ namespace Libraries.Repository.IEntityRepository
     {
         Task<PagedResult<Morland>> GetPagedMorland(MorLandsSearchDto model);
         Task<List<Morland>> GetAllMorland();
-
+        Task<List<Morland>> GetAllMorlandList(MorLandsSearchDto model);
         Task<List<Otherlandnotification>> GetAllLandNotification();
       // Task<List<Serialnumber>> GetAllSerialnumber();
         Task<bool> Any(int id, string Name);

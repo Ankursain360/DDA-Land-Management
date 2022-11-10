@@ -14,6 +14,7 @@ namespace Libraries.Service.IApplicationService
         Task<List<Undersection4>> GetAllundersection4();
 
         Task<List<Undersection6>> GetAllUndersection6();
+        Task<List<Undersection6>> GetAllUndersection6detailsList(Undersection6SearchDto model);
         Task<List<Undersection6>> GetUndersection6UsingRepo();
         Task<bool> Update(int id, Undersection6 undersection6);
         Task<bool> Create(Undersection6 undersection6);

@@ -13,6 +13,7 @@ namespace Libraries.Service.IApplicationService
     public interface IProposalplotdetailsService : IEntityService<Proposalplotdetails>
     {
         Task<List<Proposalplotdetails>> GetAllProposalplotdetails();
+        Task<List<Proposalplotdetails>> GetAllProposalplotdetailsList(ProposalplotdetailSearchDto model);
         Task<List<Proposalplotdetails>> GetProposalplotdetailsUsingRepo();
         Task<List<Proposaldetails>> GetAllProposaldetails();
         Task<List<Acquiredlandvillage>> GetAllVillage();

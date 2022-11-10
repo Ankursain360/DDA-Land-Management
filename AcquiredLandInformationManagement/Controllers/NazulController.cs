@@ -220,9 +220,9 @@ namespace AcquiredLandInformationManagement.Controllers
 
         [AuthorizeContext(ViewAction.Download)]
 
-        public async Task<IActionResult> NazulList()
+        public async Task<IActionResult> NazulList([FromBody] NazulSearchDto model)
         {
-            var result = await _nazulService.GetAllNazul();
+            var result = await _nazulService.GetAllNazulList(model);
             List<NazulListDto> data = new List<NazulListDto>();
             if (result != null)
             {
@@ -239,14 +239,22 @@ namespace AcquiredLandInformationManagement.Controllers
                         //DateOfJamabandi = Convert.ToDateTime(result[i].YearOfJamabandi).ToString("dd-MMM-yyyy"),
                         //LastMutationNo = result[i].LastMutationNo,
 
-                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
-                    }); ;
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive"
+                    });
                 }
             }
 
             var memory = ExcelHelper.CreateExcel(data);
-            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            TempData["file"] = memory;
+            return Ok();
 
+        }
+
+        [HttpGet]
+        public virtual ActionResult download()
+        {
+            byte[] data = TempData["file"] as byte[];
+            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
         public async Task<IActionResult> ViewUploadedDocument(int Id)
         {

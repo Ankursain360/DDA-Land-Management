@@ -13,6 +13,7 @@ namespace Libraries.Service.IApplicationService
     public interface IProposaldetailsService : IEntityService<Proposaldetails>
     {
         Task<List<Proposaldetails>> GetAllProposaldetails();
+        Task<List<Proposaldetails>> GetAllProposaldetailsList(ProposaldetailsSearchDto model);
         Task<List<Proposaldetails>> GetProposaldetailsUsingRepo();
         Task<List<Scheme>> GetAllScheme(); // To Get all data added by ishu
         Task<bool> Update(int id, Proposaldetails proposaldetails);

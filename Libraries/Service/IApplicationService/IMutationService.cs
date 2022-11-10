@@ -15,6 +15,7 @@ namespace Libraries.Service.IApplicationService
         Task<List<Khasra>> GetKhasraList(int id);
         Task<PagedResult<Mutation>> GetPagedDMSFileUploadList(DemandListDetailsSearchDto model);
         Task<List<Mutation>> GetAllMutation();
+        Task<List<Mutation>> GetAllDMSFileUploadList(DemandListDetailsSearchDto model);
         Task<bool> Create(Mutation mutation);
         Task<Mutation> FetchSingleResult(int id);
         Task<bool> Update(int id, Mutation mutation);

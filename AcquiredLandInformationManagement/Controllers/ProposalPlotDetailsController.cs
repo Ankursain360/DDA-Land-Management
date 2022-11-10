@@ -191,9 +191,9 @@ namespace AcquiredLandInformationManagement.Controllers
         [AuthorizeContext(ViewAction.Download)]
        
 
-        public async Task<IActionResult> ProposalplotdetailsList()
+        public async Task<IActionResult> ProposalplotdetailsList([FromBody] ProposalplotdetailSearchDto model)
         {
-            var result = await _proposalplotdetailsService.GetAllProposalplotdetails();
+            var result = await _proposalplotdetailsService.GetAllProposalplotdetailsList(model);
             List<ProposalplotdetailsListDto> data = new List<ProposalplotdetailsListDto>();
             if (result != null)
             {
@@ -215,8 +215,16 @@ namespace AcquiredLandInformationManagement.Controllers
             }
 
             var memory = ExcelHelper.CreateExcel(data);
-            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            TempData["file"] = memory;
+            return Ok();
 
+        }
+
+        [HttpGet]
+        public virtual ActionResult download()
+        {
+            byte[] data = TempData["file"] as byte[];
+            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
 
     }

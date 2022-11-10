@@ -206,6 +206,16 @@ namespace Libraries.Repository.EntityRepository
 
 
         }
+        public async Task<List<Booktransferland>> GetALlBooktransferlandList(BooktransferlandSearchDto model)
+        {
+            var data = await _dbContext.Booktransferland
+                                       .Include(x => x.Locality)
+                                       .Include(x => x.Khasra)
+                                       .Include(x => x.OtherLandNotification)
+                                         .Where(x => string.IsNullOrEmpty(model.name) || x.Part.Contains(model.name)).ToListAsync();
+            return data;
+        }
+
         public async Task<List<LandNotification>> GetAllLandNotification()
         {
             List<LandNotification> landNotificationList = await _dbContext.LandNotification.Where(x => x.IsActive == 1).ToListAsync();

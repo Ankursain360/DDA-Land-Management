@@ -114,5 +114,9 @@ namespace Service.ApplicationService
         {
             return await _mutationRepository.GetAllMutation();
         }
+        public async Task<List<Mutation>> GetAllDMSFileUploadList(DemandListDetailsSearchDto model)
+        {
+            return await _mutationRepository.GetAllDMSFileUploadList(model);
+        }
     }
 }

@@ -6,6 +6,21 @@ $(document).ready(function () {
     GetProposalplotdetails(currentPageNumber, currentPageSize, sortOrder);
 });
 
+
+function GetExcel(pageNumber, pageSize, order) {
+    var param = GetSearchParam(pageNumber, pageSize, order);
+    HttpPost(`/ProposalPlotDetails/ProposalplotdetailsList`, 'html', param, function (response) {
+        var a = document.createElement("a");
+        a.target = '_blank';
+        a.href = '/ProposalPlotDetails/download';
+        a.click();
+    });
+}
+
+$("#btndownload").click(function () {
+    GetExcel(currentPageNumber, currentPageSize, sortOrder);
+});
+
 function GetProposalplotdetails(pageNumber, pageSize, order) {
     var param = GetSearchParam(pageNumber, pageSize, order);
     HttpPost(`/proposalPlotDetails/List`, 'html', param, function (response) {

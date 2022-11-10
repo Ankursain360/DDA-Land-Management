@@ -454,7 +454,7 @@ namespace CourtCasesManagement.Controllers
                     data.Add(new LegalManagementSystemListDto()
                     {
                         Id = i + 1,
-                        fileNo = result[i].FileNo,
+                        LegalfileNo = result[i].FileNo,
                         LMFileNo = result[i].LMFileNO,
                         courtCaseNo = result[i].CourtCaseNo,
                         courtCaseTitle = result[i].CourtCaseTitle,

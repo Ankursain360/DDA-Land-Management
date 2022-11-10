@@ -126,6 +126,10 @@ namespace Service.ApplicationService
         {
             return await _demandListDetailsRepository.GetAllDemandlistdetails();
         }
+        public async Task<List<Demandlistdetails>> GetAllDMSFileUploadList(DemandListDetailsSearchDto model)
+        {
+            return await _demandListDetailsRepository.GetAllDMSFileUploadList(model);
+        }
         //*********  appeal Details **********
 
         public async Task<bool> SaveAppeal(Appealdetail appealdetail)

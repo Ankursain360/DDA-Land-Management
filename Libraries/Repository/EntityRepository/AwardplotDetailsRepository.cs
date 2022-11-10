@@ -32,7 +32,16 @@ namespace Libraries.Repository.EntityRepository
         {
             return await _dbContext.Awardplotdetails.Include(x => x.AwardMaster).Include(x => x.Village).Include(x => x.Khasra).OrderByDescending(x => x.Id).ToListAsync();
         }
-
+        public async Task<List<Awardplotdetails>> GetAllAwardplotdetailsList(AwardPlotDetailSearchDto model)
+        {
+            var data = await _dbContext.Awardplotdetails
+                                    .Include(x => x.AwardMaster)
+                                    .Include(x => x.Village)
+                                    .Include(x => x.Khasra)
+                                    .Where(x => string.IsNullOrEmpty(model.name) || x.AwardMaster.AwardNumber.Contains(model.name))
+                                      .OrderByDescending(x => x.Id).ToListAsync();
+            return data;
+        }
 
         public async Task<List<Acquiredlandvillage>> GetAllVillage()
         {

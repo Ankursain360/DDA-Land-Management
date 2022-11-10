@@ -72,6 +72,16 @@ namespace Libraries.Repository.EntityRepository
                                    .Include(x => x.Khasra)
                                    .ToListAsync();
         }
+        public async Task<List<Mutation>> GetAllDMSFileUploadList(DemandListDetailsSearchDto model)
+        {
+            var data = await _dbContext.Mutation
+                                        .Include(x => x.AcquiredVillage) 
+                                        .Include(x => x.Khasra)
+                                        .Where(x => x.AcquiredVillageId == (model.villageId == 0 ? x.AcquiredVillageId : model.villageId)                                       
+                                        && (x.KhasraId == (model.KhasraId == 0 ? x.KhasraId : model.KhasraId))
+                                        ).ToListAsync();
+            return data;
+        }
         public async Task<Mutation> FetchSingleResult(int id)
         {
             return await _dbContext.Mutation

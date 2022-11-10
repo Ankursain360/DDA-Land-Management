@@ -30,7 +30,10 @@ namespace Libraries.Service.ApplicationService
         {
             return await _gramsabhalandRepository.GetAllGramsabhaland();
         }
-
+        public async Task<List<Gramsabhaland>> GetAllGramsabhalandList(GramsabhalandSearchDto model)
+        {
+            return await _gramsabhalandRepository.GetAllGramsabhalandList(model);
+        }
         public async Task<List<Zone>> GetAllZone()
         {
             List<Zone> zoneList = await _gramsabhalandRepository.GetAllZone();

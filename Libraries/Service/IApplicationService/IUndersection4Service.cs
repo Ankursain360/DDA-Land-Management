@@ -12,7 +12,7 @@ namespace Libraries.Service.IApplicationService
     public interface IUndersection4service
     {
         Task<List<Undersection4>> GetAllUndersection4();
-
+        Task<List<Undersection4>> GetAllUndersection4detailsList(Undersection4SearchDto model);
         Task<List<Proposaldetails>> GetAllProposal();
         Task<List<Undersection4>> GetUndersection4UsingRepo();
         Task<bool> Update(int id, Undersection4 undersection4);

@@ -10,6 +10,20 @@ $(document).ready(function () {
     GetPossession(currentPageNumber, currentPageSize, sortOrder);
 });
 
+function GetExcel(pageNumber, pageSize, order) {
+    var param = GetSearchParam(pageNumber, pageSize, order);
+    HttpPost(`/PossessionDetail/PossessiondetailsList`, 'html', param, function (response) {
+        var a = document.createElement("a");
+        a.target = '_blank';
+        a.href = '/PossessionDetail/download';
+        a.click();
+    });
+}
+
+$("#btndownload").click(function () {
+    GetExcel(currentPageNumber, currentPageSize, sortOrder);
+});
+
 $("#btnSearch").click(function () {
     GetPossession(currentPageNumber, currentPageSize, sortOrder);
 });

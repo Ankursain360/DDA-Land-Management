@@ -293,9 +293,9 @@ namespace AcquiredLandInformationManagement.Controllers
         }
 
         [AuthorizeContext(ViewAction.Download)]
-        public async Task<IActionResult> PossessiondetailsList()
+        public async Task<IActionResult> PossessiondetailsList([FromBody] PossessiondetailsSearchDto model)
         {
-            var result = await _Possessiondetailservice.GetAllPossessiondetails();
+            var result = await _Possessiondetailservice.GetAllNoPossessiondetailsList(model);
             List<PossessiondetailsListDto> data = new List<PossessiondetailsListDto>();
             if (result != null)
             {
@@ -309,14 +309,22 @@ namespace AcquiredLandInformationManagement.Controllers
                         Date = Convert.ToDateTime(result[i].PossDate).ToString("dd-MMM-yyyy"),
                         typeofpossession = result[i].PlotNo,
                        
-                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
-                    }); ;
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive"
+                    }); 
                 }
             }
 
             var memory = ExcelHelper.CreateExcel(data);
-            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            TempData["file"] = memory;
+            return Ok();
 
+        }
+
+        [HttpGet]
+        public virtual ActionResult download()
+        {
+            byte[] data = TempData["file"] as byte[];
+            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
         public async Task<IActionResult> ViewUploadedDocument(int Id)
         {

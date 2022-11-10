@@ -44,7 +44,13 @@ namespace Libraries.Repository.EntityRepository
             return khasraList;
         }
 
-
+        public async Task<List<Undersection6plot>> GetAllNoUndersection6plotList(NotificationUndersection6plotDto model)
+        {
+            var data = await _dbContext.Undersection6plot.Include(x => x.Undersection6)
+                .Include(x => x.Village).Include(x => x.Khasra).Where(x => (string.IsNullOrEmpty(model.numbernotification6) || x.Undersection6.Number.Contains(model.numbernotification6))
+                   && (string.IsNullOrEmpty(model.villageid) || x.Village.Name.Contains(model.villageid))).ToListAsync();
+            return data;
+        }
 
         public async Task<List<Undersection6plot>> GetAllUndersection6Plot()
         {

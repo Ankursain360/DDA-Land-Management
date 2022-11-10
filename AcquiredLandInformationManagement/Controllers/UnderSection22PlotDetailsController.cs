@@ -184,9 +184,9 @@ namespace AcquiredLandInformationManagement.Controllers
             return PartialView("_ListNotification", Data);
         }
         [AuthorizeContext(ViewAction.Download)]
-        public async Task<IActionResult> Undersection22plotList()
+        public async Task<IActionResult> Undersection22plotList([FromBody] Undersection22plotdetailsSearchDto model)
         {
-            var result = await _undersection22plotdetailsService.GetAllUS22PlotDetails();
+            var result = await _undersection22plotdetailsService.GetAllUndersection22plotdetailsList(model);
             List<Undersection22plotListDto> data = new List<Undersection22plotListDto>();
             if (result != null)
             {
@@ -210,8 +210,16 @@ namespace AcquiredLandInformationManagement.Controllers
             }
 
             var memory = ExcelHelper.CreateExcel(data);
-            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            TempData["file"] = memory;
+            return Ok();
 
+        }
+
+        [HttpGet]
+        public virtual ActionResult download()
+        {
+            byte[] data = TempData["file"] as byte[];
+            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
     }
 }

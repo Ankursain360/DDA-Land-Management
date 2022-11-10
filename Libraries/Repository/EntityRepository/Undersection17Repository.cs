@@ -144,7 +144,15 @@ namespace Libraries.Repository.EntityRepository
         }
 
 
-
+        public async Task<List<Undersection17>> GetAllUndersection17List(UnderSection17SearchDto model)
+        {
+            
+            var data = await _dbContext.Undersection17
+                        .Include(x => x.UnderSection6)
+                        .Where(x => (string.IsNullOrEmpty(model.number) || x.Number.Contains(model.number))
+                         && (string.IsNullOrEmpty(model.undersection6) || x.UnderSection6.Number.Contains(model.undersection6))).ToListAsync();
+            return data;
+        }
 
 
 

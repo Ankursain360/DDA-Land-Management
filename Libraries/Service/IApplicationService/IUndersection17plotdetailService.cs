@@ -21,7 +21,7 @@ namespace Libraries.Service.IApplicationService
 
         Task<List<Undersection17plotdetail>> GetUndersection17plotdetailUsingRepo();
         Task<List<Undersection17plotdetail>> GetAllUndersection17plotdetail();
-
+        Task<List<Undersection17plotdetail>> GetAllUndersection17plotdetailList(Undersection17plotdetailSearchDto model);
         Task<bool> Update(int id, Undersection17plotdetail undersection17plotdetail);
         Task<bool> Create(Undersection17plotdetail undersection17plotdetail);
         Task<Undersection17plotdetail> FetchSingleResult(int id);

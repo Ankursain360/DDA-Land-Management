@@ -26,6 +26,7 @@ namespace Libraries.Repository.IEntityRepository
 
         Task<List<Legalmanagementsystem>> GetFileNoList();
         Task<List<Legalmanagementsystem>> GetCourtCaseNoList(int filenoId);
+        Task<List<Legalmanagementsystem>> GetAllLegalReportList(LegalReportSearchDto model);
 
         Task<PagedResult<Legalmanagementsystem>> GetPagedLegalReport(LegalReportSearchDto model);
 
@@ -42,6 +43,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<bool> AnyCode(int id, string name);
         Task<int> checkUniqueUpload(string fileno , string caseno);
          Task<List<Legalmanagementsystem>> GetAllLegalmanagementsystem();
+        Task<List<Legalmanagementsystem>> GetAllLegalReportDataList(HearingReportSearchDto hearingReportSearchDto);
         Task<List<Legalmanagementsystem>> getlegalmanagementlist(LegalManagementSystemSearchDto model);
 
         //********CourtCaseMapping************//

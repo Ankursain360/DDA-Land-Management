@@ -46,9 +46,9 @@ namespace CourtCasesManagement.Controllers
                 return PartialView();
             }
         }
-        public async Task<IActionResult> CaseHearningReportList()
+        public async Task<IActionResult> CaseHearningReportList([FromBody] HearingReportSearchDto hearingReportSearchDto)
         {
-            var result = await _legalmanagementsystemService.GetAllLegalmanagementsystem();
+            var result = await _legalmanagementsystemService.GetAllLegalReportDataList(hearingReportSearchDto);
             List<HearingReportListDto> data = new List<HearingReportListDto>();
             if (result != null)
             {
@@ -72,8 +72,16 @@ namespace CourtCasesManagement.Controllers
             }
 
             var memory = ExcelHelper.CreateExcel(data);
-            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            TempData["file"] = memory;
+            return Ok();
+
         }
 
+        [HttpGet]
+        public virtual ActionResult download()
+        {
+            byte[] data = TempData["file"] as byte[];
+            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        }
     }
 }

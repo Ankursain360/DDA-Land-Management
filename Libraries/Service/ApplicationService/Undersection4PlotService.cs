@@ -70,7 +70,10 @@ namespace Libraries.Service.ApplicationService
             return await _undersection4plotRepository.GetAllUndersection4Plot();
         }
 
-
+        public async Task<List<Undersection4plot>> GetAllNoUndersection4plotList(NotificationUndersection4plotDto model)
+        {
+            return await _undersection4plotRepository.GetAllNoUndersection4plotList(model);
+        }
 
         public async Task<List<Undersection4plot>> GetUndersection4PlotUsingRepo()
         {

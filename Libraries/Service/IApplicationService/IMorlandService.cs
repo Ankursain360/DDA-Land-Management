@@ -16,7 +16,7 @@ namespace Libraries.Service.IApplicationService
        // Task<List<Serialnumber>> GetAllSerialnumber();
         Task<List<Morland>> GetMorlandUsingRepo();
         Task<List<Morland>> GetAllMorland();
-
+        Task<List<Morland>> GetAllMorlandList(MorLandsSearchDto model);
         Task<bool> Update(int id, Morland morland);
         Task<bool> Create(Morland morland);
         Task<Morland> FetchSingleResult(int id);

@@ -28,6 +28,17 @@ namespace Libraries.Repository.EntityRepository
                                    .Include(x => x.Acquiredlandvillage)
                                    .ToListAsync();
         }
+        public async Task<List<Undersection22plotdetails>> GetAllUndersection22plotdetailsList(Undersection22plotdetailsSearchDto model)
+        {
+            var data = await _dbContext.Undersection22plotdetails
+                              .Include(x => x.UnderSection22) 
+                              .Include(x => x.Acquiredlandvillage)
+                              .Include(x => x.Khasra)
+                             .Where(x => (string.IsNullOrEmpty(model.usno) || x.UnderSection22.NotificationNo.Contains(model.usno))
+                             && (string.IsNullOrEmpty(model.village) || x.Acquiredlandvillage.Name.Contains(model.village))
+                             && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra))).ToListAsync();
+            return data;
+        }
         public async Task<List<Acquiredlandvillage>> GetAllAcquiredlandvillage()
         {
             List<Acquiredlandvillage> acqvillageList = await _dbContext.Acquiredlandvillage.Where(x => x.IsActive == 1).ToListAsync();

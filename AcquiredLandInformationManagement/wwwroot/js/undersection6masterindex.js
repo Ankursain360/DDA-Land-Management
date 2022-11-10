@@ -9,6 +9,20 @@ $(document).ready(function () {
     GetDivision(currentPageNumber, currentPageSize, sortOrder);
 });
 
+function GetExcel(pageNumber, pageSize, order) {
+    var param = GetSearchParam(pageNumber, pageSize, order);
+    HttpPost(`/UnderSection6Master/Undersection6List`, 'html', param, function (response) {
+        var a = document.createElement("a");
+        a.target = '_blank';
+        a.href = '/UnderSection6Master/download';
+        a.click();
+    });
+}
+
+$("#btndownload").click(function () {
+    GetExcel(currentPageNumber, currentPageSize, sortOrder);
+});
+
 $("#btnSearch").click(function () {
     GetDivision(currentPageNumber, currentPageSize, sortOrder);
 });

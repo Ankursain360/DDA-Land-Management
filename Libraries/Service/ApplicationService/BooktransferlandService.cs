@@ -35,7 +35,10 @@ namespace Libraries.Service.ApplicationService
         {
             return await _booktransferlandRepository.GetAllBooktransferland();
         }
-
+        public async Task<List<Booktransferland>> GetALlBooktransferlandList(BooktransferlandSearchDto model)
+        {
+            return await _booktransferlandRepository.GetALlBooktransferlandList(model);
+        }
         public async Task<List<Booktransferland>> GetBooktransferlandUsingRepo()
         {
             return await _booktransferlandRepository.GetBooktransferland();

@@ -12,6 +12,7 @@ namespace Libraries.Service.IApplicationService
     public interface IAwardplotDetailService
     {
         Task<List<Awardplotdetails>> GetAwardplotdetails();
+        Task<List<Awardplotdetails>> GetAllAwardplotdetailsList(AwardPlotDetailSearchDto model);
         Task<List<Awardmasterdetail>> GetAllAWardmaster();
         Task<List<Khasra>> BindKhasra(int? villageId);
         Task<List<Acquiredlandvillage>> GetAllVillage();

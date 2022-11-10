@@ -13,7 +13,7 @@ namespace Libraries.Repository.IEntityRepository
     {
 
         Task<List<Undersection17>> GetAllUndersection17();
-
+        Task<List<Undersection17>> GetAllUndersection17List(UnderSection17SearchDto model);
         Task<List<Undersection6>> GetAllUndersection6List();
         Task<PagedResult<Undersection17>> GetPagedUndersection17(UnderSection17SearchDto model);
 

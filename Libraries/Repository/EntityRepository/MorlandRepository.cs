@@ -40,6 +40,16 @@ namespace Libraries.Repository.EntityRepository
                
                 .OrderByDescending(x => x.Id).ToListAsync();
         }
+        public async Task<List<Morland>> GetAllMorlandList(MorLandsSearchDto model)
+        {
+            var data = await _dbContext.Morland
+                                        .Include(x => x.LandNotification)
+                                        .Where(x => (string.IsNullOrEmpty(model.name) || x.LandNotification.NotificationNumber.Contains(model.name))
+                                        && (string.IsNullOrEmpty(model.propertyname) || x.PropertySiteNo.Contains(model.propertyname))
+                                        && (string.IsNullOrEmpty(model.sitedesc) || x.SiteDescription.Contains(model.sitedesc)))
+                                       .OrderBy(x => x.LandNotification.NotificationNumber).ToListAsync();
+            return data;
+        }
 
         public async Task<PagedResult<Morland>> GetPagedMorland(MorLandsSearchDto model)
         {

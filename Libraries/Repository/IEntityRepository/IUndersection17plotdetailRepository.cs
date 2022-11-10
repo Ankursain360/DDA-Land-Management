@@ -12,6 +12,7 @@ namespace Libraries.Repository.IEntityRepository
     {
         Task<PagedResult<Undersection17plotdetail>> GetPagedUndersection17plotdetail(Undersection17plotdetailSearchDto model);
         Task<List<Undersection17plotdetail>> GetAllUndersection17plotdetail();
+        Task<List<Undersection17plotdetail>> GetAllUndersection17plotdetailList(Undersection17plotdetailSearchDto model);
 
         Task<List<Acquiredlandvillage>> GetAllVillageList();
         Task<List<Khasra>> BindKhasra(int? villageId);

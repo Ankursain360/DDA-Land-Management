@@ -84,5 +84,9 @@ namespace Libraries.Service.ApplicationService
         {
             return await _undersection22Repository.GetPagedUndersection22(model);
         }
+        public async Task<List<Undersection22>> GetAllUndersection22List(Undersection22SearchDto model)
+        {
+            return await _undersection22Repository.GetAllUndersection22List(model);
+        }
     }
 }

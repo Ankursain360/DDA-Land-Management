@@ -205,8 +205,20 @@ namespace Libraries.Repository.EntityRepository
             return await _dbContext.Undersection17plotdetail.Include(x => x.UnderSection17).Include(x => x.Khasra).Include(x => x.Acquiredlandvillage).OrderByDescending(x => x.Id).ToListAsync();
         }
 
-       
 
+        public async Task<List<Undersection17plotdetail>> GetAllUndersection17plotdetailList(Undersection17plotdetailSearchDto model)
+        {
+
+            var data = await _dbContext.Undersection17plotdetail
+                       .Include(x => x.UnderSection17)
+                       .Include(x => x.Khasra)
+                       .Include(x => x.Acquiredlandvillage)
+
+                        .Where(x => (string.IsNullOrEmpty(model.undersection17) || x.UnderSection17.Number.Contains(model.undersection17))
+                         && (string.IsNullOrEmpty(model.village) || x.Acquiredlandvillage.Name.Contains(model.village))
+                         && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra))).ToListAsync();
+            return data;
+        }
 
         public async Task<List<Unotification17detailsListDto>> GetPagednotification17detailsList(Unotification17detailsSearchDto model)
 

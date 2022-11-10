@@ -24,9 +24,19 @@ namespace Libraries.Repository.EntityRepository
         }
 
       
-      public async Task<List<Gramsabhaland>> GetAllGramsabhaland()
+        public async Task<List<Gramsabhaland>> GetAllGramsabhaland()
         {
             return await _dbContext.Gramsabhaland.Include(x => x.Zone).Include(x => x.Village).OrderByDescending(x => x.Id).ToListAsync();
+        }
+        public async Task<List<Gramsabhaland>> GetAllGramsabhalandList(GramsabhalandSearchDto model)
+        {
+            var data = await _dbContext.Gramsabhaland                 
+                                   .Include(x => x.Zone)
+                                   .Include(x => x.Village)
+                                   .Where(x => (string.IsNullOrEmpty(model.zone) || x.Zone.Name.Contains(model.zone))
+                                    && (string.IsNullOrEmpty(model.village) || x.Village.Name.Contains(model.village))
+                                    && (string.IsNullOrEmpty(model.khasra) || x.KhasraNo.Contains(model.khasra))).ToListAsync();
+            return data;
         }
         public async Task<List<Zone>> GetAllZone()
         {

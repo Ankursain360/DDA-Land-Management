@@ -30,6 +30,10 @@ namespace Libraries.Service.ApplicationService
             return await _awardmasterdetailsRepository.Getawardmasterdetails();
           
         }
+        public async Task<List<Awardmasterdetail>> GetAllawardmasterdetailsList(AwardMasterDetailsSearchDto model)
+        {
+            return await _awardmasterdetailsRepository.GetAllawardmasterdetailsList(model);
+        }
         public async Task<PagedResult<Awardmasterdetail>> GetPagedawardmasterdetails(AwardMasterDetailsSearchDto model)
         {
             return await _awardmasterdetailsRepository.GetPagedawardmasterdetails(model);

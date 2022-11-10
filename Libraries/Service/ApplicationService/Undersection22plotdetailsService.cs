@@ -28,6 +28,10 @@ namespace Libraries.Service.ApplicationService
         {
             return await _undersection22plotdetailsRepository.GetAllUS22PlotDetails();
         }
+        public async Task<List<Undersection22plotdetails>> GetAllUndersection22plotdetailsList(Undersection22plotdetailsSearchDto model)
+        {
+            return await _undersection22plotdetailsRepository.GetAllUndersection22plotdetailsList(model);
+        }
         public async Task<List<Acquiredlandvillage>> GetAllAcquiredlandvillage()
         {
             List<Acquiredlandvillage> acqvillageList = await _undersection22plotdetailsRepository.GetAllAcquiredlandvillage();

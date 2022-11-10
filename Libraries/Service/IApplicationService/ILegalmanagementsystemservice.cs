@@ -40,7 +40,7 @@ namespace Libraries.Service.IApplicationService
         Task<PagedResult<Legalmanagementsystem>> GetPagedLegalReport(LegalReportSearchDto model);
         Task<PagedResult<Legalmanagementsystem>> GetPagedLegalReportForDownload(LegalReportSearchDto model);
 
-
+        Task<List<Legalmanagementsystem>> GetAllLegalReportList(LegalReportSearchDto model);
         Task<PagedResult<Legalmanagementsystem>> GetLegalmanagementsystemReportData(HearingReportSearchDto hearingReportSearchDto);
         Task<List<Legalmanagementsystem>> GetLegalmanagementsystemList();
         string GetDownload(int id);
@@ -51,6 +51,7 @@ namespace Libraries.Service.IApplicationService
         //Task<bool> AnyCode(int id, string name);
         Task<bool> CheckUniqueName(int id, string legalmanagementsystem);
         Task<List<Legalmanagementsystem>> GetAllLegalmanagementsystem();
+        Task<List<Legalmanagementsystem>> GetAllLegalReportDataList(HearingReportSearchDto hearingReportSearchDto);
         Task<Legalmanagementsystem> FetchSingleResult(int id);
         Task<bool> Update(int id, Legalmanagementsystem legalmanagementsystem);
         Task<bool> Create(Legalmanagementsystem legalmanagementsystem);

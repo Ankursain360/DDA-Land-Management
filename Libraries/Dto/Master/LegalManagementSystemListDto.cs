@@ -5,7 +5,7 @@ namespace Dto.Master
    public class LegalManagementSystemListDto
     {
         public int Id { get; set; }
-        public string fileNo { get; set; }
+        public string LegalfileNo { get; set; }
         public string LMFileNo { get; set; }
         public string courtCaseNo { get; set; }
         public string courtCaseTitle { get; set; }

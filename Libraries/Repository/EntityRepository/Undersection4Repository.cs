@@ -30,8 +30,15 @@ namespace Libraries.Repository.EntityRepository
         }
 
 
+        public async Task<List<Undersection4>> GetAllUndersection4detailsList(Undersection4SearchDto model)
+        {
+            var data = await _dbContext.Undersection4.Include(x => x.Proposal).Where(x => (string.IsNullOrEmpty(model.name) || x.Proposal.Name.Contains(model.name))
+                && (string.IsNullOrEmpty(model.notificationno) || x.Number.Contains(model.notificationno))
+                 && (string.IsNullOrEmpty(model.type) || x.TypeDetails.Contains(model.type))).ToListAsync();
+            return data; 
+        }
 
-   
+
 
         public async Task<bool> Any(int id, string number)
         {

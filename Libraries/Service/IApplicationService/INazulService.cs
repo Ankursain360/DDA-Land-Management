@@ -16,7 +16,7 @@ namespace Libraries.Service.IApplicationService
         Task<List<Acquiredlandvillage>> GetAllVillageList();
         Task<List<Nazul>> GetNazulUsingRepo();
         Task<List<Nazul>> GetAllNazul();
-
+        Task<List<Nazul>> GetAllNazulList(NazulSearchDto model);
         Task<bool> Update(int id, Nazul nazul);
         Task<bool> Create(Nazul nazul);
         Task<Nazul> FetchSingleResult(int id);

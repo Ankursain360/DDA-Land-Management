@@ -59,7 +59,15 @@ namespace Libraries.Repository.EntityRepository
 
 
 
-
+        public async Task<List<Undersection4plot>> GetAllNoUndersection4plotList(NotificationUndersection4plotDto model)
+        {
+            var data = await _dbContext.Undersection4plot.Include(x => x.UnderSection4)
+                .Include(x => x.Village).Include(x => x.Khasra).Where(x => (string.IsNullOrEmpty(model.numbernotification4) || x.UnderSection4.Number.Contains(model.numbernotification4))
+                   && (string.IsNullOrEmpty(model.villageid) || x.Village.Name.Contains(model.villageid))
+                    
+               ).ToListAsync();
+            return data;
+        }
 
 
 

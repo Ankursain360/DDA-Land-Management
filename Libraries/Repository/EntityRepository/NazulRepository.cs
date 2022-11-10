@@ -31,7 +31,13 @@ namespace Libraries.Repository.EntityRepository
         }
 
 
-
+        public async Task<List<Nazul>> GetAllNazulList(NazulSearchDto model)
+        {
+            var data = await _dbContext.Nazul
+                          .Include(x => x.Village)
+                          .Where(x => (string.IsNullOrEmpty(model.village) || x.Village.Name.Contains(model.village))).ToListAsync();
+            return data;
+        }
 
 
         public async Task<List<Nazul>> GetAllNazul()

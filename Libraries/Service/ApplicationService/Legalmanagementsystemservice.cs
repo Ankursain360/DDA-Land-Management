@@ -150,7 +150,10 @@ namespace Service.ApplicationService
         {
             return await _legalmanagementsystemRepository.GetPagedLegalReportForDownload(model);
         }
-
+        public async Task<List<Legalmanagementsystem>> GetAllLegalReportList(LegalReportSearchDto model)
+        {
+            return await _legalmanagementsystemRepository.GetAllLegalReportList(model);
+        }
         public async Task<PagedResult<Legalmanagementsystem>> GetLegalmanagementsystemReportData(HearingReportSearchDto hearingReportSearchDto)
         {
             return await _legalmanagementsystemRepository.GetLegalmanagementsystemReportData(hearingReportSearchDto);
@@ -242,6 +245,10 @@ namespace Service.ApplicationService
         public async Task<List<Legalmanagementsystem>> GetAllLegalmanagementsystem()
         {
             return await _legalmanagementsystemRepository.GetAllLegalmanagementsystem();
+        }
+        public async Task<List<Legalmanagementsystem>> GetAllLegalReportDataList(HearingReportSearchDto hearingReportSearchDto)
+        {
+            return await _legalmanagementsystemRepository.GetAllLegalReportDataList(hearingReportSearchDto);
         }
         public async Task<bool> CheckUniqueName(int id, string legalmanagementsystem)
         {

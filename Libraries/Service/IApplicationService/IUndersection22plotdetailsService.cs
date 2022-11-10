@@ -12,6 +12,7 @@ namespace Libraries.Service.IApplicationService
      public interface IUndersection22plotdetailsService : IEntityService<Undersection22plotdetails>
      {
         Task<List<Undersection22plotdetails>> GetAllUS22PlotDetails();
+        Task<List<Undersection22plotdetails>> GetAllUndersection22plotdetailsList(Undersection22plotdetailsSearchDto model);
         Task<List<Acquiredlandvillage>> GetAllAcquiredlandvillage();
         Task<List<Khasra>> GetAllKhasra(int? villageId);
         Task<List<Undersection4>> GetAllUndersection4();

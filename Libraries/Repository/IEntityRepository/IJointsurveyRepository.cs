@@ -10,7 +10,7 @@ namespace Libraries.Repository.IEntityRepository
     public interface IJointsurveyRepository : IGenericRepository<Jointsurvey>
     {
         Task<List<Jointsurvey>> GetAllJointSurvey();
-       
+        Task<List<Jointsurvey>> GetAllJointsurveyList(JointSurveySearchDto model);
         Task<List<Acquiredlandvillage>> GetAllVillage();
         Task<List<Khasra>> BindKhasra(int villageid);
         Task<PagedResult<Jointsurvey>> GetPagedJointsurvey(JointSurveySearchDto model);

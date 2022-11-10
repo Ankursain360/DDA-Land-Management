@@ -11,6 +11,7 @@ namespace Libraries.Service.IApplicationService
    public interface IAwardmasterdetailsService : IEntityService<Awardmasterdetail>
     {
         Task<List<Awardmasterdetail>> Getawardmasterdetails();
+        Task<List<Awardmasterdetail>> GetAllawardmasterdetailsList(AwardMasterDetailsSearchDto model);
         Task<PagedResult<Awardmasterdetail>> GetPagedawardmasterdetails(AwardMasterDetailsSearchDto model);
         Task<bool> Update(int id, Awardmasterdetail awardmasterdetail);
         Task<bool> Create(Awardmasterdetail awardmasterdetail);

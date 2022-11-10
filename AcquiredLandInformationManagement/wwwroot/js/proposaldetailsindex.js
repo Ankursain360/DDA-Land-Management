@@ -6,6 +6,20 @@ $(document).ready(function () {
     GetProposaldetails(currentPageNumber, currentPageSize, sortOrder);
 });
 
+function GetExcel(pageNumber, pageSize, order) {
+    var param = GetSearchParam(pageNumber, pageSize, order);
+    HttpPost(`/ProposalDetails/ProposalDetailsList`, 'html', param, function (response) {
+        var a = document.createElement("a");
+        a.target = '_blank';
+        a.href = '/ProposalDetails/download';
+        a.click();
+    });
+}
+
+$("#btndownload").click(function () {
+    GetExcel(currentPageNumber, currentPageSize, sortOrder);
+});
+
 $("#btnSearch").click(function () {
     GetProposaldetails(currentPageNumber, currentPageSize, sortOrder);
 });

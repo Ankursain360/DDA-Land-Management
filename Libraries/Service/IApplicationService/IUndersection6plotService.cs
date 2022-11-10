@@ -13,6 +13,7 @@ namespace Libraries.Service.IApplicationService
     {
 
         Task<List<Undersection6plot>> GetAllUndersection6Plot();
+        Task<List<Undersection6plot>> GetAllNoUndersection6plotList(NotificationUndersection6plotDto model);
         Task<List<Khasra>> BindKhasra(int? villageId);
         Task<List<Undersection6>> GetAllNotificationNo();
         Task<List<Acquiredlandvillage>> GetAllVillage();

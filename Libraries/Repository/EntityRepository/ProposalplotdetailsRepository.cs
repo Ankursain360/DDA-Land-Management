@@ -164,6 +164,17 @@ namespace Libraries.Repository.EntityRepository
 
 
         }
+        public async Task<List<Proposalplotdetails>> GetAllProposalplotdetailsList(ProposalplotdetailSearchDto model)
+        {
+            var data = await _dbContext.Proposalplotdetails
+                         .Include(x => x.Proposaldetails)
+                         .Include(x => x.Acquiredlandvillage)
+                         .Include(x => x.Khasra)
+                         .Where(x => (string.IsNullOrEmpty(model.name) || x.Proposaldetails.Name.Contains(model.name))
+                          && (string.IsNullOrEmpty(model.locality) || x.Acquiredlandvillage.Name.Contains(model.locality))
+                          && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra))).ToListAsync();
+            return data;
+        }
         public async Task<List<Proposaldetails>> GetAllProposaldetails()
         {
             List<Proposaldetails> proposaldetailsList = await _dbContext.Proposaldetails.Where(x => x.IsActive == 1).ToListAsync();

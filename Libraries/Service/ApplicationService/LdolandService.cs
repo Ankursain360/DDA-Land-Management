@@ -29,7 +29,10 @@ namespace Libraries.Service.ApplicationService
         {
             return await _ldolandRepository.GetAllLdoland();
         }
-
+        public async Task<List<Ldoland>> GetAllLdolandList(LdolandSearchDto model)
+        {
+            return await _ldolandRepository.GetAllLdolandList(model);
+        }
         public async Task<List<Ldoland>> GetLdolandUsingRepo()
         {
             return await _ldolandRepository.GetLdoland();

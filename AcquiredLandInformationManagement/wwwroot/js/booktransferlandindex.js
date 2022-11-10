@@ -6,6 +6,19 @@ $(document).ready(function () {
     GetBooktransferland(currentPageNumber, currentPageSize, sortOrder);
 });
 
+function GetExcel(pageNumber, pageSize, order) {
+    var param = GetSearchParam(pageNumber, pageSize, order);
+    HttpPost(`/BookTransferLand/BooktransferlandList`, 'html', param, function (response) {
+        var a = document.createElement("a");
+        a.target = '_blank';
+        a.href = '/BookTransferLand/download';
+        a.click();
+    });
+}
+
+$("#btndownload").click(function () {
+    GetExcel(currentPageNumber, currentPageSize, sortOrder);
+});
 
 function GetBooktransferland(pageNumber, pageSize, order) {
    

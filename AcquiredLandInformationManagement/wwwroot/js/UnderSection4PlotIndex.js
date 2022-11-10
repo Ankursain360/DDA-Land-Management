@@ -10,6 +10,21 @@ $(document).ready(function () {
     GetUS4(currentPageNumber, currentPageSize, sortOrder);
 });
 
+
+function GetExcel(pageNumber, pageSize, order) {
+    var param = GetSearchParam(pageNumber, pageSize, order);
+    HttpPost(`/UnderSection4PlotForm/Undersection4plotList`, 'html', param, function (response) {
+        var a = document.createElement("a");
+        a.target = '_blank';
+        a.href = '/UnderSection4PlotForm/download';
+        a.click();
+    });
+}
+
+$("#btndownload").click(function () {
+    GetExcel(currentPageNumber, currentPageSize, sortOrder);
+});
+
 $("#btnSearch").click(function () {
     GetUS4(currentPageNumber, currentPageSize, sortOrder);
 });

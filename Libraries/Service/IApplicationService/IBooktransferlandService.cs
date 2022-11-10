@@ -13,6 +13,7 @@ namespace Libraries.Service.IApplicationService
     public interface IBooktransferlandService : IEntityService<Booktransferland>
     {
         Task<List<Booktransferland>> GetAllBooktransferland();
+        Task<List<Booktransferland>> GetALlBooktransferlandList(BooktransferlandSearchDto model);
         Task<List<Booktransferland>> GetBooktransferlandUsingRepo();
 
         Task<List<LandNotification>> GetAllLandNotification();

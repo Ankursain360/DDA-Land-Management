@@ -15,6 +15,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Scheme>> GetAllScheme();
         Task<bool> Any(int id, string name);
         Task<List<Proposaldetails>> GetAllProposaldetails();
+        Task<List<Proposaldetails>> GetAllProposaldetailsList(ProposaldetailsSearchDto model);
         Task<PagedResult<Proposaldetails>> GetPagedProposaldetails(ProposaldetailsSearchDto model);
     }
 }

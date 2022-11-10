@@ -198,6 +198,16 @@ namespace Libraries.Repository.EntityRepository
 
            
         }
+        public async Task<List<Proposaldetails>> GetAllProposaldetailsList(ProposaldetailsSearchDto model)
+        {
+            var data = await _dbContext.Proposaldetails
+                 .Include(x => x.Scheme)
+                 .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                             && (string.IsNullOrEmpty(model.requiredAgency) || x.RequiredAgency.Contains(model.requiredAgency))
+                             && (string.IsNullOrEmpty(model.proposalFileNo) || x.ProposalFileNo.Contains(model.proposalFileNo))
+                           ).ToListAsync();
+            return data;
+        }
         public async Task<List<Scheme>> GetAllScheme()
         {
             List<Scheme> schemeList = await _dbContext.Scheme.Where(x => x.IsActive==1).ToListAsync();

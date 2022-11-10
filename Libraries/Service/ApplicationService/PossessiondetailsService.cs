@@ -66,7 +66,10 @@ namespace Libraries.Service.ApplicationService
             return await _possessiondetailsRepository.GetAllPossessiondetails();
         }
 
-
+        public async Task<List<Possessiondetails>> GetAllNoPossessiondetailsList(PossessiondetailsSearchDto model)
+        {
+            return await _possessiondetailsRepository.GetAllNoPossessiondetailsList(model);
+        }
 
         public async Task<List<Possessiondetails>> GetPossessiondetailsUsingRepo()
         {

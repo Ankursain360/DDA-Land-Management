@@ -62,7 +62,10 @@ namespace Libraries.Service.ApplicationService
             return await _JointsurveyRepository.GetAllJointSurvey();
         }
 
-
+        public async Task<List<Jointsurvey>> GetAllJointsurveyList(JointSurveySearchDto model)
+        {
+            return await _JointsurveyRepository.GetAllJointsurveyList(model);
+        }
 
         public async Task<List<Jointsurvey>> GetJointSurveyUsingRepo()
         {

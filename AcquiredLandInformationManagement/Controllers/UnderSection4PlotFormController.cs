@@ -229,9 +229,9 @@ namespace AcquiredLandInformationManagement.Controllers
         [AuthorizeContext(ViewAction.Download)]
 
 
-        public async Task<IActionResult> Undersection4plotList()
+        public async Task<IActionResult> Undersection4plotList([FromBody] NotificationUndersection4plotDto model)
         {
-            var result = await _undersection4PlotService.GetAllUndersection4Plot();
+            var result = await _undersection4PlotService.GetAllNoUndersection4plotList(model);
             List<Undersection4plotListDto> data = new List<Undersection4plotListDto>();
             if (result != null)
             {
@@ -250,17 +250,22 @@ namespace AcquiredLandInformationManagement.Controllers
                                   + '-' + result[i].Biswa.ToString()
                                   + '-' + result[i].Biswanshi.ToString(),
                         Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
-                    }); ;
+                    }); 
                 }
             }
 
             var memory = ExcelHelper.CreateExcel(data);
-            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            TempData["file"] = memory;
+            return Ok();
 
         }
 
-
-
+        [HttpGet]
+        public virtual ActionResult download()
+        {
+            byte[] data = TempData["file"] as byte[];
+            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        }
 
     }
 }

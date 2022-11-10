@@ -11,6 +11,7 @@ namespace Libraries.Repository.IEntityRepository
     {
         Task<PagedResult<Awardmasterdetail>> GetPagedawardmasterdetails(AwardMasterDetailsSearchDto model);
         Task<List<Awardmasterdetail>> Getawardmasterdetails();
+        Task<List<Awardmasterdetail>> GetAllawardmasterdetailsList(AwardMasterDetailsSearchDto model);
         Task<bool> Any(int id, string name);
         Task<List<Acquiredlandvillage>> Getvillage();
         Task<List<Proposaldetails>> GetPurposal();
