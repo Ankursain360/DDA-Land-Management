@@ -7,6 +7,21 @@ $(document).ready(function () {
     GetDetails(currentPageNumber, currentPageSize, sortOrder);
 });
 
+
+function GetExcel(pageNumber, pageSize, order) {
+    var param = GetSearchParam(pageNumber, pageSize, order);
+    HttpPost(`/DataStorageDetails/DatastoragedetailsList`, 'html', param, function (response) {
+        var a = document.createElement("a");
+        a.target = '_blank';
+        a.href = '/DataStorageDetails/download';
+        a.click();
+    });
+}
+
+$("#btndownload").click(function () {
+    GetExcel(currentPageNumber, currentPageSize, sortOrder);
+});
+
 $("#btnGenerate").click(function () {
     GetDetails(currentPageNumber, currentPageSize, sortOrder);
 });

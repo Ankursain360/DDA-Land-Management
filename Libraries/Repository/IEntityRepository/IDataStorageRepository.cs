@@ -9,6 +9,8 @@ namespace Libraries.Repository.IEntityRepository
     public interface IDataStorageRepository : IGenericRepository<Datastoragedetails>
     {
         Task<List<Datastoragedetails>> GetDataStorageDetails();
+        Task<List<Datastoragedetails>> GetAllDataStorageDetailsList(DataStorgaeDetailsSearchDto model);
+        Task<List<Datastoragedetails>> GetAllDisplayLabelList(DisplayLabelSearchDto model);
         Task<bool> Any(int id, string name);
         Task<PagedResult<Datastoragedetails>> GetPagedDataStorageDetails(DataStorgaeDetailsSearchDto model);
         Task<List<Almirah>> GetAlmirahs();

@@ -194,9 +194,9 @@ namespace FileDataLoading.Controllers
 
         // [AuthorizeContext(ViewAction.Download)]
 
-        public async Task<IActionResult> IssuereturnfileList()
+        public async Task<IActionResult> IssuereturnfileList([FromBody] IssueReturnFileSearchDto model)
         {
-            var result = await _issueReturnFileService.GetIssuereturnfile();
+            var result = await _issueReturnFileService.GetAllIssueReturnFileList(model);
             List<IssuereturnfileListDto> data = new List<IssuereturnfileListDto>();
             if (result != null)
             {
@@ -218,8 +218,16 @@ namespace FileDataLoading.Controllers
             }
 
             var memory = ExcelHelper.CreateExcel(data);
-            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            TempData["file"] = memory;
+            return Ok();
 
+        }
+
+        [HttpGet]
+        public virtual ActionResult download()
+        {
+            byte[] data = TempData["file"] as byte[];
+            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
     }
 }

@@ -8,6 +8,20 @@ $(function () {
     GetFileDetails(currentPageNumber, currentPageSize, sortOrder, filedoc);
 });
 
+function GetExcel(pageNumber, pageSize, order) {
+    var param = GetSearchParam(pageNumber, pageSize, order);
+    HttpPost(`/IssueReturnFile/IssuereturnfileList`, 'html', param, function (response) {
+        var a = document.createElement("a");
+        a.target = '_blank';
+        a.href = '/IssueReturnFile/download';
+        a.click();
+    });
+}
+
+$("#btndownload").click(function () {
+    GetExcel(currentPageNumber, currentPageSize, sortOrder);
+});
+
 function GetFileDetails(pageNumber, pageSize, sortOrder,filedoc) {
     var param = GetSearchParam(pageNumber, pageSize,sortOrder, filedoc);
     HttpPost(`/IssueReturnFile/List`, 'html', param, function (response) {

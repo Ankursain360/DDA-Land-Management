@@ -33,7 +33,14 @@ namespace Service.ApplicationService
         {
             return await _dmsFileUploadRepository.GetAllDMSFileUploadList();
         }
-
+        public async Task<List<Dmsfileupload>> GetAllDMSRetriveFileReportList(DMSRetriveFileSearchDto model)
+        {
+            return await _dmsFileUploadRepository.GetAllDMSRetriveFileReportList(model);
+        }
+        public async Task<List<Dmsfileupload>> GetAllDMSFileUploadList1(DMSFileUploadSearchDto model)
+        {
+            return await _dmsFileUploadRepository.GetAllDMSFileUploadList1(model);
+        }
         public async Task<List<Propertyregistration>> GetKhasraNoList()
         {
             return await _dmsFileUploadRepository.GetKhasraNoList();

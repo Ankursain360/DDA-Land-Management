@@ -59,9 +59,9 @@ namespace FileDataLoading.Controllers
 
         // [AuthorizeContext(ViewAction.Download)]
 
-        public async Task<IActionResult> DisplayLabelList()
+        public async Task<IActionResult> DisplayLabelList([FromBody] DisplayLabelSearchDto model)
         {
-            var result = await _datastorageService.GetDataStorageDetails();
+            var result = await _datastorageService.GetAllDisplayLabelList(model);
             List<DisplayLabelListDto> data = new List<DisplayLabelListDto>();
             if (result != null)
             {
@@ -83,8 +83,16 @@ namespace FileDataLoading.Controllers
             }
 
             var memory = ExcelHelper.CreateExcel(data);
-            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            TempData["file"] = memory;
+            return Ok();
 
+        }
+
+        [HttpGet]
+        public virtual ActionResult download()
+        {
+            byte[] data = TempData["file"] as byte[];
+            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
 
     }

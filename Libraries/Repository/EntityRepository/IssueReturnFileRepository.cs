@@ -46,6 +46,18 @@ namespace Libraries.Repository.EntityRepository
                              .Include(x => x.Column)
                              .Include(x => x.Bundle).ToListAsync();
         }
+        public async Task<List<Datastoragedetails>> GetAllIssueReturnFileList(IssueReturnFileSearchDto model)
+        {
+
+            var data = await _dbContext.Datastoragedetails 
+                             .Include(x => x.Almirah)
+                             .Include(x => x.Row)
+                             .Include(x => x.Column)
+                             .Include(x => x.Bundle)
+                             .Where(x => (x.Id == (model.FileNo == 0 ? x.Id : model.FileNo))
+                             || x.IsFileDocument == model.filedoc).ToListAsync();
+            return data;
+        }
         public async Task<PagedResult<Datastoragedetails>> GetPagedIssueReturnFile(IssueReturnFileSearchDto model)
         {
 

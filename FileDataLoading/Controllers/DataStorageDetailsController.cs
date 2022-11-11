@@ -343,9 +343,9 @@ namespace FileDataLoading.Controllers
         }
        // [AuthorizeContext(ViewAction.Download)]
 
-        public async Task<IActionResult> DatastoragedetailsList()
+        public async Task<IActionResult> DatastoragedetailsList([FromBody] DataStorgaeDetailsSearchDto model)
         {
-            var result = await _datastorageService.GetDataStorageDetails();
+            var result = await _datastorageService.GetAllDataStorageDetailsList(model);
             List<DatastoragedetailsListDto> data = new List<DatastoragedetailsListDto>();
             if (result != null)
             {
@@ -367,8 +367,16 @@ namespace FileDataLoading.Controllers
             }
 
             var memory = ExcelHelper.CreateExcel(data);
-            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            TempData["file"] = memory;
+            return Ok();
 
+        }
+
+        [HttpGet]
+        public virtual ActionResult download()
+        {
+            byte[] data = TempData["file"] as byte[];
+            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
     }
 }

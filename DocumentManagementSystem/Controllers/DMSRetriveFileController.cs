@@ -97,9 +97,9 @@ namespace DocumentManagementSystem.Controllers
             }
         }
 
-        public async Task<IActionResult> DmsRetriveFileList()
+        public async Task<IActionResult> DmsRetriveFileList([FromBody] DMSRetriveFileSearchDto model)
         {
-            var result = await _dmsfileuploadService.GetAllDMSFileUploadList();
+            var result = await _dmsfileuploadService.GetAllDMSRetriveFileReportList(model);
             List<DMSRetrieveFileListDto> data = new List<DMSRetrieveFileListDto>();
             if (result != null)
             {
@@ -127,9 +127,16 @@ namespace DocumentManagementSystem.Controllers
             }
 
             var memory = ExcelHelper.CreateExcel(data);
-            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            TempData["file"] = memory;
+            return Ok();
+
         }
 
-
+        [HttpGet]
+        public virtual ActionResult download()
+        {
+            byte[] data = TempData["file"] as byte[];
+            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        }
     }
 }

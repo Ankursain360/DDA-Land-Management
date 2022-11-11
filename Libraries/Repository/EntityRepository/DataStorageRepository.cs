@@ -103,8 +103,29 @@ namespace Libraries.Repository.EntityRepository
                                    .ToListAsync();
         }
 
-     
-
+        public async Task<List<Datastoragedetails>> GetAllDisplayLabelList(DisplayLabelSearchDto model)
+        { 
+            var data = await _dbContext.Datastoragedetails
+                                .Include(x => x.Almirah)
+                                .Include(x => x.Row)
+                                .Include(x => x.Column)
+                                .Include(x => x.Bundle)
+                                 .Where(x => (string.IsNullOrEmpty(model.fileNo) || x.FileNo.Contains(model.fileNo))
+                                 && (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))).ToListAsync();
+            return data;
+        }
+        public async Task<List<Datastoragedetails>> GetAllDataStorageDetailsList(DataStorgaeDetailsSearchDto model) 
+        {
+            var data = await _dbContext.Datastoragedetails
+                                        .Include(x => x.Almirah)
+                                        .Include(x => x.Row)
+                                        .Include(x => x.Column)
+                                        .Include(x => x.Bundle)
+                                        .Where(x => x.FileNo == (model.FileNo == "" ? x.FileNo : model.FileNo)
+                                        && (x.Name == (model.Name == "" ? x.Name : model.Name))).ToListAsync();
+            return data;
+        }
+   
         public async Task<bool> Any(int id, string name)
         {
             return await _dbContext.Datastoragedetails.AnyAsync(t => t.Id != id && t.FileNo.ToLower() == name.ToLower());

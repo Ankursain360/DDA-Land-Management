@@ -29,6 +29,8 @@ namespace Libraries.Service.IApplicationService
         Task<PagedResult<Dmsfileupload>> GetPagedDMSRetriveFileReport(DMSRetriveFileSearchDto model);
         Task<Dmsfileright> GetDMSUserRights(int userId);
         Task<List<Dmsfileupload>> GetAllDMSFileUploadList();
+        Task<List<Dmsfileupload>> GetAllDMSRetriveFileReportList(DMSRetriveFileSearchDto model);
+        Task<List<Dmsfileupload>> GetAllDMSFileUploadList1(DMSFileUploadSearchDto model);
         Task<List<Zone>> allZoneList();
         Task<List<Village>> allVillageList(int? zoneid);
     }

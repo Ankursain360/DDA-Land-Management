@@ -62,6 +62,10 @@ namespace Service.ApplicationService
             return await _issueReturnFileRepository.GetIssuereturnfile();
 
         }
+        public async Task<List<Datastoragedetails>> GetAllIssueReturnFileList(IssueReturnFileSearchDto model)
+        {
+            return await _issueReturnFileRepository.GetAllIssueReturnFileList(model);
+        }
 
         public async Task<bool> UpdateIssueFileStatus(int id)
         {

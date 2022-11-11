@@ -50,7 +50,24 @@ namespace Libraries.Repository.EntityRepository
                 return null;
             }
         }
+        public async Task<List<Dmsfileupload>> GetAllDMSRetriveFileReportList(DMSRetriveFileSearchDto model) 
+        {
 
+            var data = await _dbContext.Dmsfileupload
+                                        .Include(x => x.Department)
+                                        .Include(x => x.Locality)
+                                        .Include(x => x.KhasraNo)
+                                        .Include(x => x.Category)
+                                        .Where(x => x.DepartmentId == (model.Department == 0 ? x.DepartmentId : model.Department)
+                                        && (x.LocalityId == (model.Locality == 0 ? x.LocalityId : model.Locality))
+                                        && (x.KhasraNoId == (model.Khasra == 0 ? x.KhasraNoId : model.Khasra))
+                                        && (x.CategoryId == (model.Category == 0 ? x.CategoryId : model.Category))
+                                        && (x.FileNo.ToUpper().Trim().Contains(model.FileNo == "" ? x.FileNo.ToUpper().Trim() : model.FileNo.ToUpper().Trim()))
+                                        && (x.PropertyNoAddress.ToUpper().Trim().Contains(model.PropertyNo == "" ? x.PropertyNoAddress.ToUpper().Trim() : model.PropertyNo.ToUpper().Trim()))
+                                        && (x.AlmirahNo.ToUpper().Trim().Contains(model.AlmirahNo == "" ? x.AlmirahNo.ToUpper().Trim() : model.AlmirahNo.ToUpper().Trim()))
+                                        && (x.Title.ToUpper().Trim().Contains(model.Title == "" ? x.Title.ToUpper().Trim() : model.Title.ToUpper().Trim()))).ToListAsync();
+            return data;
+        }
 
         public async Task<List<Dmsfileupload>> GetAllDMSFileUploadList()
         {
@@ -62,6 +79,21 @@ namespace Libraries.Repository.EntityRepository
                                         //  .Include(x => x.Zone)
                                         //.Include(x => x.Village)
                 .ToListAsync();
+        }
+        public async Task<List<Dmsfileupload>> GetAllDMSFileUploadList1(DMSFileUploadSearchDto model) 
+        {
+            var data = await _dbContext.Dmsfileupload
+                                        .Include(x => x.Department)
+                                        .Include(x => x.Locality)
+                                        .Include(x => x.KhasraNo)
+                                         .Include(x => x.Zone)
+                                        .Include(x => x.Village)
+                                        .Include(x => x.Category)
+                                        .Where(x => x.DepartmentId == (model.departmentId == 0 ? x.DepartmentId : model.departmentId)
+                                        && (x.LocalityId == (model.localityId == 0 ? x.LocalityId : model.localityId))
+                                        && (x.KhasraNoId == (model.KhasraId == 0 ? x.KhasraNoId : model.KhasraId))
+                                        && (x.CategoryId == (model.CategoryId == 0 ? x.CategoryId : model.CategoryId))).ToListAsync();
+            return data;
         }
 
         public async Task<PagedResult<Dmsfileupload>> GetPagedDMSFileUploadList(DMSFileUploadSearchDto model)

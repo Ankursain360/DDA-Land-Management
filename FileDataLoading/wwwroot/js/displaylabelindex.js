@@ -7,6 +7,20 @@ $(function () {
     GetFileDetails(currentPageNumber, currentPageSize, sortOrder);
 });
 
+function GetExcel(pageNumber, pageSize, order) {
+    var param = GetSearchParam(pageNumber, pageSize, order);
+    HttpPost(`/DisplayLabel/DisplayLabelList`, 'html', param, function (response) {
+        var a = document.createElement("a");
+        a.target = '_blank';
+        a.href = '/DisplayLabel/download';
+        a.click();
+    });
+}
+
+$("#btndownload").click(function () {
+    GetExcel(currentPageNumber, currentPageSize, sortOrder);
+});
+
 function GetFileDetails(pageNumber, pageSize, sortOrder) {
     var param = GetSearchParam(pageNumber, pageSize, sortOrder);
     HttpPost(`/DisplayLabel/List`, 'html', param, function (response) {

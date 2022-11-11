@@ -244,8 +244,15 @@ namespace Libraries.Service.ApplicationService
         }
         public async Task<List<Datastoragedetails>> GetDataStorageDetails()
         {
-            return await _datastoragedetailRepository.GetDataStorageDetails();
-                                  
+            return await _datastoragedetailRepository.GetDataStorageDetails();                                  
+        }
+        public async Task<List<Datastoragedetails>> GetAllDataStorageDetailsList(DataStorgaeDetailsSearchDto model)
+        {
+            return await _datastoragedetailRepository.GetAllDataStorageDetailsList(model);
+        }
+        public async Task<List<Datastoragedetails>> GetAllDisplayLabelList(DisplayLabelSearchDto model)
+        {
+            return await _datastoragedetailRepository.GetAllDisplayLabelList(model);
         }
     }
 }

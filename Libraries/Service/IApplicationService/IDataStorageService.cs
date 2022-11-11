@@ -61,8 +61,8 @@ namespace Libraries.Service.IApplicationService
         Task<Datastoragedetails> FetchPrintLabel(int id);
 
         Task<List<Datastoragedetails>> GetDataStorageDetails();
-
-
+        Task<List<Datastoragedetails>> GetAllDataStorageDetailsList(DataStorgaeDetailsSearchDto model);
+        Task<List<Datastoragedetails>> GetAllDisplayLabelList(DisplayLabelSearchDto model);
 
     }
 }

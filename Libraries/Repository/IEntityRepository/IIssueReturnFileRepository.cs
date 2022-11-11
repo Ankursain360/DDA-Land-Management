@@ -21,6 +21,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<Issuereturnfile> FetchSingleReceiptResult(int id);
         Task<Issuereturnfile> FetchfiletResult(int id);
         Task<List<Datastoragedetails>> GetIssuereturnfile();
+        Task<List<Datastoragedetails>> GetAllIssueReturnFileList(IssueReturnFileSearchDto model);
         Task<Issuereturnfile> FetchReturnReceiptResult(int id);
     }
 }
