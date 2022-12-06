@@ -23,6 +23,7 @@ namespace EncroachmentDemolition.Controllers
         }
         public async Task<IActionResult> Index()
         {
+            ViewBag.userRole = _siteContext.RoleId;
             UserProfileDto user = await _userProfileService.GetUserById(_siteContext.UserId);
             return View(user);
         }
