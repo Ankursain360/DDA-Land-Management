@@ -48,9 +48,26 @@
             </div>
         </div>
     </div>*@
-    <div id="divDashboard">
-        <img class="img-fluid d-block mx-auto" src="~/images/brand.png" alt="dda">
-    </div>
+    @{
+        if(@ViewBag.userRole!=null)
+        {
+            if (@ViewBag.userRole == 19 || @ViewBag.userRole == 63 || @ViewBag.userRole == 7 || @ViewBag.userRole == 3 || @ViewBag.userRole == 16)
+            {
+                <div id="divDashboard">
+                    <img class="img-fluid d-block mx-auto" src="~/images/brand.png" alt="dda">
+                </div>
+            }
+            else
+            {
+                <img class="img-fluid d-block mx-auto" src="~/images/brand.png" alt="dda">
+            }
+        }
+        else
+        {
+            <img class="img-fluid d-block mx-auto" src="~/images/brand.png" alt="dda">
+        }
+    }
+   
 </figure>
 
 <environment include="Development">
