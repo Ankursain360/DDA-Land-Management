@@ -32,8 +32,8 @@ namespace Libraries.Repository.EntityRepository
                                       .Include(x => x.ApprovedStatusNavigation)
                                       .Where(x => x.IsActive == 1
                                           && (model.StatusId == 0 ? (x.PrimaryListNoNavigation.ZoneId == x.PrimaryListNoNavigation.ZoneId) : (x.PrimaryListNoNavigation.ZoneId == (zoneId == 0 ? x.PrimaryListNoNavigation.ZoneId : zoneId)))
-                                          && (model.StatusId == 0 ? x.PendingAt != "0" : x.PendingAt == "0")
-                                          && (model.StatusId == 0 ? (myIdArray).Contains(x.Id) : x.PendingAt == "0")
+                                          && (model.StatusId == 0 ? x.PendingAt != "0" : x.PendingAt == x.PendingAt)
+                                          && (model.StatusId == 0 ? (myIdArray).Contains(x.Id) : x.PendingAt == x.PendingAt)
                                           && (model.approvalstatusId == 0 ? (x.ApprovedStatus == x.ApprovedStatus ): (x.ApprovedStatus == model.approvalstatusId))
                                           )
                                       .GetPaged<Watchandward>(model.PageNumber, model.PageSize);

@@ -36,7 +36,7 @@ namespace Libraries.Repository.EntityRepository
                                         .Where(x => x.IsActive == 1
                                             && (model.StatusId == 0 ? (x.ZoneId == x.ZoneId) : model.StatusId == 1 ? (x.ZoneId == (zoneId == 0 ? x.ZoneId : zoneId)) : (x.ZoneId == x.ZoneId))
                                             && (model.StatusId == 0 ? x.PendingAt != "0" : model.StatusId == 1 ? x.PendingAt == x.PendingAt : x.PendingAt == "0")
-                                            && (model.StatusId == 0 ? (myIdArray).Contains(x.Id) : x.PendingAt == "0")
+                                            && (model.StatusId == 0 ? (myIdArray).Contains(x.Id) : x.PendingAt == x.PendingAt)
                                             && (model.approvalstatusId == 0 ? (x.ApprovedStatus == x.ApprovedStatus) : (x.ApprovedStatus == model.approvalstatusId))
                                             )
                                         .GetPaged<EncroachmentRegisteration>(model.PageNumber, model.PageSize);
