@@ -15,7 +15,7 @@ namespace Libraries.Service.IApplicationService
         Task<List<Khasra>> GetAllKhasra();
         Task<List<Locality>> GetAllLocality();
         Task<Watchandward> FetchSingleResult(int id);
-        Task<PagedResult<Watchandward>> GetPagedWatchandward(WatchandwardApprovalSearchDto model, int userId, int zoneId);
+        Task<PagedResult<Watchandward>> GetPagedWatchandward(WatchandwardApprovalSearchDto model, int userId, int zoneId,int deprtId);
         Task<bool> IsApplicationPendingAtUserEnd(int id, int userId);
     }
 }

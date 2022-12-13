@@ -485,7 +485,7 @@ namespace Libraries.Repository.EntityRepository
 
         // added by ishu 17 june 2021
 
-        public async Task<PagedResult<Fixingdemolition>> GetPagedDemolitiondiary(DemolitionstructuredetailsDto1 model, int userId, int approved)
+        public async Task<PagedResult<Fixingdemolition>> GetPagedDemolitiondiary(DemolitionstructuredetailsDto1 model, int userId, int approved,int zoneId , int deprtId)
         {
             var InDemolitionPoliceAssistenceTable = (from x in _dbContext.Demolitionpoliceassistenceletter
                                                      .Include(x => x.FixingDemolition.Encroachment.KhasraNoNavigation)
@@ -503,7 +503,8 @@ namespace Libraries.Repository.EntityRepository
                                         .Include(x => x.Demolitionstructuredetails)
                                         .Include(x => x.Encroachment.KhasraNoNavigation)
                                         .Where(x => x.IsActive == 1 && x.ApprovedStatusNavigation.StatusCode == approved
-                                        //  && (model.StatusId == 0 ? x.PendingAt == userId : x.PendingAt == 0)
+                                        && (model.StatusId == 0?(x.Encroachment.ZoneId == x.Encroachment.ZoneId) : (x.Encroachment.ZoneId == (zoneId == 0 ? x.Encroachment.ZoneId : zoneId)))
+                                        && (model.StatusId == 0? (x.Encroachment.DepartmentId == x.Encroachment.DepartmentId) : (x.Encroachment.DepartmentId == (deprtId == 0 ? x.Encroachment.DepartmentId : deprtId)))
                                         // && !(InDemolitionPoliceAssistenceTable).Contains(x.Id)
                                         )
                                         .GetPaged<Fixingdemolition>(model.PageNumber, model.PageSize);

@@ -1001,7 +1001,7 @@ namespace EncroachmentDemolition.Controllers
         public async Task<PartialViewResult> List1([FromBody] DemolitionstructuredetailsDto1 model)
         {
 
-            var result = await _demolitionstructuredetailsService.GetPagedDemolitiondiary(model, SiteContext.UserId, (int)ApprovalActionStatus.Approved);
+            var result = await _demolitionstructuredetailsService.GetPagedDemolitiondiary(model, SiteContext.UserId, (int)ApprovalActionStatus.Approved, SiteContext.ZoneId ?? 0, SiteContext.DepartmentId ?? 0);
             ViewBag.IsApproved = model.StatusId;
             return PartialView("_List1", result);
 

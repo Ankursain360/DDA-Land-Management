@@ -44,7 +44,6 @@ namespace Libraries.Model.Entity
 
         [StringLength(200)]
         public string KhasraNo { get; set; }
-
         public string Colony { get; set; }
         public string Sector { get; set; }
         public string Block { get; set; }

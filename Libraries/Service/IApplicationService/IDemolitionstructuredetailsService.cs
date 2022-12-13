@@ -54,7 +54,7 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Deletedearearptdetails(int Id);
 
         //added by ishu 17 june 2021
-        Task<PagedResult<Fixingdemolition>> GetPagedDemolitiondiary(DemolitionstructuredetailsDto1 model, int userId, int approved);
+        Task<PagedResult<Fixingdemolition>> GetPagedDemolitiondiary(DemolitionstructuredetailsDto1 model, int userId, int approved, int zoneId, int deprtId);
         Task<Demolitionstructuredetails> FetchSingleResultonId(int id);
         Task<Fixingdemolition> FetchSingleResultOfFixingDemolition(int id);
 

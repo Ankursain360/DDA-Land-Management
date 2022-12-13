@@ -227,9 +227,9 @@ namespace Libraries.Service.ApplicationService
         }
 
         //added by ishu 17/6/2021
-        public async Task<PagedResult<Fixingdemolition>> GetPagedDemolitiondiary(DemolitionstructuredetailsDto1 model, int userId, int approved)
+        public async Task<PagedResult<Fixingdemolition>> GetPagedDemolitiondiary(DemolitionstructuredetailsDto1 model, int userId, int approved, int zoneId, int deprtId)
         {
-            return await _demolitionstructuredetailsRepository.GetPagedDemolitiondiary(model, userId, approved);
+            return await _demolitionstructuredetailsRepository.GetPagedDemolitiondiary(model, userId, approved,zoneId,deprtId);
         }
         public async Task<Demolitionstructuredetails> FetchSingleResultonId(int id)
         {

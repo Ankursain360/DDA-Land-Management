@@ -43,9 +43,9 @@ namespace Libraries.Service.ApplicationService
             return await _watchAndWardApprovalRepository.GetAllWatchandward();
         }
 
-        public async Task<PagedResult<Watchandward>> GetPagedWatchandward(WatchandwardApprovalSearchDto model, int userId,int zoneId)
+        public async Task<PagedResult<Watchandward>> GetPagedWatchandward(WatchandwardApprovalSearchDto model, int userId,int zoneId, int deprtId )
         {
-            return await _watchAndWardApprovalRepository.GetPagedWatchandward(model,  userId, zoneId);
+            return await _watchAndWardApprovalRepository.GetPagedWatchandward(model,  userId, zoneId, deprtId);
         }
 
         public async Task<bool> IsApplicationPendingAtUserEnd(int id, int userId)
