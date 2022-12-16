@@ -64,11 +64,11 @@
         <div class="col-md-6">
             <div class="floating-label-wrap">
 
-                <select asp-for="KhasraNo" class="floating-label-field floating-label-field--s3" asp-items="@(new SelectList(Model.PropertyInventoryKhasraList,"Id","KhasraNo"))">
+                <select asp-for="KhasraNo"  class="floating-label-field floating-label-field--s3" asp-items="@(new SelectList(Model.PropertyInventoryKhasraList,"Id","KhasraNo"))">
                     <option value="0">Select</option>
                 </select>
                 <span asp-validation-for="KhasraNo" class="text-danger"></span>
-                <label class="floating-label"><span style="color:red">*</span>Khasra No/Plot No.</label>
+                <label class="floating-label">Khasra No/Plot No.<span style="color:red">*</span></label>
             </div>
         </div>
         <div class="col-md-6">
@@ -411,7 +411,7 @@
     </div>
     <div class="row mt-md-3">
         <div class="col-md-12">
-            <input type="submit" value="Submit" class="btn btn-theme " />
+            <input type="submit" onclick="return Emplty()" value="Submit" class="btn btn-theme " />
             @Html.ActionLink("Back", "Index", "EncroachmentRegister", null, new { @class = "btn btn-theme " })
         </div>
     </div>

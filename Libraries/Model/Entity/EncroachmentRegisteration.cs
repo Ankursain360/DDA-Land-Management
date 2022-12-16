@@ -41,9 +41,6 @@ namespace Libraries.Model.Entity
         public DateTime EncrochmentDate { get; set; }
 
         [Required(ErrorMessage = "Khasra No is Mandatory Field")]
-       // public string KhasraNo { get; set; }
-
-
         public int KhasraNo { get; set; }
 
         [Required(ErrorMessage = "Area Unit is Mandatory Field", AllowEmptyStrings = false)]

@@ -333,8 +333,18 @@ $('.checkExtension').on('change', function (e) {
 
 });
 
+function Emplty() {
+    debugger;
+    var khasra = $('#KhasraNo option:selected').val();
+    if (khasra == 0) {
+        alert("Khasra is mandatory");
+        return false;
+    }
+    else {
+        return true;
+    }
 
-
+};
 function ValidateFileSize(fileid, file) {
     try {
         var fileSize = 0;
