@@ -47,7 +47,7 @@
             @*<td>@(item.PlannedUnplannedLand == "Planned Land" ? item.PlotNo : item.KhasraNo)</td>*@
 
             <td>@item.TotalArea</td>
-            <td>@(item.EncroachedPartiallyFully == "0" ? "Partially Encroached" : "Fully Encroached")</td>
+            <td>@(item.EncroachedPartiallyFully == "0" ? "Partially Encroached" :item.EncroachedPartiallyFully =="1" ? "Fully Encroached" :"Na")</td>
             <td>@(item.Boundary == 0 ? "Boundary Wall" : item.Boundary == 1 ? "Fencing" : "None")</td>
 
             <td>

@@ -3,9 +3,9 @@ var currentPageSize = 10;
 var sortby = 1;//default Ascending 
 $(document).ready(function () {
     $("#btnGenerate").click(function () {
-        
+        debugger;
         var result = ValidateForm();
-        var localityid = $('#LocalityId option:selected').val();
+        var localityid = $('#VillageName option:selected').val();
         var fromDate = $('#txtFromDate').val();
         var toDate = $('#txtToDate').val();
 
@@ -58,6 +58,7 @@ $("#btnDownload").click(function () {
 })
 
 function GetDetails(pageNumber, pageSize, order) {
+    debugger;
     var param = GetSearchParam(pageNumber, pageSize, order);
     
     HttpPost(`/DemolitionReport/GetDetails`, 'html', param, function (response) {
@@ -68,7 +69,7 @@ function GetDetails(pageNumber, pageSize, order) {
 
 function GetSearchParam(pageNumber, pageSize, sortOrder) {
     
-    var localityid = $('#LocalityId option:selected').val();
+    var localityid = $('#VillageName option:selected').val();
     var FromDate = $('#txtFromDate').val();
     var ToDate = $('#txtToDate').val();
     var model = {
