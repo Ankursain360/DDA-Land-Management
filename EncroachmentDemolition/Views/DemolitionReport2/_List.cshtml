@@ -27,7 +27,7 @@
             <td>@item.Zone.Name</td>
             <td>@item.Division.Name</td>
             <td>@item.Locality.Name</td>
-            <td>@(item.FixingDemolition.Encroachment.KhasraNoNavigation.LocalityId == null ? item.FixingDemolition.Encroachment.KhasraNoNavigation.PlotNo: item.FixingDemolition.Encroachment.KhasraNoNavigation.KhasraNo)</td>
+            <td>@(item.FixingDemolition.Encroachment.KhasraNoNavigation.PlannedUnplannedLand == "Planned Land" ? item.FixingDemolition.Encroachment.KhasraNoNavigation.PlotNo: item.FixingDemolition.Encroachment.KhasraNoNavigation.KhasraNo)</td>
             <td>@item.EndOfDemolitionActionDate?.ToString("dd/MM/yyyy")</td>
             <td>@item.Areareclaimedrpt.Select(x => x.AreaReclaimed).Sum()</td>
             <td>@item.Remarks</td>

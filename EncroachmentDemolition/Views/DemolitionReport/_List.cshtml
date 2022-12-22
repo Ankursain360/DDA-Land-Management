@@ -26,7 +26,7 @@
                     <td>@item.Department.Name</td>
                     <td>@item.Zone.Name</td>
                     <td>@item.Locality.Name</td>
-                    <td>@(item.KhasraNoNavigation.LocalityId == null ? item.KhasraNoNavigation.PlotNo: item.KhasraNoNavigation.KhasraNo)</td>
+                    <td>@(item.KhasraNoNavigation.PlannedUnplannedLand == "Planned Land" ? item.KhasraNoNavigation.PlotNo: item.KhasraNoNavigation.KhasraNo)</td>
                     <td>@item.Area </td>
                     <td>@(item.EncrochmentDate != null ? Convert.ToDateTime(item.EncrochmentDate).ToString("dd MMM yyyy") : "Not Available")</td>
                     <td>@(item.EncrochmentDate != null ? Convert.ToDateTime(item.EncrochmentDate).ToString("dd MMM yyyy") : "Not Available")</td>

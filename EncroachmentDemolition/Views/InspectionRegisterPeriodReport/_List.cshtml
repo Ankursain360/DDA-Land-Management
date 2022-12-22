@@ -35,7 +35,7 @@
             <td>@item.Zone.Name</td>
             <td>@item.Division.Name</td>
             <td>@item.Locality.Name</td>
-            <td>@(item.KhasraNoNavigation.LocalityId == null ? item.KhasraNoNavigation.PlotNo: item.KhasraNoNavigation.KhasraNo)</td>
+            <td>@(item.KhasraNoNavigation.PlannedUnplannedLand == "Planned Land" ? item.KhasraNoNavigation.PlotNo: item.KhasraNoNavigation.KhasraNo)</td>
             @*<td>@item.KhasraNo</td>*@
             <td>@item.Area</td>
             <td>@(item.IsEncroachment== "" ? "No" : item.IsEncroachment)</td>

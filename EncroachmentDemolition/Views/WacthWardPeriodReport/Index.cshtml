@@ -26,7 +26,7 @@
 
             @*<td>@item.Date</td>*@
             <td>@(item.PrimaryListNoNavigation?.LocalityId == null ? item.PrimaryListNoNavigation.Colony : item.PrimaryListNoNavigation.Locality.Name)</td>
-            <td>@(item.PrimaryListNoNavigation?.LocalityId == null ? item.PrimaryListNoNavigation.PlotNo: item.PrimaryListNoNavigation.KhasraNo)</td>
+            <td>@(item.PrimaryListNoNavigation?.PlannedUnplannedLand == "Planned Land" ? item.PrimaryListNoNavigation.PlotNo: item.PrimaryListNoNavigation.KhasraNo)</td>
             <td>@(item.PrimaryListNoNavigation?.PrimaryListNo == null ? "NA" : item.PrimaryListNoNavigation.PrimaryListNo)</td>
             @*<td>@(item.Locality == null ? "" : item.Locality.Name == null ? "" : item.Locality.Name)</td>*@
 
