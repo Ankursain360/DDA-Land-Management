@@ -21,7 +21,7 @@
                     <td> @(Convert.ToDateTime(item.Encroachment.EncrochmentDate).ToString("dd-MMM-yyyy"))</td>
                     <td>@item.Encroachment.Department.Name</td>
                     <td>@item.Encroachment.Zone.Name</td> 
-                    <td>@(item.Encroachment.KhasraNoNavigation.LocalityId == null ? item.Encroachment.KhasraNoNavigation.PlotNo: item.Encroachment.KhasraNoNavigation.KhasraNo)</td>
+                    <td>@(item.Encroachment.KhasraNoNavigation.PlannedUnplannedLand == "Planned Land" ? item.Encroachment.KhasraNoNavigation.PlotNo: item.Encroachment.KhasraNoNavigation.KhasraNo)</td>
                     <td>
                         @(item.ApprovedStatusNavigation == null ? "" : item.ApprovedStatusNavigation.SentStatusName)
                     </td>
