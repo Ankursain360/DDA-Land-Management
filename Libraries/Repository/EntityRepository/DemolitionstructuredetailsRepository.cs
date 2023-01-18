@@ -587,10 +587,10 @@ namespace Libraries.Repository.EntityRepository
                                      .FirstOrDefaultAsync();
         }
 
-        public async Task<List<DemolitionDashboardDto>> GetDashboardData(int userId, int roleId)
+        public async Task<List<DemolitionDashboardDto>> GetDashboardData(int userId, int roleId , int DeptId , int ZoneId)
         {
             var data = await _dbContext.LoadStoredProcedure("PendancyDashboard")
-                                            .WithSqlParams(("P_UserId", userId), ("P_RoleId", roleId)
+                                            .WithSqlParams(("P_UserId", userId), ("P_RoleId", roleId), ("P_DeptId", DeptId), ("P_ZoneId", ZoneId)
                                             )
                                             .ExecuteStoredProcedureAsync<DemolitionDashboardDto>();
 
@@ -598,7 +598,7 @@ namespace Libraries.Repository.EntityRepository
         }
 
 
-        public async Task<PagedResult<Fixingdemolition>> GetDashboardListData(DemolitionDasboardDataDto model)
+        public async Task<PagedResult<Fixingdemolition>> GetDashboardListData(DemolitionDasboardDataDto model , int DeptId , int ZoneId, int roleId)
         {
             var PendingatYoustatus = new[] { 3, 4 };
             var data = await _dbContext.Fixingdemolition.Include(x => x.Encroachment.Locality)
@@ -608,7 +608,9 @@ namespace Libraries.Repository.EntityRepository
                                           .Include(x => x.ApprovedStatusNavigation)
                                           .Include(x => x.Demolitionstructuredetails)
                                           .Include(x => x.Encroachment.KhasraNoNavigation)
-                                          .Where(x => x.IsActive == 1
+                                          .Where(x => x.IsActive == 1 
+                                          && (model. roleId == 1 || roleId == 2 || roleId == 3 || roleId == 10 || roleId == 19 || roleId == 7 || roleId == 69 || roleId == 16 ? (x.Encroachment.ZoneId == x.Encroachment.ZoneId) : (x.Encroachment.ZoneId == (ZoneId == 0 ? x.Encroachment.ZoneId : ZoneId)))
+                                          && (model. roleId == 1 || roleId == 2 || roleId == 3 || roleId == 10 || roleId == 19 || roleId == 7 || roleId == 69 || roleId == 16 ? (x.Encroachment.DepartmentId == x.Encroachment.DepartmentId) : (x.Encroachment.DepartmentId == (DeptId == 0 ? x.Encroachment.DepartmentId : DeptId)))
                                           && (model.filter == "TotalReceived" ? x.ApprovedStatusNavigation.StatusCode == x.ApprovedStatusNavigation.StatusCode
                                               : model.filter == "TotalApproved" ? (x.ApprovedStatusNavigation.StatusCode == 3)
                                               : model.filter == "PendingAtyou" ? (!PendingatYoustatus.Contains(x.ApprovedStatusNavigation.StatusCode) && x.PendingAt == model.userId.ToString())

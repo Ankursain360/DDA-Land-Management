@@ -55,8 +55,8 @@ namespace Libraries.Repository.IEntityRepository
         Task<PagedResult<Fixingdemolition>> GetPagedDemolitiondiary(DemolitionstructuredetailsDto1 model, int userId, int approved, int zoneId, int deprtId , int roleId);
         Task<Demolitionstructuredetails> FetchSingleResultonId(int id);
         Task<Fixingdemolition> FetchSingleResultOfFixingDemolition(int id); 
-        Task<List<DemolitionDashboardDto>> GetDashboardData(int userId, int roleId);
-        Task<PagedResult<Fixingdemolition>> GetDashboardListData(DemolitionDasboardDataDto model);
+        Task<List<DemolitionDashboardDto>> GetDashboardData(int userId, int roleId , int DeptId , int ZoneId);
+        Task<PagedResult<Fixingdemolition>> GetDashboardListData(DemolitionDasboardDataDto model ,int DeptId , int ZoneId,int roleId);
         Task<List<Fixingdemolition>> DownloadDasboarddata(string filter, int Userid);
         Task<string> Getusername(int Userid);
         Task<List<Demolitionstructuredetails>> GetAllDemolitionReport(DemolitionReportZoneDivisionLocalityWiseSearchDto dto);
