@@ -7,12 +7,14 @@ var modelopen = false;
 $(document).ready(function () {
     var userId = parseInt($('#hdnUserid').val());
     var roleId = parseInt($('#hdnRoleid').val());
-    GetDashboard(userId, roleId);
+    var deptId = parseInt($('#hdnDeptid').val());
+    var zoneId = parseInt($('#hdnZoneid').val());
+    GetDashboard(userId, roleId, deptId, zoneId);
 });
 
 
-function GetDashboard(userId, roleId) {
-    HttpGet(`/Demolitionstructuredetails/GetDashboard/?userId=${userId}&roleId=${roleId}`, 'html', function (response) {
+function GetDashboard(userId, roleId, deptId, zoneId) {
+    HttpGet(`/Demolitionstructuredetails/GetDashboard/?userId=${userId}&roleId=${roleId}&deptId=${deptId}&zoneId=${zoneId}`, 'html', function (response) {
         $('#divDashboard').html("");
         $('#divDashboard').html(response);
     });
@@ -23,6 +25,7 @@ function showdata(filter) {
     Pagewisedata(currentPageNumber, currentPageSize, sortOrder, filter)
 }
 function Pagewisedata(pageNumber, pageSize, sortOrder, filter) {
+    debugger;
     var param = GetSearchParam(pageNumber, pageSize, sortOrder, filter)
     $('#hfiltertext').empty().text('(' + filter + ')');
     HttpPost(`/Demolitionstructuredetails/GetDashboardListData`, 'html', param, function (response) {

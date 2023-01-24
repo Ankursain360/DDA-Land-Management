@@ -58,9 +58,9 @@ namespace Libraries.Service.IApplicationService
         Task<Demolitionstructuredetails> FetchSingleResultonId(int id);
         Task<Fixingdemolition> FetchSingleResultOfFixingDemolition(int id);
 
-        Task<List<DemolitionDashboardDto>> GetDashboardData(int userId, int roleId);
+        Task<List<DemolitionDashboardDto>> GetDashboardData(int userId, int roleId, int deptId, int zoneId);
 
-        Task<PagedResult<Fixingdemolition>> GetDashboardListData(DemolitionDasboardDataDto model);
+        Task<PagedResult<Fixingdemolition>> GetDashboardListData(DemolitionDasboardDataDto model , int deptId , int zoneId,int roleId);
         Task<List<Fixingdemolition>> DownloadDasboarddata(string filter, int Userid);
         Task<string> Getusername(int Userid);
         Task<List<Demolitionstructuredetails>> GetAllDemolitionReport(DemolitionReportZoneDivisionLocalityWiseSearchDto model);

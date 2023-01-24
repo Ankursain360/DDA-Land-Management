@@ -239,13 +239,13 @@ namespace Libraries.Service.ApplicationService
         {
             return await _demolitionstructuredetailsRepository.FetchSingleResultOfFixingDemolition(id);
         }
-        public async Task<List<DemolitionDashboardDto>> GetDashboardData(int userId, int roleId)
+        public async Task<List<DemolitionDashboardDto>> GetDashboardData(int userId, int roleId , int DeptId , int ZoneId)
         {
-            return await _demolitionstructuredetailsRepository.GetDashboardData(userId, roleId);
+            return await _demolitionstructuredetailsRepository.GetDashboardData(userId, roleId, DeptId, ZoneId);
         }
-        public async Task<PagedResult<Fixingdemolition>> GetDashboardListData(DemolitionDasboardDataDto model)
+        public async Task<PagedResult<Fixingdemolition>> GetDashboardListData(DemolitionDasboardDataDto model , int DeptId, int ZoneId,int roleId)
         {
-            return await _demolitionstructuredetailsRepository.GetDashboardListData(model);
+            return await _demolitionstructuredetailsRepository.GetDashboardListData(model,DeptId,ZoneId,roleId);
         }
         public async Task<List<Fixingdemolition>> DownloadDasboarddata(string filter, int Userid)
         {

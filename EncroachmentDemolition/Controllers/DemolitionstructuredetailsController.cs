@@ -23,8 +23,7 @@ using System.Text;
 
 
 using Microsoft.AspNetCore.Http;
-
-
+using EncroachmentDemolition.Helper;
 
 namespace EncroachmentDemolition.Controllers
 {
@@ -37,6 +36,7 @@ namespace EncroachmentDemolition.Controllers
         string BeforePhotoFilePath = "";
 
         public readonly IAnnexureAApprovalService _annexureAApprovalService;
+       
         public readonly IAnnexureAService _annexureAService;
         public readonly IEncroachmentRegisterationApprovalService _encroachmentRegisterationApprovalService;
         public readonly IEncroachmentRegisterationService _encroachmentRegisterationService;
@@ -64,6 +64,7 @@ namespace EncroachmentDemolition.Controllers
             _approvalproccessService = approvalproccessService;
             _annexureAService = annexureAService;
             _annexureAApprovalService = annexureAApprovalService;
+            
             _hostingEnvironment = en;
             AfterPhotoFilePath = _configuration.GetSection("FilePaths:DemolitionstructuredetailsFiles:AfterPhotoFilePath").Value.ToString();
             BeforePhotoFilePath = _configuration.GetSection("FilePaths:DemolitionstructuredetailsFiles:BeforePhotoFilePath").Value.ToString();
@@ -1255,10 +1256,10 @@ namespace EncroachmentDemolition.Controllers
         #region Demolistion Dashboard
         //Demolistion Dashboard
 
-        public async Task<PartialViewResult> GetDashboard(int userId, int roleId)
+        public async Task<PartialViewResult> GetDashboard(int userId, int roleId, int deptId, int zoneId)
         {
 
-            var results = await _demolitionstructuredetailsService.GetDashboardData(userId, roleId);
+            var results = await _demolitionstructuredetailsService.GetDashboardData(userId, roleId, deptId, zoneId);
 
             return PartialView("_dashboard", results);
         }
@@ -1266,7 +1267,7 @@ namespace EncroachmentDemolition.Controllers
         public async Task<PartialViewResult> GetDashboardListData([FromBody] DemolitionDasboardDataDto model)
         {
 
-            var results = await _demolitionstructuredetailsService.GetDashboardListData(model);
+            var results = await _demolitionstructuredetailsService.GetDashboardListData(model, SiteContext.DepartmentId??0,SiteContext.ZoneId??0, SiteContext.RoleId??0);
              
             return PartialView("_ModelDashboardData", results);
         }
