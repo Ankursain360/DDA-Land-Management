@@ -138,7 +138,7 @@ namespace EncroachmentDemolition.Controllers
                     data.ApprovalStatusList = await _approvalproccessService.BindDropdownApprovalStatus(actions.Distinct().ToArray());
                     data.ApprovalStatusList = await _approvalproccessService.BindDropdownApprovalStatus(actions.Distinct().ToArray());
                     // For Approval Status
-                    if (fixingdemolition.ApprovalStatus == "3" && SiteContext.RoleId == 19) // 58 For CLM and 3 For Approved
+                    if (fixingdemolition.ApprovalStatus == "3") // 3 For Approved
                     {
                         HttpContext.Session.SetString("id", id.ToString());
                         HttpContext.Session.SetString("fixingdemolition", JsonConvert.SerializeObject(fixingdemolition));
