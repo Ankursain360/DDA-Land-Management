@@ -242,7 +242,10 @@ namespace EncroachmentDemolition.Controllers
                                         if (col > 0)
                                             multouserprofileid.Append(",");
                                         var UserProfile = await _userProfileService.GetUserById(Convert.ToInt32(MultiUserId));
-                                        multouserprofileid.Append(UserProfile.Id);
+                                        if (UserProfile != null)
+                                        {
+                                            multouserprofileid.Append(UserProfile.Id);
+                                        }
                                         col++;
                                     }
                                     approvalproccess.SendToProfileId = multouserprofileid.ToString();
@@ -344,7 +347,10 @@ namespace EncroachmentDemolition.Controllers
                                                         if (col > 0)
                                                             multouserprofileid.Append(",");
                                                         var UserProfile = await _userProfileService.GetUserById(Convert.ToInt32(MultiUserId));
-                                                        multouserprofileid.Append(UserProfile.Id);
+                                                        if (UserProfile != null)
+                                                        {
+                                                            multouserprofileid.Append(UserProfile.Id);
+                                                        }
                                                         col++;
                                                     }
                                                     approvalproccess.SendToProfileId = multouserprofileid.ToString();
@@ -648,7 +654,10 @@ namespace EncroachmentDemolition.Controllers
                                         if (col > 0)
                                             multouserprofileid.Append(",");
                                         var UserProfile = await _userProfileService.GetUserById(Convert.ToInt32(MultiUserId));
-                                        multouserprofileid.Append(UserProfile.Id);
+                                        if (UserProfile != null)
+                                        {
+                                            multouserprofileid.Append(UserProfile.Id);
+                                        }
                                         col++;
                                     }
                                     approvalproccess.SendToProfileId = multouserprofileid.ToString();
@@ -750,7 +759,10 @@ namespace EncroachmentDemolition.Controllers
                                                         if (col > 0)
                                                             multouserprofileid.Append(",");
                                                         var UserProfile = await _userProfileService.GetUserById(Convert.ToInt32(MultiUserId));
-                                                        multouserprofileid.Append(UserProfile.Id);
+                                                        if (UserProfile != null)
+                                                        {
+                                                            multouserprofileid.Append(UserProfile.Id);
+                                                        }
                                                         col++;
                                                     }
                                                     approvalproccess.SendToProfileId = multouserprofileid.ToString();
@@ -849,7 +861,10 @@ namespace EncroachmentDemolition.Controllers
                                         if (col > 0)
                                             multousermailId.Append(",");
                                         var RecevierUsers = await _userProfileService.GetUserById(Convert.ToInt32(MultiUserId));
-                                        multousermailId.Append(RecevierUsers.User.Email);
+                                        if (RecevierUsers != null)
+                                        {
+                                            multousermailId.Append(RecevierUsers.User.Email);
+                                        }
                                         col++;
                                     }
                                 }
