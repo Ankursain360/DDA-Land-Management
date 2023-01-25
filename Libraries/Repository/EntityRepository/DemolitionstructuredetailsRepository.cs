@@ -609,8 +609,8 @@ namespace Libraries.Repository.EntityRepository
                                           .Include(x => x.Demolitionstructuredetails)
                                           .Include(x => x.Encroachment.KhasraNoNavigation)
                                           .Where(x => x.IsActive == 1 
-                                          && (model. roleId == 1 || roleId == 2 || roleId == 3 || roleId == 10 || roleId == 19 || roleId == 7 || roleId == 69 || roleId == 16 ? (x.Encroachment.ZoneId == x.Encroachment.ZoneId) : (x.Encroachment.ZoneId == (ZoneId == 0 ? x.Encroachment.ZoneId : ZoneId)))
-                                          && (model. roleId == 1  ? (x.Encroachment.DepartmentId == x.Encroachment.DepartmentId) : (x.Encroachment.DepartmentId == (DeptId == 0 ? x.Encroachment.DepartmentId : DeptId)))
+                                          && (model. roleId == 1 || roleId == 2 || roleId == 3 || roleId == 63 || roleId == 19 || roleId == 7 || roleId == 69 || roleId == 16 ? (x.Encroachment.ZoneId == x.Encroachment.ZoneId) : (x.Encroachment.ZoneId == (ZoneId == 0 ? x.Encroachment.ZoneId : ZoneId)))
+                                          && (model. roleId == 1 || roleId == 2 || roleId == 3 ||   roleId == 7 || roleId == 63  ? (x.Encroachment.DepartmentId == x.Encroachment.DepartmentId) : (x.Encroachment.DepartmentId == (DeptId == 0 ? x.Encroachment.DepartmentId : DeptId)))
                                           && (model.filter == "TotalReceived" ? x.ApprovedStatusNavigation.StatusCode == x.ApprovedStatusNavigation.StatusCode
                                               : model.filter == "TotalApproved" ? (x.ApprovedStatusNavigation.StatusCode == 3)
                                               : model.filter == "PendingAtyou" ? (!PendingatYoustatus.Contains(x.ApprovedStatusNavigation.StatusCode) && x.PendingAt == model.userId.ToString()&& x.EncroachmentId==x.Encroachment.Id)

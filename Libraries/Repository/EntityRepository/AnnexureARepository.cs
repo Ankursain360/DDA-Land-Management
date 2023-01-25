@@ -21,15 +21,15 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<List<Demolitionchecklist>> GetDemolitionchecklist()
         {
-            return await _dbContext.Demolitionchecklist.ToListAsync();
+            return await _dbContext.Demolitionchecklist.Where(x=> x.IsActive==1).ToListAsync();
         }
         public async Task<List<Demolitionprogram>> GetDemolitionprogram()
         {
-            return await _dbContext.Demolitionprogram.ToListAsync();
+            return await _dbContext.Demolitionprogram.Where(x => x.IsActive == 1).ToListAsync();
         }
         public async Task<List<Demolitiondocument>> GetDemolitiondocument()
         {
-            return await _dbContext.Demolitiondocument.ToListAsync();
+            return await _dbContext.Demolitiondocument.Where(x => x.IsActive == 1).ToListAsync();
         }
         public async Task<List<Fixingdemolition>> GetFixingdemolition(int id)
         {
