@@ -813,7 +813,7 @@ namespace EncroachmentDemolition.Controllers
                                                     }
                                                     else
                                                     {
-                                                        if (i == DataFlow.Count - 1)
+                                                        if (i == DataFlow.Count - 1 || Convert.ToInt32(fixingdemolition.ApprovalStatus) == 3)// changes by sachin
                                                         {
                                                             fixingdemolition.ApprovedStatus = Convert.ToInt32(fixingdemolition.ApprovalStatus);
                                                             fixingdemolition.PendingAt = "0";

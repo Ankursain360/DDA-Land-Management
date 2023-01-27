@@ -35,7 +35,7 @@ namespace Libraries.Repository.EntityRepository
             foreach (Fixingdemolition myLine in UserWiseDataList)
                 myIdList.Add(myLine.Id);
             int[] myIdArray = myIdList.ToArray();
-
+            var PendingatYoustatus = new[] { 3, 4 };//approved and rejected
             var data = await _dbContext.Fixingdemolition
                                         .Include(x => x.Encroachment.Locality)
                                         .Include(x => x.Encroachment.Department)
@@ -45,7 +45,7 @@ namespace Libraries.Repository.EntityRepository
                                         .Include(x => x.ApprovedStatusNavigation)
                                         .Where(x => x.IsActive == 1
                                             && (model.StatusId == 0 ? (x.Encroachment.ZoneId == x.Encroachment.ZoneId) : (x.Encroachment.ZoneId == (zoneId == 0 ? x.Encroachment.ZoneId : zoneId)))
-                                            && (model.StatusId == 0 ? x.PendingAt != "0" : x.PendingAt == "0")
+                                            && (model.StatusId == 0 ? (!PendingatYoustatus.Contains(x.ApprovedStatusNavigation.StatusCode)) : x.PendingAt == "0")
                                             && (model.StatusId == 0 ? (myIdArray).Contains(x.Id) : x.PendingAt == "0")
                                             && (model.approvalstatusId == 0 ? (x.ApprovedStatus == x.ApprovedStatus) : (x.ApprovedStatus == model.approvalstatusId))
                                             )
