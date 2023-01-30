@@ -35,7 +35,13 @@
                     {
                         <td>
                             <a asp-action="View" asp-route-id="@item.Id" title="View" class="view"><i class="ri-eye-fill"></i> </a>
-                            <b>|</b> <a asp-action="PrintFile" asp-route-id="@item.Id" title="Print" target="_blank" class="view"><i class="ri-printer-fill"></i> </a>
+                            @if (item.ApprovedStatusNavigation != null)
+                            {
+                                if (item.ApprovedStatusNavigation.StatusCode == 3 || item.ApprovedStatusNavigation.StatusCode == 4)
+                                {
+                                    <b>|</b> <a asp-action="PrintFile" asp-route-id="@item.Id" title="Print" target="_blank" class="view"><i class="ri-printer-fill"></i> </a>
+                                }
+                            }
                         </td>
                     }
                 </tr>
