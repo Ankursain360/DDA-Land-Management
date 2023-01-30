@@ -9,16 +9,15 @@ $(document).ready(function () {
 function GetExcel(pageNumber, pageSize, order) {
     debugger;
     var param = GetSearchParam(pageNumber, pageSize, order);
-    HttpPost(`/PropertyRegistration/DownloadIndex`, 'html', param, function (response) {
+    HttpPost(`/InventoryUnverified/DownloadIndex`, 'html', param, function (response) {
         var a = document.createElement("a");
         a.target = '_blank';
-        a.href = '/PropertyRegistration/DownloadIndex1';
+        a.href = '/InventoryUnverified/DownloadIndex1';
         a.click();
 
     });
 }
-$("#btndownload").click(function () {
-    debugger;
+$("#btndownload").click(function () {    
     GetExcel(currentPageNumber, currentPageSize, sortOrder);
 });
 

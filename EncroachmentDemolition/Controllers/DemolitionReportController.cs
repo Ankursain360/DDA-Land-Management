@@ -87,12 +87,12 @@ namespace EncroachmentDemolition.Controllers
                 byte[] data = TempData["file"] as byte[];
                 return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-
-                return Json(new { status = "error", message = "Please generet the record before downloading" }); 
+                TempData["msg"] = "<script>alert('Please Generate the record before downloading')</script>";
+                return RedirectToAction("Index");
             }
-            //byte[] data = TempData["file"] as byte[];            
+            //byte[] data = TempData["file"] as byte[];
             //if (data != null)
             //{
             //    return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
@@ -101,8 +101,8 @@ namespace EncroachmentDemolition.Controllers
             //{
             //    TempData["msg"] = "<script>alert('Please generet the record before downloading')</script>";
             //}
-            //string msg = TempData["msg"].ToString();
-            //return View(msg);
+
+            //return RedirectToAction("Index");
         }
     }
 }
