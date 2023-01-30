@@ -14,7 +14,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<EncroachmentRegisteration>> GetAllEncroachmentRegisteration();
         Task<List<Locality>> GetAllLocality();
         Task<List<Khasra>> GetAllKhasra();
-        Task<List<Fixingdemolition>> GetAllFixingdemolition();
+        Task<List<Fixingdemolition>> GetAllFixingdemolition(AnnexureAApprovalSearchDto model, int userId, int zoneId);
         Task<PagedResult<Fixingdemolition>> GetPagedAnnexureA(AnnexureAApprovalSearchDto model, int userId, int zoneId);
         Task<bool> IsApplicationPendingAtUserEnd(int id, int userId);
         Task<Fixingdemolition> FetchSingleResult(int id);

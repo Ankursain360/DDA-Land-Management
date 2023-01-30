@@ -29,9 +29,9 @@ namespace Libraries.Service.ApplicationService
             return await _annexureARepository.GetDemolitionchecklist();
         }
 
-        public async Task<List<EncroachmentRegisteration>> GetAllRequestForFixingDemolitionList(int approved)
+        public async Task<List<EncroachmentRegisteration>> GetAllRequestForFixingDemolitionList(int approved, int zoneId)
         {
-            return await _annexureARepository.GetAllRequestForFixingDemolitionList(approved);
+            return await _annexureARepository.GetAllRequestForFixingDemolitionList(approved,zoneId);
         }
         public async Task<List<Demolitionprogram>> GetDemolitionprogram()
         {

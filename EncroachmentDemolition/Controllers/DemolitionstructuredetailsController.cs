@@ -1286,7 +1286,7 @@ namespace EncroachmentDemolition.Controllers
                         InspectionDate = Convert.ToDateTime(result[i].Encroachment.EncrochmentDate).ToString("dd-MMM-yyyy"),
                         Department = result[i].Encroachment.Department.Name,
                         Zone = result[i].Encroachment.Zone.Name,
-                        KhasraNo = result[i].Encroachment.KhasraNoNavigation.LocalityId == null ? result[i].Encroachment.KhasraNoNavigation.PlotNo : result[i].Encroachment.KhasraNoNavigation.KhasraNo,
+                        KhasraNo = result[i].Encroachment.KhasraNoNavigation.Locality == null ? result[i].Encroachment.KhasraNoNavigation.PlotNo : result[i].Encroachment.KhasraNoNavigation.KhasraNo,
                         DemolitionStatus = result[i].Demolitionstructuredetails.Count > 0 ? result[i].Demolitionstructuredetails.Select(x => x.DemolitionStatus).FirstOrDefault().Replace("_", " ") : "-",
                         ApplicationDate = result[i].CreatedDate.ToString("dd/MMM/yyyy"),
                         ApplicationStatus = result[i].ApprovedStatusNavigation.SentStatusName,

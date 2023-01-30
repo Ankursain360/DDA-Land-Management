@@ -11,7 +11,7 @@ namespace Libraries.Repository.IEntityRepository
     public interface IEncroachmentRegisterationApprovalRepository : IGenericRepository<EncroachmentRegisteration>
     {
         Task<List<EncroachmentRegisteration>> GetEncroachmentRegisteration();
-        Task<List<EncroachmentRegisteration>> GetAllEncroachmentRegisteration();
+        Task<List<EncroachmentRegisteration>> GetAllEncroachmentRegisteration(EncroachmentRegisterApprovalSearchDto model, int userId, int zoneId);
         Task<List<Locality>> GetAllLocality();
         Task<List<Khasra>> GetAllKhasra();
         Task<PagedResult<EncroachmentRegisteration>> GetPagedEncroachmentRegisteration(EncroachmentRegisterApprovalSearchDto model, int userId, int zoneId);

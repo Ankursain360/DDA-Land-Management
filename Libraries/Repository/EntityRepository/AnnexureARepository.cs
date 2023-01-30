@@ -69,21 +69,22 @@ namespace Libraries.Repository.EntityRepository
             return await _dbContext.Fixingdocument.Where(x => x.FixingdemolitionId == fixingdemolitionId && x.IsActive == 1).ToListAsync();
         }
 
-        public async Task<List<EncroachmentRegisteration>> GetAllRequestForFixingDemolitionList(int approved)
+        public async Task<List<EncroachmentRegisteration>> GetAllRequestForFixingDemolitionList(int approved, int zoneId)
         {
             var InInspectionId = (from x in _dbContext.Fixingdemolition
                                   where x.IsActive == 1
                                   select x.EncroachmentId).ToArray();
-
-            return await _dbContext.EncroachmentRegisteration
-
-
-                .Include(x => x.Locality)
-
-                .Include(x => x.ApprovedStatusNavigation)
+            var data = await _dbContext.EncroachmentRegisteration
+                                   .Include(x => x.Department)
+                                   .Include(x => x.Zone)
+                                   .Include(x => x.Locality)
+                                   .Include(x => x.ApprovedStatusNavigation)
+                                   .Include(x => x.KhasraNoNavigation)
                                     .Where(x => x.IsActive == 1 && x.ApprovedStatusNavigation.StatusCode == approved
-                                          && !(InInspectionId).Contains(x.Id))
-                 .ToListAsync();
+                                       && (x.ZoneId == (zoneId == 0 ? x.ZoneId : zoneId))
+                                       && !(InInspectionId).Contains(x.Id)).ToListAsync();
+            return data;
+
         }
 
 

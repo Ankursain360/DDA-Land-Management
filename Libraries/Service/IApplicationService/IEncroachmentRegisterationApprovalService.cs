@@ -11,7 +11,7 @@ namespace Libraries.Service.IApplicationService
 {
     public interface IEncroachmentRegisterationApprovalService : IEntityService<EncroachmentRegisteration>
     {
-        Task<List<EncroachmentRegisteration>> GetAllEncroachmentRegisteration();
+        Task<List<EncroachmentRegisteration>> GetAllEncroachmentRegisteration(EncroachmentRegisterApprovalSearchDto model, int userId, int zoneId);
         Task<List<Khasra>> GetAllKhasra();
         Task<List<Locality>> GetAllLocality();
         Task<EncroachmentRegisteration> FetchSingleResult(int id);

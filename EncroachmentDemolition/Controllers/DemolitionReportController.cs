@@ -82,8 +82,27 @@ namespace EncroachmentDemolition.Controllers
         [HttpGet]
         public virtual ActionResult download()
         {
-            byte[] data = TempData["file"] as byte[];
-            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            try
+            {
+                byte[] data = TempData["file"] as byte[];
+                return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            }
+            catch (Exception ex)
+            {
+
+                return Json(new { status = "error", message = "Please generet the record before downloading" });
+            }
+            //byte[] data = TempData["file"] as byte[];            
+            //if (data != null)
+            //{
+            //    return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            //}
+            //else
+            //{
+            //    TempData["msg"] = "<script>alert('Please generet the record before downloading')</script>";
+            //}
+            //string msg = TempData["msg"].ToString();
+            //return View(msg);
         }
     }
 }

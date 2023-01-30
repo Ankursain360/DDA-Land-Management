@@ -835,9 +835,9 @@ namespace EncroachmentDemolition.Controllers
         #endregion
         //  [AuthorizeContext(ViewAction.Download)]
 
-        public async Task<IActionResult> EncroachmentRegisterApprovalList()
+        public async Task<IActionResult> EncroachmentRegisterApprovalList(EncroachmentRegisterApprovalSearchDto model)
         {
-            var result = await _encroachmentRegisterationApprovalService.GetAllEncroachmentRegisteration();
+            var result = await _encroachmentRegisterationApprovalService.GetAllEncroachmentRegisteration(model, SiteContext.UserId, SiteContext.ZoneId ?? 0);
             List<EncroachmentRegisterApprovalListDto> data = new List<EncroachmentRegisterApprovalListDto>();
             if (result != null)
             {
@@ -847,11 +847,11 @@ namespace EncroachmentDemolition.Controllers
                     {
                         Id = result[i].Id,
                         Date = Convert.ToDateTime(result[i].EncrochmentDate).ToString("dd-MMM-yyyy"),
-                        LocalityVillage = result[i].Locality == null ? "" : result[i].Locality.Name,
-                        KhasraNo = result[i].KhasraNoNavigation.KhasraNo == null ? "" : result[i].KhasraNoNavigation.KhasraNo,
+                        LocalityVillage = result[i].KhasraNoNavigation.Locality == null ? result[i].KhasraNoNavigation.Colony : result[i].KhasraNoNavigation.Locality == null ? result[i].Locality.Name : result[i].KhasraNoNavigation.Locality.Name,
+                        KhasraNo = result[i].KhasraNoNavigation.PlannedUnplannedLand == "Planned Land" ? result[i].KhasraNoNavigation.PlotNo : result[i].KhasraNoNavigation.KhasraNo,
                         Status = result[i].ApprovedStatusNavigation == null ? "" : result[i].ApprovedStatusNavigation.SentStatusName,
-                      
-                    }); ;
+
+                    });
                 }
             }
 

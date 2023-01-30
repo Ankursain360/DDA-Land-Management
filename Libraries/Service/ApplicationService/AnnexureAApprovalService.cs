@@ -27,9 +27,9 @@ namespace Libraries.Service.ApplicationService
         {
             return await _annexureAApprovalRepository.FetchSingleResult(id);
         }
-        public async Task<List<Fixingdemolition>> GetAllFixingdemolition()
+        public async Task<List<Fixingdemolition>> GetAllFixingdemolition(AnnexureAApprovalSearchDto model, int userId, int zoneId)
         {
-            return await _annexureAApprovalRepository.GetAllFixingdemolition();
+            return await _annexureAApprovalRepository.GetAllFixingdemolition(model,userId,zoneId);
         }
         public async Task<PagedResult<Fixingdemolition>> GetPagedAnnexureA(AnnexureAApprovalSearchDto model, int userId, int zoneId)
         {

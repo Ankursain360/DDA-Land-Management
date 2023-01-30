@@ -14,7 +14,7 @@ namespace Libraries.Service.IApplicationService
         Task<List<Demolitionprogram>> GetDemolitionprogram();
         Task<List<Demolitiondocument>> GetDemolitiondocument();
 
-        Task<List<EncroachmentRegisteration>> GetAllRequestForFixingDemolitionList(int approved);
+        Task<List<EncroachmentRegisteration>> GetAllRequestForFixingDemolitionList(int approved, int zoneId);
 
         Task<List<Fixingdemolition>> GetFixingdemolition(int id);
         //Task<bool> SaveFixingdemolition(Fixingdemolition fixingdemolition);

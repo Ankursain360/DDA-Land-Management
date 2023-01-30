@@ -91,11 +91,33 @@ namespace Libraries.Repository.EntityRepository
         //        .Include(x => x.Khasra)
         //        .ToListAsync();
         //}
-        public async Task<List<EncroachmentRegisteration>> GetAllEncroachmentRegisteration()
+        public async Task<List<EncroachmentRegisteration>> GetAllEncroachmentRegisteration(EncroachmentRegisterApprovalSearchDto model, int userId, int zoneId)
         {
-            return await _dbContext.EncroachmentRegisteration.Include(x => x.Locality)
-                .Include(x => x.ApprovedStatusNavigation)
-                .ToListAsync();
+            var AllDataList = await _dbContext.EncroachmentRegisteration.ToListAsync();
+            var UserWiseDataList = AllDataList.Where(x => x.PendingAt.Split(',').Contains(userId.ToString()));
+            List<int> myIdList = new List<int>();
+            foreach (EncroachmentRegisteration myLine in UserWiseDataList)
+                myIdList.Add(myLine.Id);
+            int[] myIdArray = myIdList.ToArray();
+            var data = await _dbContext.EncroachmentRegisteration
+                                        .Include(x => x.Locality)
+                                         .Include(x => x.Department)
+                                         .Include(x => x.Zone)
+                                        .Include(x => x.ApprovedStatusNavigation)
+                                        .Include(x => x.KhasraNoNavigation)
+                                        .Where(x => x.IsActive == 1
+                                            && (model.StatusId == 1 ? (x.ZoneId == x.ZoneId) : model.StatusId == 0 ? (x.ZoneId == (zoneId == 0 ? x.ZoneId : zoneId)) : (x.ZoneId == x.ZoneId))
+                                            && (model.StatusId == 1 ? x.PendingAt != "0" : model.StatusId == 0 ? x.PendingAt == x.PendingAt : x.PendingAt == "0")
+                                            && (model.StatusId == 1 ? (myIdArray).Contains(x.Id) : x.PendingAt == x.PendingAt)
+                                            && (model.approvalstatusId == 0 ? (x.ApprovedStatus == x.ApprovedStatus) : (x.ApprovedStatus == model.approvalstatusId))
+                                            ).ToListAsync();
+            return data;
+
+
+            //return await _dbContext.EncroachmentRegisteration.Include(x => x.Locality)
+            //    .Include(x => x.ApprovedStatusNavigation)
+            //    .Include(x => x.KhasraNoNavigation)
+            //    .ToListAsync();
         }
         public async Task<List<Khasra>> GetAllKhasra()
         {

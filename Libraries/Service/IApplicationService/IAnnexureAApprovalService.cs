@@ -13,7 +13,7 @@ namespace Libraries.Service.IApplicationService
     {
         Task<PagedResult<Fixingdemolition>> GetPagedAnnexureA(AnnexureAApprovalSearchDto model, int userId, int zoneId);
         Task<Fixingdemolition> FetchSingleResult(int id);
-        Task<List<Fixingdemolition>> GetAllFixingdemolition();
+        Task<List<Fixingdemolition>> GetAllFixingdemolition(AnnexureAApprovalSearchDto model, int userId, int zoneId);
         Task<bool> IsApplicationPendingAtUserEnd(int id, int userId);
     }
 }

@@ -506,7 +506,7 @@ namespace EncroachmentDemolition.Controllers
 
         public async Task<IActionResult> RequestForFixingDemolitionProgrammeList()
         {
-            var result = await _annexureAService.GetAllRequestForFixingDemolitionList((int)ApprovalActionStatus.Approved);
+            var result = await _annexureAService.GetAllRequestForFixingDemolitionList((int)ApprovalActionStatus.Approved,SiteContext.ZoneId??0);
             List<RequestForFixingDemolitionProgrammeListDto> data = new List<RequestForFixingDemolitionProgrammeListDto>();
             if (result != null)
             {
