@@ -613,7 +613,7 @@ namespace Libraries.Repository.EntityRepository
                                           && (model. roleId == 1 || roleId == 2 || roleId == 3 ||   roleId == 7 || roleId == 63  ? (x.Encroachment.DepartmentId == x.Encroachment.DepartmentId) : (x.Encroachment.DepartmentId == (DeptId == 0 ? x.Encroachment.DepartmentId : DeptId)))
                                           && (model.filter == "TotalReceived" ? x.ApprovedStatusNavigation.StatusCode == x.ApprovedStatusNavigation.StatusCode
                                               : model.filter == "TotalApproved" ? (x.ApprovedStatusNavigation.StatusCode == 3)
-                                              : model.filter == "PendingAtyou" ? (!PendingatYoustatus.Contains(x.ApprovedStatusNavigation.StatusCode) && x.PendingAt == model.userId.ToString()&& x.EncroachmentId==x.Encroachment.Id)
+                                              : model.filter == "PendingAtyou" ? (!PendingatYoustatus.Contains(x.ApprovedStatusNavigation.StatusCode) && x.PendingAt.Contains(model.userId.ToString())&& x.EncroachmentId==x.Encroachment.Id)
                                               : model.filter == "TotalPending" ? (!PendingatYoustatus.Contains(x.ApprovedStatusNavigation.StatusCode))
                                               : model.filter == "TotalRejected" ? (x.ApprovedStatusNavigation.StatusCode == 4)
                                               : (x.ApprovedStatusNavigation.StatusCode == x.ApprovedStatusNavigation.StatusCode)
