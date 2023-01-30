@@ -19,14 +19,37 @@ namespace Libraries.Repository.EntityRepository
         {
 
         }
-        public async Task<List<Fixingdemolition>> GetAllFixingdemolition()
+        public async Task<List<Fixingdemolition>> GetAllFixingdemolition(AnnexureAApprovalSearchDto model, int userId, int zoneId)
         {
-            return await _dbContext.Fixingdemolition
+            var AllDataList = await _dbContext.Fixingdemolition.ToListAsync();
+            var UserWiseDataList = AllDataList.Where(x => x.PendingAt.Split(',').Contains(userId.ToString()));
+            List<int> myIdList = new List<int>();
+            foreach (Fixingdemolition myLine in UserWiseDataList)
+                myIdList.Add(myLine.Id);
+            int[] myIdArray = myIdList.ToArray();
+
+            var data = await _dbContext.Fixingdemolition
                                         .Include(x => x.Encroachment.Locality)
+                                        .Include(x => x.Encroachment.Department)
+                                        .Include(x => x.Encroachment.Zone)
                                         .Include(x => x.Encroachment)
+                                        .Include(x => x.Encroachment.KhasraNoNavigation)
                                         .Include(x => x.ApprovedStatusNavigation)
-                .ToListAsync();
+                                        .Where(x => x.IsActive == 1
+                                            && (model.StatusId == 1 ? (x.Encroachment.ZoneId == x.Encroachment.ZoneId) : (x.Encroachment.ZoneId == (zoneId == 0 ? x.Encroachment.ZoneId : zoneId)))
+                                            && (model.StatusId == 1 ? x.PendingAt != "0" : x.PendingAt == "0")
+                                            && (model.StatusId == 1 ? (myIdArray).Contains(x.Id) : x.PendingAt == "0")
+                                            && (model.approvalstatusId == 0 ? (x.ApprovedStatus == x.ApprovedStatus) : (x.ApprovedStatus == model.approvalstatusId))
+                                            ).ToListAsync();
+            return data;
+            //return await _dbContext.Fixingdemolition
+            //                            .Include(x => x.Encroachment.Locality)
+            //                            .Include(x => x.Encroachment)
+            //                            .Include(x => x.Encroachment.KhasraNoNavigation)
+            //                            .Include(x => x.ApprovedStatusNavigation)
+            //    .ToListAsync();
         }
+    
         public async Task<PagedResult<Fixingdemolition>> GetPagedAnnexureA(AnnexureAApprovalSearchDto model, int userId, int zoneId)
         {
             var AllDataList = await _dbContext.Fixingdemolition.ToListAsync();

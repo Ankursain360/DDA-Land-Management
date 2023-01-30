@@ -1309,9 +1309,9 @@ namespace EncroachmentDemolition.Controllers
 
         //  [AuthorizeContext(ViewAction.Download)]
 
-        public async Task<IActionResult> FixingdemolitionApprovalList()
+        public async Task<IActionResult> FixingdemolitionApprovalList(AnnexureAApprovalSearchDto model)
         {
-            var result = await _annexureAApprovalService.GetAllFixingdemolition();
+            var result = await _annexureAApprovalService.GetAllFixingdemolition(model, SiteContext.UserId, SiteContext.ZoneId ?? 0);
             List<FixingdemolitionApprovalListDto> data = new List<FixingdemolitionApprovalListDto>();
             if (result != null)
             {

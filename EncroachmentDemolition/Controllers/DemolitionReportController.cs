@@ -90,7 +90,7 @@ namespace EncroachmentDemolition.Controllers
             catch (Exception ex)
             {
 
-                return Json(new { status = "error", message = "Please generet the record before downloading" });
+                return Json(new { status = "error", message = "Please generet the record before downloading" }); 
             }
             //byte[] data = TempData["file"] as byte[];            
             //if (data != null)
