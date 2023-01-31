@@ -1,11 +1,13 @@
-﻿
-@model IEnumerable<Libraries.Model.Entity.Landbankdetails>
-
+﻿@model IEnumerable<Libraries.Model.Entity.Landbankdetails>
+@{
+    int row = 1;
+}
 
 <table class="table table-sm table-bordered mb-0 table-striped">
     <thead class="text-nowrap">
 
         <tr>
+            <th>Sr.No.</th>
             <th>Land Category</th>
             <th>Zone</th>
             <th>Village Name</th>
@@ -16,42 +18,65 @@
     <tbody>
         @if (Model != null && Model.Count() > 0)
         {
-        @foreach (var item in Model)
+            @foreach (var item in Model)
             {
-        <tr>
-            <td>@(item.LandCategoryNavigation.Name) </td>
-            <td>@(item.ZoneName) </td>
-            <td>@(item.VillageName)</td>
-            <td>@item.Area</td>
-        </tr>
+                <tr>
+                    <td>
+
+                        @row
+
+                    </td>
+                    <td>@(item.LandCategoryNavigation.Name) </td>
+                    <td>@(item.ZoneName) </td>
+                    <td>@(item.VillageName)</td>
+                    <td>@item.Area</td>
+                </tr>
+                row++;
             }
-        @if (Model.Count() < 0)
+            @if (Model.Count() < 0)
             {
-        <tr>
-            <th style="text-align:center" colspan="4">
-                Data Not Available
-            </th>
-        </tr>
+                <tr>
+                    <th style="text-align:center" colspan="5">
+                        Data Not Available
+                    </th>
+                </tr>
             }
         }
         else
         {
-        <tr>
-            <th colspan="4" style="text-align:center"> No Record Available! </th>
-        </tr>
+            <tr>
+                <th colspan="5" style="text-align:center"> No Record Available! </th>
+            </tr>
         }
     </tbody>
     <tfoot>
         @if (Model != null && Model.Count() > 0)
         {
-        <tr>
-            <td colspan="3" style="font-weight: bolder;background-color: darkgrey" align="right">Total</td>
-            <td style="font-weight: bolder;background-color: darkgrey">@Model.Sum(i => i.Area) </td>
-        </tr>
+            <tr>
+                <td colspan="4" style="font-weight: bolder;background-color: darkgrey" align="right">Total</td>
+                <td style="font-weight: bolder;background-color: darkgrey">@Model.Sum(i => i.Area) </td>
+            </tr>
         }
     </tfoot>
 
+
 </table>
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.css" />
+
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.js"></script>
+<script>
+    $(document).ready(function () {
+       
+        $(".table").dataTable();
+
+    });
+</script>
+<style>
+    label, dataTables_info, dataTables_paginate {
+        font-weight: bolder;
+    }
+</style>
 
 
 @*@await Component.InvokeAsync("Pager", new { totalCount = Model.RowCount, pageNumber = Model.CurrentPage, pageSize = Model.PazeSize })*@
