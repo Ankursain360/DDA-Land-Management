@@ -15,13 +15,13 @@ function GetExcel(pageNumber, pageSize, order) {
     HttpPost(`/PropertyRegistration/DownloadIndex`, 'html', param, function (response) {
         var a = document.createElement("a");
         a.target = '_blank';
-        a.href = '/PropertyRegistration/DownloadIndex1';
+        a.href = '/PropertyRegistration/Download';
         a.click();
 
     });
 }
 $("#btndownload").click(function () {
-    debugger;
+    
     GetExcel(currentPageNumber, currentPageSize, sortOrder);
 });
 

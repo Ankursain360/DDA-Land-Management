@@ -946,8 +946,8 @@ namespace LandInventory.Controllers
             return Ok();
         }
 
-        [HttpGet]
-        public virtual IActionResult DownloadIndex1()
+        [HttpGet] 
+        public virtual IActionResult Download()
         {
             //var memory = ExcelHelper.CreateExcel(data);
             //string sFileName = @"LandInventory.xlsx";
