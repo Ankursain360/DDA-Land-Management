@@ -9,19 +9,19 @@ $(document).ready(function () {
 $("#btnSearch").click(function () {
     GetDetails(currentPageNumber, currentPageSize, sortOrder);
 });
+
 function GetExcel(pageNumber, pageSize, order) {
     debugger;
     var param = GetSearchParam(pageNumber, pageSize, order);
-    HttpPost(`/PropertyRegistration/DownloadIndex`, 'html', param, function (response) {
+    HttpPost(`/PropertyRegistration/downloadPropertyList`, 'html', param, function (response) {
         var a = document.createElement("a");
         a.target = '_blank';
-        a.href = '/PropertyRegistration/DownloadIndex1';
+        a.href = '/PropertyRegistration/Download';
         a.click();
 
     });
 }
-$("#btndownload").click(function () {
-    debugger;
+$("#btndownload").click(function () {    
     GetExcel(currentPageNumber, currentPageSize, sortOrder);
 });
 
@@ -43,12 +43,13 @@ $('#ddlSort').change(function () {
     GetDetails(currentPageNumber, currentPageSize, sortOrder);
 });
 $("#btnReset").click(function () {
+    
     $('#DepartmentId').val('0').trigger('change');
     $('#ZoneId').val('0').trigger('change');
     $('#DivisionId').val('0').trigger('change');
     $('#InventoriedInId').val('0').trigger('change')
     $('#ClassificationOfLandId').val('0').trigger('change');
-    $('#PlannedUnplannedLand').val('0').trigger('change');
+    $('#PlannedUnplannedLand').val('Planned Land').trigger('change');
     GetDetails(currentPageNumber, currentPageSize, sortOrder);
 });
 

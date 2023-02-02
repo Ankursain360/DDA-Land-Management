@@ -873,9 +873,9 @@ namespace LandInventory.Controllers
             }
         }
 
-        [AuthorizeContext(ViewAction.Download)]
+        //[AuthorizeContext(ViewAction.Download)]
         [HttpPost]
-        public async Task<IActionResult> DownloadIndex([FromBody] PropertyRegisterationSearchDto model)
+        public async Task<IActionResult> downloadPropertyList([FromBody] PropertyRegisterationSearchDto model)
         {
             var result = await _propertyregistrationService.GetAllPropertInventory(model, SiteContext.UserId);
             List<PropertyInventoryListDto> data = new List<PropertyInventoryListDto>();
@@ -888,7 +888,6 @@ namespace LandInventory.Controllers
                         Id = result[i].Id,
                         InventoriedIn = result[i].InventoriedInId.ToString() == "1" ? "VLMS" : "Used",
                         PlannedUnplannedLand = result[i].PlannedUnplannedLand,
-
                         ClassificationofLand = result[i].ClassificationOfLand == null ? " " : result[i].ClassificationOfLand.Name,
                         Department = result[i].Department == null ? " " : result[i].Department.Name,
                         Zone = result[i].Zone == null ? " " : result[i].Zone.Name,
@@ -946,8 +945,8 @@ namespace LandInventory.Controllers
             return Ok();
         }
 
-        [HttpGet]
-        public virtual IActionResult DownloadIndex1()
+        [HttpGet] 
+        public virtual IActionResult Download()
         {
             //var memory = ExcelHelper.CreateExcel(data);
             //string sFileName = @"LandInventory.xlsx";
