@@ -141,6 +141,6 @@ $("#btnReset").click(function () {
     $('#DivisionId').val('0').trigger('change');
     $('#InventoriedInId').val('0').trigger('change')
     $('#ClassificationOfLandId').val('0').trigger('change');
-    $('#PlannedUnplannedLand').val('0').trigger('change');
+    $('#PlannedUnplannedLand').val('Planned Land').trigger('change');
     GetDetails(currentPageNumber, currentPageSize, sortOrder);
 });
