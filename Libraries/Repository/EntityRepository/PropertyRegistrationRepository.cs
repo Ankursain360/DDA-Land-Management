@@ -519,9 +519,9 @@ namespace Libraries.Repository.EntityRepository
                    .ToListAsync();
             return data;
         }
-        public async  Task<List<Propertyregistration>> GetAllPropertInventory(PropertyRegisterationSearchDto model, int UserId)
+        public async Task<List<Propertyregistration>> GetAllPropertInventory(PropertyRegisterationSearchDto model, int UserId)
         {
-             var badCodes = new[] { 3, 5 };
+            var badCodes = new[] { 3, 5 };
             var data = await _dbContext.Propertyregistration
                               .Include(x => x.ClassificationOfLand)
                               .Include(x => x.Department)
@@ -536,7 +536,7 @@ namespace Libraries.Repository.EntityRepository
                                                          && (x.ZoneId == (model.zoneId == 0 ? x.ZoneId : model.zoneId))
                                                          && (x.DivisionId == (model.divisionId == 0 ? x.DivisionId : model.divisionId))
                                                          && (x.InventoriedInId == (model.inventoriedId == 0 ? x.InventoriedInId : model.inventoriedId))
-                                                         && (x.PlannedUnplannedLand == (model.plannedUnplannedLand == "0" ? x.PlannedUnplannedLand : model.plannedUnplannedLand))) .ToListAsync();
+                                                         && (x.PlannedUnplannedLand == (model.plannedUnplannedLand == "0" ? x.PlannedUnplannedLand : model.plannedUnplannedLand))).ToListAsync();
             return data;
             //var data = await _dbContext.Propertyregistration
             //               .Include(x => x.ClassificationOfLand)
@@ -885,7 +885,7 @@ namespace Libraries.Repository.EntityRepository
 
             var data = await _dbContext.Propertyregistration
                                         .Include(x => x.Locality)
-                                        .Include(x => x.Department) 
+                                        .Include(x => x.Department)
                                         .Include(x => x.Zone)
                                         .Include(x => x.Division)
                                         .Include(x => x.Deletedproperty)
@@ -1187,7 +1187,7 @@ namespace Libraries.Repository.EntityRepository
             return await _dbContext.Propertyregistration
        .Include(x => x.ClassificationOfLand)
                             .Include(x => x.Department)
-                            .Include(x => x.Division) 
+                            .Include(x => x.Division)
                             .Include(x => x.DisposalType)
                             .Include(x => x.MainLandUse)
                             .Include(x => x.Zone)
@@ -1444,9 +1444,9 @@ namespace Libraries.Repository.EntityRepository
                                         .Include(x => x.ClassificationOfLand)
                                         .Where(x => (x.IsDeleted == 0 || x.IsDisposed == 0)).ToListAsync();
         }
-        public async Task<List<Propertyregistration>> GetAllDeletedLandReportDataList(PropertyRegisterationSearchDto model) 
+        public async Task<List<Propertyregistration>> GetAllDeletedLandReportDataList(PropertyRegisterationSearchDto model)
         {
-            var data = await _dbContext.Propertyregistration 
+            var data = await _dbContext.Propertyregistration
                                         .Include(x => x.Locality)
                                         .Include(x => x.Department)
                                         .Include(x => x.Zone)
@@ -1494,7 +1494,7 @@ namespace Libraries.Repository.EntityRepository
                                  .ToListAsync();
         }
 
-        public async Task <List<LandDashboardDataDto>> GetLandDashboardData()
+        public async Task<List<LandDashboardDataDto>> GetLandDashboardData()
         {
             var data = await _dbContext.landbankdetails
                                         .Include(y => y.LandCategoryNavigation)
@@ -1502,15 +1502,26 @@ namespace Libraries.Repository.EntityRepository
                                         .Select(x => new { landtype = x.Key, area = x.Sum(x => x.Area) }).ToListAsync();
 
             List<LandDashboardDataDto> list = new List<LandDashboardDataDto>();
-            
+
             foreach (var p in data)
             {
                 LandDashboardDataDto dto = new LandDashboardDataDto();
                 dto.LandType = p.landtype;
                 dto.Area = p.area;
                 list.Add(dto);
-            } 
-            return list; 
+            }
+            return list;
+        }
+
+        public async Task<List<Awardplotdetails>> GetAwardData(string village, int category)
+        {
+            var data = await _dbContext.Awardplotdetails
+                                        .Include(x => x.AwardMaster)
+                                        .Include(x => x.Village)
+                                        .Include(x => x.Khasra)
+                                        .Where(x=> x.Village.Name.Contains(village))
+                                        .OrderBy(x => x.AwardMasterId).ToListAsync();
+            return data;
         }
     }
 

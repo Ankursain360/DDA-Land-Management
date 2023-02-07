@@ -440,5 +440,9 @@ namespace Libraries.Service.ApplicationService
         {
             return await _propertyregistrationRepository.GetLandDashboardData();
         }
+        public async Task<List<Awardplotdetails>> GetAwardData(string village, int category)
+        {
+            return await _propertyregistrationRepository.GetAwardData(village,category);
+        }
     }
 }

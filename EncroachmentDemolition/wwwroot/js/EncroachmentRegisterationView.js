@@ -53,6 +53,28 @@
     else {
         $("#divForLandStatus").hide();
     }
+    
+    if ($("#IsEncroachment").val() == "Yes") {
+        $("#Divclsification").show();
+        $("select").select2({
+            placeholder: "Select",
+            allowClear: true
+        });
+        $('input,textarea').each(function () {
+            if ($(this).is("[limit]")) {
+                if ($(this).attr("limit") != undefined && $(this).attr("limit") != null) {
+                    //  $(this).MaxLength({ MaxLength: parseInt($(this).attr("limit")) });
+                    //$(this).siblings('div').removeAttr('style');
+                    $(this).siblings('div').attr('style', 'width:auto;text-align:right;');
+                }
+            }
+        });
+
+    }
+    else {
+        $("#Divclsification").hide();
+
+    }
    
 
 });
@@ -271,5 +293,26 @@ function callSelect2() {
 $("input[name='grpIsEncroachment']").click(function () {
     var selected = $("input[type='radio'][name='grpIsEncroachment']:checked");
     $("#IsEncroachment").val(selected.val());
+    if ($("#IsEncroachment").val() == "Yes") {
+        $("#Divclsification").show();
+        $("select").select2({
+            placeholder: "Select",
+            allowClear: true
+        });
+        $('input,textarea').each(function () {
+            if ($(this).is("[limit]")) {
+                if ($(this).attr("limit") != undefined && $(this).attr("limit") != null) {
+                    //  $(this).MaxLength({ MaxLength: parseInt($(this).attr("limit")) });
+                    //$(this).siblings('div').removeAttr('style');
+                    $(this).siblings('div').attr('style', 'width:auto;text-align:right;');
+                }
+            }
+        });
+
+    }
+    else {
+        $("#Divclsification").hide();
+
+    }
 
 });

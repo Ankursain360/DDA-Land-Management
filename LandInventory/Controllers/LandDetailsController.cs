@@ -52,5 +52,12 @@ namespace LandInventory.Controllers
             var result = await _propertyregistrationService.GetLandDashboardData();
             return Json(result);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAwardData(string village,int category)
+        {
+            var result = await _propertyregistrationService.GetAwardData(village.Trim().TrimEnd(), category);
+            return View(result);
+        }
     }
 }

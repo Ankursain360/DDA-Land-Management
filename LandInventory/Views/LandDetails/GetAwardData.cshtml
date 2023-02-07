@@ -1,0 +1,121 @@
+﻿@model IEnumerable<Libraries.Model.Entity.Awardplotdetails>
+@{
+    ViewData["Title"] = "Award data";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int row = 1;
+    double areas = 0.0;
+    double actualareas = 0.0;
+    double ActualAreaSumInAcres = 0.0;
+    double NotifiedAreaSumInAcres = 0.0;
+}
+
+<div class="pt-3">
+    <form class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+        <h3 class="mb-3 d-flex">Search</h3>
+        <div class="row">
+            <div class="col-md-3">
+
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="text" id="txtIcon" class="floating-label-field floating-label-field--s3" placeholder="Award No" />
+                    <label class="floating-label">Award No</label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-12 col-xl-3">
+                <div class="row">
+                    <div class="col-6 col-md-5 col-xl-6">
+                        <button id="btnReset" class="btn btn-link btn-block d-flex align-items-center justify-content-center" type="reset">
+                            <i class="ri-refresh-line me-2"></i>Reset
+                        </button>
+                    </div>
+                    <div class="col-6 col-md-7 col-xl-6">
+                        <button class="btn btn-theme" type="submit" id="btnSearch">Search</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div class="table-section bg-white border shadow rounded">
+
+        <div class="table-responsive" id="divTable">
+            <table class="table table-sm table-bordered mb-0 table-striped">
+
+                <thead class="text-nowrap">
+                    <tr>
+                        <th>Sr.No.</th>
+                        <th>Award No.</th>
+                        <th>Village Name</th>
+                        <th>Khasra No.</th>
+                        <th>Actual Area(B-B-B)[Acres]</th>
+                        <th>Actual Area(Acres)</th>
+                        <th>Notified Area (B-B-B)</th>
+                        <th>Notified Area (Acres)</th>
+                    </tr>
+                </thead>
+                <tbody class="tbody">
+                    @if (Model != null && Model.Count() > 0)
+                    {
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@row</td>
+                                <td>@item.AwardMaster.AwardNumber</td>
+                                <td>@item.Village.Name</td>
+                                <td>@item.Khasra.Name</td>
+                                <td>
+                                    @item.Khasra.Bigha -
+                                    @item.Khasra.Biswa -
+                                    @item.Khasra.Biswanshi
+                                </td>
+                                <td>
+                                    @{
+                                        int a = @item.Khasra.Bigha * 20;
+                                        int c = a + @item.Khasra.Biswa + @item.Khasra.Biswanshi;
+                                        areas = (double)(c / 96m);
+                                        ActualAreaSumInAcres = ActualAreaSumInAcres + areas;
+                                    }
+                                    @areas.ToString("0.000")
+                                </td>
+                                <td>
+                                    @item.Bigha -
+                                    @item.Biswa -
+                                    @item.Biswanshi
+                                </td>
+                                <td>
+                                    @{
+                                        int ab = @item.Khasra.Bigha * 20;
+                                        int cb = ab + @item.Khasra.Biswa + @item.Khasra.Biswanshi;
+                                        actualareas = (double)(cb / 96m);
+                                        NotifiedAreaSumInAcres = NotifiedAreaSumInAcres + areas;
+                                    }
+                                    @actualareas.ToString("0.000")
+                                </td>
+
+                            </tr>
+                            row++;
+
+                        }
+                    }
+
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><b>Total Actual Area(In Acres): @ActualAreaSumInAcres.ToString("0.000")</b></td>
+                        <td></td>
+                        <td><b>Total Notified Area(In Acres): @NotifiedAreaSumInAcres.ToString("0.000")</b></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+

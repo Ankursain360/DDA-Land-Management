@@ -76,6 +76,7 @@ namespace Libraries.Service.IApplicationService
 
         Task<List<Landbankdetails>> GetLandBankdata(string landCategory);
         Task<List<LandDashboardDataDto>> GetLandDashboardData();
+        Task<List<Awardplotdetails>> GetAwardData(string village,int category);
         
 
     }

@@ -55,12 +55,13 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Propertyregistration>> GetAllRestoreLandReportData();
         Task<List<Propertyregistration>> GetAllPropertyRegistrationReportList();
         Task<List<Propertyregistration>> GetAllPropertyRegistrationMORlist(PropertyRegisterationSearchDto model, int UserId);
-        Task<PagedResult<Propertyregistration>> GetInventoryUnverifiedVerified(InvnentoryUnverifiedVerifiedSearchDto model, int userId,int? roleId);
+        Task<PagedResult<Propertyregistration>> GetInventoryUnverifiedVerified(InvnentoryUnverifiedVerifiedSearchDto model, int userId, int? roleId);
         Task<PagedResult<Propertyregistration>> GetDeletedLandReportData(PropertyRegisterationSearchDto model);
         Task<List<Propertyregistration>> GetPrimaryListForAPI(int deptid, int zoneid, int divisionid);// for api added by renu
         string GetMobileNo(int UseId);
 
         Task<List<Landbankdetails>> GetLandBankdata(string landCategory);
         Task<List<LandDashboardDataDto>> GetLandDashboardData();
+        Task<List<Awardplotdetails>> GetAwardData(string village, int category);
     }
 }
