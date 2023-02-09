@@ -1513,13 +1513,15 @@ namespace Libraries.Repository.EntityRepository
             return list;
         }
 
-        public async Task<List<Awardplotdetails>> GetAwardData(string village, int category)
+        public async Task<List<Awardplotdetails>> GetAwardData(string village, int category, string award )
         {
             var data = await _dbContext.Awardplotdetails
                                         .Include(x => x.AwardMaster)
                                         .Include(x => x.Village)
                                         .Include(x => x.Khasra)
-                                        .Where(x=> x.Village.Name.Contains(village))
+                                        .Where(x=> x.Village.Name.Contains(village)
+                                        &&((award=="0"?(x.AwardMaster.AwardNumber== x.AwardMaster.AwardNumber): x.AwardMaster.AwardNumber.Contains(award)))
+                                        )
                                         .OrderBy(x => x.AwardMasterId).ToListAsync();
             return data;
         }

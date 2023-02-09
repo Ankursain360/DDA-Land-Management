@@ -26,7 +26,7 @@ using Dto.Common;
 
 namespace LandInventory.Controllers
 {
-    public class LandDetailsController : Controller
+    public class LandDetailsController : BaseController
     {
         private readonly IPropertyRegistrationService _propertyregistrationService;
 
@@ -54,9 +54,9 @@ namespace LandInventory.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAwardData(string village,int category)
+        public async Task<IActionResult> GetAwardData(string village,int category,string award)
         {
-            var result = await _propertyregistrationService.GetAwardData(village.Trim().TrimEnd(), category);
+            var result = await _propertyregistrationService.GetAwardData(village.Trim().TrimEnd(), category, award.Trim().TrimEnd());
             return View(result);
         }
     }

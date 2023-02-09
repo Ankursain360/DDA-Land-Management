@@ -62,6 +62,6 @@ namespace Libraries.Repository.IEntityRepository
 
         Task<List<Landbankdetails>> GetLandBankdata(string landCategory);
         Task<List<LandDashboardDataDto>> GetLandDashboardData();
-        Task<List<Awardplotdetails>> GetAwardData(string village, int category);
+        Task<List<Awardplotdetails>> GetAwardData(string village, int category, string award);
     }
 }
