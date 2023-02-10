@@ -28,7 +28,16 @@
                     </td>
                     <td>@(item.LandCategoryNavigation.Name) </td>
                     <td>@(item.ZoneName) </td>
-                    <td>@(item.VillageName)</td>
+                    <td>
+                        @if (item.LandCategoryNavigation.Name == "Acquired/Nazul-2 Land")
+                        {
+                            <a href="GetAwardData?village=@item.VillageName&category=@item.LandCategoryNavigation.Id.ToString()&award=0" target="_blank">@item.VillageName</a>
+                        }
+                        else
+                        {
+                            @(item.VillageName)
+                        }
+                    </td>
                     <td>@item.Area</td>
                 </tr>
                 row++;
@@ -63,13 +72,10 @@
 </table>
 
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.css" />
-
 <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.js"></script>
 <script>
     $(document).ready(function () {
-       
         $(".table").dataTable();
-
     });
 </script>
 <style>
