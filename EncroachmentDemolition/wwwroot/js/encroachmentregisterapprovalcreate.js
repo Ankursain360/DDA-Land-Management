@@ -1,16 +1,4 @@
-﻿$(document).ready(function () {
-
-    var id = parseInt($('#Id').val());
-    var watchWardId = parseInt($('#WatchWardId').val());
-    GetWatchWardDetails(watchWardId);
-    GetOtherDetails(id);
-    GetHistoryDetails(id);
-
-    $("#ApprovalStatus").val('0').trigger('change');
-
-});
-
-function GetWatchWardDetails(id) {
+﻿function GetWatchWardDetails(id) {
     HttpGet(`/EncroachmentRegisterApproval/WatchWardView/?Id=${id}`, 'html', function (response) {
         $('#WatchWardDetailsDiv').html("");
         $('#WatchWardDetailsDiv').html(response);

@@ -367,10 +367,11 @@ namespace Libraries.Model
         { get; set; }
         public virtual DbSet<NewdamageAddfloor> newdamage_addfloor
         { get; set; }
-        
+        public virtual DbSet<LandAcquisitionAwards> landacquisitionawards { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new Undersection17plotdetailConfiguration());
+            modelBuilder.ApplyConfiguration(new LandAcquisitionAwardsConfiguration());
             //new damage Page
             modelBuilder.ApplyConfiguration(new NewdamagepayeeregistrationConfiguration());
             modelBuilder.ApplyConfiguration(new LandbankdetailsConfiguration());

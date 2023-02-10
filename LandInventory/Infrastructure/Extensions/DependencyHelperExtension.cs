@@ -4,11 +4,11 @@ using Libraries.Repository.EntityRepository;
 using Libraries.Service.IApplicationService;
 using Libraries.Service.ApplicationService;
 using Libraries.Repository.Common;
+using LandInventory.Helper;
 using Repository.IEntityRepository;
 using Repository.EntityRepository;
-using Service.IApplicationService;
 using Service.ApplicationService;
-using LandInventory.Helper;
+using Service.IApplicationService;
 
 namespace LandInventory.Infrastructure.Extensions
 {
@@ -24,6 +24,8 @@ namespace LandInventory.Infrastructure.Extensions
             services.AddScoped<INazullandRepository, NazullandRepository>();
             services.AddScoped<IPropertyRegistrationRepository, PropertyRegistrationRepository>();
             services.AddScoped<IStatusofVacantLandRepository, StatusofVacantLandRepository>();
+            services.AddScoped<IAcquiredlandvillageRepository, AcquiredlandvillageRepository>();
+            services.AddScoped<ILandAcquisitionAwardsRepository, LandAcquisitionAwardsRepository>();
             /*Land transfer */
             services.AddScoped<INazullandRepository, NazullandRepository>();
             services.AddScoped<ILandTransferRepository, LandtransferRepository>();
@@ -39,7 +41,11 @@ namespace LandInventory.Infrastructure.Extensions
             services.AddScoped<IUserWiseLandStatusReportRepository, UserWiseLandStatusReportRepository>();
             services.AddScoped<IAuditRepository, AuditRepository>();
 
+
+
             /* Application Services */
+            services.AddScoped<ILandAcquisitionAwardsService, LandAcquisitionAwardsService>();
+            services.AddScoped<IAcquiredlandvillageService, AcquiredlandvillageService>();
             services.AddScoped<INazullandService, NazullandService>();
             services.AddScoped<IPropertyRegistrationService, PropertyRegistrationService>();
             services.AddScoped<IStatusofVacantLandService, StatusofVacantLandService>();

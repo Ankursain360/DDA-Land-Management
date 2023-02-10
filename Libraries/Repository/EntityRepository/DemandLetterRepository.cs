@@ -46,7 +46,7 @@ namespace Libraries.Repository.EntityRepository
                     && (x.IsActive == 1)).ToListAsync();
             return data;
         }
-        public async Task<PagedResult<Demandletters>> GetPagedDemandletter(DemandletterSearchDto model)
+        public async Task<PagedResult<Demandletters>> GetPagedDemandletter(DemandletterSearchDto model) 
         {
             var data = await _dbContext.Demandletters 
                 .Include(x => x.Locality)

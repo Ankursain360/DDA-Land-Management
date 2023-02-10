@@ -1,0 +1,30 @@
+﻿
+.register .nav-tabs {
+        margin-top: .5%;
+        border: none;
+        background: #0062cc;
+        border-radius: 1.5rem;
+        width: 25%;
+        float: right;
+    }
+
+        .register .nav-tabs .nav-link {
+            padding: 2%;
+            height: 42px;
+            font-weight: 600;
+            color: #fff;
+            border-top-right-radius: 1.5rem;
+            border-bottom-right-radius: 1.5rem;
+        }
+
+            .register .nav-tabs .nav-link:hover {
+                border: none;
+            }
+
+            .register .nav-tabs .nav-link.active {
+                width: 100px;
+                color: #0062cc;
+                border: 2px solid #0062cc;
+                border-top-left-radius: 1.5rem;
+                border-bottom-left-radius: 1.5rem;
+            }

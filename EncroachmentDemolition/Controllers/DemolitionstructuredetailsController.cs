@@ -1299,7 +1299,13 @@ namespace EncroachmentDemolition.Controllers
             return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", filter + "_Dashboard.xlsx");
 
         }
+        public async Task<PartialViewResult> EncrochmentDashboard(int userId, int roleId, int deptId, int zoneId)
+        { 
 
+            var results = await _demolitionstructuredetailsService.GetDashboardData(userId, roleId, deptId, zoneId);
+
+            return PartialView("_dashboard", results);
+        }
         //
         #endregion
         #region Demolistion Diary pdf

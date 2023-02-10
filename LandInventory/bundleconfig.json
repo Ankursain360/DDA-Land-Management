@@ -166,5 +166,11 @@
     "inputFiles": [
       "wwwroot/js/landdetailsindex.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/landAcquisitionAwards.min.js",
+    "inputFiles": [
+      "wwwroot/js/landAcquisitionAwards.js"
+    ]
   }
 ]

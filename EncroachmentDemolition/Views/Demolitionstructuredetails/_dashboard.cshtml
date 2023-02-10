@@ -1,92 +1,193 @@
 ﻿
 @model List<Dto.Search.DemolitionDashboardDto>
-<div class="card text-white bg-secondary  mb-3">
-    <div class="card-header">
-        <h5>Demolition Dashboard</h5>
+<link rel="stylesheet" href="~/css/formDesignStyle.css" />
+<div class="card text-white bg-secondary register mb-3">
+    <div class="card-header ">
+        <h5 style="float:left">Demolition Dashboard</h5>
+        <div class="register-right">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+                <li class="nav-item">
+                    <div class="nav-link active" data-toggle="tab" id="divDemolitionDashboard" onclick="return DemolitionDashboard();" value="Demolition" role="tab" aria-controls="DemolitionDashboard" aria-selected="true">Demolition Dashboard</div>
+                    @*<a class="nav-link active" data-toggle="tab" href="#DemolitionDashboard" role="tab" aria-controls="DemolitionDashboard" aria-selected="true">Demolition Dashboard</a>*@
+                </li>
+                <li class="nav-item">
+                    <div class="nav-link" data-toggle="tab" id="divEncroachmentDemolition" onclick="return EncroachmentDemolition();" value="Encroachment" role="tab" aria-controls="EncroachmentDemolition" aria-selected="false">Encroachment Demolition</div>
+                    @*<a class="nav-link"  data-toggle="tab" href="#EncroachmentDemolition" role="tab" aria-controls="EncroachmentDemolition" aria-selected="false">Encroachment Demolition</a>*@
+                </li>
+            </ul>
+        </div>
     </div>
-    <div class="card-body bg-light" style="text-decoration:none!important;outline:none!important">
-        <div class="widget p-4 p-md-5">
-            <div class="row g-md-5">
-                <div class="col-md-4 col-sm-6">
-                    <a href="#" onclick="showdata('TotalReceived')" title="Total Received">
-                        <div class="card text-white bg-primary mb-3">
-                            <div class="card-header">
-                                <b>Total Received</b>
+    <div id="myTabContent">
+        <div class="card-body bg-light tab-pane fade show active" id="demolitionDashboard" role="tabpanel" aria-labelledby="home-tab" style="text-decoration:none!important;outline:none!important;display:none">
+            <div class="widget p-4 p-md-5 ">
+                <div class="row register-form g-md-5">
+                    <div class="col-md-4 col-sm-6">
+                        <a href="#" onclick="showdata('TotalReceived')" title="Total Received">
+                            <div class="card text-white bg-primary mb-3">
+                                <div class="card-header">
+                                    <b>Total Received</b>
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">@Model.Select(x => x.TotalRequest).FirstOrDefault()</h5>
+                                    <p class="card-text">Click here to see Total Received Application</p>
+                                </div>
+                                <div class="card-footer text-end">
+                                    @*<a href="#" class="btn btn-group-sm bg-primary">show</a>*@
+                                </div>
                             </div>
-                            <div class="card-body">
-                                <h5 class="card-title">@Model.Select(x => x.TotalRequest).FirstOrDefault()</h5>
-                                <p class="card-text">Click here to see Total Received Application</p>
+                        </a>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <a href="#" onclick="showdata('TotalPending')" title="Total Pending">
+                            <div class="card text-white bg-secondary  mb-3">
+                                <div class="card-header">
+                                    <b> Total Pending</b>
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">@Model.Select(x => x.TotalPending).FirstOrDefault() </h5>
+                                    <p class="card-text">Pending</p>
+                                </div>
+                                <div class="card-footer text-end">
+                                </div>
                             </div>
-                            <div class="card-footer text-end">
-                                @*<a href="#" class="btn btn-group-sm bg-primary">show</a>*@
+                        </a>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <a href="#" onclick="showdata('PendingAtyou')" title="Total Pending at User Level">
+                            <div class="card text-white bg-warning mb-3">
+                                <div class="card-header">
+                                    <b>Pending At User Level</b>
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">@Model.Select(x => x.PendingAtYou).FirstOrDefault() </h5>
+                                    <p class="card-text">Pending At User Level</p>
+                                    @*<a href="#" class="btn btn-primary">Go#</a>*@
+                                </div>
+                                <div class="card-footer text-end">
+                                </div>
                             </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <a href="#" onclick="showdata('TotalPending')" title="Total Pending">
-                        <div class="card text-white bg-secondary  mb-3">
-                            <div class="card-header">
-                                <b> Total Pending</b>
+                        </a>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <a href="#" onclick="showdata('TotalApproved')" title="Total Approved">
+                            <div class="card text-white bg-success   mb-3">
+                                <div class="card-header">
+                                    <b> Approved</b>
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">@Model.Select(x => x.TotalApproved).FirstOrDefault() </h5>
+                                    <p class="card-text">Approved</p>
+                                </div>
+                                <div class="card-footer text-end">
+                                </div>
                             </div>
-                            <div class="card-body">
-                                <h5 class="card-title">@Model.Select(x => x.TotalPending).FirstOrDefault() </h5>
-                                <p class="card-text">Pending</p>
+                        </a>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <a href="#" onclick="showdata('TotalRejected')" title="Total Rejected">
+                            <div class="card text-white bg-danger mb-3">
+                                <div class="card-header">
+                                    <b>Rejected</b>
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">@Model.Select(x => x.TotalRejected).FirstOrDefault() </h5>
+                                    <p class="card-text">Rejected</p>
+                                </div>
+                                <div class="card-footer text-end">
+                                </div>
                             </div>
-                            <div class="card-footer text-end">
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <a href="#" onclick="showdata('PendingAtyou')" title="Total Pending at User Level">
-                        <div class="card text-white bg-warning mb-3">
-                            <div class="card-header">
-                                <b>Pending At User Level</b>
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title">@Model.Select(x => x.PendingAtYou).FirstOrDefault() </h5>
-                                <p class="card-text">Pending At User Level</p>
-                                @*<a href="#" class="btn btn-primary">Go#</a>*@
-                            </div>
-                            <div class="card-footer text-end">
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <a href="#" onclick="showdata('TotalApproved')" title="Total Approved">
-                        <div class="card text-white bg-success   mb-3">
-                            <div class="card-header">
-                                <b> Approved</b>
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title">@Model.Select(x => x.TotalApproved).FirstOrDefault() </h5>
-                                <p class="card-text">Approved</p>
-                            </div>
-                            <div class="card-footer text-end">
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <a href="#" onclick="showdata('TotalRejected')" title="Total Rejected">
-                        <div class="card text-white bg-danger mb-3">
-                            <div class="card-header">
-                                <b>Rejected</b>
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title">@Model.Select(x => x.TotalRejected).FirstOrDefault() </h5>
-                                <p class="card-text">Rejected</p>
-                            </div>
-                            <div class="card-footer text-end">
-                            </div>
-                        </div>
-                    </a>
+                        </a>
+                    </div>
                 </div>
             </div>
+
         </div>
 
+
+        <div class="card-body bg-light tab-pane fade show" id="encroachmentDemolition" role="tabpanel" aria-labelledby="profile-tab" style="text-decoration:none!important;outline:none!important;display:none">
+            <div class="widget p-4 p-md-5 ">
+                <div class="row register-form g-md-5">
+                    <div class="col-md-4 col-sm-6">
+                        <a href="#" onclick="showdata('TotalReceived')" title="Total Received">
+                            <div class="card text-white bg-primary mb-3">
+                                <div class="card-header">
+                                    <b>Total Received</b>
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">@Model.Select(x => x.TotalRequest).FirstOrDefault()</h5>
+                                    <p class="card-text">Click here to see Total Received Application</p>
+                                </div>
+                                <div class="card-footer text-end">
+                                    @*<a href="#" class="btn btn-group-sm bg-primary">show</a>*@
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <a href="#" onclick="showdata('TotalPending')" title="Total Pending">
+                            <div class="card text-white bg-secondary  mb-3">
+                                <div class="card-header">
+                                    <b> Total Pending</b>
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">@Model.Select(x => x.TotalPending).FirstOrDefault() </h5>
+                                    <p class="card-text">Pending</p>
+                                </div>
+                                <div class="card-footer text-end">
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <a href="#" onclick="showdata('PendingAtyou')" title="Total Pending at User Level">
+                            <div class="card text-white bg-warning mb-3">
+                                <div class="card-header">
+                                    <b>Pending At User Level</b>
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">@Model.Select(x => x.PendingAtYou).FirstOrDefault() </h5>
+                                    <p class="card-text">Pending At User Level</p>
+                                    @*<a href="#" class="btn btn-primary">Go#</a>*@
+                                </div>
+                                <div class="card-footer text-end">
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <a href="#" onclick="showdata('TotalApproved')" title="Total Approved">
+                            <div class="card text-white bg-success   mb-3">
+                                <div class="card-header">
+                                    <b> Accept and initiate demolition</b>
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">@Model.Select(x => x.TotalApproved).FirstOrDefault() </h5>
+                                    <p class="card-text">Accept and initiate demolition</p>
+                                </div>
+                                <div class="card-footer text-end">
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <a href="#" onclick="showdata('TotalRejected')" title="Total Rejected">
+                            <div class="card text-white bg-danger mb-3">
+                                <div class="card-header">
+                                    <b>Rejected</b>
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">@Model.Select(x => x.TotalRejected).FirstOrDefault() </h5>
+                                    <p class="card-text">Rejected</p>
+                                </div>
+                                <div class="card-footer text-end">
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
     <div class="card-footer">
         <small class="text-white">Last updated 3 mins ago</small>
@@ -117,4 +218,25 @@
         </div>
     </div>
 </div>
- 
+
+<script>
+    function DemolitionDashboard() {
+        debugger;
+        $('#divDemolitionDashboard').removeClass('active').addClass('active');
+        $('#divEncroachmentDemolition').removeClass('active');
+        $('#demolitionDashboard').show();
+        $('#encroachmentDemolition').hide();
+
+
+    };
+    function EncroachmentDemolition() {
+        debugger;
+        $('#divEncroachmentDemolition').removeClass('active').addClass('active');
+        $('#divDemolitionDashboard').removeClass('active');
+        $('#encroachmentDemolition').show();
+        $('#demolitionDashboard').hide();
+        return true;
+
+
+    };
+</script>

@@ -10,5 +10,8 @@ namespace Dto.Search
         public int TotalPending { get; set; }
         public int TotalRejected { get; set; } 
         public int PendingAtYou { get; set; } 
+        public int DemolitionDashboard { get; set; }
+        public int mainDiv { get; set; }
+        public int EncroachmentDemolition { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Libraries.Model.Common;
 using Microsoft.AspNetCore.Mvc;
+using Model.Entity;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -25,6 +26,7 @@ namespace Libraries.Model.Entity
             Datastoragedetails = new HashSet<Datastoragedetails>();
             Dmsfileupload = new HashSet<Dmsfileupload>();
             NewdamageSelfassessment = new HashSet<NewDamageSelfAssessment>();
+           
         }
 
 
@@ -76,5 +78,6 @@ namespace Libraries.Model.Entity
         public ICollection<Datastoragedetails> Datastoragedetails { get; set; }
         public ICollection<Datastoragepartfilenodetails> Datastoragepartfilenodetails { get; set; }
         public ICollection<NewDamageSelfAssessment> NewdamageSelfassessment { get; set; }
+        
     }
 }
