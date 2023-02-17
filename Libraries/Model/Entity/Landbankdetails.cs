@@ -12,6 +12,8 @@ namespace Libraries.Model.Entity
         public string VillageName { get; set; }
         public decimal Area { get; set; }
         public int LandCategory { get; set; }
+        public string NotificationNo { get; set; }
+        public DateTime? NotificationDate { get; set; }
         public byte? IsActive { get; set; }
         public Classificationofland LandCategoryNavigation { get; set; }
     }

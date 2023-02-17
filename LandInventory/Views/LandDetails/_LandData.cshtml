@@ -12,6 +12,18 @@
             <th>Zone</th>
             <th>Village Name</th>
             <th>Area (in acre)</th>
+            @if (Model != null && Model.Count() > 0)
+            {
+                @if (Model.Select(x => x.LandCategoryNavigation.Name).FirstOrDefault() == "Gram Sabha Land")
+                {
+                    <th>
+                        Notification No
+                    </th>
+                    <th>
+                        Notification Date
+                    </th>
+                }
+            }
         </tr>
 
     </thead>
@@ -39,6 +51,16 @@
                         }
                     </td>
                     <td>@item.Area</td>
+                    @if (item.LandCategoryNavigation.Name == "Gram Sabha Land")
+                    {
+                        <td>
+                            @item.NotificationNo
+                        </td>
+                        <td>
+                            @(item.NotificationDate.HasValue? item.NotificationDate.Value.ToString("dd-mm-yyyy"):"")
+                            
+                        </td>
+                    }
                 </tr>
                 row++;
             }
@@ -64,6 +86,15 @@
             <tr>
                 <td colspan="4" style="font-weight: bolder;background-color: darkgrey" align="right">Total</td>
                 <td style="font-weight: bolder;background-color: darkgrey">@Model.Sum(i => i.Area) </td>
+                @if (Model.Select(x => x.LandCategoryNavigation.Name).FirstOrDefault() == "Gram Sabha Land")
+                {
+                    <td style="font-weight: bolder;background-color: darkgrey">
+                       
+                    </td>
+                    <td style="font-weight: bolder;background-color: darkgrey">
+                        
+                    </td>
+                }
             </tr>
         }
     </tfoot>
