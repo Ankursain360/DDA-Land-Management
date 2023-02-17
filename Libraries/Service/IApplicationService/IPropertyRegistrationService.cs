@@ -13,6 +13,7 @@ namespace Libraries.Service.IApplicationService
     {
         Task<List<Classificationofland>> GetClassificationOfLandDropDownList();
         Task<List<Zone>> GetZoneDropDownList(int DepartmentId);
+        Task<List<Zone>> GetZoneDropDownListForApi(int DepartmentId);
         Task<List<Locality>> GetLocalityDropDownList(int zoneId);
         Task<List<Propertyregistration>> GetPrimaryListNoList(int DivisionId); // added by ishu
         Task<List<Locality>> GetLocalityDropDownList2(int divisionId);// added by ishu
@@ -36,11 +37,13 @@ namespace Libraries.Service.IApplicationService
         Task<PagedResult<Propertyregistration>> GetInventoryUnverifiedVerified(InvnentoryUnverifiedVerifiedSearchDto model, int userId, int? roleId);
         string GetGeoFile(int id);
         Task<List<Department>> GetDepartmentDropDownList();
+        Task<List<Department>> GetDepartmentDropDownListForApi();
         Task<PagedResult<Propertyregistration>> GetRestoreLandReportData(PropertyRegisterationSearchDto model);// added by ishu
         Task<PagedResult<Propertyregistration>> GetRestorePropertyReportData(PropertyRegisterationSearchDto model);// added by ishu
         Task<PagedResult<Propertyregistration>> GetPropertyRegisterationReportData(PropertyRegisterationReportSearchDto model);
         Task<PagedResult<Propertyregistration>> GetDeletedLandReportData(PropertyRegisterationSearchDto model);
         Task<List<Division>> GetDivisionDropDownList(int zoneId);
+        Task<List<Division>> GetDivisionDropDownListForApi(int zoneId);
         Task<PagedResult<Propertyregistration>> GetPagedPropertyRegisterationMOR(PropertyRegisterationSearchDto model, int userId);
         string GetDisposalFile(int id);
         string GetHandedOverFile(int id);

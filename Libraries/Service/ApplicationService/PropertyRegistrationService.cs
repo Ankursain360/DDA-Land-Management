@@ -36,7 +36,10 @@ namespace Libraries.Service.ApplicationService
             List<Zone> zoneList = await _propertyregistrationRepository.GetZoneDropDownList(DepartmentId);
             return zoneList;
         }
-
+        public async Task<List<Zone>> GetZoneDropDownListForApi(int DepartmentId)
+        {
+            return await _propertyregistrationRepository.GetZoneDropDownListForApi(DepartmentId);
+        }
         public async Task<List<Locality>> GetLocalityDropDownList(int zoneId)
         {
             List<Locality> LocalityList = await _propertyregistrationRepository.GetLocalityDropDownList(zoneId);
@@ -234,7 +237,10 @@ namespace Libraries.Service.ApplicationService
             List<Department> DepartmentList = await _propertyregistrationRepository.GetDepartmentDropDownList();
             return DepartmentList;
         }
-
+        public async Task<List<Department>> GetDepartmentDropDownListForApi()
+        {
+            return await _propertyregistrationRepository.GetDepartmentDropDownListForApi();
+        }
         public async Task<PagedResult<Propertyregistration>> GetPropertyRegisterationReportData(PropertyRegisterationReportSearchDto model)
         {
             return await _propertyregistrationRepository.GetPropertyRegisterationReportData(model);
@@ -254,7 +260,10 @@ namespace Libraries.Service.ApplicationService
             List<Division> DivisionList = await _propertyregistrationRepository.GetDivisionDropDownList(zoneId);
             return DivisionList;
         }
-
+        public async Task<List<Division>> GetDivisionDropDownListForApi(int zoneId)
+        {
+            return await _propertyregistrationRepository.GetDivisionDropDownListForApi(zoneId);
+        }
         public string GetDisposalFile(int id)
         {
             return _propertyregistrationRepository.GetDisposalFile(id);

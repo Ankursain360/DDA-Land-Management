@@ -77,7 +77,14 @@ namespace Libraries.Repository.EntityRepository
             List<Department> DepartmentList = await _dbContext.Department.Where(x => x.IsActive == 1).ToListAsync();
             return DepartmentList;
         }
-
+        public async Task<List<Department>> GetDepartmentDropDownListForApi()
+        {
+            var DeptId = new[] { 10, 13, 4, 3, 5, 47 };
+            List<Department> DepartmentList = await _dbContext.Department
+                                                    .Where(x => x.IsActive == 1 && DeptId.Contains(x.Id)
+                                                    ).ToListAsync();
+            return DepartmentList;
+        }
         public string GetDisposalFile(int id)
         {
             var File = (from f in _dbContext.Propertyregistration
@@ -100,6 +107,12 @@ namespace Libraries.Repository.EntityRepository
             return DivisionList;
         }
 
+        public async Task<List<Division>> GetDivisionDropDownListForApi(int zoneId)
+        {
+            List<Division> DivisionList = await _dbContext.Division.Where(x => x.ZoneId == zoneId && x.IsActive == 1)
+                                               .ToListAsync();
+            return DivisionList;
+        }
         public async Task<List<Propertyregistration>> GetPrimaryListNoList(int divisionId)
         {
             List<Propertyregistration> PrimaryListNoList = await _dbContext.Propertyregistration
@@ -486,12 +499,16 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<Zone>> GetZoneDropDownList(int DepartmentId)
         {
-
             List<Zone> ZoneList = await _dbContext.Zone.Where(x => x.DepartmentId == DepartmentId && x.IsActive == 1)
                                         .ToListAsync();
             return ZoneList;
         }
-
+        public async Task<List<Zone>> GetZoneDropDownListForApi(int DepartmentId)
+        {
+            List<Zone> ZoneList = await _dbContext.Zone.Where(x => x.DepartmentId == DepartmentId && x.IsActive == 1)
+                                           .ToListAsync();
+            return ZoneList;
+        }
         public async Task<bool> InsertInDeletedProperty(Deletedproperty model)
         {
             var result = _dbContext.Deletedproperty.Add(model);
@@ -1466,13 +1483,11 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<Propertyregistration>> GetPrimaryListForAPI(int deptid, int zoneid, int divisionid)// for api added by renu
         {
+            var badCodes = new[] { 3, 5 };
             return await _dbContext.Propertyregistration
-                                  .Where(x => x.ZoneId == zoneid
-                                  && x.DepartmentId == deptid
-                                  && x.DivisionId == divisionid
-                                  && x.IsActive == 1
-                                  )
-                                  .ToListAsync();
+                                  .Where(x => x.ZoneId == zoneid && x.DepartmentId == deptid && x.DivisionId == divisionid && x.IsActive == 1
+                                  && x.IsValidate == 1 && x.IsDisposed != 0 && x.IsDeleted == 1 && !badCodes.Contains(x.ClassificationOfLand.Id)
+                                  ).ToListAsync();
         }
 
         public string GetMobileNo(int Uid)
