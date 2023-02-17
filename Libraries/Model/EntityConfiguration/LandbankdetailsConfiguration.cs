@@ -25,6 +25,10 @@ namespace Libraries.Model.EntityConfiguration
                 .IsRequired()
                 .HasMaxLength(200)
                 .IsUnicode(false);
+            builder.Property(e => e.NotificationNo)
+               .HasMaxLength(50)
+               .IsUnicode(false);
+            builder.Property(e => e.NotificationDate);
 
             builder.Property(e => e.ZoneName)
                 .HasMaxLength(100)

@@ -477,11 +477,15 @@ function showDisBoundariesDim(response, villageid) {
         value.layer.setMap(null);
     });
     for (h = 0; h < dim.length; h++) {
-        var poly = createPolygon(getLatLongArr(dim[h].polygon));
-        poly.setOptions({ strokeWeight: 1, strokeColor: dim[h].fillColor, fillOpacity: 0, clickable: !0 });
-        DIM_LAYER.push({ "villageid": dim[h].villageId, "layer": poly });
+        var ln = createLine(getLatLongArr(dim[h].polygon));
+        ln.setOptions({ strokeWeight: 2, strokeColor: dim[h].fillColor, fillOpacity: 0, clickable: !0 });
+        DIM_LAYER.push({ "villageid": dim[h].villageId, "layer": ln });
+        //var poly = createPolygon(getLatLongArr(dim[h].polygon));
+        //poly.setOptions({ strokeWeight: 1, strokeColor: dim[h].fillColor, fillOpacity: 0, clickable: !0 });
+        //DIM_LAYER.push({ "villageid": dim[h].villageId, "layer": poly });
         //DIM_LAYER.push(poly);
         // map.panTo(new google.maps.LatLng(dim[h].ycoordinate, dim[h].xcoordinate));
+        Polys.push(ln);
     }
 }
 function showDisBoundariesEncroachment(response, villageid) {
