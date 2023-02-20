@@ -61,6 +61,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<PagedResult<Propertyregistration>> GetInventoryUnverifiedVerified(InvnentoryUnverifiedVerifiedSearchDto model, int userId, int? roleId);
         Task<PagedResult<Propertyregistration>> GetDeletedLandReportData(PropertyRegisterationSearchDto model);
         Task<List<Propertyregistration>> GetPrimaryListForAPI(int deptid, int zoneid, int divisionid);// for api added by renu
+        Task<Propertyregistration> GetPropertyregistrationDetail(int id);
         string GetMobileNo(int UseId);
 
         Task<List<Landbankdetails>> GetLandBankdata(string landCategory);

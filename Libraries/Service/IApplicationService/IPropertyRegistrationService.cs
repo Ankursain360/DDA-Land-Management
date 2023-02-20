@@ -74,7 +74,7 @@ namespace Libraries.Service.IApplicationService
         Task<List<Propertyregistration>> GetAllRestorePropertyReportDataList(PropertyRegisterationSearchDto model);
         Task<List<Propertyregistration>> GetAllPropertyRegistrationMORlist(PropertyRegisterationSearchDto model, int UserId);
         Task<List<Propertyregistration>> GetPrimaryListForAPI(int deptid, int zoneid, int divisionid); // for api added by renu
-
+        Task<Propertyregistration> GetPropertyregistrationDetail(int id);
         string GetMobileNo(int UserId);
 
         Task<List<Landbankdetails>> GetLandBankdata(string landCategory);

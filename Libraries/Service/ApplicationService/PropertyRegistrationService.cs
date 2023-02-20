@@ -434,6 +434,10 @@ namespace Libraries.Service.ApplicationService
 
             return await _propertyregistrationRepository.GetPrimaryListForAPI( deptid,  zoneid,  divisionid);
         }
+        public async Task<Propertyregistration> GetPropertyregistrationDetail(int id)
+        {
+            return await _propertyregistrationRepository.GetPropertyregistrationDetail(id);
+        }
 
         public String GetMobileNo(int MobileNo)
         {

@@ -236,6 +236,56 @@ namespace Vacant.Land.Api.Controllers
         }
 
 
+        [HttpGet]
+        [Route("[action]")]
+        [Route("api/DepartmentAPI/GetPropertyDetail")]
+        public async Task<IActionResult> GetPropertyDetail(int id)
+        {
+            ApiPrimaryResponseDetails apiPrimaryResponse = new ApiPrimaryResponseDetails();
+            GetPropertyDetailDto getPropertyDetail = new GetPropertyDetailDto();
+            if (id != 0)
+            {
+                var data = await _propertyRegistrationService.GetPropertyregistrationDetail(id);
+                if (data != null)
+                {
 
+                getPropertyDetail = new GetPropertyDetailDto
+                {
+                    Id = data.Id,
+                    Locality = data.Locality.Name,
+                    LandUse = data.MainLandUse.Name,
+                    LayoutPlan = data.LayoutFilePath == null || data.LayoutFilePath ==""?"No":"Yes"
+                };
+                apiPrimaryResponse = new ApiPrimaryResponseDetails
+                {
+                    responseCode = "200",
+                    responseMessage = "details fetched successfully",
+                    getPropertyDetailDto = getPropertyDetail
+                };
+                return Ok(apiPrimaryResponse);
+                }
+              else
+              {
+                apiPrimaryResponse = new ApiPrimaryResponseDetails
+                {
+                    responseCode = "404",
+                    responseMessage = " details not found",
+                    getPropertyDetailDto = getPropertyDetail
+                };
+                return NotFound(apiPrimaryResponse);
+              }
+            }
+            else
+            {
+                apiPrimaryResponse = new ApiPrimaryResponseDetails
+                {
+                    responseCode = "400",
+                    responseMessage = "Bad Request. Insufficient Parameters",
+                    getPropertyDetailDto = getPropertyDetail
+                };
+                return NotFound(apiPrimaryResponse);
+            }
+
+        }
     }
 }

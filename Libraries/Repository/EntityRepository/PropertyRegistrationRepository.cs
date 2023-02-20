@@ -1489,6 +1489,14 @@ namespace Libraries.Repository.EntityRepository
                                   && x.IsValidate == 1 && x.IsDisposed != 0 && x.IsDeleted == 1 && !badCodes.Contains(x.ClassificationOfLand.Id)
                                   ).ToListAsync();
         }
+        public async Task<Propertyregistration> GetPropertyregistrationDetail(int id)
+        {
+            var data = await _dbContext.Propertyregistration
+                                                          .Include(x => x.MainLandUse)
+                                                          .Include(x => x.Locality)
+                                                          .Where(x => x.Id == id && x.IsActive == 1).FirstOrDefaultAsync();
+            return data;
+        }
 
         public string GetMobileNo(int Uid)
         {
