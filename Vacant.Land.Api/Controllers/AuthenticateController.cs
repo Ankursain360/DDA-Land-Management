@@ -47,37 +47,7 @@ namespace Vacant.Land.Api.Controllers
         [Route("login")]
         public async Task<IActionResult> Login([FromBody] LoginModel model)
         {
-            //var user = await _userManager.FindByNameAsync(model.Username);
-            //var result = await _signInManager.PasswordSignInAsync(model.Username, model.Password, false, lockoutOnFailure: true);
-            //if (result.Succeeded)
-            //{
-            //    var authClaims = new List<Claim>
-            //    {
-            //        new Claim(ClaimTypes.Name, user.UserName),
-            //        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-            //    };
-
-               
-
-            //    var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
-
-            //    var token = new JwtSecurityToken(
-            //        issuer: _configuration["JWT:ValidIssuer"],
-            //        audience: _configuration["JWT:ValidAudience"],
-            //        expires: DateTime.Now.AddHours(3),
-            //        claims: authClaims,
-            //        signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
-            //        );
-
-            //    return Ok(new
-            //    {
-            //        token = new JwtSecurityTokenHandler().WriteToken(token),
-            //        expiration = token.ValidTo
-            //    });
-            //}
-            //return Unauthorized();
-
-
+             
 
             if (ModelState.IsValid)
             {
@@ -162,7 +132,9 @@ namespace Vacant.Land.Api.Controllers
             {
                 Token = jwtToken,
                 Success = true,
-                RefreshToken = refreshToken.Token
+                RefreshToken = refreshToken.Token,
+                UserId= user.Id,    
+                UserName=user.UserName
             };
         }
         [HttpPost]
