@@ -8,5 +8,7 @@ namespace Vacant.Land.Api.Authentication
         public string RefreshToken { get; set; }
         public bool Success { get; set; }
         public List<string> Errors { get; set; }
+        public int UserId { get; set; }
+        public string UserName { get; set; }
     }
 }
