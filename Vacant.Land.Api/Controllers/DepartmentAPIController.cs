@@ -36,7 +36,7 @@ namespace Vacant.Land.Api.Controllers
         {
             ApiResponseDetails apiResponseDetails = new ApiResponseDetails();
             List<ApiDepartmentListDto> dtoData = new List<ApiDepartmentListDto>();
-            var data = await _propertyRegistrationService.GetDepartmentDropDownList();
+            var data = await _propertyRegistrationService.GetDepartmentDropDownListForApi();
             if (data != null)
             {
                 for (int i = 0; i < data.Count; i++)
@@ -79,7 +79,7 @@ namespace Vacant.Land.Api.Controllers
             List<ApiZoneListDto> dtoData = new List<ApiZoneListDto>();
             if (id != 0)
             {
-                var data = await _propertyRegistrationService.GetZoneDropDownList(id);
+                var data = await _propertyRegistrationService.GetZoneDropDownListForApi(id);
                 if (data != null)
                 {
                     for (int i = 0; i < data.Count; i++)
@@ -135,7 +135,7 @@ namespace Vacant.Land.Api.Controllers
             List<ApiDivisionListDto> dtoData = new List<ApiDivisionListDto>();
             if (id != 0)
             {
-                var data = await _propertyRegistrationService.GetDivisionDropDownList(id);
+                var data = await _propertyRegistrationService.GetDivisionDropDownListForApi(id);
                 if (data != null)
                 {
                     for (int i = 0; i < data.Count; i++)

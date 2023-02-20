@@ -12,6 +12,7 @@ namespace Libraries.Repository.IEntityRepository
     {
         Task<List<Classificationofland>> GetClassificationOfLandDropDownList();
         Task<List<Zone>> GetZoneDropDownList(int DepartmentId);
+        Task<List<Zone>> GetZoneDropDownListForApi(int DepartmentId); 
         Task<List<Locality>> GetLocalityDropDownList(int zoneId);
         Task<List<Propertyregistration>> GetAllPropertyRegisterationReportDataList(PropertyRegisterationReportSearchDto model);
         Task<List<Locality>> GetLocalityDropDownList2(int divisionId);
@@ -27,8 +28,10 @@ namespace Libraries.Repository.IEntityRepository
         string GetFile(int id);
         string GetGeoFile(int id);
         Task<List<Department>> GetDepartmentDropDownList();
+        Task<List<Department>> GetDepartmentDropDownListForApi(); 
         Task<PagedResult<Propertyregistration>> GetPropertyRegisterationReportData(PropertyRegisterationReportSearchDto model);
         Task<List<Division>> GetDivisionDropDownList(int zoneId);
+        Task<List<Division>> GetDivisionDropDownListForApi(int zoneId); 
         Task<List<Propertyregistration>> GetPrimaryListNoList(int divisionId);
         string GetDisposalFile(int id);
         string GetHandedOverFile(int id);
