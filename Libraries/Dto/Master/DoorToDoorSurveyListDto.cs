@@ -1,7 +1,7 @@
 ﻿using Dto.Common;
 namespace Dto.Master
 {
-   public class DoorToDoorSurveyListDto
+    public class DoorToDoorSurveyListDto
     {
         //public int Id { get; set; }
         //public string LocationAddressofProperty { get; set; }
@@ -20,7 +20,7 @@ namespace Dto.Master
         public string ApproxAreaoftheProperty { get; set; }
         public string AreaUnit { get; set; }
         public string NumberofFloors { get; set; }
-        public string FileNo { get; set; } 
+        public string FileNo { get; set; }
         public string CA_NumberOfElectricityConnection { get; set; }
         public string k_NumberOfWaterConnection { get; set; }
         public string HouseTaxNumberIssueBy_MCD { get; set; }
@@ -32,6 +32,7 @@ namespace Dto.Master
         public string DemagePaidInThePast { get; set; }
         public string Status { get; set; }
         public string remarks { get; set; }
+        public string CreatedDate { get; set; }
 
 
     }
