@@ -71,7 +71,7 @@ namespace Vacant.Land.Api.Controllers
                     return BadRequest(new RegistrationResponse()
                     {
                         Errors = new List<string>() {
-                                "Invalid login request"
+                                "Please check the Username and Password"
                             },
                         Success = false
                     });
