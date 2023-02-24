@@ -47,7 +47,7 @@ namespace Vacant.Land.Api.Controllers
                    List<ApiInsertVacantLandImageDto> dtodata = new List<ApiInsertVacantLandImageDto>();
                     apiResponseDetails = new ApiInsertVacantLandImageResponseDetails()
                     {
-                        responseCode = "205",
+                        responseCode = "404",
                         responseMessage = "BoundaryWall is mandatory",
                         ApiInsertVacantLandImageDto = dtodata
                     };
@@ -58,7 +58,7 @@ namespace Vacant.Land.Api.Controllers
                     List<ApiInsertVacantLandImageDto> dtodata = new List<ApiInsertVacantLandImageDto>();
                     apiResponseDetails = new ApiInsertVacantLandImageResponseDetails()
                     {
-                        responseCode = "205",
+                        responseCode = "404",
                         responseMessage = "Fencing is mandatory",
                         ApiInsertVacantLandImageDto = dtodata
                     };
@@ -69,7 +69,7 @@ namespace Vacant.Land.Api.Controllers
                     List<ApiInsertVacantLandImageDto> dtodata = new List<ApiInsertVacantLandImageDto>();
                     apiResponseDetails = new ApiInsertVacantLandImageResponseDetails()
                     {
-                        responseCode = "205",
+                        responseCode = "404",
                         responseMessage = "Ddaboard is mandatory",
                         ApiInsertVacantLandImageDto = dtodata
                     };
@@ -80,7 +80,7 @@ namespace Vacant.Land.Api.Controllers
                     List<ApiInsertVacantLandImageDto> dtodata = new List<ApiInsertVacantLandImageDto>();
                     apiResponseDetails = new ApiInsertVacantLandImageResponseDetails()
                     {
-                        responseCode = "205",
+                        responseCode = "404",
                         responseMessage = "ScurityGuard is mandatory",
                         ApiInsertVacantLandImageDto = dtodata
                     };
@@ -91,40 +91,40 @@ namespace Vacant.Land.Api.Controllers
                     List<ApiInsertVacantLandImageDto> dtodata = new List<ApiInsertVacantLandImageDto>();
                     apiResponseDetails = new ApiInsertVacantLandImageResponseDetails()
                     {
-                        responseCode = "205",
+                        responseCode = "404",
                         responseMessage = "IsExistanceEncroachment is mandatory",
                         ApiInsertVacantLandImageDto = dtodata
                     };
                     return NotFound(apiResponseDetails);
                 }
-                else if (dto.IsExistanceEncroachment.ToUpper() == "N" || dto.IsExistanceEncroachment.ToUpper() == "No" && (dto.PerEncroached == "" || dto.PerEncroached ==null))
+                else if (dto.IsExistanceEncroachment.ToUpper() == "N" || dto.IsExistanceEncroachment.ToUpper() == "NO" && (dto.PerEncroached == "" || dto.PerEncroached ==null))
                 {
                     List<ApiInsertVacantLandImageDto> dtodata = new List<ApiInsertVacantLandImageDto>();
                     apiResponseDetails = new ApiInsertVacantLandImageResponseDetails()
                     {
-                        responseCode = "205",
+                        responseCode = "404",
                         responseMessage = "PerEncroached is mandatory",
                         ApiInsertVacantLandImageDto = dtodata
                     };
                     return NotFound(apiResponseDetails);
                 }
-                else if (dto.IsExistanceEncroachment.ToUpper() == "N" || dto.IsExistanceEncroachment.ToUpper() == "No" && (dto.AreaEncroached == "" || dto.AreaEncroached == null))
+                else if (dto.IsExistanceEncroachment.ToUpper() == "N" || dto.IsExistanceEncroachment.ToUpper() == "NO" && (dto.AreaEncroached == "" || dto.AreaEncroached == null))
                 {
                     List<ApiInsertVacantLandImageDto> dtodata = new List<ApiInsertVacantLandImageDto>();
                     apiResponseDetails = new ApiInsertVacantLandImageResponseDetails()
                     {
-                        responseCode = "205",
+                        responseCode = "404",
                         responseMessage = "AreaEncroached is mandatory",
                         ApiInsertVacantLandImageDto = dtodata
                     };
                     return NotFound(apiResponseDetails);
                 }
-                else if (dto.IsExistanceEncroachment.ToUpper() == "N" || dto.IsExistanceEncroachment.ToUpper() == "No" && (dto.IsActionInitiated == "" || dto.IsActionInitiated == null))
+                else if (dto.IsExistanceEncroachment.ToUpper() == "N" || dto.IsExistanceEncroachment.ToUpper() == "NO" && (dto.IsActionInitiated == "" || dto.IsActionInitiated == null))
                 {
                     List<ApiInsertVacantLandImageDto> dtodata = new List<ApiInsertVacantLandImageDto>();
                     apiResponseDetails = new ApiInsertVacantLandImageResponseDetails()
                     {
-                        responseCode = "205",
+                        responseCode = "404",
                         responseMessage = "IsActionInitiated is mandatory",
                         ApiInsertVacantLandImageDto = dtodata
                     };
@@ -135,7 +135,7 @@ namespace Vacant.Land.Api.Controllers
                     List<ApiInsertVacantLandImageDto> dtodata = new List<ApiInsertVacantLandImageDto>();
                     apiResponseDetails = new ApiInsertVacantLandImageResponseDetails()
                     {
-                        responseCode = "205",
+                        responseCode = "404",
                         responseMessage = "Longitude is mandatory",
                         ApiInsertVacantLandImageDto = dtodata
                     };
@@ -146,7 +146,7 @@ namespace Vacant.Land.Api.Controllers
                     List<ApiInsertVacantLandImageDto> dtodata = new List<ApiInsertVacantLandImageDto>();
                     apiResponseDetails = new ApiInsertVacantLandImageResponseDetails()
                     {
-                        responseCode = "205",
+                        responseCode = "404",
                         responseMessage = "Latitude is mandatory",
                         ApiInsertVacantLandImageDto = dtodata
                     };

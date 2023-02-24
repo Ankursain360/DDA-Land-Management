@@ -45,12 +45,12 @@ namespace Libraries.Service.ApplicationService
             model.Flag = dto.Flag;    
             model.Mobile = dto.Mobile;
             model.CheckingPoint = dto.CheckingPoint;
-            model.BoundaryWall = dto.BoundaryWall.ToLower()=="y"?"Yes":"No";
+            model.BoundaryWall = dto.BoundaryWall.ToLower()=="y" || dto.BoundaryWall.ToLower() == "yes" ? "Yes":"No";
             model.Fencing = dto.Fencing;
             model.Ddaboard = dto.Ddaboard;
             model.ScurityGuard = dto.ScurityGuard;
             model.UniqueId = dto.UniqueId;
-            model.IsExistanceEncroachment = dto.IsExistanceEncroachment.ToLower() == "y" ? "Yes" : "No";
+            model.IsExistanceEncroachment = dto.IsExistanceEncroachment.ToLower() == "y" || dto.IsExistanceEncroachment.ToLower() == "yes" ? "Yes" : "No";
             model.EncroachmentDetails = dto.EncroachmentDetails;
             model.IsEncroached = dto.IsEncroached;
             model.PerEncroached = dto.PerEncroached;
