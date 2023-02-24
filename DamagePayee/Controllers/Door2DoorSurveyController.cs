@@ -420,7 +420,7 @@ namespace DamagePayee.Controllers
                         AadharNumberOfOccupant = result[i].OccupantAadharNo,
                         VoterIdNumber = result[i].VoterIdNo,
                         DemagePaidInThePast = result[i].DamagePaidPast,
-
+                        CreatedDate = result[i].CreatedDate.ToString("dd-MM-yyyy hh:mm:ss tt"),
                         Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
                         remarks = result[i].Remarks,
                     }); ;

@@ -35,7 +35,7 @@
                     <td>@item.FileNo</td>
                     <td align="center"> <a target="_blank" href="https://maps.google.com/?q=@item.GeoReferencingLattitude,@item.Longitude" title="View Location on Map"><i class="ri-map-pin-fill"></i></a></td>
                     <td>@item.CreatedByNavigation.UserName</td>
-                    <td>@item.CreatedDate.ToString("dd-MMM-yyyy")</td>
+                    <td>@item.CreatedDate.ToString("dd-MMM-yyyy hh:mm:ss tt")</td>
                     <td>
                         @if (item.IsActive == 1)
                         {

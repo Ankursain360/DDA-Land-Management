@@ -46,6 +46,7 @@ var MICK_LAYER = [];
 var LINE_LAYER = [];
 var DDA_VACANT_LAYER = [];
 var highlighted_khasra_LAYER = [];
+var TEMPLE_LAYER = [];
 
 
 $(document).ready(function () {
@@ -251,6 +252,7 @@ function showDisBoundariesVillage(ploygn, xaixis, yaixis, villageid) {
     var sl = createPolygon(getLatLongArr(ploygn));
     sl.setOptions({ strokeWeight: 5, strokeColor: '#FF5733', fillOpacity: 0, clickable: !1 });
     zoomvillage.push({ "villageid": villageid, "layer": sl });
+    VILLAGEBOUNDARY_LAYER.push({ "villageid": villageid, "layer": sl });
     map.setZoom(15);
     map.panTo(new google.maps.LatLng(yaixis, xaixis));
 
@@ -356,7 +358,7 @@ function showvillagelayers(villageid) {
         if (Inner.length > 0 && Inner[0].checkedStatus == 1)
             showDisBoundariesInner(Inner, villageid);
 
-        var VillageBoundary = response.filter((x) => x.VillageBoundary === 22);//VillageBoundary
+        var VillageBoundary = response.filter((x) => x.gisLayerId === 22);//VillageBoundary
         if (VillageBoundary.length > 0 && VillageBoundary[0].checkedStatus == 1)
             showDisBoundariesVillageBoundary(VillageBoundary);
 
@@ -391,6 +393,10 @@ function showvillagelayers(villageid) {
         var RectWithKhasraNo = response.filter((x) => x.gisLayerId === 30);//RectWithKhasraNo
         if (RectWithKhasraNo.length > 0 && RectWithKhasraNo[0].checkedStatus == 1)
             showDisBoundariesRectWithKhasraNo(RectWithKhasraNo, villageid);
+
+        var Templelayer = response.filter((x) => x.gisLayerId === 32);//Temple Layer
+        if (Templelayer.length > 0 && Templelayer[0].checkedStatus == 1)
+            showTempleLayer(Templelayer, villageid);
 
         var Calvert = response.filter((x) => x.gisLayerId === 34);//Calvert
         if (Calvert.length > 0 && Calvert[0].checkedStatus == 1)
@@ -708,11 +714,11 @@ function showDisBoundariesInner(response) {
 function showDisBoundariesVillageBoundary(response, villageid) {
     var villageboundary = $.map(response, function (el) { return el; })
     for (ac = 0; ac < villageboundary.length; ac++) {
-        var ln = createLine(getLatLongArr(villageboundary[ac].polygon));
-        ln.setOptions({ strokeWeight: 3, strokeColor: villageboundary[ac].fillColor });
+        var ln = createPolygon(getLatLongArr(villageboundary[ac].polygon));
+        ln.setOptions({ strokeWeight: 3, strokeColor: villageboundary[ac].fillColor, fillOpacity: 0, clickable: !1 });
         VILLAGEBOUNDARY_LAYER.push({ "villageid": villageboundary[ac].villageId, "layer": ln });
         //VILLAGEBOUNDARY_LAYER.push(ln);
-        Polys.push(ln);
+        Polys.push(ln); 
     }
 }
 function showDisBoundariesCleantext(response, villageid) {
@@ -891,6 +897,20 @@ function clearhighlightedkhasra(_label) {
     highlighted_khasra_LAYER.push(_label);
 
 }
+
+
+/*Temple Layer*/
+
+function showTempleLayer(response, villageid) {
+    var templ = $.map(response, function (el) { return el; })
+    for (al = 0; al < templ.length; al++) {
+        var ln = createLine(getLatLongArr(templ[al].polygon));
+        ln.setOptions({ strokeWeight: 1, strokeColor: templ[al].fillColor });
+        TEMPLE_LAYER.push({ "villageid": templ[al].villageId, "layer": ln }); 
+        Polys.push(ln);
+    }
+}
+
 
 function showDisBoundariesWell(response, villageid) {
     var well = $.map(response, function (el) { return el; })
@@ -1114,7 +1134,7 @@ $(document).on('change', '#chkAllImpInfra', function (e) {   /*Select all Functi
         if (Inner.length > 0)
             showDisBoundariesInner(Inner);
 
-        var VillageBoundary = data.filter((x) => x.VillageBoundary === 22);//VillageBoundary
+        var VillageBoundary = data.filter((x) => x.gisLayerId === 22);//VillageBoundary
         if (VillageBoundary.length > 0)
             showDisBoundariesVillageBoundary(VillageBoundary);
 
@@ -1153,6 +1173,10 @@ $(document).on('change', '#chkAllImpInfra', function (e) {   /*Select all Functi
         var Well = data.filter((x) => x.gisLayerId === 31);//Well
         if (Well.length > 0)
             showDisBoundariesWell(Well);
+
+        var temple = data.filter((x) => x.gisLayerId === 32);//temple
+        if (temple.length > 0)
+            showTempleLayer(temple);
 
         var Calvert = data.filter((x) => x.gisLayerId === 34);//Calvert
         if (Calvert.length > 0)
@@ -1321,7 +1345,7 @@ $(document).on('change', '#chkAllImpInfra', function (e) {   /*Select all Functi
             });
         }
 
-        var VillageBoundary = data.filter((x) => x.VillageBoundary === 22);//VillageBoundary
+        var VillageBoundary = data.filter((x) => x.gisLayerId === 22);//VillageBoundary
         if (VillageBoundary.length > 0) {
             $.each(VillageBoundary, function (index, value) {
                 value.layer.setMap(null);
@@ -1387,6 +1411,13 @@ $(document).on('change', '#chkAllImpInfra', function (e) {   /*Select all Functi
         var Well = data.filter((x) => x.gisLayerId === 31);//clean
         if (Well.length > 0) {
             $.each(WELL_LAYER, function (index, value) {
+                value.layer.setMap(null);
+            });
+        }
+
+        var temple = data.filter((x) => x.gisLayerId === 32);//temple
+        if (temple.length > 0) {
+            $.each(TEMPLE_LAYER, function (index, value) {
                 value.layer.setMap(null);
             });
         }
@@ -1543,7 +1574,7 @@ $('#infrastructureData').on('change', '.checkUncheckInfra', function (e) {  /*ch
         if (Inner.length > 0 && Inner[0].code == id)
             showDisBoundariesInner(Inner);
 
-        var VillageBoundary = data.filter((x) => x.VillageBoundary === 22);//VillageBoundary
+        var VillageBoundary = data.filter((x) => x.gisLayerId === 22);//VillageBoundary
         if (VillageBoundary.length > 0 && VillageBoundary[0].code == id)
             showDisBoundariesVillageBoundary(VillageBoundary);
 
@@ -1582,6 +1613,10 @@ $('#infrastructureData').on('change', '.checkUncheckInfra', function (e) {  /*ch
         var Well = data.filter((x) => x.gisLayerId === 31);//Well
         if (Well.length > 0 && Well[0].code == id)
             showDisBoundariesWell(Well);
+
+        var temple = data.filter((x) => x.gisLayerId === 32);//Temple
+        if (temple.length > 0 && temple[0].code == id)
+            showTempleLayer(temple);
 
         var Calvert = data.filter((x) => x.gisLayerId === 34);//Calvert
         if (Calvert.length > 0 && Calvert[0].code == id)
@@ -1749,7 +1784,7 @@ $('#infrastructureData').on('change', '.checkUncheckInfra', function (e) {  /*ch
             });
         }
 
-        var VillageBoundary = data.filter((x) => x.VillageBoundary === 22);//VillageBoundary
+        var VillageBoundary = data.filter((x) => x.gisLayerId === 22);//VillageBoundary
         if (VillageBoundary.length > 0 && VillageBoundary[0].code == id) {
             $.each(VILLAGEBOUNDARY_LAYER, function (index, value) {
                 value.layer.setMap(null);
@@ -1819,6 +1854,12 @@ $('#infrastructureData').on('change', '.checkUncheckInfra', function (e) {  /*ch
             });
         }
 
+        var temple = data.filter((x) => x.gisLayerId === 32);//Temple
+        if (temple.length > 0 && temple[0].code == id) {
+            $.each(TEMPLE_LAYER, function (index, value) {
+                value.layer.setMap(null);
+            });
+        }
         var Calvert = data.filter((x) => x.gisLayerId === 34);//Calvert
         if (Calvert.length > 0 && Calvert[0].code == id) {
             $.each(CALVERT_LAYER, function (index, value) {
@@ -2167,6 +2208,10 @@ function RemoveAllVillageLayer(villageids) {
     });
     let welllayer = WELL_LAYER.filter((x) => x.villageid === villageid);
     $.each(welllayer, function (index, value) {
+        value.layer.setMap(null);
+    });
+    let templeLayer = TEMPLE_LAYER.filter((x) => x.villageid === villageid);
+    $.each(templeLayer, function (index, value) {
         value.layer.setMap(null);
     });
     let ddavacantlandlayer = DDA_VACANT_LAYER.filter((x) => x.villageid === villageid);

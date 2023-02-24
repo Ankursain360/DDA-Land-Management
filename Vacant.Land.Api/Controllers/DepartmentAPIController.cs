@@ -251,10 +251,10 @@ namespace Vacant.Land.Api.Controllers
 
                 getPropertyDetail = new GetPropertyDetailDto
                 {
-                    Id = data.Id,
-                    Locality = data.Locality.Name,
-                    LandUse = data.MainLandUse.Name,
-                    LayoutPlan = data.LayoutFilePath == null || data.LayoutFilePath ==""?"No":"Yes"
+                    uniqueId = data.Id,
+                    locality = data.Locality.Name,
+                    landUse = data.MainLandUse.Name,
+                    layoutPlan = data.LayoutFilePath == null || data.LayoutFilePath ==""?"No":"Yes"
                 };
                 apiPrimaryResponse = new ApiPrimaryResponseDetails
                 {
