@@ -7,6 +7,7 @@ namespace Dto.Master
 {
     public class ApiInsertVacantLandImageDto
     {
+        public int Id { get; set; }
         public int? ZoneId { get; set; }
         public string Zone { get; set; }
         public int? DepartmentId { get; set; }
@@ -16,8 +17,7 @@ namespace Dto.Master
         public int? PrimaryListId { get; set; }
         public string PrimaryList { get; set; }
         public string Location { get; set; }
-        public string ImageData { get; set; }
-        public string ImagePath { get; set; }
+        public IList<string> ImageData { get; set; }
         public string Longitude { get; set; }
         public string Latitude { get; set; }
         public string SrNoInPrimaryList { get; set; }

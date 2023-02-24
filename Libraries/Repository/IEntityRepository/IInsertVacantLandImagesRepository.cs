@@ -9,6 +9,6 @@ namespace Libraries.Repository.IEntityRepository
 {
     public interface IInsertVacantLandImagesRepository : IGenericRepository<Vacantlandimage>
     {
-        
+        Task<bool> SaveVacantlandlistimage(vacantlandlistimage vacantlandlistimage);
     }
 }

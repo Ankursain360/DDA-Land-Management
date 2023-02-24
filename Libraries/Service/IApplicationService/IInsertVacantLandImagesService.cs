@@ -12,5 +12,6 @@ namespace Libraries.Service.IApplicationService
     public interface IInsertVacantLandImagesService : IEntityService<Vacantlandimage>
     {
         Task<bool> Create(ApiInsertVacantLandImageDto dto); // To Create Particular data added by renu
+        Task<bool> SaveVacantlandlistimage(vacantlandlistimage vacantlandlistimage);
     }
 }

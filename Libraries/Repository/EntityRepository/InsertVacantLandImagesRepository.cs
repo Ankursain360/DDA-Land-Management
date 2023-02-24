@@ -18,7 +18,12 @@ namespace Libraries.Repository.EntityRepository
         {
 
         }
-
-       
+        public async Task<bool> SaveVacantlandlistimage(vacantlandlistimage vacantlandlistimage)
+        {
+            _dbContext.vacantlandlistimage.Add(vacantlandlistimage);
+            var result = await _dbContext.SaveChangesAsync();
+            return result > 0 ? true : false;
+        }
+      
     }
 }

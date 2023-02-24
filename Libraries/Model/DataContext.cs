@@ -368,8 +368,10 @@ namespace Libraries.Model
         public virtual DbSet<NewdamageAddfloor> newdamage_addfloor
         { get; set; }
         public virtual DbSet<LandAcquisitionAwards> landacquisitionawards { get; set; }
+        public virtual DbSet<vacantlandlistimage> vacantlandlistimage { get; set; } 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.ApplyConfiguration(new vacantlandlistimageConfiguration());
             modelBuilder.ApplyConfiguration(new Undersection17plotdetailConfiguration());
             modelBuilder.ApplyConfiguration(new LandAcquisitionAwardsConfiguration());
             //new damage Page
