@@ -11,6 +11,10 @@ namespace Libraries.Model.Entity
 {
     public class Vacantlandimage : AuditableEntity<int>
     {
+        public Vacantlandimage()
+        {
+            vacantlandlistimages = new HashSet<vacantlandlistimage>();
+        }
         public int? ZoneId { get; set; }
         public string Zone { get; set; }
         public int? DepartmentId { get; set; }
@@ -52,7 +56,7 @@ namespace Libraries.Model.Entity
         public List<Zone> ZoneList { get; set; }
 
 
-
+        public ICollection<vacantlandlistimage> vacantlandlistimages { get; set; }
         [NotMapped]
         public List<Division> DivisionList { get; set; }
 

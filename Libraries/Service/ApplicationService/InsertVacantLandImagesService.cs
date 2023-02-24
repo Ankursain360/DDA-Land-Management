@@ -39,19 +39,18 @@ namespace Libraries.Service.ApplicationService
             model.PrimaryListId = dto.PrimaryListId;
             model.PrimaryList = dto.PrimaryList;
             model.Location = dto.Location;
-            model.ImagePath = dto.ImagePath;
             model.Longitude = dto.Longitude;
             model.Latitude = dto.Latitude;
             model.SrNoInPrimaryList = dto.SrNoInPrimaryList;
-            model.Flag = dto.Flag;
+            model.Flag = dto.Flag;    
             model.Mobile = dto.Mobile;
             model.CheckingPoint = dto.CheckingPoint;
-            model.BoundaryWall = dto.BoundaryWall;
+            model.BoundaryWall = dto.BoundaryWall.ToLower()=="y"?"Yes":"No";
             model.Fencing = dto.Fencing;
             model.Ddaboard = dto.Ddaboard;
             model.ScurityGuard = dto.ScurityGuard;
             model.UniqueId = dto.UniqueId;
-            model.IsExistanceEncroachment = dto.IsExistanceEncroachment;
+            model.IsExistanceEncroachment = dto.IsExistanceEncroachment.ToLower() == "y" ? "Yes" : "No";
             model.EncroachmentDetails = dto.EncroachmentDetails;
             model.IsEncroached = dto.IsEncroached;
             model.PerEncroached = dto.PerEncroached;
@@ -61,7 +60,16 @@ namespace Libraries.Service.ApplicationService
             model.CreatedBy = dto.CreatedBy;
             model.CreatedDate = DateTime.Now;
             _insertVacantLandImagesRepository.Add(model);
-            return await _unitOfWork.CommitAsync() > 0;
+            var result = await _unitOfWork.CommitAsync() > 0;
+            dto.Id = model.Id;
+            dto.CreatedBy = model.CreatedBy;
+            return result;
+        }
+
+        public async Task<bool> SaveVacantlandlistimage(vacantlandlistimage vacantlandlistimage)
+        {
+            vacantlandlistimage.CreatedDate = DateTime.Now;
+            return await _insertVacantLandImagesRepository.SaveVacantlandlistimage(vacantlandlistimage);
         }
     }
 }

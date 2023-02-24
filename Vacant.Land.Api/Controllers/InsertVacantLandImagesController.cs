@@ -42,24 +42,152 @@ namespace Vacant.Land.Api.Controllers
             ApiInsertVacantLandImageResponseDetails apiResponseDetails = new ApiInsertVacantLandImageResponseDetails();
             if (dto != null)
             {
-                FileHelper fileHelper = new FileHelper();
-                dto.ImagePath = Guid.NewGuid().ToString() + ".jpg";
-                if(dto.ImageData != "")
+                if (dto.BoundaryWall =="" || dto.BoundaryWall == null)
                 {
-                    if (!Directory.Exists(VacantLandImagePath))
+                   List<ApiInsertVacantLandImageDto> dtodata = new List<ApiInsertVacantLandImageDto>();
+                    apiResponseDetails = new ApiInsertVacantLandImageResponseDetails()
                     {
-                        DirectoryInfo directoryInfo = Directory.CreateDirectory(VacantLandImagePath);
-                    }
-                    using (MemoryStream ms = new MemoryStream(Convert.FromBase64String(dto.ImageData)))
+                        responseCode = "205",
+                        responseMessage = "BoundaryWall is mandatory",
+                        ApiInsertVacantLandImageDto = dtodata
+                    };
+                    return NotFound(apiResponseDetails);
+                }
+                else if (dto.Fencing == "" || dto.Fencing == null)
+                {
+                    List<ApiInsertVacantLandImageDto> dtodata = new List<ApiInsertVacantLandImageDto>();
+                    apiResponseDetails = new ApiInsertVacantLandImageResponseDetails()
                     {
-                        using (Bitmap bm2 = new Bitmap(ms))
+                        responseCode = "205",
+                        responseMessage = "Fencing is mandatory",
+                        ApiInsertVacantLandImageDto = dtodata
+                    };
+                    return NotFound(apiResponseDetails);
+                }
+                else if (dto.Ddaboard == "" || dto.Ddaboard == null)
+                {
+                    List<ApiInsertVacantLandImageDto> dtodata = new List<ApiInsertVacantLandImageDto>();
+                    apiResponseDetails = new ApiInsertVacantLandImageResponseDetails()
+                    {
+                        responseCode = "205",
+                        responseMessage = "Ddaboard is mandatory",
+                        ApiInsertVacantLandImageDto = dtodata
+                    };
+                    return NotFound(apiResponseDetails);
+                }
+                else if (dto.ScurityGuard == "" || dto.ScurityGuard == null)
+                {
+                    List<ApiInsertVacantLandImageDto> dtodata = new List<ApiInsertVacantLandImageDto>();
+                    apiResponseDetails = new ApiInsertVacantLandImageResponseDetails()
+                    {
+                        responseCode = "205",
+                        responseMessage = "ScurityGuard is mandatory",
+                        ApiInsertVacantLandImageDto = dtodata
+                    };
+                    return NotFound(apiResponseDetails);
+                }
+                else if (dto.IsExistanceEncroachment == "" || dto.IsExistanceEncroachment == null)
+                {
+                    List<ApiInsertVacantLandImageDto> dtodata = new List<ApiInsertVacantLandImageDto>();
+                    apiResponseDetails = new ApiInsertVacantLandImageResponseDetails()
+                    {
+                        responseCode = "205",
+                        responseMessage = "IsExistanceEncroachment is mandatory",
+                        ApiInsertVacantLandImageDto = dtodata
+                    };
+                    return NotFound(apiResponseDetails);
+                }
+                else if (dto.IsExistanceEncroachment.ToUpper() == "N" || dto.IsExistanceEncroachment.ToUpper() == "No" && (dto.PerEncroached == "" || dto.PerEncroached ==null))
+                {
+                    List<ApiInsertVacantLandImageDto> dtodata = new List<ApiInsertVacantLandImageDto>();
+                    apiResponseDetails = new ApiInsertVacantLandImageResponseDetails()
+                    {
+                        responseCode = "205",
+                        responseMessage = "PerEncroached is mandatory",
+                        ApiInsertVacantLandImageDto = dtodata
+                    };
+                    return NotFound(apiResponseDetails);
+                }
+                else if (dto.IsExistanceEncroachment.ToUpper() == "N" || dto.IsExistanceEncroachment.ToUpper() == "No" && (dto.AreaEncroached == "" || dto.AreaEncroached == null))
+                {
+                    List<ApiInsertVacantLandImageDto> dtodata = new List<ApiInsertVacantLandImageDto>();
+                    apiResponseDetails = new ApiInsertVacantLandImageResponseDetails()
+                    {
+                        responseCode = "205",
+                        responseMessage = "AreaEncroached is mandatory",
+                        ApiInsertVacantLandImageDto = dtodata
+                    };
+                    return NotFound(apiResponseDetails);
+                }
+                else if (dto.IsExistanceEncroachment.ToUpper() == "N" || dto.IsExistanceEncroachment.ToUpper() == "No" && (dto.IsActionInitiated == "" || dto.IsActionInitiated == null))
+                {
+                    List<ApiInsertVacantLandImageDto> dtodata = new List<ApiInsertVacantLandImageDto>();
+                    apiResponseDetails = new ApiInsertVacantLandImageResponseDetails()
+                    {
+                        responseCode = "205",
+                        responseMessage = "IsActionInitiated is mandatory",
+                        ApiInsertVacantLandImageDto = dtodata
+                    };
+                    return NotFound(apiResponseDetails);
+                }
+                else if (dto.Longitude == "" || dto.Longitude == null)
+                {
+                    List<ApiInsertVacantLandImageDto> dtodata = new List<ApiInsertVacantLandImageDto>();
+                    apiResponseDetails = new ApiInsertVacantLandImageResponseDetails()
+                    {
+                        responseCode = "205",
+                        responseMessage = "Longitude is mandatory",
+                        ApiInsertVacantLandImageDto = dtodata
+                    };
+                    return NotFound(apiResponseDetails);
+                }
+                else if (dto.Latitude == "" || dto.Latitude == null)
+                {
+                    List<ApiInsertVacantLandImageDto> dtodata = new List<ApiInsertVacantLandImageDto>();
+                    apiResponseDetails = new ApiInsertVacantLandImageResponseDetails()
+                    {
+                        responseCode = "205",
+                        responseMessage = "Latitude is mandatory",
+                        ApiInsertVacantLandImageDto = dtodata
+                    };
+                    return NotFound(apiResponseDetails); 
+                }
+                FileHelper fileHelper = new FileHelper();               
+                var data = await _insertVacantLandImagesService.Create(dto);                
+                if (dto.ImageData != null && dto.ImageData.Count>0)
+                {
+                    List<vacantlandlistimage> vacantlandlistimages = new List<vacantlandlistimage>();
+                    for (int i = 0; i < dto.ImageData.Count; i++)
+                    {
+                        if (dto.ImageData[i] != null && dto.ImageData[i] != "")
                         {
-                            bm2.Save(VacantLandImagePath + Guid.NewGuid().ToString() + ".jpg");
+                            var imagePath = Guid.NewGuid().ToString() + ".jpg";
+                            if (!Directory.Exists(VacantLandImagePath))
+                            {
+                                DirectoryInfo directoryInfo = Directory.CreateDirectory(VacantLandImagePath);
+                            }
+                            using (MemoryStream ms = new MemoryStream(Convert.FromBase64String(dto.ImageData[i])))
+                            {
+                                using (Bitmap bm2 = new Bitmap(ms))
+                                {
+                                    bm2.Save(VacantLandImagePath + Guid.NewGuid().ToString() + ".jpg");
+                                }
+                            }
+                            vacantlandlistimages.Add(new vacantlandlistimage()
+                            {
+                                
+                                vacantlandimageId = dto.Id,
+                                ImagePath = imagePath,
+                                CreatedBy = dto.CreatedBy
+                            });
                         }
                     }
+                    foreach (var item in vacantlandlistimages)
+                    {
+                        data = await _insertVacantLandImagesService.SaveVacantlandlistimage(item);
+                    }
+                   
                 }
-               
-                var data = await _insertVacantLandImagesService.Create(dto);
                 if (data == true)
                 {
 
@@ -67,7 +195,7 @@ namespace Vacant.Land.Api.Controllers
                     apiResponseDetails = new ApiInsertVacantLandImageResponseDetails
                     {
                         responseCode = "200",
-                        responseMessage = "details fetched successfully",
+                        responseMessage = "Record saved successfully!",
                         ApiInsertVacantLandImageDto = dtoData
                     };
 
