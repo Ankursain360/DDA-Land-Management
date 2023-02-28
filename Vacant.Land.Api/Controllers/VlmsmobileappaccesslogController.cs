@@ -1,5 +1,6 @@
 ﻿using Dto.Search;
 using Libraries.Service.IApplicationService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -22,6 +23,7 @@ namespace Vacant.Land.Api.Controllers
             _configuration = configuration;
             _vlmsmobileappaccesslog = vlmsmobileappaccesslog;
         }
+        [AllowAnonymous]
         [HttpPost]
         [Route("[action]")]
         [Route("api/Vlmsmobileappaccesslog/SaveVLMSMobileApp")]
