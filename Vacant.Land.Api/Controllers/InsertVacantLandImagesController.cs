@@ -49,9 +49,9 @@ namespace Vacant.Land.Api.Controllers
                     {
                         responseCode = "404",
                         responseMessage = "BoundaryWall is mandatory",
-                        ApiInsertVacantLandImageDto = dtodata
+                        response = dtodata
                     };
-                    return NotFound(apiResponseDetails);
+                    return Ok(apiResponseDetails);
                 }
                 else if (dto.Fencing == "" || dto.Fencing == null)
                 {
@@ -60,9 +60,9 @@ namespace Vacant.Land.Api.Controllers
                     {
                         responseCode = "404",
                         responseMessage = "Fencing is mandatory",
-                        ApiInsertVacantLandImageDto = dtodata
+                        response = dtodata
                     };
-                    return NotFound(apiResponseDetails);
+                    return Ok(apiResponseDetails);
                 }
                 else if (dto.Ddaboard == "" || dto.Ddaboard == null)
                 {
@@ -71,9 +71,9 @@ namespace Vacant.Land.Api.Controllers
                     {
                         responseCode = "404",
                         responseMessage = "Ddaboard is mandatory",
-                        ApiInsertVacantLandImageDto = dtodata
+                        response = dtodata
                     };
-                    return NotFound(apiResponseDetails);
+                    return Ok(apiResponseDetails);
                 }
                 else if (dto.ScurityGuard == "" || dto.ScurityGuard == null)
                 {
@@ -82,9 +82,9 @@ namespace Vacant.Land.Api.Controllers
                     {
                         responseCode = "404",
                         responseMessage = "ScurityGuard is mandatory",
-                        ApiInsertVacantLandImageDto = dtodata
+                        response = dtodata
                     };
-                    return NotFound(apiResponseDetails);
+                    return Ok(apiResponseDetails);
                 }
                 else if (dto.IsExistanceEncroachment == "" || dto.IsExistanceEncroachment == null)
                 {
@@ -93,9 +93,9 @@ namespace Vacant.Land.Api.Controllers
                     {
                         responseCode = "404",
                         responseMessage = "IsExistanceEncroachment is mandatory",
-                        ApiInsertVacantLandImageDto = dtodata
+                        response = dtodata
                     };
-                    return NotFound(apiResponseDetails);
+                    return Ok(apiResponseDetails);
                 }
                 else if (dto.IsExistanceEncroachment.ToUpper() == "N" || dto.IsExistanceEncroachment.ToUpper() == "NO" && (dto.PerEncroached == "" || dto.PerEncroached ==null))
                 {
@@ -104,9 +104,9 @@ namespace Vacant.Land.Api.Controllers
                     {
                         responseCode = "404",
                         responseMessage = "PerEncroached is mandatory",
-                        ApiInsertVacantLandImageDto = dtodata
+                        response = dtodata
                     };
-                    return NotFound(apiResponseDetails);
+                    return Ok(apiResponseDetails);
                 }
                 else if (dto.IsExistanceEncroachment.ToUpper() == "N" || dto.IsExistanceEncroachment.ToUpper() == "NO" && (dto.AreaEncroached == "" || dto.AreaEncroached == null))
                 {
@@ -115,9 +115,9 @@ namespace Vacant.Land.Api.Controllers
                     {
                         responseCode = "404",
                         responseMessage = "AreaEncroached is mandatory",
-                        ApiInsertVacantLandImageDto = dtodata
+                        response = dtodata
                     };
-                    return NotFound(apiResponseDetails);
+                    return Ok(apiResponseDetails);
                 }
                 else if (dto.IsExistanceEncroachment.ToUpper() == "N" || dto.IsExistanceEncroachment.ToUpper() == "NO" && (dto.IsActionInitiated == "" || dto.IsActionInitiated == null))
                 {
@@ -126,9 +126,9 @@ namespace Vacant.Land.Api.Controllers
                     {
                         responseCode = "404",
                         responseMessage = "IsActionInitiated is mandatory",
-                        ApiInsertVacantLandImageDto = dtodata
+                        response = dtodata
                     };
-                    return NotFound(apiResponseDetails);
+                    return Ok(apiResponseDetails);
                 }
                 else if (dto.Longitude == "" || dto.Longitude == null)
                 {
@@ -137,9 +137,9 @@ namespace Vacant.Land.Api.Controllers
                     {
                         responseCode = "404",
                         responseMessage = "Longitude is mandatory",
-                        ApiInsertVacantLandImageDto = dtodata
+                        response = dtodata
                     };
-                    return NotFound(apiResponseDetails);
+                    return Ok(apiResponseDetails);
                 }
                 else if (dto.Latitude == "" || dto.Latitude == null)
                 {
@@ -148,9 +148,9 @@ namespace Vacant.Land.Api.Controllers
                     {
                         responseCode = "404",
                         responseMessage = "Latitude is mandatory",
-                        ApiInsertVacantLandImageDto = dtodata
+                        response = dtodata
                     };
-                    return NotFound(apiResponseDetails); 
+                    return Ok(apiResponseDetails); 
                 }
                 FileHelper fileHelper = new FileHelper();               
                 var data = await _insertVacantLandImagesService.Create(dto);                
@@ -196,7 +196,7 @@ namespace Vacant.Land.Api.Controllers
                     {
                         responseCode = "200",
                         responseMessage = "Record saved successfully!",
-                        ApiInsertVacantLandImageDto = dtoData
+                        response = dtoData
                     };
 
                     return Ok(apiResponseDetails);
@@ -208,7 +208,7 @@ namespace Vacant.Land.Api.Controllers
                     {
                         responseCode = "404",
                         responseMessage = " details not found",
-                        ApiInsertVacantLandImageDto = dtoData
+                        response = dtoData
                     };
                     return NotFound(apiResponseDetails);
                 }
@@ -220,9 +220,9 @@ namespace Vacant.Land.Api.Controllers
                 {
                     responseCode = "400",
                     responseMessage = "Bad Request. Insufficient Parameters",
-                    ApiInsertVacantLandImageDto = dtoData
+                    response = dtoData
                 };
-                return NotFound(apiResponseDetails);
+                return Ok(apiResponseDetails);
             }
         }
 

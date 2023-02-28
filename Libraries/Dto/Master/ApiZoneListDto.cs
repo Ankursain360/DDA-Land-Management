@@ -17,6 +17,6 @@ namespace Dto.Master
     {
         public string responseCode { get; set; }
         public string responseMessage { get; set; }
-        public List<ApiZoneListDto> ApiZoneListDto { get; set; }
+        public List<ApiZoneListDto> response { get; set; }
     }
 }

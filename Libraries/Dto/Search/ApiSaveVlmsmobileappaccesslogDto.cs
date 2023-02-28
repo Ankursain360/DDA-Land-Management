@@ -20,6 +20,6 @@ namespace Dto.Search
     {
         public string responseCode { get; set; } 
         public string responseMessage { get; set; }
-        public List<ApiSaveVlmsmobileappaccesslogDto>  apiSaveVlmsmobileappaccesslogDtos { get; set; }
+        public List<ApiSaveVlmsmobileappaccesslogDto>  response { get; set; }
     }
 }

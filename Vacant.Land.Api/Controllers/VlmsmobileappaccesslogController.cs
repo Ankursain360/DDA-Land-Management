@@ -40,7 +40,7 @@ namespace Vacant.Land.Api.Controllers
                         {
                             responseCode = "200",
                             responseMessage = "Record saved successfully!",
-                            apiSaveVlmsmobileappaccesslogDtos = dtoData
+                            response = dtoData
 
                         };
                         return Ok(responseDetails);
@@ -52,10 +52,10 @@ namespace Vacant.Land.Api.Controllers
                         {
                             responseCode = "404",
                             responseMessage = "Details Not Found",
-                            apiSaveVlmsmobileappaccesslogDtos = dtoData
+                            response = dtoData
 
                         };
-                        return NotFound(responseDetails);
+                        return Ok(responseDetails);
                     }
                 }
                 else
@@ -65,9 +65,9 @@ namespace Vacant.Land.Api.Controllers
                     {
                         responseCode = "404",
                         responseMessage = "Please insert only T or F in LoginStatus",
-                        apiSaveVlmsmobileappaccesslogDtos = dtoData
+                        response = dtoData
                     };
-                    return NotFound(responseDetails);
+                    return Ok(responseDetails);
                 }
             }
             else
@@ -77,10 +77,10 @@ namespace Vacant.Land.Api.Controllers
                 {
                     responseCode = "404",
                     responseMessage = "Bad Request. Insufficient Parameters",
-                    apiSaveVlmsmobileappaccesslogDtos = dtoData
+                    response = dtoData
 
                 };
-                return NotFound(responseDetails);
+                return Ok(responseDetails);
             }
             
         }

@@ -55,7 +55,7 @@ namespace Vacant.Land.Api.Controllers
                 var existingUser = await _userManager.FindByNameAsync(model.Username);
                 if (existingUser == null)
                 {
-                    return BadRequest(new RegistrationResponse()
+                    return Ok(new RegistrationResponse()
                     {
                         Errors = new List<string>() {
                                 "Invalid login request"
@@ -68,7 +68,7 @@ namespace Vacant.Land.Api.Controllers
                // var isCorrect = await _signInManager.PasswordSignInAsync(model.Username, model.Password, false, lockoutOnFailure: true);
                 if (!isCorrect)
                 {
-                    return BadRequest(new RegistrationResponse()
+                    return Ok(new RegistrationResponse()
                     {
                         Errors = new List<string>() {
                                 "Please check the Username and Password"
@@ -82,7 +82,7 @@ namespace Vacant.Land.Api.Controllers
                 return Ok(jwtToken);
             }
 
-            return BadRequest(new RegistrationResponse()
+            return Ok(new RegistrationResponse()
             {
                 Errors = new List<string>() {
                         "Invalid payload"

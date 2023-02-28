@@ -15,7 +15,7 @@ namespace Dto.Master
     {
         public string responseCode { get; set; }
         public string responseMessage { get; set; }
-        public GetPropertyDetailDto getPropertyDetailDto { get; set; } 
+        public GetPropertyDetailDto response { get; set; } 
 
     }
 }

@@ -67,7 +67,7 @@ namespace Vacant.Land.Api.Controllers
                     responseMessage = " details not found",
                     ApiDepartmentListDto = dtoData
                 };
-                return NotFound(apiResponseDetails);
+                return Ok(apiResponseDetails);
             }
         }
         [HttpGet]
@@ -98,7 +98,7 @@ namespace Vacant.Land.Api.Controllers
                     {
                         responseCode = "200",
                         responseMessage = "details fetched successfully",
-                        ApiZoneListDto = dtoData
+                        response = dtoData
                     };
 
                     return Ok(apiResponseDetails);
@@ -109,9 +109,9 @@ namespace Vacant.Land.Api.Controllers
                     {
                         responseCode = "404",
                         responseMessage = " details not found",
-                        ApiZoneListDto = dtoData
+                        response = dtoData
                     };
-                    return NotFound(apiResponseDetails);
+                    return Ok(apiResponseDetails);
                 }
             }
             else
@@ -120,7 +120,7 @@ namespace Vacant.Land.Api.Controllers
                 {
                     responseCode = "400",
                     responseMessage = "Bad Request. Insufficient Parameters",
-                    ApiZoneListDto = dtoData
+                    response = dtoData
                 };
                 return NotFound(apiResponseDetails);
             }
@@ -154,7 +154,7 @@ namespace Vacant.Land.Api.Controllers
                     {
                         responseCode = "200",
                         responseMessage = "details fetched successfully",
-                        ApiDivisionListDto = dtoData
+                        response = dtoData
                     };
 
                     return Ok(apiResponseDetails);
@@ -165,9 +165,9 @@ namespace Vacant.Land.Api.Controllers
                     {
                         responseCode = "404",
                         responseMessage = " details not found",
-                        ApiDivisionListDto = dtoData
+                        response = dtoData
                     };
-                    return NotFound(apiResponseDetails);
+                    return Ok(apiResponseDetails);
                 }
             }
             else
@@ -176,9 +176,9 @@ namespace Vacant.Land.Api.Controllers
                 {
                     responseCode = "400",
                     responseMessage = "Bad Request. Insufficient Parameters",
-                    ApiDivisionListDto = dtoData
+                    response = dtoData
                 };
-                return NotFound(apiResponseDetails);
+                return Ok(apiResponseDetails);
             }
         }
 
@@ -207,7 +207,7 @@ namespace Vacant.Land.Api.Controllers
                     {
                         responseCode = "200",
                         responseMessage = "details fetched successfully",
-                        ApiPrimaryListDto = dtoData
+                        response = dtoData
                     };
 
                     return Ok(apiResponseDetails);
@@ -218,9 +218,9 @@ namespace Vacant.Land.Api.Controllers
                     {
                         responseCode = "404",
                         responseMessage = " details not found",
-                        ApiPrimaryListDto = dtoData
+                        response = dtoData
                     };
-                    return NotFound(apiResponseDetails);
+                    return Ok(apiResponseDetails);
                 }
             }
             else
@@ -229,9 +229,9 @@ namespace Vacant.Land.Api.Controllers
                 {
                     responseCode = "400",
                     responseMessage = "Bad Request. Insufficient Parameters",
-                    ApiPrimaryListDto = dtoData
+                    response = dtoData
                 };
-                return NotFound(apiResponseDetails);
+                return Ok(apiResponseDetails);
             }
         }
 
@@ -260,7 +260,7 @@ namespace Vacant.Land.Api.Controllers
                 {
                     responseCode = "200",
                     responseMessage = "details fetched successfully",
-                    getPropertyDetailDto = getPropertyDetail
+                    response = getPropertyDetail
                 };
                 return Ok(apiPrimaryResponse);
                 }
@@ -270,9 +270,9 @@ namespace Vacant.Land.Api.Controllers
                 {
                     responseCode = "404",
                     responseMessage = " details not found",
-                    getPropertyDetailDto = getPropertyDetail
+                    response = getPropertyDetail
                 };
-                return NotFound(apiPrimaryResponse);
+                return Ok(apiPrimaryResponse);
               }
             }
             else
@@ -281,9 +281,9 @@ namespace Vacant.Land.Api.Controllers
                 {
                     responseCode = "400",
                     responseMessage = "Bad Request. Insufficient Parameters",
-                    getPropertyDetailDto = getPropertyDetail
+                    response = getPropertyDetail
                 };
-                return NotFound(apiPrimaryResponse);
+                return Ok(apiPrimaryResponse);
             }
 
         }

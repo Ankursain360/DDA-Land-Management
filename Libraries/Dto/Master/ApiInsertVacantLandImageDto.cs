@@ -44,6 +44,6 @@ namespace Dto.Master
     {
         public string responseCode { get; set; }
         public string responseMessage { get; set; }
-        public List<ApiInsertVacantLandImageDto> ApiInsertVacantLandImageDto { get; set; }
+        public List<ApiInsertVacantLandImageDto> response { get; set; }
     }
 }
