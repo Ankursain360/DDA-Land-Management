@@ -122,7 +122,7 @@ namespace Vacant.Land.Api.Controllers
                     responseMessage = "Bad Request. Insufficient Parameters",
                     response = dtoData
                 };
-                return NotFound(apiResponseDetails);
+                return Ok(apiResponseDetails);
             }
         }
 
