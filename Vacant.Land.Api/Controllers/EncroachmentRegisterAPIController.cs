@@ -105,7 +105,7 @@ namespace Vacant.Land.Api.Controllers
                         responseMessage = " details not found",
                         APIGetDepartmentListDto = dtoData
                     };
-                    return NotFound(apiResponseDetails);
+                    return Ok(apiResponseDetails);
                 }
 
             }
@@ -118,7 +118,7 @@ namespace Vacant.Land.Api.Controllers
                     responseMessage = "Internal Server Error",
                     APIGetDepartmentListDto = dtoData
                 };
-                return NotFound(apiResponseDetails);
+                return Ok(apiResponseDetails);
             }
         }
 
@@ -154,7 +154,7 @@ namespace Vacant.Land.Api.Controllers
                         responseMessage = " details not found",
                         ApiGetZoneListDto = dtoData
                     };
-                    return NotFound(apiResponseDetails);
+                    return Ok(apiResponseDetails);
                 }
             }
             else
@@ -166,7 +166,7 @@ namespace Vacant.Land.Api.Controllers
                     responseMessage = "Bad Request. Insufficient Parameters",
                     ApiGetZoneListDto = dtoData
                 };
-                return NotFound(apiResponseDetails);
+                return Ok(apiResponseDetails);
             }
         }
 
@@ -201,7 +201,7 @@ namespace Vacant.Land.Api.Controllers
                         responseMessage = " details not found",
                         ApiGetDivisionListDto = dtoData
                     };
-                    return NotFound(apiResponseDetails);
+                    return Ok(apiResponseDetails);
                 }
             }
             else
@@ -213,7 +213,7 @@ namespace Vacant.Land.Api.Controllers
                     responseMessage = "Bad Request. Insufficient Parameters",
                     ApiGetDivisionListDto = dtoData
                 };
-                return NotFound(apiResponseDetails);
+                return Ok(apiResponseDetails);
             }
         }
 
@@ -248,7 +248,7 @@ namespace Vacant.Land.Api.Controllers
                         responseMessage = " details not found",
                         ApiGetLocalityListDto = dtoData
                     };
-                    return NotFound(apiResponseDetails);
+                    return Ok(apiResponseDetails);
                 }
             }
             else
@@ -260,7 +260,7 @@ namespace Vacant.Land.Api.Controllers
                     responseMessage = "Bad Request. Insufficient Parameters",
                     ApiGetLocalityListDto = dtoData
                 };
-                return NotFound(apiResponseDetails);
+                return Ok(apiResponseDetails);
             }
         }
 
@@ -295,7 +295,7 @@ namespace Vacant.Land.Api.Controllers
                         responseMessage = " details not found",
                         APIGetKhasraListDto = dtoData
                     };
-                    return NotFound(apiResponseDetails);
+                    return Ok(apiResponseDetails);
                 }
 
             }
@@ -308,7 +308,7 @@ namespace Vacant.Land.Api.Controllers
                     responseMessage = "Internal Server Error",
                     APIGetKhasraListDto = dtoData
                 };
-                return NotFound(apiResponseDetails);
+                return Ok(apiResponseDetails);
             }
         }
         [HttpPost]
@@ -346,7 +346,7 @@ namespace Vacant.Land.Api.Controllers
                             responseMessage = "Mandatory Fields missing",
                             ApiSaveEncroachmentRegisterDto = dtoData
                         };
-                        return NotFound(apiResponseDetails);
+                        return Ok(apiResponseDetails);
                     }
                     FileHelper fileHelper = new FileHelper();
 
@@ -732,7 +732,7 @@ namespace Vacant.Land.Api.Controllers
                             responseMessage = "Details not found",
                             ApiSaveEncroachmentRegisterDto = dtoData
                         };
-                        return NotFound(apiResponseDetails);
+                        return Ok(apiResponseDetails);
                     }
                 }
                 else
@@ -744,7 +744,7 @@ namespace Vacant.Land.Api.Controllers
                         responseMessage = "Bad Request. Insufficient Parameters",
                         ApiSaveEncroachmentRegisterDto = dtoData
                     };
-                    return NotFound(apiResponseDetails);
+                    return Ok(apiResponseDetails);
                 }
             }
             catch (Exception ex)
@@ -756,7 +756,7 @@ namespace Vacant.Land.Api.Controllers
                     responseMessage = "Internal Server Error",
                     ApiSaveEncroachmentRegisterDto = dtoData
                 };
-                return NotFound(apiResponseDetails);
+                return Ok(apiResponseDetails);
             }
         }
         #region Fetch workflow data for approval prrocess Added by ishu 8 oct 2021
@@ -804,7 +804,7 @@ namespace Vacant.Land.Api.Controllers
                         responseMessage = " details not found",
                         ApiSaveEncroachmentRegisterDto = dtoData
                     };
-                    return NotFound(apiResponseDetails);
+                    return Ok(apiResponseDetails);
                 }
 
             }
@@ -817,7 +817,7 @@ namespace Vacant.Land.Api.Controllers
                     responseMessage = "Internal Server Error",
                     ApiSaveEncroachmentRegisterDto = dtoData
                 };
-                return NotFound(apiResponseDetails);
+                return Ok(apiResponseDetails);
             }
         }
 

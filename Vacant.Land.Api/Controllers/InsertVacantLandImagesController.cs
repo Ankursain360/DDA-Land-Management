@@ -210,7 +210,7 @@ namespace Vacant.Land.Api.Controllers
                         responseMessage = " details not found",
                         response = dtoData
                     };
-                    return NotFound(apiResponseDetails);
+                    return Ok(apiResponseDetails);
                 }
             }
             else
