@@ -91,6 +91,52 @@ namespace Vacant.Land.Api.Controllers
             });
         }
 
+        [HttpGet]
+        [Route("login")]
+        public async Task<IActionResult> Login(string username,string password)
+        {
+
+
+             
+                // var existingUser = await _userManager.FindByEmailAsync(user.Email);
+                var existingUser = await _userManager.FindByNameAsync(username);
+                if (existingUser == null)
+                {
+                    return BadRequest(new RegistrationResponse()
+                    {
+                        Errors = new List<string>() {
+                                "Invalid login request"
+                            },
+                        Success = false
+                    });
+                }
+
+                var isCorrect = await _userManager.CheckPasswordAsync(existingUser, password);
+                // var isCorrect = await _signInManager.PasswordSignInAsync(model.Username, model.Password, false, lockoutOnFailure: true);
+                if (!isCorrect)
+                {
+                    return BadRequest(new RegistrationResponse()
+                    {
+                        Errors = new List<string>() {
+                                "Please check the Username and Password"
+                            },
+                        Success = false
+                    });
+                }
+
+                var jwtToken = await GenerateJwtToken(existingUser);
+
+                return Ok(jwtToken);
+            //}
+
+            //return BadRequest(new RegistrationResponse()
+            //{
+            //    Errors = new List<string>() {
+            //            "Invalid payload"
+            //        },
+            //    Success = false
+            //});
+        }
         private async Task<AuthResult> GenerateJwtToken(ApplicationUser user)
         {
             var jwtTokenHandler = new JwtSecurityTokenHandler();
