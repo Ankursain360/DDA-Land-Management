@@ -70,7 +70,7 @@ namespace Vacant.Land.Api.Controllers
                 return NotFound(apiResponseDetails);
             }
         }
-        [HttpPost]
+        [HttpGet]
         [Route("[action]")]
         [Route("api/DepartmentAPI/GetZone")]
         public async Task<IActionResult> GetZone(int id)
@@ -126,7 +126,7 @@ namespace Vacant.Land.Api.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpGet]
         [Route("[action]")]
         [Route("api/DepartmentAPI/GetDivision")]
         public async Task<IActionResult> GetDivision(int id)
@@ -182,7 +182,7 @@ namespace Vacant.Land.Api.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpGet]
         [Route("[action]")]
         [Route("api/DepartmentAPI/GetPrimaryList")]
         public async Task<IActionResult> GetPrimaryList(int deptid, int zoneid , int divisionid)

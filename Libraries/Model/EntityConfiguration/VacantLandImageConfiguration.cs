@@ -97,6 +97,8 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
 
+            builder.Property(e => e.IsActive).HasColumnType("TINYINT(4)");
+
             builder.Property(e => e.PerEncroached)
                 .HasMaxLength(10)
                 .IsUnicode(false);

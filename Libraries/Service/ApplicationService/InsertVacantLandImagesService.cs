@@ -59,6 +59,7 @@ namespace Libraries.Service.ApplicationService
             model.Remarks = dto.Remarks;
             model.CreatedBy = dto.CreatedBy;
             model.CreatedDate = DateTime.Now;
+            model.IsActive = 1;
             _insertVacantLandImagesRepository.Add(model);
             var result = await _unitOfWork.CommitAsync() > 0;
             dto.Id = model.Id;

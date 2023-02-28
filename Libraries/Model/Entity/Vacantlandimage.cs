@@ -43,6 +43,7 @@ namespace Libraries.Model.Entity
         public string AreaEncroached { get; set; }
         public string IsActionInitiated { get; set; }
         public string Remarks { get; set; }
+        public int IsActive { get; set; }
 
         public Department DepartmentNavigation { get; set; }
         public Division DivisionNavigation { get; set; }
