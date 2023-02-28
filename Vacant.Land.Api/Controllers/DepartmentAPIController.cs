@@ -54,7 +54,7 @@ namespace Vacant.Land.Api.Controllers
                 {
                     responseCode = "200",
                     responseMessage = "details fetched successfully",
-                    ApiDepartmentListDto = dtoData
+                    response = dtoData
                 };
 
                 return Ok(apiResponseDetails);
@@ -65,7 +65,7 @@ namespace Vacant.Land.Api.Controllers
                 {
                     responseCode = "404",
                     responseMessage = " details not found",
-                    ApiDepartmentListDto = dtoData
+                    response = dtoData
                 };
                 return Ok(apiResponseDetails);
             }
