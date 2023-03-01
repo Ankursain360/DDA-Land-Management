@@ -48,7 +48,7 @@ namespace Vacant.Land.Api.Controllers
                     apiResponseDetails = new ApiInsertVacantLandImageResponseDetails()
                     {
                         responseCode = "404",
-                        responseMessage = "BoundaryWall is mandatory",
+                        responseMessage = "Boundary Wall is mandatory",
                         response = dtodata
                     };
                     return Ok(apiResponseDetails);
@@ -70,7 +70,7 @@ namespace Vacant.Land.Api.Controllers
                     apiResponseDetails = new ApiInsertVacantLandImageResponseDetails()
                     {
                         responseCode = "404",
-                        responseMessage = "Ddaboard is mandatory",
+                        responseMessage = "DDA Board is mandatory",
                         response = dtodata
                     };
                     return Ok(apiResponseDetails);
@@ -81,7 +81,7 @@ namespace Vacant.Land.Api.Controllers
                     apiResponseDetails = new ApiInsertVacantLandImageResponseDetails()
                     {
                         responseCode = "404",
-                        responseMessage = "ScurityGuard is mandatory",
+                        responseMessage = "Security Guard is mandatory",
                         response = dtodata
                     };
                     return Ok(apiResponseDetails);
@@ -92,7 +92,7 @@ namespace Vacant.Land.Api.Controllers
                     apiResponseDetails = new ApiInsertVacantLandImageResponseDetails()
                     {
                         responseCode = "404",
-                        responseMessage = "IsExistanceEncroachment is mandatory",
+                        responseMessage = "Certified that the plot is 100% encroachment free is mandatory",
                         response = dtodata
                     };
                     return Ok(apiResponseDetails);
@@ -103,7 +103,7 @@ namespace Vacant.Land.Api.Controllers
                     apiResponseDetails = new ApiInsertVacantLandImageResponseDetails()
                     {
                         responseCode = "404",
-                        responseMessage = "PerEncroached is mandatory",
+                        responseMessage = "Plot Encroached is mandatory",
                         response = dtodata
                     };
                     return Ok(apiResponseDetails);
@@ -114,7 +114,7 @@ namespace Vacant.Land.Api.Controllers
                     apiResponseDetails = new ApiInsertVacantLandImageResponseDetails()
                     {
                         responseCode = "404",
-                        responseMessage = "AreaEncroached is mandatory",
+                        responseMessage = "Area Encroached is mandatory",
                         response = dtodata
                     };
                     return Ok(apiResponseDetails);
@@ -125,7 +125,7 @@ namespace Vacant.Land.Api.Controllers
                     apiResponseDetails = new ApiInsertVacantLandImageResponseDetails()
                     {
                         responseCode = "404",
-                        responseMessage = "IsActionInitiated is mandatory",
+                        responseMessage = "Action initiated/taken for removal of Encroachment is mandatory",
                         response = dtodata
                     };
                     return Ok(apiResponseDetails);
@@ -151,6 +151,17 @@ namespace Vacant.Land.Api.Controllers
                         response = dtodata
                     };
                     return Ok(apiResponseDetails); 
+                }
+                else if (dto.Remarks == "" || dto.Remarks == null)
+                {
+                    List<ApiInsertVacantLandImageDto> dtodata = new List<ApiInsertVacantLandImageDto>();
+                    apiResponseDetails = new ApiInsertVacantLandImageResponseDetails()
+                    {
+                        responseCode = "404",
+                        responseMessage = "Remarks/Comment is mandatory",
+                        response = dtodata
+                    };
+                    return Ok(apiResponseDetails);
                 }
                 FileHelper fileHelper = new FileHelper();               
                 var data = await _insertVacantLandImagesService.Create(dto);                

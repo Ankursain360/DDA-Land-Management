@@ -66,7 +66,7 @@ namespace Vacant.Land.Api.Controllers
                     responseDetails = new ApiSaveVlmsmobileappaccesslogResponseDetails()
                     {
                         responseCode = "404",
-                        responseMessage = "Please insert only T or F in LoginStatus",
+                        responseMessage = "Please insert only T/F in LoginStatus",
                         response = dtoData
                     };
                     return Ok(responseDetails);
