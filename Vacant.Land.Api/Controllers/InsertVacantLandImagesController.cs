@@ -97,7 +97,7 @@ namespace Vacant.Land.Api.Controllers
                     };
                     return Ok(apiResponseDetails);
                 }
-                else if (dto.IsExistanceEncroachment.ToUpper() == "N" || dto.IsExistanceEncroachment.ToUpper() == "NO" && (dto.PerEncroached == "" || dto.PerEncroached ==null))
+                else if ((dto.IsExistanceEncroachment.ToUpper() == "N" || dto.IsExistanceEncroachment.ToUpper() == "NO") && (dto.PerEncroached == "" || dto.PerEncroached ==null))
                 {
                     List<ApiInsertVacantLandImageDto> dtodata = new List<ApiInsertVacantLandImageDto>();
                     apiResponseDetails = new ApiInsertVacantLandImageResponseDetails()
@@ -108,7 +108,7 @@ namespace Vacant.Land.Api.Controllers
                     };
                     return Ok(apiResponseDetails);
                 }
-                else if (dto.IsExistanceEncroachment.ToUpper() == "N" || dto.IsExistanceEncroachment.ToUpper() == "NO" && (dto.AreaEncroached == "" || dto.AreaEncroached == null))
+                else if ((dto.IsExistanceEncroachment.ToUpper() == "N" || dto.IsExistanceEncroachment.ToUpper() == "NO") && (dto.AreaEncroached == "" || dto.AreaEncroached == null))
                 {
                     List<ApiInsertVacantLandImageDto> dtodata = new List<ApiInsertVacantLandImageDto>();
                     apiResponseDetails = new ApiInsertVacantLandImageResponseDetails()
@@ -119,7 +119,7 @@ namespace Vacant.Land.Api.Controllers
                     };
                     return Ok(apiResponseDetails);
                 }
-                else if (dto.IsExistanceEncroachment.ToUpper() == "N" || dto.IsExistanceEncroachment.ToUpper() == "NO" && (dto.IsActionInitiated == "" || dto.IsActionInitiated == null))
+                else if ((dto.IsExistanceEncroachment.ToUpper() == "N" || dto.IsExistanceEncroachment.ToUpper() == "NO") && (dto.IsActionInitiated == "" || dto.IsActionInitiated == null))
                 {
                     List<ApiInsertVacantLandImageDto> dtodata = new List<ApiInsertVacantLandImageDto>();
                     apiResponseDetails = new ApiInsertVacantLandImageResponseDetails()

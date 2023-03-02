@@ -97,6 +97,10 @@ namespace Libraries.Repository.EntityRepository
             {
                 switch (model.SortBy.ToUpper())
                 {
+                    case ("CREATEDDATE"):
+                        data.Results = data.Results.OrderBy(x => x.CreatedDate).ToList();
+                        break;
+
                     case ("LOCATION"):
                         data.Results = data.Results.OrderBy(x => x.PropertyAddress).ToList();
                         //data = null;
@@ -154,6 +158,9 @@ namespace Libraries.Repository.EntityRepository
             {
                 switch (model.SortBy.ToUpper())
                 {
+                    case ("CREATEDDATE"):
+                        data.Results = data.Results.OrderByDescending(x => x.CreatedDate).ToList();
+                        break;
                     case ("LOCATION"):
                         data.Results = data.Results.OrderByDescending(x => x.PropertyAddress).ToList();
                         //data = null;
