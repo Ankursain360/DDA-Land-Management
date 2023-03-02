@@ -14,9 +14,11 @@ using Notification.OptionEnums;
 using Dto.Master;
 using System.IO;
 using System.Drawing;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Vacant.Land.Api.Controllers
 {
+    [Authorize(AuthenticationSchemes = "Bearer")]
     [ApiController]
     [Route("api/[controller]")]
     [Produces("application/json")]

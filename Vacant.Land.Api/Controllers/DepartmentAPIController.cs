@@ -12,10 +12,12 @@ using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 using Dto.Master;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Vacant.Land.Api.Controllers
 {
-    [ApiController]
+    [Authorize(AuthenticationSchemes = "Bearer")]
+    [ApiController]   
     [Route("api/[controller]")]
     [Produces("application/json")]
     public class DepartmentAPIController : ControllerBase
