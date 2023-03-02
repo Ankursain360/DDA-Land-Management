@@ -37,7 +37,6 @@ namespace Vacant.Land.Api.Controllers
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            //this.roleManager = roleManager;
             _tokenValidationParams = tokenValidationParams;
             _configuration = configuration;
             _DbContext = DbContext;
@@ -47,11 +46,8 @@ namespace Vacant.Land.Api.Controllers
         [Route("login")]
         public async Task<IActionResult> Login([FromBody] LoginModel model)
         {
-             
-
             if (ModelState.IsValid)
             {
-               // var existingUser = await _userManager.FindByEmailAsync(user.Email);
                 var existingUser = await _userManager.FindByNameAsync(model.Username);
                 if (existingUser == null)
                 {
@@ -64,8 +60,7 @@ namespace Vacant.Land.Api.Controllers
                     });
                 }
 
-                 var isCorrect = await _userManager.CheckPasswordAsync(existingUser, model.Password);
-               // var isCorrect = await _signInManager.PasswordSignInAsync(model.Username, model.Password, false, lockoutOnFailure: true);
+                var isCorrect = await _userManager.CheckPasswordAsync(existingUser, model.Password);
                 if (!isCorrect)
                 {
                     return Ok(new RegistrationResponse()
@@ -91,74 +86,30 @@ namespace Vacant.Land.Api.Controllers
             });
         }
 
-        [HttpGet]
-        [Route("login")]
-        public async Task<IActionResult> Login(string username,string password)
-        {
-
-
-             
-                // var existingUser = await _userManager.FindByEmailAsync(user.Email);
-                var existingUser = await _userManager.FindByNameAsync(username);
-                if (existingUser == null)
-                {
-                    return Ok(new RegistrationResponse()
-                    {
-                        Errors = new List<string>() {
-                                "Invalid login request"
-                            },
-                        Success = false
-                    });
-                }
-
-                var isCorrect = await _userManager.CheckPasswordAsync(existingUser, password);
-                // var isCorrect = await _signInManager.PasswordSignInAsync(model.Username, model.Password, false, lockoutOnFailure: true);
-                if (!isCorrect)
-                {
-                    return Ok(new RegistrationResponse()
-                    {
-                        Errors = new List<string>() {
-                                "Please check the Username and Password"
-                            },
-                        Success = false
-                    });
-                }
-
-                var jwtToken = await GenerateJwtToken(existingUser);
-
-                return Ok(jwtToken);
-            //}
-
-            //return BadRequest(new RegistrationResponse()
-            //{
-            //    Errors = new List<string>() {
-            //            "Invalid payload"
-            //        },
-            //    Success = false
-            //});
-        }
+        
         private async Task<AuthResult> GenerateJwtToken(ApplicationUser user)
         {
-            var jwtTokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]);
-          //  var key = Encoding.ASCII.GetBytes(_jwtConfig.Secret);
+             
+            //create claims details based on the user information
+            var claims = new[] {
+                    new Claim(JwtRegisteredClaimNames.Sub, _configuration["JWT:Subject"]),
+                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                    new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
+                    new Claim("Id", user.Id.ToString()),
+                    new Claim("FirstName", user.Name), 
+                    new Claim("UserName", user.UserName),
+                    new Claim("Email", user.Email)
+                   };
 
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(new[]
-                {
-                   // new Claim("Id", user.Id),
-                    new Claim(JwtRegisteredClaimNames.Email, user.Email),
-                    new Claim(JwtRegisteredClaimNames.Sub, user.Email),
-                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-                }),
-                // Expires = DateTime.UtcNow.AddSeconds(30), // 5-10 
-                Expires = DateTime.Now.AddHours(3),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-            };
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
 
-            var token = jwtTokenHandler.CreateToken(tokenDescriptor);
-            var jwtToken = jwtTokenHandler.WriteToken(token);
+            var signIn = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+            var token = new JwtSecurityToken(_configuration["JWT:ValidIssuer"], _configuration["JWT:ValidAudience"], claims, expires: DateTime.UtcNow.AddHours(1), signingCredentials: signIn);
+
+            var jwtToken = (new JwtSecurityTokenHandler().WriteToken(token));
+             
+
 
             var refreshToken = new RefreshToken()
             {
@@ -179,8 +130,8 @@ namespace Vacant.Land.Api.Controllers
                 Token = jwtToken,
                 Success = true,
                 RefreshToken = refreshToken.Token,
-                UserId= user.Id,    
-                UserName=user.UserName
+                UserId = user.Id,
+                UserName = user.UserName
             };
         }
         [HttpPost]

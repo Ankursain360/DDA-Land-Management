@@ -52,7 +52,7 @@ namespace Vacant.Land.Api
             }
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddDbContext<DataContext>(a => a.UseMySQL(Configuration.GetSection("ConnectionString:Con").Value));
-            
+
             //jwt token validation parameters
             var key = Encoding.UTF8.GetBytes(Configuration["JWT:Secret"]);
             var tokenValidationparams = new TokenValidationParameters()
@@ -77,29 +77,42 @@ namespace Vacant.Land.Api
                 .AddEntityFrameworkStores<DataContext>()
                 .AddDefaultTokenProviders();
 
-          
+
             services.RegisterDependency();
             services.AddAutoMapperSetup();
 
-           
-            // Adding Authentication
-            services.AddAuthentication(options =>
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
             {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-
-            // Adding Jwt Bearer
-            .AddJwtBearer(options =>
-            {
-                options.SaveToken = true;
                 options.RequireHttpsMetadata = false;
-                options.TokenValidationParameters = tokenValidationparams;
+                options.SaveToken = true;
+                options.TokenValidationParameters = new TokenValidationParameters()
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidAudience = Configuration["JWT:ValidAudience"],
+                    ValidIssuer = Configuration["JWT:ValidIssuer"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT:Secret"]))
+                };
             });
-          
-          
-           
+
+            //// Adding Authentication
+            //services.AddAuthentication(options =>
+            //{
+            //    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            //    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            //    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            //})
+
+            //// Adding Jwt Bearer
+            //.AddJwtBearer(options =>
+            //{
+            //    options.SaveToken = true;
+            //    options.RequireHttpsMetadata = false;
+            //    options.TokenValidationParameters = tokenValidationparams;
+            //});
+
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -109,7 +122,7 @@ namespace Vacant.Land.Api
             {
                 app.UseDeveloperExceptionPage();
             }
-           
+
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
@@ -119,7 +132,7 @@ namespace Vacant.Land.Api
             {
                 endpoints.MapControllers();
             });
-          
+
         }
     }
 }
