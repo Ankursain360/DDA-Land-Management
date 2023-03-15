@@ -56,11 +56,14 @@ namespace Libraries.Repository.IEntityRepository
         Task<Demolitionstructuredetails> FetchSingleResultonId(int id);
         Task<Fixingdemolition> FetchSingleResultOfFixingDemolition(int id); 
         Task<List<DemolitionDashboardDto>> GetDashboardData(int userId, int roleId , int DeptId , int ZoneId);
+        Task<List<EncroachmentRegisterDashboardDto>> GetEncroachmentRegistersDashboardData(int userId, int roleId, int DeptId, int ZoneId);
         Task<PagedResult<Fixingdemolition>> GetDashboardListData(DemolitionDasboardDataDto model ,int DeptId , int ZoneId,int roleId);
+        Task<PagedResult<EncroachmentRegisteration>> GetAllEncroachmentRagistrationDashboardListData(DemolitionDasboardDataDto model, int DeptId, int ZoneId, int roleId); 
         Task<List<Fixingdemolition>> DownloadDasboarddata(string filter, int Userid);
-        Task<string> Getusername(int Userid);
+        Task<List<EncroachmentRegisteration>> DownloadEncroachmentDashboard(string filter, int Userid);
+        Task<string> Getusername(string Userid);
         Task<List<Demolitionstructuredetails>> GetAllDemolitionReport(DemolitionReportZoneDivisionLocalityWiseSearchDto dto);
-
+        
 
 
     }

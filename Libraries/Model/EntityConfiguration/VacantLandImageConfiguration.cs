@@ -34,7 +34,7 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(20)
                 .IsUnicode(false);
 
-            builder.Property(e => e.CheckingPoint).HasColumnType("int(11)");
+            //builder.Property(e => e.CheckingPoint).HasColumnType("int(11)");
 
             builder.Property(e => e.CreatedBy).HasColumnType("int(11)");
 
@@ -55,7 +55,7 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.DivisionId).HasColumnType("int(11)");
 
-            builder.Property(e => e.EncroachmentDetails).HasColumnType("longtext");
+            //builder.Property(e => e.EncroachmentDetails).HasColumnType("longtext");
 
             builder.Property(e => e.Fencing)
                 .HasMaxLength(20)
@@ -71,9 +71,9 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(100)
                 .IsUnicode(false);
 
-            builder.Property(e => e.IsEncroached)
-                .HasMaxLength(10)
-                .IsUnicode(false);
+            //builder.Property(e => e.IsEncroached)
+            //    .HasMaxLength(10)
+            //    .IsUnicode(false);
 
             builder.Property(e => e.IsExistanceEncroachment)
                 .HasMaxLength(20)
@@ -84,16 +84,16 @@ namespace Libraries.Model.EntityConfiguration
                 .IsUnicode(false);
 
             builder.Property(e => e.Location)
-                .HasMaxLength(50)
+                .HasMaxLength(500)
                 .IsUnicode(false);
 
             builder.Property(e => e.Longitude)
                 .HasMaxLength(1000)
                 .IsUnicode(false);
 
-            builder.Property(e => e.Mobile)
-                .HasMaxLength(10)
-                .IsUnicode(false);
+            //builder.Property(e => e.Mobile)
+            //    .HasMaxLength(10)
+            //    .IsUnicode(false);
 
             builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
 
@@ -115,9 +115,9 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(20)
                 .IsUnicode(false);
 
-            builder.Property(e => e.SrNoInPrimaryList)
-                .HasMaxLength(400)
-                .IsUnicode(false);
+            //builder.Property(e => e.SrNoInPrimaryList)
+            //    .HasMaxLength(400)
+            //    .IsUnicode(false);
 
             builder.Property(e => e.UniqueId).HasColumnType("int(11)");
 

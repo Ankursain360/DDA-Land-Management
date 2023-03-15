@@ -1,4 +1,15 @@
-﻿function GetWatchWardDetails(id) {
+﻿$(document).ready(function () {
+
+    var id = parseInt($('#Id').val());
+    var watchWardId = parseInt($('#WatchWardId').val());
+    GetWatchWardDetails(watchWardId);
+    GetOtherDetails(id);
+    GetHistoryDetails(id);
+
+    $("#ApprovalStatus").val('0').trigger('change');
+
+});
+function GetWatchWardDetails(id) {
     HttpGet(`/EncroachmentRegisterApproval/WatchWardView/?Id=${id}`, 'html', function (response) {
         $('#WatchWardDetailsDiv').html("");
         $('#WatchWardDetailsDiv').html(response);
@@ -75,7 +86,7 @@ function fileValidation(filePath, fileInput, size) {
 }
 
 function GetApprvoalStatus(id) {
-    debugger;
+    
     HttpGet(`/EncroachmentRegisterApproval/GetApprvoalStatus/?value=${id}`, 'json', function (response) {
         if (response != null) {
             $("#ApprovalStatusCode").val(response.statusCode);

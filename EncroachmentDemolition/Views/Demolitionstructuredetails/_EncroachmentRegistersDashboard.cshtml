@@ -1,48 +1,44 @@
 ﻿
-@model List<Dto.Search.DemolitionDashboardDto>
-
+@model List<Dto.Search.EncroachmentRegisterDashboardDto>
 <link rel="stylesheet" href="~/css/ToggleSwitch1.css" />
 <div class="card text-white bg-secondary register mb-3">
     <div class="card-header ">
-        <h5 style="float:left">Demolition Dashboard</h5>
-        <div >
+        <h5 style="float:left">Encroachment Dashboard</h5>
+        <div>
             <div class="mid">
-                <span style="color: white; font-size: 15px; margin-left: 300px ">Demolition <br /><span>Dashboard</span></span>
+                <span class="DemolitionCls" style="color: white; font-size: 15px; margin-left: 300px">Demolition <br /><span class="DemolitionCls">Dashboard</span></span>
                 <label class="rocker" style="margin-left: 15px; background-color: #6c757d">
-                    <input type="checkbox" checked>
-                    <span id="divDemolitionDashboard" onclick="return DemolitionDashboard();" class="switch-left"></span>
-                    <span id="divEncroachmentDemolition" onclick="return EncroachmentDemolition();" class="switch-right"></span>
+                    <input type="checkbox">
+                    <span id="divDemolitionDashboard" onclick="return DemolitionDashboard();" title="Demolition Dashboard" class="switch-left active"></span>
+                    <span id="divEncroachmentDemolition" onclick="return EncroachmentDemolition();" title="Encroachment Dashboard" class="switch-right"></span>
                 </label>
-                <span style="color:white; font-size: 15px; margin-left: 15px ">Encroachment <br /><span>Dashboard</span></span>
+                <span style="color: white; font-size: 15px; margin-left: 15px ">Encroachment <br /><span>Dashboard</span></span>
             </div>
             <!--<ul class="nav nav-tabs nav-justified" style="cursor:pointer" role="tablist">
         <li class="nav-item">
-
             <div class="nav-link active" data-toggle="tab" id="divDemolitionDashboard" onclick="return DemolitionDashboard();" value="Demolition" role="tab" aria-controls="DemolitionDashboard" aria-selected="true">Demolition Dashboard</div>-->
             @*<a class="nav-link active" data-toggle="tab" href="#DemolitionDashboard" role="tab" aria-controls="DemolitionDashboard" aria-selected="true">Demolition Dashboard</a>*@
             <!--</li>
     <li class="nav-item">
-        <div class="nav-link" data-toggle="tab" id="divEncroachmentDemolition" onclick="return EncroachmentDemolition();" value="Encroachment" role="tab" aria-controls="EncroachmentDemolition" aria-selected="false">Encroachment Demolition</div>-->
+        <div class="nav-link" data-toggle="tab" id="divEncroachmentDemolition" onclick="return EncroachmentDemolition();" value="Encroachment" role="tab" aria-controls="EncroachmentDemolition" aria-selected="false">Encroachment Dashboard</div>-->
             @*<a class="nav-link"  data-toggle="tab" href="#EncroachmentDemolition" role="tab" aria-controls="EncroachmentDemolition" aria-selected="false">Encroachment Demolition</a>*@
             <!--</li>
     </ul>-->
         </div>
     </div>
     <div id="myTabContent">
-        <div class="card-body bg-light tab-pane fade show active" id="demolitionDashboard" role="tabpanel" aria-labelledby="home-tab" style="text-decoration: none !important; outline: none !important">
-            @*;display: none*@
-
+        <div class="card-body bg-light tab-pane fade show" id="encroachmentDemolition" role="tabpanel" aria-labelledby="profile-tab" style="text-decoration:none!important;outline:none!important">
             <div class="widget p-4 p-md-5 ">
                 <div class="row register-form g-md-5">
                     <div class="col-md-4 col-sm-6">
-                        <a href="#" onclick="showdata('TotalReceived')" title="Total Received">
+                        <a href="#" onclick="encroachmentregistrationshowdata('TotalRequest')" title="Total encroachment application Received">
                             <div class="card text-white bg-primary mb-3">
                                 <div class="card-header">
-                                    <b>Total Received</b>
+                                    <b>Total encroachment application Received</b>
                                 </div>
                                 <div class="card-body">
                                     <h5 class="card-title">@Model.Select(x => x.TotalRequest).FirstOrDefault()</h5>
-                                    <p class="card-text">Click here to see Total Received Application</p>
+                                    <p class="card-text">Total encroachment application Received</p>
                                 </div>
                                 <div class="card-footer text-end">
                                     @*<a href="#" class="btn btn-group-sm bg-primary">show</a>*@
@@ -51,14 +47,14 @@
                         </a>
                     </div>
                     <div class="col-md-4 col-sm-6">
-                        <a href="#" onclick="showdata('TotalPending')" title="Total Pending">
+                        <a href="#" onclick="encroachmentregistrationshowdata('TotalPending')" title="Total encroachment application pending">
                             <div class="card text-white bg-secondary  mb-3">
                                 <div class="card-header">
-                                    <b> Total Pending</b>
+                                    <b>Total encroachment application pending</b>
                                 </div>
                                 <div class="card-body">
                                     <h5 class="card-title">@Model.Select(x => x.TotalPending).FirstOrDefault() </h5>
-                                    <p class="card-text">Pending</p>
+                                    <p class="card-text">Total encroachment application pending</p>
                                 </div>
                                 <div class="card-footer text-end">
                                 </div>
@@ -66,14 +62,14 @@
                         </a>
                     </div>
                     <div class="col-md-4 col-sm-6">
-                        <a href="#" onclick="showdata('PendingAtyou')" title="Total Pending at User Level">
+                        <a href="#" onclick="encroachmentregistrationshowdata('PendingAtyou')" title="Total encroachment application Pending At User Level">
                             <div class="card text-white bg-warning mb-3">
                                 <div class="card-header">
-                                    <b>Pending At User Level</b>
+                                    <b>Total encroachment application Pending At User Level</b>
                                 </div>
                                 <div class="card-body">
                                     <h5 class="card-title">@Model.Select(x => x.PendingAtYou).FirstOrDefault() </h5>
-                                    <p class="card-text">Pending At User Level</p>
+                                    <p class="card-text">Total encroachment application Pending At User Level</p>
                                     @*<a href="#" class="btn btn-primary">Go#</a>*@
                                 </div>
                                 <div class="card-footer text-end">
@@ -82,14 +78,14 @@
                         </a>
                     </div>
                     <div class="col-md-4 col-sm-6">
-                        <a href="#" onclick="showdata('TotalApproved')" title="Total Approved">
+                        <a href="#" onclick="encroachmentregistrationshowdata('AcceptAndInitiateDemolition')" title="Total encroachment application Accept & initiate demolition">
                             <div class="card text-white bg-success   mb-3">
                                 <div class="card-header">
-                                    <b> Approved</b>
+                                    <b>Total encroachment application Accept & initiate demolition</b>
                                 </div>
                                 <div class="card-body">
-                                    <h5 class="card-title">@Model.Select(x => x.TotalApproved).FirstOrDefault() </h5>
-                                    <p class="card-text">Approved</p>
+                                    <h5 class="card-title">@Model.Select(x => x.AcceptAndInitiateDemolition).FirstOrDefault() </h5>
+                                    <p class="card-text">Total encroachment application Accept & initiate demolition</p>
                                 </div>
                                 <div class="card-footer text-end">
                                 </div>
@@ -97,14 +93,14 @@
                         </a>
                     </div>
                     <div class="col-md-4 col-sm-6">
-                        <a href="#" onclick="showdata('TotalRejected')" title="Total Rejected">
+                        <a href="#" onclick="encroachmentregistrationshowdata('TotalDemolitionToBETakenLater')" title="Total encroachment application Demolition to be taken later">
                             <div class="card text-white bg-danger mb-3">
                                 <div class="card-header">
-                                    <b>Rejected</b>
+                                    <b>Total encroachment application Demolition to be taken later</b>
                                 </div>
                                 <div class="card-body">
-                                    <h5 class="card-title">@Model.Select(x => x.TotalRejected).FirstOrDefault() </h5>
-                                    <p class="card-text">Rejected</p>
+                                    <h5 class="card-title">@Model.Select(x => x.TotalDemolitionToBETakenLater).FirstOrDefault() </h5>
+                                    <p class="card-text">Total encroachment application Demolition to be taken later</p>
                                 </div>
                                 <div class="card-footer text-end">
                                 </div>
@@ -116,11 +112,11 @@
 
         </div>
 
-        <div id="encroachmentDemolition">
+
+        <div id="demolitionDashboard">
 
         </div>
 
-      
     </div>
     <div class="card-footer">
         <small class="text-white">Last updated 3 mins ago</small>
@@ -137,7 +133,7 @@
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Dashboard Data</h5><h5 id="hfiltertext"></h5>
+                <h5 class="modal-title" id="staticBackdropLabel">Dashboard Data</h5><h5 id="hfiltertextofapplication"></h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" onclick="resetModel()" aria-label="Close"></button>
             </div>
             <div class="modal-body">

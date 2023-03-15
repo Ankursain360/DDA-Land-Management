@@ -30,40 +30,41 @@ namespace Libraries.Service.ApplicationService
         public async Task<bool> Create(ApiInsertVacantLandImageDto dto)
         {
             Vacantlandimage model = new Vacantlandimage();
+            model.UniqueId = dto.UniqueId;
             model.ZoneId = dto.ZoneId;
             model.Zone = dto.Zone;
             model.DepartmentId = dto.DepartmentId;
             model.Department = dto.Department;
             model.DivisionId = dto.DivisionId;
             model.Division = dto.Division;
+            model.BoundaryWall = dto.BoundaryWall.ToLower() == "y" || dto.BoundaryWall.ToLower() == "yes" ? "Yes" : "No";
+            model.Fencing = dto.Fencing;
+            model.Ddaboard = dto.Ddaboard;
+            model.ScurityGuard = dto.ScurityGuard;
             model.PrimaryListId = dto.PrimaryListId;
             model.PrimaryList = dto.PrimaryList;
             model.Location = dto.Location;
             model.Longitude = dto.Longitude;
             model.Latitude = dto.Latitude;
-            model.SrNoInPrimaryList = dto.SrNoInPrimaryList;
-            model.Flag = dto.Flag;    
-            model.Mobile = dto.Mobile;
-            model.CheckingPoint = dto.CheckingPoint;
-            model.BoundaryWall = dto.BoundaryWall.ToLower()=="y" || dto.BoundaryWall.ToLower() == "yes" ? "Yes":"No";
-            model.Fencing = dto.Fencing;
-            model.Ddaboard = dto.Ddaboard;
-            model.ScurityGuard = dto.ScurityGuard;
-            model.UniqueId = dto.UniqueId;
-            model.IsExistanceEncroachment = dto.IsExistanceEncroachment.ToLower() == "y" || dto.IsExistanceEncroachment.ToLower() == "yes" ? "Yes" : "No";
-            model.EncroachmentDetails = dto.EncroachmentDetails;
-            model.IsEncroached = dto.IsEncroached;
-            model.PerEncroached = dto.PerEncroached;
+           // model.SrNoInPrimaryList = dto.SrNoInPrimaryList;
+            model.Flag = "M";    
+           // model.Mobile = "M";
+            model.Location = dto.Location;
+           // model.CheckingPoint = dto.CheckingPoint;
+            model.IsExistanceEncroachment = dto.CertifiedPlot.ToLower() == "y" || dto.CertifiedPlot.ToLower() == "yes" ? "Yes" : "No";
+            model.PerEncroached = dto.percentageEncroached; 
             model.AreaEncroached = dto.AreaEncroached;
             model.IsActionInitiated = dto.IsActionInitiated;
+            //model.EncroachmentDetails = dto.EncroachmentDetails;
+            //model.IsEncroached = dto.IsEncroached;          
             model.Remarks = dto.Remarks;
-            model.CreatedBy = dto.CreatedBy;
+            model.CreatedBy = dto.createdby;
             model.CreatedDate = DateTime.Now;
             model.IsActive = 1;
             _insertVacantLandImagesRepository.Add(model);
             var result = await _unitOfWork.CommitAsync() > 0;
             dto.Id = model.Id;
-            dto.CreatedBy = model.CreatedBy;
+            dto.createdby = model.CreatedBy;
             return result;
         }
 

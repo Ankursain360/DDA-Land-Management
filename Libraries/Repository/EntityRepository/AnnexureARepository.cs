@@ -155,12 +155,13 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<Fixingdemolition> FetchSingleResult(int id)
         {
-            return await _dbContext.Fixingdemolition
+            var data = await _dbContext.Fixingdemolition
                                .Include(x => x.Fixingchecklist)
                                .Include(x => x.Fixingdocument)
                                .Include(x => x.Fixingprogram)
                                .Where(x => x.Id == id)
                                .FirstOrDefaultAsync();
+            return data;
         }
 
         public async Task<Fixingdocument> GetAnnexureAfiledetails(int id)

@@ -27,18 +27,18 @@ namespace Libraries.Model.Entity
         public string ImagePath { get; set; }
         public string Longitude { get; set; }
         public string Latitude { get; set; }
-        public string SrNoInPrimaryList { get; set; }
+       // public string SrNoInPrimaryList { get; set; }
         public string Flag { get; set; }
-        public string Mobile { get; set; }
-        public int? CheckingPoint { get; set; }
+       // public string Mobile { get; set; }
+       // public int? CheckingPoint { get; set; }
         public string BoundaryWall { get; set; }
         public string Fencing { get; set; }
         public string Ddaboard { get; set; }
         public string ScurityGuard { get; set; }
         public int? UniqueId { get; set; }
         public string IsExistanceEncroachment { get; set; }
-        public string EncroachmentDetails { get; set; }
-        public string IsEncroached { get; set; }
+        //public string EncroachmentDetails { get; set; }
+       // public string IsEncroached { get; set; }
         public string PerEncroached { get; set; }
         public string AreaEncroached { get; set; }
         public string IsActionInitiated { get; set; }

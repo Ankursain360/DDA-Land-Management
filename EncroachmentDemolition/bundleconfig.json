@@ -358,5 +358,11 @@
     "inputFiles": [
       "wwwroot/js/DemolitionstructuredetailsPrint.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/EncroachmentRagistrationApprovalView.min.js",
+    "inputFiles": [
+      "wwwroot/js/EncroachmentRagistrationApprovalView.js"
+    ]
   }
 ]

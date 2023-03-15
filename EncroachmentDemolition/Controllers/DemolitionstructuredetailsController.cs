@@ -1255,13 +1255,22 @@ namespace EncroachmentDemolition.Controllers
 
         #region Demolistion Dashboard
         //Demolistion Dashboard
-
+        
         public async Task<PartialViewResult> GetDashboard(int userId, int roleId, int deptId, int zoneId)
         {
 
             var results = await _demolitionstructuredetailsService.GetDashboardData(userId, roleId, deptId, zoneId);
 
             return PartialView("_dashboard", results);
+        }
+        //Encroachment Ragister Dashboard
+       
+        public async Task<PartialViewResult> GetEncroachmentRegistersDashboard(int userId, int roleId, int deptId, int zoneId) 
+        {
+
+            var results = await _demolitionstructuredetailsService.GetEncroachmentRegistersDashboardData(userId, roleId, deptId, zoneId);
+
+            return PartialView("_EncroachmentRegistersDashboard", results); 
         }
 
         public async Task<PartialViewResult> GetDashboardListData([FromBody] DemolitionDasboardDataDto model)
@@ -1271,7 +1280,12 @@ namespace EncroachmentDemolition.Controllers
              
             return PartialView("_ModelDashboardData", results);
         }
-
+        public async Task<PartialViewResult> GetAllEncroachmentRagistrationDashboardListData([FromBody] DemolitionDasboardDataDto model)
+        {
+            var results = await _demolitionstructuredetailsService.GetAllEncroachmentRagistrationDashboardListData(model, SiteContext.DepartmentId ?? 0, SiteContext.ZoneId ?? 0, SiteContext.RoleId ?? 0);
+            return PartialView("_EncroachmentRagistrationModelDashboardData", results);
+        }
+        
         public async Task<IActionResult> DwnloadDashboard(string filter)
         {
             var result = await _demolitionstructuredetailsService.DownloadDasboarddata(filter, SiteContext.UserId);
@@ -1290,13 +1304,40 @@ namespace EncroachmentDemolition.Controllers
                         DemolitionStatus = result[i].Demolitionstructuredetails.Count > 0 ? result[i].Demolitionstructuredetails.Select(x => x.DemolitionStatus).FirstOrDefault().Replace("_", " ") : "-",
                         ApplicationDate = result[i].CreatedDate.ToString("dd/MMM/yyyy"),
                         ApplicationStatus = result[i].ApprovedStatusNavigation.SentStatusName,
-                        PendingAt = result[i].PendingAt == "0" ? "NA" : await _demolitionstructuredetailsService.Getusername(result[i].PendingAt == null ? 0 : Convert.ToInt32(result[i].PendingAt))
+                        PendingAt = result[i].PendingAt == "0" ? "NA" : await _demolitionstructuredetailsService.Getusername(result[i].PendingAt == null ? "0" : result[i].PendingAt)
                     });
                 }
             }
 
             var memory = ExcelHelper.CreateExcel(data);
             return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", filter + "_Dashboard.xlsx");
+
+        }
+        public async Task<IActionResult> DownloadEncroachmentDashboard(string filter) 
+        {
+            var result = await _demolitionstructuredetailsService.DownloadEncroachmentDashboard(filter, SiteContext.UserId);
+            List<DemolitionDashboardDownloadDto> data = new List<DemolitionDashboardDownloadDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new DemolitionDashboardDownloadDto()
+                    {
+                        SrNo = i + 1,
+                        InspectionDate = Convert.ToDateTime(result[i].EncrochmentDate).ToString("dd-MMM-yyyy"),
+                        Department = result[i].Department.Name,
+                        Zone = result[i].Zone.Name,
+                        KhasraNo = result[i].KhasraNoNavigation.Locality == null ? result[i].KhasraNoNavigation.PlotNo : result[i].KhasraNoNavigation.KhasraNo,
+                        ////DemolitionStatus = result[i].Demolitionstructuredetails.Count > 0 ? result[i].Demolitionstructuredetails.Select(x => x.DemolitionStatus).FirstOrDefault().Replace("_", " ") : "-",
+                        ApplicationDate = result[i].CreatedDate.ToString("dd/MMM/yyyy"),
+                        ApplicationStatus = result[i].ApprovedStatusNavigation.SentStatusName == "Submitted" ? "Pending" :result[i].ApprovedStatusNavigation.SentStatusName == "Approved" ? result[i].ApprovedStatusNavigation.SentStatusName: result[i].ApprovedStatusNavigation.SentStatusName,
+                        PendingAt = result[i].PendingAt == "0" ? "NA" : await _demolitionstructuredetailsService.Getusername(result[i].PendingAt == null ? "0" : result[i].PendingAt)
+                    });
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", filter + "_EncroachmentDashboard.xlsx");
 
         }
         public async Task<PartialViewResult> EncrochmentDashboard(int userId, int roleId, int deptId, int zoneId)

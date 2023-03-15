@@ -1295,7 +1295,7 @@ namespace EncroachmentDemolition.Controllers
             return Json(dropdown);
         }
 
-        // [AuthorizeContext(ViewAction.View)]
+         [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _annexureAApprovalService.FetchSingleResult(id);

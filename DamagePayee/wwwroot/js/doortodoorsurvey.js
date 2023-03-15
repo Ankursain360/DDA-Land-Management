@@ -12,12 +12,12 @@ $("#btnSearch").click(function () {
 });
 
 function GetExcel(pageNumber, pageSize, order) {
-    debugger;
+    
     var param = GetSearchParam(pageNumber, pageSize, order);
     HttpPost(`/Door2DoorSurvey/DoorToDoorSurveyList`, 'html', param, function (response) {
         var a = document.createElement("a");
         a.target = '_blank';
-        a.href = '/Door2DoorSurvey/download';
+        a.href = `../Door2DoorSurvey/download`;
         a.click();
     });
 }

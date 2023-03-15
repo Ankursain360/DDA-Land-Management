@@ -243,15 +243,28 @@ namespace Libraries.Service.ApplicationService
         {
             return await _demolitionstructuredetailsRepository.GetDashboardData(userId, roleId, DeptId, ZoneId);
         }
+        public async Task<List<EncroachmentRegisterDashboardDto>> GetEncroachmentRegistersDashboardData(int userId, int roleId, int DeptId, int ZoneId)
+        {
+            return await _demolitionstructuredetailsRepository.GetEncroachmentRegistersDashboardData(userId, roleId, DeptId, ZoneId);
+        }
         public async Task<PagedResult<Fixingdemolition>> GetDashboardListData(DemolitionDasboardDataDto model , int DeptId, int ZoneId,int roleId)
         {
             return await _demolitionstructuredetailsRepository.GetDashboardListData(model,DeptId,ZoneId,roleId);
         }
+        public async Task<PagedResult<EncroachmentRegisteration>> GetAllEncroachmentRagistrationDashboardListData(DemolitionDasboardDataDto model, int DeptId, int ZoneId, int roleId)
+        {
+            return await _demolitionstructuredetailsRepository.GetAllEncroachmentRagistrationDashboardListData(model, DeptId, ZoneId, roleId);
+        }
+
         public async Task<List<Fixingdemolition>> DownloadDasboarddata(string filter, int Userid)
         {
             return await _demolitionstructuredetailsRepository.DownloadDasboarddata(filter, Userid);
         }
-        public async Task<string> Getusername(int Userid)
+        public async Task<List<EncroachmentRegisteration>> DownloadEncroachmentDashboard(string filter, int Userid)
+        {
+            return await _demolitionstructuredetailsRepository.DownloadEncroachmentDashboard(filter, Userid);
+        }
+        public async Task<string> Getusername(string Userid)
         {
             return await _demolitionstructuredetailsRepository.Getusername(Userid);
         }
@@ -259,6 +272,7 @@ namespace Libraries.Service.ApplicationService
         {
             return await _demolitionstructuredetailsRepository.GetAllDemolitionReport(model);
         }
+        
     }
 
 }

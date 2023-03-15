@@ -436,7 +436,7 @@ namespace DamagePayee.Controllers
         public virtual ActionResult download()
         {
             byte[] data = TempData["file"] as byte[];
-            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "_DoorToDoorSurvey.xlsx");
         }
 
 

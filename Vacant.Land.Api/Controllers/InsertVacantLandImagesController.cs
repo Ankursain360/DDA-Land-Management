@@ -88,7 +88,7 @@ namespace Vacant.Land.Api.Controllers
                     };
                     return Ok(apiResponseDetails);
                 }
-                else if (dto.IsExistanceEncroachment == "" || dto.IsExistanceEncroachment == null)
+                else if (dto.CertifiedPlot == "" || dto.CertifiedPlot == null)
                 {
                     List<ApiInsertVacantLandImageDto> dtodata = new List<ApiInsertVacantLandImageDto>();
                     apiResponseDetails = new ApiInsertVacantLandImageResponseDetails()
@@ -99,7 +99,7 @@ namespace Vacant.Land.Api.Controllers
                     };
                     return Ok(apiResponseDetails);
                 }
-                else if ((dto.IsExistanceEncroachment.ToUpper() == "N" || dto.IsExistanceEncroachment.ToUpper() == "NO") && (dto.PerEncroached == "" || dto.PerEncroached ==null))
+                else if ((dto.CertifiedPlot.ToUpper() == "N" || dto.CertifiedPlot.ToUpper() == "NO") && (dto.percentageEncroached == "" || dto.percentageEncroached == null))
                 {
                     List<ApiInsertVacantLandImageDto> dtodata = new List<ApiInsertVacantLandImageDto>();
                     apiResponseDetails = new ApiInsertVacantLandImageResponseDetails()
@@ -110,7 +110,7 @@ namespace Vacant.Land.Api.Controllers
                     };
                     return Ok(apiResponseDetails);
                 }
-                else if ((dto.IsExistanceEncroachment.ToUpper() == "N" || dto.IsExistanceEncroachment.ToUpper() == "NO") && (dto.AreaEncroached == "" || dto.AreaEncroached == null))
+                else if ((dto.CertifiedPlot.ToUpper() == "N" || dto.CertifiedPlot.ToUpper() == "NO") && (dto.AreaEncroached == "" || dto.AreaEncroached == null))
                 {
                     List<ApiInsertVacantLandImageDto> dtodata = new List<ApiInsertVacantLandImageDto>();
                     apiResponseDetails = new ApiInsertVacantLandImageResponseDetails()
@@ -121,7 +121,7 @@ namespace Vacant.Land.Api.Controllers
                     };
                     return Ok(apiResponseDetails);
                 }
-                else if ((dto.IsExistanceEncroachment.ToUpper() == "N" || dto.IsExistanceEncroachment.ToUpper() == "NO") && (dto.IsActionInitiated == "" || dto.IsActionInitiated == null))
+                else if ((dto.CertifiedPlot.ToUpper() == "N" || dto.CertifiedPlot.ToUpper() == "NO") && (dto.IsActionInitiated == "" || dto.IsActionInitiated == null))
                 {
                     List<ApiInsertVacantLandImageDto> dtodata = new List<ApiInsertVacantLandImageDto>();
                     apiResponseDetails = new ApiInsertVacantLandImageResponseDetails()
@@ -191,7 +191,7 @@ namespace Vacant.Land.Api.Controllers
                                 
                                 vacantlandimageId = dto.Id,
                                 ImagePath = imagePath,
-                                CreatedBy = dto.CreatedBy
+                                CreatedBy = dto.createdby
                             });
                         }
                     }

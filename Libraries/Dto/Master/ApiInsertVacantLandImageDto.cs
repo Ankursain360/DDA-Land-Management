@@ -29,14 +29,14 @@ namespace Dto.Master
         public string Ddaboard { get; set; }
         public string ScurityGuard { get; set; }
         public int? UniqueId { get; set; }
-        public string IsExistanceEncroachment { get; set; }
+        public string CertifiedPlot { get; set; } 
         public string EncroachmentDetails { get; set; }
         public string IsEncroached { get; set; }
-        public string PerEncroached { get; set; }
+        public string percentageEncroached { get; set; } 
         public string AreaEncroached { get; set; }
         public string IsActionInitiated { get; set; }
         public string Remarks { get; set; }
-        public int CreatedBy { get; set; }
+        public int createdby { get; set; } 
 
     }
 
