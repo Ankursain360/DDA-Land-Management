@@ -1,7 +1,7 @@
 ﻿var currentPageNumber = 1;
 var currentPageSize = 5;
 var sortOrder = 1;//default Ascending 
-debugger;
+
 $(document).ready(function () {
     GetLandTransfer(currentPageNumber, currentPageSize, sortOrder);
 });
@@ -27,7 +27,7 @@ function GetSearchParam(pageNumber, pageSize, sortOrder) {
 
 
 
-debugger;
+
 $("#btnAscending").click(function () {
    
     $("#btnDescending").removeClass("active");
@@ -35,7 +35,7 @@ $("#btnAscending").click(function () {
     sortOrder = 1;//for Ascending
     GetLandTransfer(currentPageNumber, currentPageSize, sortOrder);
 });
-debugger;
+
 $("#btnDescending").click(function () {
     $("#btnAscending").removeClass("active");
     $("#btnDescending").addClass("active");
@@ -45,9 +45,6 @@ $("#btnDescending").click(function () {
 $('#ddlSort').change(function () {
     GetLandTransfer(currentPageNumber, currentPageSize, sortOrder);
 });
-
-
-
 
 function onPaging(pageNo) {
     

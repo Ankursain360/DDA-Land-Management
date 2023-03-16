@@ -13,6 +13,7 @@ using LandInventory.Filters;
 using Core.Enum;
 using Utility.Helper;
 using Dto.Master;
+using Microsoft.AspNetCore.Http;
 
 namespace LandInventory.Controllers
 {
@@ -156,14 +157,17 @@ namespace LandInventory.Controllers
             }
 
             var memory = ExcelHelper.CreateExcel(data);
-            TempData["file"] = memory;
+            //TempData["file"] = memory;
+            HttpContext.Session.Set("file", memory);
             return Ok();
         }
         [HttpGet]
         public virtual IActionResult download()
         {
-            byte[] data = TempData["file"] as byte[];
-            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "MORLandInventory.xlsx");
+            byte[] data = HttpContext.Session.Get("file") as byte[];
+            HttpContext.Session.Remove("file");
+            //byte[] data = TempData["file"] as byte[];
+            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "DeletedProperty.xlsx");
 
         }
 

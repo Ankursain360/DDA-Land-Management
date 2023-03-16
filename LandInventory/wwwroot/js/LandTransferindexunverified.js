@@ -33,7 +33,7 @@ function GetLandTransfer(pageNumber, pageSize, sortOrder) {
 }
 
 $("#btnGenerate").click(function () {
-    debugger;
+    
     GetLandTransfer(currentPageNumber, currentPageSize, sortOrder);
 });
 $("#btnAscending").click(function () {
@@ -98,7 +98,7 @@ function onChangePlanned(value) {
 };
 
 function GetZoneList(id) {
-    debugger;
+    
     HttpGet(`/LandTransfer/GetZoneList/?departmentId=${id}`, 'json', function (response) {
 
         var html = '<option value="0">All</option>';
@@ -134,7 +134,7 @@ function GetDivisionList(id) {
 };
 
 function GetSearchParam(pageNumber, pageSize, sortOrder) {
-    debugger;
+    
     var classificationOfLandId = $('#Propertyregistration_ClassificationOfLandId option:selected').val();
     var departmentid = $('#Propertyregistration_DepartmentId option:selected').val();
     var zoneId = $('#Propertyregistration_ZoneId option:selected').val();

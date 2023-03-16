@@ -88,7 +88,7 @@ function onChangePageSize(pageSize) {
 }
 
 function GetZoneList(id) {
-    debugger;
+    
     HttpGet(`/PropertyRegistration/GetZoneList/?departmentId=${id}`, 'json', function (response) {
         var html = '<option value="0">All</option>';
         for (var i = 0; i < response.length; i++) {

@@ -702,18 +702,21 @@ namespace LandInventory.Controllers
             var memory = ExcelHelper.CreateExcel(data);
             //string sFileName = @"LandInventory.xlsx";
             //return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-            TempData["file"] = memory;
+            //TempData["file"] = memory;
+            HttpContext.Session.Set("file", memory);
             return Ok();
         }
 
         [HttpGet]
         public virtual IActionResult DownloadIndex1()
         {
+            byte[] data = HttpContext.Session.Get("file") as byte[];
+            HttpContext.Session.Remove("file");
             //var memory = ExcelHelper.CreateExcel(data);
             //string sFileName = @"LandInventory.xlsx";
             //return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
-            byte[] data = TempData["file"] as byte[];
-            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "LandInventory.xlsx");
+            //byte[] data = TempData["file"] as byte[];
+            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "InventoryUnverified.xlsx");
 
         }
 
