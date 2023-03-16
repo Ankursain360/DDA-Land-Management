@@ -941,7 +941,10 @@ namespace LandInventory.Controllers
             var memory = ExcelHelper.CreateExcel(data);
             //string sFileName = @"LandInventory.xlsx";
             //return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-            TempData["file"] = memory;
+            
+            var comp = Compress(memory);
+            HttpContext.Session.Set("file", comp);
+           // TempData["file"] = comp;
             return Ok();
         }
 
