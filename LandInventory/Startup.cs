@@ -82,6 +82,7 @@ namespace LandInventory
                 option.Filters.Add(typeof(ExceptionLogFilter));
                 option.Filters.Add(typeof(AuditFilterAttribute));
             });
+            services.AddMemoryCache();
             services.AddSession(options =>
             {
                 options.IdleTimeout = TimeSpan.FromMinutes(Convert.ToInt32(Configuration.GetSection("CookiesSettings:CookiesTimeout").Value));
