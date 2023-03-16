@@ -23,9 +23,8 @@ using Core.Enum;
 using Utility.Helper;
 using Dto.Master;
 using Dto.Common;
-
-
-
+using System.IO.Compression;
+using MySqlX.XDevAPI;
 
 namespace LandInventory.Controllers
 {
@@ -954,12 +953,37 @@ namespace LandInventory.Controllers
             //var memory = ExcelHelper.CreateExcel(data);
             //string sFileName = @"LandInventory.xlsx";
             //return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
-            byte[] data = TempData["file"] as byte[];
-            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "LandInventory.xlsx");
+            //  byte[] data = TempData["file"] as byte[];
+            byte[] data = HttpContext.Session.Get("file") as byte[];
+            var dem = Decompress(data);
+            return File(dem, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "LandInventory.xlsx");
 
         }
-
-
+        public static byte[] Compress(byte[] bytes)
+        {
+            using (var memoryStream = new MemoryStream())
+            {
+                using (var brotliStream = new BrotliStream(memoryStream, CompressionLevel.Optimal))
+                {
+                    brotliStream.Write(bytes, 0, bytes.Length);
+                }
+                return memoryStream.ToArray();
+            }
+        }
+        public static byte[] Decompress(byte[] bytes)
+        {
+            using (var memoryStream = new MemoryStream(bytes))
+            {
+                using (var outputStream = new MemoryStream())
+                {
+                    using (var decompressStream = new BrotliStream(memoryStream, CompressionMode.Decompress))
+                    {
+                        decompressStream.CopyTo(outputStream);
+                    }
+                    return outputStream.ToArray();
+                }
+            }
+        }
 
         public async Task<IActionResult> PropertyInventoryList()
         {
