@@ -11,7 +11,6 @@ $("#btnSearch").click(function () {
 });
 
 function GetExcel(pageNumber, pageSize, order) {
-    debugger;
     var param = GetSearchParam(pageNumber, pageSize, order);
     HttpPost(`/PropertyRegistration/downloadPropertyList`, 'html', param, function (response) {
         var a = document.createElement("a");
@@ -89,7 +88,6 @@ function onChangePageSize(pageSize) {
 }
 
 function GetZoneList(id) {
-    debugger;
     HttpGet(`/PropertyRegistration/GetZoneList/?departmentId=${id}`, 'json', function (response) {
         var html = '<option value="0">All</option>';
         for (var i = 0; i < response.length; i++) {

@@ -9,12 +9,18 @@ var roleId = parseInt($('#hdnRoleid').val());
 var deptId = parseInt($('#hdnDeptid').val());
 var zoneId = parseInt($('#hdnZoneid').val());
 $(document).ready(function (e) {
+    /*debugger;*/
     GetDashboard();
-    var classname = $('#divDemolitionDashboard').hasClass('active');
-    if (classname == true) {
-        document.getElementsByClassName("DemolitionCls").style.color = "green";
-        $(".DemolitionCls").removeAttr('color').attr('color', 'green');
-    }
+    //var classname = $('#divDemolitionDashboard').hasClass('active');
+    //if (classname == true) {
+    //    document.getElementsByClassName("DemolitionCls").style.color = "green";
+    //    /*$(".DemolitionCls").removeAttr('color').attr('color', 'green');*/
+    //}
+    //else {
+    //    $(".EncroachmentCls").css({ 'color': 'green' });
+    //   /* document.getElementsByClassName("#EncroachmentCls").style.color = "green";*/
+    //   /* $(".EncroachmentCls").removeAttr('color').attr('color', 'green');*/
+    //}
 });
 
 
