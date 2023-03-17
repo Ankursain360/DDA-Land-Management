@@ -13,6 +13,7 @@ using CourtCasesManagement.Filters;
 using Core.Enum;
 using Dto.Master;
 using Utility.Helper;
+using Microsoft.AspNetCore.Http;
 
 namespace CourtCasesManagement.Controllers
 {
@@ -72,7 +73,7 @@ namespace CourtCasesManagement.Controllers
             }
 
             var memory = ExcelHelper.CreateExcel(data);
-            TempData["file"] = memory;
+            HttpContext.Session.Set("file", memory);
             return Ok();
 
         }
@@ -80,8 +81,9 @@ namespace CourtCasesManagement.Controllers
         [HttpGet]
         public virtual ActionResult download()
         {
-            byte[] data = TempData["file"] as byte[];
-            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            byte[] data = HttpContext.Session.Get("file") as byte[];
+            HttpContext.Session.Remove("file");
+            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "CaseHearningReport.xlsx");
         }
     }
 }
