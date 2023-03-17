@@ -12,6 +12,7 @@ using DamagePayee.Filters;
 using Core.Enum;
 using System.Collections.Generic;
 using Utility.Helper;
+using Microsoft.AspNetCore.Http;
 
 namespace DamagePayee.Controllers
 {
@@ -71,14 +72,15 @@ namespace DamagePayee.Controllers
 
             }
             var memory = ExcelHelper.CreateExcel(data);
-            TempData["file"] = memory;
+            HttpContext.Session.Set("file", memory);
             return Ok();
         }
         [HttpGet]
         public virtual ActionResult download()
         {
-            byte[] data = TempData["file"] as byte[];
-            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            byte[] data = HttpContext.Session.Get("file") as byte[];
+            HttpContext.Session.Remove("file");
+            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "ReliefReport");
         }
     
     }

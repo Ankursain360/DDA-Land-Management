@@ -17,6 +17,8 @@ using System.Linq;
 using System.Globalization; 
 using System.IO;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Http;
+
 namespace DamagePayee.Controllers
 {
     public class DemandsLetterController : Controller
@@ -199,16 +201,18 @@ namespace DamagePayee.Controllers
             }
 
             var memory = ExcelHelper.CreateExcel(data);
-            TempData["file"] = memory;
+            HttpContext.Session.Set("file",memory);
+            //TempData["file"] = memory;
             return Ok();
 
         }
 
         [HttpGet]
         public virtual ActionResult download()
-        {
-            byte[] data = TempData["file"] as byte[];
-            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        {            
+            byte[] data = HttpContext.Session.Get("file") as byte[];
+            HttpContext.Session.Remove("file");
+            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "DemandsLetter.xlsx");
         }
         [HttpPost]
         public async Task<JsonResult> AutoComplete(string prefix)

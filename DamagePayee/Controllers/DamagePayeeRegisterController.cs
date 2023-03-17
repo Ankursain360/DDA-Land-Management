@@ -24,7 +24,7 @@ using Service.IApplicationService;
 using System.Text;
 
 using Microsoft.AspNetCore.Http;
-
+using System.IO.Compression;
 
 namespace DamagePayee.Controllers
 {
@@ -1229,17 +1229,46 @@ namespace DamagePayee.Controllers
             }
 
             var memory = ExcelHelper.CreateExcel(data);
-            TempData["file"] = memory;
+            //var comp = Compress(memory);
+            //TempData["file"] = comp;
+            HttpContext.Session.Set("file", memory);
             return Ok();
-            //return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-
+          
         }
         [HttpGet]
         public virtual ActionResult download()
         {
-            byte[] data = TempData["file"] as byte[];
-            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"); 
+            //byte[] data = TempData["file"] as byte[];
+            // var dem = Decompress(data);
+            byte[] data = HttpContext.Session.Get("file") as byte[];
+            HttpContext.Session.Remove("file");
+            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "DamagePayeeRegister"); 
         }
+        public static byte[] Compress(byte[] bytes)
+        {
+            using (var memoryStream = new MemoryStream())
+            {
+                using (var brotliStream = new BrotliStream(memoryStream, CompressionLevel.Optimal))
+                {
+                    brotliStream.Write(bytes, 0, bytes.Length);
+                }
+                return memoryStream.ToArray();
+            }
+        }
+        public static byte[] Decompress(byte[] bytes)
+        {
+            using (var memoryStream = new MemoryStream(bytes))
+            {
+                using (var outputStream = new MemoryStream())
+                {
+                    using (var decompressStream = new BrotliStream(memoryStream, CompressionMode.Decompress))
+                    {
+                        decompressStream.CopyTo(outputStream);
+                    }
+                    return outputStream.ToArray();
+                }
+            }
+        }   
         //view file
         public FileResult ViewDocument(string path)
         {

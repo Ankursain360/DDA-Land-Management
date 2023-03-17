@@ -938,11 +938,8 @@ namespace LandInventory.Controllers
             }
 
             var memory = ExcelHelper.CreateExcel(data);
-            //string sFileName = @"LandInventory.xlsx";
-            //return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-            
-           // var comp = Compress(memory);
-            HttpContext.Session.Set("file", memory);
+            var comp = Compress(memory);
+            HttpContext.Session.Set("file", comp);
            // TempData["file"] = comp;
             return Ok();
         }
@@ -950,14 +947,9 @@ namespace LandInventory.Controllers
         [HttpGet] 
         public virtual IActionResult Download()
         {
-            //var memory = ExcelHelper.CreateExcel(data);
-            //string sFileName = @"LandInventory.xlsx";
-            //return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
-            //  byte[] data = TempData["file"] as byte[];
             byte[] data = HttpContext.Session.Get("file") as byte[];
-            HttpContext.Session.Remove("file");
-            //var dem = Decompress(data);
-            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "PropertyRegistration.xlsx");
+            var dem = Decompress(data);
+            return File(dem, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "LandInventory.xlsx");
 
         }
         public static byte[] Compress(byte[] bytes)
