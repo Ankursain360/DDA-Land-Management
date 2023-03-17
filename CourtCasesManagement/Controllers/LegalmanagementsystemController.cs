@@ -479,12 +479,16 @@ namespace CourtCasesManagement.Controllers
             }
 
             var memory = ExcelHelper.CreateExcel(data);
-            TempData["file"] = memory;
-            //var file = File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-            //return file;
+            HttpContext.Session.Set("file", memory);
             return Ok();
         }
-
+        [HttpGet]
+        public virtual ActionResult Download()
+        {
+            byte[] data = HttpContext.Session.Get("file") as byte[];
+            HttpContext.Session.Remove("file");
+            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "LegalManagementSystemData.xlsx");
+        }
 
         [HttpPost]
         public JsonResult CheckFile()
@@ -872,12 +876,6 @@ namespace CourtCasesManagement.Controllers
             }
 
         }
-
-        [HttpGet]
-        public virtual ActionResult Download()
-        {
-            byte[] data = TempData["file"] as byte[];
-            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "LegalManagementSystemData.xlsx");
-        }
+        
     }
 }

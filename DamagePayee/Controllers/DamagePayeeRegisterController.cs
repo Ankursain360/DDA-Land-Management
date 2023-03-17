@@ -1242,7 +1242,7 @@ namespace DamagePayee.Controllers
             // var dem = Decompress(data);
             byte[] data = HttpContext.Session.Get("file") as byte[];
             HttpContext.Session.Remove("file");
-            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "DamagePayeeRegister"); 
+            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "DamagePayeeRegister.xlsx"); 
         }
         public static byte[] Compress(byte[] bytes)
         {

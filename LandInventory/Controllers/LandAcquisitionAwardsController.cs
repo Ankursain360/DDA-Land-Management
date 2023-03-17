@@ -3,6 +3,7 @@ using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -100,13 +101,14 @@ namespace LandInventory.Controllers
 
             }
             var memory = ExcelHelper.CreateExcel(data);
-            TempData["file"] = memory;
+            HttpContext.Session.Set("file", memory);
             return Ok();
         }
         [HttpGet]
         public virtual IActionResult Download()
         {
-            byte[] data = TempData["file"] as byte[];
+            byte[] data = HttpContext.Session.Get("file") as byte[];
+            HttpContext.Session.Remove("file");
             return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "LandAcquisitionAwards.xlsx");
         }
         public async Task<IActionResult> DownloadallLandAcquisitionAwards()

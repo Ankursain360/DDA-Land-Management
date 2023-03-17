@@ -79,7 +79,7 @@ namespace DamagePayee.Controllers
         {
             byte[] data = HttpContext.Session.Get("file") as byte[];
             HttpContext.Session.Remove("file");
-            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "NoticeGenerationReport.xlsx");
 
         }
     }
