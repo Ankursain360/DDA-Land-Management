@@ -17,6 +17,7 @@ namespace Dto.Master
         public string lattitude { get; set; }
         public string longitude { get; set; }
         public string presentUse { get; set; }
+        public string OccupantName { get; set; }
         public string ApproxAreaoftheProperty { get; set; }
         public string AreaUnit { get; set; }
         public string NumberofFloors { get; set; }

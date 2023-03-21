@@ -406,6 +406,7 @@ namespace DamagePayee.Controllers
                         lattitude = result[i].GeoReferencingLattitude,
                         longitude = result[i].Longitude,
                         presentUse = result[i].PresentUseNavigation.Name,
+                        OccupantName = result[i].OccupantName,
                         ApproxAreaoftheProperty = result[i].ApproxPropertyArea.ToString(),
                         //AreaUnit = result[i].AreaUnit.ToString(),
                         AreaUnit = result[i].AreaUnitNavigation == null ? "" : result[i].AreaUnitNavigation.Name,

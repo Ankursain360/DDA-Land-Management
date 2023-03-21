@@ -24,6 +24,7 @@ using Dto.Master;
 using Service.IApplicationService;
 using Microsoft.AspNetCore.Hosting;
 using System.Text;
+using Microsoft.AspNetCore.Http;
 
 namespace NewLandAcquisition.Controllers
 {
@@ -596,15 +597,16 @@ namespace NewLandAcquisition.Controllers
             }
 
             var memory = ExcelHelper.CreateExcel(data);
-            TempData["file"] = memory;
+            HttpContext.Session.Set("file", memory);
             return Ok();
 
         }
         [HttpGet]
         public virtual ActionResult download()
         {
-            byte[] data = TempData["file"] as byte[];
-            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            byte[] data = HttpContext.Session.Get("file") as byte[];
+            HttpContext.Session.Remove("file");
+            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "RequestApprovalProcess.xlsx");
         }
 
         #region History Details Only For Approval Page Added by Renu 16 march 2021
