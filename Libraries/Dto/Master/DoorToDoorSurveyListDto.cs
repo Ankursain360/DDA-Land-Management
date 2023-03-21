@@ -17,6 +17,7 @@ namespace Dto.Master
         public string lattitude { get; set; }
         public string longitude { get; set; }
         public string presentUse { get; set; }
+        public string NameOfOccupant { get; set; }
         public string ApproxAreaoftheProperty { get; set; }
         public string AreaUnit { get; set; }
         public string NumberofFloors { get; set; }
@@ -24,7 +25,6 @@ namespace Dto.Master
         public string CA_NumberOfElectricityConnection { get; set; }
         public string k_NumberOfWaterConnection { get; set; }
         public string HouseTaxNumberIssueBy_MCD { get; set; }
-        public string NameOfOccupant { get; set; }
         public string email { get; set; }
         public string Mobile { get; set; }
         public string AadharNumberOfOccupant { get; set; }
