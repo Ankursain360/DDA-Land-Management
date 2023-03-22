@@ -61,8 +61,8 @@ namespace Libraries.Service.IApplicationService
         Task<List<EncroachmentRegisterDashboardDto>> GetEncroachmentRegistersDashboardData(int userId, int roleId, int DeptId, int ZoneId);
         Task<PagedResult<Fixingdemolition>> GetDashboardListData(DemolitionDasboardDataDto model , int deptId , int zoneId,int roleId);
         Task<PagedResult<EncroachmentRegisteration>> GetAllEncroachmentRagistrationDashboardListData(DemolitionDasboardDataDto model, int DeptId, int ZoneId, int roleId);
-        Task<List<Fixingdemolition>> DownloadDasboarddata(string filter, int Userid);
-        Task<List<EncroachmentRegisteration>> DownloadEncroachmentDashboard(string filter, int Userid); 
+        Task<List<Fixingdemolition>> DownloadDasboarddata(string filter, int Userid, int DepartmentId, int ZoneId, int RoleId);
+        Task<List<EncroachmentRegisteration>> DownloadEncroachmentDashboard(string filter, int Userid, int DepartmentId, int ZoneId, int RoleId); 
         Task<string> Getusername(string Userid);
         Task<List<Demolitionstructuredetails>> GetAllDemolitionReport(DemolitionReportZoneDivisionLocalityWiseSearchDto model);
        

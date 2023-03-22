@@ -9,17 +9,19 @@ var roleId = parseInt($('#hdnRoleid').val());
 var deptId = parseInt($('#hdnDeptid').val());
 var zoneId = parseInt($('#hdnZoneid').val());
 $(document).ready(function (e) {
-    /*debugger;*/
+   
     GetDashboard();
-    //var classname = $('#divDemolitionDashboard').hasClass('active');
-    //if (classname == true) {
-    //    document.getElementsByClassName("DemolitionCls").style.color = "green";
-    //    /*$(".DemolitionCls").removeAttr('color').attr('color', 'green');*/
+    //var classname = $(".DemolitionCls").hasClass('active');
+    //if (classname == false) {
+    //    /*document.getElementsByClassName("DemolitionCls").style.color = "darkgreen";*/
+    //    /*$(".DemolitionCls").removeAttr('color').attr('color', 'darkgreen');*/
+    //    /*$('.DemolitionCls').css('color': 'darkgreen');*/
+    //    $(".DemolitionCls").css("color","darkgreen");
     //}
     //else {
-    //    $(".EncroachmentCls").css({ 'color': 'green' });
-    //   /* document.getElementsByClassName("#EncroachmentCls").style.color = "green";*/
-    //   /* $(".EncroachmentCls").removeAttr('color').attr('color', 'green');*/
+    //    $('.EncroachmentCls').css({ 'color': 'darkgreen' });
+    //   /* document.getElementsByClassName("#EncroachmentCls").style.color = "darkgreen";*/
+    //   /* $(".EncroachmentCls").removeAttr('color').attr('color', 'darkgreen');*/
     //}
 });
 
@@ -143,7 +145,7 @@ function DownloadForEncroachmentDashboard(filter) {
 }
 
 
-function onPaging(pageNo) {
+function onPaging(pageNo) {    
     var DemolitionDashboard = $('#divDemolitionDashboard').hasClass('active');
     if (DemolitionDashboard == true) {
         Pagewisedata(parseInt(pageNo), parseInt(currentPageSize), sortOrder, filterdata);
@@ -154,9 +156,9 @@ function onPaging(pageNo) {
     currentPageNumber = pageNo;
 }
 
-function onChangePageSize(pageSize) {
+function onChangePageSize(pageSize) {    
     var DemolitionDashboard = $('#divDemolitionDashboard').hasClass('active');
-    if (DemolitionDashboard) {
+    if (DemolitionDashboard == true) {
         Pagewisedata(parseInt(currentPageNumber), parseInt(pageSize), sortOrder, filterdata);
     }
     else {

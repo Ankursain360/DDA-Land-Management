@@ -256,13 +256,13 @@ namespace Libraries.Service.ApplicationService
             return await _demolitionstructuredetailsRepository.GetAllEncroachmentRagistrationDashboardListData(model, DeptId, ZoneId, roleId);
         }
 
-        public async Task<List<Fixingdemolition>> DownloadDasboarddata(string filter, int Userid)
+        public async Task<List<Fixingdemolition>> DownloadDasboarddata(string filter, int Userid, int DepartmentId, int ZoneId, int RoleId)
         {
-            return await _demolitionstructuredetailsRepository.DownloadDasboarddata(filter, Userid);
+            return await _demolitionstructuredetailsRepository.DownloadDasboarddata(filter, Userid, DepartmentId, ZoneId, RoleId);
         }
-        public async Task<List<EncroachmentRegisteration>> DownloadEncroachmentDashboard(string filter, int Userid)
+        public async Task<List<EncroachmentRegisteration>> DownloadEncroachmentDashboard(string filter, int Userid, int DepartmentId, int ZoneId, int RoleId)
         {
-            return await _demolitionstructuredetailsRepository.DownloadEncroachmentDashboard(filter, Userid);
+            return await _demolitionstructuredetailsRepository.DownloadEncroachmentDashboard(filter, Userid, DepartmentId, ZoneId, RoleId);
         }
         public async Task<string> Getusername(string Userid)
         {

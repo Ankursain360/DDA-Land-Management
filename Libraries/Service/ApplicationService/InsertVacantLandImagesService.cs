@@ -38,9 +38,9 @@ namespace Libraries.Service.ApplicationService
             model.DivisionId = dto.DivisionId;
             model.Division = dto.Division;
             model.BoundaryWall = dto.BoundaryWall.ToLower() == "y" || dto.BoundaryWall.ToLower() == "yes" ? "Yes" : "No";
-            model.Fencing = dto.Fencing;
-            model.Ddaboard = dto.Ddaboard;
-            model.ScurityGuard = dto.ScurityGuard;
+            model.Fencing = dto.Fencing.ToLower() =="y" || dto.Fencing.ToLower() == "yes" ? "Yes":"No";
+            model.Ddaboard = dto.Ddaboard.ToLower() == "y" || dto.Fencing.ToLower() == "yes" ? "Yes" : "No";
+            model.ScurityGuard = dto.ScurityGuard.ToLower() == "y" || dto.Fencing.ToLower() == "yes" ? "Yes" : "No";
             model.PrimaryListId = dto.PrimaryListId;
             model.PrimaryList = dto.PrimaryList;
             model.Location = dto.Location;

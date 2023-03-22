@@ -17,11 +17,8 @@ using EncroachmentDemolition.Filters;
 using Core.Enum;
 using Dto.Master;
 using Microsoft.AspNetCore.Hosting;
-
 using Service.IApplicationService;
 using System.Text;
-
-
 using Microsoft.AspNetCore.Http;
 using EncroachmentDemolition.Helper;
 
@@ -1288,7 +1285,7 @@ namespace EncroachmentDemolition.Controllers
         
         public async Task<IActionResult> DwnloadDashboard(string filter)
         {
-            var result = await _demolitionstructuredetailsService.DownloadDasboarddata(filter, SiteContext.UserId);
+            var result = await _demolitionstructuredetailsService.DownloadDasboarddata(filter, SiteContext.UserId, SiteContext.DepartmentId ?? 0, SiteContext.ZoneId ?? 0, SiteContext.RoleId ?? 0);
             List<DemolitionDashboardDownloadDto> data = new List<DemolitionDashboardDownloadDto>();
             if (result != null)
             {
@@ -1315,7 +1312,7 @@ namespace EncroachmentDemolition.Controllers
         }
         public async Task<IActionResult> DownloadEncroachmentDashboard(string filter) 
         {
-            var result = await _demolitionstructuredetailsService.DownloadEncroachmentDashboard(filter, SiteContext.UserId);
+            var result = await _demolitionstructuredetailsService.DownloadEncroachmentDashboard(filter, SiteContext.UserId, SiteContext.DepartmentId ?? 0, SiteContext.ZoneId ?? 0, SiteContext.RoleId ?? 0);
             List<DemolitionDashboardDownloadDto> data = new List<DemolitionDashboardDownloadDto>();
             if (result != null)
             {

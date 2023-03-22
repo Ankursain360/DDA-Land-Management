@@ -1,5 +1,6 @@
 ﻿
 $(document).ready(function () {
+    debugger;
     $("#TotalArea").attr("readonly", "readonly");
 
     var value = $('#Boundary option:selected').val();

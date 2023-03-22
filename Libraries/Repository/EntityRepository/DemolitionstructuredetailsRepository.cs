@@ -652,7 +652,7 @@ namespace Libraries.Repository.EntityRepository
 
             return data;
         }
-        public async Task<List<Fixingdemolition>> DownloadDasboarddata(string filter, int Userid)
+        public async Task<List<Fixingdemolition>> DownloadDasboarddata(string filter, int Userid, int DepartmentId, int ZoneId, int RoleId)
         {
             var PendingatYoustatus = new[] { 3, 4 };
             var data = await _dbContext.Fixingdemolition.Include(x => x.Encroachment.Locality)
@@ -663,6 +663,8 @@ namespace Libraries.Repository.EntityRepository
                                           .Include(x => x.Demolitionstructuredetails)
                                           .Include(x => x.Encroachment.KhasraNoNavigation)
                                           .Where(x => x.IsActive == 1
+                                           && (RoleId == 1 || RoleId == 2 || RoleId == 3 || RoleId == 63 || RoleId == 19 || RoleId == 7 || RoleId == 69 || RoleId == 16 ? (x.Encroachment.ZoneId == x.Encroachment.ZoneId) : (x.Encroachment.ZoneId == (ZoneId == 0 ? x.Encroachment.ZoneId : ZoneId)))
+                                          && (RoleId == 1 || RoleId == 2 || RoleId == 3 || RoleId == 7 || RoleId == 63 ? (x.Encroachment.DepartmentId == x.Encroachment.DepartmentId) : (x.Encroachment.DepartmentId == (DepartmentId == 0 ? x.Encroachment.DepartmentId : DepartmentId)))
                                           && (filter == "TotalReceived" ? x.ApprovedStatusNavigation.StatusCode == x.ApprovedStatusNavigation.StatusCode
                                               : filter == "TotalApproved" ? (x.ApprovedStatusNavigation.StatusCode == 3)
                                               : filter == "PendingAtyou" ? (!PendingatYoustatus.Contains(x.ApprovedStatusNavigation.StatusCode) && x.PendingAt == Userid.ToString())
@@ -675,7 +677,7 @@ namespace Libraries.Repository.EntityRepository
 
             return data;
         }
-        public async Task<List<EncroachmentRegisteration>> DownloadEncroachmentDashboard(string filter, int Userid)
+        public async Task<List<EncroachmentRegisteration>> DownloadEncroachmentDashboard(string filter, int Userid, int DepartmentId, int ZoneId, int RoleId)
         {
             var PendingatYoustatus = new[] { 6, 7 };
             var data = await _dbContext.EncroachmentRegisteration.Include(x => x.Locality)
@@ -685,6 +687,8 @@ namespace Libraries.Repository.EntityRepository
                                           //.Include(x => x.Demolitionstructuredetails)
                                           .Include(x => x.KhasraNoNavigation)
                                           .Where(x => x.IsActive == 1
+                                           && (RoleId == 1 || RoleId == 2 || RoleId == 3 || RoleId == 63 || RoleId == 19 || RoleId == 7 || RoleId == 69 || RoleId == 16 ? (x.ZoneId == x.ZoneId) : (x.ZoneId == (ZoneId == 0 ? x.ZoneId : ZoneId)))
+                                          && (RoleId == 1 || RoleId == 2 || RoleId == 3 || RoleId == 7 || RoleId == 63 ? (x.DepartmentId == x.DepartmentId) : (x.DepartmentId == (DepartmentId == 0 ? x.DepartmentId : DepartmentId)))
                                           && (filter == "TotalRequest" ? x.ApprovedStatusNavigation.Id == x.ApprovedStatusNavigation.Id
                                               : filter == "AcceptAndInitiateDemolition" ? (x.ApprovedStatusNavigation.Id == 7)
                                               : filter == "PendingAtyou" ? (!PendingatYoustatus.Contains(x.ApprovedStatusNavigation.Id) && x.PendingAt == Userid.ToString())
