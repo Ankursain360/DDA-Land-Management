@@ -183,7 +183,7 @@ namespace Vacant.Land.Api.Controllers
                             {
                                 using (Bitmap bm2 = new Bitmap(ms))
                                 {
-                                    bm2.Save(VacantLandImagePath + Guid.NewGuid().ToString() + ".jpg");
+                                    bm2.Save(VacantLandImagePath + imagePath);
                                 }
                             }
                             vacantlandlistimages.Add(new vacantlandlistimage()
