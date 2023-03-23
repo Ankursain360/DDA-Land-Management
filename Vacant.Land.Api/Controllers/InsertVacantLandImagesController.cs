@@ -187,8 +187,7 @@ namespace Vacant.Land.Api.Controllers
                                 }
                             }
                             vacantlandlistimages.Add(new vacantlandlistimage()
-                            {
-                                
+                            {                                
                                 vacantlandimageId = dto.Id,
                                 ImagePath = imagePath,
                                 CreatedBy = dto.createdby
