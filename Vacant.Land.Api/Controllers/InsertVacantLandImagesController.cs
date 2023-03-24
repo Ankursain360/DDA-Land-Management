@@ -105,7 +105,7 @@ namespace Vacant.Land.Api.Controllers
                     apiResponseDetails = new ApiInsertVacantLandImageResponseDetails()
                     {
                         responseCode = "404",
-                        responseMessage = "Plot Encroached is mandatory",
+                        responseMessage = "percentageEncroached is mandatory",
                         response = dtodata
                     };
                     return Ok(apiResponseDetails);

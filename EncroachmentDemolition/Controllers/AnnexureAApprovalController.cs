@@ -1308,8 +1308,8 @@ namespace EncroachmentDemolition.Controllers
         #endregion
 
         //  [AuthorizeContext(ViewAction.Download)]
-
-        public async Task<IActionResult> FixingdemolitionApprovalList(AnnexureAApprovalSearchDto model)
+        [HttpPost]
+        public async Task<IActionResult> FixingdemolitionApprovalList([FromBody] AnnexureAApprovalSearchDto model)
         {
             var result = await _annexureAApprovalService.GetAllFixingdemolition(model, SiteContext.UserId, SiteContext.ZoneId ?? 0);
             List<FixingdemolitionApprovalListDto> data = new List<FixingdemolitionApprovalListDto>();
@@ -1330,8 +1330,16 @@ namespace EncroachmentDemolition.Controllers
             }
 
             var memory = ExcelHelper.CreateExcel(data);
-            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            HttpContext.Session.Set("file", memory);
+            return Ok();
+           // return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
 
+        }
+        [HttpGet]
+        public virtual IActionResult download()
+        {
+            byte[] data = HttpContext.Session.Get("file") as byte[];
+            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "FixingdemolitionApproval.xlsx");
         }
 
 

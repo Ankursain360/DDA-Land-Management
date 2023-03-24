@@ -605,6 +605,13 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<PagedResult<Fixingdemolition>> GetDashboardListData(DemolitionDasboardDataDto model, int DeptId, int ZoneId, int roleId)
         {
+            var AllDataList = await _dbContext.Fixingdemolition.ToListAsync();
+            var UserWiseDataList = AllDataList.Where(x => x.PendingAt.Split(',').Contains(model.userId.ToString()));
+            List<int> myIdList = new List<int>();
+            foreach (Fixingdemolition myLine in UserWiseDataList)            
+                myIdList.Add(myLine.Id);
+            int[] myIdArray = myIdList.ToArray();
+            
             var PendingatYoustatus = new[] { 3, 4 };
             var data = await _dbContext.Fixingdemolition.Include(x => x.Encroachment.Locality)
                                           .Include(x => x.Encroachment)
@@ -617,10 +624,10 @@ namespace Libraries.Repository.EntityRepository
                                           && (model.roleId == 1 || roleId == 2 || roleId == 3 || roleId == 63 || roleId == 19 || roleId == 7 || roleId == 69 || roleId == 16 ? (x.Encroachment.ZoneId == x.Encroachment.ZoneId) : (x.Encroachment.ZoneId == (ZoneId == 0 ? x.Encroachment.ZoneId : ZoneId)))
                                           && (model.roleId == 1 || roleId == 2 || roleId == 3 || roleId == 7 || roleId == 63 ? (x.Encroachment.DepartmentId == x.Encroachment.DepartmentId) : (x.Encroachment.DepartmentId == (DeptId == 0 ? x.Encroachment.DepartmentId : DeptId)))
                                           && (model.filter == "TotalReceived" ? x.ApprovedStatusNavigation.StatusCode == x.ApprovedStatusNavigation.StatusCode
-                                              : model.filter == "TotalApproved" ? (x.ApprovedStatusNavigation.StatusCode == 3)
-                                              : model.filter == "PendingAtyou" ? (!PendingatYoustatus.Contains(x.ApprovedStatusNavigation.StatusCode) && x.PendingAt.Contains(model.userId.ToString()) && x.EncroachmentId == x.Encroachment.Id)
-                                              : model.filter == "TotalPending" ? (!PendingatYoustatus.Contains(x.ApprovedStatusNavigation.StatusCode))
-                                              : model.filter == "TotalRejected" ? (x.ApprovedStatusNavigation.StatusCode == 4)
+                                              : model.filter == "TotalApproved" ? (x.ApprovedStatusNavigation.Id == 3)
+                                              : model.filter == "PendingAtyou" ? (!PendingatYoustatus.Contains(x.ApprovedStatusNavigation.Id) && myIdArray.Contains(x.Id) && x.EncroachmentId == x.Encroachment.Id)
+                                              : model.filter == "TotalPending" ? (!PendingatYoustatus.Contains(x.ApprovedStatusNavigation.Id) && x.EncroachmentId == x.Encroachment.Id)
+                                              : model.filter == "TotalRejected" ? (x.ApprovedStatusNavigation.Id == 4)
                                               : (x.ApprovedStatusNavigation.StatusCode == x.ApprovedStatusNavigation.StatusCode)
                                               )
                                           ).GetPaged<Fixingdemolition>(model.PageNumber, model.PageSize);
@@ -630,6 +637,12 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<PagedResult<EncroachmentRegisteration>> GetAllEncroachmentRagistrationDashboardListData(DemolitionDasboardDataDto model, int DeptId, int ZoneId, int roleId)
         {
+            var AllDataList = await _dbContext.EncroachmentRegisteration.ToListAsync();
+            var UserWiseDataList = AllDataList.Where(x => x.PendingAt.Split(',').Contains(model.userId.ToString()));
+            List<int> myIdList = new List<int>();
+            foreach (EncroachmentRegisteration myLine in UserWiseDataList)
+                myIdList.Add(myLine.Id);
+            int[] myIdArray = myIdList.ToArray();
             var PendingatYoustatus = new[] { 6, 7 };
             var data = await _dbContext.EncroachmentRegisteration.Include(x => x.Locality)
                                           .Include(x => x.Department)
@@ -642,7 +655,7 @@ namespace Libraries.Repository.EntityRepository
                                           && (model.roleId == 1 || roleId == 2 || roleId == 3 || roleId == 7 || roleId == 63 ? (x.DepartmentId == x.DepartmentId) : (x.DepartmentId == (DeptId == 0 ? x.DepartmentId : DeptId)))
                                           && (model.filter == "TotalRequest" ? x.ApprovedStatusNavigation.StatusCode == x.ApprovedStatusNavigation.StatusCode
                                               : model.filter == "AcceptAndInitiateDemolition" ? (x.ApprovedStatusNavigation.Id == 7)
-                                              : model.filter == "PendingAtyou" ? (!PendingatYoustatus.Contains(x.ApprovedStatusNavigation.Id) && x.PendingAt.Contains(model.userId.ToString()))
+                                              : model.filter == "PendingAtyou" ? (!PendingatYoustatus.Contains(x.ApprovedStatusNavigation.Id) && myIdArray.Contains(x.Id))
                                               : model.filter == "TotalPending" ? (!PendingatYoustatus.Contains(x.ApprovedStatusNavigation.Id))
                                               : model.filter == "TotalDemolitionToBETakenLater" ? (x.ApprovedStatusNavigation.Id == 11)
                                               : (x.ApprovedStatusNavigation.StatusCode == x.ApprovedStatusNavigation.StatusCode)
@@ -654,6 +667,13 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<List<Fixingdemolition>> DownloadDasboarddata(string filter, int Userid, int DepartmentId, int ZoneId, int RoleId)
         {
+            var AllDataList = await _dbContext.Fixingdemolition.ToListAsync();
+            var UserWiseDataList = AllDataList.Where(x => x.PendingAt.Split(',').Contains(Userid.ToString()));
+            List<int> myIdList = new List<int>();
+            foreach (Fixingdemolition myLine in UserWiseDataList)
+                myIdList.Add(myLine.Id);
+            int[] myIdArray = myIdList.ToArray();
+
             var PendingatYoustatus = new[] { 3, 4 };
             var data = await _dbContext.Fixingdemolition.Include(x => x.Encroachment.Locality)
                                           .Include(x => x.Encroachment)
@@ -663,13 +683,13 @@ namespace Libraries.Repository.EntityRepository
                                           .Include(x => x.Demolitionstructuredetails)
                                           .Include(x => x.Encroachment.KhasraNoNavigation)
                                           .Where(x => x.IsActive == 1
-                                           && (RoleId == 1 || RoleId == 2 || RoleId == 3 || RoleId == 63 || RoleId == 19 || RoleId == 7 || RoleId == 69 || RoleId == 16 ? (x.Encroachment.ZoneId == x.Encroachment.ZoneId) : (x.Encroachment.ZoneId == (ZoneId == 0 ? x.Encroachment.ZoneId : ZoneId)))
+                                          && (RoleId == 1 || RoleId == 2 || RoleId == 3 || RoleId == 63 || RoleId == 19 || RoleId == 7 || RoleId == 69 || RoleId == 16 ? (x.Encroachment.ZoneId == x.Encroachment.ZoneId) : (x.Encroachment.ZoneId == (ZoneId == 0 ? x.Encroachment.ZoneId : ZoneId)))
                                           && (RoleId == 1 || RoleId == 2 || RoleId == 3 || RoleId == 7 || RoleId == 63 ? (x.Encroachment.DepartmentId == x.Encroachment.DepartmentId) : (x.Encroachment.DepartmentId == (DepartmentId == 0 ? x.Encroachment.DepartmentId : DepartmentId)))
                                           && (filter == "TotalReceived" ? x.ApprovedStatusNavigation.StatusCode == x.ApprovedStatusNavigation.StatusCode
-                                              : filter == "TotalApproved" ? (x.ApprovedStatusNavigation.StatusCode == 3)
-                                              : filter == "PendingAtyou" ? (!PendingatYoustatus.Contains(x.ApprovedStatusNavigation.StatusCode) && x.PendingAt == Userid.ToString())
-                                              : filter == "TotalPending" ? (!PendingatYoustatus.Contains(x.ApprovedStatusNavigation.StatusCode))
-                                              : filter == "TotalRejected" ? (x.ApprovedStatusNavigation.StatusCode == 4)
+                                              : filter == "TotalApproved" ? (x.ApprovedStatusNavigation.Id == 3)
+                                              : filter == "PendingAtyou" ? (!PendingatYoustatus.Contains(x.ApprovedStatusNavigation.Id) && myIdArray.Contains(x.Id) && x.EncroachmentId == x.Encroachment.Id)
+                                              : filter == "TotalPending" ? (!PendingatYoustatus.Contains(x.ApprovedStatusNavigation.Id) && x.EncroachmentId == x.Encroachment.Id)
+                                              : filter == "TotalRejected" ? (x.ApprovedStatusNavigation.Id == 4)
                                               : (x.ApprovedStatusNavigation.StatusCode == x.ApprovedStatusNavigation.StatusCode)
                                               )
                                           ).ToListAsync();
@@ -679,6 +699,12 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<List<EncroachmentRegisteration>> DownloadEncroachmentDashboard(string filter, int Userid, int DepartmentId, int ZoneId, int RoleId)
         {
+            var AllDataList = await _dbContext.EncroachmentRegisteration.ToListAsync();
+            var UserWiseDataList = AllDataList.Where(x => x.PendingAt.Split(',').Contains(Userid.ToString()));
+            List<int> myIdList = new List<int>();
+            foreach (EncroachmentRegisteration myLine in UserWiseDataList)
+                myIdList.Add(myLine.Id);
+            int[] myIdArray = myIdList.ToArray();
             var PendingatYoustatus = new[] { 6, 7 };
             var data = await _dbContext.EncroachmentRegisteration.Include(x => x.Locality)
                                           .Include(x => x.Department)
@@ -687,14 +713,14 @@ namespace Libraries.Repository.EntityRepository
                                           //.Include(x => x.Demolitionstructuredetails)
                                           .Include(x => x.KhasraNoNavigation)
                                           .Where(x => x.IsActive == 1
-                                           && (RoleId == 1 || RoleId == 2 || RoleId == 3 || RoleId == 63 || RoleId == 19 || RoleId == 7 || RoleId == 69 || RoleId == 16 ? (x.ZoneId == x.ZoneId) : (x.ZoneId == (ZoneId == 0 ? x.ZoneId : ZoneId)))
+                                          && (RoleId == 1 || RoleId == 2 || RoleId == 3 || RoleId == 63 || RoleId == 19 || RoleId == 7 || RoleId == 69 || RoleId == 16 ? (x.ZoneId == x.ZoneId) : (x.ZoneId == (ZoneId == 0 ? x.ZoneId : ZoneId)))
                                           && (RoleId == 1 || RoleId == 2 || RoleId == 3 || RoleId == 7 || RoleId == 63 ? (x.DepartmentId == x.DepartmentId) : (x.DepartmentId == (DepartmentId == 0 ? x.DepartmentId : DepartmentId)))
-                                          && (filter == "TotalRequest" ? x.ApprovedStatusNavigation.Id == x.ApprovedStatusNavigation.Id
+                                          && (filter == "TotalRequest" ? x.ApprovedStatusNavigation.StatusCode == x.ApprovedStatusNavigation.StatusCode
                                               : filter == "AcceptAndInitiateDemolition" ? (x.ApprovedStatusNavigation.Id == 7)
-                                              : filter == "PendingAtyou" ? (!PendingatYoustatus.Contains(x.ApprovedStatusNavigation.Id) && x.PendingAt == Userid.ToString())
+                                              : filter == "PendingAtyou" ? (!PendingatYoustatus.Contains(x.ApprovedStatusNavigation.Id) && myIdArray.Contains(x.Id))
                                               : filter == "TotalPending" ? (!PendingatYoustatus.Contains(x.ApprovedStatusNavigation.Id))
                                               : filter == "TotalDemolitionToBETakenLater" ? (x.ApprovedStatusNavigation.Id == 11)
-                                              : (x.ApprovedStatusNavigation.Id == x.ApprovedStatusNavigation.Id)
+                                              : (x.ApprovedStatusNavigation.StatusCode == x.ApprovedStatusNavigation.StatusCode)
                                               )
                                           ).ToListAsync();
 

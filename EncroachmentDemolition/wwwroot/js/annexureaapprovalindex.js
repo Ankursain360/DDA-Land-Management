@@ -9,6 +9,30 @@ $(document).ready(function () {
 $("#btnSearch").click(function () {
     GetDetails(currentPageNumber, currentPageSize, sortOrder, StatusId);
 });
+
+$('#btndownload').click(function () {
+    
+    var data = $('input[name="radioStatus"]:checked').val();
+    if (data == 0) {
+        var StatusId = 0;
+        GetExcel(currentPageNumber, currentPageSize, sortOrder, StatusId);
+    }
+    else if (data == 1) {
+        var StatusId = 1;
+        GetExcel(currentPageNumber, currentPageSize, sortOrder, StatusId);
+    }
+   
+})
+function GetExcel(pageNumber, pageSize, sortOrder, StatusId) {
+    
+    var param = GetSearchParam(pageNumber, pageSize, sortOrder, StatusId);
+    HttpPost(`/AnnexureAApproval/FixingdemolitionApprovalList`, 'html', param, function (response) {
+        var a = document.createElement("a");
+        a.target = '_blank';
+        a.href = '/AnnexureAApproval/download';
+        a.click();
+    });
+}
 $("#btnAscending").click(function () {
     $("#btnDescending").removeClass("active");
     $("#btnAscending").addClass("active");
