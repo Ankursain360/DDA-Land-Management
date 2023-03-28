@@ -25,7 +25,7 @@ namespace Libraries.Service.ApplicationService
         public async Task<bool> Create(ApiSaveVlmsmobileappaccesslogDto Dto)
         {
             Vlmsmobileappaccesslog Model = new Vlmsmobileappaccesslog();
-            Model.UserId = Dto.UserId;
+            Model.UserId = Dto.UserId == 0?null:Dto.UserId;
             Model.UserName = Dto.UserName;
             Model.IPAddress = Dto.IPAddress;
             Model.Brand = Dto.Brand;
