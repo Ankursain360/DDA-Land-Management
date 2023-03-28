@@ -79,7 +79,7 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<List<Department>> GetDepartmentDropDownListForApi()
         {
-            var DeptId = new[] { 10, 13, 4, 3, 5, 47 };
+            var DeptId = new[] { 10, 13, 4, 5 };
             List<Department> DepartmentList = await _dbContext.Department
                                                     .Where(x => x.IsActive == 1 && DeptId.Contains(x.Id)
                                                     ).ToListAsync();
