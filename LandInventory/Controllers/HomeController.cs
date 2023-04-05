@@ -37,6 +37,7 @@ namespace LandInventory.Controllers
             _httpContextAccessor.HttpContext.Response.Clear();
 
             //Clear cookies
+            //test
             var cookies = _httpContextAccessor.HttpContext.Request.Cookies;
             foreach (var cookie in cookies)
             {
