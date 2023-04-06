@@ -50,6 +50,7 @@ namespace Libraries.Service.IApplicationService
         string GetTakenOverFile(int id);
         Task<bool> InsertInDeletedProperty(int id, Deletedproperty model);
         Task<PagedResult<Propertyregistration>> GetPagedPropertyRegisteration(PropertyRegisterationSearchDto model, int UserId);
+        Task<PagedResult<Vacantlandimage>> GetPagedVacantLandAppDetails(VacantLandAppDetailsSearchDto model); 
         Task<List<Propertyregistration>> GetAllPropertInventory(PropertyRegisterationSearchDto model, int UserId);
         Task<List<Classificationofland>> GetClassificationOfLandDropDownListMOR();
         Task<bool> InsertInRestoreProperty(int id, Restoreproperty model);
@@ -64,6 +65,7 @@ namespace Libraries.Service.IApplicationService
         Task<List<Propertyregistration>> GetAllPropertInventorylist(int UserId);
         Task<List<Propertyregistration>> GetUnverifiedList(int UserId);
         Task<List<Propertyregistration>> GetAllUnverified(PropertyRegisterationSearchDto model, int UserId);
+        Task<List<vacantlandlistimage>> FetchSingleVacantLandAppDetails(int id);
         Task<List<Propertyregistration>> GetAllDeletedPropertyList();
         Task<List<Propertyregistration>> GetAllDeletedLandReportDataList(PropertyRegisterationSearchDto model);
         Task<List<Propertyregistration>> GetAllRestoreLandReportData();
@@ -74,6 +76,7 @@ namespace Libraries.Service.IApplicationService
         Task<List<Propertyregistration>> GetAllRestorePropertyReportDataList(PropertyRegisterationSearchDto model);
         Task<List<Propertyregistration>> GetAllPropertyRegistrationMORlist(PropertyRegisterationSearchDto model, int UserId);
         Task<List<Propertyregistration>> GetPrimaryListForAPI(int deptid, int zoneid, int divisionid); // for api added by renu
+        Task<List<Propertyregistration>> GetPrimaryList(VacantLandAppDetailsSearchDto model);
         Task<Propertyregistration> GetPropertyregistrationDetail(int id);
         string GetMobileNo(int UserId);
 

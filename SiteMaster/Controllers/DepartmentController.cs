@@ -130,6 +130,7 @@ namespace SiteMaster.Controllers
                 }
                 catch (Exception ex)
                 {
+
                     ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                     return View(department);
 
@@ -140,7 +141,7 @@ namespace SiteMaster.Controllers
 
         [AcceptVerbs("Get", "Post")]
         [AllowAnonymous]
-        public async Task<IActionResult> Exist(int Id, string Name)
+        public async Task<IActionResult> Exist(int Id, string Name) 
         {
             var result = await _departmentService.CheckUniqueName(Id, Name);
             if (result == false)

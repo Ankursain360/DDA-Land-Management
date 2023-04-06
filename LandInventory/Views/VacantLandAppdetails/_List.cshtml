@@ -1,0 +1,67 @@
+﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Vacantlandimage>
+
+
+<table class="table table-sm table-bordered mb-0 table-striped">
+
+
+    <thead class="text-nowrap">
+
+        <tr>
+            <th scope="col">Department</th>
+            <th scope="col">Zone</th>
+            <th scope="col">Division</th>
+            <th scope="col">Primary List No.</th>
+            <th scope="col">Boundary Wall</th>
+            <th scope="col">Fencing</th>
+            <th scope="col">DDABoard</th>
+            <th scope="col">Security Guard</th>           
+            <th scope="col">Certified Plot</th>
+            <th scope="col">Remarks</th>
+            <th scope="col">Images</th>
+           
+        </tr>
+
+    </thead>
+    <tbody class="tbody">
+        @if (Model != null && Model.Results.Count() > 0)
+        {
+            @foreach (var item in Model.Results)
+            {
+                <tr>
+                    <td>@(item.DepartmentNavigation == null ?"":item.DepartmentNavigation.Name) </td>
+                    <td>@(item.ZoneNavigation == null ? "": item.ZoneNavigation.Name)</td>
+                     <td>@item.DivisionNavigation.Name </td>
+                    <td>@item.PrimaryList</td>
+                    <td>@item.BoundaryWall</td>
+                    <td>@item.Fencing</td>
+                    <td>@item.Ddaboard</td>
+                    <td>@item.ScurityGuard</td>
+                    <td>@item.IsExistanceEncroachment</td>
+                    <td>@item.Remarks</td>
+                    @{
+                        @if (item.vacantlandlistimages.Select(x=>x.ImagePath) != null)
+                        {
+                            //<td style="color:red;"><a class="badge bg-primary px-2" asp-action="fetchAppUploadImagesFile" asp-route-id="@item.Id" target="_blank" > <i style="font-size:25px;" class="ri-image-fill"></i></a></td>
+                            <td><a style="color:red" href="#" onclick="ShowImages(@item.Id);"> <i style="font-size:30px;" class="bi bi-images"></i></a></td>
+                           
+                        }
+                        else
+                        {
+                            <td><a style="color:red" href="#"> <i style="font-size:30px;" class="bi bi-images"></i></a></td>
+                        }
+                        
+                    }
+                   
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <th colspan="14" style="text-align:center"> No Record Available! </th>
+            </tr>
+        }
+    </tbody>
+
+</table>
+@await Component.InvokeAsync("Pager", new { totalCount = Model.RowCount, pageNumber = Model.CurrentPage, pageSize = Model.PazeSize })

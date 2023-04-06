@@ -85,7 +85,10 @@ namespace Libraries.Service.ApplicationService
         {
             return await _propertyregistrationRepository.GetAllUnverified(model,UserId);
         }
-
+        public async Task<List<vacantlandlistimage>> FetchSingleVacantLandAppDetails(int id)
+        {
+            return await _propertyregistrationRepository.FetchSingleVacantLandAppDetails(id);
+        }
         public async Task<Propertyregistration> FetchSingleResult(int id)
         {
             var result = await _propertyregistrationRepository.FindBy(a => a.Id == id);
@@ -299,6 +302,10 @@ namespace Libraries.Service.ApplicationService
         {
             return await _propertyregistrationRepository.GetPagedPropertyRegisteration(model, UserId);
         }
+        public async Task<PagedResult<Vacantlandimage>> GetPagedVacantLandAppDetails(VacantLandAppDetailsSearchDto model)
+        {
+            return await _propertyregistrationRepository.GetPagedVacantLandAppDetails(model);
+        }
         public async Task<List<Propertyregistration>> GetAllPropertInventory(PropertyRegisterationSearchDto model, int UserId)
         {
             return await _propertyregistrationRepository.GetAllPropertInventory(model,UserId);
@@ -433,6 +440,11 @@ namespace Libraries.Service.ApplicationService
         {
 
             return await _propertyregistrationRepository.GetPrimaryListForAPI( deptid,  zoneid,  divisionid);
+        }
+        public async Task<List<Propertyregistration>> GetPrimaryList(VacantLandAppDetailsSearchDto model) 
+        {
+
+            return await _propertyregistrationRepository.GetPrimaryList(model);
         }
         public async Task<Propertyregistration> GetPropertyregistrationDetail(int id)
         {

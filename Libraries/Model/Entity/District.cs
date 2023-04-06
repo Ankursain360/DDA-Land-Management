@@ -22,7 +22,7 @@ namespace Libraries.Model.Entity
             Newdamagepayeeregistration = new HashSet<Newdamagepayeeregistration>();
         }
         [Required(ErrorMessage = "District name is Mandatory")]
-        [Remote(action: "Exist", controller: "Department", AdditionalFields = "Id")]
+        [Remote(action: "Exist", controller: "District", AdditionalFields = "Id")]
         public string Name { get; set; }
         [Required(ErrorMessage = "District code is Mandatory ")]
 

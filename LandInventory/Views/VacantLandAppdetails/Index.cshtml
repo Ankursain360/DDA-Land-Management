@@ -1,0 +1,124 @@
+﻿@model IEnumerable<Libraries.Model.Entity.Propertyregistration>
+@await Component.InvokeAsync("PageHeader", new { pageName = "Vacant Land App Details" })
+
+<div class="pt-3">
+    <form class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+        <h3 class="mb-3 d-flex">Search</h3>
+       @* <input hidden id="btnImages" asp-for="Select(x=>x.Id)" />*@
+        <div class="row">
+          
+            <div class="col-md-3">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" id="DepartmentId" asp-items="@(new SelectList(ViewBag.DepartmentList, "Id","Name"))" onchange="return GetZoneList(this.options[this.selectedIndex].value);">
+                        <option selected="selected" value="0">All</option>
+                    </select>
+                    <label class="floating-label" for="DepartmentId">Department</label>
+                </div>
+            </div>
+       
+            <div class="col-md-3">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" id="ZoneId" onchange="return GetDivisionList(this.options[this.selectedIndex].value);">
+                        <option selected="selected" value="0">All</option>
+                    </select>
+                    <label class="floating-label" for="ZoneId">Zone</label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" id="DivisionId" onchange="return GetPrimaryList(this.options[this.selectedIndex].value);">
+                        <option selected="selected" value="0">All</option>
+                    </select>
+                    <label class="floating-label" for="DivisionId">Division</label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" id="PrimaryListId">
+                        <option selected="selected" value="0">All</option>
+                    </select>
+                    <label class="floating-label" for="PrimaryListId">Primary List NO</label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-12 col-xl-3">
+                <div class="row">
+                    <div class="col-6 col-md-5 col-xl-6">
+                        <button class="btn btn-link btn-block d-flex align-items-center justify-content-center" id="btnReset" type="reset">
+                            <i class="ri-refresh-line me-2"></i>Reset
+                        </button>
+                    </div>
+                    <div class="col-6 col-md-7 col-xl-6">
+                        <button class="btn btn-theme btn-block" type="button" id="btnSearch">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div class="table-section bg-white border shadow rounded">
+        <div class="short-section d-md-flex align-items-center">
+            <div class="p-3 d-flex align-items-end me-auto">
+                <div class="floating-label-wrap">
+                    <select id="ddlSort" class="floating-label-field floating-label-field--s3">    
+                        <option value="DEPARTMENT">Department</option>
+                        <option value="ZONE">Zone</option>
+                        <option value="DIVISION">Division</option>
+                    </select>
+                    <label for="field-1" class="floating-label">Sort by</label>
+                </div>
+                <div class="short-btn d-flex align-items-center">
+                    <span class="btn slow active" id="btnAscending" title="Ascending order"><i class="ri-sort-asc"></i></span>
+                    <span class="btn slow" id="btnDescending" title="Descending order"><i class="ri-sort-desc"></i></span>
+                </div>
+            </div>
+
+            <div class="download-table d-flex align-items-center px-3 mb-3 mb-md-0">
+               @* <a href="/PropertyRegistration/create" class="d-flex align-items-center btn btn-primary me-2">
+                    <i class="ri-add-fill me-2 me-lg-1"></i>
+                    <small>Add More</small>
+                </a>*@
+                @*<a href="/PropertyRegistration/PropertyInventoryList" class="d-flex align-items-center btn btn-success">
+                <i class="ri-download-2-line me-2 me-lg-1"></i>
+                <small>Download</small>
+                </a>*@
+            </div>
+        </div>
+        <div class="table-responsive px-2" id="divTable">
+        </div>
+    </div>
+</div>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" style="display:none" id="btnShowimagesModel" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+    #
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+               @* <h5 class="modal-title" id="staticBackdropLabel">Dashboard Data</h5><h5 id="hfiltertext"></h5>*@
+                <button type="button" class="btn-close" data-bs-dismiss="modal" onclick="resetModel()" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="divModelContent">
+                    @*show data Here*@
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="resetModel()" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/VacantLandAppDetailsIndex.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/VacantLandAppDetailsIndex.min.js" asp-append-version="true"></script>
+</environment>
+

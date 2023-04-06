@@ -1,0 +1,47 @@
+﻿@model List<Dto.Master.VacantLandListImagesDto>
+
+<div class="pt-3">
+    <div class="table-section bg-white border shadow rounded">
+        
+        <div >
+           @* <table class="table table-sm table-bordered mb-0 table-striped">
+                <thead class="text-nowrap">
+                    <tr>
+                        <th>Images Name</th>
+                        <th>Images</th>
+                    </tr>
+                </thead>
+                <tbody>
+                   @* @if (Model != null && Model.Count() > 0)
+                    {
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td style="width:150px">@item.imagename</td> 
+                                <td><img src="@item.imagedata" width="200" /></td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <th colspan="14" style="text-align:center"> No Record Available! </th>
+                        </tr>
+                    }
+                </tbody>
+            </table>*@
+            @if (Model != null && Model.Count() > 0)
+            {
+                @foreach (var item in Model)
+                {
+
+                    <a> <img src="@item.imagedata" alt="@item.imagename" class="img-responsive img-thumbnail img-fluid" /></a> <hr />
+                    
+                }
+            }
+          
+        </div>
+
+
+    </div>
+</div>

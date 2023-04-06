@@ -134,7 +134,7 @@ namespace SiteMaster.Controllers
             }
             else
             {
-                return Json($"Department: {Name} already exist");
+                return Json($"District: {Name} already exist");
             }
         }
 

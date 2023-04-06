@@ -21,6 +21,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Propertyregistration>> GetAllPropertyregistration(int UserId);
         Task<List<Propertyregistration>> GetUnverifiedList(int UserId);
         Task<List<Propertyregistration>> GetAllUnverified(PropertyRegisterationSearchDto model, int UserId);
+        Task<List<vacantlandlistimage>> FetchSingleVacantLandAppDetails(int id);
         Task<List<Propertyregistration>> GetAllPropertInventorylist(int UserId);
         Task<List<Propertyregistration>> GetAllPropertInventory(PropertyRegisterationSearchDto model, int UserId);
         Task<List<Propertyregistration>> GetAllDeletedPropertyList();
@@ -42,6 +43,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<bool> InsertInDeletedProperty(Deletedproperty model);
         Task<bool> InsertInRestoreProperty(Restoreproperty model);
         Task<PagedResult<Propertyregistration>> GetPagedPropertyRegisteration(PropertyRegisterationSearchDto model, int UserId);
+        Task<PagedResult<Vacantlandimage>> GetPagedVacantLandAppDetails(VacantLandAppDetailsSearchDto model);
         Task<List<Department>> GetTakenDepartmentDropDownList();
         Task<List<Department>> GetHandedDepartmentDropDownList();
         Task<List<Classificationofland>> GetClassificationOfLandDropDownListMOR();
@@ -61,6 +63,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<PagedResult<Propertyregistration>> GetInventoryUnverifiedVerified(InvnentoryUnverifiedVerifiedSearchDto model, int userId, int? roleId);
         Task<PagedResult<Propertyregistration>> GetDeletedLandReportData(PropertyRegisterationSearchDto model);
         Task<List<Propertyregistration>> GetPrimaryListForAPI(int deptid, int zoneid, int divisionid);// for api added by renu
+        Task<List<Propertyregistration>> GetPrimaryList(VacantLandAppDetailsSearchDto model);
         Task<Propertyregistration> GetPropertyregistrationDetail(int id);
         string GetMobileNo(int UseId);
 

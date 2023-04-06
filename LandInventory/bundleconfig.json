@@ -172,5 +172,11 @@
     "inputFiles": [
       "wwwroot/js/landAcquisitionAwards.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/VacantLandAppDetailsIndex.min.js",
+    "inputFiles": [
+      "wwwroot/js/VacantLandAppDetailsIndex.js"
+    ]
   }
 ]
