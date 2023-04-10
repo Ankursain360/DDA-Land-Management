@@ -412,6 +412,7 @@ namespace DamagePayee.Controllers
                         AreaUnit = result[i].AreaUnitNavigation == null ? "" : result[i].AreaUnitNavigation.Name,
                         NumberofFloors = result[i].NumberOfFloorsNavigation.Name,
                         FileNo = result[i].FileNo,
+                        SubmittedBy = result[i].CreatedByNavigation.UserName,
                         CA_NumberOfElectricityConnection = result[i].CaelectricityNo,
                         k_NumberOfWaterConnection = result[i].KwaterNo,
                         HouseTaxNumberIssueBy_MCD = result[i].PropertyHouseTaxNo,
