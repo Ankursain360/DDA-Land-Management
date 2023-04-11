@@ -79,7 +79,7 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<List<Department>> GetDepartmentDropDownListForApi()
         {
-            var DeptId = new[] { 10, 13, 4};
+            var DeptId = new[] { 10, 13, 4 };
             List<Department> DepartmentList = await _dbContext.Department
                                                     .Where(x => x.IsActive == 1 && DeptId.Contains(x.Id)
                                                     ).ToListAsync();
@@ -556,7 +556,7 @@ namespace Libraries.Repository.EntityRepository
                                                          && (x.InventoriedInId == (model.inventoriedId == 0 ? x.InventoriedInId : model.inventoriedId))
                                                          && (x.PlannedUnplannedLand == (model.plannedUnplannedLand == "0" ? x.PlannedUnplannedLand : model.plannedUnplannedLand))).ToListAsync();
             return data;
-           
+
         }
 
         public async Task<PagedResult<Propertyregistration>> GetPagedPropertyRegisteration(PropertyRegisterationSearchDto model, int UserId)
@@ -640,16 +640,21 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<PagedResult<Vacantlandimage>> GetPagedVacantLandAppDetails(VacantLandAppDetailsSearchDto model)
         {
-            
+
             var data = await _dbContext.Vacantlandimage
                             .Include(x => x.DepartmentNavigation)
                             .Include(x => x.DivisionNavigation)
                             .Include(x => x.ZoneNavigation)
-                            .Include(x=>x.PrimaryListNavigation)
-                                .Where(x => x.IsActive == 1 
+                            .Include(x => x.PrimaryListNavigation)
+                            .Include(x => x.UserNavigation)
+                                .Where(x => x.IsActive == 1
                                 && (x.DepartmentId == (model.departmentId == 0 ? x.DepartmentId : model.departmentId))
                                 && (x.ZoneId == (model.zoneId == 0 ? x.ZoneId : model.zoneId))
                                 && (x.DivisionId == (model.divisionId == 0 ? x.DivisionId : model.divisionId)))
+                                 .OrderByDescending(x => x.DepartmentId)
+                                .ThenBy(x => x.DepartmentNavigation.Name)
+                                .ThenBy(x => x.ZoneNavigation.Name)
+                                .ThenBy(x => x.DivisionNavigation.Name)
                             .GetPaged<Vacantlandimage>(model.PageNumber, model.PageSize);
 
             int SortOrder = (int)model.SortOrder;
@@ -687,7 +692,7 @@ namespace Libraries.Repository.EntityRepository
             return data;
 
         }
-        
+
         public async Task<List<Propertyregistration>> GetAllPropertyRegistrationMORlist(PropertyRegisterationSearchDto model, int UserId)
         {
             var badCodes = new[] { 3, 5 };
@@ -1231,9 +1236,9 @@ namespace Libraries.Repository.EntityRepository
                                                          && (x.PlannedUnplannedLand == (model.plannedUnplannedLand == "0" ? x.PlannedUnplannedLand : model.plannedUnplannedLand))).ToListAsync();
         }
 
-       public async Task<List<vacantlandlistimage>> FetchSingleVacantLandAppDetails(int id)
+        public async Task<List<vacantlandlistimage>> FetchSingleVacantLandAppDetails(int id)
         {
-            var result = await _dbContext.vacantlandlistimage.Where(x=>x.vacantlandimageId == id).ToListAsync();
+            var result = await _dbContext.vacantlandlistimage.Where(x => x.vacantlandimageId == id).ToListAsync();
             return result;
         }
         public async Task<PagedResult<Propertyregistration>> GetInventoryUnverifiedVerified(InvnentoryUnverifiedVerifiedSearchDto model, int userId, int? RoleId)
@@ -1510,11 +1515,11 @@ namespace Libraries.Repository.EntityRepository
         public async Task<List<Propertyregistration>> GetPrimaryList(VacantLandAppDetailsSearchDto model)
         {
             var badCodes = new[] { 3, 5 };
-            var data =  await _dbContext.Propertyregistration
+            var data = await _dbContext.Propertyregistration
                                   .Where(x => x.ZoneId == model.zoneId && x.DepartmentId == model.departmentId && x.DivisionId == model.divisionId && x.IsActive == 1
                                   && x.IsValidate == 1 && x.IsDisposed != 0 && x.IsDeleted == 1 && !badCodes.Contains(x.ClassificationOfLand.Id)
                                   ).ToListAsync();
-            return data;    
+            return data;
         }
         public async Task<Propertyregistration> GetPropertyregistrationDetail(int id)
         {
@@ -1563,14 +1568,14 @@ namespace Libraries.Repository.EntityRepository
             return list;
         }
 
-        public async Task<List<Awardplotdetails>> GetAwardData(string village, int category, string award )
+        public async Task<List<Awardplotdetails>> GetAwardData(string village, int category, string award)
         {
             var data = await _dbContext.Awardplotdetails
                                         .Include(x => x.AwardMaster)
                                         .Include(x => x.Village)
                                         .Include(x => x.Khasra)
-                                        .Where(x=> x.Village.Name.Contains(village)
-                                        &&((award=="0"?(x.AwardMaster.AwardNumber== x.AwardMaster.AwardNumber): x.AwardMaster.AwardNumber.Contains(award)))
+                                        .Where(x => x.Village.Name.Contains(village)
+                                        && ((award == "0" ? (x.AwardMaster.AwardNumber == x.AwardMaster.AwardNumber) : x.AwardMaster.AwardNumber.Contains(award)))
                                         )
                                         .OrderBy(x => x.AwardMasterId).ToListAsync();
             return data;

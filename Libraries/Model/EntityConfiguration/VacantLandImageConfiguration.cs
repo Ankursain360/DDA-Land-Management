@@ -23,6 +23,8 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.HasIndex(e => e.ZoneId)
                 .HasName("fk_ZoneIdVacantLand_idx");
+            builder.HasIndex(e=>e.CreatedBy)
+                .HasName("User_Id_fk_idx");
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
@@ -146,6 +148,11 @@ namespace Libraries.Model.EntityConfiguration
                 .WithMany(p => p.Vacantlandimage)
                 .HasForeignKey(d => d.ZoneId)
                 .HasConstraintName("fk_ZoneIdVacantLand");
+            builder.HasOne(d => d.UserNavigation)
+               .WithMany(p => p.Vacantlandimages)
+               .HasForeignKey(d => d.CreatedBy)
+               .HasConstraintName("User_Id_fk");
+
         }
     }
 }

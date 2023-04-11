@@ -16,6 +16,8 @@
             <th scope="col">DDABoard</th>
             <th scope="col">Security Guard</th>           
             <th scope="col">Certified Plot</th>
+            <th scope="col">Created Date</th>
+            <th scope="col">Created By</th>
             <th scope="col">Remarks</th>
             <th scope="col">Images</th>
            
@@ -37,6 +39,8 @@
                     <td>@item.Ddaboard</td>
                     <td>@item.ScurityGuard</td>
                     <td>@item.IsExistanceEncroachment</td>
+                    <td>@item.CreatedDate</td>
+                    <td>@(item.UserNavigation == null ? "": item.UserNavigation.UserName)</td>
                     <td>@item.Remarks</td>
                     @{
                         @if (item.vacantlandlistimages.Select(x=>x.ImagePath) != null)

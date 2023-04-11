@@ -13,6 +13,7 @@ namespace Libraries.Model.Entity
             Paymentverification = new HashSet<Paymentverification>();
             RefreshToken = new HashSet<RefreshToken>();
             Vlmsmobileappaccesslogs = new HashSet<Vlmsmobileappaccesslog>();
+            Vacantlandimages = new HashSet<Vacantlandimage>();
             // ApprovalproccessSendFromUser = new HashSet<Approvalproccess>();
         }
         
@@ -30,6 +31,7 @@ namespace Libraries.Model.Entity
         public ICollection<Paymentverification> Paymentverification { get; set; }
         public virtual ICollection<RefreshToken> RefreshToken { get; set; }
         public virtual ICollection<Vlmsmobileappaccesslog> Vlmsmobileappaccesslogs { get; set; }
+        public ICollection<Vacantlandimage> Vacantlandimages { get; set; }
 
         //  public virtual ICollection<Approvalproccess> ApprovalproccessSendFromUser { get; set; }
     }

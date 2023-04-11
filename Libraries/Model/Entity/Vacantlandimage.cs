@@ -49,6 +49,7 @@ namespace Libraries.Model.Entity
         public Division DivisionNavigation { get; set; }
         public Propertyregistration PrimaryListNavigation { get; set; }
         public Zone ZoneNavigation { get; set; }
+        public  ApplicationUser UserNavigation { get; set; }
 
         [NotMapped]
         public List<Department> DepartmentList { get; set; }
@@ -60,11 +61,6 @@ namespace Libraries.Model.Entity
         public ICollection<vacantlandlistimage> vacantlandlistimages { get; set; }
         [NotMapped]
         public List<Division> DivisionList { get; set; }
-
-
-
-
-      
 
     }
 }
