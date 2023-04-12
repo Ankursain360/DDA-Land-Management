@@ -63,7 +63,8 @@ namespace Libraries.Repository.EntityRepository
                                         .Include(x => x.CreatedByNavigation)
                                         .Include(x => x.AreaUnitNavigation)
                                         .Include(a => a.NumberOfFloorsNavigation)
-                                        .Where(x => (string.IsNullOrEmpty(model.location) || x.PropertyAddress.Contains(model.location))
+                                        .Where(x=>x.IsActive == 1 
+                                           && (string.IsNullOrEmpty(model.location) || x.PropertyAddress.Contains(model.location))
                                            && (string.IsNullOrEmpty(model.occupantname) || x.OccupantName.Contains(model.occupantname))
                                            && (string.IsNullOrEmpty(model.Mobileno) || x.MobileNo.Contains(model.Mobileno))
                                            && (string.IsNullOrEmpty(model.presentuse) || x.PresentUseNavigation.Name.Contains(model.presentuse))
