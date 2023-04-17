@@ -18,8 +18,6 @@ namespace Libraries.Repository.EntityRepository
 
         }
 
-
-
         public async Task<List<Presentuse>> GetAllPresentuse()
         {
             List<Presentuse> presentuseList = await _dbContext.Presentuse.Where(x => x.IsActive == 1).ToListAsync();
