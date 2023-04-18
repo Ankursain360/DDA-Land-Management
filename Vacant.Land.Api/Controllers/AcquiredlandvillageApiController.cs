@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Renci.SshNet.Common;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using static Dto.Master.VillageAndKhasraBiseReport_ApiDto;
 
 namespace Vacant.Land.Api.Controllers
 {
@@ -17,7 +18,7 @@ namespace Vacant.Land.Api.Controllers
     {
         private readonly IPossessiondetailsService _service;
 
-        public AcquiredlandvillageApiController(IPossessiondetailsService service) 
+        public AcquiredlandvillageApiController(IPossessiondetailsService service)
         {
             _service = service;
         }
@@ -31,7 +32,7 @@ namespace Vacant.Land.Api.Controllers
             var data = await _service.GetAllVillage();
             if (data != null)
             {
-                for (int i = 0; i < data.Count; i++) 
+                for (int i = 0; i < data.Count; i++)
                 {
                     dtoList.Add(new AcquiredlandvillageApiDto()
                     {
@@ -58,7 +59,7 @@ namespace Vacant.Land.Api.Controllers
                 };
                 return Ok(acquiredlandvillageResponse);
             }
-          
+
         }
 
 
@@ -80,7 +81,7 @@ namespace Vacant.Land.Api.Controllers
                         {
                             KhasraID = data[i].Id,
                             Khasra_NAME = data[i].Name,
-                           
+
                         });
                     }
 
@@ -116,12 +117,65 @@ namespace Vacant.Land.Api.Controllers
             }
         }
 
-        //[HttpGet]
-        //[Route("[action]")]
-        //[Route("api/DepartmentAPI/GetVillageAndKhasraReport")]
-        //public async Task<IActionResult> GetVillageAndKhasraReport([FromBody] VillageAndKhasraDetailsSearchDto model)
-        //{
+        [HttpGet]
+        [Route("[action]")]
+        [Route("api/DepartmentAPI/GetVillageAndKhasraReport")]
+        public async Task<IActionResult> GetVillageAndKhasraReport([FromBody] VillageAndKhasraDetailsSearchDto model)
+        {
+            VillageAndKhasraBiseReportResponseDetails villageAndKhasraResponse = new VillageAndKhasraBiseReportResponseDetails();
+            List<VillageAndKhasraBiseReport_ApiDto> dtoData = new List<VillageAndKhasraBiseReport_ApiDto>();
+            if (model.Khasraid != 0)
+            {
+                var data = await _service.GetPagedKhasraDetails(model);
+                if (data != null && data.Count > 0)
+                {
+                    for (int i = 0; i < data.Count; i++)
+                    {
+                        dtoData.Add(new VillageAndKhasraBiseReport_ApiDto()
+                        {
+                            VillageName = data[i].VillageName,
+                            Khasra_No = data[i].KhasraName,
+                            AreaBhigha_Biswa_Biswana = data[i].Bigha +"-"+ data[i].Biswa + "-" + data[i].Biswanshi.ToString(),
+                            Notification_s_US_4 = data[i].un4Number +"-"+ data[i].um4Date,
+                            Notification_s_US_6 = data[i].un6Number + "-" + data[i].un6Date,
+                            Notification_s_US_17 = data[i].un17Number + "-" + data[i].um17Date,
+                            Notification_s_US_22 = data[i].un22Number + "-" + data[i].un22Date,
+                            Awards = data[i].AwardNumber + data[i].AwardDate,
+                            Date_of_Possesion = data[i].PossDate
+                        });
+                    }
+                    villageAndKhasraResponse = new VillageAndKhasraBiseReportResponseDetails
+                    {
+                        responseCode = "200",
+                        responseMessage = "details fetched successfully",
+                        response = dtoData
+                    };
+                    return Ok(villageAndKhasraResponse);
 
-        //}
+                }
+                else
+                {
+                    villageAndKhasraResponse = new VillageAndKhasraBiseReportResponseDetails
+                    {
+                        responseCode = "404",
+                        responseMessage = " details not found",
+                        response = dtoData
+                    };
+                    return Ok(villageAndKhasraResponse);
+                }
+
+            }
+            else
+            {
+                villageAndKhasraResponse = new VillageAndKhasraBiseReportResponseDetails
+                {
+                    responseCode = "400",
+                    responseMessage = "Bad Request. Insufficient Parameters",
+                    response = dtoData
+                };
+                return Ok(villageAndKhasraResponse);
+            }
+
+        }
     }
 }

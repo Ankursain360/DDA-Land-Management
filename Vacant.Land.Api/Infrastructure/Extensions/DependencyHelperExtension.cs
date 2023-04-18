@@ -39,7 +39,9 @@ namespace Vacant.Land.Api.Infrastructure.Extensions
             services.AddScoped<IEncroachmentRegisterAPIRepository, EncroachmentRegisterAPIRepository>();
             services.AddScoped<IEncroachmentRegisterationRepository, EncroachmentRegisterationRepository>();
             services.AddScoped<IVlmsmobileappaccesslogRepository, VlmsmobileappaccesslogRepository>();
+            services.AddScoped<IPossessiondetailsRepository, PossessiondetailsRepository>();
             /* Application Services */
+            services.AddScoped<IPossessiondetailsService, PossessiondetailsService>();
             services.AddScoped<IVlmsmobileappaccesslogService, VlmsmobileappaccesslogService>();
             services.AddScoped<INazullandService, NazullandService>();
             services.AddScoped<IPropertyRegistrationService, PropertyRegistrationService>();
