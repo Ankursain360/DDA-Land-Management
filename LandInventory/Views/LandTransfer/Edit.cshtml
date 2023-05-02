@@ -32,7 +32,7 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="floating-label-wrap">
-                                <select class="floating-label-field floating-label-field--s3" disabled asp-for="Propertyregistration.InventoriedInId">
+                                <select class="floating-label-field floating-label-field--s3" readonly asp-for="Propertyregistration.InventoriedInId">
                                     <option value="">--Select--</option>
                                     <option value="1">VLMS</option>
                                     <option value="2">Used/Allocated</option>
@@ -42,7 +42,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="floating-label-wrap">
-                                <select class="floating-label-field floating-label-field--s3" disabled asp-for="Propertyregistration.PlannedUnplannedLand">
+                                <select class="floating-label-field floating-label-field--s3" readonly asp-for="Propertyregistration.PlannedUnplannedLand">
                                     <option value="Planned Land">Planned Land</option>
                                     <option value="Unplanned Land">Unplanned Land</option>
                                 </select>
@@ -52,7 +52,7 @@
                         <div class="col-md-4">
                             <div class="floating-label-wrap">
                                 <select class="floating-label-field floating-label-field--s3"
-                                        disabled asp-for="Propertyregistration.ClassificationOfLandId"
+                                        readonly asp-for="Propertyregistration.ClassificationOfLandId"
                                         asp-items="@(new SelectList(Model.Propertyregistration.ClassificationOfLandList, "Id","Name"))">
                                     <option value="">--Select--</option>
                                 </select>
@@ -64,7 +64,7 @@
                         <div class="col-md-4">
                             <div class="floating-label-wrap">
                                 <select class="floating-label-field floating-label-field--s3"
-                                        disabled asp-for="Propertyregistration.DepartmentId"
+                                        readonly asp-for="Propertyregistration.DepartmentId"
                                         asp-items="@(new SelectList(Model.Propertyregistration.TakenOverDepartmentList, "Id","Name"))"
                                         onchange="return GetZoneList(this.options[this.selectedIndex].value);">
                                     <option value="">--Select--</option>
@@ -74,7 +74,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="floating-label-wrap">
-                                <select class="floating-label-field floating-label-field--s3" disabled asp-for="Propertyregistration.ZoneId"
+                                <select class="floating-label-field floating-label-field--s3" readonly asp-for="Propertyregistration.ZoneId"
                                         asp-items="@(new SelectList(Model.Propertyregistration.ZoneList, "Id","Name"))">
                                     <option value="">--Select--</option>>
                                 </select>
@@ -84,7 +84,7 @@
                         <div class="col-md-4">
                             <div class="floating-label-wrap">
                                 <select class="floating-label-field floating-label-field--s3"
-                                        disabled asp-for="Propertyregistration.DivisionId"
+                                        readonly asp-for="Propertyregistration.DivisionId"
                                         asp-items="@(new SelectList(Model.Propertyregistration.DivisionList, "Id","Name"))">
                                     <option value="">--Select--</option>
                                 </select>
@@ -97,7 +97,7 @@
                             <div class="col-md-4">
                                 <div class="floating-label-wrap">
                                     <select class="floating-label-field floating-label-field--s3"
-                                            disabled asp-for="Propertyregistration.LocalityId">
+                                            readonly asp-for="Propertyregistration.LocalityId">
                                         <option value="">--Select--</option>
                                     </select>
                                     <label class="floating-label" asp-for="Propertyregistration.LocalityId">Locality(Village)</label>
@@ -105,7 +105,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="floating-label-wrap mb-3 mb-md-0">
-                                    <input asp-for="Propertyregistration.KhasraNo" placeholder="Khasra No" disabled type="text" class="floating-label-field floating-label-field--s3" />
+                                    <input asp-for="Propertyregistration.KhasraNo" placeholder="Khasra No" readonly type="text" class="floating-label-field floating-label-field--s3" />
                                     <label class="floating-label">Khasra No </label>
                                 </div>
                             </div>
@@ -115,19 +115,19 @@
                         <div class="row pt-3">
                             <div class="col-md-4">
                                 <div class="floating-label-wrap mb-3 mb-md-0">
-                                    <input asp-for="Propertyregistration.Colony" placeholder="Colony" disabled type="text" class="floating-label-field floating-label-field--s3" />
+                                    <input asp-for="Propertyregistration.Colony" placeholder="Colony" readonly type="text" class="floating-label-field floating-label-field--s3" />
                                     <label class="floating-label">Colony  </label>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="floating-label-wrap mb-3 mb-md-0">
-                                    <input asp-for="Propertyregistration.Sector" placeholder="Sector" disabled type="text" class="floating-label-field floating-label-field--s3" />
+                                    <input asp-for="Propertyregistration.Sector" placeholder="Sector" readonly type="text" class="floating-label-field floating-label-field--s3" />
                                     <label class="floating-label">Sector  </label>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="floating-label-wrap mb-3 mb-md-0">
-                                    <input type="text" placeholder="Block" disabled asp-for="Propertyregistration.Block"
+                                    <input type="text" placeholder="Block" readonly asp-for="Propertyregistration.Block"
                                            class="floating-label-field floating-label-field--s3" />
                                     <label class="floating-label">Block </label>
                                 </div>
@@ -136,19 +136,19 @@
                         <div class="row pt-3">
                             <div class="col-md-4">
                                 <div class="floating-label-wrap mb-3 mb-md-0">
-                                    <input asp-for="Propertyregistration.Pocket" placeholder="Pocket" disabled type="text" class="floating-label-field floating-label-field--s3" />
+                                    <input asp-for="Propertyregistration.Pocket" placeholder="Pocket" readonly type="text" class="floating-label-field floating-label-field--s3" />
                                     <label class="floating-label">Pocket</label>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="floating-label-wrap mb-3 mb-md-0">
-                                    <input asp-for="Propertyregistration.PlotNo" placeholder="Plot No." disabled type="text" class="floating-label-field floating-label-field--s3" />
+                                    <input asp-for="Propertyregistration.PlotNo" placeholder="Plot No." readonly type="text" class="floating-label-field floating-label-field--s3" />
                                     <label class="floating-label">Plot No.  </label>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="floating-label-wrap mb-3 mb-md-0">
-                                    <input asp-for="Propertyregistration.PrimaryListNo" placeholder="Primary List No." disabled type="text" class="floating-label-field floating-label-field--s3" />
+                                    <input asp-for="Propertyregistration.PrimaryListNo" placeholder="Primary List No." readonly type="text" class="floating-label-field floating-label-field--s3" />
                                     <label class="floating-label">Primary List No.</label>
                                 </div>
                             </div>
@@ -157,7 +157,7 @@
                     <div class="row pt-3">
                         <div class="col-md-12">
                             <div class="floating-label-wrap mb-3 mb-md-0">
-                                <textarea asp-for="Propertyregistration.Palandmark" placeholder="Address with Landmark" disabled type="text"
+                                <textarea asp-for="Propertyregistration.Palandmark" placeholder="Address with Landmark" readonly type="text"
                                           class="floating-label-field floating-label-field--s3 pt-3"></textarea>
                                 <div id="feedbackPalandmark"></div>
                                 <label class="floating-label">Address with Landmark  </label>
@@ -170,7 +170,7 @@
                             <div class="col-md-4">
                                 <div class="floating-label-wrap">
 
-                                    <select class="floating-label-field floating-label-field--s3" disabled asp-for="Propertyregistration.AreaUnit">
+                                    <select class="floating-label-field floating-label-field--s3" readonly asp-for="Propertyregistration.AreaUnit">
                                         <option value="0">Bigha-Biswa-Biswansi</option>
                                         <option value="1">Sq Yd.</option>
                                         <option value="2">Acre</option>
@@ -189,7 +189,7 @@
                                         <div class="col-md-4">
                                             <div class="floating-label-wrap mb-3 mb-md-0">
 
-                                                <input asp-for="Propertyregistration.TotalAreaInBigha" disabled class="floating-label-field floating-label-field--s3 numbers bbbcalculation" onkeypress="return numericDecimal(this);" onpaste="return false;">
+                                                <input asp-for="Propertyregistration.TotalAreaInBigha" readonly class="floating-label-field floating-label-field--s3 numbers bbbcalculation" onkeypress="return numericDecimal(this);" onpaste="return false;">
                                                 <span asp-validation-for="Propertyregistration.TotalAreaInBigha" class="text-danger"></span>
                                                 <label class="floating-label">Bigha</label>
                                             </div>
@@ -197,7 +197,7 @@
                                         <div class="col-md-4">
                                             <div class="floating-label-wrap mb-3 mb-md-0">
 
-                                                <input asp-for="Propertyregistration.TotalAreaInBiswa" disabled class="floating-label-field floating-label-field--s3 numbers bbbcalculation" onkeypress="return numericDecimal(this);" onpaste="return false;">
+                                                <input asp-for="Propertyregistration.TotalAreaInBiswa" readonly class="floating-label-field floating-label-field--s3 numbers bbbcalculation" onkeypress="return numericDecimal(this);" onpaste="return false;">
                                                 <span asp-validation-for="Propertyregistration.TotalAreaInBiswa" class="text-danger"></span>
                                                 <label class="floating-label">Biswa</label>
                                             </div>
@@ -205,7 +205,7 @@
                                         <div class="col-md-4">
                                             <div class="floating-label-wrap mb-3 mb-md-0">
 
-                                                <input asp-for="Propertyregistration.TotalAreaInBiswani" disabled class="floating-label-field floating-label-field--s3 numbers bbbcalculation" onkeypress="return numericDecimal(this);" onpaste="return false;">
+                                                <input asp-for="Propertyregistration.TotalAreaInBiswani" readonly class="floating-label-field floating-label-field--s3 numbers bbbcalculation" onkeypress="return numericDecimal(this);" onpaste="return false;">
                                                 <span asp-validation-for="Propertyregistration.TotalAreaInBiswani" class="text-danger"></span>
                                                 <label class="floating-label">Biswansi</label>
                                             </div>
@@ -219,7 +219,7 @@
                             <div class="row pt-3">
                                 <div class="col-md-4">
                                     <div class="floating-label-wrap mb-3 mb-md-0">
-                                        <input asp-for="Propertyregistration.TotalAreaInSqAcreHt" type="text" disabled class="floating-label-field floating-label-field--s3 numbers TotalCalculation" onkeypress="return numericDecimal(this);" onpaste="return false;" />
+                                        <input asp-for="Propertyregistration.TotalAreaInSqAcreHt" type="text" readonly class="floating-label-field floating-label-field--s3 numbers TotalCalculation" onkeypress="return numericDecimal(this);" onpaste="return false;" />
                                         <span asp-validation-for="Propertyregistration.TotalAreaInSqAcreHt" class="text-danger"></span>
                                         <label class="floating-label" id="LabelTotalAreaSqAcreHec">Total Area(Sq Yd./Acre/Hectare)</label>
                                     </div>
@@ -231,7 +231,7 @@
                         <div class="row mt-md-3">
                             <div class="col-md-4">
                                 <div class="floating-label-wrap mb-3 mb-md-0">
-                                    <input asp-for="Propertyregistration.TotalArea" class="floating-label-field floating-label-field--s3 numbers" disabled onkeypress="return numericDecimal(this);" onpaste="return false;" required="required" requiredmsg="Total Area is Mandatory">
+                                    <input asp-for="Propertyregistration.TotalArea" class="floating-label-field floating-label-field--s3 numbers" readonly onkeypress="return numericDecimal(this);" onpaste="return false;" required="required" requiredmsg="Total Area is Mandatory">
                                     <span asp-validation-for="Propertyregistration.TotalArea" class="text-danger"></span>
                                     <label class="floating-label">Total Area(in sq. mt.)</label>
                                 </div>
@@ -282,7 +282,7 @@
                             <div class=" col-md-4">
                                 <div class="floating-label-wrap">
                                     <select class="floating-label-field floating-label-field--s3"
-                                            asp-for="Propertyregistration.EncroachmentStatusId" disabled>
+                                            asp-for="Propertyregistration.EncroachmentStatusId" readonly>
                                         <option value="0">No</option>
                                         <option value="1">Yes</option>
                                     </select>
@@ -296,7 +296,7 @@
                                 <div class="col-md-4">
                                     <div class="floating-label-wrap">
                                         <select class="floating-label-field floating-label-field--s3"
-                                                asp-for="Propertyregistration.EncroachedPartiallyFully" disabled>
+                                                asp-for="Propertyregistration.EncroachedPartiallyFully" readonly>
                                             <option value="0">Vacant</option>
                                             <option value="1">Partially Vacant</option>
                                         </select>

@@ -115,7 +115,7 @@ namespace Libraries.Service.ApplicationService
 
         public async Task<bool> Create(Landtransfer Landtransfer)
         {
-            //Landtransfer.CreatedBy = 1;
+             
             Landtransfer.CreatedDate = DateTime.Now;
             _landTransferRepository.Add(Landtransfer);
             return await _unitOfWork.CommitAsync() > 0;
