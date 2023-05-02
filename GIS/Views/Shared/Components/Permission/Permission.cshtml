@@ -1,0 +1,90 @@
+﻿@model System.Collections.Generic.IList<Dto.Master.PermissionDto>
+
+@foreach (var menu in Model)
+{
+    @if (menu.Children.Any())
+    {
+        <ul class="accordion list-unstyled m-0" id="permission_@menu.Id">
+            <li class="card" id="sub-permission_@menu.Id">
+                @if (menu.ParentId == 0)
+                {
+                    <a class="p-2 no-dec d-flex align-items-center" 
+                       data-bs-toggle="collapse" 
+                       href="#per_@menu.Id" 
+                       role="button" 
+                       aria-expanded="true" 
+                       aria-controls="per_@menu.Id">
+                        <i class="ri-arrow-right-s-fill"></i>
+                        <span class="text ms-1 me-auto">@menu.Name</span>
+                        <i class="arrow ri-arrow-drop-down-line slow"></i>
+                    </a>
+                }
+                else
+                {
+                    <a class="p-2 no-dec d-flex align-items-center" 
+                       data-bs-toggle="collapse" 
+                       href="#per_@menu.Id" 
+                       role="button" 
+                       aria-expanded="true" 
+                       aria-controls="per_@menu.Id">
+                        <i class="ri-arrow-right-s-fill"></i>
+                        <span class="text ms-1 me-auto">@menu.Name</span>
+                        <i class="arrow ri-arrow-drop-down-line slow"></i>
+                    </a>
+                }
+                @if (menu.ParentId == 0)
+                {
+                    <ul class="list-unstyled m-0 ps-2 pe-1 ps-md-4 pe-md-3 collapse show" id="per_@menu.Id" data-parent="#permission_@menu.Id">
+                        <partial name="Components/Permission/Permission" model="menu.Children" />
+                    </ul>
+                }
+                else
+                {
+                    <ul class="list-unstyled m-0 ps-2 pe-1 ps-md-4 pe-md-3 collapse show" id="per_@menu.Id" data-parent="#permission_@menu.Id">
+                        <partial name="Components/Permission/Permission" model="menu.Children" />
+                    </ul>
+                }
+            </li>
+        </ul>
+    }
+    else
+    {
+        <li class="border-bottom d-md-flex align-items-center">
+            @{
+                if (menu.Children.Count == 0)
+                {
+                    <a class="d-block no-dec p-2 me-auto">@menu.Name</a>
+                    <ul class="list-unstyled m-0 p-0 d-lg-flex align-items-center" >
+                        @foreach (var item in menu.Actions)
+                        {
+                            <li class="form-check">
+                                @if (item.IsAvailable == true)
+                                {
+                                    <input type="checkbox" class="form-check-input chkAction" id="@item.ActionId,@menu.Id" checked="checked" />
+                                }
+                                else
+                                {
+                                    <input type="checkbox" id="@item.ActionId,@menu.Id" class="form-check-input chkAction" />
+                                }
+
+                                <label class="form-check-label" for="@item.ActionId,@menu.Id">@item.ActionName</label>
+                            </li>
+                        }
+                    </ul>
+                }
+                else
+                {
+                    <a class="p-2 no-dec d-flex align-items-center"
+                       data-bs-toggle="collapse" href="#per_@menu.Id"
+                       role="button"
+                       aria-expanded="true"
+                       aria-controls="per_@menu.Id">
+                        <i class="ri-arrow-right-s-fill"></i>
+                        <span class="text ms-1 me-auto">@menu.Name</span>
+                        <i class="arrow ri-arrow-drop-down-line slow"></i>
+                    </a>
+                }
+            }
+        </li>
+    }
+}

@@ -321,7 +321,7 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<Village>> GetVillageAutoCompleteDetails(string prefix)
         {
-            var data = await _dbContext.Village.Where(x => x.Name.Contains(prefix)).OrderBy(p => p.Name).ToListAsync();
+            var data = await _dbContext.Village.Where(x => x.Name.Contains(prefix) && x.IsActive == 1).OrderBy(p => p.Name).ToListAsync();
             return data;
 
         }

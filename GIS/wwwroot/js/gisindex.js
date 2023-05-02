@@ -47,6 +47,7 @@ var LINE_LAYER = [];
 var DDA_VACANT_LAYER = [];
 var highlighted_khasra_LAYER = [];
 var TEMPLE_LAYER = [];
+var GCP_POINTS_LAYER = [];
 
 
 $(document).ready(function () {
@@ -413,6 +414,10 @@ function showvillagelayers(villageid) {
         var VLand = response.filter((x) => x.gisLayerId === 36);//DDA Vacant Land
         if (VLand.length > 0 && VLand[0].checkedStatus == 1)
             showDDAVacantLandBoundaries(VLand, villageid);
+
+        var GCP_Points = response.filter((x) => x.gisLayerId === 37);//DDA Vacant Land
+        if (GCP_Points.length > 0 && GCP_Points[0].checkedStatus == 1)
+            showGCPPoints(GCP_Points, villageid);
     });
     VILLAGEID_UNIVERSAL = [];
     VILLAGEID_UNIVERSAL.push(villageid);
@@ -680,6 +685,31 @@ function showDDAVacantLandBoundaries(response, villageid) {
     }
 
 }
+
+//Added by sachin for GCP Point Data 24-04-2023
+function showGCPPoints(response, villageid) {
+    var poly = $.map(response, function (el) { return el; });
+
+    for (i = 0; i < poly.length; i++) {
+        var imgg = {
+            url: 'img/dot.png',
+            size: new google.maps.Size(12, 12),
+            origin: new google.maps.Point(0, 0),
+            scaledSize: new google.maps.Size(12, 12)
+        };
+        var marker = new google.maps.Marker({
+            position: { lng: parseFloat(poly[i].xcoordinate), lat: parseFloat (poly[i].ycoordinate) },
+            map: map,
+            icon: imgg,
+            title: poly[i].label
+        });
+
+        GCP_POINTS_LAYER.push({ "villageid": poly[i].villageId, "layer": marker });
+        Polys.push(marker);
+    }
+
+}
+
 
 function showDisBoundariesRoad(response, villageid) {
     var road = $.map(response, function (el) { return el; })
@@ -1193,6 +1223,10 @@ $(document).on('change', '#chkAllImpInfra', function (e) {   /*Select all Functi
         var Vland = data.filter((x) => x.gisLayerId === 36);//DDA Vacant Land
         if (Vland.length > 0)
             showDDAVacantLandBoundaries(Vland);
+
+        var GCP_points = data.filter((x) => x.gisLayerId === 37);//GCP points
+        if (GCP_points.length > 0)
+            showGCPPoints(GCP_points);
     }
     else {
         $('#chkAllImpInfra').closest('table').find('td input[type="checkbox"]').prop('checked', false);
@@ -1443,9 +1477,16 @@ $(document).on('change', '#chkAllImpInfra', function (e) {   /*Select all Functi
             });
         }
 
-        var VLand = data.filter((x) => x.gisLayerId === 36);//Line
+        var VLand = data.filter((x) => x.gisLayerId === 36);//dda Vacant Lnad
         if (VLand.length > 0) {
             $.each(DDA_VACANT_LAYER, function (index, value) {
+                value.layer.setMap(null);
+            });
+        }
+
+        var GCP_points = data.filter((x) => x.gisLayerId === 37);//GCp points
+        if (GCP_points.length > 0) {
+            $.each(GCP_POINTS_LAYER, function (index, value) {
                 value.layer.setMap(null);
             });
         }
@@ -1633,6 +1674,10 @@ $('#infrastructureData').on('change', '.checkUncheckInfra', function (e) {  /*ch
         var Vland = data.filter((x) => x.gisLayerId === 36);//DDA Vacant Land
         if (Vland.length > 0 && Vland[0].code == id)
             showDDAVacantLandBoundaries(Vland);
+
+        var GCP_Points = data.filter((x) => x.gisLayerId === 37);//GCP Points
+        if (GCP_Points.length > 0 && GCP_Points[0].code == id)
+            showGCPPoints(GCP_Points);
 
     }
     else {
@@ -1884,6 +1929,13 @@ $('#infrastructureData').on('change', '.checkUncheckInfra', function (e) {  /*ch
         var Vland = data.filter((x) => x.gisLayerId === 36);//Line
         if (Vland.length > 0 && Vland[0].code == id) {
             $.each(DDA_VACANT_LAYER, function (index, value) {
+                value.layer.setMap(null);
+            });
+        }
+
+        var GCPPoints = data.filter((x) => x.gisLayerId === 37);//GCP Points
+        if (GCPPoints.length > 0 && GCPPoints[0].code == id) {
+            $.each(GCP_POINTS_LAYER, function (index, value) {
                 value.layer.setMap(null);
             });
         }
@@ -2216,6 +2268,11 @@ function RemoveAllVillageLayer(villageids) {
     });
     let ddavacantlandlayer = DDA_VACANT_LAYER.filter((x) => x.villageid === villageid);
     $.each(ddavacantlandlayer, function (index, value) {
+        value.layer.setMap(null);
+    });
+
+    let gcppoints = GCP_POINTS_LAYER.filter((x) => x.villageid === villageid);
+    $.each(gcppoints, function (index, value) {
         value.layer.setMap(null);
     });
 
