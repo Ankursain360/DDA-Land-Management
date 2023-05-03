@@ -30,6 +30,7 @@ namespace Libraries.Model.Entity
           
                 //Acquiredenhancecompensation = new HashSet<Acquiredenhancecompensation>();
              Demandlistdetails = new HashSet<Demandlistdetails>();
+            LandVerificationDetails = new HashSet<LandVerificationDetails>();
             
         }
         [Required(ErrorMessage = "Khasra is mandatory")]
@@ -92,5 +93,6 @@ namespace Libraries.Model.Entity
         public ICollection<Demandlistdetails> Demandlistdetails { get; set; }
         public ICollection<Mutation> Mutation { get; set; }
         public ICollection<Courtcasesmapping> Courtcasesmapping { get; set; }
+        public ICollection<LandVerificationDetails> LandVerificationDetails { get; set; }
     }
 }
