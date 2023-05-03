@@ -521,77 +521,77 @@ namespace GIS.Controllers
 
 
 
-        public void test()
-        {
-            try
-            {
-                // Load the satellite images dataset and labels
-                var bitmap1 = new Bitmap(image1.OpenReadStream());
-                var bitmap2 = new Bitmap(image2.OpenReadStream());
-                var bitmapLabels = new Bitmap(labels.OpenReadStream());
+        //public void test()
+        //{
+        //    try
+        //    {
+        //        // Load the satellite images dataset and labels
+        //        var bitmap1 = new Bitmap(image1.OpenReadStream());
+        //        var bitmap2 = new Bitmap(image2.OpenReadStream());
+        //        var bitmapLabels = new Bitmap(labels.OpenReadStream());
 
-                // Convert the images to grayscale
-                var gray1 = Grayscale.CommonAlgorithms.BT709.Apply(bitmap1);
+        //        // Convert the images to grayscale
+        //        var gray1 = Grayscale.CommonAlgorithms.BT709.Apply(bitmap1);
 
 
-                var gray2 = Grayscale.CommonAlgorithms.BT709.Apply(bitmap2);
+        //        var gray2 = Grayscale.CommonAlgorithms.BT709.Apply(bitmap2);
 
-                // Compute the difference between the two images
-                var diff = new Difference(gray1, gray2).Apply();
+        //        // Compute the difference between the two images
+        //        var diff = new Difference(gray1, gray2).Apply();
 
-                // Extract features from the difference image
-                var hog = new HistogramsOfOrientedGradients()
-                {
-                    CellSize = new Size(16, 16),
-                    BlockSize = new Size(2, 2),
-                    BlockStride = new Size(1, 1),
-                    GradientSize = 1,
-                    UseSignedOrientation = false
-                };
-                var features = hog.ProcessImage(diff);
+        //        // Extract features from the difference image
+        //        var hog = new HistogramsOfOrientedGradients()
+        //        {
+        //            CellSize = new Size(16, 16),
+        //            BlockSize = new Size(2, 2),
+        //            BlockStride = new Size(1, 1),
+        //            GradientSize = 1,
+        //            UseSignedOrientation = false
+        //        };
+        //        var features = hog.ProcessImage(diff);
 
-                // Convert the labels to a 1D array
-                var labelsArray = new int[bitmapLabels.Width * bitmapLabels.Height];
-                for (var y = 0; y < bitmapLabels.Height; y++)
-                {
-                    for (var x = 0; x < bitmapLabels.Width; x++)
-                    {
-                        var color = bitmapLabels.GetPixel(x, y);
-                        labelsArray[y * bitmapLabels.Width + x] = color.R == 0 ? 0 : 1;
-                    }
-                }
+        //        // Convert the labels to a 1D array
+        //        var labelsArray = new int[bitmapLabels.Width * bitmapLabels.Height];
+        //        for (var y = 0; y < bitmapLabels.Height; y++)
+        //        {
+        //            for (var x = 0; x < bitmapLabels.Width; x++)
+        //            {
+        //                var color = bitmapLabels.GetPixel(x, y);
+        //                labelsArray[y * bitmapLabels.Width + x] = color.R == 0 ? 0 : 1;
+        //            }
+        //        }
 
-                // Split the dataset into training and testing sets
-                var splitter = new Splitter(0.8);
-                var split = splitter.Split(features, labelsArray);
+        //        // Split the dataset into training and testing sets
+        //        var splitter = new Splitter(0.8);
+        //        var split = splitter.Split(features, labelsArray);
 
-                // Create a kernel support vector machine
-                var kernel = new Linear();
-                var svm = new KernelSupportVectorMachine(kernel, 1);
+        //        // Create a kernel support vector machine
+        //        var kernel = new Linear();
+        //        var svm = new KernelSupportVectorMachine(kernel, 1);
 
-                // Train the SVM on the training data
-                var teacher = new SequentialMinimalOptimization(svm, split.TrainingInputs, split.TrainingOutputs);
-                teacher.Run();
+        //        // Train the SVM on the training data
+        //        var teacher = new SequentialMinimalOptimization(svm, split.TrainingInputs, split.TrainingOutputs);
+        //        teacher.Run();
 
-                // Predict the labels for the testing data
-                var predicted = new int[split.TestingInputs.Length];
-                for (var i = 0; i < split.TestingInputs.Length; i++)
-                {
-                    predicted[i] = svm.Compute(split.TestingInputs[i]) > 0 ? 1 : 0;
-                }
+        //        // Predict the labels for the testing data
+        //        var predicted = new int[split.TestingInputs.Length];
+        //        for (var i = 0; i < split.TestingInputs.Length; i++)
+        //        {
+        //            predicted[i] = svm.Compute(split.TestingInputs[i]) > 0 ? 1 : 0;
+        //        }
 
-                // Compute the accuracy of the classification
-                var accuracy = new Accuracy(split.TestingOutputs, predicted).Accuracy;
+        //        // Compute the accuracy of the classification
+        //        var accuracy = new Accuracy(split.TestingOutputs, predicted).Accuracy;
 
-                // Return the accuracy
-                return Ok(accuracy);
-            }
-            catch (Exception ex)
-            {
-                // Return a bad request with the error message
-                return BadRequest(ex.Message);
-            }
-        }
+        //        // Return the accuracy
+        //        return Ok(accuracy);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        // Return a bad request with the error message
+        //        return BadRequest(ex.Message);
+        //    }
+        //}
 
         #endregion
     }
