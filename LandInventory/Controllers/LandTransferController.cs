@@ -240,8 +240,6 @@ namespace LandInventory.Controllers
             landtransfer.HandedOverDivisionList = await _landTransferService.GetAllDivisionList(landtransfer == null ? 0 : landtransfer.HandedOverZoneId);
             landtransfer.TakenOverZoneList = await _landTransferService.GetAllZone(landtransfer.TakenOverDepartmentId ?? 0);
             landtransfer.TakenOverDivisionList = await _landTransferService.GetAllDivisionList(landtransfer == null ? 0 : landtransfer.TakenOverZoneId);
-
-             
             landtransfer.LandTransferList = await _landTransferService.GetAllLandTransfer(landtransfer.PropertyRegistrationId);
             if (ModelState.IsValid)
             {

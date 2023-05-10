@@ -31,7 +31,7 @@ namespace Libraries.Model.Entity
             NewDamageColony = new HashSet<New_Damage_Colony>();
             NewdamageSelfassessment = new HashSet<NewDamageSelfAssessment>();
             Newdamagepayeeregistration = new HashSet<Newdamagepayeeregistration>();
-            
+            Landverificationdetails = new HashSet<LandVerificationDetails>();
         }
         [Required(ErrorMessage = "Village name is mandatory ")]
         public string Name { get; set; }
@@ -99,7 +99,7 @@ namespace Libraries.Model.Entity
         public ICollection<New_Damage_Colony> NewDamageColony { get; set; }
         public ICollection<NewDamageSelfAssessment> NewdamageSelfassessment { get; set; }
         public ICollection<Newdamagepayeeregistration> Newdamagepayeeregistration { get; set; }
-        //public ICollection<LandVerificationDetails> LandVerificationDetails { get; set; }
+        public ICollection<LandVerificationDetails> Landverificationdetails { get; set; } 
 
 
         [NotMapped]

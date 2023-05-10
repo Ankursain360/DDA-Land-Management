@@ -370,8 +370,16 @@ namespace Libraries.Model
         public virtual DbSet<LandAcquisitionAwards> landacquisitionawards { get; set; }
         public virtual DbSet<vacantlandlistimage> vacantlandlistimage { get; set; }
         public virtual DbSet<Vlmsmobileappaccesslog> vlmsmobileappaccesslog { get; set; }
+        public virtual DbSet<LandVerificationDetails> landverificationdetails { get; set; }
+        public virtual DbSet<LandVerificationSignatureData> landverificationsignaturedata { get; set; }
+        public virtual DbSet<LandVerificationVillageDetails> landverificationvillagedetails { get; set; }  
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.ApplyConfiguration(new LandVerificationDetailsConfiguration());
+            modelBuilder.ApplyConfiguration(new LandVerificationSignatureDataConfiguration());
+            modelBuilder.ApplyConfiguration(new LandVerificationVillageDetailsConfiguration());
+
             modelBuilder.ApplyConfiguration(new VlmsmobileappaccesslogConfiguration());
             modelBuilder.ApplyConfiguration(new vacantlandlistimageConfiguration());
             modelBuilder.ApplyConfiguration(new Undersection17plotdetailConfiguration());
