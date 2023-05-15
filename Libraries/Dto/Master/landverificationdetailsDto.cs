@@ -18,6 +18,7 @@ namespace Dto.Master
     {
         public string responseCode { get; set; }
         public string responseMessage { get; set; }
+        public string AckID { get; set; }
         public List<landverificationdetailsDto> response { get; set; }
     }
     public class SignatureDetails

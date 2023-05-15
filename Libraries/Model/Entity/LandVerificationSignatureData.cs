@@ -25,31 +25,31 @@ namespace Libraries.Model.Entity
         public LandVerificationDetails GetLandVerificationDetail { get; set; } 
         public ICollection<LandVerificationVillageDetails> LandVerificationVillageDetails { get; set; }
 
-        [NotMapped]
-        public List<string> signatureTextlist { get; set; }
+        //[NotMapped]
+        //public List<string> signatureTextlist { get; set; }
 
-        [NotMapped]
-        public List<string> signatureTypelist { get; set; }
+        //[NotMapped]
+        //public List<string> signatureTypelist { get; set; }
 
-        [NotMapped]
-        public List<string> subjectNamelist { get; set; }
+        //[NotMapped]
+        //public List<string> subjectNamelist { get; set; }
 
-        [NotMapped]
-        public List<string> EmailIdlist { get; set; }
+        //[NotMapped]
+        //public List<string> EmailIdlist { get; set; }
 
-        [NotMapped]
-        public List<string> TokenserialNolist { get; set; }
+        //[NotMapped]
+        //public List<string> TokenserialNolist { get; set; }
 
-        [NotMapped]
-        public List<string> signaturelist { get; set; }
+        //[NotMapped]
+        //public List<string> signaturelist { get; set; }
 
-        [NotMapped]
-        public List<string> signatureDatelist { get; set; }
+        //[NotMapped]
+        //public List<string> signatureDatelist { get; set; }
 
-        [NotMapped]
-        public List<string> AccountNamelist { get; set; }
+        //[NotMapped]
+        //public List<string> AccountNamelist { get; set; }
 
-        [NotMapped]
-        public List<string> AccountDesignationlist { get; set; }
+        //[NotMapped]
+        //public List<string> AccountDesignationlist { get; set; }
     }
 }

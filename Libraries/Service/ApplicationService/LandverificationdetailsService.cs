@@ -37,6 +37,7 @@ namespace Service.ApplicationService
             var result = await _unitOfWork.CommitAsync() > 0;
             dto.Id = model.Id;
             dto.createdby = model.CreatedBy;
+            dto.AckID = model.AckID;
             return result;
         }
 
