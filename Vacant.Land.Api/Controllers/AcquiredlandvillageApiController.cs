@@ -31,12 +31,12 @@ namespace Vacant.Land.Api.Controllers
         {
             _service = service;
             _configuration = configuration;
-            un4documentPath = _configuration.GetSection("FilePaths:ApiDocumentFiles:un4FilePath").Value.ToString();
-            un6documentPath = _configuration.GetSection("FilePaths:ApiDocumentFiles:un6FilePath").Value.ToString();
-            un17documentPath = _configuration.GetSection("FilePaths:ApiDocumentFiles:un17FilePath").Value.ToString();
-            un22documentPath = _configuration.GetSection("FilePaths:ApiDocumentFiles:un22FilePath").Value.ToString();
-            AwarddocumentPath = _configuration.GetSection("FilePaths:ApiDocumentFiles:AwardFilePath").Value.ToString();
-            possessiondocumentPath = _configuration.GetSection("FilePaths:ApiDocumentFiles:possessionFilePath").Value.ToString();
+            un4documentPath = _configuration.GetSection("FilePaths:US4:DocumentFIlePath").Value.ToString();
+            un6documentPath = _configuration.GetSection("FilePaths:US6:DocumentFIlePath").Value.ToString();
+            un17documentPath = _configuration.GetSection("FilePaths:US17:DocumentFIlePath").Value.ToString();
+            un22documentPath = _configuration.GetSection("FilePaths:US22:DocumentFIlePath").Value.ToString();
+            AwarddocumentPath = _configuration.GetSection("FilePaths:AwardMaster:DocumentFIlePath").Value.ToString();
+            possessiondocumentPath = _configuration.GetSection("FilePaths:Possesion:DocumentFIlePath").Value.ToString();
         }
         [HttpGet]
         [Route("[action]")]
