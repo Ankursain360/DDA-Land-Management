@@ -24,9 +24,9 @@ namespace Libraries.Repository.IEntityRepository
         }
 
 
-        public async Task<List<Acquiredlandvillage>> GetAllVillage()
+        public async Task<List<Acquiredlandvillage>> GetAllVillage(int ZoneId)
         {
-            List<Acquiredlandvillage> villageList = await _dbContext.Acquiredlandvillage.Where(x => x.IsActive == 1).ToListAsync();
+            List<Acquiredlandvillage> villageList = await _dbContext.Acquiredlandvillage.Where(x => x.IsActive == 1 && x.ZoneId == ZoneId).ToListAsync();
             return villageList;
         }
 
@@ -245,6 +245,11 @@ namespace Libraries.Repository.IEntityRepository
 
                 throw;
             }
+        }
+        public async Task<List<Zone>> GetZoneListApi()
+        {
+            var data = await _dbContext.Zone.Where(x => x.IsActive == 1 && x.DepartmentId == 13).ToListAsync();
+            return data;
         }
         public async Task<List<Possessiondetails>> GetAllPossessionReport(PossessionReportSearchDto model)
         {

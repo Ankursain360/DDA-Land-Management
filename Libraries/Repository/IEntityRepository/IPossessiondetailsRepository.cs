@@ -14,7 +14,7 @@ namespace Libraries.Repository.IEntityRepository
 
         Task<List<Possessiondetails>> GetAllPossessiondetails();
         Task<List<Possessiondetails>> GetAllNoPossessiondetailsList(PossessiondetailsSearchDto model);
-        Task<List<Acquiredlandvillage>> GetAllVillage();
+        Task<List<Acquiredlandvillage>> GetAllVillage(int ZoneId);
         Task<List<Khasra>> BindKhasra(int? villageId);
         Task<Khasra> FetchSingleKhasraResult(int? khasraId);
         Task<PagedResult<Possessiondetails>> GetPagedNoPossessiondetails(PossessiondetailsSearchDto model);
@@ -23,6 +23,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<VillageAndKhasraDetailListDto>> GetPagedvillageAndKhasradetailsList(VillageAndKhasraDetailsSearchDto model);
 
         Task<List<AcquiredLandVillageListSearchDto>> GetPagedKhasraDetails(VillageAndKhasraDetailsSearchDto model);
+        Task<List<Zone>> GetZoneListApi();
         Task<List<Possessiondetails>> GetAllPossessionReport(PossessionReportSearchDto model); 
     }
 }
