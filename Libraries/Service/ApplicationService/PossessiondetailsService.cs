@@ -53,9 +53,9 @@ namespace Libraries.Service.ApplicationService
         }
 
 
-        public async Task<List<Acquiredlandvillage>> GetAllVillage()
+        public async Task<List<Acquiredlandvillage>> GetAllVillage(int ZoneId)
         {
-            List<Acquiredlandvillage> villageList = await _possessiondetailsRepository.GetAllVillage();
+            List<Acquiredlandvillage> villageList = await _possessiondetailsRepository.GetAllVillage(ZoneId);
             return villageList;
         }
 
@@ -145,6 +145,10 @@ namespace Libraries.Service.ApplicationService
         public async Task<List<AcquiredLandVillageListSearchDto>> GetPagedKhasraDetails(VillageAndKhasraDetailsSearchDto model)
         {
             return await _possessiondetailsRepository.GetPagedKhasraDetails(model);
+        }
+        public async Task<List<Zone>> GetZoneListApi()
+        {
+            return await _possessiondetailsRepository.GetZoneListApi();
         }
         public async Task<List<Possessiondetails>> GetAllPossessionReport(PossessionReportSearchDto model)
         {

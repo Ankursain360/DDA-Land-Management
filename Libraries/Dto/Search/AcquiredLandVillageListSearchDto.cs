@@ -11,11 +11,12 @@ namespace Dto.Search
         public string VillageName { get; set; }
         
         public string um4Date { get; set; }
-        
-        public string un6Date { get; set; }
-        
+        public string un4document { get; set; }
+
+        public string um6Date { get; set; }
+        public string un6document { get; set; }
         public string um17Date { get; set; }
-        
+        public string un17document { get; set; }
         public string AwardDate { get; set; }
         
         public string PossDate { get; set; }
@@ -23,7 +24,7 @@ namespace Dto.Search
         public string LBRefDate { get; set; }
         
         public string un22Date { get; set; }
-        
+        public string un22document { get; set; }
 
         public Int32 Bigha { get; set; }
         
@@ -41,7 +42,7 @@ namespace Dto.Search
         public string un22Number { get; set; }
         
         public string AwardNumber { get; set; }
-        
+        public string Awarddocument { get; set; }
         public string DemandListNo { get; set; }
         
         public string LACNo { get; set; }
@@ -68,6 +69,6 @@ namespace Dto.Search
         public string AwardnoWithDate { get; set; }
         public string US22NoWithDate { get; set; }
         public string PossessionDate { get; set; }
-        
+        public string possessiondocument { get; set; }
     }
 }
