@@ -15,7 +15,7 @@ using Repository.Common;
 
 namespace Libraries.Repository.IEntityRepository
 {
-   public class PossessiondetailsRepository : GenericRepository<Possessiondetails>, IPossessiondetailsRepository
+    public class PossessiondetailsRepository : GenericRepository<Possessiondetails>, IPossessiondetailsRepository
     {
 
         public PossessiondetailsRepository(DataContext dbContext) : base(dbContext)
@@ -48,7 +48,7 @@ namespace Libraries.Repository.IEntityRepository
         {
             return await _dbContext.Possessiondetails.Include(x => x.Village).Include(x => x.Khasra).OrderByDescending(x => x.Id).ToListAsync();
         }
-        public async Task<List<Possessiondetails>> GetAllNoPossessiondetailsList(PossessiondetailsSearchDto model) 
+        public async Task<List<Possessiondetails>> GetAllNoPossessiondetailsList(PossessiondetailsSearchDto model)
         {
             var data = await _dbContext.Possessiondetails
                 .Include(x => x.Village).Include(x => x.Khasra).Where(x => (string.IsNullOrEmpty(model.villageid) || x.Village.Name.Contains(model.villageid))).ToListAsync();
@@ -58,23 +58,10 @@ namespace Libraries.Repository.IEntityRepository
         public async Task<PagedResult<Possessiondetails>> GetPagedNoPossessiondetails(PossessiondetailsSearchDto model)
         {
             var data = await _dbContext.Possessiondetails
-                .Include(x => x.Village).Include(x => x.Khasra).Where(x => (string.IsNullOrEmpty(model.villageid) || x.Village.Name.Contains(model.villageid))
-                 
-
+                .Include(x => x.Village).Include(x => x.Khasra).Where(x =>
+                        (string.IsNullOrEmpty(model.villageid) || x.Village.Name.Contains(model.villageid))
                ).
-
-
-
-
                 GetPaged<Possessiondetails>(model.PageNumber, model.PageSize);
-
-
-
-
-
-
-
-
 
             int SortOrder = (int)model.SortOrder;
             if (SortOrder == 1)
@@ -110,7 +97,7 @@ namespace Libraries.Repository.IEntityRepository
             {
                 switch (model.SortBy.ToUpper())
                 {
-                    
+
                     case ("VILLAGE"):
                         data = null;
                         data = await _dbContext.Possessiondetails
@@ -154,7 +141,7 @@ namespace Libraries.Repository.IEntityRepository
             var data = await _dbContext.Possessiondetails
                                         .Include(x => x.Village)
                                         .Include(x => x.Khasra)
-                                        .Where(x => x.PossDate ==( model.PossessionDate == "0" ? x.PossDate : Convert.ToDateTime(model.PossessionDate))
+                                        .Where(x => x.PossDate == (model.PossessionDate == "0" ? x.PossDate : Convert.ToDateTime(model.PossessionDate))
                                         && x.IsActive == 1
                                         )
                                         .GetPaged<Possessiondetails>(model.PageNumber, model.PageSize);
@@ -213,7 +200,7 @@ namespace Libraries.Repository.IEntityRepository
 
 
         public async Task<List<VillageAndKhasraDetailListDto>> GetPagedvillageAndKhasradetailsList(VillageAndKhasraDetailsSearchDto model)
-         {
+        {
             try
             {
 

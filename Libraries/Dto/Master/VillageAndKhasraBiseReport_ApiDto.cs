@@ -21,10 +21,10 @@ namespace Dto.Master
         public string Notification_s_US_22 { get; set; }
         public string un22Date { get;set; }
         public string un22document { get;set; }
-        public string Awards  { get; set; } 
+        public string AwardsNumber { get; set; } 
         public string AwardDate { get; set; }
         public string Awarddocument { get; set; }
-        public string Date_of_Possesion { get; set; }
+        public string DateofPossesion { get; set; }
         public string possessiondocument { get; set; }
 
         public class VillageAndKhasraBiseReportResponseDetails 

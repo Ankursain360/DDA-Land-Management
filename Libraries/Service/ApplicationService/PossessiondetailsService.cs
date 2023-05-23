@@ -93,12 +93,12 @@ namespace Libraries.Service.ApplicationService
             model.PossType = possessiondetails.PossType;
             model.Bigha = possessiondetails.Bigha;
             model.Biswa = possessiondetails.Biswa;
-            model.ReasonNonPoss = possessiondetails.ReasonNonPoss;
+            model.ReasonNonPoss = possessiondetails.ReasonNonPoss == null ?"Y":possessiondetails.ReasonNonPoss;
             model.IsActive = possessiondetails.IsActive;
             model.Remarks = possessiondetails.Remarks;
             model.DocumentName = possessiondetails.DocumentName;
             model.PossessionTaken = possessiondetails.PossessionTaken;
-            model.Reason = possessiondetails.Reason;
+            model.Reason = possessiondetails.Reason == null?"NA":possessiondetails.Reason;
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = 1;
             _possessiondetailsRepository.Edit(model);
@@ -110,8 +110,8 @@ namespace Libraries.Service.ApplicationService
         {
             possessiondetails.CreatedBy = 1;
             possessiondetails.CreatedDate = DateTime.Now;
-
-
+            possessiondetails.Reason = possessiondetails.Reason == null ? "Na":possessiondetails.Reason;
+            possessiondetails.ReasonNonPoss = possessiondetails.ReasonNonPoss == null ? "Y" : possessiondetails.ReasonNonPoss;
             _possessiondetailsRepository.Add(possessiondetails);
             return await _unitOfWork.CommitAsync() > 0;
         }

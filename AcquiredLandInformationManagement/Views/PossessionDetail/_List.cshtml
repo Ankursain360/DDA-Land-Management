@@ -19,8 +19,8 @@
         {
         <tr>
 
-            <td>@item.Village.Name</td>
-            <td>@item.Khasra.Name</td>
+            <td>@(item.Village == null ?"":item.Village.Name)</td>
+            <td>@(item.Khasra == null ?"":item.Khasra.Name)</td>
             <td>@item.PossDate.ToString("dd-MMM-yyyy")</td>
             <td>@item.PossType</td>
   

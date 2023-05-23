@@ -190,10 +190,10 @@ namespace Vacant.Land.Api.Controllers
                             Notification_s_US_22 = data[i].un22Number /*+ "-" + data[i].un22Date*/,
                             un22Date = data[i].un22Date,
                             un22document = data[i].un22document == null ? "" : System.IO.File.Exists(un22documentPath + data[i].un22document)?un22LivePath + data[i].un22document:"",
-                            Awards = data[i].AwardNumber/* + data[i].AwardDate*/,
+                            AwardsNumber = data[i].AwardNumber/* + data[i].AwardDate*/,
                             AwardDate = data[i].AwardDate,
                             Awarddocument = data[i].Awarddocument == null ? "" : System.IO.File.Exists(AwarddocumentPath + data[i].Awarddocument)?AwardLivePath + data[i].Awarddocument:"",
-                            Date_of_Possesion = data[i].PossDate,
+                            DateofPossesion = data[i].PossDate,
                             possessiondocument = data[i].possessiondocument == null ? "" : System.IO.File.Exists(possessiondocumentPath + "" + data[i].possessiondocument) ? possessionLivePath + data[i].possessiondocument :""
                         });
                     }

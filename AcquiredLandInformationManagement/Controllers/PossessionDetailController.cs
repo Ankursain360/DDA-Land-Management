@@ -108,8 +108,8 @@ namespace AcquiredLandInformationManagement.Controllers
                         if (result == true)
                         {
                             ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                            var list = await _Possessiondetailservice.GetAllPossessiondetails();
-                            return View("Index", list);
+                            //var list = await _Possessiondetailservice.GetAllPossessiondetails();
+                            return View("Index");
                         }
                         else
                         {
@@ -200,8 +200,8 @@ namespace AcquiredLandInformationManagement.Controllers
                         if (result == true)
                         {
                             ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                            var list = await _Possessiondetailservice.GetAllPossessiondetails();
-                            return View("Index", list);
+                            //var list = await _Possessiondetailservice.GetAllPossessiondetails();
+                            return View("Index");
                         }
                         else
                         {
