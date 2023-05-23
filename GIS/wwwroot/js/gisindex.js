@@ -691,16 +691,26 @@ function showGCPPoints(response, villageid) {
     var poly = $.map(response, function (el) { return el; });
 
     for (i = 0; i < poly.length; i++) {
-        var imgg = {
-            url: 'img/dot.png',
-            size: new google.maps.Size(12, 12),
-            origin: new google.maps.Point(0, 0),
-            scaledSize: new google.maps.Size(12, 12)
-        };
+        //var imgg = {
+        //    url: 'img/dot.png',
+        //    size: new google.maps.Size(12, 12),
+        //    origin: new google.maps.Point(0, 0),
+        //    scaledSize: new google.maps.Size(12, 12)
+        //};
+
+        var img = {
+            path: google.maps.SymbolPath.CIRCLE,
+            fillColor: poly[i].fillColor,
+            fillOpacity: 0.6,
+            strokeColor: poly[i].fillColor,
+            strokeOpacity: 0.9,
+            strokeWeight: 1,
+            scale: 4
+        }
         var marker = new google.maps.Marker({
-            position: { lng: parseFloat(poly[i].xcoordinate), lat: parseFloat (poly[i].ycoordinate) },
+            position: { lng: parseFloat(poly[i].xcoordinate), lat: parseFloat(poly[i].ycoordinate) },
             map: map,
-            icon: imgg,
+            icon: img,
             title: poly[i].label
         });
 
@@ -748,7 +758,7 @@ function showDisBoundariesVillageBoundary(response, villageid) {
         ln.setOptions({ strokeWeight: 3, strokeColor: villageboundary[ac].fillColor, fillOpacity: 0, clickable: !1 });
         VILLAGEBOUNDARY_LAYER.push({ "villageid": villageboundary[ac].villageId, "layer": ln });
         //VILLAGEBOUNDARY_LAYER.push(ln);
-        Polys.push(ln); 
+        Polys.push(ln);
     }
 }
 function showDisBoundariesCleantext(response, villageid) {
@@ -936,7 +946,7 @@ function showTempleLayer(response, villageid) {
     for (al = 0; al < templ.length; al++) {
         var ln = createLine(getLatLongArr(templ[al].polygon));
         ln.setOptions({ strokeWeight: 1, strokeColor: templ[al].fillColor });
-        TEMPLE_LAYER.push({ "villageid": templ[al].villageId, "layer": ln }); 
+        TEMPLE_LAYER.push({ "villageid": templ[al].villageId, "layer": ln });
         Polys.push(ln);
     }
 }
