@@ -30,6 +30,11 @@ namespace Libraries.Repository.IEntityRepository
             return villageList;
         }
 
+        public async Task<List<Acquiredlandvillage>> GetAllVillage()
+        {
+            List<Acquiredlandvillage> villageList = await _dbContext.Acquiredlandvillage.Where(x => x.IsActive == 1).ToListAsync();
+            return villageList;
+        }
 
 
         public async Task<List<Khasra>> BindKhasra(int? villageId)

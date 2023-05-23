@@ -54,28 +54,29 @@ namespace Vacant.Land.Api.Controllers
         [HttpGet]
         [Route("[action]")]
         [Route("api/AcquiredlandvillageApi/GetAcquiredlandvillage")]
-        public async Task<IActionResult> GetAcquiredlandvillage(int ZoneId)
+        public async Task<IActionResult> GetAcquiredlandvillage()
         {
             AcquiredlandvillageResponseDetails acquiredlandvillageResponse = new AcquiredlandvillageResponseDetails();
             List<AcquiredlandvillageApiDto> dtoList = new List<AcquiredlandvillageApiDto>();
-            if (ZoneId == 0 || ZoneId < 0)
-            {
-                acquiredlandvillageResponse = new AcquiredlandvillageResponseDetails
-                {
-                    responseCode = "403",
-                    responseMessage = "Please Insert ZoneId/Valid ZoneId",
-                    response = dtoList
-                };
+            //if (ZoneId == 0 || ZoneId < 0)
+            //{
+            //    acquiredlandvillageResponse = new AcquiredlandvillageResponseDetails
+            //    {
+            //        responseCode = "403",
+            //        responseMessage = "Please Insert ZoneId/Valid ZoneId",
+            //        response = dtoList
+            //    };
 
-                return Ok(acquiredlandvillageResponse);
-            }
-            var data = await _service.GetAllVillage(ZoneId);
+            //    return Ok(acquiredlandvillageResponse);
+            //}
+            var data = await _service.GetAllVillage();
             if (data != null && data.Count != 0)
             {
                 for (int i = 0; i < data.Count; i++)
                 {
                     dtoList.Add(new AcquiredlandvillageApiDto()
                     {
+                        ZoneId = data[i].ZoneId??0,
                         villageID = data[i].Id,
                         village_NAME = data[i].Name,
                     });

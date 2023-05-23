@@ -183,7 +183,10 @@ namespace AcquiredLandInformationManagement.Controllers
                     str.Append("|");
                 str.Append("Built Up");
             }
-
+            if (undersection4plot.PossessionTaken == "Yes")
+            {
+                ModelState.Remove("ReasonNonPoss");
+            }
             if (ModelState.IsValid)
             {
                 if (IsValidpdf == true)

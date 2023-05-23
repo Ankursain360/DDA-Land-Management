@@ -58,7 +58,11 @@ namespace Libraries.Service.ApplicationService
             List<Acquiredlandvillage> villageList = await _possessiondetailsRepository.GetAllVillage(ZoneId);
             return villageList;
         }
-
+        public async Task<List<Acquiredlandvillage>> GetAllVillage()
+        {
+            List<Acquiredlandvillage> villageList = await _possessiondetailsRepository.GetAllVillage();
+            return villageList;
+        }
 
         public async Task<List<Possessiondetails>> GetAllPossessiondetails()
         {

@@ -6,7 +6,8 @@ namespace Dto.Master
 {
     public class AcquiredlandvillageApiDto
     {
-        public int villageID { get; set; } 
+        public int ZoneId { get; set; } 
+        public int villageID { get; set; }
         public string village_NAME { get; set; }
         //public DateTime CREATIONDATE { get; set; }
         //public int CREATEDBY { get; set; }

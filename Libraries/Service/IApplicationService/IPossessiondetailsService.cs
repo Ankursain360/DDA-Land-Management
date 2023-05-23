@@ -14,6 +14,7 @@ namespace Libraries.Service.IApplicationService
     {
         Task<List<Khasra>> BindKhasra(int? villageId);
         Task<List<Acquiredlandvillage>> GetAllVillage(int ZoneId);
+        Task<List<Acquiredlandvillage>> GetAllVillage();
         Task<List<Possessiondetails>> GetAllPossessiondetails();
         Task<List<Possessiondetails>> GetAllNoPossessiondetailsList(PossessiondetailsSearchDto model);
         Task<List<Possessiondetails>> GetPossessiondetailsUsingRepo();
