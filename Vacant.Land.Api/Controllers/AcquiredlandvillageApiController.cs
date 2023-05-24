@@ -43,13 +43,13 @@ namespace Vacant.Land.Api.Controllers
             un6documentPath = _configuration.GetSection("FilePaths:US6:DocumentFIlePath").Value.ToString();
             un6LivePath = _configuration.GetSection("FilePaths:US6:LivePath").Value.ToString();
             un17documentPath = _configuration.GetSection("FilePaths:US17:DocumentFIlePath").Value.ToString();
-            un17LivePath = _configuration.GetSection("FilePaths:US6:LivePath").Value.ToString();
+            un17LivePath = _configuration.GetSection("FilePaths:US17:LivePath").Value.ToString();
             un22documentPath = _configuration.GetSection("FilePaths:US22:DocumentFIlePath").Value.ToString();
-            un22LivePath = _configuration.GetSection("FilePaths:US6:LivePath").Value.ToString();
+            un22LivePath = _configuration.GetSection("FilePaths:US22:LivePath").Value.ToString();
             AwarddocumentPath = _configuration.GetSection("FilePaths:AwardMaster:DocumentFIlePath").Value.ToString();
-            AwardLivePath = _configuration.GetSection("FilePaths:US6:LivePath").Value.ToString();
+            AwardLivePath = _configuration.GetSection("FilePaths:AwardMaster:LivePath").Value.ToString();
             possessiondocumentPath = _configuration.GetSection("FilePaths:Possesion:DocumentFIlePath").Value.ToString();
-            possessionLivePath = _configuration.GetSection("FilePaths:US6:LivePath").Value.ToString();
+            possessionLivePath = _configuration.GetSection("FilePaths:Possesion:LivePath").Value.ToString();
         }
         [HttpGet]
         [Route("[action]")]
