@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System;
 using System.Linq;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-
+using Newtonsoft.Json;
 namespace Vacant.Land.Api.Controllers
 {
     [ApiController]
@@ -32,6 +32,22 @@ namespace Vacant.Land.Api.Controllers
             List<landverificationdetailsDto> DtoList = new List<landverificationdetailsDto>();
             if (dto != null)
             {
+                string LogPath = "C://Vedang//DDA//Document//LMIS_Data_verfication_logs//";
+                string LogFileName = LogPath+ "/LMIS_Data_verfication_logs_" + DateTime.Now.ToString("dd-mm-yyyy_hh_mm_ss") + ".txt";
+                var logdata = JsonConvert.SerializeObject(dto);
+                if (!Directory.Exists(LogPath))
+                {
+                    DirectoryInfo directoryInfo = Directory.CreateDirectory(LogPath);
+                }
+                using (StreamWriter writer = new StreamWriter(LogFileName, true))
+                {
+                    writer.WriteLine("------------- Log Captured at" + DateTime.Now.ToString("dd.MMM.yyyy hh:mm:ss tt") + "----------");
+                    writer.WriteLine("-- Data Received from DDA Verification Software ---");
+                    writer.WriteLine(logdata);
+                    writer.WriteLine("   ");
+                   writer.WriteLine("-- end of Log");
+                }
+
                 if (dto.signatureData != null && dto.signatureData[0].villagedetails != null)
                 {
                     for (int i = 0; i < dto.signatureData.Count; i++)
@@ -48,7 +64,7 @@ namespace Vacant.Land.Api.Controllers
                             return Ok(apiResponseDetails);
                         }
                     }
-                   
+
                     dto.AckID = Guid.NewGuid().ToString();
                     var data = await _landverificationdetailsService.Create(dto);
 
@@ -106,6 +122,15 @@ namespace Vacant.Land.Api.Controllers
                         response = DtoList
                     };
 
+                    var successresponse= JsonConvert.SerializeObject(apiResponseDetails);
+                    using (StreamWriter writer = new StreamWriter(LogFileName, true))
+                    {
+                        writer.WriteLine("------------- Log Captured at" + DateTime.Now.ToString("dd.MMM.yyyy hh:mm:ss tt") + "----------");
+                        writer.WriteLine("-- Response Data sent to DDA Verification Software ---");
+                        writer.WriteLine(successresponse);
+                        writer.WriteLine("   ");
+                        writer.WriteLine("-- end of Log");
+                    }
                     return Ok(apiResponseDetails);
                 }
 

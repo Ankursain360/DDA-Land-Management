@@ -53,9 +53,9 @@ namespace Libraries.Service.ApplicationService
         }
 
 
-        public async Task<List<Acquiredlandvillage>> GetAllVillage(int ZoneId)
+        public async Task<List<Acquiredlandvillage>> GetAllVillage(AcquiredlandvillageApiDto model)
         {
-            List<Acquiredlandvillage> villageList = await _possessiondetailsRepository.GetAllVillage(ZoneId);
+            List<Acquiredlandvillage> villageList = await _possessiondetailsRepository.GetAllVillage(model);
             return villageList;
         }
         public async Task<List<Acquiredlandvillage>> GetAllVillage()
