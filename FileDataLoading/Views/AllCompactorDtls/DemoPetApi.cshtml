@@ -1,0 +1,95 @@
+﻿@model Dto.Master.DemoPetApiConsume
+
+@await Component.InvokeAsync("PageHeader", new { pageName = "Login Details" })
+
+<div class="pt-3">
+
+    <form asp-action="DemoPetApi" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+        <div class="mb-3 d-flex">Details<span class="ms-auto"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span></div>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="User_Name" required placeholder="User Name" type="text"
+                           class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="User_Name" class="text-danger "></span>
+                    <label class="floating-label">User Name<span style="color:red">*</span> </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="Mobile_No" placeholder="Mobile No" type="text"
+                           class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="Mobile_No" class="text-danger "></span>
+                    <label class="floating-label">Mobile No<span style="color:red">*</span> </label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class=" col-md-4">
+                <button class="btn btn-theme " type="submit">Submit</button>
+
+            </div>
+            @*<div class=" col-md-4">
+            <button class="btn btn-link btn-block d-flex" id="btnReset" type="submit">
+            <i class="ri-refresh-line me-2"></i>Reset
+            </button>
+            </div>*@
+        </div>
+
+    </form>
+
+    @if (Model != null)
+    {
+        <div class="table-section bg-white border shadow rounded">
+
+
+            <div class="table-responsive ">
+
+                <table class="table table-sm table-bordered mb-0 table-striped">
+                    <thead class="text-nowrap">
+                        @*<tr  style="text-align:center"> <th colspan="2"> Compactor Details</th></tr>*@
+                       @* <tr>
+                            <th> MAIN FILE NO</th>
+                            <th> @Model.cargo[0].MAIN_FILE_NO</th>
+                        </tr>*@
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>User Name</th>
+                            <td>@Model.User_Name</td>
+                        </tr>
+                        <tr>
+                            <th>Mobile No</th>
+                            <td>@Model.Mobile_No</td>
+                        </tr>
+                        <tr>
+                            <th>Active Status</th>
+                            <td>@(Model.ActiveStatus == 0?"Yes":"")</td>
+                        </tr>
+                        <tr>
+                            <th>ID</th>
+                            <td>@Model.Id</td>
+                        </tr>
+                       
+                        <tr>
+                            <th>OTP</th>
+                            <td>@Model.OTP</td>
+                        </tr>
+                        
+                    </tbody>
+
+                </table>
+            </div>
+
+
+        </div>
+
+    }
+    else
+    {
+        <p>
+            <b style="text-align:center"> No Record Available! </b>
+        </p>
+    }
+</div>

@@ -51,9 +51,10 @@ namespace Vacant.Land.Api.Controllers
             possessiondocumentPath = _configuration.GetSection("FilePaths:Possesion:DocumentFIlePath").Value.ToString();
             possessionLivePath = _configuration.GetSection("FilePaths:Possesion:LivePath").Value.ToString();
         }
-        [HttpPost]
+        
         [Route("[action]")]
         [Route("api/AcquiredlandvillageApi/GetAcquiredlandvillage")]
+        [HttpPost]
         public async Task<IActionResult> GetAcquiredlandvillage([FromBody] AcquiredlandvillageApiDto model)
         {
             AcquiredlandvillageResponseDetails acquiredlandvillageResponse = new AcquiredlandvillageResponseDetails();

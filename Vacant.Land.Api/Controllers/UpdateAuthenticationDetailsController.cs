@@ -10,6 +10,8 @@ using System;
 using System.Linq;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Newtonsoft.Json;
+using Microsoft.Extensions.Configuration;
+
 namespace Vacant.Land.Api.Controllers
 {
     [ApiController]
@@ -18,12 +20,14 @@ namespace Vacant.Land.Api.Controllers
     public class UpdateAuthenticationDetailsController : ControllerBase
     {
         private readonly ILandverificationdetailsService _landverificationdetailsService;
-
-        public UpdateAuthenticationDetailsController(ILandverificationdetailsService landverificationdetailsService)
+        private readonly IConfiguration _configuration;
+       
+        public UpdateAuthenticationDetailsController(ILandverificationdetailsService landverificationdetailsService, IConfiguration configuration)
         {
             _landverificationdetailsService = landverificationdetailsService;
+            _configuration = configuration;
         }
-        [HttpPost]
+        [HttpPost] 
         [Route("[action]")]
         [Route("api/UpdateAuthenticationDetails/SaveAuthenticationDetails")]
         public async Task<IActionResult> SaveAuthenticationDetails([FromBody] landverificationdetailsDto dto)
@@ -32,7 +36,7 @@ namespace Vacant.Land.Api.Controllers
             List<landverificationdetailsDto> DtoList = new List<landverificationdetailsDto>();
             if (dto != null)
             {
-                string LogPath = "C://Vedang//DDA//Document//LMIS_Data_verfication_logs//";
+                string LogPath = _configuration.GetSection("FilePaths:Logs:LogFilePath").Value.ToString();
                 string LogFileName = LogPath+ "/LMIS_Data_verfication_logs_" + DateTime.Now.ToString("dd-mm-yyyy_hh_mm_ss") + ".txt";
                 var logdata = JsonConvert.SerializeObject(dto);
                 if (!Directory.Exists(LogPath))
@@ -45,7 +49,7 @@ namespace Vacant.Land.Api.Controllers
                     writer.WriteLine("-- Data Received from DDA Verification Software ---");
                     writer.WriteLine(logdata);
                     writer.WriteLine("   ");
-                   writer.WriteLine("-- end of Log");
+                    writer.WriteLine("-- end of Log");
                 }
 
                 if (dto.signatureData != null && dto.signatureData[0].villagedetails != null)

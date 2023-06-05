@@ -8,6 +8,7 @@ using Dto.Master;
 using Microsoft.AspNetCore.Mvc;
 //using Newtonsoft.Json;
 using Microsoft.Extensions.Configuration;
+using NPOI.POIFS.Crypt.Dsig;
 
 namespace FileDataLoading.Controllers
 {
@@ -34,7 +35,6 @@ namespace FileDataLoading.Controllers
                         if (!apiResponse.Contains("No Record Found"))
                         {
                             var data2 = JsonSerializer.Deserialize<ApiResponseCompactor>(apiResponse);
-
                             return View(data2);
                         }
                         else
@@ -79,10 +79,52 @@ namespace FileDataLoading.Controllers
                     }
                    
                 }
-            }
-           
+            }          
 
         }
-       
+        public IActionResult DemoPetApi() 
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> DemoPetApi(DemoPetApiConsume demo)
+        {
+
+
+            var client = new HttpClient();
+            var request = new HttpRequestMessage(HttpMethod.Post, _configuration.GetSection("PetOwnerLoginDetailsApi").Value.ToString());
+            var content = new StringContent("{\r\n    \"User_Name\":\"yash001\",\r\n    \"Mobile_No\":\"8398835630\"\r\n}", null, "application/json");
+            request.Content = content;
+            var response = await client.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+            Console.WriteLine(await response.Content.ReadAsStringAsync());
+            var data = await response.Content.ReadAsStringAsync();
+
+            return View();
+
+            ////Reservation reservation = new Reservation();
+            //using (var httpClient = new HttpClient()) 
+            //{
+            //    using (var response = await httpClient.PostAsync(_configuration.GetSection("PetOwnerLoginDetailsApi").Value + demo.User_Name +  demo.Mobile_No))
+
+            //    {
+            //        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            //        {
+            //            string apiResponse = await response.Content.ReadAsStringAsync();
+            //            var data = JsonSerializer.Deserialize<DemoPetApiConsume>(apiResponse);
+            //            return View(data);
+
+            //        }
+            //        else
+            //        {
+            //            return View();
+
+            //        }
+
+            //    }
+            //}
+
+        }
+
     }
 }
