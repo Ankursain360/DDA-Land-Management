@@ -51,25 +51,25 @@ namespace Vacant.Land.Api.Controllers
             possessiondocumentPath = _configuration.GetSection("FilePaths:Possesion:DocumentFIlePath").Value.ToString();
             possessionLivePath = _configuration.GetSection("FilePaths:Possesion:LivePath").Value.ToString();
         }
-        [HttpGet]
+        [HttpPost]
         [Route("[action]")]
         [Route("api/AcquiredlandvillageApi/GetAcquiredlandvillage")]
-        public async Task<IActionResult> GetAcquiredlandvillage()
+        public async Task<IActionResult> GetAcquiredlandvillage([FromBody] AcquiredlandvillageApiDto model)
         {
             AcquiredlandvillageResponseDetails acquiredlandvillageResponse = new AcquiredlandvillageResponseDetails();
             List<AcquiredlandvillageApiDto> dtoList = new List<AcquiredlandvillageApiDto>();
-            //if (ZoneId == 0 || ZoneId < 0)
-            //{
-            //    acquiredlandvillageResponse = new AcquiredlandvillageResponseDetails
-            //    {
-            //        responseCode = "403",
-            //        responseMessage = "Please Insert ZoneId/Valid ZoneId",
-            //        response = dtoList
-            //    };
+            if (model.ZoneId == 0 || model.ZoneId < 0)
+            {
+                acquiredlandvillageResponse = new AcquiredlandvillageResponseDetails
+                {
+                    responseCode = "403",
+                    responseMessage = "Please Insert ZoneId/Valid ZoneId",
+                    response = dtoList
+                };
 
-            //    return Ok(acquiredlandvillageResponse);
-            //}
-            var data = await _service.GetAllVillage();
+                return Ok(acquiredlandvillageResponse);
+            }
+            var data = await _service.GetAllVillage(model);
             if (data != null && data.Count != 0)
             {
                 for (int i = 0; i < data.Count; i++)
@@ -159,7 +159,7 @@ namespace Vacant.Land.Api.Controllers
             }
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("[action]")]
         [Route("api/DepartmentAPI/GetVillageAndKhasraReport")]
         public async Task<IActionResult> GetVillageAndKhasraReport([FromBody] VillageAndKhasraDetailsSearchDto model)

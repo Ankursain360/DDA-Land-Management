@@ -13,7 +13,7 @@ namespace Libraries.Service.IApplicationService
     public interface IPossessiondetailsService
     {
         Task<List<Khasra>> BindKhasra(int? villageId);
-        Task<List<Acquiredlandvillage>> GetAllVillage(int ZoneId);
+        Task<List<Acquiredlandvillage>> GetAllVillage(AcquiredlandvillageApiDto model);
         Task<List<Acquiredlandvillage>> GetAllVillage();
         Task<List<Possessiondetails>> GetAllPossessiondetails();
         Task<List<Possessiondetails>> GetAllNoPossessiondetailsList(PossessiondetailsSearchDto model);
