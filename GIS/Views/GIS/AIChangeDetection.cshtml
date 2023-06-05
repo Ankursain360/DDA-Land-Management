@@ -8,7 +8,7 @@
     <div class="pt-3">
         <form id="frmInfo" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" method="post" asp-action="Process" enctype="multipart/form-data">
             <div id="divBulkFileUpload">
-                <h3 class="my-3 d-flex sub-heading">Bulk Upload</h3>
+                <h3 class="my-3 d-flex sub-heading">Upload Images</h3>
                 <div class="row mt-md-3">
                     <div class="col-md-6">
                         <div class="floating-label-wrap mb-3 mb-md-0">
@@ -36,7 +36,10 @@
             <hr />
             <div class="row mt-md-3">
                 <div class="col-md-12">
-                    <img src="@Model.ChangedImage" alt="img" class="img-responsive img-thumbnail img-fluid" />
+                    @if (Model != null)
+                    {
+                        <img src="@Model.ChangedImage" alt="img" class="img-responsive img-thumbnail img-fluid" />
+                    }
                 </div>
             </div>
         </form>
