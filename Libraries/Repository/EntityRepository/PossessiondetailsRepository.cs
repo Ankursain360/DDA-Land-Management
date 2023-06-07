@@ -240,7 +240,8 @@ namespace Libraries.Repository.IEntityRepository
         }
         public async Task<List<Zone>> GetZoneListApi()
         {
-            var data = await _dbContext.Zone.Where(x => x.IsActive == 1 && x.DepartmentId == 13).ToListAsync();
+            int[] ZondeId = { 67, 64, 65, 68, 63, 14, 66, 69, 58, 57, 7 };
+            var data = await _dbContext.Zone.Where(x => x.IsActive == 1 && x.DepartmentId == 13 && !ZondeId.Contains(x.Id)).ToListAsync();
             return data;
         }
         public async Task<List<Possessiondetails>> GetAllPossessionReport(PossessionReportSearchDto model)

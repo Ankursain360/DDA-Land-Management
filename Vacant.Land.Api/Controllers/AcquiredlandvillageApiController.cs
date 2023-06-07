@@ -123,7 +123,7 @@ namespace Vacant.Land.Api.Controllers
                         dtoData.Add(new AcquiredlandKhasraApiDto()
                         {
                             KhasraID = data[i].Id,
-                            Khasra_NAME = data[i].Name,
+                            Khasra_NAME = data[i].RectNo +"//"+ data[i].Name,
 
                         });
                     }
