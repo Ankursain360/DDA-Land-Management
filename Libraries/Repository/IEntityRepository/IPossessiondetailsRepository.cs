@@ -11,7 +11,6 @@ namespace Libraries.Repository.IEntityRepository
 {
     public interface IPossessiondetailsRepository : IGenericRepository<Possessiondetails>
     {
-
         Task<List<Possessiondetails>> GetAllPossessiondetails();
         Task<List<Possessiondetails>> GetAllNoPossessiondetailsList(PossessiondetailsSearchDto model);
         Task<List<Acquiredlandvillage>> GetAllVillage(AcquiredlandvillageApiDto model);
