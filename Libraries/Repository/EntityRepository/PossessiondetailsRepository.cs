@@ -26,8 +26,8 @@ namespace Libraries.Repository.IEntityRepository
 
         public async Task<List<Acquiredlandvillage>> GetAllVillage(AcquiredlandvillageApiDto model)
         {
-            String Acquired = "A";
-            List<Acquiredlandvillage> villageList = await _dbContext.Acquiredlandvillage.Where(x => x.IsActive == 1 && x.ZoneId == model.ZoneId && Acquired.Contains(x.Acquired)).ToListAsync();
+            //String Acquired = "A";
+            List<Acquiredlandvillage> villageList = await _dbContext.Acquiredlandvillage.Where(x => x.IsActive == 1 && x.ZoneId == model.ZoneId && x.Acquired.ToUpper().Trim() == "A").ToListAsync();
             return villageList;
         }
 
