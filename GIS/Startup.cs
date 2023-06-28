@@ -81,6 +81,7 @@ namespace GIS
             services.AddMvc(option =>
             {
                 option.Filters.Add(typeof(ExceptionLogFilter));
+                option.Filters.Add(typeof(AuditFilterAttribute));
             });
 
             services.RegisterDependency();
