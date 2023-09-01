@@ -175,6 +175,11 @@ $(function () {
             $('#spanVillage').empty().append('Village : ' + ui.item.label.toUpperCase())
             $('#aVillageName').show();
             HttpGet(`/GIS/GetVillageDetails?VillageId=${parseInt(ui.item.value)}`, 'json', function (response) {
+                //For single selection only
+                if (VILLAGEID_UNIVERSAL.length > 0) {
+                    RemoveAllVillageLayer(VILLAGEID_UNIVERSAL[0]);
+                }
+                //end 
                 showDisBoundariesVillage(response[0].polygon, response[0].xcoordinate, response[0].ycoordinate, response[0].id);
             });
         },
