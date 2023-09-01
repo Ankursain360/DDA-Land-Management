@@ -1,0 +1,115 @@
+﻿@await Component.InvokeAsync("PageHeader",new {pageName = "Decision Support System"})
+<div class="pt-3">
+    <div class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+        <h3 class="mb-3 d-flex">Search</h3>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="text" class="floating-label-field floating-label-field--s3" placeholder="Zone" />
+                    <label class="floating-label">Zone</label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="text" class="floating-label-field floating-label-field--s3" placeholder="Village" />
+                    <label class="floating-label">Village</label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-12 col-xl-3">
+                <div class="row">
+                    <div class="col-6 col-md-5 col-xl-6">
+                        <button id="btnReset" class="btn btn-link btn-block d-flex align-items-center justify-content-center" type="reset">
+                            <i class="ri-refresh-line me-2"></i>Reset
+                        </button>
+                    </div>
+                    <div class="col-6 col-md-7 col-xl-6">
+                        <button id="btnSearch" class="btn btn-theme btn-block" type="submit">Search</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="table-section bg-white border shadow rounded">
+        <div class="short-section d-md-flex align-items-center">
+            <div class="p-3 d-flex align-items-end me-auto">
+                <div class="floating-label-wrap">
+                    <select id="ddlSort" class="floating-label-field floating-label-field--s3">
+
+                        <option value="Zone">Zone</option>
+                        <option value="Village">Village</option>
+                        <option value="IsActive">Status</option>
+
+                    </select>
+                    <label for="field-1" class="floating-label">Sort by</label>
+                </div>
+                <div class="short-btn d-flex align-items-center">
+                    <span class="btn slow active" id="btnAscending" title="Ascending order"><i class="ri-sort-asc"></i></span>
+                    <span class="btn slow" id="btnDescending" title="Descending order"><i class="ri-sort-desc"></i></span>
+                </div>
+            </div>
+
+
+            <div style="margin-left: 750px;" class="download-table d-flex align-items-center px-3 mb-3 mb-md-0">
+                <a href="DistrictCreate.html" class="d-flex align-items-center btn btn-primary me-2">
+                    <i class="ri-add-fill me-2 mr-lg-1"></i>
+                    <small>Add More</small>
+                </a>
+            </div>
+        </div>
+
+        <div class="table-responsive px-2" id="divDistrict">
+        </div>
+        <form method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" action="/ApprovalProcess/Create">
+            <h3 class="mb-3 d-flex">DDA Decision Support System</h3>
+            <div class="row my-md-3">
+                <div class="col-md-12">
+                    <div class="table-section bg-white border shadow rounded">
+                        <div class="table-responsive px-2">
+                            <table class="table table-sm table-bordered mb-0 table-striped">
+                                <thead class="text-nowrap">
+                                    <tr>
+                                        <th>Sr.No</th>
+                                        <th>Zone</th>
+                                        <th>Village</th>
+                                        <th>Property No</th>
+                                        <th>Encroachment Detected Yes/No</th>
+                                        <th>In case of Yes Encroachment Area</th>
+                                        <th>GIS Coordinates for encroachment</th>
+                                        <th>Status</th>
+                                        <th>Operations</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>North-East</td>
+                                        <td>Karawal Nagar</td>
+                                        <td>335</td>
+                                        <td>Yes</td>
+                                        <td>500sql mtr</td>
+                                        <td>Saddam Hussain</td>
+                                        <td>Active</td>
+                                        <td>
+                                            <div class="action-btns">
+                                                <a asp-action="View" title="View" class="view">  <i class="ri-eye-fill"></i> </a>
+                                                <a asp-action="Edit" title="edit" class="edit"> <i class="ri-edit-line"></i> </a>
+                                                <a asp-action="Delete" title="delete" class="remove" onclick="return confirm('Are you sure, you want to delete this record?')"><i class="ri-delete-bin-5-fill"></i></a>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+        </form>
+    </div>
+</div>
