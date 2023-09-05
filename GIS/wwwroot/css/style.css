@@ -494,6 +494,29 @@ a.no-dec {
         height: calc(100vh - 140px);
         overflow: auto;
     }
+
+
+#GCPRouteDetailShow {
+    position: fixed;
+    z-index: 99999;
+    right: 0;
+    max-width: 320px;
+    min-width: 320px;
+    height:100px;
+}
+
+.table-sm > :not(caption) > * > * {
+    padding: .35rem .35rem;
+}
+
+#GCPRouteDetailShow .card-header {
+    cursor: move;
+}
+
+#GCPRouteDetailShow .div {
+    /*height: calc(100vh - 140px);*/
+    overflow: auto;
+}
 /*
 
 @media(min-width:576px) {}

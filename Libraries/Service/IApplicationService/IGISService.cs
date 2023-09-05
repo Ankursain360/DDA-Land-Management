@@ -1,4 +1,5 @@
-﻿using Dto.Master;
+﻿using Dto.GIS;
+using Dto.Master;
 using Libraries.Model.Entity;
 using Libraries.Service.Common;
 using System.Collections.Generic;
@@ -51,5 +52,7 @@ namespace Libraries.Service.IApplicationService
         Task<List<GISKhasraDto>> GetKhasraList(int villageId);
         Task<List<Gisdata>> GetKhasraNoPolygon(int gisDataId);
         Task<GISKhasraUpdateResponseDto> UpdatekhasraNo(int khasraid, string khasraNo,int Userid);
+
+        Task<List<Gisdata>> GetGCPList(int villageId);
     }
 }

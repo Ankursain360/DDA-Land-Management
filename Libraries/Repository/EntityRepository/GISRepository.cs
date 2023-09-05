@@ -1,4 +1,5 @@
-﻿using Dto.Master;
+﻿using Dto.GIS;
+using Dto.Master;
 using Libraries.Model;
 using Libraries.Model.Entity;
 using Libraries.Repository.Common;
@@ -425,6 +426,13 @@ namespace Libraries.Repository.EntityRepository
                 _obj.responseMessage = " System is unable to update Khasra No, because there is some issue with data history records.";
             }
             return _obj;
+        }
+
+        public async Task<List<Gisdata>> GetGCPList(int villageId)
+        {
+            return await _dbContext.Gisdata
+                                    .Where(x => x.VillageId == villageId && x.IsActive == 1 && x.GisLayerId == 37)
+                                    .ToListAsync();
         }
 
     }

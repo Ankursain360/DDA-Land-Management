@@ -2,7 +2,7 @@
 
 
 var zoomZone = [];
-var map;
+var map, measureTool;
 var zoomZone = [];
 var zoomvillage = [];
 var ZoomPlot = [];
@@ -48,7 +48,7 @@ var DDA_VACANT_LAYER = [];
 var highlighted_khasra_LAYER = [];
 var TEMPLE_LAYER = [];
 var GCP_POINTS_LAYER = [];
-
+var OTHER_ZONE_LIST = [];
 
 $(document).ready(function () {
 
@@ -71,7 +71,7 @@ $(document).ready(function () {
                 for (var j = 0; j < response[i].village.length; j++) {
                     if (response[i].village[j].isActive == 1) {
                         html = html + '<a href="javascript:void(0);" id="V' + response[i].village[j].id + '" class="list-group-item list-group-item-action" onclick="showVillage(this.id)"><i class="ri-eye-line"></i> ' + response[i].village[j].name + '</a>';
-                        //  html = html + '<div class="form-check" style="border-bottom: 1px solid rgba(0, 0, 0, .125);"><input class="form-check-input"  type="checkbox" id="V' + response[i].village[j].id + '" onchange="showVillage(this.id)"> <label class="form-check-label" for="V' + response[i].village[j].id + '">' + response[i].village[j].name + '</label> <span id="z' + response[i].village[j].id + '" class="ri-zoom-in-line" style="display:none" onclick="ZoomtoVillage(' + response[i].village[j].ycoordinate + ',' + response[i].village[j].xcoordinate + ',\'' + response[i].village[j].name + '\');" title="Click here Zoom to ' + response[i].village[j].name + '"></span></div> ';
+                       // html = html + '<div class="form-check" style="border-bottom: 1px solid rgba(0, 0, 0, .125);"><input class="form-check-input"  type="checkbox" id="V' + response[i].village[j].id + '" onchange="showVillage(this.id)"> <label class="form-check-label" for="V' + response[i].village[j].id + '">' + response[i].village[j].name + '</label> <span id="z' + response[i].village[j].id + '" class="ri-zoom-in-line" style="display:none" onclick="ZoomtoVillage(' + response[i].village[j].ycoordinate + ',' + response[i].village[j].xcoordinate + ',\'' + response[i].village[j].name + '\');" title="Click here Zoom to ' + response[i].village[j].name + '"></span></div> ';
                         check++;
                     }
                 }
@@ -96,13 +96,93 @@ CoordMapType.prototype.getTile = function (coord, zoom, ownerDocument) {
     var div = ownerDocument.createElement('div');
     div.style.width = this.tileSize.width + 'px';
     div.style.height = this.tileSize.height + 'px';
-    div.style.backgroundColor = '#E5E3DF';
+    div.style.backgroundColor = '#F1F1F1';
     return div;
 };
 
 CoordMapType.prototype.name = 'Tile #s';
 CoordMapType.prototype.alt = 'Tile Coordinate Map Type';
 var coordinateMapType = new CoordMapType();
+
+
+//Route
+var source, destination;
+var directionsDisplay;
+var txtSource = $("#txtSource");
+var txtDestination = $("#txtDestination");
+var btnRoute = $("#btnRoute");
+var directionsService = new google.maps.DirectionsService();
+google.maps.event.addDomListener(btnRoute, 'click', function () {
+    new google.maps.places.SearchBox(txtSource);
+    new google.maps.places.SearchBox(txtDestination);
+    directionsDisplay = new google.maps.DirectionsRenderer({ 'draggable': true });
+});
+
+
+
+google.maps.event.addDomListener(window, 'load', function () {
+    new google.maps.places.SearchBox(document.getElementById('txtSource'));
+   // new google.maps.places.SearchBox(document.getElementById('txtDestination'));
+    directionsDisplay = new google.maps.DirectionsRenderer({ 'draggable': true });
+});
+
+
+function GetRoute() {
+    var delhi = new google.maps.LatLng(28.6508954, 76.9201811);
+    var mapOptions = {
+        zoom: 7,
+        center: delhi
+    };
+
+    directionsDisplay.setMap(map);
+    directionsDisplay.setPanel(document.getElementById('dvPanel'));
+
+    //*********DIRECTIONS AND ROUTE**********************//
+    source = document.getElementById("txtSource").value;
+    destination = document.getElementById("hdnDestination").value;
+    var Mode = $('input[name=radio]:checked').val();
+    var request = {
+        origin: source,
+        destination: destination,
+        travelMode: google.maps.TravelMode[Mode]
+    };
+    directionsService.route(request, function (response, status) {
+        if (status == google.maps.DirectionsStatus.OK) {
+            directionsDisplay.setDirections(response);
+        }
+    });
+
+    //*********DISTANCE AND DURATION**********************//
+    var dvDistance = document.getElementById("dvDistance");
+    dvDistance.innerHTML = "";
+    var dvPanel = document.getElementById("dvPanel");
+    dvPanel.innerHTML = "";
+    var service = new google.maps.DistanceMatrixService();
+    service.getDistanceMatrix({
+        origins: [source],
+        destinations: [destination],
+        travelMode: google.maps.TravelMode[Mode],
+        unitSystem: google.maps.UnitSystem.METRIC,
+        avoidHighways: true,
+        avoidTolls: true
+    }, function (response, status) {
+        if (status == google.maps.DistanceMatrixStatus.OK && response.rows[0].elements[0].status != "ZERO_RESULTS") {
+            var distance = response.rows[0].elements[0].distance.text;
+            var duration = response.rows[0].elements[0].duration.text;
+            var dvDistance = document.getElementById("dvDistance");
+            dvDistance.innerHTML = "";
+            dvDistance.innerHTML += "Distance: " + distance + "<br />";
+            dvDistance.innerHTML += "Duration:" + duration;
+            $('#GCPRouteDetailShow').show();
+        } else {
+            alert("Unable to find the Route.");
+            $('#GCPRouteDetailShow').hide();
+        }
+    });
+}
+
+
+//end of Route
 
 
 google.maps.event.addDomListener(window, 'load', initialize);
@@ -139,6 +219,29 @@ function initialize() {
         Zoom_change(map);
     });
 
+    measureTool = new MeasureTool(map, {
+        showSegmentLength: true,
+        tooltip: true,
+       //contextMenu: false,
+        unit: MeasureTool.UnitTypeId.METRIC // metric, imperial, or nautical
+    });
+
+    measureTool.addListener('measure_start', () => {
+        console.log('started');
+        //      measureTool.removeListener('measure_start')
+    });
+    measureTool.addListener('measure_end', (e) => {
+        console.log('ended', e.result);
+        //      measureTool.removeListener('measure_end');
+    });
+    measureTool.addListener('measure_change', (e) => {
+        console.log('changed', e.result);
+        //      measureTool.removeListener('measure_change');
+    });
+
+
+
+
     google.maps.event.addListener(map, 'mousemove', function (event) {
         displayCoordinates(event.latLng);
     });
@@ -166,9 +269,27 @@ function initialize() {
 }
 
 function getStateboundary() {
-    HttpGet(`/GIS/GetInitiallyStateDetails`, 'json', function (response) {
-        setStateboundary(response);
-    });
+    //HttpGet(`/GIS/GetInitiallyStateDetails`, 'json', function (response) {
+    //    setStateboundary(response);
+    //});
+
+    //const imageMapType = new google.maps.ImageMapType({
+    //    getTileUrl: function (coord, zoom) {
+    //        if (
+    //            zoom < 10 ||
+    //            zoom > 13 
+    //        ) {
+    //            return "";
+    //        }
+
+    //        return [
+    //            "https://zeevector.com/wp-content/uploads/LOGO/Delhi-Development-Authority-Logo-Vector-PNG.png"
+    //        ].join("");
+    //    },
+    //    tileSize: new google.maps.Size(256, 256),
+    //});
+
+    //map.overlayMapTypes.push(imageMapType);
 }
 
 function setStateboundary(response) {
@@ -188,10 +309,44 @@ function setStateboundary(response) {
 /*Zone Boundary Start*/
 function showZone(maxima) {
     var newdis_id = maxima.replace('Z', '');
+
+    //Remove all other zone villages
+    if (OTHER_ZONE_LIST.length > 0) {
+        $('#spanVillageName').empty();
+        let new_arr = [];
+        $.each(OTHER_ZONE_LIST, function (i, item) {
+            if (jQuery.inArray(item.villageid, new_arr) === -1) { 
+                new_arr.push(item);
+            }
+        });
+
+        const result = new_arr.filter(x => x.zoneid != newdis_id);
+
+        for (var villist = 0; villist < result.length; villist++) {
+            let s = '#V' + result[villist].villageid;
+            $(s).prop("checked", false);
+            //close accordien
+            $('#Z' + result[villist].zoneid).addClass("collapsed");
+            var divvalue = $('#Z' + result[villist].zoneid).attr("data-bs-target");
+            $(divvalue).removeClass("show");
+            //
+            
+            //hide zoom to icon
+            $('#z' + result[villist].villageid).hide();
+            //
+            //Remove all layers of perticular village
+            RemoveAllVillageLayer(result[villist].villageid);
+            VILLAGEID_UNIVERSAL.splice($.inArray(result[villist].villageid, VILLAGEID_UNIVERSAL), 1);
+
+            //$('#V' + result[villist].villageid).click();
+        }
+    }
+    //
+
     SetMapNull();
-    HttpGet(`/GIS/GetZoneDetails?ZoneId=${parseInt(newdis_id)}`, 'json', function (response) {
-        showDisBoundaries(response[0].polygon, response[0].xcoordinate, response[0].ycoordinate);
-    });
+    //HttpGet(`/GIS/GetZoneDetails?ZoneId=${parseInt(newdis_id)}`, 'json', function (response) {
+    //    showDisBoundaries(response[0].polygon, response[0].xcoordinate, response[0].ycoordinate);
+    //});
 }
 function showDisBoundaries(polygon, xaixis, yaixis) {
 
@@ -215,10 +370,11 @@ function showDisBoundaries(polygon, xaixis, yaixis) {
 /*Village Boundary Start*/
 // single village selection//
 function showVillage(maxima) {
-
+  $('#spanGCP').empty();
     var villageid = maxima.replace('V', '');
     HttpGet("/GIS/GetVillageDetails?VillageId=" + parseInt(villageid), 'json', function (response, villageid) {
         //Show Village Name
+
         $('#spanVillageName').empty().append(response[0].name.toUpperCase());
         $('#spanVillage').empty().append('Village : ' + response[0].name.toUpperCase())
         $('#aVillageName').show();
@@ -237,6 +393,7 @@ function showVillage(maxima) {
 
 ////Village Multiple selection
 //function showVillage(maxima) {
+//    $('#spanGCP').empty();
 //    if ($('#' + maxima).is(':checked')) {
 //        var villageid = maxima.replace('V', '');
 //        HttpGet("/GIS/GetVillageDetails?VillageId=" + parseInt(villageid), 'json', function (response, villageid) {
@@ -247,6 +404,12 @@ function showVillage(maxima) {
 //            //Show Zoom to Icon
 //            $('#z' + response[0].id).show();
 //            //
+//            //SHOW VILLAGE LABLE
+//            var lp = new google.maps.LatLng(parseFloat(response[0].ycoordinate), parseFloat(response[0].xcoordinate));
+//            var _label = new google.maps.Label({ visibleZoom: 13, hideZoom: 19, visible: true, map: map, cssName: 'sctrLbl', position: lp, text: response[0].name.toUpperCase() });
+//            VILLAGEBOUNDARY_LAYER.push({ "villageid": response[0].id, "layer": _label });
+//            //
+//            OTHER_ZONE_LIST.push({ "villageid": response[0].id, "zoneid": response[0].zoneId });
 //            showDisBoundariesVillage(response[0].polygon, response[0].xcoordinate, response[0].ycoordinate, response[0].id);
 //        });
 //    }
@@ -271,11 +434,12 @@ function ZoomtoVillage(yaixis, xaixis, villagename) {
 }
 function showDisBoundariesVillage(ploygn, xaixis, yaixis, villageid) {
 
-    //for (var x = 0; x < zoomvillage.length; x++) {
-    //    zoomvillage[x].setMap(null);
-    //}
+   // showVillage(villageid);
+     
     var sl = createPolygon(getLatLongArr(ploygn));
     sl.setOptions({ strokeWeight: 5, strokeColor: '#FF5733', fillOpacity: 0, clickable: !1 });
+
+   
     zoomvillage.push({ "villageid": villageid, "layer": sl });
     VILLAGEBOUNDARY_LAYER.push({ "villageid": villageid, "layer": sl });
     map.setZoom(15);
@@ -713,7 +877,7 @@ function showDDAVacantLandBoundaries(response, villageid) {
 //Added by sachin for GCP Point Data 24-04-2023
 function showGCPPoints(response, villageid) {
     var poly = $.map(response, function (el) { return el; });
-
+    var GCP_Count = $.map(response, function (el) { return el; });
     for (i = 0; i < poly.length; i++) {
         //var imgg = {
         //    url: 'img/dot.png',
@@ -741,6 +905,7 @@ function showGCPPoints(response, villageid) {
         GCP_POINTS_LAYER.push({ "villageid": poly[i].villageId, "layer": marker });
         Polys.push(marker);
     }
+    $('#spanGCP').empty().append(" // GCP Count:" + GCP_Count.length)
 
 }
 
@@ -1101,8 +1266,12 @@ $('#RouteDetail').on('click', function () {
 $('#HideRouteDetail').on('click', function () {
     $('#RouteDetailShow').hide();
 });
+$('#HideGCPRouteDetail').on('click', function () {
+    $('#GCPRouteDetailShow').hide();
+});
 $(function () {
     $("#RouteDetailShow").draggable();
+    $("#GCPRouteDetailShow").draggable();
 });
 
 $(document).on('change', '#chkAllImpInfra', function (e) {   /*Select all Functionality added by renu */
@@ -1520,6 +1689,7 @@ $(document).on('change', '#chkAllImpInfra', function (e) {   /*Select all Functi
 
         var GCP_points = data.filter((x) => x.gisLayerId === 37);//GCp points
         if (GCP_points.length > 0) {
+            $('#spanGCP').empty();
             $.each(GCP_POINTS_LAYER, function (index, value) {
                 value.layer.setMap(null);
             });
@@ -1969,6 +2139,7 @@ $('#infrastructureData').on('change', '.checkUncheckInfra', function (e) {  /*ch
 
         var GCPPoints = data.filter((x) => x.gisLayerId === 37);//GCP Points
         if (GCPPoints.length > 0 && GCPPoints[0].code == id) {
+            $('#spanGCP').empty();
             $.each(GCP_POINTS_LAYER, function (index, value) {
                 value.layer.setMap(null);
             });
@@ -2010,6 +2181,43 @@ function GetKhasraList(id) {
             showDisBoundariesVillage(response[0].polygon, response[0].xcoordinate, response[0].ycoordinate, response[0].id);
     });
 };
+
+function GetGCPVillageList(id) {
+    HttpGet(`/GIS/GetVillageList/?zoneId=${id}`, 'json', function (response) {
+        $("#GCPVillageId").val('0').trigger('change');
+        var html = '<option value="0">---Select---</option>';
+        for (var i = 0; i < response.length; i++) {
+            html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
+        }
+        $("#GCPVillageId").html(html);
+        $("#GPCListId").val('0').trigger('change');
+    });
+
+    HttpGet(`/GIS/GetZoneDetails?ZoneId=${parseInt(id)}`, 'json', function (response) {
+        showDisBoundaries(response[0].polygon, response[0].xcoordinate, response[0].ycoordinate);
+    });
+};
+
+
+function GetGCPList(id) {
+    HttpGet(`/GIS/GetGCPList/?villageId=${id}`, 'json', function (response) {
+        var html = '<option value="0">---Select---</option>';
+        for (var i = 0; i < response.length; i++) {
+            html = html + '<option value=' + response[i].ycoordinate + ',' + response[i].xcoordinate + ' on>' + response[i].label + '</option>';
+        }
+        $("#GPCListId").val('0').trigger('change');
+        $("#GPCListId").html(html);
+    });
+
+    HttpGet("/GIS/GetVillageDetails?VillageId=" + parseInt(id), 'json', function (response) {
+        if (response.length > 0)
+            showDisBoundariesVillage(response[0].polygon, response[0].xcoordinate, response[0].ycoordinate, response[0].id);
+    });
+};
+
+function setGCPValue(value) {
+    $('#hdnDestination').val(value);
+}
 
 function ShowKhasraNo(id) {
     var khasrano = id;
@@ -2306,6 +2514,7 @@ function RemoveAllVillageLayer(villageids) {
     });
 
     let gcppoints = GCP_POINTS_LAYER.filter((x) => x.villageid === villageid);
+    $('#spanGCP').empty();
     $.each(gcppoints, function (index, value) {
         value.layer.setMap(null);
     });

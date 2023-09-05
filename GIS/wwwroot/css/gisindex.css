@@ -1,4 +1,14 @@
-﻿.ui-autocomplete {
+﻿.sctrLbl {
+    color: #4285F4;
+    white-space: nowrap;
+    display: block;
+    position: relative;
+    font-size: 18px;
+    left: -50%;
+    text-shadow: 2px 0 0 #fff, -2px 0 0 #fff, 0 2px 0 #fff, 0 -2px 0 #fff, 1px 1px #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff;
+}
+
+.ui-autocomplete {
     max-height: 400px;
     overflow-y: auto; /* prevent horizontal scrollbar */
     overflow-x: hidden; /* add padding to account for vertical scrollbar */

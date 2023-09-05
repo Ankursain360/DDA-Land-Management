@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Dto.GIS;
 using Dto.Master;
 using Libraries.Model.Entity;
 using Libraries.Repository.Common;
@@ -242,6 +243,13 @@ namespace Libraries.Service.ApplicationService
             var result = await _iGISSRepository.UpdatekhasraNo(khasraid, KhasraNo, Userid); 
              
             return result;
+        }
+
+        public async Task<List<Gisdata>> GetGCPList(int villageId)
+        {
+            var GCPPoints = await _iGISSRepository.GetGCPList(villageId);
+            
+            return GCPPoints;
         }
     }
 }

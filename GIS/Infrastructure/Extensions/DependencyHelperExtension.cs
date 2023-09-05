@@ -48,6 +48,7 @@ namespace GIS.Infrastructure.Extensions
             services.AddScoped<ICourtRepository, CourtRepository>();
             services.AddScoped<IApprovalstatusRepository, ApprovalstatusRepository>();
             services.AddScoped<IGISSRepository, GISRepository>();
+            services.AddScoped<IAuditRepository, AuditRepository>();
 
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
@@ -76,7 +77,9 @@ namespace GIS.Infrastructure.Extensions
             services.AddScoped<IStructureService, StructureService>();
             services.AddScoped<ICaseyearService, CaseyearService>();
             services.AddScoped<ICourtService, CourtService>();
+            services.AddScoped<IAuditService, AuditService>();
             services.AddScoped<IGISService, GISService>();
+            
         }
     }
 }

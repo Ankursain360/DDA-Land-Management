@@ -1,5 +1,7 @@
 ﻿@model Dto.Master.UserProfileDto
-@{Layout = null;}
+@{
+    Layout = null;
+}
 <!doctype html>
 <html lang="en">
 <head>
@@ -96,8 +98,8 @@
                         <form class="search">
                             <div class="form-group">
                                 <i class="ri-search-line"></i>
-                                <input type="search" class="form-control form-control-sm" placeholder="Search Village Name" id="txtSearch">                               
-                                
+                                <input type="search" class="form-control form-control-sm" placeholder="Search Village Name" id="txtSearch">
+
                             </div>
                         </form>
                         <!--search from end-->
@@ -144,8 +146,8 @@
                                                         </select>
                                                     </div>
                                                     @*<div class="mt-3 text-center">
-                                                            <button type="submit" class="btn d-block w-100 small btn-sm btn-primary">Find</button>
-                                                        </div>*@
+                                                    <button type="submit" class="btn d-block w-100 small btn-sm btn-primary">Find</button>
+                                                    </div>*@
                                                 </form>
                                             </div>
 
@@ -153,6 +155,63 @@
                                     </div>
                                 </div>
                             </div>
+
+
+                            <div class="accordion-item">
+                                <h5 class="accordion-header" id="Query1">
+                                    <button class="accordion-button collapsed py-2 bg-primary text-white" type="button" data-bs-toggle="collapse" data-bs-target="#Route" aria-expanded="true" aria-controls="Route">
+                                        <i class="ri-route-line text-white"></i>Find Route
+                                    </button>
+                                </h5>
+                                <div id="Route" class="accordion-collapse collapse " aria-labelledby="Query1" data-bs-parent="#navQueryData">
+                                    <div class="p-3">
+                                        @* <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                        <li class="nav-item" role="presentation">
+                                                <a href="#ZoneRoute" class="nav-link active" id="Zone-tab" data-bs-toggle="tab" data-bs-target="#ZoneRoute" type="button" role="tab" aria-controls="ZoneRoute" aria-selected="true">Route</a>
+                                        </li>
+                                        </ul>*@
+                                       @* <div class="tab-content" id="myTabContent">
+                                        <div class="tab-pane fade show active" id="ZoneRoute" role="tabpanel" aria-labelledby="Zone-tab">
+                                        *@    
+                                                <div class="mb-4">
+                                                    <input type="radio" id="radio1" value="DRIVING" name="radio" />@*<i class="ri-car-fill"></i>*@Driving
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;
+
+                                                    <input type="radio" id="radio2" value="TRANSIT" checked="checked" name="radio" />@*<i class="ri-train-fill"></i>*@Transit
+
+                                                </div>
+                                                <div class="mb-4">
+                                                    <label for="ddlZone" class="form-label mb-1 small">Source :</label>
+                                            <input type="text" id="txtSource" value="DDA Vikas Sadan, Barapullah Road, beside SBI Bank, Aviation Colony, INA Colony, New Delhi, Delhi, India" class="form-control form-control-sm" placeholder="Enter a query" autocomplete="off" />
+                                                </div>
+                                                <div class="mb-4">
+                                                    <label for="ddlZone" class="form-label mb-1 small">Zone :</label>
+                                                    <select class="form-select form-select-sm" style="width:100%" id="ZoneId" asp-items="@(new SelectList( @ViewBag.ZoneList, "Id","Name"))" onchange="return GetGCPVillageList(this.options[this.selectedIndex].value);">
+                                                        <option selected="selected" value="0">--Select-- </option>
+                                                    </select>
+                                                </div>
+                                                <div class="mb-4">
+                                                    <label for="ddlVillage" class="form-label mb-1 small">Village :</label>
+                                                        <select class="form-select form-select-sm" style="width:100%" id="GCPVillageId" onchange="return GetGCPList(this.options[this.selectedIndex].value);">
+                                                        <option selected="selected" value="0">--Select-- </option>
+                                                    </select>
+                                                </div>
+                                                <div class="mb-4">
+                                                    <label for="ddlKhasra" class="form-label mb-1 small">GCP LandMarks :</label>
+                                                        <select class="form-select form-select-sm" style="width:100%" id="GPCListId" onchange="return setGCPValue(this.options[this.selectedIndex].value);">
+                                                        <option selected="selected" value="0">--Select-- </option>
+                                                    </select>
+                                                        <input type="hidden" value="" id="hdnDestination" />
+                                                </div>
+                                                <div class="mt-3 text-center">
+                                                <button type="button" class="btn d-block w-100 small btn-sm btn-primary" onclick="GetRoute()">Find</button>
+                                                </div> 
+                                       @* </div> 
+                                        </div>*@
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
 
@@ -196,11 +255,12 @@
                 <!--area text-->
                 <p style="font-size: .7rem" class="my-2">
                     State : <strong class="text-dark">Delhi</strong><br />
-                    <strong class="text-dark" id="spanVillage"></strong><br />
+                    <strong class="text-dark" id="spanVillage"></strong> <strong class="text-dark" id="spanGCP"></strong><br /><br />
                     @*No of Zones : <strong class="text-dark">18</strong><br />
-                        Total Area : <strong class="text-dark">366704 Acres</strong><br />*@
+                    Total Area : <strong class="text-dark">366704 Acres</strong><br />*@
                     Lat & Long : <strong class="text-dark" id="tdCursor"></strong><br />
                     User: <strong>@Model.User.Name (@Model.Role.Name)</strong>
+
                 </p>
             </div>
             <!--bottom btns-->
@@ -229,17 +289,32 @@
                                 </figure>
                             </a>
                             @*<a href="#" class="d-block" title="Satallite Map">
-                                    <figure class="rounded" id="mapsatellite">
-                                        <img src="~/img/satelite.jpg" alt="Satallite Map" />
-                                        <figcaption class="text-center py-1 w-100 d-block bg-primary text-white">Satallite Map</figcaption>
-                                    </figure>
-                                </a>*@
+                            <figure class="rounded" id="mapsatellite">
+                            <img src="~/img/satelite.jpg" alt="Satallite Map" />
+                            <figcaption class="text-center py-1 w-100 d-block bg-primary text-white">Satallite Map</figcaption>
+                            </figure>
+                            </a>*@
                         </div>
                     </div>
                 </div>
 
             </div>
             <!--bottom btns end-->
+        </div>
+
+        <div id="GCPRouteDetailShow" style="display: none; ">
+            <div class="card">
+                <div class="card-header text-white bg-primary small px-2 py-1 d-flex align-items-center">
+                    Route Information <a href="javascript:;" id="HideGCPRouteDetail" class="close text-white ms-auto badge bg-danger" style="text-decoration: none">X</a>
+                </div>
+                <div class="card-body p-1" >
+                    <div id="dvDistance"></div>
+              
+                    <div class="accordion" id="dvPanel" style="overflow:scroll;height:500px">
+                    </div>
+                </div>
+            </div>
+
         </div>
 
         <div id="RouteDetailShow" style="display: none; ">
@@ -249,7 +324,7 @@
                 </div>
                 <div class="card-body p-1">
                     @*<ul class="list-unstyled small">
-                        <li>*@
+                    <li>*@
                     <input type="hidden" id="hdnkhasraid" />
                     <table id="tblVillageData" style="border-collapse: collapse; font-size:13px !important; margin-bottom: 0px;" class="table table-bordererd table-primary table-responsive">
                         <tbody>
@@ -278,7 +353,7 @@
                         </tbody>
                     </table>
                     <div class="accordion" id="CourtCaseData">
-                    </div> 
+                    </div>
                 </div>
             </div>
 
@@ -317,6 +392,7 @@
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS , any custom js-->
     <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+    <script src="~/js/gmaps-measuretool.umd.js"></script>
     <environment include="Development">
         <script src="~/js/main.js"></script>
     </environment>

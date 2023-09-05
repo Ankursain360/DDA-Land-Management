@@ -594,5 +594,11 @@ namespace GIS.Controllers
         //}
 
         #endregion
+
+
+        public async Task<JsonResult> GetGCPList(int? VillageId)
+        {
+            return Json(await _GISService.GetGCPList(VillageId ?? 0));
+        }
     }
 }
