@@ -34,19 +34,19 @@
                         <i class="ri-menu-fold-line"></i>
                         <i class="ri-menu-unfold-line"></i>
                     </div>
-                    <div class="logo py-1 me-auto me-md-4 order-md-1">
+                    <div class="logo py-1 me-auto me-md-4 order-md-1" >
                         <a href="/" class="d-block">
                             <figure class="m-0">
                                 <img src="~/images/header-logo.png" alt="" class="img-fluid">
                             </figure>
                         </a>
                     </div>
-                    <div class="dropdown noti text-white my-2  me-3 order-md-3">
+                    <div class="dropdown noti text-white my-2  me-3 order-md-3" style="margin-left:1070px">
                         <a href="~/docs/DocumentManagementSystem.pdf" target="_blank" role="button" title="User Manual" class='p-2 d-block text-white no-dec'>
                             <i class="ri-folder-user-fill" style="font-size:20px"></i>
                         </a>
                     </div>
-                    <div class="dropdown noti text-white my-2  me-3 order-md-3">
+                    <div class="dropdown noti text-white my-2  me-3 order-md-3" >
                         <a href="https://ddalmis.org.in/" role="button" id="notification" title="Go back to modules!" class='p-2 d-block text-white no-dec'>
                             @*<i class="ri-notification-2-line"></i>*@
                             <i class="ri-home-3-fill" style="font-size:20px"></i>
@@ -90,12 +90,40 @@
     <div class="pt-3">
     </div>
 
-    <aside class="left-menu small slow" id="leftMenu">
+    @*<aside class="left-menu small slow" id="leftMenu">
         <ul class="accordion list-unstyled mb-0">
+
             @await Component.InvokeAsync("SideNav")
         </ul>
+    </aside>*@
+    <aside class="left-menu small slow" id="leftMenu">
+        <div class="accordion" id="leftMenu">
+            <a class="no-dec d-flex align-items-center collapsed active" data-toggle="collapse" href="#m0" role="button"
+               aria-expanded="false" aria-controls="m0">
+                <i class="main-icon ri-dashboard-line"></i>
+                <span class="text mr-auto">Dashboard</span>
+                <i class="arrow ri-arrow-drop-down-line slow"></i>
+            </a>
+            <a class="no-dec d-flex align-items-center collapsed" data-toggle="collapse" href="#m1" role="button"
+               aria-expanded="false" aria-controls="m1">
+                <i class="main-icon ri-group-line"></i>
+                <span class="text mr-auto">DecisionSupportSystem</span>
+                <i class="arrow ri-arrow-drop-down-line slow"></i>
+            </a>
+            <div class="collapse sub-menu" id="m1" data-parent="#leftMenu">
+                <ul class="list-unstyled m-0 p-0">
+                    <li>
+                        <a href="~/DDADecisionSupportSystem/Index" class="d-block">DDADecisionSupportSystem</a>
+                    </li>
+                    <li>
+                        <a href="~/GIS/AIChangeDetection" class="d-block">AIChangeDetection</a>
+                    </li>
+                    
+                </ul>
+            </div>
+          
+        </div>
     </aside>
-
     <partial name="_CookieConsentPartial" />
     <section id="rightSection" class="slow bg-gray">
         <div class="container-fluid">
