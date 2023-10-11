@@ -83,6 +83,15 @@ namespace GIS
                 option.Filters.Add(typeof(ExceptionLogFilter));
                // option.Filters.Add(typeof(AuditFilterAttribute));
             });
+            services.AddMemoryCache();
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(Convert.ToInt32(Configuration.GetSection("CookiesSettings:CookiesTimeout").Value));
+                options.Cookie.HttpOnly = true;
+                options.Cookie.Domain = HostEnvironment.IsProduction() ? (Configuration.GetSection("CookiesSettings:CookiesDomain").Value).ToString() : "localhost";
+                //options.Cookie.Path = "/Home";
+                options.Cookie.IsEssential = true;
+            });
 
             services.RegisterDependency();
             services.AddAutoMapperSetup();

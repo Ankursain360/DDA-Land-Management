@@ -121,7 +121,10 @@
                                     <div class="p-3">
                                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                                             <li class="nav-item" role="presentation">
-                                                <a href="#Zone" class="nav-link active" id="Zone-tab" data-bs-toggle="tab" data-bs-target="#Zone" type="button" role="tab" aria-controls="Zone" aria-selected="true">Zone wise</a>
+                                                <a href="#Zone" class="nav-link active" id="Zone-tab" data-bs-toggle="tab" data-bs-target="#Zone"  type="button" role="tab" aria-controls="Zone" aria-selected="true">Zone wise</a>
+                                            </li>
+                                            <li class="nav-item" role="presentation">
+                                                <a href="#Export" class="nav-link" id="Export-tab" data-bs-toggle="tab" data-bs-target="#Export" onclick="callSelect1()" type="button" role="tab" aria-controls="Export" aria-selected="false">Export</a>
                                             </li>
                                         </ul>
                                         <div class="tab-content" id="myTabContent">
@@ -151,6 +154,26 @@
                                                 </form>
                                             </div>
 
+                                            <div class="tab-pane fade" id="Export" role="tabpanel" aria-labelledby="Export-tab">
+
+                                                <div class="mb-2">
+                                                    <label for="ExportZoneId" class="form-label mb-1 small">Zone :</label>
+                                                    <select class="form-select form-select-sm" id="ExportZoneId" asp-items="@(new SelectList( @ViewBag.ZoneList, "Id","Name"))" onchange="return GetExportVillageList(this.options[this.selectedIndex].value);">
+                                                        <option selected="selected" value="0">--Select-- </option>
+                                                    </select>
+                                                </div>
+                                                <div class="mb-2">
+                                                    <label for="ExportVillageId" class="form-label mb-1 small">Village :</label>
+                                                    <select class="form-select form-select-sm" id="ExportVillageId">
+                                                        <option selected="selected" value="0">--Select-- </option>
+                                                    </select>
+                                                </div>
+                                                <div class="mt-3 text-center">
+                                                    <button type="button" id="btnExport" onclick="Export()" class="btn d-block w-100 small btn-sm btn-primary">Export Khasra's</button>
+                                                </div>
+
+                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -167,46 +190,46 @@
                                     <div class="p-3">
                                         @* <ul class="nav nav-tabs" id="myTab" role="tablist">
                                         <li class="nav-item" role="presentation">
-                                                <a href="#ZoneRoute" class="nav-link active" id="Zone-tab" data-bs-toggle="tab" data-bs-target="#ZoneRoute" type="button" role="tab" aria-controls="ZoneRoute" aria-selected="true">Route</a>
+                                        <a href="#ZoneRoute" class="nav-link active" id="Zone-tab" data-bs-toggle="tab" data-bs-target="#ZoneRoute" type="button" role="tab" aria-controls="ZoneRoute" aria-selected="true">Route</a>
                                         </li>
                                         </ul>*@
-                                       @* <div class="tab-content" id="myTabContent">
+                                        @* <div class="tab-content" id="myTabContent">
                                         <div class="tab-pane fade show active" id="ZoneRoute" role="tabpanel" aria-labelledby="Zone-tab">
-                                        *@    
-                                                <div class="mb-4">
-                                                    <input type="radio" id="radio1" value="DRIVING" name="radio" />@*<i class="ri-car-fill"></i>*@Driving
-                                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                        *@
+                                        <div class="mb-4">
+                                            <input type="radio" id="radio1" value="DRIVING" name="radio" />@*<i class="ri-car-fill"></i>*@Driving
+                                            &nbsp;&nbsp;&nbsp;&nbsp;
 
-                                                    <input type="radio" id="radio2" value="TRANSIT" checked="checked" name="radio" />@*<i class="ri-train-fill"></i>*@Transit
+                                            <input type="radio" id="radio2" value="TRANSIT" checked="checked" name="radio" />@*<i class="ri-train-fill"></i>*@Transit
 
-                                                </div>
-                                                <div class="mb-4">
-                                                    <label for="ddlZone" class="form-label mb-1 small">Source :</label>
+                                        </div>
+                                        <div class="mb-4">
+                                            <label for="ddlZone" class="form-label mb-1 small">Source :</label>
                                             <input type="text" id="txtSource" value="DDA Vikas Sadan, Barapullah Road, beside SBI Bank, Aviation Colony, INA Colony, New Delhi, Delhi, India" class="form-control form-control-sm" placeholder="Enter a query" autocomplete="off" />
-                                                </div>
-                                                <div class="mb-4">
-                                                    <label for="ddlZone" class="form-label mb-1 small">Zone :</label>
-                                                    <select class="form-select form-select-sm" style="width:100%" id="ZoneId" asp-items="@(new SelectList( @ViewBag.ZoneList, "Id","Name"))" onchange="return GetGCPVillageList(this.options[this.selectedIndex].value);">
-                                                        <option selected="selected" value="0">--Select-- </option>
-                                                    </select>
-                                                </div>
-                                                <div class="mb-4">
-                                                    <label for="ddlVillage" class="form-label mb-1 small">Village :</label>
-                                                        <select class="form-select form-select-sm" style="width:100%" id="GCPVillageId" onchange="return GetGCPList(this.options[this.selectedIndex].value);">
-                                                        <option selected="selected" value="0">--Select-- </option>
-                                                    </select>
-                                                </div>
-                                                <div class="mb-4">
-                                                    <label for="ddlKhasra" class="form-label mb-1 small">GCP LandMarks :</label>
-                                                        <select class="form-select form-select-sm" style="width:100%" id="GPCListId" onchange="return setGCPValue(this.options[this.selectedIndex].value);">
-                                                        <option selected="selected" value="0">--Select-- </option>
-                                                    </select>
-                                                        <input type="hidden" value="" id="hdnDestination" />
-                                                </div>
-                                                <div class="mt-3 text-center">
-                                                <button type="button" class="btn d-block w-100 small btn-sm btn-primary" onclick="GetRoute()">Find</button>
-                                                </div> 
-                                       @* </div> 
+                                        </div>
+                                        <div class="mb-4">
+                                            <label for="ddlZone" class="form-label mb-1 small">Zone :</label>
+                                            <select class="form-select form-select-sm" style="width:100%" id="ZoneId" asp-items="@(new SelectList( @ViewBag.ZoneList, "Id","Name"))" onchange="return GetGCPVillageList(this.options[this.selectedIndex].value);">
+                                                <option selected="selected" value="0">--Select-- </option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-4">
+                                            <label for="ddlVillage" class="form-label mb-1 small">Village :</label>
+                                            <select class="form-select form-select-sm" style="width:100%" id="GCPVillageId" onchange="return GetGCPList(this.options[this.selectedIndex].value);">
+                                                <option selected="selected" value="0">--Select-- </option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-4">
+                                            <label for="ddlKhasra" class="form-label mb-1 small">GCP LandMarks :</label>
+                                            <select class="form-select form-select-sm" style="width:100%" id="GPCListId" onchange="return setGCPValue(this.options[this.selectedIndex].value);">
+                                                <option selected="selected" value="0">--Select-- </option>
+                                            </select>
+                                            <input type="hidden" value="" id="hdnDestination" />
+                                        </div>
+                                        <div class="mt-3 text-center">
+                                            <button type="button" class="btn d-block w-100 small btn-sm btn-primary" onclick="GetRoute()">Find</button>
+                                        </div>
+                                        @* </div>
                                         </div>*@
                                     </div>
                                 </div>
@@ -307,9 +330,9 @@
                 <div class="card-header text-white bg-primary small px-2 py-1 d-flex align-items-center">
                     Route Information <a href="javascript:;" id="HideGCPRouteDetail" class="close text-white ms-auto badge bg-danger" style="text-decoration: none">X</a>
                 </div>
-                <div class="card-body p-1" >
+                <div class="card-body p-1">
                     <div id="dvDistance"></div>
-              
+
                     <div class="accordion" id="dvPanel" style="overflow:scroll;height:500px">
                     </div>
                 </div>

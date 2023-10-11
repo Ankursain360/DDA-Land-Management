@@ -251,5 +251,11 @@ namespace Libraries.Service.ApplicationService
             
             return GCPPoints;
         }
+
+        public async Task<List<GISKhasraExport>> GetKhasraListforExport(int villageId)
+        {
+            var khasra = await _iGISSRepository.GetKhasraListforExport(villageId); 
+            return khasra;
+        }
     }
 }

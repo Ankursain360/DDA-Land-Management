@@ -435,5 +435,26 @@ namespace Libraries.Repository.EntityRepository
                                     .ToListAsync();
         }
 
+        public async Task<List<GISKhasraExport>> GetKhasraListforExport(int villageId)
+        {
+            List<GISKhasraExport> _khasralist = new List<GISKhasraExport>();
+          
+            var khasra = await _dbContext.Gisdata
+                                    .Include(x => x.Village)
+                                    .Where(x => x.VillageId == villageId && x.IsActive == 1 && x.GisLayerId == 30)
+                                    .ToListAsync();
+            int count = 1;
+            foreach (var item in khasra)
+            {
+                GISKhasraExport _obj = new GISKhasraExport();
+                _obj.SrNo = count;
+                _obj.VillageName = item.Village.Name;
+                _obj.RectNo_With_KhasraNo = item.Label;
+                _khasralist.Add(_obj);
+                count++;
+            }
+            return _khasralist;
+        }
+
     }
 }
