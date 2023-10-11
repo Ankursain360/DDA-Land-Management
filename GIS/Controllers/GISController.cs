@@ -25,6 +25,9 @@ using Org.BouncyCastle.Asn1.Tsp;
 using Accord.MachineLearning;
 using Accord.Math; 
 using Accord.IO;
+using NPOI.POIFS.Crypt.Dsig;
+using Utility.Helper;
+using Microsoft.AspNetCore.Http;
 
 namespace GIS.Controllers
 {
@@ -599,6 +602,23 @@ namespace GIS.Controllers
         public async Task<JsonResult> GetGCPList(int? VillageId)
         {
             return Json(await _GISService.GetGCPList(VillageId ?? 0));
+        }
+
+        public async Task<IActionResult> GetKhasraNoForExport(int? villageId)
+        {
+          var data=  await _GISService.GetKhasraListforExport(villageId ?? 0);
+            var memory = ExcelHelper.CreateExcel(data);
+            HttpContext.Session.Set("exportfile", memory); 
+            return Json("Success");
+             
+        }
+        [HttpGet]
+        public virtual IActionResult download()
+        {
+            byte[] data = HttpContext.Session.Get("exportfile") as byte[];
+            HttpContext.Session.Remove("exportfile"); 
+            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "KhasraDetails.xlsx");
+
         }
     }
 }

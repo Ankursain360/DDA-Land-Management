@@ -54,5 +54,7 @@ namespace Libraries.Service.IApplicationService
         Task<GISKhasraUpdateResponseDto> UpdatekhasraNo(int khasraid, string khasraNo,int Userid);
 
         Task<List<Gisdata>> GetGCPList(int villageId);
+
+        Task<List<GISKhasraExport>> GetKhasraListforExport(int villageId);
     }
 }

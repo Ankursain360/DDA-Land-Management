@@ -55,5 +55,7 @@ namespace Libraries.Repository.IEntityRepository
 
         Task<List<Gisdata>> GetGCPList(int villageId);
 
+        Task<List<GISKhasraExport>> GetKhasraListforExport(int villageId);
+
     }
 }

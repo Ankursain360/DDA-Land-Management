@@ -71,7 +71,7 @@ $(document).ready(function () {
                 for (var j = 0; j < response[i].village.length; j++) {
                     if (response[i].village[j].isActive == 1) {
                         html = html + '<a href="javascript:void(0);" id="V' + response[i].village[j].id + '" class="list-group-item list-group-item-action" onclick="showVillage(this.id)"><i class="ri-eye-line"></i> ' + response[i].village[j].name + '</a>';
-                       // html = html + '<div class="form-check" style="border-bottom: 1px solid rgba(0, 0, 0, .125);"><input class="form-check-input"  type="checkbox" id="V' + response[i].village[j].id + '" onchange="showVillage(this.id)"> <label class="form-check-label" for="V' + response[i].village[j].id + '">' + response[i].village[j].name + '</label> <span id="z' + response[i].village[j].id + '" class="ri-zoom-in-line" style="display:none" onclick="ZoomtoVillage(' + response[i].village[j].ycoordinate + ',' + response[i].village[j].xcoordinate + ',\'' + response[i].village[j].name + '\');" title="Click here Zoom to ' + response[i].village[j].name + '"></span></div> ';
+                        // html = html + '<div class="form-check" style="border-bottom: 1px solid rgba(0, 0, 0, .125);"><input class="form-check-input"  type="checkbox" id="V' + response[i].village[j].id + '" onchange="showVillage(this.id)"> <label class="form-check-label" for="V' + response[i].village[j].id + '">' + response[i].village[j].name + '</label> <span id="z' + response[i].village[j].id + '" class="ri-zoom-in-line" style="display:none" onclick="ZoomtoVillage(' + response[i].village[j].ycoordinate + ',' + response[i].village[j].xcoordinate + ',\'' + response[i].village[j].name + '\');" title="Click here Zoom to ' + response[i].village[j].name + '"></span></div> ';
                         check++;
                     }
                 }
@@ -122,7 +122,7 @@ google.maps.event.addDomListener(btnRoute, 'click', function () {
 
 google.maps.event.addDomListener(window, 'load', function () {
     new google.maps.places.SearchBox(document.getElementById('txtSource'));
-   // new google.maps.places.SearchBox(document.getElementById('txtDestination'));
+    // new google.maps.places.SearchBox(document.getElementById('txtDestination'));
     directionsDisplay = new google.maps.DirectionsRenderer({ 'draggable': true });
 });
 
@@ -222,7 +222,7 @@ function initialize() {
     measureTool = new MeasureTool(map, {
         showSegmentLength: true,
         tooltip: true,
-       //contextMenu: false,
+        //contextMenu: false,
         unit: MeasureTool.UnitTypeId.METRIC // metric, imperial, or nautical
     });
 
@@ -315,7 +315,7 @@ function showZone(maxima) {
         $('#spanVillageName').empty();
         let new_arr = [];
         $.each(OTHER_ZONE_LIST, function (i, item) {
-            if (jQuery.inArray(item.villageid, new_arr) === -1) { 
+            if (jQuery.inArray(item.villageid, new_arr) === -1) {
                 new_arr.push(item);
             }
         });
@@ -330,7 +330,7 @@ function showZone(maxima) {
             var divvalue = $('#Z' + result[villist].zoneid).attr("data-bs-target");
             $(divvalue).removeClass("show");
             //
-            
+
             //hide zoom to icon
             $('#z' + result[villist].villageid).hide();
             //
@@ -370,7 +370,7 @@ function showDisBoundaries(polygon, xaixis, yaixis) {
 /*Village Boundary Start*/
 // single village selection//
 function showVillage(maxima) {
-  $('#spanGCP').empty();
+    $('#spanGCP').empty();
     var villageid = maxima.replace('V', '');
     HttpGet("/GIS/GetVillageDetails?VillageId=" + parseInt(villageid), 'json', function (response, villageid) {
         //Show Village Name
@@ -434,12 +434,12 @@ function ZoomtoVillage(yaixis, xaixis, villagename) {
 }
 function showDisBoundariesVillage(ploygn, xaixis, yaixis, villageid) {
 
-   // showVillage(villageid);
-     
+    // showVillage(villageid);
+
     var sl = createPolygon(getLatLongArr(ploygn));
     sl.setOptions({ strokeWeight: 5, strokeColor: '#FF5733', fillOpacity: 0, clickable: !1 });
 
-   
+
     zoomvillage.push({ "villageid": villageid, "layer": sl });
     VILLAGEBOUNDARY_LAYER.push({ "villageid": villageid, "layer": sl });
     map.setZoom(15);
@@ -2166,6 +2166,45 @@ function GetVillageList(id) {
     });
 };
 
+function GetExportVillageList(id) {
+  
+    HttpGet(`/GIS/GetVillageList/?zoneId=${id}`, 'json', function (response) {
+        $("#ExportVillageId").val('0').trigger('change');
+        var html = '<option value="0">---Select---</option>';
+        for (var i = 0; i < response.length; i++) {
+            html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
+        }
+        $("#ExportVillageId").html(html);
+    });
+
+    //HttpGet(`/GIS/GetZoneDetails?ZoneId=${parseInt(id)}`, 'json', function (response) {
+    //    showDisBoundaries(response[0].polygon, response[0].xcoordinate, response[0].ycoordinate);
+    //});
+};
+
+function Export() {
+    //  $('#ExportZoneId option:selected').val()
+    if ($('#ExportZoneId option:selected').val() !== 0) {
+
+        if ($('#ExportVillageId option:selected').val() !== 0) {
+            let vill_id = $('#ExportVillageId option:selected').val();
+
+            HttpGet(`/GIS/GetKhasraNoForExport/?villageId=${vill_id}`, 'json', function (response) {
+                var a = document.createElement("a");
+                a.target = '_blank';
+                a.href = '/GIS/download';
+                a.click();
+            }); 
+        }
+        else {
+            alert('Please select village to export the khasra');
+        }
+    }
+    else {
+        alert('Please select zone first');
+    }
+}
+
 function GetKhasraList(id) {
     HttpGet(`/GIS/GetKhasraList/?villageId=${id}`, 'json', function (response) {
         var html = '<option value="0">---Select---</option>';
@@ -2352,7 +2391,12 @@ function SetMapNull() {
 }
 
 function callSelect2() {
-    $("select").select2();
+    $("select").select2({});
+}
+
+function callSelect1() {
+    $("#ExportZoneId").select2({});
+    $("#ExportVillageId").select2({});
 }
 $('#Query1').on('click', function (e) {
 
