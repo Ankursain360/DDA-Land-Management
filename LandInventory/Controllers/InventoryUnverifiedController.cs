@@ -361,7 +361,8 @@ namespace LandInventory.Controllers
                         string Mobile = _propertyregistrationService.GetMobileNo(SiteContext.UserId);
                         if (Mobile != null || Mobile != "" || Mobile != string.Empty)
                         {
-                            SendSMSDto SMS = new SendSMSDto();
+                            SendSMSDto SMS = new SendSMSDto(); 
+                              //  SMS.TestMsg(Action, Mobile);
                             SMS.GenerateSendOTPForVerifyProperty(Action, Mobile);                      
                             HttpContext.Session.SetString("InventoryId", id.ToString());
                             HttpContext.Session.SetString("Mobile", Mobile);
