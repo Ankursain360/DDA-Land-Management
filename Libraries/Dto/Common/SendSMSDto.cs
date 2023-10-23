@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using System.Security.Cryptography;
 using System.Net.Http;
 using static System.Net.WebRequestMethods;
+using Dto.Master;
 
 namespace Dto.Common
 {
@@ -77,6 +78,7 @@ namespace Dto.Common
             //{
             //    //  results = "0";
             //}
+           
 
             string Message = "%22Dear%20User%2C%0AYour%20property%20verification%20OTP%20is%20" + OTP + ".%20This%20OTP%20is%20valid%20for%205%20minutes.%0ALand%20Management%20DDA%22";
             string url = "https://dda.org.in/sms/SMSService.asmx/SendSMS";
@@ -97,16 +99,16 @@ namespace Dto.Common
             else
             {
 
-                SMSRequest apiRequest = new SMSRequest()
+				SMSRequestDto apiRequest = new SMSRequestDto()
                 {
                     AuthId = "live_0047ff3001f3461a8de21d99451bd56d",
                     EncodedMessage = base64String,
                     TemplateId = "1607100000000189082",
-                    MobileNumber = Mobile,
+                    MobileNumber = "8368554472",
                     CheckSum = str1
                 };
 
-                string str2 = JsonConvert.SerializeObject((object)new APIRequestWrapper()
+                string str2 = JsonConvert.SerializeObject((object)new APIRequestWrapperDto()
                 {
                     request = (object)apiRequest
                 });
@@ -143,19 +145,61 @@ namespace Dto.Common
         public void GenerateSendSMSForVerifyProperty(string PrimaryListNo, string Mobile)
         {
 
-            string url = "https://gateway.leewaysoftech.com/xml-transconnect-api.php?username=Ddauth&password=m1kw6vu2&mobile=" + Mobile + "&message=You%20have%20successfully%20verified%20and%20added%20the%20record%20having%20Primary%20List%20no%20" + PrimaryListNo + "%20in%20Land%20Inventory.%20Land%20Management%20DDA&senderid=DDASVY&peid=1201159308150125712&contentid=1607100000000189083";
-            HttpWebRequest httpreq = (HttpWebRequest)WebRequest.Create(url);
-            try
-            {
-                HttpWebResponse httpres = (HttpWebResponse)httpreq.GetResponse();
+            //string url = "https://gateway.leewaysoftech.com/xml-transconnect-api.php?username=Ddauth&password=m1kw6vu2&mobile=" + Mobile + "&message=You%20have%20successfully%20verified%20and%20added%20the%20record%20having%20Primary%20List%20no%20" + PrimaryListNo + "%20in%20Land%20Inventory.%20Land%20Management%20DDA&senderid=DDASVY&peid=1201159308150125712&contentid=1607100000000189083";
+            //HttpWebRequest httpreq = (HttpWebRequest)WebRequest.Create(url);
+            //try
+            //{
+            //    HttpWebResponse httpres = (HttpWebResponse)httpreq.GetResponse();
 
-            }
-            catch (Exception e)
-            {
+            //}
+            //catch (Exception e)
+            //{
 
-            }
+            //}
+            string Message = "You%20have%20successfully%20verified%20and%20added%20the%20record%20%0Ahaving%20Primary%20List%20no%20" + PrimaryListNo + ".%20in%20Land%20Inventory.%0ALand%20Management%20DDA";
+			string url = "https://dda.org.in/sms/SMSService.asmx/SendSMS";
+			string secret = "YjY0NmI5YWMtZDJhYS00MjEyLWIyMTQtZTJkOTE3NTMwY2Fk";
 
-        }
+			using var client = new HttpClient();
+
+
+
+			string base64String = Convert.ToBase64String(Encoding.UTF8.GetBytes(Message));
+			string str1 = "";
+			using (HMACSHA256 hmacshA256 = new HMACSHA256(Encoding.UTF8.GetBytes(secret)))
+				str1 = BitConverter.ToString(hmacshA256.ComputeHash(Encoding.UTF8.GetBytes(base64String))).Replace("-", "");
+			if (string.IsNullOrEmpty(str1))
+			{
+				// sendSmsResponse.Message = "Unable To Compute Checksum. Please Verify Client Secret Provided.";
+			}
+			else
+			{
+
+				SMSRequestDto apiRequest = new SMSRequestDto()
+				{
+					AuthId = "live_0047ff3001f3461a8de21d99451bd56d",
+					EncodedMessage = base64String,
+					TemplateId = "1607100000000189083",
+					MobileNumber = "8368554472",
+					CheckSum = str1
+				};
+
+				string str2 = JsonConvert.SerializeObject((object)new APIRequestWrapperDto()
+				{
+					request = (object)apiRequest
+				});
+				HttpContent body = new StringContent(str2, Encoding.UTF8, "application/json");
+				var response = client.PostAsync(url, body).Result;
+
+				if (response.IsSuccessStatusCode)
+				{
+
+
+				}
+
+			}
+
+		}
 
        
         public void GenerateSendSMSForSaveEncroachmentRegistration(string RefNo, string Mobile)
@@ -191,23 +235,189 @@ namespace Dto.Common
 
         }
 
+		public void GenerateSendSMSForInspectionreportsubmission(string RefNo, string Mobile)
+		{
+			string Message = "Your%20inspection%20request%20containing%20inspection%20report%20vide%20%0AReference%20no%20" + RefNo + ".%20has%20been%20successfully%20submitted%20%0Aand%20forwarded%20for%20approval%20to%20your%20reporting%20officer.%0ALand%20Management%20DDA";
+			string url = "https://dda.org.in/sms/SMSService.asmx/SendSMS";
+			string secret = "MzY1ZmZjNWEtYzZlMS00OGMxLWJjZWQtMGExNDI0ODU4M2Zj";
 
-        public class SMSRequest
-        {
+			using var client = new HttpClient();
 
-            public string AuthId { get; set; }
-            public string EncodedMessage { get; set; }
-            public string TemplateId { get; set; }
-            public string MobileNumber { get; set; }
-            public string CheckSum { get; set; }
-        }
 
-        public class APIRequestWrapper
-        {
-            public object request { get; set; }
-        }
 
-        public void TestMsg(string OTP, string Mobile)
+			string base64String = Convert.ToBase64String(Encoding.UTF8.GetBytes(Message));
+			string str1 = "";
+			using (HMACSHA256 hmacshA256 = new HMACSHA256(Encoding.UTF8.GetBytes(secret)))
+				str1 = BitConverter.ToString(hmacshA256.ComputeHash(Encoding.UTF8.GetBytes(base64String))).Replace("-", "");
+			if (string.IsNullOrEmpty(str1))
+			{
+				// sendSmsResponse.Message = "Unable To Compute Checksum. Please Verify Client Secret Provided.";
+			}
+			else
+			{
+
+				SMSRequestDto apiRequest = new SMSRequestDto()
+				{
+					AuthId = "test_509c3b1a53994adb8b41e38ad297fd17",
+					EncodedMessage = base64String,
+					TemplateId = "1607100000000189081",
+					MobileNumber = "8368554472",
+					CheckSum = str1
+				};
+
+				string str2 = JsonConvert.SerializeObject((object)new APIRequestWrapperDto()
+				{
+					request = (object)apiRequest
+				});
+				HttpContent body = new StringContent(str2, Encoding.UTF8, "application/json");
+				var response = client.PostAsync(url, body).Result;
+
+				if (response.IsSuccessStatusCode)
+				{
+
+
+				}
+
+			}
+		}
+		public void GenerateSendSMSEncroachmentremovalrequest(string RefNo, string Mobile)
+		{
+			string Message = "Your%20encroachment%20removal%2Fdemolition%20request%20vide%20%0AReference%20no%20" + RefNo + ".%20has%20been%20successfully%20submitted%20%0Aand%20forwarded%20for%20approval%20to%20your%20reporting%20officer.%0ALand%20Management%20DDA";
+			string url = "https://dda.org.in/sms/SMSService.asmx/SendSMS";
+			string secret = "MzY1ZmZjNWEtYzZlMS00OGMxLWJjZWQtMGExNDI0ODU4M2Zj";
+
+			using var client = new HttpClient();
+
+
+
+			string base64String = Convert.ToBase64String(Encoding.UTF8.GetBytes(Message));
+			string str1 = "";
+			using (HMACSHA256 hmacshA256 = new HMACSHA256(Encoding.UTF8.GetBytes(secret)))
+				str1 = BitConverter.ToString(hmacshA256.ComputeHash(Encoding.UTF8.GetBytes(base64String))).Replace("-", "");
+			if (string.IsNullOrEmpty(str1))
+			{
+				// sendSmsResponse.Message = "Unable To Compute Checksum. Please Verify Client Secret Provided.";
+			}
+			else
+			{
+
+				SMSRequestDto apiRequest = new SMSRequestDto()
+				{
+					AuthId = "test_509c3b1a53994adb8b41e38ad297fd17",
+					EncodedMessage = base64String,
+					TemplateId = "1607100000000189087",
+					MobileNumber = "8368554472",
+					CheckSum = str1
+				};
+
+				string str2 = JsonConvert.SerializeObject((object)new APIRequestWrapperDto()
+				{
+					request = (object)apiRequest
+				});
+				HttpContent body = new StringContent(str2, Encoding.UTF8, "application/json");
+				var response = client.PostAsync(url, body).Result;
+
+				if (response.IsSuccessStatusCode)
+				{
+
+
+				}
+
+			}
+		}
+		public void GenerateSendSMSRegistrationOTP(string OTP, string Mobile)
+		{
+			string Message = "Dear%20User%2C%20%0AYour%20registration%20OTP%20is%20" + OTP + ".%20This%20OTP%20is%20valid%20for%205%20%0Aminutes.%0ALand%20Management%20DDA";
+			string url = "https://dda.org.in/sms/SMSService.asmx/SendSMS";
+			string secret = "MzY1ZmZjNWEtYzZlMS00OGMxLWJjZWQtMGExNDI0ODU4M2Zj";
+
+			using var client = new HttpClient();
+
+
+
+			string base64String = Convert.ToBase64String(Encoding.UTF8.GetBytes(Message));
+			string str1 = "";
+			using (HMACSHA256 hmacshA256 = new HMACSHA256(Encoding.UTF8.GetBytes(secret)))
+				str1 = BitConverter.ToString(hmacshA256.ComputeHash(Encoding.UTF8.GetBytes(base64String))).Replace("-", "");
+			if (string.IsNullOrEmpty(str1))
+			{
+				// sendSmsResponse.Message = "Unable To Compute Checksum. Please Verify Client Secret Provided.";
+			}
+			else
+			{
+
+				SMSRequestDto apiRequest = new SMSRequestDto()
+				{
+					AuthId = "test_509c3b1a53994adb8b41e38ad297fd17",
+					EncodedMessage = base64String,
+					TemplateId = "1607100000000189095",
+					MobileNumber = "8368554472",
+					CheckSum = str1
+				};
+
+				string str2 = JsonConvert.SerializeObject((object)new APIRequestWrapperDto()
+				{
+					request = (object)apiRequest
+				});
+				HttpContent body = new StringContent(str2, Encoding.UTF8, "application/json");
+				var response = client.PostAsync(url, body).Result;
+
+				if (response.IsSuccessStatusCode)
+				{
+
+
+				}
+
+			}
+		}
+		public void GenerateSendSMSLandinventoryforwardedforverification(string PrimaryListNo, string Mobile)
+		{
+			string Message = "You%20have%20successfully%20entered%20the%20Land%20Inventory%20Record%20%0Ahaving%20Primary%20List%20no%20"+PrimaryListNo+ ".%20and%20forwarded%20for%20%0Averification%2Fapproval%20to%20your%20reporting%20officer.%0ALand%20Management%20DDA%0A";
+			string url = "https://dda.org.in/sms/SMSService.asmx/SendSMS";
+			string secret = "MzY1ZmZjNWEtYzZlMS00OGMxLWJjZWQtMGExNDI0ODU4M2Zj";
+
+			using var client = new HttpClient();
+
+
+
+			string base64String = Convert.ToBase64String(Encoding.UTF8.GetBytes(Message));
+			string str1 = "";
+			using (HMACSHA256 hmacshA256 = new HMACSHA256(Encoding.UTF8.GetBytes(secret)))
+				str1 = BitConverter.ToString(hmacshA256.ComputeHash(Encoding.UTF8.GetBytes(base64String))).Replace("-", "");
+			if (string.IsNullOrEmpty(str1))
+			{
+				// sendSmsResponse.Message = "Unable To Compute Checksum. Please Verify Client Secret Provided.";
+			}
+			else
+			{
+
+				SMSRequestDto apiRequest = new SMSRequestDto()
+				{
+					AuthId = "test_509c3b1a53994adb8b41e38ad297fd17",
+					EncodedMessage = base64String,
+					TemplateId = "1607100000000189078",
+					MobileNumber = "8368554472",
+					CheckSum = str1
+				};
+
+				string str2 = JsonConvert.SerializeObject((object)new APIRequestWrapperDto()
+				{
+					request = (object)apiRequest
+				});
+				HttpContent body = new StringContent(str2, Encoding.UTF8, "application/json");
+				var response = client.PostAsync(url, body).Result;
+
+				if (response.IsSuccessStatusCode)
+				{
+
+
+				}
+
+			}
+		}
+		
+
+		public void TestMsg(string OTP, string Mobile)
         {
            string Message = "%22Dear%20User%2C%0AYour%20property%20verification%20OTP%20is%20"+ OTP + ".%20This%20OTP%20is%20valid%20for%205%20minutes.%0ALand%20Management%20DDA%22";
             string url = "https://dda.org.in/sms/SMSService.asmx/SendSMS";
@@ -228,7 +438,7 @@ namespace Dto.Common
             else
             {
 
-                SMSRequest apiRequest = new SMSRequest()
+				SMSRequestDto apiRequest = new SMSRequestDto()
                 {
                     AuthId = "test_509c3b1a53994adb8b41e38ad297fd17",
                     EncodedMessage = base64String,
@@ -237,7 +447,7 @@ namespace Dto.Common
                     CheckSum = str1
                 };
 
-                string str2 = JsonConvert.SerializeObject((object)new APIRequestWrapper()
+                string str2 = JsonConvert.SerializeObject((object)new APIRequestWrapperDto()
                 {
                     request = (object)apiRequest
                 });
