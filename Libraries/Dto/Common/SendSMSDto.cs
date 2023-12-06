@@ -122,7 +122,7 @@ namespace Dto.Common
            
 
             string Message = "%22Dear%20User%2C%0AYour%20property%20verification%20OTP%20is%20" + OTP + ".%20This%20OTP%20is%20valid%20for%205%20minutes.%0ALand%20Management%20DDA%22";
-            string url = "https://dda.org.in/sms/SMSService.asmx/SendSMS";
+            string url = "http://dda.org.in/sms/SMSService.asmx/SendSMS";
             string secret = "YjY0NmI5YWMtZDJhYS00MjEyLWIyMTQtZTJkOTE3NTMwY2Fk";
 
             using var client = new HttpClient();
