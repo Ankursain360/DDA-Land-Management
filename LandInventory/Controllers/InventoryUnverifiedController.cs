@@ -361,7 +361,7 @@ namespace LandInventory.Controllers
                         string Mobile = _propertyregistrationService.GetMobileNo(SiteContext.UserId);
                         if (Mobile != null || Mobile != "" || Mobile != string.Empty)
                         {
-                            SendSMSDto SMS = new SendSMSDto(); 
+                            SendSMSDto SMS = new SendSMSDto(_Configuration); 
                               //  SMS.TestMsg(Action, Mobile);
                             SMS.GenerateSendOTPForVerifyProperty(Action, Mobile);                      
                             HttpContext.Session.SetString("InventoryId", id.ToString());
@@ -427,7 +427,7 @@ namespace LandInventory.Controllers
                     if (result == true)
                     {
                         string Mobile = _propertyregistrationService.GetMobileNo(SiteContext.UserId);
-                        SendSMSDto SMS = new SendSMSDto(); 
+                        SendSMSDto SMS = new SendSMSDto(_Configuration); 
                         
                         SMS.GenerateSendSMSForVerifyProperty(PrimaryListNo, Mobile);
                         ViewBag.Message = Alert.Show("Property Successfully Updated", "", AlertType.Success);

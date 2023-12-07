@@ -181,7 +181,7 @@ namespace LeaseForPublic.Controllers
             #endregion
 
 
-            SendSMSDto SMS = new SendSMSDto();
+            SendSMSDto SMS = new SendSMSDto(_configuration);
             SMS.GenerateSendSMS(Action, Mobile);
             HttpContext.Session.SetString("Mobile", model.MobileNo);
             HttpContext.Session.SetString("Email", model.EmailId);
@@ -343,7 +343,7 @@ namespace LeaseForPublic.Controllers
             #endregion
 
 
-            SendSMSDto SMS = new SendSMSDto();
+            SendSMSDto SMS = new SendSMSDto(_configuration);
             SMS.GenerateSendSMS(Action, Mobile);
 
             //TempData["data1"] = model.MobileNo;

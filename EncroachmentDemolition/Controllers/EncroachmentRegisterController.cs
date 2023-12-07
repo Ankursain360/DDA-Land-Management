@@ -466,7 +466,7 @@ namespace EncroachmentDemolition.Controllers
                                     #endregion
 
                                     #region Mobile SMS
-                                    SendSMSDto SMS = new SendSMSDto();
+                                    SendSMSDto SMS = new SendSMSDto(_configuration);
                                     // Add SMS 
                                     string Mobile = _propertyRegistrationService.GetMobileNo(SiteContext.UserId);
                                     SMS.GenerateSendSMSForSaveEncroachmentRegistration(encroachmentRegisterations.RefNo, Mobile);

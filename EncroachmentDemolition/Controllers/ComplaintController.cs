@@ -317,7 +317,7 @@ namespace EncroachmentDemolition.Controllers
                         string Action = "Dear Requester, <br> Your Request for <b>" + onlinecomplaint.ComplaintType.Name + "</b> has been successfully submitted.Please note your reference No for future reference.<br> Your Ref. number is : <b>" + onlinecomplaint.ReferenceNo + "</b> <br><br><br> Regards,<br>DDA";
                         String Mobile = onlinecomplaint.Contact;
                         SendMailDto mail = new SendMailDto();
-                        SendSMSDto SMS = new SendSMSDto();
+                        SendSMSDto SMS = new SendSMSDto(_configuration);
                         SMS.GenerateSendSMS(Action, Mobile);
                         try
                         {

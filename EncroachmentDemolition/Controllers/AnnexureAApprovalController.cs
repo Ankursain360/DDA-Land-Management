@@ -147,7 +147,7 @@ namespace EncroachmentDemolition.Controllers
                         string Action = otp.ToString();
                         string Mobile = _propertyRegistrationService.GetMobileNo(SiteContext.UserId);
                         HttpContext.Session.SetString("OTP", otp.ToString());
-                        SendSMSDto SMS = new SendSMSDto();
+                        SendSMSDto SMS = new SendSMSDto(_configuration);
                         SMS.GenerateSendSMS(Action, Mobile);
                         return RedirectToAction("OTP");
                     }

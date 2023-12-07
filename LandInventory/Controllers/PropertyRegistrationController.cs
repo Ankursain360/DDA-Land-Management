@@ -314,7 +314,7 @@ namespace LandInventory.Controllers
                         ViewBag.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
                         ViewBag.IsUserCreation = SiteContext.UserId;
                         ViewBag.IsDisposedRightsUser = SiteContext.UserId;
-                        SendSMSDto SMS = new SendSMSDto();
+                        SendSMSDto SMS = new SendSMSDto(_Configuration);
                         // Add SMS 
                         string Mobile = _propertyregistrationService.GetMobileNo(SiteContext.UserId);
                         SMS.GenerateSendSMSForSaveLandInventory(propertyregistration.PrimaryListNo,Mobile);

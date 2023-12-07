@@ -7,13 +7,21 @@ using System.Security.Cryptography;
 using System.Net.Http;
 using static System.Net.WebRequestMethods;
 using Dto.Master;
+using Microsoft.Extensions.Configuration;
 
 namespace Dto.Common
 {
     public class SendSMSDto
     {
 
-        public void GenerateSendSMS(string OTP, string Mobile)
+		private readonly IConfiguration _configuration;
+
+		public SendSMSDto(IConfiguration configuration)
+		{
+			_configuration = configuration;
+		}
+
+		public void GenerateSendSMS(string OTP, string Mobile)
         {
 			//  var authkey = "9ebb4d6454214d29";
 			////  string url = "http://sms.justclicksky.com/pushsms.php?username=GNIDA&api_password=242f38iadg4voobux&sender=VCSSMS&to=" + Mobile + "&message= " + Message + " Thank you .&priority=11";
@@ -39,7 +47,8 @@ namespace Dto.Common
 			//}
 
 			string Message = "Dear%20User%2C%20%0AYour%20registration%20OTP%20is%20" + OTP + ".%20This%20OTP%20is%20valid%20for%205%20%0Aminutes.%0ALand%20Management%20DDA";
-			string url = "https://dda.org.in/sms/SMSService.asmx/SendSMS";
+			//string url = "https://dda.org.in/sms/SMSService.asmx/SendSMS";
+			string url = _configuration.GetSection("SendOTP:URL").Value.ToString();
 			string secret = "YjY0NmI5YWMtZDJhYS00MjEyLWIyMTQtZTJkOTE3NTMwY2Fk";
 
 			using var client = new HttpClient();
@@ -122,8 +131,8 @@ namespace Dto.Common
            
 
             string Message = "%22Dear%20User%2C%0AYour%20property%20verification%20OTP%20is%20" + OTP + ".%20This%20OTP%20is%20valid%20for%205%20minutes.%0ALand%20Management%20DDA%22";
-            string url = "http://dda.org.in/sms/SMSService.asmx/SendSMS";
-            string secret = "YjY0NmI5YWMtZDJhYS00MjEyLWIyMTQtZTJkOTE3NTMwY2Fk";
+			string url = _configuration.GetSection("SendOTP:URL").Value.ToString();
+			string secret = "YjY0NmI5YWMtZDJhYS00MjEyLWIyMTQtZTJkOTE3NTMwY2Fk";
 
             using var client = new HttpClient();
 
@@ -182,7 +191,7 @@ namespace Dto.Common
 
 			//}
 			string Message = "You%20have%20successfully%20entered%20the%20Land%20Inventory%20Record%20%0Ahaving%20Primary%20List%20no%20" + PrimaryListNo + ".%20and%20forwarded%20for%20%0Averification%2Fapproval%20to%20your%20reporting%20officer.%0ALand%20Management%20DDA%0A";
-			string url = "https://dda.org.in/sms/SMSService.asmx/SendSMS";
+			string url = _configuration.GetSection("SendOTP:URL").Value.ToString();
 			string secret = "YjY0NmI5YWMtZDJhYS00MjEyLWIyMTQtZTJkOTE3NTMwY2Fk";
 
 			using var client = new HttpClient();
@@ -240,7 +249,7 @@ namespace Dto.Common
 
             //}
             string Message = "You%20have%20successfully%20verified%20and%20added%20the%20record%20%0Ahaving%20Primary%20List%20no%20" + PrimaryListNo + ".%20in%20Land%20Inventory.%0ALand%20Management%20DDA";
-			string url = "https://dda.org.in/sms/SMSService.asmx/SendSMS";
+			string url = _configuration.GetSection("SendOTP:URL").Value.ToString();
 			string secret = "YjY0NmI5YWMtZDJhYS00MjEyLWIyMTQtZTJkOTE3NTMwY2Fk";
 
 			using var client = new HttpClient();
@@ -300,7 +309,7 @@ namespace Dto.Common
 
 			//}
 			string Message = "Your%20inspection%20request%20containing%20inspection%20report%20vide%20%0AReference%20no%20" + RefNo + ".%20has%20been%20successfully%20submitted%20%0Aand%20forwarded%20for%20approval%20to%20your%20reporting%20officer.%0ALand%20Management%20DDA";
-			string url = "https://dda.org.in/sms/SMSService.asmx/SendSMS";
+			string url = _configuration.GetSection("SendOTP:URL").Value.ToString();
 			string secret = "YjY0NmI5YWMtZDJhYS00MjEyLWIyMTQtZTJkOTE3NTMwY2Fk";
 
 			using var client = new HttpClient();
@@ -358,7 +367,7 @@ namespace Dto.Common
 
 			//}
 			string Message = "Your%20encroachment%20removal%2Fdemolition%20request%20vide%20%0AReference%20no%20" + RefNo + ".%20has%20been%20successfully%20submitted%20%0Aand%20forwarded%20for%20approval%20to%20your%20reporting%20officer.%0ALand%20Management%20DDA";
-			string url = "https://dda.org.in/sms/SMSService.asmx/SendSMS";
+			string url = _configuration.GetSection("SendOTP:URL").Value.ToString();
 			string secret = "YjY0NmI5YWMtZDJhYS00MjEyLWIyMTQtZTJkOTE3NTMwY2Fk";
 
 			using var client = new HttpClient();
@@ -406,8 +415,8 @@ namespace Dto.Common
 		public void TestMsg(string OTP, string Mobile)
         {
            string Message = "%22Dear%20User%2C%0AYour%20property%20verification%20OTP%20is%20"+ OTP + ".%20This%20OTP%20is%20valid%20for%205%20minutes.%0ALand%20Management%20DDA%22";
-            string url = "https://dda.org.in/sms/SMSService.asmx/SendSMS";
-            string secret = "MzY1ZmZjNWEtYzZlMS00OGMxLWJjZWQtMGExNDI0ODU4M2Zj";
+			string url = _configuration.GetSection("SendOTP:URL").Value.ToString();
+			string secret = "MzY1ZmZjNWEtYzZlMS00OGMxLWJjZWQtMGExNDI0ODU4M2Zj";
 
             using var client = new HttpClient();
 
