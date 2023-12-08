@@ -49,7 +49,7 @@ namespace Dto.Common
 			string Message = "Dear%20User%2C%20%0AYour%20registration%20OTP%20is%20" + OTP + ".%20This%20OTP%20is%20valid%20for%205%20%0Aminutes.%0ALand%20Management%20DDA";
 			//string url = "https://dda.org.in/sms/SMSService.asmx/SendSMS";
 			string url = _configuration.GetSection("SendOTP:URL").Value.ToString();
-			string secret = "YjY0NmI5YWMtZDJhYS00MjEyLWIyMTQtZTJkOTE3NTMwY2Fk";
+			string secret = _configuration.GetSection("SendOTP:SECRET").Value.ToString();
 
 			using var client = new HttpClient();
 
@@ -68,7 +68,7 @@ namespace Dto.Common
 
 				SMSRequestDto apiRequest = new SMSRequestDto()
 				{
-					AuthId = "live_0047ff3001f3461a8de21d99451bd56d",
+					AuthId = _configuration.GetSection("SendOTP:AUTHID").Value.ToString(),
 					EncodedMessage = base64String,
 					TemplateId = "1607100000000189095",
 					MobileNumber = Mobile,
@@ -132,9 +132,9 @@ namespace Dto.Common
 
             string Message = "%22Dear%20User%2C%0AYour%20property%20verification%20OTP%20is%20" + OTP + ".%20This%20OTP%20is%20valid%20for%205%20minutes.%0ALand%20Management%20DDA%22";
 			string url = _configuration.GetSection("SendOTP:URL").Value.ToString();
-			string secret = "YjY0NmI5YWMtZDJhYS00MjEyLWIyMTQtZTJkOTE3NTMwY2Fk";
+			string secret = _configuration.GetSection("SendOTP:SECRET").Value.ToString();
 
-            using var client = new HttpClient();
+			using var client = new HttpClient();
 
 
 
@@ -151,8 +151,8 @@ namespace Dto.Common
 
 				SMSRequestDto apiRequest = new SMSRequestDto()
                 {
-                    AuthId = "live_0047ff3001f3461a8de21d99451bd56d",
-                    EncodedMessage = base64String,
+                    AuthId = _configuration.GetSection("SendOTP:AUTHID").Value.ToString(),
+					EncodedMessage = base64String,
                     TemplateId = "1607100000000189082",
                     MobileNumber = Mobile,
                     CheckSum = str1
@@ -192,7 +192,7 @@ namespace Dto.Common
 			//}
 			string Message = "You%20have%20successfully%20entered%20the%20Land%20Inventory%20Record%20%0Ahaving%20Primary%20List%20no%20" + PrimaryListNo + ".%20and%20forwarded%20for%20%0Averification%2Fapproval%20to%20your%20reporting%20officer.%0ALand%20Management%20DDA%0A";
 			string url = _configuration.GetSection("SendOTP:URL").Value.ToString();
-			string secret = "YjY0NmI5YWMtZDJhYS00MjEyLWIyMTQtZTJkOTE3NTMwY2Fk";
+			string secret = _configuration.GetSection("SendOTP:SECRET").Value.ToString();
 
 			using var client = new HttpClient();
 
@@ -211,7 +211,7 @@ namespace Dto.Common
 
 				SMSRequestDto apiRequest = new SMSRequestDto()
 				{
-					AuthId = "live_0047ff3001f3461a8de21d99451bd56d",
+					AuthId = _configuration.GetSection("SendOTP:AUTHID").Value.ToString(),
 					EncodedMessage = base64String,
 					TemplateId = "1607100000000189078",
 					MobileNumber = Mobile,
@@ -250,7 +250,7 @@ namespace Dto.Common
             //}
             string Message = "You%20have%20successfully%20verified%20and%20added%20the%20record%20%0Ahaving%20Primary%20List%20no%20" + PrimaryListNo + ".%20in%20Land%20Inventory.%0ALand%20Management%20DDA";
 			string url = _configuration.GetSection("SendOTP:URL").Value.ToString();
-			string secret = "YjY0NmI5YWMtZDJhYS00MjEyLWIyMTQtZTJkOTE3NTMwY2Fk";
+			string secret = _configuration.GetSection("SendOTP:SECRET").Value.ToString();
 
 			using var client = new HttpClient();
 
@@ -269,7 +269,7 @@ namespace Dto.Common
 
 				SMSRequestDto apiRequest = new SMSRequestDto()
 				{
-					AuthId = "live_0047ff3001f3461a8de21d99451bd56d",
+					AuthId = _configuration.GetSection("SendOTP:AUTHID").Value.ToString(),
 					EncodedMessage = base64String,
 					TemplateId = "1607100000000189083",
 					MobileNumber = Mobile,
@@ -310,7 +310,7 @@ namespace Dto.Common
 			//}
 			string Message = "Your%20inspection%20request%20containing%20inspection%20report%20vide%20%0AReference%20no%20" + RefNo + ".%20has%20been%20successfully%20submitted%20%0Aand%20forwarded%20for%20approval%20to%20your%20reporting%20officer.%0ALand%20Management%20DDA";
 			string url = _configuration.GetSection("SendOTP:URL").Value.ToString();
-			string secret = "YjY0NmI5YWMtZDJhYS00MjEyLWIyMTQtZTJkOTE3NTMwY2Fk";
+			string secret = _configuration.GetSection("SendOTP:SECRET").Value.ToString();
 
 			using var client = new HttpClient();
 
@@ -329,7 +329,7 @@ namespace Dto.Common
 
 				SMSRequestDto apiRequest = new SMSRequestDto()
 				{
-					AuthId = "live_0047ff3001f3461a8de21d99451bd56d",
+					AuthId = _configuration.GetSection("SendOTP:AUTHID").Value.ToString(),
 					EncodedMessage = base64String,
 					TemplateId = "1607100000000189081",
 					MobileNumber = Mobile,
@@ -368,7 +368,7 @@ namespace Dto.Common
 			//}
 			string Message = "Your%20encroachment%20removal%2Fdemolition%20request%20vide%20%0AReference%20no%20" + RefNo + ".%20has%20been%20successfully%20submitted%20%0Aand%20forwarded%20for%20approval%20to%20your%20reporting%20officer.%0ALand%20Management%20DDA";
 			string url = _configuration.GetSection("SendOTP:URL").Value.ToString();
-			string secret = "YjY0NmI5YWMtZDJhYS00MjEyLWIyMTQtZTJkOTE3NTMwY2Fk";
+			string secret = _configuration.GetSection("SendOTP:SECRET").Value.ToString();
 
 			using var client = new HttpClient();
 
@@ -387,7 +387,7 @@ namespace Dto.Common
 
 				SMSRequestDto apiRequest = new SMSRequestDto()
 				{
-					AuthId = "live_0047ff3001f3461a8de21d99451bd56d",
+					AuthId = _configuration.GetSection("SendOTP:AUTHID").Value.ToString(),
 					EncodedMessage = base64String,
 					TemplateId = "1607100000000189087",
 					MobileNumber = Mobile,
@@ -416,9 +416,9 @@ namespace Dto.Common
         {
            string Message = "%22Dear%20User%2C%0AYour%20property%20verification%20OTP%20is%20"+ OTP + ".%20This%20OTP%20is%20valid%20for%205%20minutes.%0ALand%20Management%20DDA%22";
 			string url = _configuration.GetSection("SendOTP:URL").Value.ToString();
-			string secret = "MzY1ZmZjNWEtYzZlMS00OGMxLWJjZWQtMGExNDI0ODU4M2Zj";
+			string secret = _configuration.GetSection("SendOTP:SECRET").Value.ToString();
 
-            using var client = new HttpClient();
+			using var client = new HttpClient();
 
            
 
@@ -435,8 +435,8 @@ namespace Dto.Common
 
 				SMSRequestDto apiRequest = new SMSRequestDto()
                 {
-                    AuthId = "test_509c3b1a53994adb8b41e38ad297fd17",
-                    EncodedMessage = base64String,
+                    AuthId = _configuration.GetSection("SendOTP:AUTHID").Value.ToString(),
+					EncodedMessage = base64String,
                     TemplateId = "1607100000000189082",
                     MobileNumber = Mobile,
                     CheckSum = str1
