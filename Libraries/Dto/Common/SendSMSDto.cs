@@ -416,9 +416,9 @@ namespace Dto.Common
         {
            string Message = "%22Dear%20User%2C%0AYour%20property%20verification%20OTP%20is%20"+ OTP + ".%20This%20OTP%20is%20valid%20for%205%20minutes.%0ALand%20Management%20DDA%22";
 			string url = _configuration.GetSection("SendOTP:URL").Value.ToString();
-			string secret = _configuration.GetSection("SendOTP:SECRET").Value.ToString();
+			string secret = "MzY1ZmZjNWEtYzZlMS00OGMxLWJjZWQtMGExNDI0ODU4M2Zj";
 
-			using var client = new HttpClient();
+            using var client = new HttpClient();
 
            
 
@@ -435,8 +435,8 @@ namespace Dto.Common
 
 				SMSRequestDto apiRequest = new SMSRequestDto()
                 {
-                    AuthId = _configuration.GetSection("SendOTP:AUTHID").Value.ToString(),
-					EncodedMessage = base64String,
+                    AuthId = "test_509c3b1a53994adb8b41e38ad297fd17",
+                    EncodedMessage = base64String,
                     TemplateId = "1607100000000189082",
                     MobileNumber = Mobile,
                     CheckSum = str1
