@@ -1,5 +1,7 @@
 ﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Propertyregistration>
-@{int rowNo = 0; }
+@{
+    int rowNo = 0;
+}
 
 <table class="table table-sm table-bordered mb-0 table-striped">
 
@@ -27,43 +29,50 @@
         {
             @foreach (var item in Model.Results)
             {
-        <tr>
-            <td>@(item.InventoriedInId.ToString() == "1" ? "VLMS" : "Used" ) </td>
-            <td>@(item.PlannedUnplannedLand)</td>
-            <td>@item.ClassificationOfLand.Name</td>
-            <td>@item.Department.Name</td>
-            <td>@item.Zone.Name</td>
-            <td>@item.Division.Name</td>
-            <td>@item.PrimaryListNo</td>
-            @if (@item.PlannedUnplannedLand == "Planned Land")
-            {
-                <td>@item.PlotNo</td>
-            }
-            else
-            {
-                <td>@item.KhasraNo</td>
-}
+                <tr>
+                    <td>@(item.InventoriedInId.ToString() == "1" ? "VLMS" : "Used") </td>
+                    <td>@(item.PlannedUnplannedLand)</td>
+                    <td>@item.ClassificationOfLand.Name</td>
+                    <td>@item.Department.Name</td>
+                    <td>@item.Zone.Name</td>
+                    <td>@item.Division.Name</td>
+                    <td>@item.PrimaryListNo</td>
+                    @if (@item.PlannedUnplannedLand == "Planned Land")
+                    {
+                        <td>@item.PlotNo</td>
+                    }
+                    else
+                    {
+                        <td>@item.KhasraNo</td>
+                    }
 
-            @*<td>@(item.PlannedUnplannedLand == "Planned Land" ? item.PlotNo : item.KhasraNo)</td>*@
+                    @*<td>@(item.PlannedUnplannedLand == "Planned Land" ? item.PlotNo : item.KhasraNo)</td>*@
 
-            <td>@item.TotalArea</td>
-            <td>@(item.EncroachedPartiallyFully == "0" ? "Partially Encroached" :item.EncroachedPartiallyFully =="1" ? "Fully Encroached" :"Na")</td>
-            <td>@(item.Boundary == 0 ? "Boundary Wall" : item.Boundary == 1 ? "Fencing" : "None")</td>
+                    <td>@item.TotalArea</td>
+                    @if (item.EncroachmentStatusId == 0)
+                    {
+                        <td>@(item.EncroachedPartiallyFully == "0" ? "No" : item.EncroachedPartiallyFully == "1" ? "No" : "Na")</td>
+                    }
+                   else
+                    {
+                        <td>@(item.EncroachedPartiallyFully == "0" ? "Partially Encroached" : item.EncroachedPartiallyFully == "1" ? "Fully Encroached" : "Na")</td>
+                    }
+                    <td>@(item.Boundary == 0 ? "Boundary Wall" : item.Boundary == 1 ? "Fencing" : "None")</td>
 
-            <td>
-                <a asp-action="View" asp-route-id="@item.Id" title="View" class="view"><i class="ri-eye-fill"></i></a>
+                    <td>
+                        <a asp-action="View" asp-route-id="@item.Id" title="View" class="view"><i class="ri-eye-fill"></i></a>
 
 
-                <a asp-action="Edit" asp-route-id="@item.Id" title="edit" class="edit"><i class="ri-edit-line"></i></a>
+                        <a asp-action="Edit" asp-route-id="@item.Id" title="edit" class="edit"><i class="ri-edit-line"></i></a>
 
-                @if (item.IsValidate == 1)
-                {
+                        @if (item.IsValidate == 1)
+                        {
 
-                    <a asp-action="Dispose" asp-route-id="@item.Id" title="Dispose" class="remove" onclick="return confirm('Are You Sure, You want to Dispose this Record?')"> <i class="ri-delete-bin-5-fill"></i></a>
+                            <a asp-action="Dispose" asp-route-id="@item.Id" title="Dispose" class="remove" onclick="return confirm('Are You Sure, You want to Dispose this Record?')"> <i class="ri-delete-bin-5-fill"></i></a>
 
-                }
-            </td>
-        </tr>
+                        }
+                    </td>
+                </tr>
             }
         }
         else
