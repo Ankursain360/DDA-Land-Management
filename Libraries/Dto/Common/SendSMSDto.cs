@@ -70,7 +70,8 @@ namespace Dto.Common
 				{
 					AuthId = _configuration.GetSection("SendOTP:AUTHID").Value.ToString(),
 					EncodedMessage = base64String,
-					TemplateId = "1607100000000189095",
+					//TemplateId = "1607100000000189095",
+					TemplateId = "1607100000000294917",
 					MobileNumber = Mobile,
 					CheckSum = str1
 				};
@@ -153,7 +154,8 @@ namespace Dto.Common
                 {
                     AuthId = _configuration.GetSection("SendOTP:AUTHID").Value.ToString(),
 					EncodedMessage = base64String,
-                    TemplateId = "1607100000000189082",
+                    //TemplateId = "1607100000000189082",
+                    TemplateId = "1607100000000294913",
                     MobileNumber = Mobile,
                     CheckSum = str1
                 };
@@ -213,8 +215,9 @@ namespace Dto.Common
 				{
 					AuthId = _configuration.GetSection("SendOTP:AUTHID").Value.ToString(),
 					EncodedMessage = base64String,
-					TemplateId = "1607100000000189078",
-					MobileNumber = Mobile,
+					//TemplateId = "1607100000000189078",
+					TemplateId = "1607100000000294919",
+                    MobileNumber = Mobile,
 					CheckSum = str1
 				};
 
@@ -271,8 +274,9 @@ namespace Dto.Common
 				{
 					AuthId = _configuration.GetSection("SendOTP:AUTHID").Value.ToString(),
 					EncodedMessage = base64String,
-					TemplateId = "1607100000000189083",
-					MobileNumber = Mobile,
+                    //TemplateId = "1607100000000189083",
+                    TemplateId = "1607100000000189083",
+                    MobileNumber = Mobile,
 					CheckSum = str1
 				};
 
@@ -331,7 +335,8 @@ namespace Dto.Common
 				{
 					AuthId = _configuration.GetSection("SendOTP:AUTHID").Value.ToString(),
 					EncodedMessage = base64String,
-					TemplateId = "1607100000000189081",
+					//TemplateId = "1607100000000189081",
+					TemplateId = "1607100000000294915",
 					MobileNumber = Mobile,
 					CheckSum = str1
 				};
@@ -389,7 +394,8 @@ namespace Dto.Common
 				{
 					AuthId = _configuration.GetSection("SendOTP:AUTHID").Value.ToString(),
 					EncodedMessage = base64String,
-					TemplateId = "1607100000000189087",
+					//TemplateId = "1607100000000189087",
+					TemplateId = "1607100000000294916",
 					MobileNumber = Mobile,
 					CheckSum = str1
 				};
@@ -437,7 +443,7 @@ namespace Dto.Common
                 {
                     AuthId = "test_509c3b1a53994adb8b41e38ad297fd17",
                     EncodedMessage = base64String,
-                    TemplateId = "1607100000000189082",
+                    TemplateId = "1607100000000189082",					
                     MobileNumber = Mobile,
                     CheckSum = str1
                 };
