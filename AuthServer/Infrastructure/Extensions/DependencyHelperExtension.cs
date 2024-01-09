@@ -17,16 +17,17 @@ namespace AuthServer.Infrastructure.Extensions
         {
             /* Common Dependencies */
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-           // services.AddScoped<ISiteContext, SiteContext>();
+            // services.AddScoped<ISiteContext, SiteContext>();
+
             /* Respository */
-           
-          
-           services.AddScoped<IPasswordhistoryRepository, PasswordhistoryRepository>();
-           
-            
+
+           // services.AddScoped<IUserProfileRepository, UserProfileRepository>();
+            services.AddScoped<IPasswordhistoryRepository, PasswordhistoryRepository>();
+
+
             /* Application Services */
+           // services.AddScoped<IUserProfileService, UserProfileService>();
            
-          
             services.AddScoped<IPasswordhistoryService, PasswordhistoryService>();
 
         }
