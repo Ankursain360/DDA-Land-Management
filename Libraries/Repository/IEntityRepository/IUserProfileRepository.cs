@@ -16,9 +16,9 @@ namespace Repository.IEntityRepository
         Task<List<Userprofile>> GetUser();
         Task<List<ApplicationRole>> GetRole();
         Task<Userprofile> GetUserById(int userId);
-
-       
-        Task<List<KycApplicationSearchDto>> KycApplicationDetails(int id);
+        Task<Userprofile> GetUserProfileById(int userId);
+        
+         Task<List<KycApplicationSearchDto>> KycApplicationDetails(int id);
 
         Task<List<KycDemandPaymentSearchDto>> KycDemandPaymentDetails(int id);
         Task<List<ApplicationRole>> GetActiveRole();

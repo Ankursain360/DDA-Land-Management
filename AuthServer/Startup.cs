@@ -62,8 +62,8 @@ namespace AuthServer
                 options.Password.RequiredLength = 7;
                 options.Password.RequireDigit = false;
                 options.Password.RequireUppercase = false;
-                options.User.RequireUniqueEmail = true;
-            })
+                options.User.RequireUniqueEmail = true;                
+            }).AddRoles<ApplicationRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddEntityFrameworkStores<DataContext>()
                 .AddDefaultTokenProviders();

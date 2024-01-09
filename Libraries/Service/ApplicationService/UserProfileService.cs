@@ -82,7 +82,15 @@ namespace Service.ApplicationService
             return result;
         }
 
-       
+        public async Task<UserProfileDto> GetUserProfileById(int userId)
+        {
+            var user = await _userProfileRepository.GetUserProfileById(userId);
+            var result = _mapper.Map<UserProfileDto>(user);
+            return result;
+        }
+        
+
+
 
 
         public async Task<List<KycApplicationSearchDto>> KycApplicationDetails(int id)

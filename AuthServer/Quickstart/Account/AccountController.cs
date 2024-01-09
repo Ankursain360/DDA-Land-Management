@@ -33,6 +33,7 @@ using Notification.Constants;
 using Notification.OptionEnums;
 using Libraries.Service.IApplicationService;
 using Libraries.Model.Entity;
+using Service.IApplicationService;
 
 namespace IdentityServerHost.Quickstart.UI
 {
@@ -50,6 +51,7 @@ namespace IdentityServerHost.Quickstart.UI
         public IConfiguration _configuration;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IPasswordhistoryService _passwordhistoryService;
+       // private readonly IUserProfileService _userProfileService;
         public AccountController(
             UserManager<IdentityServerAspNetIdentity.Models.ApplicationUser> userManager,
             SignInManager<IdentityServerAspNetIdentity.Models.ApplicationUser> signInManager,
@@ -59,7 +61,9 @@ namespace IdentityServerHost.Quickstart.UI
             IEventService events,
             IConfiguration configuration,
              IPasswordhistoryService passwordhistoryService,
-            IHttpContextAccessor httpContextAccessor, IHostingEnvironment en)
+            IHttpContextAccessor httpContextAccessor, IHostingEnvironment en
+           //, IUserProfileService userProfileService
+            )
 
         {
             _userManager = userManager;
@@ -72,6 +76,7 @@ namespace IdentityServerHost.Quickstart.UI
             _httpContextAccessor = httpContextAccessor;
             _hostingEnvironment = en;
             _passwordhistoryService = passwordhistoryService;
+           // _userProfileService = userProfileService;
         }
 
         /// <summary>
@@ -151,57 +156,72 @@ namespace IdentityServerHost.Quickstart.UI
                 var result = await _signInManager.PasswordSignInAsync(model.Username, model.Password, model.RememberLogin, lockoutOnFailure: true);
                 if (result.Succeeded)
                 {
+                   
+
+
                     var user = await _userManager.FindByNameAsync(model.Username);
+                 //   UserProfileDto userprofile = await _userProfileService.GetUserProfileById(user.Id);
 
-                    if (user.ChangePasswordStatus == "T")
-                    {
-                        var token = await _userManager.GeneratePasswordResetTokenAsync(user);
-                        var callback = Url.Action(nameof(ResetPassword), "Account", new { token, username = user.UserName }, Request.Scheme);
+                    //if (userprofile.IsActive == 1)
+                    //{
 
-                        //At successfull completion send mail and sms
-                        string DisplayName = model.Username.ToString();
-                        string EmailID = user.Email.ToString();
-                        // string Id = "";
-                        string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "MailDetails1.html");
-
-                        #region Mail Generation Added By Renu
-
-                        MailSMSHelper mailG = new MailSMSHelper();
-
-                        #region HTML Body Generation
-                        RegisterationBodyDTO bodyDTO = new RegisterationBodyDTO();
-                        bodyDTO.displayName = DisplayName;
-                        bodyDTO.loginName = DisplayName;
-                        bodyDTO.password = "";
-                        bodyDTO.link = callback;
-                        bodyDTO.action = "";
-                        bodyDTO.path = path;
-                        string strBodyMsg = mailG.PopulateBody(bodyDTO);
-                        #endregion
-
-                        #region Common Mail Genration
-                        SentMailGenerationDto maildto = new SentMailGenerationDto();
-                        maildto.strMailSubject = "Reset Password";
-                        maildto.strMailCC = ""; maildto.strMailBCC = ""; maildto.strAttachPath = "";
-                        maildto.strBodyMsg = strBodyMsg;
-                        maildto.defaultPswd = (_configuration.GetSection("EmailConfiguration:defaultPswd").Value).ToString();
-                        maildto.fromMail = (_configuration.GetSection("EmailConfiguration:fromMail").Value).ToString();
-                        maildto.fromMailPwd = (_configuration.GetSection("EmailConfiguration:fromMailPwd").Value).ToString();
-                        maildto.mailHost = (_configuration.GetSection("EmailConfiguration:mailHost").Value).ToString();
-                        maildto.port = Convert.ToInt32(_configuration.GetSection("EmailConfiguration:port").Value);
-
-                        maildto.strMailTo = EmailID;
-                        var sendMailResult = mailG.SendMailWithAttachment(maildto);
-                        #endregion
-                        #endregion
-                        if (sendMailResult)
+                        if (user.ChangePasswordStatus == "T")
                         {
-                            return RedirectToAction("MailSentMsg", "Account", new { username = user.UserName });
+                            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+                            var callback = Url.Action(nameof(ResetPassword), "Account", new { token, username = user.UserName }, Request.Scheme);
+
+                            //At successfull completion send mail and sms
+                            string DisplayName = model.Username.ToString();
+                            string EmailID = user.Email.ToString();
+                            // string Id = "";
+                            string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "MailDetails1.html");
+
+                            #region Mail Generation Added By Renu
+
+                            MailSMSHelper mailG = new MailSMSHelper();
+
+                            #region HTML Body Generation
+                            RegisterationBodyDTO bodyDTO = new RegisterationBodyDTO();
+                            bodyDTO.displayName = DisplayName;
+                            bodyDTO.loginName = DisplayName;
+                            bodyDTO.password = "";
+                            bodyDTO.link = callback;
+                            bodyDTO.action = "";
+                            bodyDTO.path = path;
+                            string strBodyMsg = mailG.PopulateBody(bodyDTO);
+                            #endregion
+
+                            #region Common Mail Genration
+                            SentMailGenerationDto maildto = new SentMailGenerationDto();
+                            maildto.strMailSubject = "Reset Password";
+                            maildto.strMailCC = ""; maildto.strMailBCC = ""; maildto.strAttachPath = "";
+                            maildto.strBodyMsg = strBodyMsg;
+                            maildto.defaultPswd = (_configuration.GetSection("EmailConfiguration:defaultPswd").Value).ToString();
+                            maildto.fromMail = (_configuration.GetSection("EmailConfiguration:fromMail").Value).ToString();
+                            maildto.fromMailPwd = (_configuration.GetSection("EmailConfiguration:fromMailPwd").Value).ToString();
+                            maildto.mailHost = (_configuration.GetSection("EmailConfiguration:mailHost").Value).ToString();
+                            maildto.port = Convert.ToInt32(_configuration.GetSection("EmailConfiguration:port").Value);
+
+                            maildto.strMailTo = EmailID;
+                            var sendMailResult = mailG.SendMailWithAttachment(maildto);
+                            #endregion
+                            #endregion
+                            if (sendMailResult)
+                            {
+                                return RedirectToAction("MailSentMsg", "Account", new { username = user.UserName });
+
+                            }
+
 
                         }
-
-
-                    }
+                    //}
+                    //else
+                    //{
+                    //    ModelState.AddModelError(string.Empty, "The account is no more active. Kindly Contact to system adminitsrator");
+                    //    var vms = await BuildLoginViewModelAsync(model);
+                    //    return View(vms);
+                    //}
+                    
 
                     await _events.RaiseAsync(new UserLoginSuccessEvent(user.UserName, user.Id.ToString(), user.UserName, clientId: context?.Client.ClientId));
                     #region cookie based session fixation added by sachin bhatt
