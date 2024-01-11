@@ -365,7 +365,7 @@ namespace Libraries.Repository.EntityRepository
             return await _dbContext.Zone.Include(x => x.Village).Where(x => x.IsActive == 1 && x.Id == zoneId).ToListAsync();
         }
 
-        public async Task<List<Zone>> GetZoneList()
+        public async Task<List<Zone>> GetZoneList()  //Demo
         {
 
             var data = await _dbContext.Zone.Include(x => x.Village)

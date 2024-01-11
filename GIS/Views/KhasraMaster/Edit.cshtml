@@ -1,0 +1,123 @@
+﻿@model Libraries.Model.Entity.Khasra
+@await Component.InvokeAsync("PageHeader", new { pageName = "Khasra" })
+
+<div class="pt-3">
+    <form asp-action="Edit" id="create_user" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+        <h3 class="mb-3 d-flex">Edit Details<span class="ms-auto"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span></h3>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+
+                    <select class="floating-label-field floating-label-field--s3" asp-for="AcquiredlandvillageId" asp-items="@(new SelectList(Model.VillageList, "Id","Name"))">
+                        <option selected="selected" disabled="disabled" value="">--Select-- </option>
+                    </select>
+                    <span asp-validation-for="AcquiredlandvillageId" class="text-danger"></span>
+                    <label class="floating-label">Village<span style="color:red">*</span></label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input asp-for="RectNo" class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="RectNo" class="text-danger"></span>
+                    <label class="floating-label">Rect No.<span style="color:red">*</span></label>
+                </div>
+            </div>
+        </div>
+
+            <div class="row pt-3">
+                <div class="col-md-6">
+                    <div class="floating-label-wrap">
+
+                        <select class="floating-label-field floating-label-field--s3" asp-for="LandCategoryId" asp-items="@(new SelectList(Model.LandCategoryList, "Id","Name"))">
+                            <option selected="selected" disabled="disabled" value="">--Select-- </option>
+                        </select>
+                        <span asp-validation-for="LandCategoryId" class="text-danger"></span>
+                        <label class="floating-label">Land Category<span style="color:red">*</span></label>
+                    </div>
+                </div>
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+
+                            <input asp-for="Name" class="floating-label-field floating-label-field--s3" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                            <label class="floating-label">Khasra No.<span style="color:red">*</span></label>
+                        </div>
+                    </div>
+               
+            </div>
+            <div id="Divclsification">
+                <h2 class="my-3 sub-heading">Area</h2>
+                <div class="row pt-3">
+                    <div class="col-md-4">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+
+
+                            <input limit="4"  asp-for="Bigha" class="floating-label-field floating-label-field--s3 onlynumbers" />
+                            <span asp-validation-for="Bigha" class="text-danger"></span>
+
+                            <label class="floating-label">Bigha<span style="color:red">*</span></label>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-4">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+
+                            <input limit="2"  asp-for="Biswa" class="floating-label-field floating-label-field--s3 onlynumbers" />
+                            <span asp-validation-for="Biswa" class="text-danger"></span>
+                            <label class="floating-label">Biswa<span style="color:red">*</span></label>
+                        </div>
+                    </div>
+                        <div class="col-md-4">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
+
+                                <input limit="2"  asp-for="Biswanshi" class="floating-label-field floating-label-field--s3 onlynumbers" />
+                                <span asp-validation-for="Biswanshi" class="text-danger"></span>
+                                <label class="floating-label">Biswanshi<span style="color:red">*</span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div class="row pt-3">
+
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+
+                        <select asp-for="IsActive" class="floating-label-field floating-label-field--s3">
+                            <option value="1">Active</option>
+                            <option value="0">InActive</option>
+                        </select>
+                        <span asp-validation-for="IsActive" class="text-danger"></span>
+                        <label class="floating-label"> Status</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row pt-3">
+                <div class="col-md-12">
+
+                    <textarea asp-for="Description" class="floating-label-field floating-label-field--s3"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                    <label class="floating-label">Remarks</label>
+                </div>
+            </div>
+
+
+            <div class="row mt-md-3">
+                <div class=" col-md-12">
+                   
+                        <input type="submit" value="Update" class="btn btn-theme "  onclick="return PasswordMatch();" />
+                        @Html.ActionLink("Back", "Index", "KhasraMaster", null, new { @class = "btn btn-theme" })
+                    </div>
+                </div>
+            
+
+
+</form>
+</div>
+    
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />

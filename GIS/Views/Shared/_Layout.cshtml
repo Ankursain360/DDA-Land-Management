@@ -92,7 +92,7 @@
 
     @*<aside class="left-menu small slow" id="leftMenu">
         <ul class="accordion list-unstyled mb-0">
-
+             
             @await Component.InvokeAsync("SideNav")
         </ul>
     </aside>*@
@@ -107,13 +107,32 @@
             <a class="no-dec d-flex align-items-center collapsed" data-toggle="collapse" href="#m1" role="button"
                aria-expanded="false" aria-controls="m1">
                 <i class="main-icon ri-group-line"></i>
-                <span class="text mr-auto">DecisionSupportSystem</span>
+                <span class="text mr-auto">Master</span>
                 <i class="arrow ri-arrow-drop-down-line slow"></i>
             </a>
             <div class="collapse sub-menu" id="m1" data-parent="#leftMenu">
                 <ul class="list-unstyled m-0 p-0">
                     <li>
-                        <a href="~/DDADecisionSupportSystem/Index" class="d-block">DDADecisionSupportSystem</a>
+                        <a href="~/Zone/Index" class="d-block">Zone</a>
+                    </li>
+                    <li>
+                        <a href="~/Acquiredvillage/Index" class="d-block">Village</a>
+                    </li>
+                    <li>
+                        <a href="~/KhasraMaster/Index" class="d-block">Khasra</a>
+                    </li>
+                </ul>
+            </div>
+            <a class="no-dec d-flex align-items-center collapsed" data-toggle="collapse" href="#DecisionSupportSystem" role="button"
+               aria-expanded="false" aria-controls="m1">
+                <i class="main-icon ri-group-line"></i>
+                <span class="text mr-auto">Decision Support System</span>
+                <i class="arrow ri-arrow-drop-down-line slow"></i>
+            </a>
+            <div class="collapse sub-menu" id="DecisionSupportSystem" data-parent="#leftMenu">
+                <ul class="list-unstyled m-0 p-0">
+                    <li>
+                        <a href="~/DDADecisionSupportSystem/Index" class="d-block">DDA Decision Support System</a>
                     </li>
                     <li>
                         <a href="~/GIS/AIChangeDetection" class="d-block">AIChangeDetection</a>

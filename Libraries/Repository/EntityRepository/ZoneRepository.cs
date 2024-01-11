@@ -158,6 +158,127 @@ namespace Libraries.Repository.EntityRepository
                 }
             }
             return data;
+        } 
+        public async Task<PagedResult<Zone>> DecisionSupportSystemZone(ZoneSearchDto model)
+        {
+            var data = await _dbContext.Zone.Include(x => x.Village)
+                                        .Where(x => x.IsActive == 1
+                                                 && x.Xcoordinate != null &&
+                            (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                             && (string.IsNullOrEmpty(model.code) || x.Code.Contains(model.code))
+                             && (string.IsNullOrEmpty(model.department) || x.Department.Name.Contains(model.department)))
+                        .GetPaged<Zone>(model.PageNumber, model.PageSize);
+
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("DEPARTMENT"):
+                        data = null;
+                        data = await _dbContext.Zone
+                            .Include(s => s.Department)
+                            .Where(x => x.IsActive == 1
+                                                 && x.Xcoordinate != null && (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                             && (string.IsNullOrEmpty(model.code) || x.Code.Contains(model.code))
+                               && (string.IsNullOrEmpty(model.department) || x.Department.Name.Contains(model.department)))
+                            .OrderBy(x => x.Department.Name)
+                            .GetPaged<Zone>(model.PageNumber, model.PageSize);
+                        break;
+
+
+                    case ("NAME"):
+                        data = null;
+                        data = await _dbContext.Zone
+                            .Include(s => s.Department)
+                            .Where(x => x.IsActive == 1
+                                                 && x.Xcoordinate != null && (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                             && (string.IsNullOrEmpty(model.code) || x.Code.Contains(model.code))
+                               && (string.IsNullOrEmpty(model.department) || x.Department.Name.Contains(model.department)))
+                            .OrderBy(x => x.Name)
+                            .GetPaged<Zone>(model.PageNumber, model.PageSize);
+                        break;
+                    case ("CODE"):
+                        data = null;
+                        data = await _dbContext.Zone
+                            .Include(s => s.Department)
+                            .Where(x => x.IsActive == 1
+                                                 && x.Xcoordinate != null && (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                             && (string.IsNullOrEmpty(model.code) || x.Code.Contains(model.code))
+                               && (string.IsNullOrEmpty(model.department) || x.Department.Name.Contains(model.department)))
+                            .OrderBy(x => x.Code)
+                            .GetPaged<Zone>(model.PageNumber, model.PageSize);
+                        break;
+                    case ("ISACTIVE"):
+                        data = null;
+                        data = await _dbContext.Zone
+                            .Include(s => s.Department)
+                           .Where(x => x.IsActive == 1
+                                                 && x.Xcoordinate != null && (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                             && (string.IsNullOrEmpty(model.code) || x.Code.Contains(model.code))
+                               && (string.IsNullOrEmpty(model.department) || x.Department.Name.Contains(model.department)))
+                            .OrderByDescending(x => x.IsActive)
+                            .GetPaged<Zone>(model.PageNumber, model.PageSize);
+                        break;
+
+
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("DEPARTMENT"):
+                        data = null;
+                        data = await _dbContext.Zone
+                            .Include(s => s.Department)
+                            .Where(x => x.IsActive == 1
+                                                 && x.Xcoordinate != null && (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                             && (string.IsNullOrEmpty(model.code) || x.Code.Contains(model.code))
+                               && (string.IsNullOrEmpty(model.department) || x.Department.Name.Contains(model.department)))
+                            .OrderByDescending(x => x.Department.Name)
+                            .GetPaged<Zone>(model.PageNumber, model.PageSize);
+                        break;
+
+
+                    case ("NAME"):
+                        data = null;
+                        data = await _dbContext.Zone
+                            .Include(s => s.Department)
+                            .Where(x => x.IsActive == 1
+                                                 && x.Xcoordinate != null && (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                             && (string.IsNullOrEmpty(model.code) || x.Code.Contains(model.code))
+                               && (string.IsNullOrEmpty(model.department) || x.Department.Name.Contains(model.department)))
+                            .OrderByDescending(x => x.Name)
+                            .GetPaged<Zone>(model.PageNumber, model.PageSize);
+                        break;
+                    case ("CODE"):
+                        data = null;
+                        data = await _dbContext.Zone
+                            .Include(s => s.Department)
+                            .Where(x => x.IsActive == 1
+                                                 && x.Xcoordinate != null && (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                             && (string.IsNullOrEmpty(model.code) || x.Code.Contains(model.code))
+                               && (string.IsNullOrEmpty(model.department) || x.Department.Name.Contains(model.department)))
+                            .OrderByDescending(x => x.Code)
+                            .GetPaged<Zone>(model.PageNumber, model.PageSize);
+                        break;
+                    case ("ISACTIVE"):
+                        data = null;
+                        data = await _dbContext.Zone
+                            .Include(s => s.Department)
+                           .Where(x => x.IsActive == 1
+                                                 && x.Xcoordinate != null && (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                             && (string.IsNullOrEmpty(model.code) || x.Code.Contains(model.code))
+                             && (string.IsNullOrEmpty(model.department) || x.Department.Name.Contains(model.department)))
+                            .OrderBy(x => x.IsActive)
+                            .GetPaged<Zone>(model.PageNumber, model.PageSize);
+                        break;
+
+
+                }
+            }
+            return data;
         }
     }
 

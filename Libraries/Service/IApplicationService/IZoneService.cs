@@ -24,6 +24,7 @@ namespace Libraries.Service.IApplicationService
         Task<bool> CheckUniqueCode(int id, int departmentId, string code);// To check Unique Value  for zone
         Task<List<Department>> GetDropDownList();
         Task<List<Zone>> GetAllDetails();
-        Task<PagedResult<Zone>> GetPagedZone(ZoneSearchDto model);
+        Task<PagedResult<Zone>> GetPagedZone(ZoneSearchDto model); 
+        Task<PagedResult<Zone>> DecisionSupportSystemZone(ZoneSearchDto model);
     }
 }

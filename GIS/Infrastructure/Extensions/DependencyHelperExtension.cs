@@ -49,8 +49,14 @@ namespace GIS.Infrastructure.Extensions
             services.AddScoped<IApprovalstatusRepository, ApprovalstatusRepository>();
             services.AddScoped<IGISSRepository, GISRepository>();
             services.AddScoped<IAuditRepository, AuditRepository>();
-
+            services.AddScoped<IAcquiredlandvillageRepository,  AcquiredlandvillageRepository>();
+            services.AddScoped<IKhasraRepository , KhasraRepository>();
+            services.AddScoped<IZoneRepository, ZoneRepository>();
             /* Application Services */
+
+            services.AddScoped<IZoneService, ZoneService>();
+            services.AddScoped<IKhasraService,  KhasraService>();
+            services.AddScoped<IAcquiredlandvillageService, AcquiredlandvillageService>();
             services.AddScoped<ICountryService, CountryService>();
             services.AddScoped<IDesignationService, DesignationService>();
             services.AddScoped<IZoneService, ZoneService>();

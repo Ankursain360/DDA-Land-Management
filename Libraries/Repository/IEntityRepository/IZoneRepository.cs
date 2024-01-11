@@ -16,5 +16,6 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Zone>> GetAllDetails();
         Task<List<Zone>> GetAllZone();
         Task<PagedResult<Zone>> GetPagedZone(ZoneSearchDto model);
+        Task<PagedResult<Zone>> DecisionSupportSystemZone(ZoneSearchDto model); 
     }
 }
