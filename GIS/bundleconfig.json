@@ -58,5 +58,11 @@
     "inputFiles": [
       "wwwroot/js/js.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/ddadecisionSupportsystemIndex.min.js",
+    "inputFiles": [
+      "wwwroot/js/ddadecisionSupportsystemIndex.js"
+    ]
   }
 ]

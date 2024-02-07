@@ -372,7 +372,8 @@ namespace Libraries.Model
         public virtual DbSet<Vlmsmobileappaccesslog> vlmsmobileappaccesslog { get; set; }
         public virtual DbSet<LandVerificationDetails> landverificationdetails { get; set; }
         public virtual DbSet<LandVerificationSignatureData> landverificationsignaturedata { get; set; }
-        public virtual DbSet<LandVerificationVillageDetails> landverificationvillagedetails { get; set; }  
+        public virtual DbSet<LandVerificationVillageDetails> landverificationvillagedetails { get; set; }
+        public virtual DbSet<AIchangedetectiondata> aichangedetectiondata { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -674,6 +675,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new RestorationentryConfiguration());
             //modelBuilder.ApplyConfiguration(new KyclicensepaymentrptConfiguration());
             modelBuilder.ApplyConfiguration(new RefreshTokenConfiguration());
+            modelBuilder.ApplyConfiguration(new AIchangedetectiondataConfiguration());
             base.OnModelCreating(modelBuilder);
         }
     }

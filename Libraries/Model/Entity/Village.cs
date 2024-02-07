@@ -1,5 +1,6 @@
 ﻿using Libraries.Model.Common;
 using Microsoft.AspNetCore.Mvc;
+using Model.Entity;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -43,6 +44,7 @@ namespace Libraries.Model.Entity
             Gisvillageboundary = new HashSet<Gisvillageboundary>();
             Gisvillagetext = new HashSet<Gisvillagetext>();
             Giszero = new HashSet<Giszero>();
+            ChangeDetection= new HashSet<AIchangedetectiondata>();
             //Newdamagepayeeregistration = new HashSet<Newdamagepayeeregistration>();
         }
 
@@ -103,6 +105,8 @@ namespace Libraries.Model.Entity
         public ICollection<Gisvillageboundary> Gisvillageboundary { get; set; }
         public ICollection<Gisvillagetext> Gisvillagetext { get; set; }
         public ICollection<Giszero> Giszero { get; set; }
-       // public ICollection<Newdamagepayeeregistration> Newdamagepayeeregistration { get; set; }
+
+        public ICollection<AIchangedetectiondata> ChangeDetection { get; set; }
+        // public ICollection<Newdamagepayeeregistration> Newdamagepayeeregistration { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Dto.GIS;
 using Dto.Master;
+using Dto.Search;
 using Libraries.Model;
 using Libraries.Model.Entity;
 using Libraries.Repository.Common;
@@ -438,7 +439,7 @@ namespace Libraries.Repository.EntityRepository
         public async Task<List<GISKhasraExport>> GetKhasraListforExport(int villageId)
         {
             List<GISKhasraExport> _khasralist = new List<GISKhasraExport>();
-          
+
             var khasra = await _dbContext.Gisdata
                                     .Include(x => x.Village)
                                     .Where(x => x.VillageId == villageId && x.IsActive == 1 && x.GisLayerId == 30)
@@ -454,6 +455,29 @@ namespace Libraries.Repository.EntityRepository
                 count++;
             }
             return _khasralist;
+        }
+
+        public async Task<PagedResult<AIchangedetectiondata>> GetChangeDetectionData(AIchangeDetectionSearchDto model)
+        {
+            var data = await _dbContext.aichangedetectiondata
+                .Include(x => x.Zone)
+                .Include(x => x.Village)
+                .Where(x => x.IsActive == 1)
+                                    .GetPaged<AIchangedetectiondata>(model.PageNumber, model.PageSize);
+            return data;
+        }
+
+        public async Task<bool> InsertchangeDetectiondata(AIchangedetectiondata dto)
+        {
+            _dbContext.Add(dto);
+            var result = await _dbContext.SaveChangesAsync();
+            //end history
+            if (result > 0)
+            {
+                return true;
+            }
+            else
+            { return false; }
         }
 
     }

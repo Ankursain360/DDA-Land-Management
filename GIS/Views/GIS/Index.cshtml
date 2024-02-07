@@ -131,19 +131,19 @@
                                             <div class="tab-pane fade show active" id="Zone" role="tabpanel" aria-labelledby="Zone-tab">
                                                 <form id="searchWise">
                                                     <div class="mb-2">
-                                                        <label for="ddlZone" class="form-label mb-1 small">Zone :</label>
+                                                        <label for="ZoneId" class="form-label mb-1 small">Zone :</label>
                                                         <select class="form-select form-select-sm" id="ZoneId" asp-items="@(new SelectList( @ViewBag.ZoneList, "Id","Name"))" onchange="return GetVillageList(this.options[this.selectedIndex].value);">
                                                             <option selected="selected" value="0">--Select-- </option>
                                                         </select>
                                                     </div>
                                                     <div class="mb-2">
-                                                        <label for="ddlVillage" class="form-label mb-1 small">Village :</label>
+                                                        <label for="VillageId" class="form-label mb-1 small">Village :</label>
                                                         <select class="form-select form-select-sm" id="VillageId" onchange="return GetKhasraList(this.options[this.selectedIndex].value);">
                                                             <option selected="selected" value="0">--Select-- </option>
                                                         </select>
                                                     </div>
                                                     <div class="mb-2">
-                                                        <label for="ddlKhasra" class="form-label mb-1 small">Khasra :</label>
+                                                        <label for="KhasraId" class="form-label mb-1 small">Khasra :</label>
                                                         <select class="form-select form-select-sm" id="KhasraId" onchange="return ShowKhasraNo(this.options[this.selectedIndex].value);">
                                                             <option selected="selected" value="0">--Select-- </option>
                                                         </select>
@@ -204,23 +204,23 @@
 
                                         </div>
                                         <div class="mb-4">
-                                            <label for="ddlZone" class="form-label mb-1 small">Source :</label>
+                                            <label for="txtSource" class="form-label mb-1 small">Source :</label>
                                             <input type="text" id="txtSource" value="DDA Vikas Sadan, Barapullah Road, beside SBI Bank, Aviation Colony, INA Colony, New Delhi, Delhi, India" class="form-control form-control-sm" placeholder="Enter a query" autocomplete="off" />
                                         </div>
                                         <div class="mb-4">
-                                            <label for="ddlZone" class="form-label mb-1 small">Zone :</label>
+                                            <label for="ZoneId" class="form-label mb-1 small">Zone :</label>
                                             <select class="form-select form-select-sm" style="width:100%" id="ZoneId" asp-items="@(new SelectList( @ViewBag.ZoneList, "Id","Name"))" onchange="return GetGCPVillageList(this.options[this.selectedIndex].value);">
                                                 <option selected="selected" value="0">--Select-- </option>
                                             </select>
                                         </div>
                                         <div class="mb-4">
-                                            <label for="ddlVillage" class="form-label mb-1 small">Village :</label>
+                                            <label for="GCPVillageId" class="form-label mb-1 small">Village :</label>
                                             <select class="form-select form-select-sm" style="width:100%" id="GCPVillageId" onchange="return GetGCPList(this.options[this.selectedIndex].value);">
                                                 <option selected="selected" value="0">--Select-- </option>
                                             </select>
                                         </div>
                                         <div class="mb-4">
-                                            <label for="ddlKhasra" class="form-label mb-1 small">GCP LandMarks :</label>
+                                            <label for="GPCListId" class="form-label mb-1 small">GCP LandMarks :</label>
                                             <select class="form-select form-select-sm" style="width:100%" id="GPCListId" onchange="return setGCPValue(this.options[this.selectedIndex].value);">
                                                 <option selected="selected" value="0">--Select-- </option>
                                             </select>
@@ -311,12 +311,12 @@
                                     <figcaption class="text-center py-1 w-100 d-block bg-primary text-white">Topographic Map</figcaption>
                                 </figure>
                             </a>
-                            @*<a href="#" class="d-block" title="Satallite Map">
+                            <a href="#" class="d-block" title="Satallite Map">
                             <figure class="rounded" id="mapsatellite">
                             <img src="~/img/satelite.jpg" alt="Satallite Map" />
                             <figcaption class="text-center py-1 w-100 d-block bg-primary text-white">Satallite Map</figcaption>
                             </figure>
-                            </a>*@
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -398,7 +398,7 @@
                     <div class="modal-body">
                         <form>
                             <div class="mb-3">
-                                <label for="recipient-name" class="col-form-label">Rectangle//Khasra No:</label>
+                                <label for="txtKhasrano" class="col-form-label">Rectangle//Khasra No:</label>
                                 <input type="text" class="form-control" id="txtKhasrano" maxlength="20">
                             </div>
                         </form>

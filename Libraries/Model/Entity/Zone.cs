@@ -1,5 +1,6 @@
 ﻿using Libraries.Model.Common;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using Model.Entity;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -29,6 +30,7 @@ namespace Libraries.Model.Entity
             Legalmanagementsystem = new HashSet<Legalmanagementsystem>();
             Newlandjointsurvey = new HashSet<Newlandjointsurvey>();
             Vacantlandimage = new HashSet<Vacantlandimage>();
+            ChangeDetection = new HashSet<AIchangedetectiondata>();
         }
 
         [Required(ErrorMessage = " Department is mandatory", AllowEmptyStrings = false)]
@@ -82,5 +84,6 @@ namespace Libraries.Model.Entity
         public ICollection<Vacantlandimage> Vacantlandimage { get; set; }
         public ICollection<Gramsabhaland> Gramsabhaland { get; set; }
         public ICollection<Kycform> Kycform { get; set; }
+        public ICollection<AIchangedetectiondata> ChangeDetection { get; set; }
     }
 }

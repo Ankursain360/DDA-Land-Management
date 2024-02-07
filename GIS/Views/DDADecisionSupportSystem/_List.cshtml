@@ -1,0 +1,64 @@
+﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.AIchangedetectiondata>
+<table class="table table-sm table-bordered mb-0 table-striped">
+    <thead class="text-nowrap">
+        <tr>
+            <th>Sr.No</th>
+            <th>Zone</th>
+            <th>Village</th>
+            <th>First Image</th>
+            <th>Second Image</th>
+            <th>Change Detection Image</th>
+            <th>Similarity(%)</th>
+            <th>Encroachment Detected Yes/No</th>
+            <th>Active Status</th>
+            <th>Operations</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model.Results)
+        {
+            <tr>
+                <td></td>
+
+                <td> @(item.Zone == null ? "" : item.Zone.Name)</td>
+                <td>@(item.Village == null ? "" : item.Village.Name)</td>
+                <td>@item.FirstPhotoPath</td>
+                <td>
+                    @item.SecondPhotoPath
+                   
+                </td>
+                <td>
+                    @item.ChangedImage
+
+                </td>
+                <td>
+                    @item.Similarity
+
+                </td>
+                <td>
+                    Yes
+
+                </td>
+                <td>
+                    @if (item.IsActive == 1)
+                    {
+                        <span class="badge bg-primary px-2 py-1">Active</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-danger px-2 py-1">Inactive</span>
+                    }
+                </td>
+
+                <td>
+                    <div class="action-btns">
+                        <a asp-action="View" asp-route-id="@item.Id" title="View" class="view"><i class="ri-eye-fill"></i> </a>                       
+                    </div>
+                </td>
+            </tr>
+        }
+       
+
+    </tbody>
+</table>

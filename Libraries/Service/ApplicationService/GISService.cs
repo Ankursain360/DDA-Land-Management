@@ -1,11 +1,14 @@
 ﻿using AutoMapper;
 using Dto.GIS;
 using Dto.Master;
+using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Repository.Common;
+using Libraries.Repository.EntityRepository;
 using Libraries.Repository.IEntityRepository;
 using Libraries.Service.Common;
 using Libraries.Service.IApplicationService;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -256,6 +259,32 @@ namespace Libraries.Service.ApplicationService
         {
             var khasra = await _iGISSRepository.GetKhasraListforExport(villageId); 
             return khasra;
+        }
+
+        public async Task<PagedResult<AIchangedetectiondata>> GetChangeDetectionData(AIchangeDetectionSearchDto model)
+        {
+            var data = await _iGISSRepository.GetChangeDetectionData(model);
+            return data;
+        }
+
+        public async Task<bool> InsertchangeDetectiondata(ChangeDetectionDto dto)
+        {
+            AIchangedetectiondata model = new AIchangedetectiondata();
+            model.Zoneid = dto.ZoneId;
+            model.Villageid = dto.VillageID;
+            model.FirstPhotoPath = dto.FirstPhotoPath;
+            model.SecondPhotoPath = dto.SecondPhotoPath;
+            model.ChangedImage = dto.ChangedImagePath;
+            model.Similarity = dto.Similarity;
+            model.FirstImageResoultion = dto.FirstImageResoultion;
+            model.SecondImageResoultion = dto.SecondImageResoultion;
+            model.IsActive = 1;
+            model.CreatedBy = dto.CreatedBy;
+
+            var result = await  _iGISSRepository.InsertchangeDetectiondata(model);
+              
+            
+            return result;
         }
     }
 }

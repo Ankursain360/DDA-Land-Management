@@ -21,13 +21,21 @@ using Accord.Imaging;
 using Accord.MachineLearning.VectorMachines.Learning;
 using Accord.MachineLearning.VectorMachines;
 using Accord.Statistics.Kernels;
-using Org.BouncyCastle.Asn1.Tsp; 
+using Org.BouncyCastle.Asn1.Tsp;
 using Accord.MachineLearning;
-using Accord.Math; 
+using Accord.Math;
 using Accord.IO;
 using NPOI.POIFS.Crypt.Dsig;
 using Utility.Helper;
 using Microsoft.AspNetCore.Http;
+using Point = OpenCvSharp.Point;
+using AForge.Imaging.Filters;
+using Notification.Constants;
+using Notification.OptionEnums;
+using Notification;
+using Microsoft.AspNetCore.Hosting;
+using System.Text;
+using System.Xml.Linq;
 
 namespace GIS.Controllers
 {
@@ -37,12 +45,14 @@ namespace GIS.Controllers
         private readonly ISiteContext _siteContext;
         private readonly IUserProfileService _userProfileService;
         public IConfiguration _Configuration;
-        public GISController(IGISService GISService, IUserProfileService userProfileService, ISiteContext siteContext, IConfiguration configuration)
+        private readonly IHostingEnvironment _hostingEnvironment;
+        public GISController(IGISService GISService, IUserProfileService userProfileService, ISiteContext siteContext, IConfiguration configuration, IHostingEnvironment en)
         {
             _siteContext = siteContext;
             _userProfileService = userProfileService;
             _GISService = GISService;
             _Configuration = configuration;
+            _hostingEnvironment = en;
         }
         public async Task<IActionResult> Index()
         {
@@ -344,7 +354,7 @@ namespace GIS.Controllers
 
         public async Task<IActionResult> AIChangeDetection()
         {
-
+            ViewBag.ZoneList = await _GISService.GetZoneList();
             return View();
         }
         [HttpPost]
@@ -370,7 +380,7 @@ namespace GIS.Controllers
             }
             else
             {
-
+                ViewBag.Message = Alert.Show("Please select First Image", "Alert", AlertType.Warning);
             }
 
             if (dto.SecondPhoto != null)
@@ -388,7 +398,7 @@ namespace GIS.Controllers
             }
             else
             {
-
+                ViewBag.Message = Alert.Show("Please select Second Image", "Alert", AlertType.Warning);
             }
 
 
@@ -424,6 +434,176 @@ namespace GIS.Controllers
             byte[] fileBytes = await System.IO.File.ReadAllBytesAsync(changeimg);
             dto.ChangedImage = string.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(fileBytes));
             return View("AIChangeDetection", dto);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Process1(ChangeDetectionDto dto)
+        {
+            ViewBag.ZoneList = await _GISService.GetZoneList();
+            try
+            {
+                string firstPhotoPath = string.Empty;
+                string secondPhotoPath = string.Empty;
+                var UploadFilePath = _Configuration.GetSection("FilePaths:InputImages:FirstPhotoPath").Value.ToString();
+                var ChangedPhotoPath = _Configuration.GetSection("FilePaths:OutPutImages:ChangedImagePath").Value.ToString();
+                string image1Path, image2Path, outputImagePath = string.Empty;
+
+                if (dto.FirstPhoto != null)
+                {
+                    if (!Directory.Exists(UploadFilePath))
+                    {
+                        DirectoryInfo di = Directory.CreateDirectory(UploadFilePath);// Try to create the directory.
+                    }
+                    string FileName = Guid.NewGuid().ToString() + "_" + dto.FirstPhoto.FileName;
+                    dto.FirstPhotoPath = FileName;
+                    firstPhotoPath = Path.Combine(UploadFilePath, FileName);
+                    using (var stream = new FileStream(firstPhotoPath, FileMode.Create))
+                    {
+                        dto.FirstPhoto.CopyTo(stream);
+                    }
+                }
+                else
+                {
+                    ViewBag.Message = Alert.Show("Please select First Image", "Alert", AlertType.Warning);
+                }
+
+                if (dto.SecondPhoto != null)
+                {
+                    if (!Directory.Exists(UploadFilePath))
+                    {
+                        DirectoryInfo di = Directory.CreateDirectory(UploadFilePath);// Try to create the directory.
+                    }
+                    string FileName = Guid.NewGuid().ToString() + "_" + dto.SecondPhoto.FileName;
+                    dto.SecondPhotoPath = FileName;
+                    secondPhotoPath = Path.Combine(UploadFilePath, FileName);
+                    using (var stream = new FileStream(secondPhotoPath, FileMode.Create))
+                    {
+                        dto.SecondPhoto.CopyTo(stream);
+                    }
+                }
+                else
+                {
+                    ViewBag.Message = Alert.Show("Please select Second Image", "Alert", AlertType.Warning);
+                }
+                image1Path = firstPhotoPath;
+                image2Path = secondPhotoPath;
+                string savepath = ChangedPhotoPath;
+                // Load the images
+                Mat img1 = Cv2.ImRead(image1Path);
+                Mat img2 = Cv2.ImRead(image2Path);
+
+                // Convert images to grayscale
+                Mat gray1 = new Mat();
+                Mat gray2 = new Mat();
+                Cv2.CvtColor(img1, gray1, ColorConversionCodes.BGR2GRAY);
+                Cv2.CvtColor(img2, gray2, ColorConversionCodes.BGR2GRAY);
+
+                // Get image resolutions
+                OpenCvSharp.Size resolution1 = img1.Size();
+                OpenCvSharp.Size resolution2 = img2.Size();
+
+                dto.FirstImageResoultion = resolution1.ToString();
+                dto.SecondImageResoultion = resolution2.ToString();
+                // Compute absolute difference between the two images
+                Mat diff = new Mat();
+                Cv2.Absdiff(gray1, gray2, diff);
+
+                // Apply a threshold to highlight differences
+              
+                Cv2.Threshold(diff, diff, 30, 255, ThresholdTypes.Binary);
+
+                // Find contours of differences
+                Point[][] contours;
+                HierarchyIndex[] hierarchy;
+                Cv2.FindContours(diff, out contours, out hierarchy, RetrievalModes.External, ContourApproximationModes.ApproxSimple);
+
+                // Draw contours on the original images
+                Mat result = img1.Clone();
+                Cv2.DrawContours(result, contours, -1, Scalar.Red, 2); // Highlight differences in red
+
+                // Calculate similarity percentage
+                int totalPixels = resolution1.Width * resolution1.Height;
+                int differentPixels = Cv2.CountNonZero(diff);
+                double similarityPercentage = ((totalPixels - differentPixels) / (double)totalPixels) * 100;
+                dto.Similarity = similarityPercentage.ToString();
+
+                // Save the result
+                //Cv2.ImWrite(outputImagePath, result);
+                Cv2.Resize(result, result, new OpenCvSharp.Size(800, 500));
+                dto.ChangedImagePath = Guid.NewGuid().ToString() + "diff.jpg";
+                string changeimg = savepath + dto.ChangedImagePath;
+
+                Cv2.ImWrite(changeimg, result);
+                // Cv2.ImShow("diff.jpg", result);
+                // Cv2.WaitKey();
+                byte[] fileBytes = await System.IO.File.ReadAllBytesAsync(changeimg);
+                dto.ChangedImage = string.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(fileBytes));
+                var results = true;
+                dto.CreatedBy = _siteContext.UserId;
+                //insert data
+                results = await _GISService.InsertchangeDetectiondata(dto);
+                // 
+                if (results)
+                {
+                    var sendMailResult = false;
+                    MailSMSHelper mailG = new MailSMSHelper();
+                    string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "EmailTemp"), "ChangeDetection.html");
+                    var senderUser = await _userProfileService.GetUserById(SiteContext.UserId);
+
+                    string body = string.Empty;
+                    using (StreamReader reader = new StreamReader(path))
+                    {
+                        body = reader.ReadToEnd();
+                    }
+
+                    body = body.Replace("{User}", senderUser.User.Name);
+                    body = body.Replace("{Emaild}", senderUser.User.Email);
+
+                    #region Common Mail Genration
+                    SentMailGenerationDto maildto = new SentMailGenerationDto();
+                    maildto.strMailSubject = "Detected Changes in Satellite Images";
+                    maildto.strMailCC = ""; maildto.strMailBCC = ""; maildto.strAttachPath = changeimg;
+                    maildto.strBodyMsg = body;
+                    maildto.defaultPswd = (_Configuration.GetSection("EmailConfiguration:defaultPswd").Value).ToString();
+                    maildto.fromMail = (_Configuration.GetSection("EmailConfiguration:fromMail").Value).ToString();
+                    maildto.fromMailPwd = (_Configuration.GetSection("EmailConfiguration:fromMailPwd").Value).ToString();
+                    maildto.mailHost = (_Configuration.GetSection("EmailConfiguration:mailHost").Value).ToString();
+                    maildto.port = Convert.ToInt32(_Configuration.GetSection("EmailConfiguration:port").Value);
+
+                    maildto.strMailTo = senderUser.User.Email;
+                    sendMailResult = mailG.SendMailWithAttachment(maildto);
+                    #endregion
+                    ViewBag.Message = Alert.Show("Image Successfully Processed and Result shared thorugh Email", "Alert", AlertType.Success);
+                }
+                else
+                {
+                    ViewBag.Message = Alert.Show("Unable to process the images", "Alert", AlertType.Error);
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                ViewBag.Message = Alert.Show(ex.Message.ToString(), "Alert", AlertType.Error);
+            }
+            return View("AIChangeDetection", dto);
+        }
+        public string PopulateBodyApprovalMailDetails(ApprovalMailBodyDto element)
+        {
+            string body = string.Empty;
+            using (StreamReader reader = new StreamReader(element.path))
+            {
+                body = reader.ReadToEnd();
+            }
+            body = body.Replace("{ApplicationName}", element.ApplicationName);
+            body = body.Replace("{AppRefNo}", element.AppRefNo);
+            body = body.Replace("{SubmitDate}", element.SubmitDate);
+            body = body.Replace("{SenderName}", element.SenderName);
+            body = body.Replace("{Remarks}", element.Remarks);
+            body = body.Replace("{Status}", element.Status);
+            body = body.Replace("{Link}", element.Link);
+
+
+            return body;
         }
 
         private static Bitmap Grayscales(Bitmap bitmap)
@@ -606,17 +786,17 @@ namespace GIS.Controllers
 
         public async Task<IActionResult> GetKhasraNoForExport(int? villageId)
         {
-          var data=  await _GISService.GetKhasraListforExport(villageId ?? 0);
+            var data = await _GISService.GetKhasraListforExport(villageId ?? 0);
             var memory = ExcelHelper.CreateExcel(data);
-            HttpContext.Session.Set("exportfile", memory); 
+            HttpContext.Session.Set("exportfile", memory);
             return Json("Success");
-             
+
         }
         [HttpGet]
         public virtual IActionResult download()
         {
             byte[] data = HttpContext.Session.Get("exportfile") as byte[];
-            HttpContext.Session.Remove("exportfile"); 
+            HttpContext.Session.Remove("exportfile");
             return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "KhasraDetails.xlsx");
 
         }

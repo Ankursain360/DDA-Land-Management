@@ -1,5 +1,6 @@
 ﻿using Dto.GIS;
 using Dto.Master;
+using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using System.Collections.Generic;
@@ -56,6 +57,10 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Gisdata>> GetGCPList(int villageId);
 
         Task<List<GISKhasraExport>> GetKhasraListforExport(int villageId);
+
+        Task<PagedResult<AIchangedetectiondata>> GetChangeDetectionData(AIchangeDetectionSearchDto model);
+
+        Task<bool> InsertchangeDetectiondata(AIchangedetectiondata dto);
 
     }
 }

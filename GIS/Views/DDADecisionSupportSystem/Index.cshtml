@@ -1,17 +1,18 @@
-﻿@await Component.InvokeAsync("PageHeader",new {pageName = "Decision Support System"})
+﻿@model IEnumerable<Libraries.Model.Entity.AIchangedetectiondata>
+@await Component.InvokeAsync("PageHeader",new {pageName = "Decision Support System"})
 <div class="pt-3">
     <div class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
         <h3 class="mb-3 d-flex">Search</h3>
         <div class="row">
             <div class="col-md-3">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input type="text" class="floating-label-field floating-label-field--s3" placeholder="Zone" />
+                    <input type="text" id="txtzone" class="floating-label-field floating-label-field--s3" placeholder="Zone" />
                     <label class="floating-label">Zone</label>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input type="text" class="floating-label-field floating-label-field--s3" placeholder="Village" />
+                    <input type="text" id="txtvillage" class="floating-label-field floating-label-field--s3" placeholder="Village" />
                     <label class="floating-label">Village</label>
                 </div>
             </div>
@@ -51,17 +52,17 @@
             </div>
 
 
-            <div style="margin-left: 750px;" class="download-table d-flex align-items-center px-3 mb-3 mb-md-0">
+           @*  <div style="margin-left: 750px;" class="download-table d-flex align-items-center px-3 mb-3 mb-md-0">
                 <a href="~/DDADecisionSupportSystem/Create" class="d-flex align-items-center btn btn-primary me-2">
                     <i class="ri-add-fill me-2 mr-lg-1"></i>
                     <small>Add More</small>
                 </a>
-            </div>
+            </div> *@
         </div>
 
-        <div class="table-responsive px-2" id="divDistrict">
+        <div class="table-responsive px-2" id="divAIChange">
         </div>
-        <form method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" action="/ApprovalProcess/Create">
+       @*  <form method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" action="/ApprovalProcess/Create">
             <h3 class="mb-3 d-flex">DDA Decision Support System</h3>
             <div class="row my-md-3">
                 <div class="col-md-12">
@@ -110,6 +111,15 @@
 
 
 
-        </form>
+        </form> *@
     </div>
 </div>
+
+
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/ddadecisionSupportsystemIndex.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/ddadecisionSupportsystemIndex.min.js" asp-append-version="true"></script>
+</environment>
