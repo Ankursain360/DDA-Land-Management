@@ -23,13 +23,40 @@
 
                 <td> @(item.Zone == null ? "" : item.Zone.Name)</td>
                 <td>@(item.Village == null ? "" : item.Village.Name)</td>
-                <td>@item.FirstPhotoPath</td>
+                @*<td>@item.FirstPhotoPath</td>*@
+                @*<td>@item.SecondPhotoPath</td>*@
                 <td>
-                    @item.SecondPhotoPath
-                   
+                    
+                    @if (item.FirstPhotoPath != null)
+                    {
+                        <a target="_blank" asp-action="DownloadImageFirst" asp-route-id="@item.Id"><img src="~/images/jpg.png" /></a>
+                    }
+                    else
+                    {
+                        <span><img src="~/images/jpg.png" /></span>
+                    }
                 </td>
                 <td>
-                    @item.ChangedImage
+                   
+                    @if (item.SecondPhotoPath != null)
+                    {
+                        <a target="_blank" asp-action="DownloadImageSecond" asp-route-id="@item.Id"><img src="~/images/jpg.png" /> </a>
+                    }
+                    else
+                    {
+                        <span><img src="~/images/jpg.png" /></span>
+                    }
+                </td>
+                <td>
+                    
+                    @if (item.ChangedImage != null)
+                    {
+                        <a target="_blank" asp-action="DownloadChangeDetectionImage" asp-route-id="@item.Id"><img src="~/images/jpg.png" /></a>
+                    }
+                    else
+                    {
+                        <span><img src="~/images/jpg.png" /></span>
+                    }
 
                 </td>
                 <td>

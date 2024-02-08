@@ -466,7 +466,11 @@ namespace Libraries.Repository.EntityRepository
                                     .GetPaged<AIchangedetectiondata>(model.PageNumber, model.PageSize);
             return data;
         }
-
+        public async Task<AIchangedetectiondata> GetAIchangedetectionImageDetails(int id)
+        {
+            var data = await _dbContext.aichangedetectiondata.Where(x => x.Id == id && x.IsActive == 1).FirstOrDefaultAsync();
+            return data;
+        }
         public async Task<bool> InsertchangeDetectiondata(AIchangedetectiondata dto)
         {
             _dbContext.Add(dto);

@@ -266,7 +266,10 @@ namespace Libraries.Service.ApplicationService
             var data = await _iGISSRepository.GetChangeDetectionData(model);
             return data;
         }
-
+        public async Task<AIchangedetectiondata> GetAIchangedetectionImageDetails(int id)
+        {
+            return await _iGISSRepository.GetAIchangedetectionImageDetails(id);
+        }
         public async Task<bool> InsertchangeDetectiondata(ChangeDetectionDto dto)
         {
             AIchangedetectiondata model = new AIchangedetectiondata();

@@ -48,14 +48,18 @@ namespace GIS.Controllers
         private readonly IUserProfileService _userProfileService;
         public IConfiguration _Configuration;
         private readonly IHostingEnvironment _hostingEnvironment;
-
+        string InputImages = string.Empty;
+        string ChangeDetectionImage = string.Empty;
         public DDADecisionSupportSystemController(IGISService GISService, IUserProfileService userProfileService, ISiteContext siteContext, IConfiguration configuration, IHostingEnvironment en)
         {
             _siteContext = siteContext;
             _userProfileService = userProfileService;
-            _GISService = GISService;
+            _GISService = GISService; 
             _Configuration = configuration;
             _hostingEnvironment = en;
+            InputImages = _Configuration.GetSection("FilePaths:InputImages:FirstPhotoPath").Value.ToString();
+            ChangeDetectionImage = _Configuration.GetSection("FilePaths:OutPutImages:ChangedImagePath").Value.ToString();
+           
         }
 
         public IActionResult Index()
@@ -72,6 +76,33 @@ namespace GIS.Controllers
         public IActionResult Create()
         {
             return View();
+        }
+        public async Task<IActionResult> DownloadImageFirst(int Id) 
+        { 
+            FileHelper file = new FileHelper(); 
+            var Data = await _GISService.GetAIchangedetectionImageDetails(Id);
+            string targetPhotoPathLayout = InputImages + Data.FirstPhotoPath;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(targetPhotoPathLayout);
+            return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
+            // return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+        }
+        public async Task<IActionResult> DownloadImageSecond(int Id)
+        {
+            FileHelper file = new FileHelper();
+            var Data = await _GISService.GetAIchangedetectionImageDetails(Id);
+            string targetPhotoPathLayout = ChangeDetectionImage + Data.SecondPhotoPath;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(targetPhotoPathLayout);
+            return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
+            //return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+        }
+        public async Task<IActionResult> DownloadChangeDetectionImage(int Id)
+        {
+            FileHelper file = new FileHelper();
+            var Data = await _GISService.GetAIchangedetectionImageDetails(Id);
+            string targetPhotoPathLayout = InputImages + Data.ChangedImage;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(targetPhotoPathLayout);
+            return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
+            //return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
         }
     }
 }
