@@ -240,7 +240,11 @@ namespace Libraries.Service.ApplicationService
         {
             return await _iGISSRepository.GetZoneList();
         }
-
+        public async Task<PagedResult<Gisdata>> NavigateGCPDetails(NavigateGCPDetailsSearchDto dto)
+        {
+            var data = await _iGISSRepository.NavigateGCPDetails(dto);
+            return data;
+        }
         public async Task<GISKhasraUpdateResponseDto> UpdatekhasraNo(int khasraid, string KhasraNo,int Userid)
         {
             var result = await _iGISSRepository.UpdatekhasraNo(khasraid, KhasraNo, Userid); 

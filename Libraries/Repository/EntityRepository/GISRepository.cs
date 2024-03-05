@@ -376,6 +376,53 @@ namespace Libraries.Repository.EntityRepository
             data.ForEach(t => t.Village = t.Village.OrderBy(n => n.Name).ToList());
             return data;
         }
+         
+        public async Task<PagedResult<Gisdata>> NavigateGCPDetails(NavigateGCPDetailsSearchDto model)
+        {
+            var ZoneId = new[] { 3, 5, 6, 9, 10, 16, 18, 20, 21, 24, 25 };
+            var data = await _dbContext.Gisdata.Include(x => x.Village)
+                                                .Include(x => x.Village.Zone)
+                                                .Where(x => x.IsActive == 1 && x.Xcoordinate != null && x.Ycoordinate != null && ZoneId.Contains(x.Village.Zone.Id)
+                                                 && (string.IsNullOrEmpty(model.Zone) || x.Village.Zone.Name.Contains(model.Zone))
+                                                 && (string.IsNullOrEmpty(model.village) || x.Village.Name.Contains(model.village))
+                                                 &&(string.IsNullOrEmpty(model.gisLabel) || x.Label.Contains(model.gisLabel)))
+                                                .OrderBy(x => x.Village.Zone.Name)
+                                                .ThenBy(x => x.Village.Name)
+                                                .ThenBy(x => x.Label)
+                                                 .GetPaged<Gisdata>(model.PageNumber, model.PageSize);
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                        case("ZONE"):
+                        data.Results = data.Results.OrderBy(x=>(x.Village.Zone != null ? x.Village.Zone.Name:null)).ToList();
+                        break;
+                        case ("VILLAGE"):
+                        data.Results = data.Results.OrderBy(x => (x.Village != null ? x.Village.Name : null)).ToList();
+                        break;
+                        case ("LABLE"):
+                        data.Results = data.Results.OrderBy(x => (x.Village != null ? x.Village.Name : null)).ToList();
+                        break;
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("ZONE"):
+                        data.Results = data.Results.OrderByDescending(x => (x.Village.Zone != null ? x.Village.Zone.Name : null)).ToList();
+                        break;
+                    case ("VILLAGE"):
+                        data.Results = data.Results.OrderByDescending(x => (x.Village != null ? x.Village.Name : null)).ToList();
+                        break;
+                    case ("LABLE"):
+                        data.Results = data.Results.OrderByDescending(x => (x.Village != null ? x.Village.Name : null)).ToList();
+                        break;
+                }
+            }
+            return data;
+        }
 
         public async Task<GISKhasraUpdateResponseDto> UpdatekhasraNo(int khasraid, string khasraNo, int Userid)
         {

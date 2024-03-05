@@ -12,6 +12,7 @@ namespace Libraries.Service.IApplicationService
     public interface IGISService : IEntityService<Zone>
     {
         Task<List<Zone>> GetZoneList();
+        Task<PagedResult<Gisdata>> NavigateGCPDetails(NavigateGCPDetailsSearchDto dto);
         Task<List<Village>> GetVillageList(int ZoneId);
         Task<List<Plot>> GetPlotList(int VillageId);
         Task<List<Zone>> GetZoneDetails(int zoneId);
