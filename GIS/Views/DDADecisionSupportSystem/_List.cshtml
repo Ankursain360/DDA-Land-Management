@@ -2,7 +2,7 @@
 <table class="table table-sm table-bordered mb-0 table-striped">
     <thead class="text-nowrap">
         <tr>
-            <th>Sr.No</th>
+            @* <th>Sr.No</th> *@
             <th>Zone</th>
             <th>Village</th>
             <th>First Image</th>
@@ -11,7 +11,7 @@
             <th>Similarity(%)</th>
             <th>Encroachment Detected Yes/No</th>
             <th>Active Status</th>
-            <th>Operations</th>
+           @*  <th>Operations</th> *@
         </tr>
     </thead>
     <tbody>
@@ -19,7 +19,7 @@
         @foreach (var item in Model.Results)
         {
             <tr>
-                <td></td>
+               @*  <td></td> *@
 
                 <td> @(item.Zone == null ? "" : item.Zone.Name)</td>
                 <td>@(item.Village == null ? "" : item.Village.Name)</td>
@@ -78,11 +78,11 @@
                     }
                 </td>
 
-                <td>
+                @* <td>
                     <div class="action-btns">
                         <a asp-action="View" asp-route-id="@item.Id" title="View" class="view"><i class="ri-eye-fill"></i> </a>                       
                     </div>
-                </td>
+                </td> *@
             </tr>
         }
        

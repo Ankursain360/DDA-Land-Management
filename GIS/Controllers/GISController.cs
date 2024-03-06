@@ -582,7 +582,7 @@ namespace GIS.Controllers
             }
             catch (Exception ex)
             {
-
+                throw ex;
                 ViewBag.Message = Alert.Show(ex.Message.ToString(), "Alert", AlertType.Error);
             }
             return View("AIChangeDetection", dto);

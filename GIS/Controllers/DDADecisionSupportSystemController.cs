@@ -90,7 +90,7 @@ namespace GIS.Controllers
         {
             FileHelper file = new FileHelper();
             var Data = await _GISService.GetAIchangedetectionImageDetails(Id);
-            string targetPhotoPathLayout = ChangeDetectionImage + Data.SecondPhotoPath;
+            string targetPhotoPathLayout = InputImages + Data.SecondPhotoPath;
             byte[] FileBytes = System.IO.File.ReadAllBytes(targetPhotoPathLayout);
             return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
             //return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
@@ -99,7 +99,7 @@ namespace GIS.Controllers
         {
             FileHelper file = new FileHelper();
             var Data = await _GISService.GetAIchangedetectionImageDetails(Id);
-            string targetPhotoPathLayout = InputImages + Data.ChangedImage;
+            string targetPhotoPathLayout = ChangeDetectionImage + Data.ChangedImage;
             byte[] FileBytes = System.IO.File.ReadAllBytes(targetPhotoPathLayout);
             return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
             //return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));

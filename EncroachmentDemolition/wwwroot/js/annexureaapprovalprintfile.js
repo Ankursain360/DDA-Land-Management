@@ -386,37 +386,7 @@ $(".downloadpdf").click(function () {
     $('#htmlstring').val(printContents);
     
 
-    //$.ajax({
-    //    async: false,
-    //    type: "POST",
-    //    url: "/AnnexureAApproval/Export",
-    //    contentType: false,
-    //    processData: false,
-    //    data: myformData,
-
-    //    failure: function (response) {
-    //        //alert(response.d);
-    //        return false;
-    //    }
-    //}); 
-    //$.ajax({
-    //    async: false,
-    //    type: "POST",
-    //    url: "/AnnexureAApproval/Export",
-    //    contentType: false,
-    //    processData: false,
-    //    data: myformData,
-    //    success: function (response) {
-
-    //      //  showResult(response, filecontrol)
-
-    //    },
-    //    failure: function (response) {
-    //        //alert(response.d);
-    //        return false;
-    //    }
-    //});
-
+  
 });
 
  
