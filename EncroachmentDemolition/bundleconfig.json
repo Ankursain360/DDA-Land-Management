@@ -364,5 +364,11 @@
     "inputFiles": [
       "wwwroot/js/EncroachmentRagistrationApprovalView.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/NavigateToGCPIndex.min.js",
+    "inputFiles": [
+      "wwwroot/js/NavigateToGCPIndex.js"
+    ]
   }
 ]
