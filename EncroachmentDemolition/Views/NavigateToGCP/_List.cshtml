@@ -9,7 +9,7 @@
             <th>Zone Name</th>
             <th>Village Name</th>
             <th>GCP LandMarks</th>
-            <th>Map</th>
+            <th>View on Map</th>
         </tr>
     </thead>
     <tbody>
@@ -20,11 +20,12 @@
                 <td>@item.Village.Zone.Name</td>
                 <td>@item.Village.Name</td>
                 <td>@item.Label</td>
-                <td hidden>@item.Xcoordinate</td>
-                <td hidden>@item.Ycoordinate</td>
+                @* <td>@item.Xcoordinate</td>
+                <td>@item.Ycoordinate</td> *@
                 <td>
                     <div class="action-btns">
-                        <i class="ri-map-pin-2-fill"></i>
+                        <a target="_blank" href="https://maps.google.com/?q=@item.Ycoordinate,@item.Xcoordinate" title="View Location on Map"><i class="ri-road-map-fill"></i></a>
+                   
                     </div>
 
                 </td>

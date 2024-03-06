@@ -382,7 +382,7 @@ namespace Libraries.Repository.EntityRepository
             var ZoneId = new[] { 3, 5, 6, 9, 10, 16, 18, 20, 21, 24, 25 };
             var data = await _dbContext.Gisdata.Include(x => x.Village)
                                                 .Include(x => x.Village.Zone)
-                                                .Where(x => x.IsActive == 1 && x.Xcoordinate != null && x.Ycoordinate != null && ZoneId.Contains(x.Village.Zone.Id)
+                                                .Where(x => x.IsActive == 1 && x.GisLayerId==37 && x.Xcoordinate != null && x.Ycoordinate != null && ZoneId.Contains(x.Village.Zone.Id)
                                                  && (string.IsNullOrEmpty(model.Zone) || x.Village.Zone.Name.Contains(model.Zone))
                                                  && (string.IsNullOrEmpty(model.village) || x.Village.Name.Contains(model.village))
                                                  &&(string.IsNullOrEmpty(model.gisLabel) || x.Label.Contains(model.gisLabel)))
