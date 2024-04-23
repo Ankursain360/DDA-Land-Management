@@ -23,7 +23,7 @@ namespace EncroachmentDemolition.Controllers
             _GISService = GISService;
             
         }
-        public IActionResult Index()
+        public IActionResult Index() 
         {
             return View();
         }
