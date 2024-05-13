@@ -907,7 +907,7 @@ namespace LeaseDetails.Controllers
             return View(Data);
         }
 
-
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> KycFormApprovalDetailsList()
         {
             var result = await _kycformService.GetAllKycform();

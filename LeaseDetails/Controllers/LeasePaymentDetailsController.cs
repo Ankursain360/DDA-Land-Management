@@ -54,7 +54,7 @@ namespace LeaseDetails.Controllers
         }
 
 
-        [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Create(int id)
         {
 

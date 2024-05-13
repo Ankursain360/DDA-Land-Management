@@ -706,6 +706,7 @@ namespace DamagePayee.Controllers
                 x.RecieptDocumentPath
             }));
         }
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _damagepayeeregisterService.FetchSingleResult(id);
@@ -717,6 +718,7 @@ namespace DamagePayee.Controllers
             }
             return View(Data);
         }
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _damagepayeeregisterService.FetchSingleResult(id);
@@ -1204,8 +1206,8 @@ namespace DamagePayee.Controllers
                 return View("Index", result1);
             }
         }
-      
 
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> DamagePayeeRegisterList([FromBody] DamagepayeeregistertempSearchDto model)
         {
             var result = await _damagepayeeregisterService.GetAllDamagepayeeregisterList(model);
@@ -1236,6 +1238,7 @@ namespace DamagePayee.Controllers
           
         }
         [HttpGet]
+        [AuthorizeContext(ViewAction.Download)]
         public virtual ActionResult download()
         {
             //byte[] data = TempData["file"] as byte[];

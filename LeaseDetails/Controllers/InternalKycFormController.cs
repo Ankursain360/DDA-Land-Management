@@ -55,6 +55,7 @@ namespace LeaseDetails.Controllers
             _userProfileService = userProfileService;
             _approvalproccessService = approvalproccessService;
         }
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
@@ -70,7 +71,7 @@ namespace LeaseDetails.Controllers
 
         }
 
-      
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
                 Kycform kyc = new Kycform();
@@ -87,7 +88,7 @@ namespace LeaseDetails.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //[AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Kycform kyc)
         {
             try
@@ -434,7 +435,7 @@ namespace LeaseDetails.Controllers
         }
 
 
-        //[AuthorizeContext(ViewAction.Edit)]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _kycformService.FetchSingleResult(id);
@@ -458,7 +459,7 @@ namespace LeaseDetails.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //[AuthorizeContext(ViewAction.Edit)]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Kycform kyc)
         {
          
@@ -620,7 +621,8 @@ namespace LeaseDetails.Controllers
             return View(kyc);
         }
 
-       
+        [AuthorizeContext(ViewAction.Delete)]
+
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var result = await _kycformService.Delete(id);
@@ -637,7 +639,7 @@ namespace LeaseDetails.Controllers
                 return View("Index", result1);
             }
         }
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var email = HttpContext.Session.GetString("Email");
@@ -702,7 +704,7 @@ namespace LeaseDetails.Controllers
         }
 
 
-
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> KycFormDetailsList()
         {
             var mobile = HttpContext.Session.GetString("Mobile");

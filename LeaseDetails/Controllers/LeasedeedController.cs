@@ -43,7 +43,7 @@ namespace LeaseDetails.Controllers
             entry.LeaseSubPurposeList = await _allotmentEntryService.GetAllLeaseSubpurpose(entry.LeasePurposesTypeId ?? 0);
             return PartialView("_ApplicationDetails", entry);
         }
-
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
@@ -104,6 +104,7 @@ namespace LeaseDetails.Controllers
             }
         }
 
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _leasedeedService.FetchSingleResult(id);
@@ -195,6 +196,7 @@ namespace LeaseDetails.Controllers
 
         }
 
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> DownloadFile(int Id)
         {
             FileHelper file = new FileHelper();

@@ -76,6 +76,7 @@ namespace LeaseDetails.Controllers
             ChallanProof = _configuration.GetSection("FilePaths:KycFiles:ChallanProofDocument").Value.ToString();
             OustandingDeusDoc = _configuration.GetSection("FilePaths:KycFiles:OustandingDuesDocUploadedByAAOAccounts").Value.ToString();
         }
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
         {
             Kycdemandpaymentdetails payment = new Kycdemandpaymentdetails();
@@ -171,7 +172,7 @@ namespace LeaseDetails.Controllers
             }
             return View(Data);
         }
-        // [AuthorizeContext(ViewAction.Add)]
+         [AuthorizeContext(ViewAction.Add)]
 
         public async Task<IActionResult> Create(int id)
         {
@@ -200,7 +201,7 @@ namespace LeaseDetails.Controllers
 
 
         [HttpPost]
-        // [AuthorizeContext(ViewAction.Add)]
+         [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(int id, Kycdemandpaymentdetails payment)
         {
             var result = false;

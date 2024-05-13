@@ -14,7 +14,7 @@ namespace DamagePayee.Controllers
         {
             return View();
         }
-        [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Create()
         {
             return View();

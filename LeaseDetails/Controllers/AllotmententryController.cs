@@ -373,7 +373,7 @@ namespace LeaseDetails.Controllers
 
         }
 
-
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> AllotmententryList()
         {
             var result = await _allotmentEntryService.GetAllAllotmententry();

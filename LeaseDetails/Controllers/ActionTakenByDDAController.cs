@@ -240,7 +240,9 @@ namespace LeaseDetails.Controllers
 
             return PartialView("_HearingDetails", Data);
         }
-      //  [AuthorizeContext(ViewAction.Download)]
+
+
+        [AuthorizeContext(ViewAction.Download)]
 
         public async Task<IActionResult> ActionTakenByDDAList()
         {

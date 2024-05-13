@@ -34,7 +34,7 @@ namespace LeaseDetails.Controllers
             return View();
         }
 
-
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Leaseapplication leaseapplication = new Leaseapplication();

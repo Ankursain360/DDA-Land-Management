@@ -281,8 +281,7 @@ namespace LeaseDetails.Controllers
             return File(memory, GetContentType(filename), Path.GetFileName(filename));
         }
 
-
-
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> PossesionPlanList()
         {
             var result = await _possesionplanService.GetAllPossesionplan();

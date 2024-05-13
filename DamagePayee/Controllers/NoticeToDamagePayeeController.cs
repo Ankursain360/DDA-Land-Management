@@ -157,7 +157,7 @@ namespace DamagePayee.Controllers
             return View(Data);
         }
 
-
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> NoticeToDamagePayeeList([FromBody] NoticetodamagepayeeSearchDto model)
         {
             var result = await _noticeToDamagePayeeService.GetAllNoticetoDamagePayeeList(model);
@@ -186,6 +186,7 @@ namespace DamagePayee.Controllers
 
         }
         [HttpGet]
+        [AuthorizeContext(ViewAction.Download)]
         public virtual ActionResult download()
         {
             byte[] data = HttpContext.Session.Get("file") as byte[];

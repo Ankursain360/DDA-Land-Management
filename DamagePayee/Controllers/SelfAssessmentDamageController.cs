@@ -44,7 +44,7 @@ namespace DamagePayee.Controllers
         }
 
 
-        [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Create()
         {
             Damagepayeeregister damagepayeeregistertemp = new Damagepayeeregister();

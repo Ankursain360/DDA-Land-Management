@@ -50,6 +50,8 @@ namespace LeaseDetails.Controllers
         {
             return View();
         }
+
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(int id)
         {
             var Data = await _judgementService.FetchSingleResult(id);
@@ -186,7 +188,7 @@ namespace LeaseDetails.Controllers
         }
         #endregion
 
-        //  [AuthorizeContext(ViewAction.Download)]
+         [AuthorizeContext(ViewAction.Download)]
 
         public async Task<IActionResult> CaseStatusHistoryList()
         {

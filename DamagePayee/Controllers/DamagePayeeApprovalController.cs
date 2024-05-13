@@ -975,7 +975,7 @@ namespace DamagePayee.Controllers
         #endregion
 
 
-
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> DamagePayeeRegisterApprovalList()
         {
             var result = await _damagePayeeApprovalService.GetAllDamagePayeeApprovallist();
