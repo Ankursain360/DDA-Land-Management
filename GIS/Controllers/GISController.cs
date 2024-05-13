@@ -439,8 +439,8 @@ namespace GIS.Controllers
         public async Task<IActionResult> Process1(ChangeDetectionDto dto)
         {
             ViewBag.ZoneList = await _GISService.GetZoneList();
-            try
-            {
+            //try
+            //{
                 string firstPhotoPath = string.Empty;
                 string secondPhotoPath = string.Empty;
                 var UploadFilePath = _Configuration.GetSection("FilePaths:InputImages:FirstPhotoPath").Value.ToString();
@@ -579,12 +579,13 @@ namespace GIS.Controllers
                     ViewBag.Message = Alert.Show("Unable to process the images", "Alert", AlertType.Error);
                 }
 
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-                ViewBag.Message = Alert.Show(ex.Message.ToString(), "Alert", AlertType.Error);
-            }
+           // }
+            //catch (Exception ex)
+            //{
+            //    ViewBag.Message = Alert.Show(ex.Message.ToString(), "Alert", AlertType.Error);
+            //    throw ex;
+                
+            //}
             return View("AIChangeDetection", dto);
         }
         public string PopulateBodyApprovalMailDetails(ApprovalMailBodyDto element)

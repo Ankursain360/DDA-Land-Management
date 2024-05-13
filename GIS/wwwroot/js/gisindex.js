@@ -70,8 +70,8 @@ $(document).ready(function () {
             if (response[i].village.length > 0) {
                 for (var j = 0; j < response[i].village.length; j++) {
                     if (response[i].village[j].isActive == 1) {
-                        html = html + '<a href="javascript:void(0);" id="V' + response[i].village[j].id + '" class="list-group-item list-group-item-action" onclick="showVillage(this.id)"><i class="ri-eye-line"></i> ' + response[i].village[j].name + '</a>';
-                        // html = html + '<div class="form-check" style="border-bottom: 1px solid rgba(0, 0, 0, .125);"><input class="form-check-input"  type="checkbox" id="V' + response[i].village[j].id + '" onchange="showVillage(this.id)"> <label class="form-check-label" for="V' + response[i].village[j].id + '">' + response[i].village[j].name + '</label> <span id="z' + response[i].village[j].id + '" class="ri-zoom-in-line" style="display:none" onclick="ZoomtoVillage(' + response[i].village[j].ycoordinate + ',' + response[i].village[j].xcoordinate + ',\'' + response[i].village[j].name + '\');" title="Click here Zoom to ' + response[i].village[j].name + '"></span></div> ';
+                       // html = html + '<a href="javascript:void(0);" id="V' + response[i].village[j].id + '" class="list-group-item list-group-item-action" onclick="showVillage(this.id)"><i class="ri-eye-line"></i> ' + response[i].village[j].name + '</a>';
+                         html = html + '<div class="form-check" style="border-bottom: 1px solid rgba(0, 0, 0, .125);"><input class="form-check-input"  type="checkbox" id="V' + response[i].village[j].id + '" onchange="showVillage(this.id)"> <label class="form-check-label" for="V' + response[i].village[j].id + '">' + response[i].village[j].name + '</label> <span id="z' + response[i].village[j].id + '" class="ri-zoom-in-line" style="display:none" onclick="ZoomtoVillage(' + response[i].village[j].ycoordinate + ',' + response[i].village[j].xcoordinate + ',\'' + response[i].village[j].name + '\');" title="Click here Zoom to ' + response[i].village[j].name + '"></span></div> ';
                         check++;
                     }
                 }
@@ -140,6 +140,10 @@ function GetRoute() {
     //*********DIRECTIONS AND ROUTE**********************//
     source = document.getElementById("txtSource").value;
     destination = document.getElementById("hdnDestination").value;
+
+    var anchor = "<a target='_blank' href='https://maps.google.com/?q=" + destination + "' title='View Location on Map'>View on Map</a>";
+    $('.gmapanchor').empty();
+    $('.gmapanchor').html(anchor);
     var Mode = $('input[name=radio]:checked').val();
     var request = {
         origin: source,
@@ -368,63 +372,63 @@ function showDisBoundaries(polygon, xaixis, yaixis) {
 /*Zone Boundary End*/
 
 /*Village Boundary Start*/
-// single village selection//
-function showVillage(maxima) {
-    $('#spanGCP').empty();
-    var villageid = maxima.replace('V', '');
-    HttpGet("/GIS/GetVillageDetails?VillageId=" + parseInt(villageid), 'json', function (response, villageid) {
-        //Show Village Name
-
-        $('#spanVillageName').empty().append(response[0].name.toUpperCase());
-        $('#spanVillage').empty().append('Village : ' + response[0].name.toUpperCase())
-        $('#aVillageName').show();
-        //Show Zoom to Icon
-        $('#z' + response[0].id).show();
-        //
-        if (VILLAGEID_UNIVERSAL.length > 0) {
-            RemoveAllVillageLayer(VILLAGEID_UNIVERSAL[0]);
-        }
-        showDisBoundariesVillage(response[0].polygon, response[0].xcoordinate, response[0].ycoordinate, response[0].id);
-        console.log(VILLAGEID_UNIVERSAL);
-    });
-
-}
-// end of single village selection
-
-////Village Multiple selection
+//// single village selection//
 //function showVillage(maxima) {
 //    $('#spanGCP').empty();
-//    if ($('#' + maxima).is(':checked')) {
-//        var villageid = maxima.replace('V', '');
-//        HttpGet("/GIS/GetVillageDetails?VillageId=" + parseInt(villageid), 'json', function (response, villageid) {
-//            //Show Village Name
-//            $('#spanVillageName').empty().append(response[0].name.toUpperCase());
-//            $('#spanVillage').empty().append('Village : ' + response[0].name.toUpperCase())
-//            $('#aVillageName').show();
-//            //Show Zoom to Icon
-//            $('#z' + response[0].id).show();
-//            //
-//            //SHOW VILLAGE LABLE
-//            var lp = new google.maps.LatLng(parseFloat(response[0].ycoordinate), parseFloat(response[0].xcoordinate));
-//            var _label = new google.maps.Label({ visibleZoom: 13, hideZoom: 19, visible: true, map: map, cssName: 'sctrLbl', position: lp, text: response[0].name.toUpperCase() });
-//            VILLAGEBOUNDARY_LAYER.push({ "villageid": response[0].id, "layer": _label });
-//            //
-//            OTHER_ZONE_LIST.push({ "villageid": response[0].id, "zoneid": response[0].zoneId });
-//            showDisBoundariesVillage(response[0].polygon, response[0].xcoordinate, response[0].ycoordinate, response[0].id);
-//        });
-//    }
-//    else {
-//        var villageid = maxima.replace('V', '');
-//        //hide zoom to icon
-//        $('#z' + villageid).hide();
-//        //
-//        //Remove all layers of perticular village
-//        RemoveAllVillageLayer(villageid);
-//        VILLAGEID_UNIVERSAL.splice($.inArray(villageid, VILLAGEID_UNIVERSAL), 1);
+//    var villageid = maxima.replace('V', '');
+//    HttpGet("/GIS/GetVillageDetails?VillageId=" + parseInt(villageid), 'json', function (response, villageid) {
+//        //Show Village Name
 
-//    }
+//        $('#spanVillageName').empty().append(response[0].name.toUpperCase());
+//        $('#spanVillage').empty().append('Village : ' + response[0].name.toUpperCase())
+//        $('#aVillageName').show();
+//        //Show Zoom to Icon
+//        $('#z' + response[0].id).show();
+//        //
+//        if (VILLAGEID_UNIVERSAL.length > 0) {
+//            RemoveAllVillageLayer(VILLAGEID_UNIVERSAL[0]);
+//        }
+//        showDisBoundariesVillage(response[0].polygon, response[0].xcoordinate, response[0].ycoordinate, response[0].id);
+//        console.log(VILLAGEID_UNIVERSAL);
+//    });
+
 //}
-////
+//// end of single village selection
+
+//Village Multiple selection
+function showVillage(maxima) {
+    $('#spanGCP').empty();
+    if ($('#' + maxima).is(':checked')) {
+        var villageid = maxima.replace('V', '');
+        HttpGet("/GIS/GetVillageDetails?VillageId=" + parseInt(villageid), 'json', function (response, villageid) {
+            //Show Village Name
+            $('#spanVillageName').empty().append(response[0].name.toUpperCase());
+            $('#spanVillage').empty().append('Village : ' + response[0].name.toUpperCase())
+            $('#aVillageName').show();
+            //Show Zoom to Icon
+            $('#z' + response[0].id).show();
+            //
+            //SHOW VILLAGE LABLE
+            var lp = new google.maps.LatLng(parseFloat(response[0].ycoordinate), parseFloat(response[0].xcoordinate));
+            var _label = new google.maps.Label({ visibleZoom: 13, hideZoom: 19, visible: true, map: map, cssName: 'sctrLbl', position: lp, text: response[0].name.toUpperCase() });
+            VILLAGEBOUNDARY_LAYER.push({ "villageid": response[0].id, "layer": _label });
+            //
+            OTHER_ZONE_LIST.push({ "villageid": response[0].id, "zoneid": response[0].zoneId });
+            showDisBoundariesVillage(response[0].polygon, response[0].xcoordinate, response[0].ycoordinate, response[0].id);
+        });
+    }
+    else {
+        var villageid = maxima.replace('V', '');
+        //hide zoom to icon
+        $('#z' + villageid).hide();
+        //
+        //Remove all layers of perticular village
+        RemoveAllVillageLayer(villageid);
+        VILLAGEID_UNIVERSAL.splice($.inArray(villageid, VILLAGEID_UNIVERSAL), 1);
+
+    }
+}
+//
 function ZoomtoVillage(yaixis, xaixis, villagename) {
     $('#spanVillageName').empty().append(villagename.toUpperCase());
     $('#spanVillage').empty().append('Village : ' + villagename.toUpperCase())
