@@ -31,6 +31,7 @@ namespace AcquiredLandInformationManagement.Controllers
         {
             _acquiredlandvillageService = acquiredlandvillageService;
         }
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
         {
             VillageReportDetailsSearchDto dto = new VillageReportDetailsSearchDto();

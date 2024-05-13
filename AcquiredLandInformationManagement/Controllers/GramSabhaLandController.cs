@@ -334,6 +334,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
 
         [AuthorizeContext(ViewAction.Download)]
+
         public async Task<IActionResult> GramSabhaLanddetailsList([FromBody] GramsabhalandSearchDto model)
         {
             var result = await _gramsabhalandService.GetAllGramsabhalandList(model);
@@ -363,6 +364,7 @@ namespace AcquiredLandInformationManagement.Controllers
         }
 
         [HttpGet]
+        [AuthorizeContext(ViewAction.Download)]
         public virtual ActionResult download()
         {
             byte[] data = TempData["file"] as byte[];

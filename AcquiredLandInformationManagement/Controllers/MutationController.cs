@@ -290,7 +290,7 @@ namespace AcquiredLandInformationManagement.Controllers
             return PartialView("_KhasraView", Data);
         }
         [AuthorizeContext(ViewAction.Download)]
-
+        [HttpPost]
         public async Task<IActionResult> MutationList([FromBody] DemandListDetailsSearchDto model)
         {
             var result = await _mutationService.GetAllDMSFileUploadList(model);
@@ -320,6 +320,7 @@ namespace AcquiredLandInformationManagement.Controllers
         }
 
         [HttpGet]
+        [AuthorizeContext(ViewAction.Download)]
         public virtual ActionResult download()
         {
             byte[] data = TempData["file"] as byte[];
