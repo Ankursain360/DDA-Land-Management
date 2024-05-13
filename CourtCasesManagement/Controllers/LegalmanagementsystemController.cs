@@ -442,7 +442,7 @@ namespace CourtCasesManagement.Controllers
             return RedirectToAction("Index", "Legalmanagementsystem");
         }
 
-
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> LegalManagementSystemList([FromBody] LegalManagementSystemSearchDto model)
         {
             var result = await _legalmanagementsystemService.getlegalmanagementlist(model);
@@ -483,6 +483,7 @@ namespace CourtCasesManagement.Controllers
             return Ok();
         }
         [HttpGet]
+        [AuthorizeContext(ViewAction.Download)]
         public virtual ActionResult Download()
         {
             byte[] data = HttpContext.Session.Get("file") as byte[];
@@ -643,11 +644,14 @@ namespace CourtCasesManagement.Controllers
             string filename = _configuration.GetSection("FilePaths:DownloadCSVFormat:DownloadCSVFormat").Value.ToString();
             return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
         }
+
+        [AuthorizeContext(ViewAction.Upload)]
         public IActionResult CreateBulkfile()
         {
             return View();
         }
         [HttpPost]
+        [AuthorizeContext(ViewAction.Upload)]
         public async Task<IActionResult> CreateBulkfile(Legalmanagementsystem legalmanagementsystem)
         {
 

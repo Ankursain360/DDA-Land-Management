@@ -25,6 +25,7 @@ namespace CourtCasesManagement.Controllers
         {
             _legalmanagementsystemService = legalmanagementsystemService;
         }
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
         {
             Legalmanagementsystem model = new Legalmanagementsystem();
@@ -47,6 +48,7 @@ namespace CourtCasesManagement.Controllers
                 return PartialView();
             }
         }
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> CaseHearningReportList([FromBody] HearingReportSearchDto hearingReportSearchDto)
         {
             var result = await _legalmanagementsystemService.GetAllLegalReportDataList(hearingReportSearchDto);
@@ -79,6 +81,7 @@ namespace CourtCasesManagement.Controllers
         }
 
         [HttpGet]
+        [AuthorizeContext(ViewAction.Download)]
         public virtual ActionResult download()
         {
             byte[] data = HttpContext.Session.Get("file") as byte[];

@@ -71,6 +71,7 @@ namespace CourtCasesManagement.Controllers
             return Json(await _legalmanagementsystemservice.GetCourtCaseNoList(Convert.ToInt32(filenoId)));
         }
 
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> LegalReportList([FromBody] LegalReportSearchDto report)
         {
 
@@ -115,6 +116,7 @@ namespace CourtCasesManagement.Controllers
         }
 
         [HttpGet]
+        [AuthorizeContext(ViewAction.Download)]
         public virtual ActionResult download()
         {
             byte[] data = HttpContext.Session.Get("file") as byte[];
