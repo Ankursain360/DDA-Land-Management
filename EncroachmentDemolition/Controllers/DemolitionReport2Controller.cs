@@ -45,7 +45,7 @@ namespace EncroachmentDemolition.Controllers
             return Json(await _demolitionstructuredetailsService.GetAllLocalityList(Convert.ToInt32(DivisionId)));
         }
 
-        [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Create()
         {
             Demolitionstructuredetails demolitionstructuredetails = new Demolitionstructuredetails();
@@ -70,6 +70,8 @@ namespace EncroachmentDemolition.Controllers
                 return PartialView();
             }
         }
+
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> getAllDemolitionReport([FromBody] DemolitionReportZoneDivisionLocalityWiseSearchDto model)
         {
             var result = await _demolitionstructuredetailsService.GetAllDemolitionReport(model);
@@ -98,6 +100,7 @@ namespace EncroachmentDemolition.Controllers
             return Ok(); 
         }
         [HttpGet]
+        [AuthorizeContext(ViewAction.Download)]
         public virtual ActionResult download()
         {
             byte[] data = TempData["file"] as byte[];

@@ -833,7 +833,7 @@ namespace EncroachmentDemolition.Controllers
             return View(Data);
         }
         #endregion
-        //  [AuthorizeContext(ViewAction.Download)]
+         [AuthorizeContext(ViewAction.Download)]
 
         public async Task<IActionResult> EncroachmentRegisterApprovalList(EncroachmentRegisterApprovalSearchDto model)
         {

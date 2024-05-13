@@ -873,7 +873,7 @@ namespace EncroachmentDemolition.Controllers
             return View();
         }
 
-
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> DemolitionDiaryList()
         {
             var result = await _demolitionstructuredetailsService.GetAllDemolitionstructuredetailsList();
@@ -901,7 +901,7 @@ namespace EncroachmentDemolition.Controllers
             var memory = ExcelHelper.CreateExcel(data);
             return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
-
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> DemolitionDiaryList1()
         {
             var result = await _demolitionstructuredetailsService.GetAllDemolitionstructuredetailsList1();
@@ -1282,7 +1282,7 @@ namespace EncroachmentDemolition.Controllers
             var results = await _demolitionstructuredetailsService.GetAllEncroachmentRagistrationDashboardListData(model, SiteContext.DepartmentId ?? 0, SiteContext.ZoneId ?? 0, SiteContext.RoleId ?? 0);
             return PartialView("_EncroachmentRagistrationModelDashboardData", results);
         }
-        
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> DwnloadDashboard(string filter)
         {
             var result = await _demolitionstructuredetailsService.DownloadDasboarddata(filter, SiteContext.UserId, SiteContext.DepartmentId ?? 0, SiteContext.ZoneId ?? 0, SiteContext.RoleId ?? 0);
@@ -1310,6 +1310,8 @@ namespace EncroachmentDemolition.Controllers
             return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", filter + "_Dashboard.xlsx");
 
         }
+
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> DownloadEncroachmentDashboard(string filter) 
         {
             var result = await _demolitionstructuredetailsService.DownloadEncroachmentDashboard(filter, SiteContext.UserId, SiteContext.DepartmentId ?? 0, SiteContext.ZoneId ?? 0, SiteContext.RoleId ?? 0);

@@ -1307,7 +1307,7 @@ namespace EncroachmentDemolition.Controllers
         }
         #endregion
 
-        //  [AuthorizeContext(ViewAction.Download)]
+        [AuthorizeContext(ViewAction.Download)]
         [HttpPost]
         public async Task<IActionResult> FixingdemolitionApprovalList([FromBody] AnnexureAApprovalSearchDto model)
         {
@@ -1336,6 +1336,7 @@ namespace EncroachmentDemolition.Controllers
 
         }
         [HttpGet]
+        [AuthorizeContext(ViewAction.Download)]
         public virtual IActionResult download()
         {
             byte[] data = HttpContext.Session.Get("file") as byte[];

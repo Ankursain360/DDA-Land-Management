@@ -503,7 +503,7 @@ namespace EncroachmentDemolition.Controllers
             return ObjList;
         }
         #endregion
-
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> RequestForFixingDemolitionProgrammeList()
         {
             var result = await _annexureAService.GetAllRequestForFixingDemolitionList((int)ApprovalActionStatus.Approved,SiteContext.ZoneId??0);

@@ -416,6 +416,7 @@ namespace EncroachmentDemolition.Controllers
 
         #endregion
 
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> GetAllDemolitionPoliceAssistenceLetter()   //
         {
             var result = await _demolitionPoliceAssistenceLetterService.GetAllDemolitionPoliceAssistenceLetterList((int)ApprovalActionStatus.Approved);

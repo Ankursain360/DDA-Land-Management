@@ -772,9 +772,7 @@ namespace EncroachmentDemolition.Controllers
             return View(Data);
         }
 
-
-
-
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> OnlineComplaintApprovalList()
         {
             var result = await _onlinecomplaintService.GetAllOnlinecomplaint();

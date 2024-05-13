@@ -806,6 +806,8 @@ namespace EncroachmentDemolition.Controllers
             return View(Data);
         }
         #endregion
+
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> WatchWardApprovalList(int id)
         {
             var result = await _watchandwardService.GetAllWatchandward(id);

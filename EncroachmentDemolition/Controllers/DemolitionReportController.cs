@@ -80,6 +80,7 @@ namespace EncroachmentDemolition.Controllers
             return Ok();
         }
         [HttpGet]
+        [AuthorizeContext(ViewAction.Download)]
         public virtual ActionResult download()
         {
             try

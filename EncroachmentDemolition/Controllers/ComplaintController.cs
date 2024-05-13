@@ -49,6 +49,7 @@ namespace EncroachmentDemolition.Controllers
             _userNotificationService = userNotificationService;
             targetPhotoPathLayout = _configuration.GetSection("FilePaths:OnlineComplaint:Photo").Value.ToString();
         }
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
@@ -399,6 +400,7 @@ namespace EncroachmentDemolition.Controllers
             }
         }
 
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _onlinecomplaintService.FetchSingleResult(id);
@@ -414,6 +416,7 @@ namespace EncroachmentDemolition.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Onlinecomplaint onlinecomplaint)
         {
             if (ModelState.IsValid)
@@ -446,6 +449,7 @@ namespace EncroachmentDemolition.Controllers
             }
         }
 
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)
         {
             try
@@ -469,6 +473,7 @@ namespace EncroachmentDemolition.Controllers
             return View("Index", list);
         }
 
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _onlinecomplaintService.FetchSingleResult(id);
@@ -491,8 +496,8 @@ namespace EncroachmentDemolition.Controllers
             return ObjList;
         }
         #endregion
-        //  [AuthorizeContext(ViewAction.Download)]
 
+          [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> OnlineComplaintList()
         {
             var result = await _onlinecomplaintService.GetAllOnlinecomplaint();

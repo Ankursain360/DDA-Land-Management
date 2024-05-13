@@ -783,7 +783,7 @@ namespace EncroachmentDemolition.Controllers
         }
         #endregion
 
-
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> EncroachmentRegisterList()
         {
             var result = await _encroachmentRegisterationService.GetAllEncroachmentRegisterlist((int)ApprovalActionStatus.Approved);

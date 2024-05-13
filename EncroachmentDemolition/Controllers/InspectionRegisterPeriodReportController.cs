@@ -45,7 +45,7 @@ namespace EncroachmentDemolition.Controllers
             return Json(await _encroachmentregistrationService.GetAllLocalityList(Convert.ToInt32(DivisionId)));
         }
 
-        [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Create()
         {            
             EncroachmentRegisteration model = new EncroachmentRegisteration();
@@ -115,6 +115,7 @@ namespace EncroachmentDemolition.Controllers
             return Ok();
         }
         [HttpGet]
+        [AuthorizeContext(ViewAction.Download)]
         public virtual ActionResult download()
         {
             byte[] data = TempData["file"] as byte[];

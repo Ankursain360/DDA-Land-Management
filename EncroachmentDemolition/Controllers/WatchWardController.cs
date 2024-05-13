@@ -722,7 +722,7 @@ namespace EncroachmentDemolition.Controllers
 
 
 
-        //[AuthorizeContext(ViewAction.Download)]
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> WatchWardList()
         {
             var result = await _watchandwardService.GetAllWatchandward(SiteContext.ZoneId??0);

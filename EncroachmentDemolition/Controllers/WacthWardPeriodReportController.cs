@@ -26,7 +26,7 @@ namespace EncroachmentDemolition.Controllers
         }
 
 
-        [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Create()
         {
             WatchWardListDto model = new WatchWardListDto(); 
@@ -52,7 +52,7 @@ namespace EncroachmentDemolition.Controllers
         }
 
 
-       // [AuthorizeContext(ViewAction.Download)]
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> GetAllWatchWardPeriodReportList([FromBody] WatchAndWardPeriodReportSearchDto model)
         {
             var result = await _watchandwardService.GetAllWatchWardPeriodReport(model);
@@ -85,6 +85,7 @@ namespace EncroachmentDemolition.Controllers
             //return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
         [HttpGet]
+        [AuthorizeContext(ViewAction.Download)]
         public virtual ActionResult download()
         {
             byte[] data = TempData["file"] as byte[];

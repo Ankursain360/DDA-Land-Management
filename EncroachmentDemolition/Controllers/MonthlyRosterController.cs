@@ -85,7 +85,7 @@ namespace EncroachmentDemolition.Controllers
                 return Json(Url.Action("Create", "MonthlyRoster"));
             }
         }
-        //[AuthorizeContext(ViewAction.Edit)]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             MonthlyRoaster model = new MonthlyRoaster();
@@ -261,8 +261,8 @@ namespace EncroachmentDemolition.Controllers
             DivisionId = DivisionId ?? 0;
             return Json(await _monthlyRosterService.GetAllLocalityList(Convert.ToInt32(DivisionId)));
         }
-      //  [AuthorizeContext(ViewAction.Download)]
 
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> MonthlyRoasterList()
         {
             var result = await _monthlyRosterService.GetAllmonthlyrosterlist();
