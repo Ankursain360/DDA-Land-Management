@@ -312,7 +312,7 @@ namespace LandInventory.Controllers
             return Json(await _planningService.GetUnplannedProperties(Convert.ToInt32(DepartmentId), Convert.ToInt32(ZoneId), Convert.ToInt32(DivisionId)));
         }
 
-
+        [AuthorizeContext(ViewAction.Download)]
 
         public async Task<IActionResult> UpdatePlanningDetailsList()
         {

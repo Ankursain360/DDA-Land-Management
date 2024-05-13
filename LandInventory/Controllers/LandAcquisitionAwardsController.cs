@@ -1,5 +1,6 @@
 ﻿using Dto.Master;
 using Dto.Search;
+using LandInventory.Filters;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
 using Microsoft.AspNetCore.Hosting;
@@ -45,7 +46,7 @@ namespace LandInventory.Controllers
                 return PartialView(ex); 
             }
         }
-       
+        [AuthorizeContext(Core.Enum.ViewAction.Download)]
         public async Task<IActionResult> ViewDocument(int id)
         {
             FileHelper file = new FileHelper();
@@ -56,6 +57,7 @@ namespace LandInventory.Controllers
         }
 
         [HttpPost]
+        [AuthorizeContext(Core.Enum.ViewAction.Download)]
 
         public async Task<IActionResult> DownloadLandAcquisitionAwards([FromBody] LandAcquisitionAwardsSearchDto model)
         {
@@ -105,12 +107,14 @@ namespace LandInventory.Controllers
             return Ok();
         }
         [HttpGet]
+        [AuthorizeContext(Core.Enum.ViewAction.Download)]
         public virtual IActionResult Download()
         {
             byte[] data = HttpContext.Session.Get("file") as byte[];
             HttpContext.Session.Remove("file");
             return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "LandAcquisitionAwards.xlsx");
         }
+        [AuthorizeContext(Core.Enum.ViewAction.Download)]
         public async Task<IActionResult> DownloadallLandAcquisitionAwards()
         { 
             var result1 = await _acquisitionAwardsService.GetAllAcquisitionAwards();

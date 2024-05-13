@@ -27,7 +27,7 @@ namespace LandInventory.Controllers
             landtransfer.DepartmentList = await _landTransferService.GetAllDepartment();
 
         }
-        [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Create()
         {
             Landtransfer landtransfer = new Landtransfer();

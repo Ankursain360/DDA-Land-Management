@@ -90,7 +90,7 @@ namespace LandInventory.Controllers
                 throw;
             }
         }
-        [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Create()
         {
             var Msg = TempData["Message"] as string;
@@ -156,7 +156,7 @@ namespace LandInventory.Controllers
             return View(Data);
         }
 
-
+        [AuthorizeContext(ViewAction.Download)]
 
         public async Task<IActionResult> RestorePropertyList([FromBody] PropertyRegisterationSearchDto model)
         {
@@ -196,6 +196,7 @@ namespace LandInventory.Controllers
             return Ok();
         }
         [HttpGet]
+        [AuthorizeContext(ViewAction.Download)]
         public virtual IActionResult download()
         {
             byte[] data = HttpContext.Session.Get("file") as byte[];

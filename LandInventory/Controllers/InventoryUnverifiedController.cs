@@ -57,7 +57,7 @@ namespace LandInventory.Controllers
         }
 
 
-        [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Create()
         {
             var Msg = TempData["Message"] as string;
@@ -635,7 +635,7 @@ namespace LandInventory.Controllers
 
         #endregion
 
-
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> DownloadIndex([FromBody] PropertyRegisterationSearchDto model)
         {
             var result = await _propertyregistrationService.GetAllUnverified(model, SiteContext.UserId);
@@ -709,6 +709,7 @@ namespace LandInventory.Controllers
         }
 
         [HttpGet]
+        [AuthorizeContext(ViewAction.Download)]
         public virtual IActionResult DownloadIndex1()
         {
             byte[] data = HttpContext.Session.Get("file") as byte[];
@@ -721,7 +722,7 @@ namespace LandInventory.Controllers
 
         }
 
-
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> UnverifiedPropertyList()
         {
             var result = await _propertyregistrationService.GetUnverifiedList(SiteContext.UserId);

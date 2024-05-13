@@ -503,7 +503,7 @@ namespace LandInventory.Controllers
             byte[] FileBytes = System.IO.File.ReadAllBytes(path);
             return File(FileBytes, file.GetContentType(path));
         }
-        // [AuthorizeContext(ViewAction.Download)]
+         [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> DownloadIndex()
         {
             List<Propertyregistration> result = await _propertyregistrationService.GetAllPropertyregistration(SiteContext.UserId);
@@ -515,7 +515,7 @@ namespace LandInventory.Controllers
 
 
 
-
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> HandoverTakeoverList([FromBody] LandTransferSearchDto model)
         {
             var result = await _landTransferService.GetAllPropertyRegisterationDataForLandTransferList(model);
@@ -549,6 +549,7 @@ namespace LandInventory.Controllers
             return Ok();
         }
         [HttpGet]
+        [AuthorizeContext(ViewAction.Download)]
         public virtual IActionResult download()
         {
             byte[] data = HttpContext.Session.Get("file") as byte[];
@@ -560,7 +561,7 @@ namespace LandInventory.Controllers
 
 
 
-
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> UnverifiedTransferRecordsList([FromBody] LandTransferSearchDto model)
         {
             var result = await _landTransferService.GetAllPropertyRegisterationDataForLandTransferList(model);
@@ -591,6 +592,7 @@ namespace LandInventory.Controllers
             return Ok();
         }
         [HttpGet]
+        [AuthorizeContext(ViewAction.Download)]
         public virtual IActionResult download1() 
         {
             byte[] data = HttpContext.Session.Get("file") as byte[];

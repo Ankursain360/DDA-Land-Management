@@ -304,7 +304,7 @@ namespace LandInventory.Controllers
         }
 
 
-
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> UpdatePlanningDetailsList()
         {
 

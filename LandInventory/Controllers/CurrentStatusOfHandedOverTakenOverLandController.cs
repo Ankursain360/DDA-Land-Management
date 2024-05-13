@@ -202,7 +202,7 @@ namespace LandInventory.Controllers
             return File(FileBytes, file.GetContentType(path));
         }
 
-
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> UpdatePlotDetailsList()
         {
             var result = await _landTransferService.GetAllLandTransferList();

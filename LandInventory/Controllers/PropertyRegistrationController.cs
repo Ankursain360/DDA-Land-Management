@@ -872,8 +872,9 @@ namespace LandInventory.Controllers
             }
         }
 
-        //[AuthorizeContext(ViewAction.Download)]
+        [AuthorizeContext(ViewAction.Download)]
         [HttpPost]
+
         public async Task<IActionResult> downloadPropertyList([FromBody] PropertyRegisterationSearchDto model)
         {
             var result = await _propertyregistrationService.GetAllPropertInventory(model, SiteContext.UserId);
@@ -944,7 +945,8 @@ namespace LandInventory.Controllers
             return Ok();
         }
 
-        [HttpGet] 
+        [HttpGet]
+        [AuthorizeContext(ViewAction.Download)]
         public virtual IActionResult Download()
         {
             byte[] data = HttpContext.Session.Get("file") as byte[];
@@ -978,7 +980,7 @@ namespace LandInventory.Controllers
                 }
             }
         }
-
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> PropertyInventoryList()
         {
             var result = await _propertyregistrationService.GetAllPropertInventorylist(SiteContext.UserId);

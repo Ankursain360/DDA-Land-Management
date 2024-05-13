@@ -606,7 +606,7 @@ namespace LandInventory.Controllers
             return View(propertyregistration);
         }
 
-
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> DeleteConfirmed(int id)  // Used to Perform Delete Functionality added by Renu
         {
             var result = await _propertyregistrationService.Delete(id);
@@ -687,7 +687,7 @@ namespace LandInventory.Controllers
             return View(Data);
         }
 
-
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> Download(int Id)
         {
             string filename = _propertyregistrationService.GetFile(Id);
@@ -859,7 +859,7 @@ namespace LandInventory.Controllers
             }
         }
 
-
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> MORLandInventoryList([FromBody] PropertyRegisterationSearchDto model)
         {
             var result = await _propertyregistrationService.GetAllPropertyRegistrationMORlist(model,SiteContext.UserId);
@@ -890,6 +890,7 @@ namespace LandInventory.Controllers
             return Ok();
         }
         [HttpGet]
+        [AuthorizeContext(ViewAction.Download)]
         public virtual IActionResult download()  
         {
             byte[] data = HttpContext.Session.Get("file") as byte[];

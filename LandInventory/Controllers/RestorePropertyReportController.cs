@@ -31,7 +31,7 @@ namespace LandInventory.Controllers
             propertyregistration.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
           
         }
-        [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Create()
         {
             Propertyregistration propertyregistration = new Propertyregistration();
@@ -122,7 +122,7 @@ namespace LandInventory.Controllers
         }
 
 
-
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> RestorePropertyReportList([FromBody] PropertyRegisterationSearchDto model)
         {
             var result = await _propertyregistrationService.GetAllRestorePropertyReportDataList(model);
@@ -159,6 +159,7 @@ namespace LandInventory.Controllers
             return Ok();
         }
         [HttpGet]
+        [AuthorizeContext(ViewAction.Download)]
         public virtual IActionResult download()
         {
             byte[] data = HttpContext.Session.Get("file") as byte[];

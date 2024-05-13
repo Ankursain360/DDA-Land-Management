@@ -38,7 +38,7 @@ namespace LandInventory.Controllers
          
         }
 
-        [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Create()
         {
             Propertyregistration propertyregistration = new Propertyregistration();
@@ -87,7 +87,7 @@ namespace LandInventory.Controllers
         }
         #endregion
 
-
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> PropertyInventoryReportList([FromBody] PropertyRegisterationReportSearchDto model)
         {
             var result = await _propertyregistrationService.GetAllPropertyRegisterationReportDataList(model);
@@ -155,6 +155,7 @@ namespace LandInventory.Controllers
             return Ok();
         }
         [HttpGet]
+        [AuthorizeContext(ViewAction.Download)]
         public virtual IActionResult download()
         {
             byte[] data = HttpContext.Session.Get("file") as byte[];

@@ -47,7 +47,7 @@ namespace LandInventory.Controllers
             return Json(await _landtransferService.GetAllLocalityList(Convert.ToInt32(DivisionId)));
         }
 
-        [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Create()
         {
             Landtransfer model = new Landtransfer();
@@ -78,7 +78,7 @@ namespace LandInventory.Controllers
 
 
 
-
+        [AuthorizeContext(ViewAction.Download)]
 
         public async Task<IActionResult> HandoverTakeoverReportDepartmentZoneDivisionLocalitywiseList()
         {
