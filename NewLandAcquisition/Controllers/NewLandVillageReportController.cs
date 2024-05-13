@@ -51,7 +51,7 @@ namespace NewLandAcquisition.Controllers
                 return PartialView();
             }
         }
-
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> NewLandVillageReportList()
         {
             var result = await _NewlandvillageService.GetAllVillageList();

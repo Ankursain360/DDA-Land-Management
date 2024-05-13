@@ -56,7 +56,7 @@ namespace NewLandAcquisition.Controllers
             }
         }
 
-
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> NewLandVillageKhasraReportList()
         {
             var result = await _NewlandkhasraService.GetAllKhasra();

@@ -307,7 +307,7 @@ namespace NewLandAcquisition.Controllers
             return Json(await _Possessiondetailservice.FetchSingleKhasraResult(Convert.ToInt32(khasraid)));
         }
 
-
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> NewLandPossessionDetailsList([FromBody] NewlandpossesiondetailsSearchDto model)
         {
             var result = await _Possessiondetailservice.GetAllPossessiondetailsList(model);
@@ -334,6 +334,7 @@ namespace NewLandAcquisition.Controllers
 
         }
         [HttpGet]
+        [AuthorizeContext(ViewAction.Download)]
         public virtual ActionResult download()
         {
             byte[] data = TempData["file"] as byte[];

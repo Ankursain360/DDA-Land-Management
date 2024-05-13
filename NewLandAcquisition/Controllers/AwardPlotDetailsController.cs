@@ -202,7 +202,7 @@ namespace AcquiredLandInformationManagement.Controllers
             return Json(await _awardplotDetailService.FetchSingleKhasraResult(Convert.ToInt32(khasraid)));
         }
 
-
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> AwardPlotDetailsList([FromBody] NewlandawardplotdetailsSearchDto model)
         {
             var result = await _awardplotDetailService.GetAllAwardplotdetailsList(model);
@@ -228,6 +228,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
         }
         [HttpGet]
+        [AuthorizeContext(ViewAction.Download)]
         public virtual ActionResult download()
         {
             byte[] data = TempData["file"] as byte[];

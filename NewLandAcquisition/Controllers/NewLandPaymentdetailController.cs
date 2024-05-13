@@ -205,6 +205,7 @@ namespace NewLandAcquisition.Controllers
             return View(Data);
         }
 
+        [AuthorizeContext(ViewAction.Download)]
 
         public async Task<IActionResult> NewLandPaymentDetailsList()
         {

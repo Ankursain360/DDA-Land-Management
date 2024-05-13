@@ -459,7 +459,7 @@ namespace NewLandAcquisition.Controllers
             return Json(await _newLandJointSurveyService.FetchSingleKhasraResult(Convert.ToInt32(khasraid)));
         }
 
-
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> NewLandJointSurveyList([FromBody] NewLandJointSurveySearchDto model)
         {
             var result = await _newLandJointSurveyService.GetAllNewLandJointSurveyList(model);
@@ -487,6 +487,7 @@ namespace NewLandAcquisition.Controllers
 
         }
         [HttpGet]
+        [AuthorizeContext(ViewAction.Download)]
         public virtual ActionResult download()
         {
             byte[] data = TempData["file"] as byte[];

@@ -200,7 +200,7 @@ namespace NewLandAcquisition.Controllers
         }
 
 
-
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> NewLandUndersection4plotList([FromBody] Newlandus4plotSearchDto model)
         {
             var result = await _newlandus4plotService.GetAllUS4PlotList(model);
@@ -233,6 +233,7 @@ namespace NewLandAcquisition.Controllers
 
         }
         [HttpGet]
+        [AuthorizeContext(ViewAction.Download)]
         public virtual ActionResult download()
         {
             byte[] data = TempData["file"] as byte[];

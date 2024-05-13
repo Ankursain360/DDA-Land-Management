@@ -231,8 +231,8 @@ namespace NewLandAcquisition.Controllers
         }
 
 
-     
 
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> AwardMasterDetailsList([FromBody] NewlandawardmasterSearchDto model)
         {
             var result = await _newlandawardmasterdetailService.GetAllawardmasterdetailsList(model);
@@ -259,6 +259,7 @@ namespace NewLandAcquisition.Controllers
 
         }
         [HttpGet]
+        [AuthorizeContext(ViewAction.Download)]
         public virtual ActionResult download()
         {
             byte[] data = TempData["file"] as byte[];

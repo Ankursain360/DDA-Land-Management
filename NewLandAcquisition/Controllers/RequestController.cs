@@ -480,6 +480,7 @@ namespace NewLandAcquisition.Controllers
             }
         }
 
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> RequestList([FromBody] RequestSearchDto model)
         {
             var result = await _requestService.GetAllRequestList(model);
@@ -507,6 +508,7 @@ namespace NewLandAcquisition.Controllers
 
         }
         [HttpGet]
+        [AuthorizeContext(ViewAction.Download)]
         public virtual ActionResult download()
         {
             byte[] data = HttpContext.Session.Get("file") as byte[];

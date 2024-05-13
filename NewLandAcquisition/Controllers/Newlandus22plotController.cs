@@ -216,7 +216,7 @@ namespace NewLandAcquisition.Controllers
             return Json(await _newlandus22plotService.GetAllUS17Plot(Convert.ToInt32(notificationId)));
         }
 
-
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> NewLandUndersection22plotList([FromBody] Newlandus22plotSearchDto model)
         {
             var result = await _newlandus22plotService.GetAllUS22PlotList(model);
@@ -249,6 +249,7 @@ namespace NewLandAcquisition.Controllers
 
         }
         [HttpGet]
+        [AuthorizeContext(ViewAction.Download)]
         public virtual ActionResult download()
         {
             byte[] data = TempData["file"] as byte[];

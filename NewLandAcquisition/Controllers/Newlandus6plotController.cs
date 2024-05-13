@@ -194,7 +194,7 @@ namespace NewLandAcquisition.Controllers
             return Json(await _newlandus6plotService.FetchSingleKhasraResult(Convert.ToInt32(khasraid)));
         }
 
-
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> NewLandUndersection6plotList([FromBody] Newlandus6plotSearchDto model)
         {
             var result = await _newlandus6plotService.GetAllUS6PlotList(model);
@@ -227,6 +227,7 @@ namespace NewLandAcquisition.Controllers
 
         }
         [HttpGet]
+        [AuthorizeContext(ViewAction.Download)]
         public virtual ActionResult download()
         {
             byte[] data = TempData["file"] as byte[];

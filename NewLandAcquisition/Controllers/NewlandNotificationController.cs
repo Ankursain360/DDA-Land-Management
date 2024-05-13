@@ -39,7 +39,7 @@ namespace NewLandAcquisition.Controllers
 
 
         }
-        // [AuthorizeContext(ViewAction.View)]
+         [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
@@ -120,7 +120,7 @@ namespace NewLandAcquisition.Controllers
 
 
 
-
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _newlandnotificationService.FetchSingleResult1(id);
@@ -136,7 +136,7 @@ namespace NewLandAcquisition.Controllers
 
 
         [HttpPost]
-
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Newlandnotification newlandnotification)
         {
             newlandnotification.notificationtypeList = await _newlandnotificationService.GetAllNotificationType();
@@ -195,7 +195,7 @@ namespace NewLandAcquisition.Controllers
             return File(FileBytes, fileHelper.GetContentType(filename));
         }
 
-
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> NewLandNotificationList([FromBody] NewlandnotificationSearchDto model)
         {
             var result = await _newlandnotificationService.GetAllNewlandnotificationdetailsList(model);
@@ -221,6 +221,7 @@ namespace NewLandAcquisition.Controllers
 
         }
         [HttpGet]
+        [AuthorizeContext(ViewAction.Download)]
         public virtual ActionResult download()
         {
             byte[] data = TempData["file"] as byte[];

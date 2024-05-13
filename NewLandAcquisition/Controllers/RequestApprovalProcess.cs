@@ -575,6 +575,7 @@ namespace NewLandAcquisition.Controllers
 
             }
         }
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> RequestApprovalProcessList([FromBody] RequestApprovalSearchDto model)
         {
             var result = await _requestApprovalProcessService.GetAllProcessRequestList(model,SiteContext.UserId);
@@ -602,6 +603,7 @@ namespace NewLandAcquisition.Controllers
 
         }
         [HttpGet]
+        [AuthorizeContext(ViewAction.Download)]
         public virtual ActionResult download()
         {
             byte[] data = HttpContext.Session.Get("file") as byte[];
