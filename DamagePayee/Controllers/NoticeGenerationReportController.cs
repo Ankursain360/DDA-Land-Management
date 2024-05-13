@@ -49,6 +49,7 @@ namespace DamagePayee.Controllers
                 return PartialView();
             }
         }
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> GetNoticeGenerationReportList([FromBody] NoticeGenerationReportSearchDto model)
         {
             var result = await _noticeToDamagePayeeService.GetAllNoticeGenerationReportList(model); 
@@ -75,6 +76,7 @@ namespace DamagePayee.Controllers
 
         }
         [HttpGet]
+        [AuthorizeContext(ViewAction.Download)]
         public virtual ActionResult download()
         {
             byte[] data = HttpContext.Session.Get("file") as byte[];

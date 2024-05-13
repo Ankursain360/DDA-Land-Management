@@ -58,7 +58,7 @@ namespace DamagePayee.Controllers
 
 
 
-
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> PenaltyImpositionReportList([FromBody] PenaltyImpositionReportSearchDto report)
         {
             var result = await _demandLetterService.GetPenaltyImpositionReportList(report);
@@ -87,6 +87,7 @@ namespace DamagePayee.Controllers
 
         }
         [HttpGet]
+        [AuthorizeContext(ViewAction.Download)]
         public virtual ActionResult download()
         {
             byte[] data = HttpContext.Session.Get("file") as byte[];

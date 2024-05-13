@@ -23,7 +23,7 @@ namespace DamagePayee.Controllers
 
 
 
-        [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Create()
         {
             DemandCollectionLedgerReportDtoProfile demandletter = new DemandCollectionLedgerReportDtoProfile();

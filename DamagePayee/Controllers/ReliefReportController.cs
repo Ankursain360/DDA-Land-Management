@@ -50,6 +50,8 @@ namespace DamagePayee.Controllers
                 return PartialView();
             }
         }
+
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> GetReliefReportList([FromBody] ReliefReportSearchDto model)
         {
             var result = await _demandLetterService.GetAllReliefReportList(model);
@@ -76,6 +78,7 @@ namespace DamagePayee.Controllers
             return Ok();
         }
         [HttpGet]
+        [AuthorizeContext(ViewAction.Download)]
         public virtual ActionResult download()
         {
             byte[] data = HttpContext.Session.Get("file") as byte[];

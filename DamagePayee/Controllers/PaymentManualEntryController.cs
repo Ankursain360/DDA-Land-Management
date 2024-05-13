@@ -183,6 +183,7 @@ namespace DamagePayee.Controllers
 
         }
         [HttpGet]
+        [AuthorizeContext(ViewAction.Download)]
         public virtual ActionResult download()
         {
             byte[] data = HttpContext.Session.Get("file") as byte[];

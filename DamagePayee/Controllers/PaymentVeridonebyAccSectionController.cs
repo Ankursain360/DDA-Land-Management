@@ -26,7 +26,7 @@ namespace DamagePayee.Controllers
             _paymentverificationService = paymentverificationService;
         }
 
-        [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Create()
         {
 
@@ -107,6 +107,7 @@ namespace DamagePayee.Controllers
         }
 
         [HttpGet]
+        [AuthorizeContext(ViewAction.View)]
         public virtual ActionResult download()
         {
             byte[] data = HttpContext.Session.Get("file") as byte[];

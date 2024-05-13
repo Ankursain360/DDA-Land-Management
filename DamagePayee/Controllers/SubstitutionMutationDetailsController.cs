@@ -482,7 +482,7 @@ namespace DamagePayee.Controllers
             return File(FileBytes, file.GetContentType(filename));
         }
 
-
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> ApplyForMutationList()
         {
             var result = await _damagepayeeregisterService.GetAllDamagepayeeregister();

@@ -50,7 +50,7 @@ namespace DamagePayee.Controllers
                 return PartialView();
             }
         }
-
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> GetImpositionReportList([FromBody] ImpositionOfChargesSearchDto model)
         {
             var result = await _demandLetterService.GetImpositionReportOfChargesList(model);
@@ -77,6 +77,7 @@ namespace DamagePayee.Controllers
 
         }
         [HttpGet]
+        [AuthorizeContext(ViewAction.Download)]
         public virtual ActionResult download()
         {
             byte[] data = HttpContext.Session.Get("file") as byte[];

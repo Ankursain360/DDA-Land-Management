@@ -388,7 +388,7 @@ namespace DamagePayee.Controllers
         }
 
 
-
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> DoorToDoorSurveyList([FromBody] DoortodoorsurveySearchDto model)
         {
             var result = await _doortodoorsurveyService.GetDoortodoorsurveyList(model);
@@ -435,6 +435,7 @@ namespace DamagePayee.Controllers
 
         }
         [HttpGet]
+        [AuthorizeContext(ViewAction.Download)]
         public virtual ActionResult download()
         {
             byte[] data = HttpContext.Session.Get("file") as byte[];

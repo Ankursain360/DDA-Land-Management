@@ -175,7 +175,7 @@ namespace DamagePayee.Controllers
         }
 
 
-
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> DemandsLetterList([FromBody] DemandletterSearchDto model)
         {
             var result = await _demandLetterService.GetAllDemandletterList(model);
@@ -208,6 +208,7 @@ namespace DamagePayee.Controllers
         }
 
         [HttpGet]
+        [AuthorizeContext(ViewAction.Download)]
         public virtual ActionResult download()
         {            
             byte[] data = HttpContext.Session.Get("file") as byte[];

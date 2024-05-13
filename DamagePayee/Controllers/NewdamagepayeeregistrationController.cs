@@ -34,20 +34,21 @@ namespace DamagePayee.Controllers
             _selfAssessmentService = selfAssessmentService;
         }
 
-        //[AuthorizeContext(ViewAction.Index)]
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
         }
 
         [HttpPost]
+
         public async Task<PartialViewResult> List([FromBody] DamagePayeeSearchDto model)
         {
             var data = await _selfAssessmentService.GetPagedDamagePayee(model,0);
             return PartialView("_List", data);
 
         }
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var data = await _selfAssessmentService.FetchSingleResult(id);
@@ -228,6 +229,7 @@ namespace DamagePayee.Controllers
             return File(fileBytes, file.GetContentType(path));
         }
 
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> DownloadDamagePayeeList(int id)
         {
             var result = await _selfAssessmentService.GetDamageSelfAssessments(id);

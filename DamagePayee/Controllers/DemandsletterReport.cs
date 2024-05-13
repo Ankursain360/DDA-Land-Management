@@ -53,8 +53,8 @@ namespace DamagePayee.Controllers
                 return PartialView();
             }
         }
-        // [AuthorizeContext(ViewAction.Download)]
-        //[HttpPost]
+         [AuthorizeContext(ViewAction.Download)]
+         [HttpPost]
         public async Task<IActionResult> DemandLetterReportList([FromBody] DownloadDemandLetterReportDto report)
         {
             var result = await _demandLetterService.GetDemandLetterReportList(report);
@@ -86,6 +86,7 @@ namespace DamagePayee.Controllers
             return Ok();
         }
         [HttpGet]
+        [AuthorizeContext(ViewAction.Download)]
         public virtual ActionResult download()
         {
             byte[] data = HttpContext.Session.Get("file") as byte[];

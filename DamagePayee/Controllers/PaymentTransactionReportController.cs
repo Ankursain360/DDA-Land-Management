@@ -28,7 +28,7 @@ namespace DamagePayee.Controllers
 
 
 
-        [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Create()
         {
             PaymentTransactionReportDtoProfile paymentverification = new PaymentTransactionReportDtoProfile();
@@ -54,6 +54,8 @@ namespace DamagePayee.Controllers
                 return PartialView();
             }
         }
+
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> GetDetailsList([FromBody] PaymentTransactionReportSearchDto model)
         {
             var result = await _paymentverificationService.GetPagedPaymentTransactionReportData(model);
@@ -85,6 +87,7 @@ namespace DamagePayee.Controllers
         }
 
         [HttpGet]
+        [AuthorizeContext(ViewAction.Download)]
         public virtual ActionResult download()
         {
             byte[] data = HttpContext.Session.Get("file") as byte[];
