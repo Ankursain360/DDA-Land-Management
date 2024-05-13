@@ -157,7 +157,7 @@ namespace SiteMaster.Controllers
             ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
             return View(form);
         }
-       
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> DeleteConfirmed(int id)  // Used to Perform Delete Functionality added by Renu
         {
 

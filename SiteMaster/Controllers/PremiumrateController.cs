@@ -195,7 +195,7 @@ namespace SiteMaster.Controllers
             return Json(await _premiumrateService.GetAllLeaseSubpurpose(Convert.ToInt32(purposeUseId)));
         }
 
-
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> PremiumrateList()
         {
             var result = await _premiumrateService.GetAllPremiumrateList();

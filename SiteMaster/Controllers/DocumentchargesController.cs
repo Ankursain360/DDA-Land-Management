@@ -197,6 +197,7 @@ namespace SiteMaster.Controllers
             return Json(await _documentchargesService.GetAllLeaseSubpurpose(Convert.ToInt32(purposeUseId)));
         }
 
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> DocumentChargesList()
         {
             var result = await _documentchargesService.GetAllDocumentchargesList();

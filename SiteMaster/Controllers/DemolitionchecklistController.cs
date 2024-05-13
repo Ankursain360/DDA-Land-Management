@@ -172,6 +172,8 @@ namespace SiteMaster.Controllers
             }
             return View(Data);
         }
+
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> Download()
         {
             List<Demolitionchecklist> result = await _demolitionchecklistService.GetDemolitionchecklist();
@@ -180,7 +182,7 @@ namespace SiteMaster.Controllers
             return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
 
         }
-
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> DemolitionchecklistList()
         {
             var result = await _demolitionchecklistService.GetDemolitionchecklist();

@@ -201,7 +201,7 @@ namespace SiteMaster.Controllers
         }
 
         [HttpPost]
-        [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit([FromBody] WorkflowTemplateCreateDto workflowtemplatecreatedto)
         {
             WorkflowTemplate model = new WorkflowTemplate();
@@ -248,6 +248,7 @@ namespace SiteMaster.Controllers
 
             }
         }
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> DeleteConfirmed(int id)  // Used to Perform Delete Functionality added by Renu
         {
 
@@ -311,7 +312,7 @@ namespace SiteMaster.Controllers
             }
         }
 
-
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> Download()
         {
             List<WorkflowTemplate> result = await _workflowtemplateService.GetAllWorkflowTemplate();
@@ -320,7 +321,7 @@ namespace SiteMaster.Controllers
             return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
 
         }
-
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> WorkFlowTemplateList()
         {
             var result = await _workflowtemplateService.GetAllWorkflowTemplate();

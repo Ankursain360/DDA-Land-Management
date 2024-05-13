@@ -212,8 +212,8 @@ namespace SiteMaster.Controllers
 
 
 
-       
 
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> DepartmentList()
         {
             var result = await _departmentService.GetAllDepartment();

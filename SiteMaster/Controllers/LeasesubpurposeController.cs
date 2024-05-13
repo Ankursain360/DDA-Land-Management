@@ -185,6 +185,7 @@ namespace SiteMaster.Controllers
         //    return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
 
         //}
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> SubPurposeUseList()
         {
             var result = await _LeasesubpurposeService.GetAllLeaseSubpurpose();

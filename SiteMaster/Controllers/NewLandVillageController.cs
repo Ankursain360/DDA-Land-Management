@@ -25,7 +25,7 @@ namespace SiteMaster.Controllers
             _newlandvillageService = newlandvillageService;
         }
 
-      
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
 

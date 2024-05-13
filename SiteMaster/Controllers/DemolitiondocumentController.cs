@@ -172,8 +172,8 @@ namespace SiteMaster.Controllers
             }
             return View(Data);
         }
-      
 
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> DemolitionDocumentList()
         {
             var result = await _demolitiondocumentService.GetDemolitiondocument();

@@ -34,6 +34,8 @@ using Notification.OptionEnums;
 using Libraries.Service.IApplicationService;
 using Libraries.Model.Entity;
 using Service.IApplicationService;
+using Libraries.Service.ApplicationService;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace IdentityServerHost.Quickstart.UI
 {
@@ -42,6 +44,7 @@ namespace IdentityServerHost.Quickstart.UI
     public class AccountController : Controller
     {
         private readonly IHostingEnvironment _hostingEnvironment;
+        private readonly IApplicationModificationDetailsService _modificationDetails;
         private readonly UserManager<IdentityServerAspNetIdentity.Models.ApplicationUser> _userManager;
         private readonly SignInManager<IdentityServerAspNetIdentity.Models.ApplicationUser> _signInManager;
         private readonly IIdentityServerInteractionService _interaction;
@@ -61,7 +64,8 @@ namespace IdentityServerHost.Quickstart.UI
             IEventService events,
             IConfiguration configuration,
              IPasswordhistoryService passwordhistoryService,
-            IHttpContextAccessor httpContextAccessor, IHostingEnvironment en
+            IHttpContextAccessor httpContextAccessor, IHostingEnvironment en,
+            IApplicationModificationDetailsService modificationDetails
            //, IUserProfileService userProfileService
             )
 
@@ -75,6 +79,7 @@ namespace IdentityServerHost.Quickstart.UI
             _configuration = configuration;
             _httpContextAccessor = httpContextAccessor;
             _hostingEnvironment = en;
+            _modificationDetails = modificationDetails;
             _passwordhistoryService = passwordhistoryService;
            // _userProfileService = userProfileService;
         }
@@ -84,17 +89,17 @@ namespace IdentityServerHost.Quickstart.UI
         /// </summary>
         [HttpGet]
         public async Task<IActionResult> Login(string returnUrl)
-
         {
             // build a model so we know what to show on the login page
             var vm = await BuildLoginViewModelAsync(returnUrl);
-
             if (vm.IsExternalLoginOnly)
             {
                 // we only have one option for logging in and it's an external provider
                 return RedirectToAction("Challenge", "External", new { scheme = vm.ExternalLoginScheme, returnUrl });
             }
             vm.Data = SetEncriptionKey();
+            var updatedDate =  _modificationDetails.GetApplicationModificationDetails();
+            TempData["updatedDate"] = updatedDate;
             return View(vm);
         }
 
@@ -107,7 +112,7 @@ namespace IdentityServerHost.Quickstart.UI
         {
             // check if we are in the context of an authorization request
             var context = await _interaction.GetAuthorizationContextAsync(model.ReturnUrl);
-
+            
             // the user clicked the "cancel" button
             if (button != "login")
             {
@@ -708,5 +713,10 @@ namespace IdentityServerHost.Quickstart.UI
             return View();
         }
         #endregion
+
+        public IActionResult copyRightPolicy()
+        {
+            return View();
+        }
     }
 }

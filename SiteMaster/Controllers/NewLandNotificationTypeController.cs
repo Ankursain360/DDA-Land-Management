@@ -25,7 +25,7 @@ namespace SiteMaster.Controllers
         {
             _newLandNotificationTypeService = newLandNotificationTypeService;
         }
-     
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
@@ -41,13 +41,14 @@ namespace SiteMaster.Controllers
         }
 
 
-       
+        [AuthorizeContext(ViewAction.Add)]
         public IActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(NewlandNotificationtype notification)
         {
             try
@@ -81,7 +82,7 @@ namespace SiteMaster.Controllers
             }
         }
 
-
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _newLandNotificationTypeService.FetchSingleResult(id);
@@ -93,6 +94,7 @@ namespace SiteMaster.Controllers
         }
 
         [HttpPost]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, NewlandNotificationtype notification)
         {
             if (ModelState.IsValid)
@@ -120,6 +122,7 @@ namespace SiteMaster.Controllers
             }
             return View(notification);
         }
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> DeleteConfirmed(int id)  // Used to Perform Delete Functionality added by Renu
         {
             var result = await _newLandNotificationTypeService.Delete(id);
@@ -138,6 +141,7 @@ namespace SiteMaster.Controllers
         }
 
         [HttpPost]
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)
         {
             try
@@ -161,7 +165,7 @@ namespace SiteMaster.Controllers
         }
 
 
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _newLandNotificationTypeService.FetchSingleResult(id);
@@ -171,7 +175,7 @@ namespace SiteMaster.Controllers
             }
             return View(Data);
         }
-
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> NotificationList()
         {
             var result = await _newLandNotificationTypeService.GetAllNotificationType();

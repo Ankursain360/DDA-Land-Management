@@ -170,7 +170,7 @@ namespace SiteMaster.Controllers
         }
 
 
-
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> NewLandSchemeList()
         {
             var result = await _schemeService.GetAllScheme();

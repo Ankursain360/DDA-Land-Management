@@ -185,6 +185,7 @@ namespace SiteMaster.Controllers
             return View(Data);
         }
 
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> NewLandKhasraList()
         {
             var result = await _khasraService.GetAllKhasra();

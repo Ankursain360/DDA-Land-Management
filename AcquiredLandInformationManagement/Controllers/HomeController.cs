@@ -6,6 +6,7 @@ using AcquiredLandInformationManagement.Models;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Libraries.Service.IApplicationService;
 
 namespace AcquiredLandInformationManagement.Controllers
 {
@@ -13,18 +14,22 @@ namespace AcquiredLandInformationManagement.Controllers
     {
         private readonly ISiteContext _siteContext;
         private readonly IUserProfileService _userProfileService;
+        private readonly IApplicationModificationDetailsService _modificationDetails;
         private readonly IHttpContextAccessor _httpContextAccessor;
         public HomeController(ISiteContext siteContext,
-           IUserProfileService userProfileService, IHttpContextAccessor httpContextAccessor)
+           IUserProfileService userProfileService, IHttpContextAccessor httpContextAccessor, IApplicationModificationDetailsService modificationDetails)
         {
             _siteContext = siteContext;
             _userProfileService = userProfileService;
             _httpContextAccessor = httpContextAccessor;
+            _modificationDetails = modificationDetails;
         }
 
         public async Task<IActionResult> Index()
         {
             UserProfileDto user = await _userProfileService.GetUserById(_siteContext.UserId);
+            var updatedDate = _modificationDetails.GetApplicationModificationDetails();
+            TempData["updatedDate"] = updatedDate;
             return View(user);
         }
 

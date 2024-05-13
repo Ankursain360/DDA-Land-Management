@@ -98,7 +98,7 @@ namespace SiteMaster.Controllers
         //    }
         //}
 
-        //  [AuthorizeContext(ViewAction.Edit)]
+          [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             Honble Honble = new Honble();
@@ -193,7 +193,7 @@ namespace SiteMaster.Controllers
         }
 
 
-
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> Download()
         {
             List<Honble> result = await _HonbleService.GetAll();

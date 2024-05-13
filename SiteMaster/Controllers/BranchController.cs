@@ -198,7 +198,7 @@ namespace SiteMaster.Controllers
 
 
 
-       // [AuthorizeContext(ViewAction.Download)]
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> BranchList()
         {
             var result = await _branchService.GetAllDetails();

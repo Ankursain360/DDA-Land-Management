@@ -39,7 +39,7 @@ namespace SiteMaster.Controllers
         }
 
 
-     //   [AuthorizeContext(ViewAction.Add)]
+       [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Groundrent groundrent = new Groundrent();
@@ -181,9 +181,8 @@ namespace SiteMaster.Controllers
             }
             return View(Data);
         }
-      
 
-
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> Download()
         {
             List<Groundrent> result = await _groundRentService.GetAll();
@@ -201,7 +200,7 @@ namespace SiteMaster.Controllers
             return Json(await _groundRentService.GetAllLeaseSubpurpose(Convert.ToInt32(purposeUseId)));
         }
 
-
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> GroundRateList()
         {
             var result = await _groundRentService.GetAllGroundRentList();

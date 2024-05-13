@@ -191,6 +191,7 @@ namespace SiteMaster.Controllers
             return Json(await _licenceFeesService.GetAllLeaseSubpurpose(Convert.ToInt32(purposeUseId)));
         }
 
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> LicenceFeesList()
         {
             var result = await _licenceFeesService.GetAllLicencefeesList();

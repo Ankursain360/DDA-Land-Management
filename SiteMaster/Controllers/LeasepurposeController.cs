@@ -171,6 +171,7 @@ namespace SiteMaster.Controllers
             return View(Data);
         }
 
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> LeasePurposeList()
         {
             var result = await _LeasepurposeService.GetLeasepurposes();

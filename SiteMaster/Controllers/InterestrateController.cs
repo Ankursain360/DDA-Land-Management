@@ -159,7 +159,7 @@ namespace SiteMaster.Controllers
             }
         }
 
-        //  [AuthorizeContext(ViewAction.View)]
+         [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _InterestrateService.FetchSingleResult(id);
@@ -182,7 +182,7 @@ namespace SiteMaster.Controllers
         }
 
 
-
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> InterestRateList()
         {
             var result = await _InterestrateService.GetAllInterestrate();

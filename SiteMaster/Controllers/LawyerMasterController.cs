@@ -169,7 +169,7 @@ namespace SiteMaster.Controllers
             var list = await _lawyerService.GetAllLawyer();
             return View("Index", list);
         }
-
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> LawerMasterList()
         {
             var result = await _lawyerService.GetAllLawyer();

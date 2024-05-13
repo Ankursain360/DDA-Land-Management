@@ -42,7 +42,7 @@ namespace SiteMaster.Controllers
             return PartialView("_List", result);
         }
 
-        //[AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Newlandacquistionproposaldetails newlandacquistionproposaldetails = new Newlandacquistionproposaldetails();
@@ -167,7 +167,7 @@ namespace SiteMaster.Controllers
             ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
             return View("Index", result);
         }
-        //[AuthorizeContext(ViewAction.View)]
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _newlandProposaldetailsService.FetchSingleResult(id);
@@ -179,7 +179,7 @@ namespace SiteMaster.Controllers
             return View(Data);
         }
 
-        //[AuthorizeContext(ViewAction.Download)]
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> Download()
         {
             List<Newlandacquistionproposaldetails> result = await _newlandProposaldetailsService.GetAllProposaldetails();
@@ -188,7 +188,7 @@ namespace SiteMaster.Controllers
             return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
 
         }
-
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> NewLandProposalList()
         {
             var result = await _newlandProposaldetailsService.GetAllProposaldetails();

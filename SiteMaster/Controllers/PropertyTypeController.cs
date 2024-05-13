@@ -191,7 +191,7 @@ namespace SiteMaster.Controllers
 
         }
 
-
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> PropertyTypeList()
         {
             var result = await _PropertyTypeService.GetAllPropertyTypeList();

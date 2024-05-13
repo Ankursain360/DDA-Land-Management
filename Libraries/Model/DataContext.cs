@@ -374,9 +374,11 @@ namespace Libraries.Model
         public virtual DbSet<LandVerificationSignatureData> landverificationsignaturedata { get; set; }
         public virtual DbSet<LandVerificationVillageDetails> landverificationvillagedetails { get; set; }
         public virtual DbSet<AIchangedetectiondata> aichangedetectiondata { get; set; }
+        public virtual DbSet<ApplicationModificationDetails> applicationmodificationdetails { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.ApplyConfiguration(new ApplicationModificationDetailsConfiguration());
             modelBuilder.ApplyConfiguration(new LandVerificationDetailsConfiguration());
             modelBuilder.ApplyConfiguration(new LandVerificationSignatureDataConfiguration());
             modelBuilder.ApplyConfiguration(new LandVerificationVillageDetailsConfiguration());

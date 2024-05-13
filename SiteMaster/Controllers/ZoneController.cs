@@ -170,7 +170,7 @@ namespace SiteMaster.Controllers
             }
         }
 
-
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> DeleteConfirmed(int id)  // Used to Perform Delete Functionality added by Renu
         {
             var result = await _zoneService.Delete(id);
@@ -198,8 +198,8 @@ namespace SiteMaster.Controllers
         }
 
 
-       
 
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> ZoneList()
         {
             var result = await _zoneService.GetAllZone();

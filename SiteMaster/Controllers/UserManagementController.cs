@@ -276,7 +276,7 @@ namespace SiteMaster.Controllers
 
 
 
-       
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> UserList()
         {
             var result = await _userProfileService.GetAllUser();

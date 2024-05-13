@@ -27,7 +27,7 @@ namespace SiteMaster.Controllers
         }
 
 
-        //[AuthorizeContext(ViewAction.View)]
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
 
@@ -46,7 +46,7 @@ namespace SiteMaster.Controllers
 
 
 
-        //[AuthorizeContext(ViewAction.View)]
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _logService.FetchSingleResult(id);
@@ -58,7 +58,7 @@ namespace SiteMaster.Controllers
             }
             return View(Data);
         }
-
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> Download()
         {
             List<Log> result = await _logService.GetLog();

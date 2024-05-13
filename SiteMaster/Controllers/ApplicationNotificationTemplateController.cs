@@ -162,7 +162,7 @@ namespace SiteMaster.Controllers
                 return View("Index", result1);
             }
         }
-
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> DeleteConfirmed(int id)  // Used to Perform Delete Functionality added by Renu
         {
 
@@ -192,6 +192,7 @@ namespace SiteMaster.Controllers
             }
             return View(Data);
         }
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Download()
         {
             List<ApplicationNotificationTemplate> result = await _applicationNotificationService.GetAllTemplate();

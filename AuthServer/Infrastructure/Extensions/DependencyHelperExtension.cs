@@ -23,11 +23,12 @@ namespace AuthServer.Infrastructure.Extensions
 
            // services.AddScoped<IUserProfileRepository, UserProfileRepository>();
             services.AddScoped<IPasswordhistoryRepository, PasswordhistoryRepository>();
+            services.AddScoped<IApplicationModificationDetailsRepository, ApplicationModificationDetailsRepository>();
 
 
             /* Application Services */
            // services.AddScoped<IUserProfileService, UserProfileService>();
-           
+           services.AddScoped<IApplicationModificationDetailsService, ApplicationModificationDetailsService>();
             services.AddScoped<IPasswordhistoryService, PasswordhistoryService>();
 
         }
