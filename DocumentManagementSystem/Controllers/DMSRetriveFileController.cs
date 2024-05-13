@@ -30,7 +30,7 @@ namespace DocumentManagementSystem.Controllers
 
 
 
-        [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Create()
         {
             DMSRetriveFileReportDtoProfile data = new DMSRetriveFileReportDtoProfile();
@@ -61,6 +61,7 @@ namespace DocumentManagementSystem.Controllers
                 return PartialView();
             }
         }
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int Id)
         {
             FileHelper file = new FileHelper();
@@ -79,7 +80,7 @@ namespace DocumentManagementSystem.Controllers
                 return File(FileBytes, file.GetContentType(path));
             }
         }
-
+        
         public async Task<IActionResult> Download(int Id)
         {
             FileHelper file = new FileHelper();
@@ -96,7 +97,7 @@ namespace DocumentManagementSystem.Controllers
                 return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
             }
         }
-
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> DmsRetriveFileList([FromBody] DMSRetriveFileSearchDto model)
         {
             var result = await _dmsfileuploadService.GetAllDMSRetriveFileReportList(model);
@@ -133,6 +134,7 @@ namespace DocumentManagementSystem.Controllers
         }
 
         [HttpGet]
+        [AuthorizeContext(ViewAction.Download)]
         public virtual ActionResult download()
         {
             byte[] data = TempData["file"] as byte[];

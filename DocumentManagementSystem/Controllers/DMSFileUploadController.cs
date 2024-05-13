@@ -623,7 +623,7 @@ namespace DocumentManagementSystem.Controllers
         }
 
 
-
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> DmsFileUploadList([FromBody] DMSFileUploadSearchDto model)
         {
             var result = await _dmsfileuploadService.GetAllDMSFileUploadList1(model);
@@ -656,6 +656,7 @@ namespace DocumentManagementSystem.Controllers
         }
 
         [HttpGet]
+        [AuthorizeContext(ViewAction.Download)]
         public virtual ActionResult download()
         {
             byte[] data = TempData["file"] as byte[];
