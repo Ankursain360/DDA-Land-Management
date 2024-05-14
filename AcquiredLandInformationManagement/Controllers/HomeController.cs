@@ -29,7 +29,15 @@ namespace AcquiredLandInformationManagement.Controllers
         {
             UserProfileDto user = await _userProfileService.GetUserById(_siteContext.UserId);
             var updatedDate = _modificationDetails.GetApplicationModificationDetails();
-            TempData["updatedDate"] = updatedDate;
+            if (updatedDate != null)
+            {
+                TempData["updatedDate"] = updatedDate;
+            }
+            else
+            {
+                TempData["updatedDate"] = "No Data Available";
+            }
+            
             return View(user);
         }
 
@@ -62,6 +70,10 @@ namespace AcquiredLandInformationManagement.Controllers
         }
 
         public IActionResult ExceptionLog()
+        {
+            return View();
+        }
+        public IActionResult copyRight()
         {
             return View();
         }
