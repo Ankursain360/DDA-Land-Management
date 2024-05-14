@@ -10,8 +10,8 @@ using Dto.Search;
 using Utility.Helper;
 using System.Collections.Generic;
 using Dto.Master;
-
-
+using Core.Enum;
+using GIS.Filters;
 namespace GIS.Controllers
 {
     public class AcquiredvillageController : BaseController
@@ -22,6 +22,7 @@ namespace GIS.Controllers
         {
             _acquiredlandvillageService = acquiredlandvillageService;
         }
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         { 
             return View();
@@ -33,7 +34,7 @@ namespace GIS.Controllers
 
             return PartialView("_List", result);
         }
-      //  [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Acquiredlandvillage acquiredlandvillage = new Acquiredlandvillage();
@@ -48,7 +49,7 @@ namespace GIS.Controllers
 
         [HttpPost]
        // [ValidateAntiForgeryToken]
-      //  [AuthorizeContext(ViewAction.Add)]
+       [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Acquiredlandvillage acquiredlandvillage)
         {
             try
@@ -88,7 +89,7 @@ namespace GIS.Controllers
 
 
 
-      //  [AuthorizeContext(ViewAction.Edit)]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _acquiredlandvillageService.FetchSingleResult(id);
@@ -104,7 +105,7 @@ namespace GIS.Controllers
 
         [HttpPost]
        // [ValidateAntiForgeryToken]
-       // [AuthorizeContext(ViewAction.Edit)]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Acquiredlandvillage acquiredlandvillage)
         {
 
@@ -143,7 +144,7 @@ namespace GIS.Controllers
         }
 
 
-       // [AuthorizeContext(ViewAction.Delete)]
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)
         {
             try
@@ -168,7 +169,7 @@ namespace GIS.Controllers
         }
 
 
-       // [AuthorizeContext(ViewAction.View)]
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _acquiredlandvillageService.FetchSingleResult(id);
@@ -184,7 +185,7 @@ namespace GIS.Controllers
         }
 
 
-       // [AuthorizeContext(ViewAction.Download)]
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> AcquiredLandVillageList()
         {
             var result = await _acquiredlandvillageService.GetAcquiredlandvillage();

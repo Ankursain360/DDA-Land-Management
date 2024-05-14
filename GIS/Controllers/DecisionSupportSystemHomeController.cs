@@ -8,7 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 using Service.IApplicationService;
 using System.Diagnostics;
 using System.Threading.Tasks;
-
+using Core.Enum;
+using GIS.Filters;
 namespace GIS.Controllers
 {
     public class DecisionSupportSystemHomeController : Controller
@@ -24,6 +25,7 @@ namespace GIS.Controllers
             _siteContext = siteContext;
             _userProfileService = userProfileService;
         }
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
         {
             UserProfileDto user = await _userProfileService.GetUserById(_siteContext.UserId);

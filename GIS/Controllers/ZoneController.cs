@@ -13,7 +13,8 @@ using System;
 using Utility.Helper;
 using Libraries.Model.Entity;
 using MySqlX.XDevAPI.Common;
-
+using Core.Enum;
+using GIS.Filters;
 namespace GIS.Controllers
 {
     public class ZoneController : BaseController
@@ -26,7 +27,7 @@ namespace GIS.Controllers
             _zoneService = zoneService;
             _GISService = GISService;
         }
-        //[AuthorizeContext(ViewAction.View)]
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
@@ -44,7 +45,7 @@ namespace GIS.Controllers
         }
 
 
-       // [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Zone zone = new Zone();
@@ -54,7 +55,7 @@ namespace GIS.Controllers
         }
 
         [HttpPost]
-        //[AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Add)]
         //[ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Zone zone)
         {
@@ -89,7 +90,7 @@ namespace GIS.Controllers
                 return View(zone);
             }
         }
-        //[AuthorizeContext(ViewAction.Edit)]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _zoneService.FetchSingleResult(id);
@@ -102,7 +103,7 @@ namespace GIS.Controllers
         }
 
         [HttpPost]
-        //[AuthorizeContext(ViewAction.Edit)]
+        [AuthorizeContext(ViewAction.Edit)]
         //[ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Zone zone)
         {
@@ -180,7 +181,7 @@ namespace GIS.Controllers
             return RedirectToAction("Index", "Zone");
 
         }
-       // [AuthorizeContext(ViewAction.View)]
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _zoneService.FetchSingleResult(id);
@@ -194,7 +195,7 @@ namespace GIS.Controllers
 
 
 
-
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> ZoneList()
         {
             var result = await _zoneService.GetAllZone();
