@@ -36,7 +36,8 @@ using Notification;
 using Microsoft.AspNetCore.Hosting;
 using System.Text;
 using System.Xml.Linq;
-
+using GIS.Filters;
+using Core.Enum;
 namespace GIS.Controllers
 {
     public class GISController : BaseController
@@ -351,7 +352,7 @@ namespace GIS.Controllers
 
         // Grayscale function
 
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> AIChangeDetection()
         {
             ViewBag.ZoneList = await _GISService.GetZoneList();
@@ -435,6 +436,8 @@ namespace GIS.Controllers
             dto.ChangedImage = string.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(fileBytes));
             return View("AIChangeDetection", dto);
         }
+
+        [AuthorizeContext(ViewAction.Add)]
         [HttpPost]
         public async Task<IActionResult> Process1(ChangeDetectionDto dto)
         {
@@ -784,7 +787,7 @@ namespace GIS.Controllers
         {
             return Json(await _GISService.GetGCPList(VillageId ?? 0));
         }
-
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> GetKhasraNoForExport(int? villageId)
         {
             var data = await _GISService.GetKhasraListforExport(villageId ?? 0);
