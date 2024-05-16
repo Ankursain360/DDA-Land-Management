@@ -7,6 +7,7 @@ $(document).ready(function () {
 });
 
 function GetExcel(pageNumber, pageSize, order) {
+    debugger;
     var param = GetSearchParam(pageNumber, pageSize, order);
     HttpPost(`/MorLands/MorlandList`, 'html', param, function (response) {
         var a = document.createElement("a");

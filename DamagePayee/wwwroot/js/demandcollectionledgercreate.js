@@ -2,19 +2,27 @@
 var currentPageSize = 10;
 var currentSortOrderAscending = 1;
 var currentSortOrderDescending = 2;
+var order = 0;
 
 $(document).ready(function () {
 
     $("#btnGenerate").click(function () {
-       
-        var param = GetSearchParam(currentPageNumber, currentPageSize);
-        var IsValid = ValidCheck();//$("#frmDemandCollectionLedger").valid();
-        if (IsValid) {
-            HttpPost(`/DemandCollectionLedger/GetDetails`, 'html', param, function (response) {
-                $('#LoadReportView').html("");
-                $('#LoadReportView').html(response);
-            });
-        }
+
+        debugger;
+        //var param = GetSearchParam(currentPageNumber, currentPageSize);
+        //var IsValid = ValidCheck();//$("#frmDemandCollectionLedger").valid();
+        //if (IsValid) {
+        //    HttpPost(`/DemandCollectionLedger/GetDetails`, 'html', param, function (response) {
+        //        $('#LoadReportView').html("");
+        //        $('#LoadReportView').html(response);
+        //    });
+        //}
+        var param = GetSearchParamaOrderby(currentPageNumber, currentPageSize, order);
+        HttpPost(`/DemandCollectionLedger/GetDetails`, 'html', param, function (response) {
+            $('#LoadReportView').html("");
+            $('#LoadReportView').html(response);
+        });
+
     });
 
 });

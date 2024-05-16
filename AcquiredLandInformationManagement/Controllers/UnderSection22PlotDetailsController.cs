@@ -13,6 +13,7 @@ using Notification.OptionEnums;
 using Dto.Search;
 using Utility.Helper;
 using Dto.Master;
+using Microsoft.AspNetCore.Http;
 
 namespace AcquiredLandInformationManagement.Controllers
 {
@@ -209,8 +210,11 @@ namespace AcquiredLandInformationManagement.Controllers
                 }
             }
 
+            //var memory = ExcelHelper.CreateExcel(data);
+            //TempData["file"] = memory;
+            //return Ok();
             var memory = ExcelHelper.CreateExcel(data);
-            TempData["file"] = memory;
+            HttpContext.Session.Set("file", memory);
             return Ok();
 
         }
@@ -218,8 +222,13 @@ namespace AcquiredLandInformationManagement.Controllers
         [HttpGet]
         public virtual ActionResult download()
         {
-            byte[] data = TempData["file"] as byte[];
+            //byte[] data = TempData["file"] as byte[];
+            //return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            byte[] data = HttpContext.Session.Get("file") as byte[];
+            HttpContext.Session.Remove("file");
+            // var dem = Decompress(data);
             return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+
         }
     }
 }

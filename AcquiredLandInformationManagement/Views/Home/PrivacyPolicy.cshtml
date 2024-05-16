@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -11,7 +15,7 @@
 
     <!--icon css-->
     <link rel="stylesheet" href="~/font/icon/remixicon.css" />
-
+    <link rel="stylesheet" href="~/css/Footer.css" />
     <link href="~/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <link href="~/css/style.css" rel="stylesheet" />
     <link href="~/lib/toaster/toastr.min.css" rel="stylesheet" />
@@ -31,7 +35,7 @@
             <div class="container-fluid">
                 <div class="d-flex align-items-center">
                     <div class="menu me-3 p-2 text-white order-md-2 me-md-auto open" id="mobileMenu">
-                        <i class="ri-menu-fold-line"></i>
+                        @*<i class="ri-menu-fold-line"></i>*@
                         <i class="ri-menu-unfold-line"></i>
                     </div>
                     <div class="logo py-1 me-auto me-md-4 order-md-1">
@@ -80,7 +84,7 @@
                         </li>
                         </ul>
                         </div>*@
-                    </div>                    @await Component.InvokeAsync("SignInProfile")
+                    </div>
                 </div>
             </div>
         </header>
@@ -89,33 +93,60 @@
     <div class="pt-3">
     </div>
 
-    <aside class="left-menu small slow" id="leftMenu">
-        <ul class="accordion list-unstyled mb-0">
-            @await Component.InvokeAsync("SideNav")
-        </ul>
-    </aside>
+    @* <aside class="left-menu small slow" id="leftMenu">
+    <ul class="accordion list-unstyled mb-0">
+
+    </ul>
+    </aside>*@
 
     <partial name="_CookieConsentPartial" />
-    <section id="rightSection" class="slow bg-gray">
+    <section class="slow bg-gray">
         <div class="container-fluid">
             <div class="section-wraper px-3  pb-md-0">
-                @RenderBody()
+                <div class="form-control" style="margin-top:70px;">
+                    <p><h2 class="text-center"><strong>Privacy Policy</strong></h2></p>
+                    <div class="card p-3 bg-gray-100 overflow-auto">
+                        <div class="row align-items-center">
+                            <div class="col-md-12">
+                                <table class="table table-striped table-bordered table-responsive">
+                                    <tbody>
+                                        <tr>
+                                            <td><p>As a general rule, this website does not collect Personal Information about you when you visit the site. You can generally visit the site without revealing Personal Information, unless you choose to provide such information.</p>
+                                                <p>Site Visit Data:</p>
+                                                <p>This website records your visit and logs the following information for statistical purposes your server's address; the name of the top-level domain from which you access the Internet (for example, .gov, .com, .in, etc.); the type of browser you use; the date and time you access the site; the pages you have accessed and the documents downloaded and the previous Internet address from which you linked directly to the site.</p>
+                                                <p>We will not identify users or their browsing activities, except when a law enforcement agency may exercise a warrant to inspect the service provider's logs.</p>
+                                                <p>Cookies:</p>
+                                                <p>A cookie is a piece of software code that an internet web site sends to your browser when you access information at that site. This site does not use cookies.</p>
+                                                <p>Email Management:</p>
+                                                <p>Your email address will only be recorded if you choose to send a message. It will only be used for the purpose for which you have provided it and will not be added to a mailing list. Your email address will not be used for any other purpose, and will not be disclosed, without your consent.</p>
+                                                <p>Collection of Personal Information:</p>
+                                                <p>If you are asked for any other Personal Information you will be informed how it will be used if you choose to give it. If at any time you believe the principles referred to in this privacy statement have not been followed, or have any other comments on these principles, please notify the webmaster through the contact us page.</p>
+                                                <p>Note:</p>
+                                                <p>The use of the term "Personal Information" in this privacy statement refers to any information from which your identity is apparent or can be reasonably ascertained.</p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
     </section>
-    <footer class="footer slow">
+    <footer class="footers slow">
         <div class="container-fluid">
             <p class="my-0 py-2">
-            <p class="my-0 py-2">
-                    @* <a href="#">Terms & Conditions</a>*@
-                <a href="Home/PrivacyPolicy">Privacy Policy</a>
-                | <a href="Home/copyRight">Copyright Policy</a>
-                | <a href="Home/HyperlinkPolicy">Hyperlink policy</a>
-                | <a href="Home/WebInformationManager">Web Information Manager</a>
-                    @*| <a href="#">Accessibility Statement</a>
+                @* <a href="#">Terms & Conditions</a>*@
+                <a href="PrivacyPolicy">Privacy Policy</a>
+                | <a href="copyRight">Copyright Policy</a>
+                | <a href="HyperlinkPolicy">Hyperlink policy</a>
+                | <a href="WebInformationManager">Web Information Manager</a>
+                @*| <a href="#">Accessibility Statement</a>
                 | <a href="#">Help</a><br>*@
                 &nbsp; &copy; Content Owned by DDA, Government of India. &nbsp;&nbsp;<label>Last Updated : @Html.Raw(TempData["updatedDate"])</label>
-            </p>
             </p>
         </div>
     </footer>
@@ -130,7 +161,7 @@
     <environment exclude="Development">
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
-    @RenderSection("Scripts", required: false)
+
     @Html.Raw(ViewBag.Message)
 </body>
 </html>

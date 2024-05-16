@@ -7,6 +7,8 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Libraries.Service.IApplicationService;
+using System;
+using Microsoft.VisualBasic;
 
 namespace AcquiredLandInformationManagement.Controllers
 {
@@ -24,19 +26,26 @@ namespace AcquiredLandInformationManagement.Controllers
             _httpContextAccessor = httpContextAccessor;
             _modificationDetails = modificationDetails;
         }
-
-        public async Task<IActionResult> Index()
+        public void updateDateFun()
         {
-            UserProfileDto user = await _userProfileService.GetUserById(_siteContext.UserId);
             var updatedDate = _modificationDetails.GetApplicationModificationDetails();
+            var dt = Convert.ToDateTime(updatedDate).ToString("dd/MMM/yyyy HH:MM:ss tt");
             if (updatedDate != null)
             {
-                TempData["updatedDate"] = updatedDate;
+                TempData["updatedDate"] = dt;
+               
             }
             else
             {
                 TempData["updatedDate"] = "No Data Available";
+               
             }
+            
+        }
+        public async Task<IActionResult> Index()
+        {
+            UserProfileDto user = await _userProfileService.GetUserById(_siteContext.UserId);
+            updateDateFun();
             
             return View(user);
         }
@@ -75,7 +84,24 @@ namespace AcquiredLandInformationManagement.Controllers
         }
         public IActionResult copyRight()
         {
+            updateDateFun();
             return View();
         }
+        public IActionResult PrivacyPolicy() 
+        {
+            updateDateFun();
+            return View(); 
+        }
+        public IActionResult HyperlinkPolicy()
+        {
+            updateDateFun();
+            return View();
+        }
+        public IActionResult WebInformationManager()
+        {
+            updateDateFun();
+            return View();
+        }
+
     }
 }
