@@ -29,10 +29,11 @@ namespace LandingPage.Infrastructure.Extensions
             services.AddScoped<IMenuRepository, MenuRepository>();
             services.AddScoped<IModuleCategoryRepository, ModuleCategoryRespository>();
             services.AddScoped<IUserNotificationRepository, UserNotificationRepository>();
-
+            services.AddScoped<IApplicationModificationDetailsRepository, ApplicationModificationDetailsRepository>();
 
             /* Application Services */
 
+            services.AddScoped<IApplicationModificationDetailsService, ApplicationModificationDetailsService>();
             services.AddScoped<IModuleService, ModuleService>();
             services.AddScoped<IUserProfileService, UserProfileService>();
             services.AddScoped<IWorkflowTemplateService, WorkflowTemplateService>();

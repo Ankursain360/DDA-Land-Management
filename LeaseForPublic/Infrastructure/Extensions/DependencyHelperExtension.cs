@@ -64,9 +64,10 @@ namespace LeaseForPublic.Infrastructure.Extensions
             services.AddScoped<IKycformApprovalRepository, KycformApprovalRepository>();
             services.AddScoped<IKycdemandpaymentdetailstableaRespository, KycdemandpaymentdetailstableaRepository>();
             services.AddScoped<IAuditRepository, AuditRepository>();
-           
-            
+            services.AddScoped<IApplicationModificationDetailsRepository, ApplicationModificationDetailsRepository>();
+
             /* Application Services */
+            services.AddScoped<IApplicationModificationDetailsService, ApplicationModificationDetailsService>();
             services.AddScoped<INotificationService, NotificationService>();
             services.AddScoped<IMenuService, MenuService>();
             services.AddScoped<IPermissionsService, PermissionsService>();

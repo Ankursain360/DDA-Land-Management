@@ -5,15 +5,37 @@ using LIMSPublicInterface.Helper;
 using LIMSPublicInterface.Models;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using Libraries.Service.IApplicationService;
+using System;
 
 namespace LIMSPublicInterface.Controllers
 {
     public class HomeController : BaseController
     {
-        
+        private readonly IApplicationModificationDetailsService _modificationDetails;
+        public HomeController(IApplicationModificationDetailsService modificationDetails)
+        {
+            _modificationDetails = modificationDetails;
+        }
+        public void updateDateFun()
+        {
+            var updatedDate = _modificationDetails.GetApplicationModificationDetails();
+            var dt = Convert.ToDateTime(updatedDate).ToString("dd/MMM/yyyy HH:MM:ss tt");
+            if (updatedDate != null)
+            {
+                TempData["updatedDate"] = dt;
+
+            }
+            else
+            {
+                TempData["updatedDate"] = "No Data Available";
+
+            }
+
+        }
         public async Task<IActionResult> Index()
         {
-        
+            updateDateFun();
             return View();
         }
 
@@ -37,6 +59,26 @@ namespace LIMSPublicInterface.Controllers
 
         public IActionResult ExceptionLog()
         {
+            return View();
+        }
+        public IActionResult copyRight()
+        {
+            updateDateFun();
+            return View();
+        }
+        public IActionResult PrivacyPolicy()
+        {
+            updateDateFun();
+            return View();
+        }
+        public IActionResult HyperlinkPolicy()
+        {
+            updateDateFun();
+            return View();
+        }
+        public IActionResult WebInformationManager()
+        {
+            updateDateFun();
             return View();
         }
     }

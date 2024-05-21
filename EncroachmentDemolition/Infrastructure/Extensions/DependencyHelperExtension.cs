@@ -44,8 +44,10 @@ namespace EncroachmentDemolition.Infrastructure.Extensions
             services.AddScoped<IUserNotificationRepository, UserNotificationRepository>();
             services.AddScoped<IAuditRepository, AuditRepository>();
             services.AddScoped<IGISSRepository, GISRepository>();
+            services.AddScoped<IApplicationModificationDetailsRepository, ApplicationModificationDetailsRepository>();
 
             /* Application Services */
+            services.AddScoped<IApplicationModificationDetailsService, ApplicationModificationDetailsService>();
             services.AddScoped<IGISService, GISService>();
             services.AddScoped<ICountryService, CountryService>();
             services.AddScoped<IWatchandwardService, WatchandwardService>();

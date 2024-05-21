@@ -76,8 +76,18 @@ namespace SiteMaster.Controllers
         {
             if (ModelState.IsValid)
             {
-                await _userProfileService.CreateUser(model);
-                return RedirectToAction("Index");
+               var result =  await _userProfileService.CreateUser(model);
+                if (result == true)
+                {
+                    ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+                    return View("Index");
+                }
+                else
+                {
+                    ViewBag.Message = Alert.Show(Messages.ValidationFailed, "", AlertType.Warning);
+                    return View("Create");
+                }
+                
             }
             else
             {
@@ -146,7 +156,7 @@ namespace SiteMaster.Controllers
         {
             if (ModelState.IsValid)
             {
-                await _userProfileService.UpdateUser(model);
+                var result =  await _userProfileService.UpdateUser(model);
                 return RedirectToAction(nameof(Index));
             }
             else

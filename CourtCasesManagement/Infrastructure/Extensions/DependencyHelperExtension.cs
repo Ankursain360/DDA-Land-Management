@@ -37,8 +37,10 @@ namespace CourtCasesManagement.Infrastructure.Extensions
             services.AddScoped<ICasenatureRepository, CasenatureRepository>();
             services.AddScoped<ICaseyearRepository, CaseyearRepository>();
             services.AddScoped<IAuditRepository, AuditRepository>();
+            services.AddScoped<IApplicationModificationDetailsRepository, ApplicationModificationDetailsRepository>();
 
             /* Application Services */
+            services.AddScoped<IApplicationModificationDetailsService, ApplicationModificationDetailsService>();
             services.AddScoped<ICountryService, CountryService>();
             services.AddScoped<IUserProfileService, UserProfileService>();
 

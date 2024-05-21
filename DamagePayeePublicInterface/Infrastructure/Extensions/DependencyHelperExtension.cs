@@ -39,9 +39,10 @@ namespace DamagePayeePublicInterface.Infrastructure.Extensions
             services.AddScoped<IDPPublicPaymentRepository, DPPublicPaymentRepository>();
             services.AddScoped<IAuditRepository, AuditRepository>();
             services.AddScoped<INewDamageSelfAssessmentRepository, NewDamageSelfAssessmentRepository>();
-
+            services.AddScoped<IApplicationModificationDetailsRepository, ApplicationModificationDetailsRepository>();
 
             /* Application Services */
+            services.AddScoped<IApplicationModificationDetailsService, ApplicationModificationDetailsService>();
             services.AddScoped<IAcquiredlandvillageService, AcquiredlandvillageService>();
             services.AddScoped<IUserProfileService, UserProfileService>();
             services.AddScoped<IPermissionsService, PermissionsService>();

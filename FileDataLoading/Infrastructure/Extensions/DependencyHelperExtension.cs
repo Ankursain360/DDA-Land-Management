@@ -40,8 +40,11 @@ namespace FileDataLoading.Infrastructure.Extensions
             services.AddScoped<IIssueReturnFileRepository, IssueReturnFileRepository>();
             services.AddScoped<IDepartmenttargetRepository,DepartmenttargetRepository>();
             services.AddScoped<IAuditRepository,AuditRepository>();
+            services.AddScoped<IApplicationModificationDetailsRepository, ApplicationModificationDetailsRepository>();
 
             /* Application Services */
+
+            services.AddScoped<IApplicationModificationDetailsService, ApplicationModificationDetailsService>();
             services.AddScoped<ICountryService, CountryService>();
             services.AddScoped<IUserProfileService, UserProfileService>();
 

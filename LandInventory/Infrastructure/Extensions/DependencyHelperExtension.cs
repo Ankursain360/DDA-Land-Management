@@ -40,10 +40,12 @@ namespace LandInventory.Infrastructure.Extensions
             services.AddScoped<IMenuRepository, MenuRepository>();
             services.AddScoped<IUserWiseLandStatusReportRepository, UserWiseLandStatusReportRepository>();
             services.AddScoped<IAuditRepository, AuditRepository>();
-
+            services.AddScoped<IApplicationModificationDetailsRepository, ApplicationModificationDetailsRepository>();
 
 
             /* Application Services */
+
+            services.AddScoped<IApplicationModificationDetailsService, ApplicationModificationDetailsService>();
             services.AddScoped<ILandAcquisitionAwardsService, LandAcquisitionAwardsService>();
             services.AddScoped<IAcquiredlandvillageService, AcquiredlandvillageService>();
             services.AddScoped<INazullandService, NazullandService>();

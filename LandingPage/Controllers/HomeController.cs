@@ -25,20 +25,38 @@ namespace LandingPage.Controllers
         private readonly IModuleService _moduleService;
         private readonly IModuleCategoryService _modulecategoryService;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IApplicationModificationDetailsService _modificationDetails;
 
 
         public HomeController(ISiteContext siteContext,
-          IUserProfileService userProfileService, IModuleService moduleService, IModuleCategoryService modulecategoryService, IHttpContextAccessor httpContextAccessor)
+          IUserProfileService userProfileService, IModuleService moduleService, IModuleCategoryService modulecategoryService, IHttpContextAccessor httpContextAccessor, IApplicationModificationDetailsService modificationDetails)
         {
             _siteContext = siteContext;
             _userProfileService = userProfileService;
             _moduleService = moduleService;
             _modulecategoryService = modulecategoryService;
             _httpContextAccessor = httpContextAccessor;
+            _modificationDetails = modificationDetails;
+        }
+        public void updateDateFun()
+        {
+            var updatedDate = _modificationDetails.GetApplicationModificationDetails();
+            var dt = Convert.ToDateTime(updatedDate).ToString("dd/MMM/yyyy HH:MM:ss tt");
+            if (updatedDate != null)
+            {
+                TempData["updatedDate"] = dt;
+
+            }
+            else
+            {
+                TempData["updatedDate"] = "No Data Available";
+
+            }
+
         }
 
         #region changes regarding dynamic categorization of landing page based on module category   Renu added by 7 May 2021
-       
+
         public async Task<IActionResult> Index()
         {
             var moduleCategoryData = await _moduleService.GetModuleCategory();
@@ -57,6 +75,7 @@ namespace LandingPage.Controllers
                 }
             }
             var mdoulecatlisting = GetModuleListing(data, result);
+            updateDateFun();
             //#region session value change for security
             //HttpContext.Session.Clear();
             //if (_httpContextAccessor.HttpContext.Request.Cookies["ASP.NET_SessionId"] != null)
@@ -172,7 +191,7 @@ namespace LandingPage.Controllers
 
         //    if (HttpContext.Session != null)
         //    {
-               
+
         //        string _encryptedString = HttpContext.Session.GetString("encryptedSession").ToString();
         //        byte[] _encodedAsBytes = System.Convert.FromBase64String(_encryptedString);
         //        string _decryptedString = System.Text.ASCIIEncoding.ASCII.GetString(_encodedAsBytes);
@@ -243,5 +262,26 @@ namespace LandingPage.Controllers
 
         //}
         #endregion Session Fixation added by Sachin 27 Aug 21
+
+        public IActionResult copyRight()
+        {
+            updateDateFun();
+            return View();
+        }
+        public IActionResult PrivacyPolicy()
+        {
+            updateDateFun();
+            return View();
+        }
+        public IActionResult HyperlinkPolicy()
+        {
+            updateDateFun();
+            return View();
+        }
+        public IActionResult WebInformationManager()
+        {
+            updateDateFun();
+            return View();
+        }
     }
 }

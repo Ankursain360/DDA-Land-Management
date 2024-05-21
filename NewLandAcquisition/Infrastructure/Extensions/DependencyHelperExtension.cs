@@ -71,9 +71,11 @@ namespace NewLandAcquisition.Infrastructure.Extensions
             services.AddScoped<INewlandawardmasterdetailRepository, NewlandawardmasterdetailRepository>();
             services.AddScoped<INewLandDemandListDetailsRepository, NewLandDemandListDetailsRepository>();
             services.AddScoped<IAuditRepository, AuditRepository>();
-
+            services.AddScoped<IApplicationModificationDetailsRepository, ApplicationModificationDetailsRepository>();
 
             /* Application Services */
+
+            services.AddScoped<IApplicationModificationDetailsService, ApplicationModificationDetailsService>();
             services.AddScoped<ICountryService, CountryService>();
             services.AddScoped<INotificationService, NotificationService>();
             services.AddScoped<IUndersection4PlotService, Undersection4PlotService>();
