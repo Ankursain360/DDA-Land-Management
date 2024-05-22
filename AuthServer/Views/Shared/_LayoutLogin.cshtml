@@ -62,18 +62,26 @@
                                     </ul>
                                 </div>
                             </div>
-                        </div>
-                        <div class="text-center">
-                            <span style="text-align:center;font-weight:bold">Content Owned By Delhi Development Authority</span><br />
-                            <label>Last Updated : &nbsp; @Html.Raw(TempData["updatedDate"])</label>
-                        </div>
-                        
+                        </div> 
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
+    <footer class="footer slow">
+        <div class="container-fluid">
+            <p class="my-0 py-2">
+                <a asp-action="Login" asp-controller="Account">Home</a>
+                | <a asp-action="PrivacyPolicy" asp-controller="Account">Privacy Policy</a>
+                | <a asp-action="copyRight" asp-controller="Account">Copyright Policy</a>
+                | <a asp-action="HyperlinkPolicy" asp-controller="Account">Hyperlink policy</a>
+                | <a asp-action="WebInformationManager" asp-controller="Account">Web Information Manager</a>
+                @*| <a href="#">Accessibility Statement</a>
+                | <a href="#">Help</a><br>*@
+                &nbsp; &copy; Content Owned by DDA, Government of India. &nbsp;&nbsp;<label>Last Updated : @Html.Raw(TempData["updatedDate"])</label>
+            </p>
+        </div>
+    </footer>
 
     <script src="~/lib/jquery/dist/jquery.slim.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
