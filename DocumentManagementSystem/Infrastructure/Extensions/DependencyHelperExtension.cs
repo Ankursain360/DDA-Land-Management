@@ -31,9 +31,11 @@ namespace DocumentManagementSystem.Infrastructure.Extensions
             services.AddScoped<IUserRightRepository, UserRightRepository>();
             services.AddScoped<IDepartmentRepository, DepartmentRepository>();
             services.AddScoped<IAuditRepository, AuditRepository>();
-
+            services.AddScoped<IApplicationModificationDetailsRepository, ApplicationModificationDetailsRepository>();
 
             /* Application Services */
+
+            services.AddScoped<IApplicationModificationDetailsService, ApplicationModificationDetailsService>();
             services.AddScoped<IModuleService, ModuleService>();
             services.AddScoped<IWorkflowTemplateService, WorkflowTemplateService>();
             services.AddScoped<IActionsService, ActionsService>();

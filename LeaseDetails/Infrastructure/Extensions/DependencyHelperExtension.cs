@@ -75,9 +75,11 @@ namespace LeaseDetails.Infrastructure.Extensions
             services.AddScoped<IKycdemandpaymentdetailstablecRepository, KycdemandpaymentdetailstablecRepository>();
             services.AddScoped<IAuditRepository, AuditRepository>();
             services.AddScoped<IRestorationEntryRepository, RestorationEntryRepository>();
+            services.AddScoped<IApplicationModificationDetailsRepository, ApplicationModificationDetailsRepository>();
+
             /* Application Services */
 
-
+            services.AddScoped<IApplicationModificationDetailsService, ApplicationModificationDetailsService>();
             services.AddScoped<ICountryService, CountryService>();
             services.AddScoped<INotificationService, NotificationService>();
             services.AddScoped<IMenuService, MenuService>();

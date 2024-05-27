@@ -1,4 +1,5 @@
 ﻿using Dto.Master;
+using Libraries.Service.IApplicationService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -17,16 +18,35 @@ namespace SiteMaster.Controllers
         private readonly ISiteContext _siteContext;
         private readonly IUserProfileService _userProfileService;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IApplicationModificationDetailsService _modificationDetails;
         public HomeController(ISiteContext siteContext,
-           IUserProfileService userProfileService, IHttpContextAccessor httpContextAccessor)
+           IUserProfileService userProfileService, IHttpContextAccessor httpContextAccessor, IApplicationModificationDetailsService modificationDetails)
         {
             _siteContext = siteContext;
             _userProfileService = userProfileService;
             _httpContextAccessor = httpContextAccessor;
+            _modificationDetails = modificationDetails;
         }
 
+        public void updateDateFun()
+        {
+            var updatedDate = _modificationDetails.GetApplicationModificationDetails();
+            var dt = Convert.ToDateTime(updatedDate).ToString("dd/MMM/yyyy HH:MM:ss tt");
+            if (updatedDate != null)
+            {
+                TempData["updatedDate"] = dt;
+
+            }
+            else
+            {
+                TempData["updatedDate"] = "No Data Available";
+
+            }
+
+        }
         public async Task<IActionResult> Index()
         {
+            updateDateFun();
             UserProfileDto user = await _userProfileService.GetUserById(_siteContext.UserId);
             return View(user);
         }
@@ -73,6 +93,27 @@ namespace SiteMaster.Controllers
 
         public IActionResult ExceptionLog()
         {
+            return View();
+        }
+
+        public IActionResult copyRight()
+        {
+            updateDateFun();
+            return View();
+        }
+        public IActionResult PrivacyPolicy()
+        {
+            updateDateFun();
+            return View();
+        }
+        public IActionResult HyperlinkPolicy()
+        {
+            updateDateFun();
+            return View();
+        }
+        public IActionResult WebInformationManager()
+        {
+            updateDateFun();
             return View();
         }
     }

@@ -87,6 +87,23 @@ namespace IdentityServerHost.Quickstart.UI
         /// <summary>
         /// Entry point into the login workflow
         /// </summary>
+
+        public void updateDateFun()
+        {
+            var updatedDate = _modificationDetails.GetApplicationModificationDetails();
+            var dt = Convert.ToDateTime(updatedDate).ToString("dd/MMM/yyyy HH:MM:ss tt");
+            if (updatedDate != null)
+            {
+                TempData["updatedDate"] = dt;
+
+            }
+            else
+            {
+                TempData["updatedDate"] = "No Data Available";
+
+            }
+
+        }
         [HttpGet]
         public async Task<IActionResult> Login(string returnUrl)
         {
@@ -98,8 +115,7 @@ namespace IdentityServerHost.Quickstart.UI
                 return RedirectToAction("Challenge", "External", new { scheme = vm.ExternalLoginScheme, returnUrl });
             }
             vm.Data = SetEncriptionKey();
-            var updatedDate =  _modificationDetails.GetApplicationModificationDetails();
-            TempData["updatedDate"] = updatedDate;
+            updateDateFun();
             return View(vm);
         }
 
@@ -714,8 +730,24 @@ namespace IdentityServerHost.Quickstart.UI
         }
         #endregion
 
-        public IActionResult copyRightPolicy()
+        public IActionResult copyRight()
         {
+            updateDateFun();
+            return View();
+        }
+        public IActionResult PrivacyPolicy()
+        {
+            updateDateFun();
+            return View();
+        }
+        public IActionResult HyperlinkPolicy()
+        {
+            updateDateFun();
+            return View();
+        }
+        public IActionResult WebInformationManager()
+        {
+            updateDateFun();
             return View();
         }
     }

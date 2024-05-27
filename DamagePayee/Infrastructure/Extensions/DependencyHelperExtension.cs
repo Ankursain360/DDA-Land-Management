@@ -56,9 +56,11 @@ namespace DamagePayee.Infrastructure.Extensions
             services.AddScoped<IPaymentverificationRepository, PaymentverificationRepository>();
             services.AddScoped<IUserNotificationRepository, UserNotificationRepository>();
             services.AddScoped<IAuditRepository, AuditRepository>();
+            services.AddScoped<IApplicationModificationDetailsRepository, ApplicationModificationDetailsRepository>();
 
             /* Application Services */
 
+            services.AddScoped<IApplicationModificationDetailsService, ApplicationModificationDetailsService>();
             services.AddScoped<INewDamageSelfAssessmentService, NewDamageSelfAssessmentService>();
 
             services.AddScoped<ICountryService, CountryService>();

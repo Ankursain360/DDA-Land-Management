@@ -1,0 +1,29 @@
+﻿footer.footers {
+    background: rgb(44, 48, 145);
+    background: -moz-linear-gradient(90deg, rgba(44, 48, 145, 1) 0%, rgba(209, 33, 62, 1) 100%);
+    background: -webkit-linear-gradient(90deg, rgba(44, 48, 145, 1) 0%, rgba(209, 33, 62, 1) 100%);
+    background: linear-gradient(90deg, rgba(44, 48, 145, 1) 0%, rgba(209, 33, 62, 1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#2c3091", endColorstr="#d1213e", GradientType=1);
+    position: fixed;
+    bottom: 0;
+    width: calc(100%);
+    right: 0;
+    color: #fff;
+    font-size: .6rem;
+    z-index: 99;
+}
+
+    footer.footers a {
+        color: #bdeaff;
+    }
+
+/*footer.footers,
+#rightSection {
+    width: calc(100% - 275px);
+}*/
+
+ /*   footer.footers.menu-close,
+    #rightSection.menu-close {
+        width: calc(100% - 50px);
+    }
+*/

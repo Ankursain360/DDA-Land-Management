@@ -104,8 +104,10 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<IHonbleRepository, HonbleRepository>();
             services.AddScoped<ILeasePaymentTypeRepository, LeasePaymentTypeRepository>();
             services.AddScoped<IDamageRateListRepository, DamageRateListRepository>();
+            services.AddScoped<IApplicationModificationDetailsRepository, ApplicationModificationDetailsRepository>();
 
             /************ Application Services ************/
+            services.AddScoped<IApplicationModificationDetailsService, ApplicationModificationDetailsService>();
             services.AddScoped<ICountryService, CountryService>();
             services.AddScoped<IDesignationService, DesignationService>();
             services.AddScoped<IZoneService, ZoneService>();
