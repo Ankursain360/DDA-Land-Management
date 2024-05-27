@@ -55,6 +55,7 @@ namespace GIS.Controllers
             _Configuration = configuration;
             _hostingEnvironment = en;
         }
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
         {
             //GISDtoProfile gis = new GISDtoProfile();
@@ -352,7 +353,7 @@ namespace GIS.Controllers
 
         // Grayscale function
 
-        [AuthorizeContext(ViewAction.View)]
+      //  [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> AIChangeDetection()
         {
             ViewBag.ZoneList = await _GISService.GetZoneList();
@@ -787,7 +788,7 @@ namespace GIS.Controllers
         {
             return Json(await _GISService.GetGCPList(VillageId ?? 0));
         }
-        [AuthorizeContext(ViewAction.Download)]
+       // [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> GetKhasraNoForExport(int? villageId)
         {
             var data = await _GISService.GetKhasraListforExport(villageId ?? 0);

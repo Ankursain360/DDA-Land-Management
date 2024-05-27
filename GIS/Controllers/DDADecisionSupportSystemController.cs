@@ -38,7 +38,8 @@ using System.Text;
 using System.Xml.Linq;
 using Dto.Search;
 using Libraries.Service.ApplicationService;
-
+using Core.Enum;
+using GIS.Filters;
 namespace GIS.Controllers
 {
     public class DDADecisionSupportSystemController : Controller
@@ -61,7 +62,7 @@ namespace GIS.Controllers
             ChangeDetectionImage = _Configuration.GetSection("FilePaths:OutPutImages:ChangedImagePath").Value.ToString();
            
         }
-
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
@@ -77,6 +78,7 @@ namespace GIS.Controllers
         {
             return View();
         }
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> DownloadImageFirst(int Id) 
         { 
             FileHelper file = new FileHelper(); 
@@ -86,6 +88,7 @@ namespace GIS.Controllers
             return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
             // return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
         }
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> DownloadImageSecond(int Id)
         {
             FileHelper file = new FileHelper();
@@ -95,6 +98,7 @@ namespace GIS.Controllers
             return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
             //return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
         }
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> DownloadChangeDetectionImage(int Id)
         {
             FileHelper file = new FileHelper();

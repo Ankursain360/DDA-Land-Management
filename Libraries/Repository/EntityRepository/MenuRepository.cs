@@ -196,7 +196,7 @@ namespace Libraries.Repository.EntityRepository
         {
            int menuId =   (from x in _dbContext.Menu
                  where x.ModuleId == id && x.Url.Contains(url) && x.IsActive==1 /*x.Url == url*/
-                 select x.Id).First();
+                 select x.Id).FirstOrDefault();
             return menuId;
         }
     }
