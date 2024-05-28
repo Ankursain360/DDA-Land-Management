@@ -43,6 +43,11 @@
                 {
                     <a href="javascript:void(0)" class="d-block">@menu.Name</a>
                 }
+                else if (menu.Url.Contains("."))
+                {
+                    <input hidden="hidden" id="url" value="@menu.Url" />
+                    <a href="#" onclick="return CheckUrl()" class="d-block">@menu.Name</a>
+                }
                 else
                 {
                     <a href="@menu.Url" class="d-block">@menu.Name</a>
@@ -51,3 +56,5 @@
         </li>
     }
 }
+
+<script src="~/js/checkurl.js"></script>

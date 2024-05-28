@@ -37,7 +37,7 @@ namespace CourtCasesManagement.Components
         private IList<SideNavDto> GetMenu(IList<MenuDetailDto> menuList, int parentId)
         {
             var children = GetChildrenMenu(menuList, parentId);
-
+            
             if (!children.Any())
             {
                 return new List<SideNavDto>();
