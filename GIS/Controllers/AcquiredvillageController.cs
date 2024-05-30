@@ -17,14 +17,34 @@ namespace GIS.Controllers
     public class AcquiredvillageController : BaseController
     {
         private readonly IAcquiredlandvillageService _acquiredlandvillageService;
-
-        public AcquiredvillageController(IAcquiredlandvillageService acquiredlandvillageService)
+        private readonly IApplicationModificationDetailsService _modificationDetails;
+        public AcquiredvillageController(IAcquiredlandvillageService acquiredlandvillageService, IApplicationModificationDetailsService modificationDetails)
         {
             _acquiredlandvillageService = acquiredlandvillageService;
+            _modificationDetails = modificationDetails;
         }
+
+        public void updateDateFun()
+        {
+            var updatedDate = _modificationDetails.GetApplicationModificationDetails();
+            var dt = Convert.ToDateTime(updatedDate).ToString("dd/MMM/yyyy HH:MM:ss tt");
+            if (updatedDate != null)
+            {
+                TempData["updatedDate"] = dt;
+
+            }
+            else
+            {
+                TempData["updatedDate"] = "No Data Available";
+
+            }
+
+        }
+
         [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         { 
+            updateDateFun();
             return View();
         }
         [HttpPost]

@@ -22,14 +22,35 @@ namespace GIS.Controllers
 
         private readonly IZoneService _zoneService;
         private readonly IGISService _GISService;
-        public ZoneController(IZoneService zoneService, IGISService GISService)
+        private readonly IApplicationModificationDetailsService _modificationDetails;
+        public ZoneController(IZoneService zoneService, IGISService GISService, IApplicationModificationDetailsService modificationDetails)
         {
             _zoneService = zoneService;
             _GISService = GISService;
+            _modificationDetails = modificationDetails;
         }
+
+        public void updateDateFun()
+        {
+            var updatedDate = _modificationDetails.GetApplicationModificationDetails();
+            var dt = Convert.ToDateTime(updatedDate).ToString("dd/MMM/yyyy HH:MM:ss tt");
+            if (updatedDate != null)
+            {
+                TempData["updatedDate"] = dt;
+
+            }
+            else
+            {
+                TempData["updatedDate"] = "No Data Available";
+
+            }
+
+        }
+
         [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
+            updateDateFun();
             return View();
         }
 

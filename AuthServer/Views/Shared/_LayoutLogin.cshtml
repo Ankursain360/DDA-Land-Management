@@ -73,11 +73,12 @@
             <p class="my-0 py-2">
                 <a asp-action="Login" asp-controller="Account">Home</a>
                 | <a asp-action="PrivacyPolicy" asp-controller="Account">Privacy Policy</a>
+                | <a asp-action="TermsandConditions" asp-controller="Account">Terms&Conditions</a>
                 | <a asp-action="copyRight" asp-controller="Account">Copyright Policy</a>
                 | <a asp-action="HyperlinkPolicy" asp-controller="Account">Hyperlink policy</a>
                 | <a asp-action="WebInformationManager" asp-controller="Account">Web Information Manager</a>
-                @*| <a href="#">Accessibility Statement</a>
-                | <a href="#">Help</a><br>*@
+                | <a asp-action="Contactus" asp-controller="Account">Contact Us</a>
+                | <a asp-action="Help" asp-controller="Account">Help</a><br>
                 &nbsp; &copy; Content Owned by DDA, Government of India. &nbsp;&nbsp;<label>Last Updated : @Html.Raw(TempData["updatedDate"])</label>
             </p>
         </div>

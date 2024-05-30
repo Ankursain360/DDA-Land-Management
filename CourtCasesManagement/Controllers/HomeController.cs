@@ -108,5 +108,21 @@ namespace CourtCasesManagement.Controllers
             updateDateFun();
             return View();
         }
+        public IActionResult TermsandConditions()
+        {
+            updateDateFun();
+            return View();
+        }
+
+        public IActionResult Help()
+        {
+            updateDateFun();
+            return View();
+        }
+        public IActionResult Contactus()
+        {
+            updateDateFun();
+            return View();
+        }
     }
 }

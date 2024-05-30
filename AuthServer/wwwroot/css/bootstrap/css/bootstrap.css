@@ -7662,6 +7662,7 @@ textarea.form-control-lg {
   color: rgba(var(--bs-success-rgb), var(--bs-text-opacity)) !important;
 }
 
+
 .text-info {
   --bs-text-opacity: 1;
   color: rgba(var(--bs-info-rgb), var(--bs-text-opacity)) !important;
@@ -7706,7 +7707,15 @@ textarea.form-control-lg {
   --bs-text-opacity: 1;
   color: #6c757d !important;
 }
-
+.text-rgb-46_77_185 {
+    --bs-text-opacity: 1;
+    color: rgb(11, 32, 185) !important;
+}
+.text-bg-rgb-40_71_177clr {
+    --bs-text-opacity: 1;
+    background-color: rgb(40,71,177) !important;
+    color: white !important;
+}
 .text-black-50 {
   --bs-text-opacity: 1;
   color: rgba(0, 0, 0, 0.5) !important;

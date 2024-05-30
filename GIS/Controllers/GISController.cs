@@ -47,14 +47,34 @@ namespace GIS.Controllers
         private readonly IUserProfileService _userProfileService;
         public IConfiguration _Configuration;
         private readonly IHostingEnvironment _hostingEnvironment;
-        public GISController(IGISService GISService, IUserProfileService userProfileService, ISiteContext siteContext, IConfiguration configuration, IHostingEnvironment en)
+        private readonly IApplicationModificationDetailsService _modificationDetails;
+        public GISController(IGISService GISService, IUserProfileService userProfileService, ISiteContext siteContext, IConfiguration configuration, IHostingEnvironment en, IApplicationModificationDetailsService modificationDetails)
         {
             _siteContext = siteContext;
             _userProfileService = userProfileService;
             _GISService = GISService;
             _Configuration = configuration;
             _hostingEnvironment = en;
+            _modificationDetails = modificationDetails;
         }
+
+        public void updateDateFun()
+        {
+            var updatedDate = _modificationDetails.GetApplicationModificationDetails();
+            var dt = Convert.ToDateTime(updatedDate).ToString("dd/MMM/yyyy HH:MM:ss tt");
+            if (updatedDate != null)
+            {
+                TempData["updatedDate"] = dt;
+
+            }
+            else
+            {
+                TempData["updatedDate"] = "No Data Available";
+
+            }
+
+        }
+
         [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
         {
@@ -357,6 +377,7 @@ namespace GIS.Controllers
         public async Task<IActionResult> AIChangeDetection()
         {
             ViewBag.ZoneList = await _GISService.GetZoneList();
+            updateDateFun();
             return View();
         }
         [HttpPost]

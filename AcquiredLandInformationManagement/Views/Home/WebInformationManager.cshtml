@@ -134,13 +134,14 @@
     <footer class="footers slow">
         <div class="container-fluid">
             <p class="my-0 py-2">
-                  <a asp-action="Index" asp-controller="Home">Home</a>
+                <a asp-action="Index" asp-controller="Home">Home</a>
                 | <a asp-action="PrivacyPolicy" asp-controller="Home">Privacy Policy</a>
+                | <a asp-action="TermsandConditions" asp-controller="Home">Terms&Conditions</a>
                 | <a asp-action="copyRight" asp-controller="Home">Copyright Policy</a>
                 | <a asp-action="HyperlinkPolicy" asp-controller="Home">Hyperlink policy</a>
                 | <a asp-action="WebInformationManager" asp-controller="Home">Web Information Manager</a>
-                @*| <a href="#">Accessibility Statement</a>
-                | <a href="#">Help</a><br>*@
+                | <a asp-action="Contactus" asp-controller="Home">Contact Us</a>
+                | <a asp-action="Help" asp-controller="Home">Help</a><br>
                 &nbsp; &copy; Content Owned by DDA, Government of India. &nbsp;&nbsp;<label>Last Updated : @Html.Raw(TempData["updatedDate"])</label>
             </p>
         </div>

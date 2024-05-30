@@ -52,8 +52,10 @@ namespace GIS.Infrastructure.Extensions
             services.AddScoped<IAcquiredlandvillageRepository,  AcquiredlandvillageRepository>();
             services.AddScoped<IKhasraRepository , KhasraRepository>();
             services.AddScoped<IZoneRepository, ZoneRepository>();
+            services.AddScoped<IApplicationModificationDetailsRepository, ApplicationModificationDetailsRepository>();
             /* Application Services */
 
+            services.AddScoped<IApplicationModificationDetailsService, ApplicationModificationDetailsService>();
             services.AddScoped<IZoneService, ZoneService>();
             services.AddScoped<IKhasraService,  KhasraService>();
             services.AddScoped<IAcquiredlandvillageService, AcquiredlandvillageService>();

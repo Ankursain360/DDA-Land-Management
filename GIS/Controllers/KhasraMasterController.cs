@@ -22,16 +22,34 @@ namespace SiteMaster.Controllers
     public class KhasraMasterController : Controller
     {
         private readonly IKhasraService _khasraService;
+        private readonly IApplicationModificationDetailsService _modificationDetails;
 
-
-        public KhasraMasterController(IKhasraService khasraService)
+        public KhasraMasterController(IKhasraService khasraService, IApplicationModificationDetailsService modificationDetails)
         {
             _khasraService = khasraService;
+            _modificationDetails = modificationDetails;
+        }
+        public void updateDateFun()
+        {
+            var updatedDate = _modificationDetails.GetApplicationModificationDetails();
+            var dt = Convert.ToDateTime(updatedDate).ToString("dd/MMM/yyyy HH:MM:ss tt");
+            if (updatedDate != null)
+            {
+                TempData["updatedDate"] = dt;
+
+            }
+            else
+            {
+                TempData["updatedDate"] = "No Data Available";
+
+            }
+
         }
         //[AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
         {
             var list = await _khasraService.GetAllKhasra();
+            updateDateFun();
             return View(list);
         }
        // [HttpPost]

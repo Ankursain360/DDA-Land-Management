@@ -47,24 +47,43 @@ namespace GIS.Controllers
         private readonly IGISService _GISService;
         private readonly ISiteContext _siteContext;
         private readonly IUserProfileService _userProfileService;
+        private readonly IApplicationModificationDetailsService _modificationDetails;
         public IConfiguration _Configuration;
         private readonly IHostingEnvironment _hostingEnvironment;
         string InputImages = string.Empty;
         string ChangeDetectionImage = string.Empty;
-        public DDADecisionSupportSystemController(IGISService GISService, IUserProfileService userProfileService, ISiteContext siteContext, IConfiguration configuration, IHostingEnvironment en)
+        public DDADecisionSupportSystemController(IGISService GISService, IUserProfileService userProfileService, ISiteContext siteContext, IConfiguration configuration, IHostingEnvironment en, IApplicationModificationDetailsService modificationDetails)
         {
             _siteContext = siteContext;
             _userProfileService = userProfileService;
             _GISService = GISService; 
             _Configuration = configuration;
             _hostingEnvironment = en;
+            _modificationDetails = modificationDetails;
             InputImages = _Configuration.GetSection("FilePaths:InputImages:FirstPhotoPath").Value.ToString();
             ChangeDetectionImage = _Configuration.GetSection("FilePaths:OutPutImages:ChangedImagePath").Value.ToString();
            
         }
+        public void updateDateFun()
+        {
+            var updatedDate = _modificationDetails.GetApplicationModificationDetails();
+            var dt = Convert.ToDateTime(updatedDate).ToString("dd/MMM/yyyy HH:MM:ss tt");
+            if (updatedDate != null)
+            {
+                TempData["updatedDate"] = dt;
+
+            }
+            else
+            {
+                TempData["updatedDate"] = "No Data Available";
+
+            }
+
+        }
         [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
+            updateDateFun();
             return View();
         }
 
