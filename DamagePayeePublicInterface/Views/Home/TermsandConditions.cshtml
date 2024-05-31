@@ -1,0 +1,136 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link href="img/favicon.ico" rel="shortcut icon" type="image/x-icon" sizes="16x16" />
+    <link rel="icon" href="~/images/favicon.png" type="image/png" sizes="16x16" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Damage Payee Public Interface Module</title>
+    <!--font css-->
+    <link rel="stylesheet" href="~/font/open-sans/stylesheet.css" />
+
+    <!--icon css-->
+    <link rel="stylesheet" href="~/font/icon/remixicon.css" />
+    <link rel="stylesheet" href="~/css/Footer.css" />
+    <link href="~/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/style.css" rel="stylesheet" />
+    <link href="~/lib/toaster/toastr.min.css" rel="stylesheet" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <link href="~/lib/select2/select2.css" rel="stylesheet" />
+    <script src="~/lib/select2/select2.js"></script>
+
+</head>
+<body class="bg-gray">
+    <div id="loader-wrapper" style="display:none">
+        <div id="loader"></div>
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+    </div>
+    <div class="top-header">
+        <header>
+            <div class="container-fluid">
+                <div class="d-flex align-items-center">
+                    <div class="menu me-3 p-2 text-white order-md-2 me-md-auto open" id="mobileMenu">
+                        @*<i class="ri-menu-fold-line"></i>*@
+                        <i class="ri-menu-unfold-line"></i>
+                    </div>
+                    <div class="logo py-1 me-auto me-md-4 order-md-1">
+                        <a href="/" class="d-block">
+                            <figure class="m-0">
+                                <img src="~/images/header-logo.png" alt="DDA Logo" class="img-fluid">
+                            </figure>
+                        </a>
+                    </div>
+                    <div class="dropdown noti text-white my-2  me-3 order-md-3">
+                        <a href="~/doc/Damage payee public interface.pdf" target="_blank" role="button" title="User Manual" class='p-2 d-block text-white no-dec'>
+                            <i class="ri-folder-user-fill" style="font-size:20px"></i>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </header>
+    </div>
+
+    <div class="pt-3">
+    </div>
+
+    @* <aside class="left-menu small slow" id="leftMenu">
+    <ul class="accordion list-unstyled mb-0">
+
+    </ul>
+    </aside>*@
+
+    <partial name="_CookieConsentPartial" />
+    <section class="slow bg-gray">
+        <div class="container-fluid">
+            <div class="section-wraper px-3  pb-md-0">
+                <div class="form-control" style="margin-top:70px;">
+                    <p><h2 class="text-center"><strong>Terms and conditions</strong></h2></p>
+                    <div class="card p-3 bg-gray-100 overflow-auto">
+                        <div class="row align-items-center">
+                            <div class="col-md-12">
+                                <table class="table table-striped table-bordered table-responsive">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <p>User Agreement - You (the user) can access www.ddalmis.org.in ("the site"), subject to the terms and conditions of use, as changes/updated from time to time entirely at the discretion of DDA as set out below. These are for an indefinite term and you understand and agree to be bound by such terms.</p>
+                                                <p>Changes - DDA reserves its right to add to or change/modify the terms of this agreement including but not limited to suspend/cancel, or discontinue any or all service at any time without notice, make modifications and alterations in any or all of the content, information and services contained on the site without prior notice. You will be deemed to have accepted such change/s if you continue to access the Site subsequent to such chages.</p>
+                                                <p>Charges - Currently, the access to the site is free however, DDA reserves its right to charge subscription fees in respect of any part, aspect of the Site upon reasonable prior notice.</p>
+                                                <p>Copyright and Trademarks - Unless otherwise stated, copyright and all intellectual property rights in all material presented on the site (including but not limited to text, audio, video or graphical images), trademarks and logos appearing on this site are the property of DDA and is protected under applicable Indian laws. Any infringement shall be vigorously defended and pursued to the fullest extent permitted by law.</p>
+                                                <p>Limited Permission to Copy - You are permitted to print or download extracts from these pages for your personal information & non-commercial use only. Any copies of these pages saved to disk or to any other storage medium may only be used for subsequent viewing purposes or to print extracts for personal use. You may not (whether directly or through the use of any software program) create a database in electronic or structured mannual form by regularly or systematically downloading and storing all or any part of the pages from this site. No part of the Site may be reproduced or transmitted to or stored in any other web site nor may any of its pages or part thereof be disseminated in any electronic or non-electronic form, not included in any public or private electronic retrieval system or service without prior written permission.</p>
+                                                <p>OTHER TERMS AND CONDITIONS - The term User shall refer to the user who is browsing the site. The term DDA shall refer to DDA. The terms Site refers to www.ddalmis.org.in owned and monitored by DDA.</p>
+                                                <p>DDA may terminate User's access at any time for any reason. The provisions regarding disclaimer of warranty, accuracy of information and indemnification shall survive such termination. DDA may monitor access to the site.</p>
+                                                <p>DDA shall have no responsibility for any damage to User's computer system or loss of data that result from the download of any content, materials and information from the site.</p>
+                                                <p>In no event will DDA be liable for damages of any kind, including without limitation, direct, incidental or consequential damages (including but not limited to damages for lost profits business interruption and loss of programs or information) arrising out of the use of or inability to use DDA's website, or any information provided on the website, or other inaccuracies or interpretations thereof.</p>
+                                                <p>User agrees to indemnify, defend and hold DDA harmless from and against all losses, expenses, damages and costs, including reasonable attorneys' fees arising out of or relating to any misuse by the User of the content and services provided on the site.</p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <br />
+    <br />
+    <br />
+    <footer class="footers slow">
+        <div class="container-fluid">
+            <p class="my-0 py-2 text-center">
+                <a asp-action="Index1" asp-controller="Home">Home</a>
+                | <a asp-action="PrivacyPolicy" asp-controller="Home">Privacy Policy</a>
+                | <a asp-action="TermsandConditions" asp-controller="Home">Terms&Conditions</a>
+                | <a asp-action="copyRight" asp-controller="Home">Copyright Policy</a>
+                | <a asp-action="HyperlinkPolicy" asp-controller="Home">Hyperlink policy</a>
+                | <a asp-action="WebInformationManager" asp-controller="Home">Web Information Manager</a>
+                | <a asp-action="Contactus" asp-controller="Home">Contact Us</a>
+                | <a asp-action="Help" asp-controller="Home">Help</a><br>
+                &nbsp; &copy; Content Owned by DDA, Government of India. &nbsp;&nbsp;<label>Last Updated : @Html.Raw(TempData["updatedDate"])</label>
+            </p>
+        </div>
+    </footer>
+
+    <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/chart.js/dist/Chart.min.js"></script>
+    <script src="~/lib/toaster/toastr.min.js"></script>
+
+    <environment include="Development">
+        <script src="~/js/site.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>
+
+    @Html.Raw(ViewBag.Message)
+</body>
+</html>

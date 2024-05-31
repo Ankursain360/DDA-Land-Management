@@ -64,6 +64,7 @@ namespace NewLandAcquisition
             services.AddSingleton<IFileProvider>(
             new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
             services.AddDbContext<DataContext>(a => a.UseMySQL(Configuration.GetSection("ConnectionString:Con").Value));
+            
             services.AddIdentity<ApplicationUser, ApplicationRole>(opt =>
             {
                 opt.Password.RequiredLength = 7;

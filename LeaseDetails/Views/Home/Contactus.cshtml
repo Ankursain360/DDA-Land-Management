@@ -1,0 +1,136 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link href="img/favicon.ico" rel="shortcut icon" type="image/x-icon" sizes="16x16" />
+    <link rel="icon" href="~/images/favicon.png" type="image/png" sizes="16x16" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Lease Details Module</title>
+    <!--font css-->
+    <link rel="stylesheet" href="~/font/open-sans/stylesheet.css" />
+
+    <!--icon css-->
+    <link rel="stylesheet" href="~/font/icon/remixicon.css" />
+    <link rel="stylesheet" href="~/css/Footer.css" />
+    <link href="~/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/style.css" rel="stylesheet" />
+    <link href="~/lib/toaster/toastr.min.css" rel="stylesheet" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <link href="~/lib/select2/select2.css" rel="stylesheet" />
+    <script src="~/lib/select2/select2.js"></script>
+
+</head>
+<body class="bg-gray">
+    <div id="loader-wrapper" style="display:none">
+        <div id="loader"></div>
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+    </div>
+    <div class="top-header">
+        <header>
+            <div class="container-fluid">
+                <div class="d-flex align-items-center">
+                    <div class="menu me-3 p-2 text-white order-md-2 me-md-auto open" id="mobileMenu">
+                        @*<i class="ri-menu-fold-line"></i>*@
+                        <i class="ri-menu-unfold-line"></i>
+                    </div>
+                    <div class="logo py-1 me-auto me-md-4 order-md-1">
+                        <a href="/" class="d-block">
+                            <figure class="m-0">
+                                <img src="~/images/header-logo.png" alt="DDA Logo" class="img-fluid">
+                            </figure>
+                        </a>
+                    </div>
+                    <div class="dropdown noti text-white my-2  me-3 order-md-3">
+                        <a href="#" target="_blank" role="button" title="User Manual" class='p-2 d-block text-white no-dec'>
+                            <i class="ri-folder-user-fill" style="font-size:20px"></i>
+                        </a>
+                    </div>
+                    <div class="dropdown noti text-white my-2  me-3 order-md-3">
+                        <a href="https://ddalmis.org.in/" role="button" id="notification" title="Go back to modules!" class='p-2 d-block text-white no-dec'>
+                            @*<i class="ri-notification-2-line"></i>*@
+                            <i class="ri-home-3-fill" style="font-size:20px"></i>
+                            @*<small class="bg-success rounded-circle position-absolute nofi-active">99</small>*@
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </header>
+    </div>
+
+    <div class="pt-3">
+    </div>
+
+    @* <aside class="left-menu small slow" id="leftMenu">
+    <ul class="accordion list-unstyled mb-0">
+
+    </ul>
+    </aside>*@
+
+    <partial name="_CookieConsentPartial" />
+    <section class="slow bg-gray">
+        <div class="container-fluid">
+            <div class="section-wraper px-3  pb-md-0">
+                <div class="form-control" style="margin-top:70px;">
+                    <p><h2 class="text-center"><strong>Contact us</strong></h2></p>
+                    <div class="card p-3 bg-gray-100 overflow-auto">
+                        <div class="row align-items-center">
+                            <div class="col-md-12">
+                                <table class="table table-striped table-bordered table-responsive">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <p>Delhi Development Authority</p>
+                                                <p>Office: Vikas Sadan,INA, New Delhi-110023.</p>
+                                                <p>Helpline : 1800110332</p>
+                                                <p>Email Id: dda-web[at]dda[dot]gov[dot]in</p>
+                                                <p><strong>Telephone Directory -</strong> <a target="_blank" href="~/doc/tel_directory22052024.pdf"> Click Here</a><span class="filetext"><img src="~/images/pdf.png" alt="Pdf">(File Size:455 KB)</span></p>
+                                                <p><strong>E-mail Ids of DDA Officers - </strong><a target="_blank" href="~/doc/email_directory22052024.pdf"> Click Here</a><span class="filetext"><img src="~/images/pdf.png" alt="Pdf">(File Size:111 KB)</span></p>
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="footers slow">
+        <div class="container-fluid">
+            <p class="my-0 py-2 text-center">
+                <a asp-action="Index" asp-controller="Home">Home</a>
+                | <a asp-action="PrivacyPolicy" asp-controller="Home">Privacy Policy</a>
+                | <a asp-action="TermsandConditions" asp-controller="Home">Terms&Conditions</a>
+                | <a asp-action="copyRight" asp-controller="Home">Copyright Policy</a>
+                | <a asp-action="HyperlinkPolicy" asp-controller="Home">Hyperlink policy</a>
+                | <a asp-action="WebInformationManager" asp-controller="Home">Web Information Manager</a>
+                | <a asp-action="Contactus" asp-controller="Home">Contact</a>
+                | <a asp-action="Help" asp-controller="Home">Help</a><br>
+                &nbsp; &copy; Content Owned by DDA, Government of India. &nbsp;&nbsp;<label>Last Updated : @Html.Raw(TempData["updatedDate"])</label>
+            </p>
+        </div>
+    </footer>
+
+    <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/chart.js/dist/Chart.min.js"></script>
+    <script src="~/lib/toaster/toastr.min.js"></script>
+
+    <environment include="Development">
+        <script src="~/js/site.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>
+
+    @Html.Raw(ViewBag.Message)
+</body>
+</html>
