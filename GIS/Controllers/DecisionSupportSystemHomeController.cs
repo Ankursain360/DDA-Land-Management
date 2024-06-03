@@ -88,5 +88,20 @@ namespace GIS.Controllers
             updateDateFun();
             return View();
         }
+        public IActionResult AboutUs()
+        {
+            updateDateFun();
+            return View();
+        }
+        public IActionResult Disclaimer()
+        {
+            updateDateFun();
+            return View();
+        }
+        public IActionResult ContingencyManagementPlan()
+        {
+            updateDateFun();
+            return View();
+        }
     }
 }
