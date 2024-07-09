@@ -103,7 +103,7 @@
     <footer class="footer slow">
         <div class="container-fluid">
             <p class="my-0 py-2 text-center">
-                <a asp-action="Index" asp-controller="Home">Home</a>
+                <a asp-action="Index1" asp-controller="Home">Home</a>
                 | <a asp-action="PrivacyPolicy" asp-controller="Home">Privacy Policy</a>
                 | <a asp-action="TermsandConditions" asp-controller="Home">Terms&Conditions</a>
                 | <a asp-action="copyRight" asp-controller="Home">Copyright Policy</a>
@@ -114,7 +114,7 @@
                 | <a asp-action="AboutUs" asp-controller="Home">About Us</a>
                 | <a asp-action="Disclaimer" asp-controller="Home">Disclaimer</a>
                 | <a asp-action="ContingencyManagementPlan" asp-controller="Home">Contingency Management Plan</a><br>
-                &nbsp; &copy; Content Owned by DDA, Government of India. &nbsp;&nbsp;<label>Last Updated : @Html.Raw(TempData["updatedDate"])</label>
+                &nbsp; &copy; Content Owned by DDA, Government of India. &nbsp;&nbsp;<label>Last Updated : @HttpContextAccessor.HttpContext.Session.GetString("LastUpdatedDate")</label>
             </p>
             </div>
     </footer>
@@ -131,5 +131,7 @@
     </environment>
     @RenderSection("Scripts", required: false)
     @Html.Raw(ViewBag.Message)
+    @using Microsoft.AspNetCore.Http
+    @inject IHttpContextAccessor HttpContextAccessor
 </body>
 </html>

@@ -9,7 +9,7 @@ using Model.Entity;
 
 namespace Libraries.Model.Entity
 {
-   public partial class District : AuditableEntity<int>
+    public partial class District : AuditableEntity<int>
     {
         public District()
         {

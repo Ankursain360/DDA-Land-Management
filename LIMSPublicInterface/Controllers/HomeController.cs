@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using Libraries.Service.IApplicationService;
 using System;
+using Microsoft.AspNetCore.Http;
 
 namespace LIMSPublicInterface.Controllers
 {
@@ -23,8 +24,8 @@ namespace LIMSPublicInterface.Controllers
             var dt = Convert.ToDateTime(updatedDate).ToString("dd/MMM/yyyy HH:MM:ss tt");
             if (updatedDate != null)
             {
-                TempData["updatedDate"] = dt;
-
+                // TempData["updatedDate"] = dt;
+                HttpContext.Session.SetString("LastUpdatedDate", dt);
             }
             else
             {

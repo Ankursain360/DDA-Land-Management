@@ -34,8 +34,8 @@ namespace SiteMaster.Controllers
             var dt = Convert.ToDateTime(updatedDate).ToString("dd/MMM/yyyy HH:MM:ss tt");
             if (updatedDate != null)
             {
-                TempData["updatedDate"] = dt;
-
+                //TempData["updatedDate"] = dt;
+                HttpContext.Session.SetString("LastUpdatedDate", dt);
             }
             else
             {

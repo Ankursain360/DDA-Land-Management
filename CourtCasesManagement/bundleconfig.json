@@ -76,5 +76,11 @@
     "inputFiles": [
       "wwwroot/js/legalManagementBulkUploadCreate.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/bootstrap/css/bootstrap.min.css",
+    "inputFiles": [
+      "wwwroot/lib/bootstrap/css/bootstrap.css"
+    ]
   }
 ]

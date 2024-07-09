@@ -42,7 +42,7 @@
                         </a>
                     </div>
                     <div class="dropdown noti text-white my-2  me-3 order-md-3">
-                        <a href="~/docs/Acquiredlandinformation.pdf" target="_blank" role="button" title="User Manual" class='p-2 d-block text-white no-dec'>
+                        <a asp-action="Usermanual" asp-controller="Home" target="_blank" role="button" title="User Manual" class='p-2 d-block text-white no-dec'>
                             <i class="ri-folder-user-fill" style="font-size:20px"></i>
                         </a>
                     </div>
@@ -91,7 +91,7 @@
                 | <a asp-action="AboutUs" asp-controller="Home">About Us</a>
                 | <a asp-action="Disclaimer" asp-controller="Home">Disclaimer</a>
                 | <a asp-action="ContingencyManagementPlan" asp-controller="Home">Contingency Management Plan</a><br>
-                &nbsp; &copy; Content Owned by DDA, Government of India. &nbsp;&nbsp;<label>Last Updated : @Html.Raw(TempData["updatedDate"])</label>
+                &nbsp; &copy; Content Owned by DDA, Government of India. &nbsp;&nbsp;<label>Last Updated : @HttpContextAccessor.HttpContext.Session.GetString("LastUpdatedDate")</label>
             </p>
         </div>
     </footer>
@@ -108,5 +108,8 @@
     </environment>
     @RenderSection("Scripts", required: false)
     @Html.Raw(ViewBag.Message)
+    @using Microsoft.AspNetCore.Http
+    @inject IHttpContextAccessor HttpContextAccessor
+    
 </body>
 </html>

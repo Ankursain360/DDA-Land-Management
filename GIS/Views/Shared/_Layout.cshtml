@@ -138,7 +138,7 @@
                 | <a asp-action="Disclaimer" asp-controller="DecisionSupportSystemHome">Disclaimer</a>
                 | <a asp-action="AboutUs" asp-controller="DecisionSupportSystemHome">AboutUs</a>
                 | <a asp-action="ContingencyManagementPlan" asp-controller="DecisionSupportSystemHome">ContingencyManagementPlan</a><br>
-                &nbsp; &copy; Content Owned by DDA, Government of India. &nbsp;&nbsp;<label>Last Updated : @Html.Raw(TempData["updatedDate"])</label>
+                &nbsp; &copy; Content Owned by DDA, Government of India. &nbsp;&nbsp;<label>Last Updated : @HttpContextAccessor.HttpContext.Session.GetString("LastUpdatedDate")</label>
             </p>
         </div>
     </footer>
@@ -155,5 +155,7 @@
     </environment>
     @RenderSection("Scripts", required: false)
     @Html.Raw(ViewBag.Message)
+    @using Microsoft.AspNetCore.Http
+    @inject IHttpContextAccessor HttpContextAccessor
 </body>
 </html>
