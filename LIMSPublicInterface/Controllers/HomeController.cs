@@ -8,15 +8,19 @@ using System.Threading.Tasks;
 using Libraries.Service.IApplicationService;
 using System;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 
 namespace LIMSPublicInterface.Controllers
 {
     public class HomeController : BaseController
     {
         private readonly IApplicationModificationDetailsService _modificationDetails;
-        public HomeController(IApplicationModificationDetailsService modificationDetails)
+        private readonly IConfiguration _configuration;
+
+        public HomeController(IApplicationModificationDetailsService modificationDetails,IConfiguration configuration)
         {
             _modificationDetails = modificationDetails;
+            _configuration = configuration;
         }
         public void updateDateFun()
         {
@@ -112,5 +116,14 @@ namespace LIMSPublicInterface.Controllers
             updateDateFun();
             return View();
         }
+        //[AuthorizeContext(ViewAction.Download)]
+        //public IActionResult Usermanual()
+        //{
+        //    FileHelper file = new FileHelper();
+        //    string FilePath = _configuration.GetSection("FilePaths:Docs:UsermanualPath").Value.ToString();
+        //    string path = FilePath;
+        //    byte[] fileBytes = System.IO.File.ReadAllBytes(path);
+        //    return File(fileBytes, file.GetContentType(path));
+        //}
     }
 }

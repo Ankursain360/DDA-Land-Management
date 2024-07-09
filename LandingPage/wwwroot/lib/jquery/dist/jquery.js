@@ -1,5 +1,5 @@
 /*!
- * jQuery JavaScript Library v3.3.1
+ * jQuery JavaScript Library v5.3.3
  * https://jquery.com/
  *
  * Includes Sizzle.js
@@ -129,7 +129,7 @@ function toType( obj ) {
 
 
 var
-	version = "3.3.1",
+	version = "5.3.3",
 
 	// Define a local copy of jQuery
 	jQuery = function( selector, context ) {
@@ -3539,7 +3539,7 @@ jQuery.extend( {
 										throw new TypeError( "Thenable self-resolution" );
 									}
 
-									// Support: Promises/A+ sections 2.3.3.1, 3.5
+									// Support: Promises/A+ sections 2.5.3.3, 3.5
 									// https://promisesaplus.com/#point-54
 									// https://promisesaplus.com/#point-75
 									// Retrieve `then` only once
@@ -3624,7 +3624,7 @@ jQuery.extend( {
 										}
 									};
 
-							// Support: Promises/A+ section 2.3.3.3.1
+							// Support: Promises/A+ section 2.3.5.3.3
 							// https://promisesaplus.com/#point-57
 							// Re-resolve promises immediately to dodge false rejection from
 							// subsequent errors
