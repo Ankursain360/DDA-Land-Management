@@ -355,7 +355,7 @@ namespace IdentityServerHost.Quickstart.UI
             _httpContextAccessor.HttpContext.Response.Cookies.Delete(".AspNetCore.Identity.Application");
             _httpContextAccessor.HttpContext.Response.Cookies.Delete("idserv.external");
             _httpContextAccessor.HttpContext.Response.Cookies.Delete("idserv.session");
-            // _httpContextAccessor.HttpContext.Response.Cookies.Delete("AuthToken");
+            _httpContextAccessor.HttpContext.Response.Cookies.Delete("AuthToken");
             _httpContextAccessor.HttpContext.Response.Cookies.Delete("ASP.NET_SessionId");
             _httpContextAccessor.HttpContext.Response.Cookies.Delete("encryptedSession");
             _httpContextAccessor.HttpContext.Response.Cookies.Delete(".AspNetCore.Session");

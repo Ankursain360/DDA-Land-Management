@@ -22,6 +22,8 @@ using SiteMaster.Filters;
 using Core.Enum;
 using Utility.Helper;
 using Dto.Master;
+using System.Text.Encodings.Web;
+
 namespace SiteMaster.Controllers
 {
     public class DistrictController : BaseController
@@ -52,6 +54,7 @@ namespace SiteMaster.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(District district)
         {
@@ -60,8 +63,8 @@ namespace SiteMaster.Controllers
 
                 if (ModelState.IsValid)
                 {
-
-
+                    district.Name = district.Name.Replace(">", "").Replace("script", "").Replace("<script>", "").Replace("</script>", "").Replace("alert", "").Replace("onerror", "").Replace("iframe", "").Replace("video", "").Replace("audio", "");
+                    district.Code = district.Code.Replace(">", "").Replace("script", "").Replace("<script>", "").Replace("</script>", "").Replace("alert", "").Replace("onerror", "").Replace("iframe", "").Replace("video", "").Replace("audio", "");
                     var result = await _districtService.Create(district);
 
                     if (result == true)
@@ -123,6 +126,18 @@ namespace SiteMaster.Controllers
             }
             return View(district);
         }
+
+        //private static District SanitizeUserModel(District userModel)
+        //{
+        //    var encoder = HtmlEncoder.Create(allowedRanges: new[] { UnicodeRangeU0000 });
+        //    var sanitizedUserModel = new District
+        //    {
+        //        Name = encoder.Encode(userModel.Name),
+        //        Email = encoder.Encode(userModel.Email),
+        //        // Sanitize other properties as needed
+        //    };
+        //    return sanitizedUserModel;
+        //}
 
         [AcceptVerbs("Get", "Post")]
         public async Task<IActionResult> Exist(int Id, string Name)

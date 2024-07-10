@@ -122,6 +122,12 @@ namespace AuthServer
             {
                 app.UseDeveloperExceptionPage();
             }
+            else
+            {
+                app.UseExceptionHandler("/Home/Error");
+                //The default HSTS value is 30 days.You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseHsts();
+            }
             app.UseStaticFiles();
             app.UseRouting();
             if (env.IsProduction())
@@ -130,7 +136,7 @@ namespace AuthServer
                 {
                     HttpOnly = HttpOnlyPolicy.Always,
                     Secure = CookieSecurePolicy.Always,
-                  //  MinimumSameSitePolicy = SameSiteMode.Lax
+                    MinimumSameSitePolicy = SameSiteMode.Lax
                 });
             }
             app.UseIdentityServer();

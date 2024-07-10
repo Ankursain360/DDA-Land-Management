@@ -54,7 +54,7 @@ namespace LandInventory
                 services.Configure<CookiePolicyOptions>(options =>
                 {
                     options.CheckConsentNeeded = context => false;
-                   // options.MinimumSameSitePolicy = SameSiteMode.Lax;
+                    options.MinimumSameSitePolicy = SameSiteMode.Lax;
                     options.HttpOnly = HttpOnlyPolicy.Always;
                     options.Secure = CookieSecurePolicy.Always;
                 });
@@ -102,15 +102,15 @@ namespace LandInventory
                 options.DefaultChallengeScheme = "oidc";
                 options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
             })
-           
 
-             .AddCookie("Cookies")
-            //.AddCookie("Cookies", options =>
-            //{
-            //    options.ExpireTimeSpan = TimeSpan.FromMinutes(Convert.ToInt32(Configuration.GetSection("CookiesSettings:CookiesTimeout").Value));
-            //    options.SlidingExpiration = true;
-            //    options.Cookie.Name = "Auth-cookie";
-            //})
+
+            // .AddCookie("Cookies")
+            .AddCookie("Cookies", options =>
+            {
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(Convert.ToInt32(Configuration.GetSection("CookiesSettings:CookiesTimeout").Value));
+                options.SlidingExpiration = true;
+                options.Cookie.Name = "Auth-cookie";
+            })
 
             .AddOpenIdConnect("oidc", options =>
             {
@@ -122,12 +122,12 @@ namespace LandInventory
                 options.ResponseType = "code";
                 options.Scope.Add("api1");
                 options.SaveTokens = true;
-                //options.UseTokenLifetime = true;
-                //options.Events.OnRedirectToIdentityProvider = context => // <- HERE
-                //{                                                        // <- HERE
-                //    context.ProtocolMessage.Prompt = "login";            // <- HERE
-                //    return Task.CompletedTask;                           // <- HERE
-                //};                                                       // <- HERE
+                options.UseTokenLifetime = true;
+                options.Events.OnRedirectToIdentityProvider = context => // <- HERE
+                {                                                        // <- HERE
+                    context.ProtocolMessage.Prompt = "login";            // <- HERE
+                    return Task.CompletedTask;                           // <- HERE
+                };                                                       // <- HERE
             });
         }
 
@@ -154,14 +154,14 @@ namespace LandInventory
                 {
                     HttpOnly = HttpOnlyPolicy.Always,
                     Secure = CookieSecurePolicy.Always,
-                    //MinimumSameSitePolicy = SameSiteMode.Lax
+                    MinimumSameSitePolicy = SameSiteMode.Lax
                 });
             }
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseSession();
             //prevent session hijacking
-           // app.preventSessionHijacking();
+             app.preventSessionHijacking();
             // 
             app.UseEndpoints(endpoints =>
             {
