@@ -58,16 +58,16 @@ namespace GIS
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
                 options.HttpOnly = HttpOnlyPolicy.Always;
-               // options.Secure = CookieSecurePolicy.Always;
+                options.Secure = CookieSecurePolicy.Always;
             });
 
             services.AddSession(options =>
             {
                 options.IdleTimeout = TimeSpan.FromMinutes(Convert.ToInt32(Configuration.GetSection("CookiesSettings:CookiesTimeout").Value));
                 options.Cookie.HttpOnly = true;
-                //options.Cookie.Domain = (Configuration.GetSection("CookiesSettings:CookiesDomain").Value).ToString();
+                options.Cookie.Domain = (Configuration.GetSection("CookiesSettings:CookiesDomain").Value).ToString();
                 //options.Cookie.Path = "/Home";
-                //options.Cookie.IsEssential = true;
+                options.Cookie.IsEssential = true;
             });
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
@@ -112,13 +112,13 @@ namespace GIS
                 options.DefaultChallengeScheme = "oidc";
                 options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
             })
-                .AddCookie("Cookies")
-           //.AddCookie("Cookies", options =>
-           //{
-           //    options.ExpireTimeSpan = TimeSpan.FromMinutes(Convert.ToInt32(Configuration.GetSection("CookiesSettings:CookiesTimeout").Value));
-           //    options.SlidingExpiration = true;
-           //    options.Cookie.Name = "Auth-cookie";
-           //})
+           // .AddCookie("Cookies")
+           .AddCookie("Cookies", options =>
+           {
+               options.ExpireTimeSpan = TimeSpan.FromMinutes(Convert.ToInt32(Configuration.GetSection("CookiesSettings:CookiesTimeout").Value));
+               options.SlidingExpiration = true;
+               options.Cookie.Name = "Auth-cookie";
+           })
            .AddOpenIdConnect("oidc", options =>
            {
                options.SignInScheme = "Cookies";
@@ -129,12 +129,12 @@ namespace GIS
                options.ResponseType = "code";
                options.Scope.Add("api1");
                options.SaveTokens = true;
-               //options.UseTokenLifetime = true;
-               //options.Events.OnRedirectToIdentityProvider = context => // <- HERE
-               //{                                                        // <- HERE
-               //    context.ProtocolMessage.Prompt = "login";            // <- HERE
-               //    return Task.CompletedTask;                           // <- HERE
-               //};                                                       // <- HERE
+               options.UseTokenLifetime = true;
+               options.Events.OnRedirectToIdentityProvider = context => // <- HERE
+               {                                                        // <- HERE
+                   context.ProtocolMessage.Prompt = "login";            // <- HERE
+                   return Task.CompletedTask;                           // <- HERE
+               };                                                       // <- HERE
            });
         }
 
@@ -163,7 +163,8 @@ namespace GIS
             app.UseAuthorization();
             app.UseSession();
             //prevent session hijacking
-          //  app.preventSessionHijacking();
+            app.preventSessionHijacking();
+            //
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapDefaultControllerRoute().RequireAuthorization();

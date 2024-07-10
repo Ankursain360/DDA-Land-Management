@@ -59,7 +59,7 @@ namespace SiteMaster
                 services.Configure<CookiePolicyOptions>(options =>
             {
                 options.CheckConsentNeeded = context => false;
-             //   options.MinimumSameSitePolicy = SameSiteMode.Lax;
+                options.MinimumSameSitePolicy = SameSiteMode.Lax;
                 options.HttpOnly = HttpOnlyPolicy.Always;
                 options.Secure = CookieSecurePolicy.Always;
             });
@@ -164,14 +164,14 @@ namespace SiteMaster
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-            app.Use(async (context, next) =>
-            {
-                context.Response.Headers.Remove("X-Powered-By");
-                context.Response.Headers.Add("X-Content-Type-Options", "nosniff");
-                context.Response.Headers.Add("X-Frame-Options", "DENY");
-                context.Response.Headers.Add("X-XSS-Protection", "1; mode=block");
-                await next();
-            });
+            //app.Use(async (context, next) =>
+            //{
+            //    context.Response.Headers.Remove("X-Powered-By");
+            //    context.Response.Headers.Add("X-Content-Type-Options", "nosniff");
+            //    context.Response.Headers.Add("X-Frame-Options", "DENY");
+            //    context.Response.Headers.Add("X-XSS-Protection", "1; mode=block");
+            //    await next();
+            //});
             //app.Use(async (context, next) =>
             //{
             //    context.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; script-src 'self'; style-src 'self';");
