@@ -1,5 +1,5 @@
 ﻿/*!
- * Select2 4.0.0
+ * Select2 4.1.0
  * https://select2.github.io
  *
  * Released under the MIT license
