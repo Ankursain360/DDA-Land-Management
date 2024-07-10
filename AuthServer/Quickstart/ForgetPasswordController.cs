@@ -129,7 +129,9 @@ namespace IdentityServerHost.Quickstart
                             TempData["Message"] = Alert.Show("Dear User,<br/>" + DisplayName + " Enable to send mail or sms ", "", AlertType.Info);
 
                         // return RedirectToAction("Create", "ForgetPassword");
-                        return RedirectToAction("ForgetPasswordMail", "ForgetPassword", new { username = user.UserName, email = maskedemail });
+                        HttpContext.Session.SetString("username", DisplayName);
+                        HttpContext.Session.SetString("emailId", maskedemail);
+                        return RedirectToAction("ForgetPasswordMail", "ForgetPassword");
 
                     }
                     else
@@ -234,10 +236,8 @@ namespace IdentityServerHost.Quickstart
             return View(model);
         }
 
-        public IActionResult ForgetPasswordMail(string username, string email)
+        public IActionResult ForgetPasswordMail()
         {
-            ViewBag.name = username;
-            ViewBag.Emailid = email;
             return View();
         }
 
