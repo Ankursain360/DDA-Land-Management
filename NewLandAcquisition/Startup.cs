@@ -54,7 +54,7 @@ namespace NewLandAcquisition
                 services.Configure<CookiePolicyOptions>(options =>
                 {
                     options.CheckConsentNeeded = context => false;
-                    // options.MinimumSameSitePolicy = SameSiteMode.Lax;
+                    options.MinimumSameSitePolicy = SameSiteMode.Lax;
                     options.HttpOnly = HttpOnlyPolicy.Always;
                     options.Secure = CookieSecurePolicy.Always;
                 });
@@ -122,12 +122,12 @@ namespace NewLandAcquisition
                 options.ResponseType = "code";
                 options.Scope.Add("api1");
                 options.SaveTokens = true;
-                //options.UseTokenLifetime = true;
-                //options.Events.OnRedirectToIdentityProvider = context => // <- HERE
-                //{                                                        // <- HERE
-                //    context.ProtocolMessage.Prompt = "login";            // <- HERE
-                //    return Task.CompletedTask;                           // <- HERE
-                //};                                                       // <- HERE
+                options.UseTokenLifetime = true;
+                options.Events.OnRedirectToIdentityProvider = context => // <- HERE
+                {                                                        // <- HERE
+                    context.ProtocolMessage.Prompt = "login";            // <- HERE
+                    return Task.CompletedTask;                           // <- HERE
+                };                                                       // <- HERE
             });
         }
 
