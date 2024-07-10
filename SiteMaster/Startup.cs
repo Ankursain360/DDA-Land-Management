@@ -106,14 +106,14 @@ namespace SiteMaster
                 options.DefaultChallengeScheme = "oidc";
                 options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
             })
-             .AddCookie("Cookies")
-            //.AddCookie("Cookies", options =>
+            // .AddCookie("Cookies")
+            .AddCookie("Cookies", options =>
 
-            //{
-            //    options.ExpireTimeSpan = TimeSpan.FromMinutes(Convert.ToInt32(Configuration.GetSection("CookiesSettings:CookiesTimeout").Value));
-            //    options.SlidingExpiration = true;
-            //    options.Cookie.Name = "Auth-cookie";
-            //})
+            {
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(Convert.ToInt32(Configuration.GetSection("CookiesSettings:CookiesTimeout").Value));
+                options.SlidingExpiration = true;
+                options.Cookie.Name = "Auth-cookie";
+            })
             //.AddCookie("Cookies", options =>
             //{
             //    options.ExpireTimeSpan = TimeSpan.FromMinutes(2);
@@ -142,12 +142,12 @@ namespace SiteMaster
                 options.ResponseType = "code";
                 options.Scope.Add("api1");
                 options.SaveTokens = true;
-                //options.UseTokenLifetime = true;
-                //options.Events.OnRedirectToIdentityProvider = context => // <- HERE
-                //{                                                        // <- HERE
-                //    context.ProtocolMessage.Prompt = "login";            // <- HERE
-                //    return Task.CompletedTask;                           // <- HERE
-                //};                                                       // <- HERE
+                options.UseTokenLifetime = true;
+                options.Events.OnRedirectToIdentityProvider = context => // <- HERE
+                {                                                        // <- HERE
+                    context.ProtocolMessage.Prompt = "login";            // <- HERE
+                    return Task.CompletedTask;                           // <- HERE
+                };                                                       // <- HERE
             });
         }
 
@@ -164,7 +164,19 @@ namespace SiteMaster
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-
+            app.Use(async (context, next) =>
+            {
+                context.Response.Headers.Remove("X-Powered-By");
+                context.Response.Headers.Add("X-Content-Type-Options", "nosniff");
+                context.Response.Headers.Add("X-Frame-Options", "DENY");
+                context.Response.Headers.Add("X-XSS-Protection", "1; mode=block");
+                await next();
+            });
+            //app.Use(async (context, next) =>
+            //{
+            //    context.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; script-src 'self'; style-src 'self';");
+            //    await next();
+            //});
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();
@@ -174,14 +186,14 @@ namespace SiteMaster
                 {
                     HttpOnly = HttpOnlyPolicy.Always,
                     Secure = CookieSecurePolicy.Always,
-                   // MinimumSameSitePolicy = SameSiteMode.Lax
+                    MinimumSameSitePolicy = SameSiteMode.Lax
                 });
             }
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseSession();
             //prevent session hijacking
-           //app.preventSessionHijacking();
+            app.preventSessionHijacking();
             // 
             app.UseEndpoints(endpoints =>
             {

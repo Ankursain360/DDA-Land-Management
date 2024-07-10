@@ -697,7 +697,7 @@
    * ------------------------------------------------------------------------
    */
 
-  const VERSION = '5.1.0';
+  const VERSION = '5.3.3';
 
   class BaseComponent {
     constructor(element) {

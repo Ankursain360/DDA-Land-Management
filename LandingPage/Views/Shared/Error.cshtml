@@ -6,14 +6,34 @@
 <h1 class="text-danger">Error.</h1>
 <h2 class="text-danger">An error occurred while processing your request.</h2>
 
+
+<div class="error-text-box p-4 m-auto">
+    <h1 class="error-type-2 d-flex align-items-center mb-4">
+        <img src="~/images/logo-circle.png" alt="DDA logo" class="img-fluid d-block me-3" />
+        <span>Delhi Development Authority<br>Government of India</span>
+    </h1>
+    <p class="error-text-2 text-muted">  Something went wrong</p>
+    <p class="error-text-2 text-muted">
+        Contact your site administrator with trace id:
+        @if (Model.ShowRequestId)
+        {      
+           <code>@Model.RequestId</code>
+        
+        }for further assistance.
+    </p>
+    <a href="/Home/Index" class="btn btn-primary d-inline-flex align-items-center px-4 py-2">Back to Home</a>
+
+</div>
+
+
 @if (Model.ShowRequestId)
 {
     <p>
         <strong>Request ID:</strong> <code>@Model.RequestId</code>
     </p>
 }
-
-<h3>Development Mode</h3>
+<a href="/Home/Index" class="btn btn-primary d-inline-flex align-items-center px-4 py-2">Back to Home</a>
+<@* h3>Development Mode</h3>
 <p>
     Swapping to <strong>Development</strong> environment will display more detailed information about the error that occurred.
 </p>
@@ -22,4 +42,4 @@
     It can result in displaying sensitive information from exceptions to end users.
     For local debugging, enable the <strong>Development</strong> environment by setting the <strong>ASPNETCORE_ENVIRONMENT</strong> environment variable to <strong>Development</strong>
     and restarting the app.
-</p>
+</p> *@

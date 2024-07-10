@@ -104,13 +104,13 @@ namespace NewLandAcquisition
             })
 
 
-             .AddCookie("Cookies")
-            //.AddCookie("Cookies", options =>
-            //{
-            //    options.ExpireTimeSpan = TimeSpan.FromMinutes(Convert.ToInt32(Configuration.GetSection("CookiesSettings:CookiesTimeout").Value));
-            //    options.SlidingExpiration = true;
-            //    options.Cookie.Name = "Auth-cookie";
-            //})
+            //  .AddCookie("Cookies")
+            .AddCookie("Cookies", options =>
+            {
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(Convert.ToInt32(Configuration.GetSection("CookiesSettings:CookiesTimeout").Value));
+                options.SlidingExpiration = true;
+                options.Cookie.Name = "Auth-cookie";
+            })
 
             .AddOpenIdConnect("oidc", options =>
             {
@@ -154,14 +154,14 @@ namespace NewLandAcquisition
                 {
                     HttpOnly = HttpOnlyPolicy.Always,
                     Secure = CookieSecurePolicy.Always,
-                    //MinimumSameSitePolicy = SameSiteMode.Lax
+                    MinimumSameSitePolicy = SameSiteMode.Lax
                 });
             }
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseSession();
             //prevent session hijacking
-            // app.preventSessionHijacking();
+             app.preventSessionHijacking();
             // 
             app.UseEndpoints(endpoints =>
             {
