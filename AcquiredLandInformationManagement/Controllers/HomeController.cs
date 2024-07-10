@@ -169,7 +169,7 @@ namespace AcquiredLandInformationManagement.Controllers
             };
         }
 
-        [AuthorizeContext(ViewAction.View)]
+        [AuthorizeContext(ViewAction.Download)] 
         public IActionResult Usermanual()
         {
             //string path = _configuration.GetSection("FilePaths:Docs:UsermanualPath").Value.ToString();

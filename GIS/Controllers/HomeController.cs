@@ -1,9 +1,13 @@
-﻿using GIS.Models;
+﻿using Core.Enum;
+using GIS.Filters;
+using GIS.Models;
 using Libraries.Service.IApplicationService;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using Utility.Helper;
 
 namespace GIS.Controllers
 {
@@ -11,10 +15,13 @@ namespace GIS.Controllers
     {
         private readonly IGISService _GISService;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        public HomeController(IGISService GISService, IHttpContextAccessor httpContextAccessor)
+        private readonly IConfiguration _configuration;
+
+        public HomeController(IGISService GISService, IHttpContextAccessor httpContextAccessor,IConfiguration configuration)
         {
             _GISService = GISService;
             _httpContextAccessor = httpContextAccessor;
+            _configuration = configuration;
         }
         public IActionResult Index()
         {
@@ -63,6 +70,15 @@ namespace GIS.Controllers
             }
             //
             return SignOut("Cookies", "oidc");
+        }
+        [AuthorizeContext(ViewAction.Download)]
+        public IActionResult Usermanual()
+        {
+            FileHelper file = new FileHelper();
+            string FilePath = _configuration.GetSection("FilePaths:Docs:UsermanualPath").Value.ToString();
+            string path = FilePath;
+            byte[] fileBytes = System.IO.File.ReadAllBytes(path);
+            return File(fileBytes, file.GetContentType(path));
         }
     }
 }

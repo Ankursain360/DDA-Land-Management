@@ -9,6 +9,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using System;
 using Libraries.Service.IApplicationService;
+using Core.Enum;
+using DamagePayeePublicInterface.Filters;
+using Utility.Helper;
+using Microsoft.Extensions.Configuration;
 
 namespace DamagePayeePublicInterface.Controllers
 {
@@ -18,13 +22,16 @@ namespace DamagePayeePublicInterface.Controllers
         private readonly IUserProfileService _userProfileService;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IApplicationModificationDetailsService _modificationDetails;
+        private readonly IConfiguration _configuration;
+
         public HomeController(ISiteContext siteContext,
-           IUserProfileService userProfileService, IHttpContextAccessor httpContextAccessor, IApplicationModificationDetailsService modificationDetails)
+           IUserProfileService userProfileService, IHttpContextAccessor httpContextAccessor, IApplicationModificationDetailsService modificationDetails,IConfiguration configuration)
         {
             _siteContext = siteContext;
             _userProfileService = userProfileService;
             _httpContextAccessor = httpContextAccessor;
             _modificationDetails = modificationDetails;
+            _configuration = configuration;
         }
         public void updateDateFun()
         {
@@ -126,6 +133,16 @@ namespace DamagePayeePublicInterface.Controllers
         {
             updateDateFun();
             return View();
+        }
+
+        [AuthorizeContext(ViewAction.Download)]
+        public IActionResult Usermanual()
+        {
+            FileHelper file = new FileHelper();
+            string FilePath = _configuration.GetSection("FilePaths:Docs:UsermanualPath").Value.ToString();
+            string path = FilePath;
+            byte[] fileBytes = System.IO.File.ReadAllBytes(path);
+            return File(fileBytes, file.GetContentType(path));
         }
     }
 }

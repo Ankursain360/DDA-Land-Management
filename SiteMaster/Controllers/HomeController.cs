@@ -1,14 +1,18 @@
-﻿using Dto.Master;
+﻿using Core.Enum;
+using Dto.Master;
 using Libraries.Service.IApplicationService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Service.IApplicationService;
+using SiteMaster.Filters;
 using SiteMaster.Helper;
 using SiteMaster.Models;
 using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using Utility.Helper;
 
 namespace SiteMaster.Controllers
 {
@@ -19,13 +23,16 @@ namespace SiteMaster.Controllers
         private readonly IUserProfileService _userProfileService;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IApplicationModificationDetailsService _modificationDetails;
+        private readonly IConfiguration _configuration;
+
         public HomeController(ISiteContext siteContext,
-           IUserProfileService userProfileService, IHttpContextAccessor httpContextAccessor, IApplicationModificationDetailsService modificationDetails)
+           IUserProfileService userProfileService, IHttpContextAccessor httpContextAccessor, IApplicationModificationDetailsService modificationDetails,IConfiguration configuration)
         {
             _siteContext = siteContext;
             _userProfileService = userProfileService;
             _httpContextAccessor = httpContextAccessor;
             _modificationDetails = modificationDetails;
+            _configuration = configuration;
         }
 
         public void updateDateFun()
@@ -145,6 +152,15 @@ namespace SiteMaster.Controllers
         {
             updateDateFun();
             return View();
+        }
+        [AuthorizeContext(ViewAction.Download)]
+        public IActionResult Usermanual()
+        {
+            FileHelper file = new FileHelper();
+            string FilePath = _configuration.GetSection("FilePaths:Docs:UsermanualPath").Value.ToString();
+            string path = FilePath;
+            byte[] fileBytes = System.IO.File.ReadAllBytes(path);
+            return File(fileBytes, file.GetContentType(path));
         }
     }
 }
