@@ -51,7 +51,7 @@ namespace DamagePayeePublicInterface.Controllers
         }
         [ActionName("Index1")]
         public async Task<IActionResult> Index()
-        {
+            {
             UserProfileDto user = await _userProfileService.GetUserById(_siteContext.UserId);
             updateDateFun();
             return View(user);

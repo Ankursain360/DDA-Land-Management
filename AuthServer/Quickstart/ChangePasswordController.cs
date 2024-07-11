@@ -133,7 +133,9 @@ namespace AuthServer.Quickstart
                             TempData["Message"] = Alert.Show("Dear User,<br/>" + DisplayName + " Enable to send mail or sms ", "", AlertType.Info);
 
                         // return RedirectToAction("Create", "ForgetPassword");
-                        return RedirectToAction("ForgetPasswordMail", "ChangePassword", new { username = user.UserName ,email= maskedemailid });
+                        HttpContext.Session.SetString("username", DisplayName);
+                        HttpContext.Session.SetString("emailId", maskedemailid);
+                        return RedirectToAction("ForgetPasswordMail", "ChangePassword");
 
                     }
                     else
@@ -256,10 +258,9 @@ namespace AuthServer.Quickstart
             return View(model);
         }
 
-        public IActionResult ForgetPasswordMail(string username,string email)
+        public IActionResult ForgetPasswordMail()
         {
-            ViewBag.name = username;
-            ViewBag.email = email;
+            
             return View();
         }
     }
