@@ -20,6 +20,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Threading.Tasks;
 //using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.CookiePolicy;
+using NewLandAcquisition.Middleware;
 
 namespace NewLandAcquisition
 {
@@ -122,12 +123,12 @@ namespace NewLandAcquisition
                 options.ResponseType = "code";
                 options.Scope.Add("api1");
                 options.SaveTokens = true;
-                options.UseTokenLifetime = true;
-                options.Events.OnRedirectToIdentityProvider = context => // <- HERE
-                {                                                        // <- HERE
-                    context.ProtocolMessage.Prompt = "login";            // <- HERE
-                    return Task.CompletedTask;                           // <- HERE
-                };                                                       // <- HERE
+                //options.UseTokenLifetime = true;
+                //options.Events.OnRedirectToIdentityProvider = context => // <- HERE
+                //{                                                        // <- HERE
+                //    context.ProtocolMessage.Prompt = "login";            // <- HERE
+                //    return Task.CompletedTask;                           // <- HERE
+                //};                                                       // <- HERE
             });
         }
 
@@ -157,12 +158,17 @@ namespace NewLandAcquisition
                     MinimumSameSitePolicy = SameSiteMode.Lax
                 });
             }
+            // Register the NoCacheMiddleware before the authentication middleware
+            app.UseMiddleware<NoCacheMiddleware>();
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseSession();
             //prevent session hijacking
              app.preventSessionHijacking();
             // 
+            // prevent forbidden keywords
+            app.UseMiddleware<KeywordFilterMiddleware>();
+            //
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapDefaultControllerRoute().RequireAuthorization();

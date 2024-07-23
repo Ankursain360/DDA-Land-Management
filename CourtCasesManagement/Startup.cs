@@ -20,6 +20,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Threading.Tasks;
 //using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.CookiePolicy;
+using CourtCasesManagement.Middleware;
 
 namespace CourtCasesManagement
 {
@@ -154,12 +155,17 @@ namespace CourtCasesManagement
                    MinimumSameSitePolicy = SameSiteMode.Lax
                 });
             }
+            // Register the NoCacheMiddleware before the authentication middleware
+            app.UseMiddleware<NoCacheMiddleware>();
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseSession();
             //prevent session hijacking
             app.preventSessionHijacking();
             // 
+            // prevent forbidden keywords
+            app.UseMiddleware<KeywordFilterMiddleware>();
+            //
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapDefaultControllerRoute().RequireAuthorization();

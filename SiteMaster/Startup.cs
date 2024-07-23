@@ -20,11 +20,12 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.CookiePolicy;
-
-
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
-
+using SiteMaster.Middleware;
+using System.Linq;
+using System.Net;
+using Microsoft.AspNetCore.HttpOverrides;
 
 namespace SiteMaster
 {
@@ -41,6 +42,16 @@ namespace SiteMaster
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<ValidateHostHeadersOptions>(options =>
+            {
+                options.AllowedHosts = new[] { "managemybusinessess.com", "auth.managemybusinessess.com" };
+            });
+            services.Configure<ForwardedHeadersOptions>(options =>
+            {
+                options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto | ForwardedHeaders.XForwardedHost;
+                options.KnownNetworks.Clear();
+                options.KnownProxies.Clear();
+            });
             if (HostEnvironment.IsDevelopment())
             {
                 services.AddControllersWithViews().AddRazorRuntimeCompilation().AddNewtonsoftJson(options =>
@@ -110,28 +121,11 @@ namespace SiteMaster
             .AddCookie("Cookies", options =>
 
             {
-                options.ExpireTimeSpan = TimeSpan.FromMinutes(Convert.ToInt32(Configuration.GetSection("CookiesSettings:CookiesTimeout").Value));
-                options.SlidingExpiration = true;
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(2);//TimeSpan.FromMinutes(Convert.ToInt32(Configuration.GetSection("CookiesSettings:CookiesTimeout").Value));
+                options.SlidingExpiration = false;
                 options.Cookie.Name = "Auth-cookie";
             })
-            //.AddCookie("Cookies", options =>
-            //{
-            //    options.ExpireTimeSpan = TimeSpan.FromMinutes(2);
-            //    options.SlidingExpiration = true;
-            //    options.Cookie.Name = "Auth-cookie";
-            //    options.Cookie.SameSite = SameSiteMode.None;
-            //    options.LoginPath = "/Account/Login";
-            //    options.AccessDeniedPath = "/Account/AccessDenied";
-            //    // options.Cookie.Path = "/Home";
-            //    options.Events = new CookieAuthenticationEvents
-            //    {
-            //        OnRedirectToLogin = redirectContext =>
-            //        {
-            //            redirectContext.HttpContext.Response.StatusCode = 401;
-            //            return Task.CompletedTask;
-            //        }
-            //    };
-            //})
+            
             .AddOpenIdConnect("oidc", options =>
             {
                 options.SignInScheme = "Cookies";
@@ -164,19 +158,7 @@ namespace SiteMaster
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-            //app.Use(async (context, next) =>
-            //{
-            //    context.Response.Headers.Remove("X-Powered-By");
-            //    context.Response.Headers.Add("X-Content-Type-Options", "nosniff");
-            //    context.Response.Headers.Add("X-Frame-Options", "DENY");
-            //    context.Response.Headers.Add("X-XSS-Protection", "1; mode=block");
-            //    await next();
-            //});
-            //app.Use(async (context, next) =>
-            //{
-            //    context.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; script-src 'self'; style-src 'self';");
-            //    await next();
-            //});
+           
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();
@@ -189,12 +171,19 @@ namespace SiteMaster
                     MinimumSameSitePolicy = SameSiteMode.Lax
                 });
             }
+            // Register the NoCacheMiddleware before the authentication middleware
+            app.UseMiddleware<NoCacheMiddleware>();
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseSession();
             //prevent session hijacking
             app.preventSessionHijacking();
             // 
+            // Register the custom middleware
+            app.UseMiddleware<KeywordFilterMiddleware>();
+            app.UseForwardedHeaders();
+            // Use Custom Middleware to Validate X-Forwarded-Host
+            app.UseMiddleware<ValidateHostHeadersMiddleware>();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapDefaultControllerRoute().RequireAuthorization();

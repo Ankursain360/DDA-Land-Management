@@ -21,7 +21,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.CookiePolicy;
-
+using GIS.Middleware;
 
 namespace GIS
 {
@@ -159,11 +159,16 @@ namespace GIS
 
             app.UseRouting();
             app.UseCookiePolicy();
+            // Register the NoCacheMiddleware before the authentication middleware
+            app.UseMiddleware<NoCacheMiddleware>();
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseSession();
             //prevent session hijacking
             app.preventSessionHijacking();
+            //
+            // prevent forbidden keywords
+            app.UseMiddleware<KeywordFilterMiddleware>();
             //
             app.UseEndpoints(endpoints =>
             {

@@ -12,6 +12,7 @@ using Core.Enum;
 using Microsoft.Extensions.Configuration;
 using NewLandAcquisition.Filters;
 using Utility.Helper;
+using Microsoft.AspNetCore.Authentication;
 
 namespace NewLandAcquisition.Controllers
 {
@@ -70,6 +71,12 @@ namespace NewLandAcquisition.Controllers
             {
                 _httpContextAccessor.HttpContext.Response.Cookies.Delete(cookie.Key);
             }
+          //  await _httpContextAccessor.HttpContext.SignOutAsync();
+
+            HttpContext.Response.Headers["Cache-Control"] = "no-store, no-cache, must-revalidate, max-age=0";
+            HttpContext.Response.Headers["Pragma"] = "no-cache";
+            HttpContext.Response.Headers["Expires"] = "Thu, 01 Jan 1970 00:00:00 GMT";
+
             return SignOut("Cookies", "oidc");
         }
 

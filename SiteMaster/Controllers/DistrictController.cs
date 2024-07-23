@@ -26,6 +26,7 @@ using System.Text.Encodings.Web;
 
 namespace SiteMaster.Controllers
 {
+    [Authorize]
     public class DistrictController : BaseController
     {
         private readonly IDistrictService _districtService;

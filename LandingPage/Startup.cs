@@ -21,6 +21,7 @@ using System.Threading.Tasks;
 //using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.IdentityModel.Logging;
+using LandingPage.Middleware;
 
 namespace LandingPage
 {
@@ -156,6 +157,8 @@ namespace LandingPage
                     MinimumSameSitePolicy = SameSiteMode.Lax
                 });
             }
+            // Register the NoCacheMiddleware before the authentication middleware
+            app.UseMiddleware<NoCacheMiddleware>();
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseSession();
