@@ -103,8 +103,8 @@
                                         
                                     </tbody>
                                 </table>
-                                <p class="text-rgb-46_77_185">Feedback/Suggestion</p>
-                                <p>You can use the Feedback form to submit your comments, feedback, suggestions and ideas for improvements to Delhi Development Authority</p>
+                                @*<p class="text-rgb-46_77_185">Feedback/Suggestion</p>
+                                <p>You can use the Feedback form to submit your comments, feedback, suggestions and ideas for improvements to Delhi Development Authority</p>*@
                                 <p class="text-rgb-46_77_185">Do you need further help?</p>
                                 <p>If you need further help, please &nbsp;<a asp-action="Contactus" asp-controller="Account">Contact us.</a></p>
                             </div>
@@ -131,8 +131,12 @@
                 | <a asp-action="Help" asp-controller="Account">Help</a>
                 | <a asp-action="Disclaimer" asp-controller="Account">Disclaimer</a>
                 | <a asp-action="AboutUs" asp-controller="Account">AboutUs</a>
-                | <a asp-action="ContingencyManagementPlan" asp-controller="Account">ContingencyManagementPlan</a><br>
-                &nbsp; &copy; Content Owned by DDA, Government of India. &nbsp;&nbsp;<label>Last Updated : @Html.Raw(TempData["updatedDate"])</label>
+                | <a asp-action="ContingencyManagementPlan" asp-controller="Account">ContingencyManagementPlan</a>
+                | <a asp-action="ContentArchivalCAPPolicy" asp-controller="Account">Content Archival Policy ( CAP)</a>
+                | <a asp-action="ContentReviewCAPPolicy" asp-controller="Account">Content Review Policy (CRP)</a>
+                | <a asp-action="WebsiteMonitoringPlan" asp-controller="Account">WebsiteMonitoringPlan</a>
+                | <a asp-action="SecurityPolicy" asp-controller="Account">SecurityPolicy</a><br>
+                &nbsp; &copy; Content Owned by DDA, Government of India. &nbsp;&nbsp;<label>Last Updated :  @HttpContextAccessor.HttpContext.Session.GetString("LastUpdatedDate")</label>
             </p>
         </div>
     </footer>
@@ -147,7 +151,8 @@
     <environment exclude="Development">
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
-
     @Html.Raw(ViewBag.Message)
+    @using Microsoft.AspNetCore.Http
+    @inject IHttpContextAccessor HttpContextAccessor
 </body>
 </html>

@@ -94,13 +94,13 @@ namespace IdentityServerHost.Quickstart.UI
             var dt = Convert.ToDateTime(updatedDate).ToString("dd/MMM/yyyy HH:MM:ss tt");
             if (updatedDate != null)
             {
-                TempData["updatedDate"] = dt;
-
+                //TempData["updatedDate"] = dt;
+                HttpContext.Session.SetString("LastUpdatedDate", dt);
             }
             else
             {
-                TempData["updatedDate"] = "No Data Available";
-
+                // TempData["updatedDate"] = "No Data Available";
+                HttpContext.Session.SetString("LastUpdatedDate", "No Data Available");
             }
 
         }
@@ -777,6 +777,26 @@ namespace IdentityServerHost.Quickstart.UI
             return View();
         }
         public IActionResult ContingencyManagementPlan()
+        {
+            updateDateFun();
+            return View();
+        }
+        public IActionResult ContentArchivalCAPPolicy()
+        {
+            updateDateFun();
+            return View(); 
+        }
+        public IActionResult ContentReviewCAPPolicy()
+        {
+            updateDateFun();
+            return View();
+        }
+        public IActionResult WebsiteMonitoringPlan()
+        {
+            updateDateFun();
+            return View();
+        }
+        public IActionResult SecurityPolicy()
         {
             updateDateFun();
             return View();

@@ -47,8 +47,8 @@ namespace AcquiredLandInformationManagement.Controllers
             }
             else
             {
-                TempData["updatedDate"] = "No Data Available";
-               
+                // TempData["updatedDate"] = "No Data Available";
+                HttpContext.Session.SetString("LastUpdatedDate", "No Data Available");
             }
             
         }

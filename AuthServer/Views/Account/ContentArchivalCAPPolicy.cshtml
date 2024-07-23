@@ -76,21 +76,38 @@
         <div class="container-fluid">
             <div class="section-wraper px-3  pb-md-0">
                 <div class="form-control" style="margin-top:70px;">
-                    <p><h2 class="text-center"><strong>Hyperlink policy</strong></h2></p>
+                    <p><h2 class="text-center"><strong>Content Archival policy (CAP)</strong></h2></p>
                     <div class="card p-3 bg-gray-100 overflow-auto">
                         <div class="row align-items-center">
                             <div class="col-md-12">
+                                <p>Each of the content components that is valid for a particular period of time is accompanied by a validity date. For some of the components the validity date may not be known ie, the content is stated to be perpetual. Under no circumstances, any content is to be displayed on the portal after the validity date.</p>                                
                                 <table class="table table-striped table-bordered table-responsive">
                                     <tbody>
-                                        <tr>
-                                            <td>
-                                                <p>At many places in this website, you shall find links to other websites/portals. This links have been placed for your convenience. Delhi Development Authority (DDA) is not responsible for the contents and reliability of the linked websites and does not necessarily endorse the views expressed in them. Mere presence of the link or its listing on this website should not be assumed as endorsement of any kind. We cannot guarantee that these links will work all the time and we have no control over availability of linked pages.</p>
-                                                <p>The website hyper links policy will be reviewed on yearly basis.</p>
-                                            </td>
+                                        <tr class="text-bg-rgb-40_71_177clr">
+                                            <td>S.No</td>
+                                            <td>Content Element</td>
+                                            <td>Entry Policy</td>
+                                            <td>Exit Policy</td>
                                         </tr>
-
+                                        <tr>
+                                            <td>1.</td>
+                                            <td>Policy</td>
+                                            <td>90 Days/Immediate in case of any change or it loses its relevance.</td>
+                                            <td>Perpetual (10 years) since date of entry into archival.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2.</td>
+                                            <td>About us</td>
+                                            <td>Whenever Departments/ Ministries are merged /changed.</td>
+                                            <td>Perpetual (10 years) since date of entry into archival.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3.</td>
+                                            <td>Contact Us</td>
+                                            <td>Not required</td>
+                                            <td>Not Applicable.</td>
+                                        </tr>
                                     </tbody>
-
                                 </table>
                             </div>
                         </div>
@@ -100,12 +117,15 @@
             </div>
         </div>
     </section>
+    <br />
+    <br />
+    <br />
     <footer class="footers slow">
         <div class="container-fluid">
             <p class="my-0 py-2 text-center">
                 <a asp-action="Login" asp-controller="Account">Home</a>
                 | <a asp-action="PrivacyPolicy" asp-controller="Account">Privacy Policy</a>
-                | <a asp-action="TermsandConditions" asp-controller="Account">Terms&Conditions</a>
+                | <a asp-action="TermsandConditions" asp-controller="Account">Terms & Conditions</a>
                 | <a asp-action="copyRight" asp-controller="Account">Copyright Policy</a>
                 | <a asp-action="HyperlinkPolicy" asp-controller="Account">Hyperlink policy</a>
                 | <a asp-action="WebInformationManager" asp-controller="Account">Web Information Manager</a>
@@ -113,11 +133,11 @@
                 | <a asp-action="Help" asp-controller="Account">Help</a>
                 | <a asp-action="Disclaimer" asp-controller="Account">Disclaimer</a>
                 | <a asp-action="AboutUs" asp-controller="Account">AboutUs</a>
-                | <a asp-action="ContingencyManagementPlan" asp-controller="Account">ContingencyManagementPlan</a>
+                | <a asp-action="ContingencyManagementPlan" asp-controller="Account">Contingency Management Plan</a>
                 | <a asp-action="ContentArchivalCAPPolicy" asp-controller="Account">Content Archival Policy ( CAP)</a>
                 | <a asp-action="ContentReviewCAPPolicy" asp-controller="Account">Content Review Policy (CRP)</a>
-                | <a asp-action="WebsiteMonitoringPlan" asp-controller="Account">WebsiteMonitoringPlan</a>
-                | <a asp-action="SecurityPolicy" asp-controller="Account">SecurityPolicy</a><br>
+                | <a asp-action="WebsiteMonitoringPlan" asp-controller="Account">Website Monitoring Plan</a>
+                | <a asp-action="SecurityPolicy" asp-controller="Account">Security Policy</a><br>
                 &nbsp; &copy; Content Owned by DDA, Government of India. &nbsp;&nbsp;<label>Last Updated :  @HttpContextAccessor.HttpContext.Session.GetString("LastUpdatedDate")</label>
             </p>
         </div>
@@ -133,6 +153,7 @@
     <environment exclude="Development">
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
+
     @Html.Raw(ViewBag.Message)
     @using Microsoft.AspNetCore.Http
     @inject IHttpContextAccessor HttpContextAccessor
