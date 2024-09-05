@@ -2,6 +2,7 @@
 using Core.Enum;
 using Dto.Component;
 using Dto.Master;
+using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using Libraries.Repository.IEntityRepository;
@@ -74,6 +75,36 @@ namespace Libraries.Service.ApplicationService
             return result;
         }
 
+        public async Task<List<PermissionsDataDto>> GetallpermissionList(int moduleId, int roleId)
+        {
+            var actions = await _actionsRepository.FindBy(a => a.IsActive == 1);
+            var permissions = await _permissionsRepository.GetMappedMenuWithAction(moduleId);
+            var MenuactionrolemapList = await _permissionsRepository.MenuactionrolemapList(moduleId, roleId);
+            var menuAction = permissions.SelectMany(a => a.Menuactionrolemap).Where(b => b.RoleId == roleId).ToList();
+            var result = permissions.GroupBy(a => a.Id)
+                .Select(b => b.FirstOrDefault())
+                    .Select(c => new PermissionsDataDto()
+                    {
+                        Id = c.Id,
+                        ParentId = c.ParentMenuId ?? 0,
+                        Name = c.Name
+                    }).ToList();
+
+            foreach (var item in result)
+            {
+                var menuPermission = actions.Select(a => new MappedMenuActionDtoList()
+                {
+                    ModuleName = menuAction.Select(x=>x.Module.Name).FirstOrDefault(),
+                    ActionName = a.Name,
+                    RoleName = menuAction.Select(x=>x.Role.Name).FirstOrDefault(),
+                    //IsAvailable = menuAction.Any(c => c.ActionId == a.Id && MenuactionrolemapList.Select(x=>x.MenuId).Contains(c.MenuId))
+                    IsAvailable = menuAction.Any(c => c.ActionId == a.Id && c.MenuId == item.Id)
+                }).ToList();
+                item.Actions = menuPermission;
+            }
+
+            return result;
+        }
         public async Task<List<PermissionDto>> GetMappedMenuWithAction(int moduleId, int roleId)
         {
             var actions = await _actionsRepository.FindBy(a => a.IsActive == 1);

@@ -1,0 +1,41 @@
+﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Village>
+<div class="table-section bg-white border shadow rounded ">
+    <div class="table-responsive">
+        <table class="table table-sm table-bordered mb-0 table-striped">
+            <thead class="text-nowrap">
+                <tr>
+                    <th>Zone</th>
+                    <th>Village</th>
+                    <th>Property No.</th>
+                    <th>Encroachment Detected-Yes/No</th>
+                    @*<th>Yes-Encroachment Area</th>*@
+                    <th>GIS Coordinates for encroachment</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Results.Count() > 0)
+                {
+                    @foreach (var item in Model.Results)
+                    {
+                        <tr>
+                            <td>@(item.Zone.Name == null ? "" : item.Zone.Name)</td>
+                            <td>@(item.Name == null ? "" : item.Name)</td>
+                            <td>Undefined</td>
+                            <td>Yes</td>
+                            @*<td></td>*@
+                            <td>@(item.Xcoordinate == null ? "NA" : (item.Xcoordinate.ToString() +" "+ item.Ycoordinate.ToString()))</td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <th colspan="14" style="text-align:center"> No Record Available! </th>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        @await Component.InvokeAsync("Pager", new { totalCount = Model.RowCount, pageNumber = Model.CurrentPage, pageSize = Model.PazeSize })
+    </div>
+</div>
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />

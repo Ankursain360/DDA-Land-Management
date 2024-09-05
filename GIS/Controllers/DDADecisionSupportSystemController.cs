@@ -3,43 +3,19 @@ using GIS.Helper;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
 using Microsoft.AspNetCore.Mvc;
-using NPOI.HSSF.Record.CF;
-using NPOI.SS.Formula.Functions;
 using Service.IApplicationService;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
-using System.Reflection.PortableExecutable;
 using System.Threading.Tasks;
-using static System.Net.Mime.MediaTypeNames;
-using OpenCvSharp;
-using Dto.GIS;
 using Microsoft.Extensions.Configuration;
-using Accord.Imaging.Filters;
-using Accord.Imaging;
-using Accord.MachineLearning.VectorMachines.Learning;
-using Accord.MachineLearning.VectorMachines;
-using Accord.Statistics.Kernels;
-using Org.BouncyCastle.Asn1.Tsp;
-using Accord.MachineLearning;
-using Accord.Math;
-using Accord.IO;
-using NPOI.POIFS.Crypt.Dsig;
 using Utility.Helper;
-using Microsoft.AspNetCore.Http;
-using Point = OpenCvSharp.Point;
-using AForge.Imaging.Filters;
-using Notification.Constants;
-using Notification.OptionEnums;
-using Notification;
 using Microsoft.AspNetCore.Hosting;
-using System.Text;
-using System.Xml.Linq;
 using Dto.Search;
-using Libraries.Service.ApplicationService;
 using Core.Enum;
 using GIS.Filters;
+using System.Linq;
+
+
 namespace GIS.Controllers
 {
     public class DDADecisionSupportSystemController : Controller
@@ -93,10 +69,33 @@ namespace GIS.Controllers
             var result = await _GISService.GetChangeDetectionData(model);
             return PartialView("_List", result);
         }
-        public IActionResult Create()
+        [AuthorizeContext(ViewAction.Add)]
+        public async Task<IActionResult> Create()
         {
-            return View();
+
+            var data = await _GISService.GetAllChangeDetectionData();
+            var result = data.Select(x => new { x.Village.Name, x.FirstPhotoPath, x.SecondPhotoPath, x.Village.Id }).ToList();
+            List<AIchangeDetectionListSearchDto> obj = new List<AIchangeDetectionListSearchDto>();
+            for (int i = 0; i < result.Count; i++)
+            {
+                obj.Add(new AIchangeDetectionListSearchDto
+                {
+                    id = result[i].Id,
+                    FirstPhoto = result[i].Name + "_" + result[i].FirstPhotoPath.Split('.')[0],
+                    SecondPhoto = result[i].Name + "_" + result[i].SecondPhotoPath.Split('.')[0],
+                });
+
+            }
+         
+            return View(obj);
         }
+         
+        public async Task<IActionResult> ViewComparingImage([FromBody] AIchangeDetectionListSearchDto modal)
+        {
+            var data = await _GISService.ResultAfterComparingImage(modal);
+            return PartialView("_ViewComparingImage",data);
+        }
+
         [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> DownloadImageFirst(int Id) 
         { 

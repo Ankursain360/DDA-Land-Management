@@ -64,5 +64,11 @@
     "inputFiles": [
       "wwwroot/js/ddadecisionSupportsystemIndex.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/DecisionSupportSystemCreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/DecisionSupportSystemCreate.js"
+    ]
   }
 ]

@@ -513,6 +513,21 @@ namespace Libraries.Repository.EntityRepository
                                     .GetPaged<AIchangedetectiondata>(model.PageNumber, model.PageSize);
             return data;
         }
+        public async Task<List<AIchangedetectiondata>> GetAllChangeDetectionData()
+        {
+          
+            var data = await _dbContext.aichangedetectiondata
+                .Include(x => x.Zone)
+                .Include(x => x.Village)
+                .Where(x => x.IsActive == 1).ToListAsync();
+            
+            return data;
+        }
+        public async Task<PagedResult<Village>> ResultAfterComparingImage(AIchangeDetectionListSearchDto modal)
+        {
+            var result = await _dbContext.Village.Include(x=>x.Zone).Where(x=>x.Id == modal.id).GetPaged<Village>(modal.PageNumber, modal.PageSize); ;
+            return result;
+        }
         public async Task<AIchangedetectiondata> GetAIchangedetectionImageDetails(int id)
         {
             var data = await _dbContext.aichangedetectiondata.Where(x => x.Id == id && x.IsActive == 1).FirstOrDefaultAsync();

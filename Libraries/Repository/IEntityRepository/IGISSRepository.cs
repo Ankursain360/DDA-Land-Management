@@ -60,6 +60,8 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<GISKhasraExport>> GetKhasraListforExport(int villageId);
 
         Task<PagedResult<AIchangedetectiondata>> GetChangeDetectionData(AIchangeDetectionSearchDto model);
+        Task<List<AIchangedetectiondata>> GetAllChangeDetectionData();
+        Task<PagedResult<Village>> ResultAfterComparingImage(AIchangeDetectionListSearchDto id);
         Task<AIchangedetectiondata> GetAIchangedetectionImageDetails(int id);
         Task<bool> InsertchangeDetectiondata(AIchangedetectiondata dto);
 

@@ -61,6 +61,8 @@ namespace Libraries.Service.IApplicationService
         Task<List<GISKhasraExport>> GetKhasraListforExport(int villageId);
 
         Task<PagedResult<AIchangedetectiondata>> GetChangeDetectionData(AIchangeDetectionSearchDto model);
+        Task<List<AIchangedetectiondata>> GetAllChangeDetectionData();
+        Task<PagedResult<Village>> ResultAfterComparingImage(AIchangeDetectionListSearchDto id);
         Task<AIchangedetectiondata> GetAIchangedetectionImageDetails(int id);
         Task<bool> InsertchangeDetectiondata(ChangeDetectionDto dto); 
     }

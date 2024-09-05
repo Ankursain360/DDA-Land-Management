@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Dto.Search;
 using Libraries.Model;
 using Libraries.Model.Entity;
 using Libraries.Repository.Common;
@@ -50,9 +51,18 @@ namespace Libraries.Repository.EntityRepository
 
                 throw;
             }
-            
-        }
 
+        }
+        public async Task<List<Menuactionrolemap>> MenuactionrolemapList(int ModuleId, int RoleId)
+        {
+            var data = await _dbContext.Menuactionrolemap
+                                                         .Include(x => x.Module)
+                                                         .Include(x => x.Role)
+                                                         .Include(x => x.Action)
+                                                         .Include(x => x.Menu)
+                                                         .Where(x => x.ModuleId == ModuleId && x.RoleId == RoleId && x.Menu.IsActive == 1).ToListAsync();
+            return data;
+        }
         public async Task<bool> AuthorizeUser(string actionName, int roleId, int moduleId, int menuId)
         {
             return await _dbContext.Menuactionrolemap
@@ -65,5 +75,7 @@ namespace Libraries.Repository.EntityRepository
                     )
                 .AnyAsync();
         }
+
+        
     }
 }

@@ -270,6 +270,15 @@ namespace Libraries.Service.ApplicationService
             var data = await _iGISSRepository.GetChangeDetectionData(model);
             return data;
         }
+        public async Task<List<AIchangedetectiondata>> GetAllChangeDetectionData()
+        {
+            return await _iGISSRepository.GetAllChangeDetectionData();
+
+        }
+        public async Task<PagedResult<Village>> ResultAfterComparingImage(AIchangeDetectionListSearchDto id)
+        {
+            return await _iGISSRepository.ResultAfterComparingImage(id);
+        }
         public async Task<AIchangedetectiondata> GetAIchangedetectionImageDetails(int id)
         {
             return await _iGISSRepository.GetAIchangedetectionImageDetails(id);

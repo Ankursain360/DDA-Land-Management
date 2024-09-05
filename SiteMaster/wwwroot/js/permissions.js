@@ -13,7 +13,7 @@
     $("#btnSaveTop, #btnSaveBottom").click(function () {
         var roleId = $("#ddlRole").val();
         var moduleId = $("#ddlModule").val();
-
+         
         if (roleId === null) {
             ErrorMessage("Please select role.")
             return;
@@ -46,3 +46,14 @@ function GetPermission() {
         $("#divRolePermission").html(response);
     });
 }
+$("#btndownload").click(function () {
+    debugger;
+    var moduleId = $("#ddlModule").val();
+    var roleId = $("#ddlRole").val();
+    HttpGet(`/PermissionsDataDownload/Index?ModulesId=${moduleId}&RoleId=${roleId}`, 'html', function (response) {
+        var a = document.createElement("a");
+        a.target = '_blank';
+        a.href = '/PermissionsDataDownload/download';
+        a.click();
+    });
+});
