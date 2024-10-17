@@ -112,13 +112,13 @@ namespace GIS
                 options.DefaultChallengeScheme = "oidc";
                 options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
             })
-           // .AddCookie("Cookies")
-           .AddCookie("Cookies", options =>
-           {
-               options.ExpireTimeSpan = TimeSpan.FromMinutes(Convert.ToInt32(Configuration.GetSection("CookiesSettings:CookiesTimeout").Value));
-               options.SlidingExpiration = true;
-               options.Cookie.Name = "Auth-cookie";
-           })
+            .AddCookie("Cookies")
+           //.AddCookie("Cookies", options =>
+           //{
+           //    options.ExpireTimeSpan = TimeSpan.FromMinutes(Convert.ToInt32(Configuration.GetSection("CookiesSettings:CookiesTimeout").Value));
+           //    options.SlidingExpiration = true;
+           //    options.Cookie.Name = "Auth-cookie";
+           //})
            .AddOpenIdConnect("oidc", options =>
            {
                options.SignInScheme = "Cookies";

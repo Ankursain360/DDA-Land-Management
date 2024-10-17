@@ -1170,7 +1170,7 @@ function getInfo(villageid, khasrano, RectNo, khasraid) {
 }
 
 function showKhasraBasisOtherDetails(resp, khasraid, khasrano) {
-    debugger;
+    
     var tbl = $('#RouteDetailShow #tblVillageData').empty();
     tbl.empty();
 
@@ -1220,7 +1220,7 @@ $(".btnupdate").click(function () {
 });
 
 function showKhasraBasisOtherDetailsForCourtCases(resp) {
-    debugger;
+    
     var html = '';
     var tbl = '';
     $("#CourtCaseData").html('');
@@ -1732,7 +1732,7 @@ function GetInfrastructureDetails(villageid) {
 }
 
 $('#infrastructureData').on('change', '.checkUncheckInfra', function (e) {  /*check uncheck Functionality added by renu */
-    debugger;
+    
     e.preventDefault();
     var id = $(this).attr("id");
     //var data = JSON.parse(localStorage.getItem('alldata'));  //get data from local storage

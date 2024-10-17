@@ -231,16 +231,8 @@ namespace SiteMaster.Controllers
                     });
                 }
             }
-
             var memory = ExcelHelper.CreateExcel(data);         
             return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-
         }
-
-
-
-
-
-
     }
 }
