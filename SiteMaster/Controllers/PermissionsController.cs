@@ -39,7 +39,7 @@ namespace SiteMaster.Controllers
         }
 
 
-        public async Task<JsonResult> AddUpdatePermission([FromBody] List<MenuActionRoleMapDto> model) 
+        public async Task<JsonResult> AddUpdatePermission([FromBody] List<MenuActionRoleMapDto> model)
         {
             if (model.Count > 0)
             {
@@ -53,12 +53,28 @@ namespace SiteMaster.Controllers
                     return Json("Error occur during update the record.");
                 }
             }
-            else {
+            else
+            {
                 return Json("Please select atleast one record.");
             }
         }
+        public async Task<JsonResult> NotAnyPermissionForRole([FromBody] MenuActionRoleMapDto model)
+        {
 
-        public IActionResult GetPermissions(int moduleId, int roleId) {
+            bool result = await _permissionsService.NotAnyPermissionForRole(model);
+            if (result)
+            {
+                return Json("Permission updated successully.");
+            }
+            else
+            {
+                return Json("Error occur during update the record.");
+            }
+
+        }
+
+        public IActionResult GetPermissions(int moduleId, int roleId)
+        {
             return ViewComponent("Permission", new { moduleId = moduleId, roleId = roleId });
         }
     }

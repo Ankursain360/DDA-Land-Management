@@ -466,10 +466,10 @@ namespace EncroachmentDemolition.Controllers
                                     #endregion
 
                                     #region Mobile SMS
-                                    SendSMSDto SMS = new SendSMSDto(_configuration);
-                                    // Add SMS 
-                                    string Mobile = _propertyRegistrationService.GetMobileNo(SiteContext.UserId);
-                                    SMS.GenerateSendSMSForSaveEncroachmentRegistration(encroachmentRegisterations.RefNo, Mobile);
+                                    //SendSMSDto SMS = new SendSMSDto(_configuration);
+                                    //// Add SMS 
+                                    //string Mobile = _propertyRegistrationService.GetMobileNo(SiteContext.UserId);
+                                    //SMS.GenerateSendSMSForSaveEncroachmentRegistration(encroachmentRegisterations.RefNo, Mobile);
                                     #endregion
                                     ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
                                     var result1 = await _encroachmentRegisterationService.GetAllEncroachmentRegisteration();

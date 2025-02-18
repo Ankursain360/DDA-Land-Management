@@ -16,6 +16,7 @@ namespace Libraries.Service.IApplicationService
         Task<List<PermissionsDataDto>> GetallpermissionList(int ModuleId, int RoleId);
         Task<List<PermissionDto>> GetMappedMenuWithAction(int moduleId, int roleId);
         Task<bool> AddUpdatePermission(List<MenuActionRoleMapDto> model);
+        Task<bool> NotAnyPermissionForRole(MenuActionRoleMapDto model);
         Task<bool> ValidatePermission(ViewAction action, int roleId, string moduleGuid, string url);
     }
 }

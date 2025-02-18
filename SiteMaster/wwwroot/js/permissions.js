@@ -11,6 +11,7 @@
     });
 
     $("#btnSaveTop, #btnSaveBottom").click(function () {
+        debugger;
         var roleId = $("#ddlRole").val();
         var moduleId = $("#ddlModule").val();
          
@@ -18,7 +19,11 @@
             ErrorMessage("Please select role.")
             return;
         }
-        
+
+        var ids = {
+             roleId: roleId,
+                moduleId: moduleId
+        }
         $('.chkAction:checkbox:checked').each(function () {
             console.log("Id: " + $(this).attr("id"));
             var arrIds = $(this).attr("id").split(',');
@@ -31,10 +36,19 @@
             arrPermission.push(model);
         });
 
-        HttpPost('/Permissions/AddUpdatePermission', 'json', arrPermission, function (response) {
-            SuccessMessage(response);
-            arrPermission = [];
-        });
+        if (arrPermission.length > 0) {
+            HttpPost('/Permissions/AddUpdatePermission', 'json', arrPermission, function (response) {
+                SuccessMessage(response);
+                arrPermission = [];
+            });
+        }
+        else {
+            HttpPost('/Permissions/NotAnyPermissionForRole', 'json', ids, function (response) {
+                SuccessMessage(response);
+                arrPermission = [];
+            });
+        }
+       
     });
 
 });

@@ -136,8 +136,8 @@ namespace Libraries.Service.ApplicationService
 
         public async Task<bool> AddUpdatePermission(List<MenuActionRoleMapDto> model)
         {
-            int roleId = model.FirstOrDefault().RoleId;
-            int moduleId = model.FirstOrDefault().ModuleId;
+            int roleId = model.FirstOrDefault().roleId;
+            int moduleId = model.FirstOrDefault().moduleId;
             var result = await _permissionsRepository.FindBy(a => a.RoleId == roleId && a.ModuleId==moduleId);
             _permissionsRepository.RemoveRange(result);
 
@@ -145,8 +145,8 @@ namespace Libraries.Service.ApplicationService
             {
                 MenuId = a.MenuId,
                 ActionId = a.ActionId,
-                RoleId = a.RoleId,
-                ModuleId= a.ModuleId,
+                RoleId = a.roleId,
+                ModuleId= a.moduleId,
                 CreatedBy = 1,
                 CreatedDate = DateTime.Now
             }).ToList();
@@ -155,6 +155,10 @@ namespace Libraries.Service.ApplicationService
             int saved = await _unitOfWork.CommitAsync();
 
             return saved > 0;
+        }
+        public async Task<bool> NotAnyPermissionForRole(MenuActionRoleMapDto model)
+        {
+           return await _permissionsRepository.NotAnyPermissionForRole(model);
         }
 
         public async Task<bool> ValidatePermission(ViewAction action, int roleId, string moduleGuid, string url)

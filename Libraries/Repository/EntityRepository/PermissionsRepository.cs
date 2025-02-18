@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Dto.Master;
 using Dto.Search;
 using Libraries.Model;
 using Libraries.Model.Entity;
@@ -53,6 +55,30 @@ namespace Libraries.Repository.EntityRepository
             }
 
         }
+        public async Task<bool> NotAnyPermissionForRole(MenuActionRoleMapDto model)
+        {
+            try
+            {
+                var data = await _dbContext.Menuactionrolemap
+                    .Where(x => x.RoleId == model.roleId && x.ModuleId == model.moduleId)
+                    .ToListAsync();
+
+                if (data.Any()) 
+                {
+                    _dbContext.Menuactionrolemap.RemoveRange(data);
+                    await _dbContext.SaveChangesAsync();
+                    return true; 
+                }
+
+                return false; 
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error deleting records: {ex.Message}");
+                return false;
+            }
+        }
+
         public async Task<List<Menuactionrolemap>> MenuactionrolemapList(int ModuleId, int RoleId)
         {
             var data = await _dbContext.Menuactionrolemap
