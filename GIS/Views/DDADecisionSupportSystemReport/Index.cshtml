@@ -1,0 +1,151 @@
+﻿@await Component.InvokeAsync("PageHeader", new { pageName = "Decision Support System" })
+@model List<Dto.Search.AIchangeDetectionListSearchDto>;
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="pt-3">
+    <form asp-action="Create" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+        <h3 class="mb-3 d-flex">Add Details<span class="ms-auto"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span></h3>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <select id="FirstName" class="floating-label-field floating-label-field--s3">
+                        <option selected="selected" disabled="disabled" value="">--Select-- </option>
+                        @foreach (var item in Model)
+                        {
+                            <option value="@item.id">@item.FirstPhoto</option>
+                        }
+                    </select>
+                    <label class="floating-label"> Select Base Layer(T0)</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <select id="SecondName" class="floating-label-field floating-label-field--s3">
+                        <option selected="selected" disabled="disabled" value="">--Select-- </option>
+                        @foreach (var item in Model)
+                        {
+                            <option value="@item.id">@item.SecondPhoto</option>
+                        }
+                    </select>
+                    <label class="floating-label">Select Recent Layer(T1)</label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <select id="RecentLayer" name="RecentLayer" class="floating-label-field floating-label-field--s3 contactinatevalue">
+                        <option value="veg_2006">veg_2019</option>
+                        <option value="veg_2007">veg_2020</option>
+                        <option value="veg_2008">veg_2021</option>
+                    </select>
+                    <label class="floating-label">Attributes of Recent Layer</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <input id="DataType" type="text" class="floating-label-field floating-label-field--s3 " />
+                    <lable class="floating-label">DataType <span>(<span style="color:red">Real</span>)</span></lable>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <select id="Operator" class="floating-label-field floating-label-field--s3 contactinatevalue">
+                        <option value=">">></option>
+                        <option value="<"><</option>
+                        <option value="=">=</option>
+                        <option value="+">+</option>
+                    </select>
+                    <label class="floating-label">Operator</label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <select id="RecentLayer2" class="floating-label-field floating-label-field--s3 contactinatevalue">
+                        <option value="veg_2017">veg_2021</option>
+                        <option value="veg_2018">veg_2022</option>
+                        <option value="veg_2019">veg_2023</option>
+                    </select>
+                    <label class="floating-label">Attributes of Recent Layer</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <input id="Datatype2" type="text" class="floating-label-field floating-label-field--s3" />
+                    <label class="floating-label">DataType <span>(<span style="color:red">Real</span>)</span></label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-12">
+                <div class="floating-label-wrap">
+                    <input id="Query" type="text" value="" name="Query" disabled="disabled" class="floating-label-field floating-label-field--s3" />
+                    <label class="floating-label">Query <span>(<span style="color:red">veg_2006 < veg_2017</span>)</span></label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <input type="checkbox" checked="checked" name="group1" />
+                <label>Add Results to Project</label>
+            </div>
+            <div class="col-md-6">
+                <input type="checkbox" name="group1" />
+                <label>Save Results to Shape File</label>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <input type="file" class="floating-label-field floating-label-field--s3" />
+                    <label class="floating-label">Select Output File</label>
+                </div>
+            </div>
+        </div>
+
+    </form>
+    <div class="row mt-md-3">
+        <div class=" col-md-12">
+            <button class="btn btn-theme" onclick="return Submit();" type="submit">Submit</button>
+            @Html.ActionLink("Back", "Index", "DDADecisionSupportSystemReport", null, new { @class = "btn btn-theme " })
+        </div>
+    </div>
+
+</div>
+<div class="table-section bg-white border shadow rounded">
+    <div class="short-section d-md-flex align-items-center">
+        <div class="p-3 d-flex align-items-end me-auto">
+        </div>
+
+
+
+    </div>
+
+    <div class="table-responsive px-2">
+        <div id="divComparingImageTable"></div>
+    </div>
+
+
+</div>
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+
+
+    <script src="~/js/decisionsupportsystemcreate.js"></script>
+
+</environment>
+<environment exclude="Development">
+    <script src="~/js/decisionsupportsystemcreate.min.js" asp-append-version="true"></script>
+</environment>
+

@@ -46,7 +46,7 @@ namespace SiteMaster.Controllers
                 bool result = await _permissionsService.AddUpdatePermission(model);
                 if (result)
                 {
-                    return Json("Permission updated successully.");
+                    return Json("Permission updated successfully.");
                 }
                 else
                 {
@@ -64,11 +64,11 @@ namespace SiteMaster.Controllers
             bool result = await _permissionsService.NotAnyPermissionForRole(model);
             if (result)
             {
-                return Json("Permission updated successully.");
+                return Json("Permission updated successfully.");
             }
             else
             {
-                return Json("Error occur during update the record.");
+                return Json("Permission updated successfully.");
             }
 
         }

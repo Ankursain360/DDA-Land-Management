@@ -373,7 +373,7 @@ namespace GIS.Controllers
 
         // Grayscale function
 
-      //  [AuthorizeContext(ViewAction.View)]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> AIChangeDetection()
         {
             ViewBag.ZoneList = await _GISService.GetZoneList();

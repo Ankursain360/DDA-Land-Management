@@ -45,20 +45,21 @@ namespace SiteMaster.Controllers
             }
 
         }
-        //[AuthorizeContext(ViewAction.View)]
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
         {
             var list = await _khasraService.GetAllKhasra();
             updateDateFun();
             return View(list);
         }
-       // [HttpPost]
+
+        [HttpPost]
         public async Task<PartialViewResult> List([FromBody] KhasraMasterSearchDto model)
         {
             var result = await _khasraService.GetPagedKhasra(model);
             return PartialView("_List", result);
         }
-       // [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         
         {
@@ -72,8 +73,8 @@ namespace SiteMaster.Controllers
 
 
         [HttpPost]
-       // [ValidateAntiForgeryToken]
-       // [AuthorizeContext(ViewAction.Add)]
+        [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Khasra khasra)
         {
             try
@@ -112,7 +113,7 @@ namespace SiteMaster.Controllers
 
 
 
-       // [AuthorizeContext(ViewAction.Edit)]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _khasraService.FetchSingleResult(id);
@@ -128,8 +129,8 @@ namespace SiteMaster.Controllers
         }
 
         [HttpPost]
-        //[ValidateAntiForgeryToken]
-       // [AuthorizeContext(ViewAction.Edit)]
+        [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Khasra khasra)
 
         {
@@ -163,7 +164,7 @@ namespace SiteMaster.Controllers
                 return View(khasra);
             }
         }
-       // [AuthorizeContext(ViewAction.Delete)]
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)
         {
             try
@@ -186,7 +187,7 @@ namespace SiteMaster.Controllers
             var list = await _khasraService.GetAllKhasra();
             return View("Index", list);
         }
-       // [AuthorizeContext(ViewAction.View)]
+       [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _khasraService.FetchSingleResult(id);
@@ -203,7 +204,7 @@ namespace SiteMaster.Controllers
         }
 
 
-       // [AuthorizeContext(ViewAction.Download)]
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> KhasraMasterList()
         {
             var result = await _khasraService.GetAllKhasra();
