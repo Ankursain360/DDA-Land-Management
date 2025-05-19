@@ -140,8 +140,8 @@ namespace SiteMaster.Controllers
             }
         }
 
-        [HttpPost]
-        [AuthorizeContext(ViewAction.Delete)]
+       // [HttpPost]
+       [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)
         {
             try

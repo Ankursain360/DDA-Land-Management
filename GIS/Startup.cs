@@ -130,11 +130,11 @@ namespace GIS
                options.Scope.Add("api1");
                options.SaveTokens = true;
                options.UseTokenLifetime = true;
-               options.Events.OnRedirectToIdentityProvider = context => // <- HERE
-               {                                                        // <- HERE
-                   context.ProtocolMessage.Prompt = "login";            // <- HERE
-                   return Task.CompletedTask;                           // <- HERE
-               };                                                       // <- HERE
+               //options.Events.OnRedirectToIdentityProvider = context => // <- HERE
+               //{                                                        // <- HERE
+               //    context.ProtocolMessage.Prompt = "login";            // <- HERE
+               //    return Task.CompletedTask;                           // <- HERE
+               //};                                                       // <- HERE
            });
         }
 

@@ -77,7 +77,7 @@ namespace LandInventory.Controllers
             propertyregistration.TakenOverDepartmentList = await _propertyregistrationService.GetTakenDepartmentDropDownList();
             propertyregistration.HandOverDepartmentList = await _propertyregistrationService.GetHandedDepartmentDropDownList();         
         }
-        [AuthorizeContext(ViewAction.Add)]
+       // [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Propertyregistration propertyregistration = new Propertyregistration();
@@ -341,7 +341,7 @@ namespace LandInventory.Controllers
             }
 
         }
-        [AuthorizeContext(ViewAction.Edit)]
+       // [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _propertyregistrationService.FetchSingleResult(id);
