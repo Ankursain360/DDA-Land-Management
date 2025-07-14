@@ -375,6 +375,7 @@ namespace Libraries.Model
         public virtual DbSet<LandVerificationVillageDetails> landverificationvillagedetails { get; set; }
         public virtual DbSet<AIchangedetectiondata> aichangedetectiondata { get; set; }
         public virtual DbSet<ApplicationModificationDetails> applicationmodificationdetails { get; set; }
+        public virtual DbSet<tblfeedback> Tblfeedbacks { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -678,6 +679,7 @@ namespace Libraries.Model
             //modelBuilder.ApplyConfiguration(new KyclicensepaymentrptConfiguration());
             modelBuilder.ApplyConfiguration(new RefreshTokenConfiguration());
             modelBuilder.ApplyConfiguration(new AIchangedetectiondataConfiguration());
+            modelBuilder.ApplyConfiguration(new FeedbackConfiguration());
             base.OnModelCreating(modelBuilder);
         }
     }

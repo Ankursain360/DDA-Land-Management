@@ -91,12 +91,22 @@
                                         </tr>
                                         <tr>
                                             <td>Portable Document Format (P.D.F.) content</td>
-                                            <td>Adobe Acrobat Reader</td>
+                                            <td>
+                                                <a href="#" id="downloadAdobeLink" class="link-clean">
+                                                    <i class="fas fa-file-excel icon-green"></i>
+                                                    <img src="~/images/pdf_Icon.jpg" alt="Pdf"> - Adobe Acrobat Reader
+                                                </a>
+                                            </td>
                                         </tr>
-                                       
+
                                         <tr>
                                             <td>Excel files</td>
-                                            <td>Excel Viewer Microsoft Office Compatibility Pack for Excel (for 2007 version)</td>
+                                            <td>
+                                                <a href="#" id="downloadLink" class="link-clean">
+                                                    <i class="fas fa-file-excel icon-green"></i>
+                                                    <img src="~/images/Excel_Image.png" alt="Pdf"> -  Microsoft Office Compatibility Pack for Excel (2007 version)
+                                                </a>
+                                            </td>
                                         </tr>
                                        
                                     </tbody>
@@ -140,9 +150,10 @@
 
     <environment include="Development">
         <script src="~/js/site.js"></script>
+        <script src="~/js/HelpIndex.js"></script>
     </environment>
     <environment exclude="Development">
-        <script src="~/js/site.min.js" asp-append-version="true"></script>
+        <script src="~/js/HelpIndex.min.js" asp-append-version="true"></script>
     </environment>
 
     @Html.Raw(ViewBag.Message)

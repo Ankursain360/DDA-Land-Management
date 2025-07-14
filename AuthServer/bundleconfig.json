@@ -10,5 +10,17 @@
     "inputFiles": [
       "wwwroot/css/bootstrap/css/bootstrap.css"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/custome.min.js",
+    "inputFiles": [
+      "wwwroot/js/custome.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/toaster/toastr.min.min.css",
+    "inputFiles": [
+      "wwwroot/lib/toaster/toastr.min.css"
+    ]
   }
 ]

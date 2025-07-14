@@ -50,6 +50,10 @@ namespace Libraries.Service.ApplicationService
             _passwordhistoryRepository.Add(passwordhistory);
             return await _unitOfWork.CommitAsync() > 0;
         }
+        public async Task<bool> CreateFeedback(tblfeedback tblfeedback)
+        {
+            return await _passwordhistoryRepository.CreateFeedback(tblfeedback);
+        }
 
       
 

@@ -142,11 +142,8 @@ a {
     }
 
 .slow {
-    -webkit-transition: all .5s ease-out;
-    -moz-transition: all .5s ease-out;
-    -ms-transition: all .5s ease-out;
-    -o-transition: all .5s ease-out;
-    transition: all .5s ease-out
+    
+    transition: all 0.3s ease;
 }
 
 .fixed-bg {
@@ -169,6 +166,7 @@ a.no-dec {
     background: -webkit-linear-gradient(90deg, rgba(75, 80, 162, 1) 0%, rgba(125, 56, 101, 1) 100%);
     background: linear-gradient(90deg, rgba(75, 80, 162, 1) 0%, rgba(125, 56, 101, 1) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#4b50a2", endColorstr="#7d3865", GradientType=1);
+
 }
 
 
@@ -229,7 +227,7 @@ a.no-dec {
         background: linear-gradient(90deg, rgba(75, 80, 162, 1) 0%, rgba(125, 56, 101, 1) 100%);
         filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#4b50a2", endColorstr="#7d3865", GradientType=1);
         opacity: .95;
-        z-index: 0z;
+        z-index: 0;
     }
 
 .login {
@@ -501,9 +499,9 @@ figcaption h6 {
 
 footer.footer {
     background: rgb(44, 48, 145);
-    background: -moz-linear-gradient(90deg, rgba(44, 48, 145, 1) 0%, rgba(209, 33, 62, 1) 100%);
-    background: -webkit-linear-gradient(90deg, rgba(44, 48, 145, 1) 0%, rgba(209, 33, 62, 1) 100%);
-    background: linear-gradient(90deg, rgba(44, 48, 145, 1) 0%, rgba(209, 33, 62, 1) 100%);
+    background: -webkit-linear-gradient(90deg, #4b50a2 0%, #7d3865 100%);
+    background: -moz-linear-gradient(90deg, #4b50a2 0%, #7d3865 100%);
+    background: linear-gradient(90deg, #4b50a2 0%, #7d3865 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#2c3091", endColorstr="#d1213e", GradientType=1);
     position: fixed;
     bottom: 0;
@@ -659,3 +657,26 @@ footer.footer {
     font-size: 13px;
     color: #888;
 }
+.icon-green {
+    margin-right: 5px;
+    color: green;
+}
+.link-clean {
+    color: cornflowerblue;
+    text-decoration: none;
+}
+.icon-clickable {
+    cursor: pointer;
+}
+.offset-password {
+    position: relative;
+    left: 0px;
+}
+.icon-clickable:focus,
+#img-captcha:focus {
+    outline: 2px solid #007bff;
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+

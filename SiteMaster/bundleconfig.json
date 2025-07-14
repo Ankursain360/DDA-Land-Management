@@ -400,5 +400,11 @@
     "inputFiles": [
       "wwwroot/js/NewLandNotificationTypeIndex.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/HelpIndex.min.js",
+    "inputFiles": [
+      "wwwroot/js/HelpIndex.js"
+    ]
   }
 ]

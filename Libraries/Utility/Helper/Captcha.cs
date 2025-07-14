@@ -32,12 +32,26 @@ namespace Utility.Helper
             return sb.ToString();
         }
 
+        //public static bool ValidateCaptchaCode(string userInputCaptcha, HttpContext context)
+        //{
+        //    var isValid = userInputCaptcha == context.Session.GetString("CaptchaCode");
+        //    context.Session.Remove("CaptchaCode");
+        //    return isValid;
+        //}
         public static bool ValidateCaptchaCode(string userInputCaptcha, HttpContext context)
         {
-            var isValid = userInputCaptcha == context.Session.GetString("CaptchaCode");
+            var sessionCaptcha = context.Session.GetString("CaptchaCode");
+
+            var isValid = string.Equals(
+                userInputCaptcha?.Trim(),
+                sessionCaptcha?.Trim(),
+                StringComparison.OrdinalIgnoreCase
+            );
+
             context.Session.Remove("CaptchaCode");
             return isValid;
         }
+
 
         public static CaptchaResultDto GenerateCaptchaImage(int width, int height, string captchaCode)
         {

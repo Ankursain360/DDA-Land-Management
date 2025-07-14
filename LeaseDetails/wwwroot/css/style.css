@@ -1798,3 +1798,13 @@ textarea.floating-label-field--s3 {
 .pointerAuto {
     pointer-events: auto;
 }
+
+.icon-green {
+    margin-right: 5px;
+    color: green;
+}
+
+.link-clean {
+    color: cornflowerblue;
+    text-decoration: none;
+}

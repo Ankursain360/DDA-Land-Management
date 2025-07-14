@@ -51,9 +51,18 @@ namespace Libraries.Repository.IEntityRepository
         }
         public async Task<List<Possessiondetails>> GetAllNoPossessiondetailsList(PossessiondetailsSearchDto model)
         {
-            var data = await _dbContext.Possessiondetails
+            try
+            {
+                var data = await _dbContext.Possessiondetails
                 .Include(x => x.Village).Include(x => x.Khasra).Where(x => (string.IsNullOrEmpty(model.villageid) || x.Village.Name.Contains(model.villageid))).ToListAsync();
-            return data;
+                return data;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
         }
 
         public async Task<PagedResult<Possessiondetails>> GetPagedNoPossessiondetails(PossessiondetailsSearchDto model)

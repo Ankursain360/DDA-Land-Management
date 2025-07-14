@@ -1,0 +1,202 @@
+﻿@model Libraries.Model.Entity.tblfeedback
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <link rel="icon" href="~/images/favicon.png" type="image/png" sizes="16x16" />
+    <meta name="description" content="Land Management information System (LMIS)">
+    <meta name="keywords" content="DDALMIS/DDA Land Management/DDA Lease Property/ DDA Damage Property">
+    <title>Feedback</title>
+    <!--font css-->
+    <link rel="stylesheet" href="~/font/open-sans/stylesheet.css" />
+
+    <!--icon css-->
+    <link rel="stylesheet" href="~/font/icon/remixicon.css" />
+    <link rel="stylesheet" href="~/css/Footer.css" />
+    @* <link href="~/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />*@
+    <link rel="stylesheet" href="~/css/bootstrap/css/bootstrap.min.css" />
+    <link href="~/lib/css/style.css" rel="stylesheet" />
+    <link href="~/lib/toaster/toastr.min.css" rel="stylesheet" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    @* <link href="~/lib/select2/select2.css" rel="stylesheet" />
+    <script src="~/lib/select2/select2.js"></script> *@
+</head>
+<body class="bg-gray">
+    <div id="loader-wrapper">
+        <div id="loader"></div>
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+    </div>
+    <div class="top-header">
+        <header>
+            <div class="container-fluid">
+                <div class="d-flex align-items-center">
+                    <div class="menu me-3 p-2 text-white order-md-2 me-md-auto open" id="mobileMenu">
+                        @*<i class="ri-menu-fold-line"></i>*@
+                        <i class="ri-menu-unfold-line"></i>
+                    </div>
+                    <div class="logo py-1 me-auto me-md-4 order-md-1">
+                        <a href="/" class="d-block">
+                            <figure class="m-0">
+                                <img src="~/images/header-logo.png" alt="DDA Logo" class="img-fluid">
+                            </figure>
+                        </a>
+                    </div>
+                    @*<div class="dropdown noti text-white my-2  me-3 order-md-3">
+                    <a href="~/docs/Acquiredlandinformation.pdf" target="_blank" role="button" title="User Manual" class='p-2 d-block text-white no-dec'>
+                    <i class="ri-folder-user-fill" style="font-size:20px"></i>
+                    </a>
+                    </div>*@
+                    <div class="text-white my-2  me-3 order-md-3">
+                        @*  <a href="https://ddalmis.org.in/" role="button" id="notification" title="Go back to modules!" class='p-2 d-block text-white no-dec'>
+                                <i class="ri-home-3-fill" style="font-size:20px"></i>
+                            </a> *@
+                        <ul class="nav nav-tabs mb-3" id="navigationTabs" role="tablist">
+
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link text-white" id="help-tab" data-bs-toggle="tab" href="https://ddalmis.org.in/" role="tab" aria-controls="help-tab-pane" aria-selected="false">
+                                    <i class="ri-home-3-fill" style="font-size:20px"></i>
+                                </a>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </header>
+    </div>
+
+    <div class="pt-5 mt-5">
+    </div>
+
+    @* <aside class="left-menu small slow" id="leftMenu">
+    <ul class="accordion list-unstyled mb-0">
+
+    </ul>
+    </aside>*@
+
+    <partial name="_CookieConsentPartial" />
+    <section class="slow bg-gray py-5">
+        <div class="container d-flex justify-content-center align-items-center">
+            <form method="post" asp-action="Feedback" class="card p-4 shadow-sm bg-white border-0 responsive-form" enctype="multipart/form-data" autocomplete="off">
+
+
+                <partial name="_ValidationSummary" />
+
+                <h2 class="text-center text-primary mb-3">Feedback</h2>
+                <p class="text-center text-muted mb-4">We value your input. Please fill out the form below.</p>
+
+                <div class="mb-3">
+                    <label asp-for="Name" class="form-label">Name <span class="text-danger">*</span></label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="mdi mdi-account-outline"></i></span>
+                        <input asp-for="Name" class="form-control" placeholder="Enter your name" />
+                    </div>
+                    <span asp-validation-for="Name" class="text-danger small"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Address" class="form-label">Address<span class="text-danger">*</span></label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="mdi mdi-home-variant-outline"></i></span>
+                        <textarea asp-for="Address" class="form-control" rows="2" placeholder="Enter your address"></textarea>
+                    </div>
+                    <span asp-validation-for="Address" class="text-danger small"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Email" class="form-label">Email <span class="text-danger">*</span></label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="mdi mdi-email-outline"></i></span>
+                        <input asp-for="Email" type="email" class="form-control" placeholder="Enter your email" />
+                    </div>
+                    <span asp-validation-for="Email" class="text-danger small"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Feedback" class="form-label">Feedback <span class="text-danger">*</span></label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="mdi mdi-chat-processing-outline"></i></span>
+                        <textarea asp-for="Feedback" class="form-control" rows="3" placeholder="Share your feedback"></textarea>
+                    </div>
+                    <span asp-validation-for="Feedback" class="text-danger small"></span>
+                </div>
+
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-primary px-4">Submit</button>
+                    @Html.ActionLink("Back", "Index", "Account", null, new { @class = "btn btn-outline-secondary ms-2" })
+                </div>
+            </form>
+
+        </div>
+    </section>
+
+    <br />
+    <br />
+    <br />
+    <footer class="footers slow">
+        <div class="container-fluid">
+            <div class="text-center mt-2">
+                <a href="#" id="digitalindiaLink" class="m-2">
+                    <img src="~/images/logos/digital_india.png" alt="Digital India" height="40" />
+                </a>
+                <a href="#" id="data_Gov_Link" class="m-2">
+                    <img src="~/images/logos/data_gov_in.png" alt="data.gov.in" height="40" />
+                </a>
+                <a href="#" id="makeinindiaLink" class="m-2">
+                    <img src="~/images/logos/make_in_india.png" alt="Make in India" height="40" />
+                </a>
+              @*   <a href="#" id="india_Gov_Link" class="m-2">
+                    <img src="~/images/logos/india_gov_in.png" alt="india.gov.in" height="40" />
+                </a> *@
+                <a href="#" id="my_gov_Link" class="m-2">
+                    <img src="~/images/logos/mygov_logo.jpg" alt="MyGov" height="40" />
+                </a>
+            </div>
+            <p class="my-0 py-2 text-center">
+                <a asp-action="Login" asp-controller="Account">Home</a>
+                | <a asp-action="PrivacyPolicy" asp-controller="Account">Privacy Policy</a>
+                | <a asp-action="TermsandConditions" asp-controller="Account">Terms & Conditions</a>
+                | <a asp-action="copyRight" asp-controller="Account">Copyright Policy</a>
+                | <a asp-action="HyperlinkPolicy" asp-controller="Account">Hyperlink Policy</a>
+                | <a asp-action="WebInformationManager" asp-controller="Account">Web Information Manager</a>
+                | <a asp-action="Contactus" asp-controller="Account">Contact Us</a>
+                | <a asp-action="Help" asp-controller="Account">Help</a>
+                | <a asp-action="Disclaimer" asp-controller="Account">Disclaimer</a>
+                | <a asp-action="AboutUs" asp-controller="Account">About Us</a>
+                | <a asp-action="ContingencyManagementPlan" asp-controller="Account">Contingency Management Plan</a>
+                | <a asp-action="ContentArchivalCAPPolicy" asp-controller="Account">Content Archival Policy (CAP)</a>
+                | <a asp-action="ContentReviewCAPPolicy" asp-controller="Account">Content Review Policy (CRP)</a>
+                | <a asp-action="WebsiteMonitoringPlan" asp-controller="Account">Website Monitoring Plan</a>
+                | <a asp-action="SecurityPolicy" asp-controller="Account">Security Policy</a>
+                | <a asp-action="Feedback" asp-controller="Account">Feedback</a>
+                | <a asp-action="Sitemap" asp-controller="Account">Site map</a><br>
+                &nbsp; &copy; Content Owned by DDA, Government of India. &nbsp;&nbsp;
+                <label>Last Updated : @HttpContextAccessor.HttpContext.Session.GetString("LastUpdatedDate")</label>
+            </p>
+
+
+        </div>
+    </footer>
+
+    <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    @* <script src="~/lib/chart.js/dist/Chart.min.js"></script> *@
+    <script src="~/lib/toaster/toastr.min.js"></script>
+
+    <environment include="Development">
+        @* <script src="~/js/site.js"></script> *@
+        <script src="~/js/custome.js"></script>
+    </environment>
+    <environment exclude="Development">
+        @*  <script src="~/js/site.min.js" asp-append-version="true"></script> *@
+        <script src="~/js/custome.min.js"></script>
+    </environment>
+    @Html.Raw(ViewBag.Message)
+    @using Microsoft.AspNetCore.Http
+    @inject IHttpContextAccessor HttpContextAccessor
+</body>
+</html>

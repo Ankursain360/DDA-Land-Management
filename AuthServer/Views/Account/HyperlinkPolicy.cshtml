@@ -3,12 +3,13 @@
 }
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <link rel="icon" href="~/images/favicon.png" type="image/png" sizes="16x16" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>DDA Land Management</title>
+    <meta name="description" content="Land Management information System (LMIS)">
+    <meta name="keywords" content="DDALMIS/DDA Land Management/DDA Lease Property/ DDA Damage Property">
+    <title>Hyperlink policy</title>
     <!--font css-->
     <link rel="stylesheet" href="~/font/open-sans/stylesheet.css" />
 
@@ -20,8 +21,8 @@
     <link href="~/lib/css/style.css" rel="stylesheet" />
     <link href="~/lib/toaster/toastr.min.css" rel="stylesheet" />
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <link href="~/lib/select2/select2.css" rel="stylesheet" />
-    <script src="~/lib/select2/select2.js"></script>
+    @* <link href="~/lib/select2/select2.css" rel="stylesheet" />
+    <script src="~/lib/select2/select2.js"></script> *@
 
 </head>
 <body class="bg-gray">
@@ -50,12 +51,19 @@
                     <i class="ri-folder-user-fill" style="font-size:20px"></i>
                     </a>
                     </div>*@
-                    <div class="dropdown noti text-white my-2  me-3 order-md-3">
-                        <a href="https://ddalmis.org.in/" role="button" id="notification" title="Go back to modules!" class='p-2 d-block text-white no-dec'>
-                            @*<i class="ri-notification-2-line"></i>*@
+                    <div class="text-white my-2  me-3 order-md-3">
+                        @*  <a href="https://ddalmis.org.in/" role="button" id="notification" title="Go back to modules!" class='p-2 d-block text-white no-dec'>
                             <i class="ri-home-3-fill" style="font-size:20px"></i>
-                            @*<small class="bg-success rounded-circle position-absolute nofi-active">99</small>*@
-                        </a>
+                        </a> *@
+                        <ul class="nav nav-tabs mb-3" id="navigationTabs" role="tablist">
+
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link text-white" id="help-tab" data-bs-toggle="tab" href="https://ddalmis.org.in/" role="tab" aria-controls="help-tab-pane" aria-selected="false">
+                                    <i class="ri-home-3-fill" style="font-size:20px"></i>
+                                </a>
+                            </li>
+                        </ul>
+
                     </div>
                 </div>
             </div>
@@ -102,36 +110,60 @@
     </section>
     <footer class="footers slow">
         <div class="container-fluid">
+            <div class="text-center mt-2">
+                <a href="#" id="digitalindiaLink" class="m-2">
+                    <img src="~/images/logos/digital_india.png" alt="Digital India" height="40" />
+                </a>
+                <a href="#" id="data_Gov_Link" class="m-2">
+                    <img src="~/images/logos/data_gov_in.png" alt="data.gov.in" height="40" />
+                </a>
+                <a href="#" id="makeinindiaLink" class="m-2">
+                    <img src="~/images/logos/make_in_india.png" alt="Make in India" height="40" />
+                </a>
+               @*  <a href="#" id="india_Gov_Link" class="m-2">
+                    <img src="~/images/logos/india_gov_in.png" alt="india.gov.in" height="40" />
+                </a> *@
+                <a href="#" id="my_gov_Link" class="m-2">
+                    <img src="~/images/logos/mygov_logo.jpg" alt="MyGov" height="40" />
+                </a>
+            </div>
             <p class="my-0 py-2 text-center">
                 <a asp-action="Login" asp-controller="Account">Home</a>
                 | <a asp-action="PrivacyPolicy" asp-controller="Account">Privacy Policy</a>
-                | <a asp-action="TermsandConditions" asp-controller="Account">Terms&Conditions</a>
+                | <a asp-action="TermsandConditions" asp-controller="Account">Terms & Conditions</a>
                 | <a asp-action="copyRight" asp-controller="Account">Copyright Policy</a>
-                | <a asp-action="HyperlinkPolicy" asp-controller="Account">Hyperlink policy</a>
+                | <a asp-action="HyperlinkPolicy" asp-controller="Account">Hyperlink Policy</a>
                 | <a asp-action="WebInformationManager" asp-controller="Account">Web Information Manager</a>
                 | <a asp-action="Contactus" asp-controller="Account">Contact Us</a>
                 | <a asp-action="Help" asp-controller="Account">Help</a>
                 | <a asp-action="Disclaimer" asp-controller="Account">Disclaimer</a>
-                | <a asp-action="AboutUs" asp-controller="Account">AboutUs</a>
-                | <a asp-action="ContingencyManagementPlan" asp-controller="Account">ContingencyManagementPlan</a>
-                | <a asp-action="ContentArchivalCAPPolicy" asp-controller="Account">Content Archival Policy ( CAP)</a>
+                | <a asp-action="AboutUs" asp-controller="Account">About Us</a>
+                | <a asp-action="ContingencyManagementPlan" asp-controller="Account">Contingency Management Plan</a>
+                | <a asp-action="ContentArchivalCAPPolicy" asp-controller="Account">Content Archival Policy (CAP)</a>
                 | <a asp-action="ContentReviewCAPPolicy" asp-controller="Account">Content Review Policy (CRP)</a>
-                | <a asp-action="WebsiteMonitoringPlan" asp-controller="Account">WebsiteMonitoringPlan</a>
-                | <a asp-action="SecurityPolicy" asp-controller="Account">SecurityPolicy</a><br>
-                &nbsp; &copy; Content Owned by DDA, Government of India. &nbsp;&nbsp;<label>Last Updated :  @HttpContextAccessor.HttpContext.Session.GetString("LastUpdatedDate")</label>
+                | <a asp-action="WebsiteMonitoringPlan" asp-controller="Account">Website Monitoring Plan</a>
+                | <a asp-action="SecurityPolicy" asp-controller="Account">Security Policy</a>
+                | <a asp-action="Feedback" asp-controller="Account">Feedback</a>
+                | <a asp-action="Sitemap" asp-controller="Account">Site map</a><br>
+                &nbsp; &copy; Content Owned by DDA, Government of India. &nbsp;&nbsp;
+                <label>Last Updated : @HttpContextAccessor.HttpContext.Session.GetString("LastUpdatedDate")</label>
             </p>
+
+
         </div>
     </footer>
 
     <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="~/lib/chart.js/dist/Chart.min.js"></script>
+    @* <script src="~/lib/chart.js/dist/Chart.min.js"></script> *@
     <script src="~/lib/toaster/toastr.min.js"></script>
 
     <environment include="Development">
-        <script src="~/js/site.js"></script>
+       @*  <script src="~/js/site.js"></script> *@
+        <script src="~/js/custome.js"></script>
     </environment>
     <environment exclude="Development">
-        <script src="~/js/site.min.js" asp-append-version="true"></script>
+       @*  <script src="~/js/site.min.js" asp-append-version="true"></script> *@
+        <script src="~/js/custome.min.js" asp-append-version="true"></script>
     </environment>
     @Html.Raw(ViewBag.Message)
     @using Microsoft.AspNetCore.Http

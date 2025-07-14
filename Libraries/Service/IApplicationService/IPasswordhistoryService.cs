@@ -15,6 +15,7 @@ namespace Libraries.Service.IApplicationService
         Task<List<Passwordhistory>> GetAllPasswordhistory(int userId);
         Task<bool> IsPreviousPassword(int UserID, string NewPassword);
         Task<bool> Create(Passwordhistory passwordhistory);
+        Task<bool> CreateFeedback(tblfeedback tblfeedback);
         Task<Passwordhistory> FetchSingleResult(int id);
       
 

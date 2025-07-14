@@ -1789,3 +1789,13 @@ textarea.floating-label-field--s3 {
         border-left: 0;
     }
 }
+
+.icon-green {
+    margin-right: 5px;
+    color: green;
+}
+
+.link-clean {
+    color: cornflowerblue;
+    text-decoration: none;
+}

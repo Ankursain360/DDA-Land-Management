@@ -5,10 +5,12 @@
     
     if (txtpassword == "") {
         toastr.error('Please Enter Password', 'Error', { timeOut: 3000, "progressBar": true });
+        alert('Please Enter Password');
         return false;
     }
     if (txtUserName == "") {
         toastr.error('Please Enter Username', 'Error', { timeOut: 3000, "progressBar": true });
+        alert('Please Enter Username');
         return false;
     }
     else {
@@ -37,14 +39,28 @@
     }
 });
 
+//$("#refreshcaptcha").click(function () {
+//    resetCaptchaImage();
+//});
+
+//function resetCaptchaImage() {
+//    d = new Date();
+//    $("#img-captcha").attr("src", "/get-captcha-image?" + d.getTime());
+//}
 $("#refreshcaptcha").click(function () {
-    resetCaptchaImage();
+    $.ajax({
+        url: "/refresh-captcha",
+        type: "GET",
+        success: function (data) {
+            $("#img-captcha").attr("src", data.image); // Update image
+            $("#captchaValue").val(data.code); // Update hidden field
+        },
+        error: function () {
+            alert("Failed to refresh CAPTCHA.");
+        }
+    });
 });
 
-function resetCaptchaImage() {
-    d = new Date();
-    $("#img-captcha").attr("src", "/get-captcha-image?" + d.getTime());
-}
 $("#showpassword").click(function (){
     var value = $('#Password');
     if (value[0].type== 'password') {
@@ -55,4 +71,27 @@ $("#showpassword").click(function (){
         value[0].type = "password";
     }
 });
+document.getElementById("speakCaptcha").addEventListener("click", function () {
+    debugger;
+    var captcha = document.getElementById("captchaValue").value;
 
+    if (!captcha) {
+        alert("Captcha not available.");
+        return;
+    }
+
+    var msg = new SpeechSynthesisUtterance();
+    msg.text = captcha.split("").join(" "); 
+    msg.lang = "en-US";
+    msg.rate = 0.8;
+    msg.pitch = 1;
+
+    window.speechSynthesis.speak(msg);
+});
+
+$(".icon-clickable").on("keydown", function (e) {
+    if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        $(this).click(); // Trigger the click event
+    }
+});

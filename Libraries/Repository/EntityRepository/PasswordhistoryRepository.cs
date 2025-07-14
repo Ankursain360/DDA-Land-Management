@@ -51,8 +51,14 @@ namespace Libraries.Repository.EntityRepository
                 .OrderByDescending(x => x.CreatedDate).Take(5)
                 .ToListAsync();
         }
-        
 
-
+        public async Task<bool> CreateFeedback(tblfeedback tblfeedback)
+        {
+            tblfeedback.CreatedBy = 1;
+            tblfeedback.CreatedDate = DateTime.Now;
+            tblfeedback.IsActive = 1;
+            await _dbContext.AddAsync(tblfeedback);
+            return await _dbContext.SaveChangesAsync() > 0;
+        }
     }
 }

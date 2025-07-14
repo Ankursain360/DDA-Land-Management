@@ -1960,3 +1960,13 @@ textarea.floating-label-field--s3 {
    width: 60px;
    height: 60px;
 }
+
+.icon-green {
+    margin-right: 5px;
+    color: green;
+}
+
+.link-clean {
+    color: cornflowerblue;
+    text-decoration: none;
+}

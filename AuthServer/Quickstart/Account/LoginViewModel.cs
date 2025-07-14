@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 
 namespace IdentityServerHost.Quickstart.UI
@@ -12,6 +13,12 @@ namespace IdentityServerHost.Quickstart.UI
     {
         public bool AllowRememberLogin { get; set; } = true;
         public bool EnableLocalLogin { get; set; } = true;
+
+        [NotMapped]
+        public string CaptchaData { get; set; }
+        
+        [NotMapped]
+        public string CaptchaImageBase64 { get; set; }
 
         public IEnumerable<ExternalProvider> ExternalProviders { get; set; } = Enumerable.Empty<ExternalProvider>();
         public IEnumerable<ExternalProvider> VisibleExternalProviders => ExternalProviders.Where(x => !String.IsNullOrWhiteSpace(x.DisplayName));

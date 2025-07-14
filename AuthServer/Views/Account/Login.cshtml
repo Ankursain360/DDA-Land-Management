@@ -3,13 +3,19 @@
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_LayoutLogin.cshtml";
 }
-<partial name="_ValidationSummary" />
+@if (TempData["Message"] != null)
+{
+    <div class="my-2">
+        @Html.Raw(TempData["Message"])
+    </div>
+}
 
+<partial name="_ValidationSummary" />
+<link href="~/css/style.css" rel="stylesheet" />
 <div id="Login">
 
     @if (Model.EnableLocalLogin)
     {
-
         <form asp-route="Login" class="input-form">
 
             <input type="hidden" asp-for="ReturnUrl" />
@@ -31,20 +37,52 @@
                     <span asp-validation-for="Password" class="text-danger"></span>
                                       
                 </div>
-                <div class="form-group icon" style="position:relative;left:100px">
-                    <input type="checkbox" class="form-check-input" id="showpassword" />
-                    <label class="form-check-label">show password</label>
+                @* <div class="form-group icon" style="position:relative;left:100px"> *@
+                <div class="form-group icon offset-password">
+                    <input type="checkbox" class="form-check-input" id="c" />
+                    <label class="form-check-label" for="showpassword">Show password</label>
+
                 </div>
-                <div class="form-group icon ">
-                    @*<i class="ri-code-s-slash-line"></i>*@
-                    <label>Captcha Code (<span class="text-danger">Case-Sensitive</span>)</label>
-                    <input asp-for="CaptchaCode" type="text" class="form-control" placeholder="Enter Captcha *" maxlength="4" autocomplete="off">
-                    <span asp-validation-for="CaptchaCode" class="text-danger"></span>
+               
+             
+                <div class="form-group icon">
+                    <label for="CaptchaCode">Captcha Code</label>
+                    <input asp-for="CaptchaCode" alt="Captcha Code"
+                           type="text"
+                           class="form-control"
+                           placeholder="Enter Captcha *"
+                           maxlength="4"
+                           autocomplete="off"/>
+                    @* <span asp-validation-for="CaptchaCode" class="text-danger"></span> *@
                 </div>
-                <div class="codeImg ms-3">
-                    <img src="~/get-captcha-image" id="img-captcha" alt="captcha code">
-                    <i class="ri-refresh-line" id="refreshcaptcha"></i>
+
+                <div class="d-flex align-items-center gap-2 ms-3">
+                    <div class="codeImg">
+                        <img src="@Model.CaptchaImageBase64"
+                             id="img-captcha"
+                             alt="captcha code"
+                             tabindex="0"
+                             style="cursor:pointer" />
+                    </div>
+
+                    <i class="ri-refresh-line icon-clickable"
+                       id="refreshcaptcha"
+                       title="Refresh Captcha"
+                       tabindex="0"
+                       role="button"
+                       aria-label="Refresh Captcha"></i>
+
+                    <i class="ri-volume-up-line icon-clickable"
+                       id="speakCaptcha"
+                       title="Speak Captcha"
+                       tabindex="0"
+                       role="button"
+                       aria-label="Speak Captcha"></i>
+
+                    <input type="hidden" id="captchaValue" value="@Model.CaptchaData" />
                 </div>
+
+
 
 
                 @if (Model.AllowRememberLogin)
@@ -65,19 +103,8 @@
                     <button class="btn btn-theme ms-2 px-4" name="button" id="btnlogin" value="login">Login</button>
                     <button class="btn btn-theme px-4" name="button" value="cancel">Cancel</button>
                 </div>
-                @*<button class="btn btn-theme px-4" name="button" id="btnlogin" value="login">Login</button>
-        <button class="btn btn-theme px-4" name="button" value="cancel">Cancel</button>*@
             </div>
-            @*<div class="container-fluid">
-                    <p class="my-0 py-2">
-                        <a href="https://damagepayee.managemybusinessess.com/">Damage Payee Public Interface</a>
-                        | <a href="https://publiclims.managemybusinessess.com/">LIMS Public Interface</a>
-                        | <a href="https://leaseallottee.managemybusinessess.com/SignupForm/CreateLogin/">Lease/Licence User Login  </a>
-                        | <a href="https://leaseallottee.managemybusinessess.com/SignupForm/Create/">Lease/Licence User SignUp</a>
-                        | <a href="https://damage.managemybusinessess.com/DamagePayeeRegistration/Create/">Damage Payee Registration</a>
-                    </p>
-                </div>*@
-
+           
         </form>
     }
 

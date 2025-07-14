@@ -17,13 +17,26 @@
         color: #bdeaff;
     }
 
-/*footer.footers,
-#rightSection {
-    width: calc(100% - 275px);
-}*/
+.responsive-form {
+    width: 100%;
+    max-width: 90%;
+    margin: 0 auto;
+}
 
- /*   footer.footers.menu-close,
-    #rightSection.menu-close {
-        width: calc(100% - 50px);
+@media (min-width: 576px) {
+    .responsive-form {
+        max-width: 640px;
     }
-*/
+}
+
+@media (min-width: 768px) {
+    .responsive-form {
+        max-width: 700px;
+    }
+}
+
+@media (min-width: 992px) {
+    .responsive-form {
+        max-width: 768px;
+    }
+}

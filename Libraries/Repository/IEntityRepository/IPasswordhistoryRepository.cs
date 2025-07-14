@@ -13,6 +13,8 @@ namespace Libraries.Repository.IEntityRepository
     {
         Task<bool> IsPreviousPassword(int UserID, string NewPassword);
         Task<List<Passwordhistory>> GetAllPasswordhistory(int userId);
-        
+        Task<bool> CreateFeedback(tblfeedback tblfeedback);
+
+
     }
 }

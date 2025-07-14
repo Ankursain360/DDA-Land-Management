@@ -104,20 +104,73 @@ namespace IdentityServerHost.Quickstart.UI
             }
 
         }
+        //[HttpGet]
+        //public async Task<IActionResult> Login(string returnUrl)
+        //{
+        //    // build a model so we know what to show on the login page
+        //    var vm = await BuildLoginViewModelAsync(returnUrl);
+        //    if (vm.IsExternalLoginOnly)
+        //    {
+        //        // we only have one option for logging in and it's an external provider
+        //        return RedirectToAction("Challenge", "External", new { scheme = vm.ExternalLoginScheme, returnUrl });
+        //    }
+        //    vm.Data = SetEncriptionKey();
+        //    updateDateFun();
+        //    var model = new LoginViewModel();
+        //    var captcha = HttpContext.Session.GetString("CaptchaCode");
+        //    vm.CaptchaData = captcha;
+        //    return View(vm);
+        //}
+
         [HttpGet]
         public async Task<IActionResult> Login(string returnUrl)
         {
-            // build a model so we know what to show on the login page
+            int width = 150;
+            int height = 50;
+            var captchaCode = Captcha.GenerateCaptchaCode();
+            var result = Captcha.GenerateCaptchaImage(width, height, captchaCode);
+
+            HttpContext.Session.SetString("CaptchaCode", captchaCode); 
+
+            string base64Image = Convert.ToBase64String(result.CaptchaByteData);
+            string imageDataUrl = $"data:image/png;base64,{base64Image}";
+
             var vm = await BuildLoginViewModelAsync(returnUrl);
+
             if (vm.IsExternalLoginOnly)
             {
-                // we only have one option for logging in and it's an external provider
                 return RedirectToAction("Challenge", "External", new { scheme = vm.ExternalLoginScheme, returnUrl });
             }
+
             vm.Data = SetEncriptionKey();
+            vm.CaptchaData = captchaCode;
+            vm.CaptchaImageBase64 = imageDataUrl;
+
             updateDateFun();
+
             return View(vm);
         }
+        [HttpGet]
+        [Route("refresh-captcha")]
+        public IActionResult RefreshCaptcha()
+        {
+            int width = 150;
+            int height = 50;
+            var captchaCode = Captcha.GenerateCaptchaCode();
+            var result = Captcha.GenerateCaptchaImage(width, height, captchaCode);
+
+            HttpContext.Session.SetString("CaptchaCode", captchaCode);
+
+            string base64Image = Convert.ToBase64String(result.CaptchaByteData);
+            string imageDataUrl = $"data:image/png;base64,{base64Image}";
+
+            return Json(new
+            {
+                image = imageDataUrl,
+                code = captchaCode
+            });
+        }
+
 
         /// <summary>
         /// Handle postback from username/password login
@@ -801,5 +854,62 @@ namespace IdentityServerHost.Quickstart.UI
             updateDateFun();
             return View();
         }
+        public IActionResult Sitemap() 
+        {
+            updateDateFun();
+            return View();
+        }
+        public IActionResult Feedback() 
+        { 
+            updateDateFun();
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Feedback(tblfeedback tblfeedback)
+        {
+
+            if (ModelState.IsValid)
+            {
+                var result = await _passwordhistoryService.CreateFeedback(tblfeedback);
+
+                if (result == true)
+                {
+                    TempData["Message"] = AlertMessage.ShowMessage("Feedback Send successfully","Sucess",AlertType.Success);
+                    return RedirectToAction("Login");
+                }
+                else
+                {
+                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                    updateDateFun();
+                    return View(tblfeedback);
+
+                }
+            }
+            else
+            {
+                updateDateFun();
+                return View(tblfeedback);
+            }
+
+        }
+        public IActionResult RedirectToMicrosoft()
+        {
+            return Redirect("https://www.microsoft.com/en-us/download/");
+        }
+        public IActionResult RedirectToAdobe() 
+        { 
+            return Redirect("https://www.adobe.com/");
+        }
+
+    } 
+    public static class AlertMessage
+    {
+        public static string ShowMessage(string message, string title, AlertType type)
+        {
+            return $"<div class='alert alert-{type.ToString().ToLower()} alert-dismissible fade show' role='alert'>" +
+                   $"{message}<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
+        }
     }
+
 }

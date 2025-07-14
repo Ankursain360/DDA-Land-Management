@@ -1718,3 +1718,13 @@ textarea.floating-label-field--s3 {
 .select2-selection__clear {
     display: none;
 }
+
+.icon-green {
+    margin-right: 5px;
+    color: green;
+}
+
+.link-clean {
+    color: cornflowerblue;
+    text-decoration: none;
+}
