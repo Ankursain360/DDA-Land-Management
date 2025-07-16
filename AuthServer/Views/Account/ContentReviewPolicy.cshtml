@@ -9,7 +9,7 @@
     <link rel="icon" href="~/images/favicon.png" type="image/png" sizes="16x16" />
     <meta name="description" content="Land Management information System (LMIS)">
     <meta name="keywords" content="DDALMIS/DDA Land Management/DDA Lease Property/ DDA Damage Property">
-    <title>Privacy Policy</title>
+    <title>Content Review Policy (CRP)</title>
     <!--font css-->
     <link rel="stylesheet" href="~/font/open-sans/stylesheet.css" />
 
@@ -21,7 +21,7 @@
     <link href="~/lib/css/style.css" rel="stylesheet" />
     <link href="~/lib/toaster/toastr.min.css" rel="stylesheet" />
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-   @*  <link href="~/lib/select2/select2.css" rel="stylesheet" />
+    @*  <link href="~/lib/select2/select2.css" rel="stylesheet" />
     <script src="~/lib/select2/select2.js"></script> *@
 
 </head>
@@ -51,23 +51,21 @@
                     <i class="ri-folder-user-fill" style="font-size:20px"></i>
                     </a>
                     </div>*@
-                    <div class="text-white my-2  me-3 order-md-3">                      
+                    <div class="text-white my-2  me-3 order-md-3">
+                        @*  <a href="https://ddalmis.org.in/" role="button" id="notification" title="Go back to modules!" class='p-2 d-block text-white no-dec'>
+                            <i class="ri-home-3-fill" style="font-size:20px"></i>
+                        </a> *@
                         <ul class="nav nav-tabs mb-3" id="navigationTabs" role="tablist">
 
                             <li class="nav-item" role="presentation">
-                                @* <a class="nav-link text-white" id="help-tab" data-bs-toggle="tab"
-                                    href="https://ddalmis.org.in/" role="tab" aria-controls="help-tab-pane" 
-                                    aria-selected="false">
-                                    <i class="ri-home-3-fill" style="font-size:20px"></i>
-                                </a> *@
                                 <a class="nav-link text-white"
                                    href="https://ddalmis.org.in/"
                                    aria-label="Home">
                                     <i class="ri-home-3-fill" style="font-size:20px"></i>
                                 </a>
-
                             </li>
                         </ul>
+
                     </div>
                 </div>
             </div>
@@ -84,30 +82,36 @@
     </aside>*@
 
     <partial name="_CookieConsentPartial" />
-    <section class="privacy-section bg-gray">
-        <div class="container-fluid px-3 py-4">
-            <div class="privacy-wrapper">
-                <h2 class="text-center mb-4"><strong>Privacy Policy</strong></h2>
-                <div class="card p-3 bg-light">
-                    <div class="table-responsive">
-                        <table class="table table-striped table-bordered">
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <p>DDA Delhi considers the responsible use of personal information to be a critical element in enabling the Internet to reach its potential as a serious tool for personal and professional activities. As the Internet changes our lives in a number of ways, DDA Delhi is committed to respecting your privacy. DDA Delhi has created this privacy statement in order to demonstrate our firm's commitment to privacy.</p>
-                                        <p>In general, you can visit www.dda.org.in without telling us who you are or revealing any personal information about yourself. We use your IP address to help diagnose problems with our server and / or to administer our Web site. This gives us an idea of which parts of our site users are visiting. We do not link IP addresses to anything personally identifiable. This means that a user session will be tracked, but the user will be anonymous. </p>
-                                        <p>There are times, however, when we may need information from you, such as your name, home or business address and e-mail address. DDA Delhi will seek to let you know before we collect any personal information from you over the Internet. When DDA Delhi receives information about your session or about you, we may use it for research or to improve our site and the services we offer you. We will ask you if you want us to use that information to continue contact with you by DDA Delhi and our business partners via e-mail or other means -- for example, to send you new product information or notification of special offers. If you do not want us or our partners to contact you, you can choose to "opt out," and DDA Delhi will endeavor to respect your wishes. </p>
-                                        <p>This site contains links to other sites. DDA Delhi. is not responsible for the privacy practices or the content of such Web sites.</p>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+    <section class="slow bg-gray">
+        <div class="container-fluid">
+            <div class="section-wraper px-3  pb-md-0">
+                <div class="form-control" style="margin-top:70px;">
+                    <h2 class="text-center"><strong>Content Review Policy (CRP)</strong></h2>
+                    <div class="card p-3 bg-gray-100 overflow-auto">
+                        <div class="row align-items-center">
+                            <div class="col-md-12">
+                                <table class="table table-striped table-bordered table-responsive">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <p>LIMS Application is the face of Delhi Development Authority (DDA), Ministry of Housing and Urban Affairs, Govt. Of India. It is therefore required to keep the content on the application current and up‐to‐date and hence there is a need for the Content Review Policy. Since the scope of the content is huge, different Review Policies are defined for the diverse content elements.</p>
+                                                <p>The Review Policy is based on different type of content elements, its validity and relevance as well as the archival policy. The entire Application content would be reviewed for syntax checks in a regular interval (once in a month /once in a quarter) by the DDA Team.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
+
                 </div>
             </div>
         </div>
     </section>
-
+    <br />
+    <br />
+    <br />
     <footer class="footers slow">
         <div class="container-fluid">
             <div class="text-center mt-2">
@@ -120,7 +124,7 @@
                 <a href="#" id="makeinindiaLink" class="m-2">
                     <img src="~/images/logos/make_in_india.png" alt="Make in India" height="40" />
                 </a>
-               @*  <a href="#" id="india_Gov_Link" class="m-2">
+                @* <a href="#" id="india_Gov_Link" class="m-2">
                     <img src="~/images/logos/india_gov_in.png" alt="india.gov.in" height="40" />
                 </a> *@
                 <a href="#" id="my_gov_Link" class="m-2">
@@ -153,18 +157,19 @@
         </div>
     </footer>
 
-    @* <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script> *@
-    @* <script src="~/lib/chart.js/dist/Chart.min.js"></script> *@
+    @*  <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script> *@
+    @*  <script src="~/lib/chart.js/dist/Chart.min.js"></script> *@
     <script src="~/lib/toaster/toastr.min.js"></script>
 
     <environment include="Development">
-       @*  <script src="~/js/site.js"></script> *@
+        @*  <script src="~/js/site.js"></script> *@
         <script src="~/js/custome.js"></script>
     </environment>
     <environment exclude="Development">
-       @*  <script src="~/js/site.min.js" asp-append-version="true"></script> *@
+        @* <script src="~/js/site.min.js" asp-append-version="true"></script>*@
         <script src="~/js/custome.min.js" asp-append-version="true"></script>
     </environment>
+
     @Html.Raw(ViewBag.Message)
     @using Microsoft.AspNetCore.Http
     @inject IHttpContextAccessor HttpContextAccessor

@@ -56,9 +56,10 @@
                             <i class="ri-home-3-fill" style="font-size:20px"></i>
                         </a> *@
                         <ul class="nav nav-tabs mb-3" id="navigationTabs" role="tablist">
-
                             <li class="nav-item" role="presentation">
-                                <a class="nav-link text-white" id="help-tab" data-bs-toggle="tab" href="https://ddalmis.org.in/" role="tab" aria-controls="help-tab-pane" aria-selected="false">
+                                <a class="nav-link text-white"
+                                   href="https://ddalmis.org.in/"
+                                   aria-label="Home">
                                     <i class="ri-home-3-fill" style="font-size:20px"></i>
                                 </a>
                             </li>
@@ -84,7 +85,7 @@
         <div class="container-fluid">
             <div class="section-wraper px-3  pb-md-0">
                 <div class="form-control" style="margin-top:70px;">
-                    <p><h2 class="text-center"><strong>Security Policy</strong></h2></p>
+                    <h2 class="text-center"><strong>Security Policy</strong></h2>
                     <div class="card p-3 bg-gray-100 overflow-auto">
                         <div class="row align-items-center">
                             <div class="col-md-12">
@@ -146,7 +147,7 @@
                 | <a asp-action="AboutUs" asp-controller="Account">About Us</a>
                 | <a asp-action="ContingencyManagementPlan" asp-controller="Account">Contingency Management Plan</a>
                 | <a asp-action="ContentArchivalCAPPolicy" asp-controller="Account">Content Archival Policy (CAP)</a>
-                | <a asp-action="ContentReviewCAPPolicy" asp-controller="Account">Content Review Policy (CRP)</a>
+                | <a asp-action="ContentReviewPolicy" asp-controller="Account">Content Review Policy (CRP)</a>
                 | <a asp-action="WebsiteMonitoringPlan" asp-controller="Account">Website Monitoring Plan</a>
                 | <a asp-action="SecurityPolicy" asp-controller="Account">Security Policy</a>
                 | <a asp-action="Feedback" asp-controller="Account">Feedback</a>
@@ -159,7 +160,7 @@
         </div>
     </footer>
 
-    <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    @* <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script> *@
    @*  <script src="~/lib/chart.js/dist/Chart.min.js"></script> *@
     <script src="~/lib/toaster/toastr.min.js"></script>
 

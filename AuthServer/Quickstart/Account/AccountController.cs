@@ -843,6 +843,11 @@ namespace IdentityServerHost.Quickstart.UI
         {
             updateDateFun();
             return View();
+        } 
+        public IActionResult ContentReviewPolicy()
+        {
+            updateDateFun(); 
+            return View();
         }
         public IActionResult WebsiteMonitoringPlan()
         {

@@ -678,5 +678,40 @@ footer.footer {
     outline-offset: 2px;
     border-radius: 4px;
 }
+html, body {
+    min-height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Base styles */
+#LoginPage {
+    height: auto;
+    min-height: 100vh;
+    display: flex; /* Helps center content if needed */
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    padding: 2rem;
+}
+
+.login-scroll {
+    overflow: visible;
+    padding: 0 1rem;
+}
+
+/* Force hide the right-side login image on small screens */
+@media screen and  (max-width: 767px) {
+    #LoginPage .col-md-6.d-none.d-md-block {
+        display: block;
+    }
+}
+
+
+
+
 
 

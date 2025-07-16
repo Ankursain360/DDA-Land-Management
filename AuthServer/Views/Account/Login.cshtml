@@ -5,9 +5,9 @@
 }
 @if (TempData["Message"] != null)
 {
-    <div class="my-2">
+        <div class="my-2">
         @Html.Raw(TempData["Message"])
-    </div>
+        </div>
 }
 
 <partial name="_ValidationSummary" />
@@ -16,131 +16,138 @@
 
     @if (Model.EnableLocalLogin)
     {
-        <form asp-route="Login" class="input-form">
+            <form asp-action="Login" method="post" class="input-form">
 
-            <input type="hidden" asp-for="ReturnUrl" />
-            <input type="hidden" asp-for="Data" id="hdnvals" />
-            <div class="card">
-                <div class="card-header">
-                    <strong> Authority Login</strong>
-                </div>
-                <div class="form-group icon mt-2">
-                    <i class="ri-user-line"></i>
-                    <label asp-for="Username"></label>
-                    <input class="form-control" placeholder="Username" asp-for="Username" autocomplete="off" maxlength="30" autofocus>
-                    <span asp-validation-for="Username" class="text-danger"></span>
-                </div>
-                <div class="form-group icon mt-2">
+                <input type="hidden" asp-for="ReturnUrl" />
+                <input type="hidden" asp-for="Data" id="hdnvals" />
+                <div class="card">
+                    <div class="card-header">
+                        <strong> Authority Login</strong>
+                    </div>
+                    <div class="form-group icon mt-2">
+                        <i class="ri-user-line"></i>
+                        <label asp-for="Username"></label>
+                        <input class="form-control" placeholder="Username" asp-for="Username" autocomplete="off" maxlength="30" autofocus>
+                        <span asp-validation-for="Username" class="text-danger"></span>
+                    </div>
+                @* <div class="form-group icon mt-2">
                     <i class="ri-lock-line"></i>
                     <label asp-for="Password"></label>
                     <input type="password" class="form-control" placeholder="Password" asp-for="Password" maxlength="30" autocomplete="off">
-                    <span asp-validation-for="Password" class="text-danger"></span>
-                                      
-                </div>
+                    <span asp-validation-for="Password" class="text-danger" id="Password-error"></span>
+
+                </div> *@
+                        <div class="form-group icon mt-2">
+                            <i class="ri-lock-line"></i>
+                           <label asp-for="Password">Password</label>
+                           <input type="password" class="form-control" placeholder="Password" 
+                           asp-for="Password" maxlength="30" autocomplete="off">
+                           <span asp-validation-for="Password" class="text-danger" id="Password-error"></span>
+                        </div>
+
                 @* <div class="form-group icon" style="position:relative;left:100px"> *@
-                <div class="form-group icon offset-password">
-                    <input type="checkbox" class="form-check-input" id="c" />
-                    <label class="form-check-label" for="showpassword">Show password</label>
+                    <div class="form-group icon offset-password">
+                        <input type="checkbox" class="form-check-input" id="showpassword" />
+                        <label class="form-check-label" for="showpassword">Show password</label>
 
-                </div>
-               
-             
-                <div class="form-group icon">
-                    <label for="CaptchaCode">Captcha Code</label>
-                    <input asp-for="CaptchaCode" alt="Captcha Code"
-                           type="text"
-                           class="form-control"
-                           placeholder="Enter Captcha *"
-                           maxlength="4"
-                           autocomplete="off"/>
-                    @* <span asp-validation-for="CaptchaCode" class="text-danger"></span> *@
-                </div>
-
-                <div class="d-flex align-items-center gap-2 ms-3">
-                    <div class="codeImg">
-                        <img src="@Model.CaptchaImageBase64"
-                             id="img-captcha"
-                             alt="captcha code"
-                             tabindex="0"
-                             style="cursor:pointer" />
                     </div>
 
-                    <i class="ri-refresh-line icon-clickable"
-                       id="refreshcaptcha"
-                       title="Refresh Captcha"
-                       tabindex="0"
-                       role="button"
-                       aria-label="Refresh Captcha"></i>
 
-                    <i class="ri-volume-up-line icon-clickable"
-                       id="speakCaptcha"
-                       title="Speak Captcha"
-                       tabindex="0"
-                       role="button"
-                       aria-label="Speak Captcha"></i>
+                    <div class="form-group icon">
+                        <label for="CaptchaCode">Captcha Code</label>
+                        <input asp-for="CaptchaCode" type="text"
+                               class="form-control"
+                               placeholder="Enter Captcha *"
+                               maxlength="4"
+                               autocomplete="off"/>
+                    @* <span asp-validation-for="CaptchaCode" class="text-danger"></span> *@
+                    </div>
 
-                    <input type="hidden" id="captchaValue" value="@Model.CaptchaData" />
-                </div>
+                    <div class="d-flex align-items-center gap-2 ms-3">
+                        <div class="codeImg">
+                            <img src="@Model.CaptchaImageBase64"
+                                 id="img-captcha"
+                                 alt="captcha code"
+                                 tabindex="0"
+                                 style="cursor:pointer" />
+                        </div>
+
+                        <i class="ri-refresh-line icon-clickable"
+                           id="refreshcaptcha"
+                           title="Refresh Captcha"
+                           tabindex="0"
+                           role="button"
+                           aria-label="Refresh Captcha"></i>
+
+                        <i class="ri-volume-up-line icon-clickable"
+                           id="speakCaptcha"
+                           title="Speak Captcha"
+                           tabindex="0"
+                           role="button"
+                           aria-label="Speak Captcha"></i>
+
+                        <input type="hidden" id="captchaValue" value="@Model.CaptchaData" />
+                    </div>
 
 
 
 
                 @if (Model.AllowRememberLogin)
                 {
-                    <div class="d-flex align-items-center pt-1">
-                        <div class="form-group form-check">
-                            <input class="form-check-input ms-1" asp-for="RememberLogin">
-                            <label class="form-check-label" asp-for="RememberLogin">Remember Me</label>
+                            <div class="d-flex align-items-center pt-1">
+                                <div class="form-group form-check">
+                                    <input class="form-check-input ms-1" asp-for="RememberLogin">
+                                    <label class="form-check-label" asp-for="RememberLogin">Remember Me</label>
 
-                        </div>
-                        <div class="form-group ms-auto">
-                            <a href="/ForgetPassword/Create" class="text-primary">Forgot Password?</a>
+                                </div>
+                                <div class="form-group ms-auto">
+                                    <a href="/ForgetPassword/Create" class="text-primary">Forgot Password?</a>
 
-                        </div>
-                    </div>
+                                </div>
+                            </div>
                 }
-                <div class="pb-3">
-                    <button class="btn btn-theme ms-2 px-4" name="button" id="btnlogin" value="login">Login</button>
-                    <button class="btn btn-theme px-4" name="button" value="cancel">Cancel</button>
+                    <div class="pb-3">
+                        <button class="btn btn-theme ms-2 px-4" name="button" id="btnlogin" value="login">Login</button>
+                        <button class="btn btn-theme px-4" name="button" value="cancel">Cancel</button>
+                    </div>
                 </div>
-            </div>
-           
-        </form>
+
+            </form>
     }
 
     @if (Model.VisibleExternalProviders.Any())
     {
-        <div class="col-sm-6">
-            <div class="card">
-                <div class="card-header">
-                    <h2>External Account</h2>
-                </div>
-                <div class="card-body">
-                    <ul class="list-inline">
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>External Account</h2>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-inline">
                         @foreach (var provider in Model.VisibleExternalProviders)
                         {
-                            <li class="list-inline-item">
-                                <a class="btn btn-secondary"
-                                   asp-controller="External"
-                                   asp-action="Challenge"
-                                   asp-route-scheme="@provider.AuthenticationScheme"
-                                   asp-route-returnUrl="@Model.ReturnUrl">
+                                    <li class="list-inline-item">
+                                        <a class="btn btn-secondary"
+                                           asp-controller="External"
+                                           asp-action="Challenge"
+                                           asp-route-scheme="@provider.AuthenticationScheme"
+                                           asp-route-returnUrl="@Model.ReturnUrl">
                                     @provider.DisplayName
-                                </a>
-                            </li>
+                                        </a>
+                                    </li>
                         }
-                    </ul>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
     }
 
     @if (!Model.EnableLocalLogin && !Model.VisibleExternalProviders.Any())
     {
-        <div class="alert alert-warning">
-            <strong>Invalid login request</strong>
-            There are no login schemes configured for this request.
-        </div>
+            <div class="alert alert-warning">
+                <strong>Invalid login request</strong>
+                There are no login schemes configured for this request.
+            </div>
     }
 </div>
 
@@ -155,7 +162,9 @@
 </environment>
 <environment include="Development">
     <script src="~/js/login.js"></script>
+    <script src="~/js/custome.js"></script>
 </environment>
 <environment exclude="Development">
     <script src="~/js/login.min.js" asp-append-version="true"></script>
+    <script src="~/js/custome.min.js" asp-append-version="true"></script>
 </environment>

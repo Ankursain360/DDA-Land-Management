@@ -99,7 +99,7 @@ a.no-dec {
         background: linear-gradient(90deg, rgba(75, 80, 162, 1) 0%, rgba(125, 56, 101, 1) 100%);
         filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#4b50a2", endColorstr="#7d3865", GradientType=1);
         opacity: .95;
-        z-index: 0z;
+       /* z-index: 0z;*/
     }
 
 .login {
@@ -813,7 +813,7 @@ footer.footer {
 
     .floating-label-field:focus {
         outline: 0;
-        box-shadow: 0;
+       /* box-shadow: 0;*/
     }
 
     .floating-label-field::placeholder {
@@ -1147,3 +1147,8 @@ textarea.floating-label-field--s3 {
         }
 
 
+.privacy-section {
+    max-height: calc(100vh - 150px); /* 100vh minus header/footer height */
+    overflow-y: auto; /* scroll inside section */
+    padding: 1rem;
+}

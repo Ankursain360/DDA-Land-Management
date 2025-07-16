@@ -16,13 +16,12 @@
     <link href="~/lib/toaster/toastr.min.css" rel="stylesheet" />
 </head>
 <body>
-    @*<partial name="_Nav" />*@
-
-    <section id="LoginPage" class="d-flex fixed-bg">
-        <div class="container m-auto">
-            <div class="row  justify-content-center">
+    @*<partial name="_Nav" />*@   
+    @* <section id="LoginPage" class="fixed-bg">
+        <div class="container py-4">
+            <div class="row justify-content-center">
                 <div class="col-xl-10">
-                    <div class="bg-white rounded overflow-hidden">
+                    <div class="bg-white rounded shadow-sm p-3">
                         <div class="row no-gutters">
                             <div class="col-md-6 col-lg-5 col-xl-5">
                                 <div class="login-container">
@@ -32,9 +31,14 @@
                                             <h6 class="m-0">Delhi Development Authority<br>Government of India</h6>
                                         </figcaption>
                                     </figure>
-                                    @RenderBody()
+
+                                    <!-- no need to force flex layout or fixed height -->
+                                    <div class="login-scroll">
+                                        @RenderBody()
+                                    </div>
                                 </div>
                             </div>
+
                             <div class="col-md-6 col-lg-7 col-xl-7 d-none d-md-block">
                                 <figure class="m-0 d-block overflow-hidden">
                                     <img src="~/login/login-img.jpg" alt="DDA login">
@@ -54,11 +58,11 @@
                                         <li> <a href="https://leaseallottee.ddalmis.org.in/SignupForm/Create/">Lease/Licence User SignUp</a> </li>
                                         <li> <a href="https://damage.ddalmis.org.in/DamagePayeeRegistration/Create/">Damage Payee Registration</a> </li>
 
-                                       @*  <li> <a href="https://damagepayee.managemybusinessess.com/">Damage Payee Public Interface</a></li>
+                                        <!--  <li> <a href="https://damagepayee.managemybusinessess.com/">Damage Payee Public Interface</a></li>
                                             <li><a href="https://publiclims.managemybusinessess.com/">LIMS Public Interface</a></li>
                                             <li><a href="https://leaseallottee.managemybusinessess.com/SignupForm/CreateLogin/">Lease/Licence User Login  </a></li>
                                             <li> <a href="https://leaseallottee.managemybusinessess.com/SignupForm/Create/">Lease/Licence User SignUp</a> </li>
-                                            <li> <a href="https://damage.managemybusinessess.com/DamagePayeeRegistration/Create/">Damage Payee Registration</a> </li> *@
+                                            <li> <a href="https://damage.managemybusinessess.com/DamagePayeeRegistration/Create/">Damage Payee Registration</a> </li> -->
                                     </ul>
                                 </div>
                             </div>
@@ -81,9 +85,9 @@
                 <a href="#" id="makeinindiaLink" class="m-2">
                     <img src="~/images/logos/make_in_india.png" alt="Make in India" height="40" />
                 </a>
-               @*  <a href="#" id="india_Gov_Link" class="m-2">
+              <!-- <a href="#" id="india_Gov_Link" class="m-2">
                     <img src="~/images/logos/india_gov_in.png" alt="india.gov.in" height="40" />
-                </a> *@
+                </a> -->
                 <a href="#" id="my_gov_Link" class="m-2">
                     <img src="~/images/logos/mygov_logo.jpg" alt="MyGov" height="40" />
                 </a>
@@ -110,7 +114,109 @@
                 <label>Last Updated : @HttpContextAccessor.HttpContext.Session.GetString("LastUpdatedDate")</label>
             </p>
         </div>
-    </footer>
+    </footer> *@
+
+
+    <section id="LoginPage" class="fixed-bg">
+    <div class="container py-4">
+        <div class="row justify-content-center">
+            <div class="col-xl-10">
+                <div class="bg-white rounded shadow-sm p-3">
+
+                    <!-- ROW for Form + Image -->
+                    <div class="row align-items-center g-0">
+
+                        <!-- LEFT COLUMN: Login Form -->
+                        <div class="col-12 col-md-6 col-lg-5">
+                            <div class="login-container">
+                                <figure class="mx-auto my-0 d-block mb-4">
+                                    <img src="~/login/logo-circle.png" alt="DDA logo" class="d-block mx-auto mb-2">
+                                    <figcaption class="text-center">
+                                        <h6 class="m-0">
+                                            Delhi Development Authority<br>
+                                            Government of India
+                                        </h6>
+                                    </figcaption>
+                                </figure>
+
+                                <!-- Login form -->
+                                <div class="login-scroll">
+                                        @RenderBody()
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- RIGHT COLUMN: Illustration Image (hidden on mobile) -->
+                        <div class="col-md-6 col-lg-7 d-none d-md-block">
+                            <figure class="m-0 d-block overflow-hidden">
+                                <img src="~/login/login-img.jpg" alt="DDA login" class="img-fluid">
+                            </figure>
+                        </div>
+                    </div>
+
+                    <!-- ROW for Online Public Services -->
+                    <div class="row justify-content-center mb-md-3 mt-4">
+                        <div class="col-12 col-md-11">
+                            <div class="card">
+                                <div class="card-header">
+                                    <strong> Online Public Services</strong>
+                                </div>
+                                <ul>
+                                    <li><a href="https://damagepublicinterface.ddalmis.org.in/">Damage Payee Public Interface</a></li>
+                                    <li><a href="https://oldlimspublicinterface.ddalmis.org.in/">LIMS Public Interface</a></li>
+                                    <li><a href="https://leaseallottee.ddalmis.org.in/SignupForm/CreateLogin/">Lease/Licence User Login</a></li>
+                                    <li><a href="https://leaseallottee.ddalmis.org.in/SignupForm/Create/">Lease/Licence User SignUp</a></li>
+                                    <li><a href="https://damage.ddalmis.org.in/DamagePayeeRegistration/Create/">Damage Payee Registration</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div> <!-- bg-white -->
+            </div>
+        </div>
+    </div>
+</section>
+
+<br />
+<footer class="footer slow mt-1">
+    <div class="container-fluid text-center">
+
+        <!-- Footer Logos -->
+        <div class="text-center mt-2">
+            <a href="#" class="m-2"><img src="~/images/logos/digital_india.png" alt="Digital India" height="40" /></a>
+            <a href="#" class="m-2"><img src="~/images/logos/data_gov_in.png" alt="data.gov.in" height="40" /></a>
+            <a href="#" class="m-2"><img src="~/images/logos/make_in_india.png" alt="Make in India" height="40" /></a>
+            <a href="#" class="m-2"><img src="~/images/logos/mygov_logo.jpg" alt="MyGov" height="40" /></a>
+        </div>
+
+        <!-- Footer Links -->
+        <p class="my-0 py-2">
+            <a asp-action="Login" asp-controller="Account">Home</a> |
+            <a asp-action="PrivacyPolicy" asp-controller="Account">Privacy Policy</a> |
+            <a asp-action="TermsandConditions" asp-controller="Account">Terms & Conditions</a> |
+            <a asp-action="copyRight" asp-controller="Account">Copyright Policy</a> |
+            <a asp-action="HyperlinkPolicy" asp-controller="Account">Hyperlink Policy</a> |
+            <a asp-action="WebInformationManager" asp-controller="Account">Web Information Manager</a> |
+            <a asp-action="Contactus" asp-controller="Account">Contact Us</a> |
+            <a asp-action="Help" asp-controller="Account">Help</a> |
+            <a asp-action="Disclaimer" asp-controller="Account">Disclaimer</a> |
+            <a asp-action="AboutUs" asp-controller="Account">About Us</a> |
+            <a asp-action="ContingencyManagementPlan" asp-controller="Account">Contingency Management Plan</a> |
+            <a asp-action="ContentArchivalCAPPolicy" asp-controller="Account">Content Archival Policy (CAP)</a> |
+                <a asp-action="ContentReviewPolicy" asp-controller="Account">Content Review Policy (CRP)</a> |
+            <a asp-action="WebsiteMonitoringPlan" asp-controller="Account">Website Monitoring Plan</a> |
+            <a asp-action="SecurityPolicy" asp-controller="Account">Security Policy</a> |
+            <a asp-action="Feedback" asp-controller="Account">Feedback</a> |
+            <a asp-action="Sitemap" asp-controller="Account">Site map</a><br>
+
+            &copy; Content Owned by DDA, Government of India.
+            <label>Last Updated : @HttpContextAccessor.HttpContext.Session.GetString("LastUpdatedDate")</label>
+        </p>
+    </div>
+</footer>
+
+
 
     <script src="~/lib/jquery/dist/jquery.slim.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

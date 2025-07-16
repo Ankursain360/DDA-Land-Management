@@ -56,9 +56,10 @@
                             <i class="ri-home-3-fill" style="font-size:20px"></i>
                         </a> *@
                         <ul class="nav nav-tabs mb-3" id="navigationTabs" role="tablist">
-
                             <li class="nav-item" role="presentation">
-                                <a class="nav-link text-white" id="help-tab" data-bs-toggle="tab" href="https://ddalmis.org.in/" role="tab" aria-controls="help-tab-pane" aria-selected="false">
+                                <a class="nav-link text-white"
+                                   href="https://ddalmis.org.in/"
+                                   aria-label="Home">
                                     <i class="ri-home-3-fill" style="font-size:20px"></i>
                                 </a>
                             </li>
@@ -138,7 +139,7 @@
                             <a class="text-decoration-none fw-bold text-dark" asp-action="SecurityPolicy" asp-controller="Account">Security Policy</a>
                         </li>
                         <li class="list-group-item bg-light">
-                            <a class="text-decoration-none fw-bold text-dark" href="#">Feedback Page</a>
+                            <a class="text-decoration-none fw-bold text-dark" asp-action="Feedback" asp-controller="Account">Feedback</a>
                         </li>
                         <li class="list-group-item bg-light">
                             <a class="text-decoration-none fw-bold text-dark" asp-action="Sitemap" asp-controller="Account">Site Map</a>
@@ -166,7 +167,7 @@
                 <a href="#" id="makeinindiaLink" class="m-2">
                     <img src="~/images/logos/make_in_india.png" alt="Make in India" height="40" />
                 </a>
-               @*  <a href="#" id="india_Gov_Link" class="m-2">
+                @*  <a href="#" id="india_Gov_Link" class="m-2">
                     <img src="~/images/logos/india_gov_in.png" alt="india.gov.in" height="40" />
                 </a> *@
                 <a href="#" id="my_gov_Link" class="m-2">
@@ -186,7 +187,7 @@
                 | <a asp-action="AboutUs" asp-controller="Account">About Us</a>
                 | <a asp-action="ContingencyManagementPlan" asp-controller="Account">Contingency Management Plan</a>
                 | <a asp-action="ContentArchivalCAPPolicy" asp-controller="Account">Content Archival Policy (CAP)</a>
-                | <a asp-action="ContentReviewCAPPolicy" asp-controller="Account">Content Review Policy (CRP)</a>
+                | <a asp-action="ContentReviewPolicy" asp-controller="Account">Content Review Policy (CRP)</a>
                 | <a asp-action="WebsiteMonitoringPlan" asp-controller="Account">Website Monitoring Plan</a>
                 | <a asp-action="SecurityPolicy" asp-controller="Account">Security Policy</a>
                 | <a asp-action="Feedback" asp-controller="Account">Feedback</a>
@@ -200,7 +201,7 @@
     </footer>
 
 
-    <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    @* <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script> *@
     @* <script src="~/lib/chart.js/dist/Chart.min.js"></script> *@
     <script src="~/lib/toaster/toastr.min.js"></script>
 
@@ -210,7 +211,7 @@
     </environment>
     <environment exclude="Development">
        @*  <script src="~/js/site.min.js" asp-append-version="true"></script> *@
-        <script src="~/js/custome.min.js asp-append-version="true"></script>
+        <script src="~/js/custome.min.js" asp-append-version="true"></script>
     </environment>
     @Html.Raw(ViewBag.Message)
     @using Microsoft.AspNetCore.Http
