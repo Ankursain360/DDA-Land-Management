@@ -26,9 +26,9 @@ namespace Libraries.Service.ApplicationService
             throw new System.NotImplementedException();
         }
 
-        public Task<PagedResult<tblfeedback>> GetPagedResult(FeedbackSearchDto model)
+        public async Task<PagedResult<tblfeedback>> GetPagedResult(FeedbackSearchDto model)
         {
-            throw new System.NotImplementedException();
+            return await _repository.GetPagedResult(model);
         }
 
         public Task<List<tblfeedback>> GetTblfeedbacks()
@@ -42,6 +42,11 @@ namespace Libraries.Service.ApplicationService
             tblfeedback.CreatedDate = DateTime.Now;
             _repository.Add(tblfeedback);
             return await _unitOfWork.CommitAsync() > 0;
+        }
+
+        public async Task<tblfeedback> GetSingleResult(int id)
+        {
+            return await _repository.GetSingleResult(id);
         }
     }
 }

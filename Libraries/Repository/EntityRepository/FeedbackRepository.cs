@@ -74,6 +74,12 @@ namespace Libraries.Repository.EntityRepository
             return data;
         }
 
+        public async Task<tblfeedback> GetSingleResult(int id)
+        {
+           var data = await _dbContext.Tblfeedbacks.Where(x=> x.Id == id).FirstOrDefaultAsync();
+           return data;
+        }
+
         public async Task<List<tblfeedback>> GetTblfeedbacks()
         {
             return await _dbContext.Tblfeedbacks.Where(x => x.IsActive == 1).ToListAsync();

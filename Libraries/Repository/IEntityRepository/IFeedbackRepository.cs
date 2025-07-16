@@ -11,5 +11,6 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<tblfeedback>> GetTblfeedbacks();
         Task<bool> Any(int id, string name);
         Task<PagedResult<tblfeedback>> GetPagedResult(FeedbackSearchDto model);
+        Task<tblfeedback> GetSingleResult(int id);
     } 
 } 
