@@ -16,7 +16,7 @@
 
     @if (Model.EnableLocalLogin)
     {
-        <form asp-route="Login" class="input-form">
+        <form asp-action="Login" method="post" class="input-form">
 
                 <input type="hidden" asp-for="ReturnUrl" />
                 <input type="hidden" asp-for="Data" id="hdnvals" />
@@ -106,10 +106,10 @@
                                 </div>
                             </div>
                 }
-                    <div class="pb-3">
-                        <button class="btn btn-theme ms-2 px-4" name="button" id="c" value="login">Login</button>
-                        <button class="btn btn-theme px-4" name="button" value="cancel">Cancel</button>
-                    </div>
+                <div class="pb-3">
+                    <button class="btn btn-theme ms-2 px-4" name="button" id="btnlogin" value="login">Login</button>
+                    <button class="btn btn-theme px-4" name="button" value="cancel">Cancel</button>
+                </div>
                 </div>
 
             </form>
