@@ -175,6 +175,25 @@ namespace IdentityServerHost.Quickstart.UI
         /// <summary>
         /// Handle postback from username/password login
         /// </summary>
+        private bool IsBase64String(string input)
+        {
+            if (string.IsNullOrWhiteSpace(input))
+                return false;
+
+            input = input.Trim();
+
+            // Length must be multiple of 4
+            if (input.Length % 4 != 0)
+                return false;
+
+            // Match valid Base64 characters
+            return System.Text.RegularExpressions.Regex.IsMatch(
+                input,
+                @"^[a-zA-Z0-9\+/]*={0,2}$",
+                System.Text.RegularExpressions.RegexOptions.None
+            );
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginInputModel model, string button)
@@ -213,12 +232,27 @@ namespace IdentityServerHost.Quickstart.UI
                 ModelState.AddModelError("captcha", "Invalid Captcha.");
             }
 
-            if (model.Data != "")
+            //if (model.Data != "")
+            //{
+            //    string key = model.Data;
+            //    model.Password = DecryptStringAES(model.Password, key);
+            //    model.Username = DecryptStringAES(model.Username, key);
+            //}
+            if (!string.IsNullOrEmpty(model.Data))
             {
                 string key = model.Data;
-                model.Password = DecryptStringAES(model.Password, key);
-                model.Username = DecryptStringAES(model.Username, key);
+
+                if (!string.IsNullOrEmpty(model.Password) && IsBase64String(model.Password))
+                {
+                    model.Password = DecryptStringAES(model.Password, key);
+                }
+
+                if (!string.IsNullOrEmpty(model.Username) && IsBase64String(model.Username))
+                {
+                    model.Username = DecryptStringAES(model.Username, key);
+                }
             }
+
             else
             {
                 ModelState.AddModelError("Decryption", "Decryption program failed.Kindly Referesh the page and try again.");
@@ -360,7 +394,7 @@ namespace IdentityServerHost.Quickstart.UI
 
             // something went wrong, show form with error
             var vm = await BuildLoginViewModelAsync(model);
-            return View(vm);
+            return RedirectToAction("Login",vm);
         }
 
 

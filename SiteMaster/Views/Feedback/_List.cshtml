@@ -19,8 +19,7 @@
             <tr>
                 <td>@item.Name</td>
                 <td>@item.Email</td>
-                <td>@(item.CreatedDate == null ? "":item.CreatedDate.ToString("dd MMMM yyyy"))</td>
-
+                <td>@item.CreatedDate</td>
                 <td>
                     @if (item.IsActive == 1)
                     {

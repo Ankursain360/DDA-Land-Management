@@ -556,7 +556,7 @@ footer.footer {
     padding-bottom: 10px;
     text-align: center;
 }
-@media(min-width:768px) {
+/*@media(min-width:768px) {
     .profile-box img {
         width: 100px;
         height: 100px;
@@ -572,7 +572,7 @@ footer.footer {
         padding-bottom: 15px;
         text-align: left;
     }
-}
+}*/
 @media(min-width:1200px) {
     .section-wraper h1 {
         font-size: 1.5rem;
@@ -704,14 +704,37 @@ html, body {
 }
 
 /* Force hide the right-side login image on small screens */
-@media screen and  (max-width: 767px) {
+/*@media screen and  (max-width: 767px) {
     #LoginPage .col-md-6.d-none.d-md-block {
         display: block;
     }
 }
+*/
 
+/*@media (max-width:767px) {
+    #LoginPage #overflowhidden img {
+        display: none;
+    }
 
+    .login-scroll {
+        width:100%;
+        overflow: visible;
+        padding: 0 1rem;
+    }
+   
+}*/
 
+@media (max-width: 767px) {
+    #LoginPage #overflowhidden img {
+        display: none;
+    }
 
-
-
+    #Login .input-form {
+        width: auto;
+    }
+    
+    .footer #my_gov_Link {
+        display: block;
+        margin-bottom: 5px;
+    }
+}
