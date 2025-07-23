@@ -914,7 +914,7 @@ namespace IdentityServerHost.Quickstart.UI
 
                 if (result == true)
                 {
-                    TempData["Message"] = AlertMessage.ShowMessage("Feedback Send successfully","Sucess",AlertType.Success);
+                    TempData["Message"] = AlertMessage.ShowMessage("Your Feedback has been successfully submitted. The System Administrator will revert with a response within 1 working day. Thank you for reaching out.", "Sucess",AlertType.Success);
                     return RedirectToAction("Login");
                 }
                 else
@@ -940,6 +940,11 @@ namespace IdentityServerHost.Quickstart.UI
         { 
             return Redirect("https://www.adobe.com/");
         }
+        public IActionResult CMAP()
+        {
+            updateDateFun();
+            return View();
+        }
 
     } 
     public static class AlertMessage
@@ -950,5 +955,6 @@ namespace IdentityServerHost.Quickstart.UI
                    $"{message}<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
         }
     }
+
 
 }

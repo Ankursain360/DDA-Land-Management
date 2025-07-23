@@ -59,10 +59,15 @@
 
                             <li class="nav-item" role="presentation">
                                 <a class="nav-link text-white"
-                                   href="https://ddalmis.org.in/"
+                                   href="https://auth.managemybusinessess.com/Account/Login"
                                    aria-label="Home">
                                     <i class="ri-home-3-fill" style="font-size:20px"></i>
                                 </a>
+                                @* <a class="nav-link text-white"
+                                   href="https://ddalmis.org.in/"
+                                   aria-label="Home">
+                                    <i class="ri-home-3-fill" style="font-size:20px"></i>
+                                </a> *@
                             </li>
                         </ul>
 
@@ -124,12 +129,12 @@
                 <a href="#" id="makeinindiaLink" class="m-2">
                     <img src="~/images/logos/make_in_india.png" alt="Make in India" height="40" />
                 </a>
-               @*  <a href="#" id="india_Gov_Link" class="m-2">
+                <a href="#" id="india_Gov_Link" class="m-2">
                     <img src="~/images/logos/india_gov_in.png" alt="india.gov.in" height="40" />
-                </a> *@
-                <a href="#" id="my_gov_Link" class="m-2">
-                    <img src="~/images/logos/mygov_logo.jpg" alt="MyGov" height="40" />
                 </a>
+              @*   <a href="#" id="my_gov_Link" class="m-2">
+                    <img src="~/images/logos/mygov_logo.jpg" alt="MyGov" height="40" />
+                </a> *@
             </div>
             <p class="my-0 py-2 text-center">
                 <a asp-action="Login" asp-controller="Account">Home</a>
@@ -148,7 +153,8 @@
                 | <a asp-action="WebsiteMonitoringPlan" asp-controller="Account">Website Monitoring Plan</a>
                 | <a asp-action="SecurityPolicy" asp-controller="Account">Security Policy</a>
                 | <a asp-action="Feedback" asp-controller="Account">Feedback</a>
-                | <a asp-action="Sitemap" asp-controller="Account">Site map</a><br>
+                | <a asp-action="Sitemap" asp-controller="Account">Site map</a>
+                | <a asp-action="CMAP" asp-controller="Account">CMAP</a><br>
                 &nbsp; &copy; Content Owned by DDA, Government of India. &nbsp;&nbsp;
                 <label>Last Updated : @HttpContextAccessor.HttpContext.Session.GetString("LastUpdatedDate")</label>
             </p>

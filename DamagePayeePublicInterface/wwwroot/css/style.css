@@ -1780,3 +1780,34 @@ span.select2-selection__clear {
     color: cornflowerblue;
     text-decoration: none;
 }
+
+html, body {
+    min-height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Base styles */
+#LoginPage {
+    height: auto;
+    min-height: 100vh;
+    display: flex; /* Helps center content if needed */
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    padding: 2rem;
+}
+
+.login-scroll {
+    overflow: visible;
+    padding: 0 1rem;
+}
+
+.privacy-section {
+    max-height: calc(100vh - 150px); /* 100vh minus header/footer height */
+    overflow-y: auto; /* scroll inside section */
+    padding: 1rem;
+}

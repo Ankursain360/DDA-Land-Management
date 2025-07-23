@@ -59,10 +59,15 @@
 
                             <li class="nav-item" role="presentation">
                                 <a class="nav-link text-white"
-                                   href="https://ddalmis.org.in/"
+                                   href="https://auth.managemybusinessess.com/Account/Login"
                                    aria-label="Home">
                                     <i class="ri-home-3-fill" style="font-size:20px"></i>
                                 </a>
+                                @* <a class="nav-link text-white"
+                                   href="https://ddalmis.org.in/"
+                                   aria-label="Home">
+                                    <i class="ri-home-3-fill" style="font-size:20px"></i>
+                                </a> *@
                             </li>
                         </ul>
 
@@ -90,14 +95,31 @@
                     <div class="card p-3 bg-gray-100 overflow-auto">
                         <div class="row align-items-center">
                             <div class="col-md-12">
+                                <p>LIMS Application is the face of Delhi Development Authority (DDA), Ministry of Housing and Urban Affairs, Govt. Of India. It is therefore required to keep the content on the application current and up‐to‐date and hence there is a need for the Content Review Policy. Since the scope of the content is huge, different Review Policies are defined for the diverse content elements.</p>
+                                <p>The Review Policy is based on different type of content elements, its validity and relevance as well as the archival policy. The entire Application content would be reviewed for syntax checks in a regular interval (once in a month /once in a quarter) by the DDA Team.</p>
                                 <table class="table table-striped table-bordered table-responsive">
+                                    <thead class="text-bg-rgb-40_71_177clr">
+                                        <tr>
+                                            <th>SECTION</th>
+                                            <th>REVIEW PERIODICITY</th>
+                                        </tr>
+                                    </thead>
                                     <tbody>
                                         <tr>
-                                            <td>
-                                                <p>LIMS Application is the face of Delhi Development Authority (DDA), Ministry of Housing and Urban Affairs, Govt. Of India. It is therefore required to keep the content on the application current and up‐to‐date and hence there is a need for the Content Review Policy. Since the scope of the content is huge, different Review Policies are defined for the diverse content elements.</p>
-                                                <p>The Review Policy is based on different type of content elements, its validity and relevance as well as the archival policy. The entire Application content would be reviewed for syntax checks in a regular interval (once in a month /once in a quarter) by the DDA Team.</p>
-                                                
-                                            </td>
+                                            <td>Home Page</td>
+                                            <td>Monthly</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Abount Us</td>
+                                            <td>Yearly</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Contact Us</td>
+                                            <td>Yearly</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Terms & Conditions, Help</td>
+                                            <td>Yearly</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -124,12 +146,12 @@
                 <a href="#" id="makeinindiaLink" class="m-2">
                     <img src="~/images/logos/make_in_india.png" alt="Make in India" height="40" />
                 </a>
-                @* <a href="#" id="india_Gov_Link" class="m-2">
+                <a href="#" id="india_Gov_Link" class="m-2">
                     <img src="~/images/logos/india_gov_in.png" alt="india.gov.in" height="40" />
-                </a> *@
-                <a href="#" id="my_gov_Link" class="m-2">
-                    <img src="~/images/logos/mygov_logo.jpg" alt="MyGov" height="40" />
                 </a>
+                @* <a href="#" id="my_gov_Link" class="m-2">
+                    <img src="~/images/logos/mygov_logo.jpg" alt="MyGov" height="40" />
+                </a> *@
             </div>
             <p class="my-0 py-2 text-center">
                 <a asp-action="Login" asp-controller="Account">Home</a>
@@ -148,7 +170,8 @@
                 | <a asp-action="WebsiteMonitoringPlan" asp-controller="Account">Website Monitoring Plan</a>
                 | <a asp-action="SecurityPolicy" asp-controller="Account">Security Policy</a>
                 | <a asp-action="Feedback" asp-controller="Account">Feedback</a>
-                | <a asp-action="Sitemap" asp-controller="Account">Site map</a><br>
+                | <a asp-action="Sitemap" asp-controller="Account">Site map</a>
+                | <a asp-action="CMAP" asp-controller="Account">CMAP</a><br>
                 &nbsp; &copy; Content Owned by DDA, Government of India. &nbsp;&nbsp;
                 <label>Last Updated : @HttpContextAccessor.HttpContext.Session.GetString("LastUpdatedDate")</label>
             </p>

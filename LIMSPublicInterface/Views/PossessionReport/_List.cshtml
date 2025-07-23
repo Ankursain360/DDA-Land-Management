@@ -24,7 +24,10 @@
                     <td>@(item.Khasra == null ? "" : item.Khasra.Name)</td>
                     <td>@(item.Khasra == null ? "" : (item.Khasra.Bigha.ToString() +  '-' + item.Khasra.Biswa.ToString() + '-' + item.Khasra.Biswanshi.ToString()))</td>
                     <td>@((item.Bigha.ToString() +  '-' + item.Biswa.ToString() + '-' + '0'))</td>
-                    <td> @(item.PossDate.ToString("dd-MMM-yyyy"))</td>
+                    <td>
+                        @(item.PossDate?.ToString("dd-MMM-yyyy") ?? "N/A")
+                    </td>
+
                 </tr>
             }
         }

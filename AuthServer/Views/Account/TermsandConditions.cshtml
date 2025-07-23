@@ -9,7 +9,7 @@
     <link rel="icon" href="~/images/favicon.png" type="image/png" sizes="16x16" />
     <meta name="description" content="Land Management information System (LMIS)">
     <meta name="keywords" content="DDALMIS/DDA Land Management/DDA Lease Property/ DDA Damage Property">
-    <title>Terms and Conditions</title>
+    <title>Terms And Conditions</title>
     <!--font css-->
     <link rel="stylesheet" href="~/font/open-sans/stylesheet.css" />
 
@@ -59,10 +59,15 @@
 
                             <li class="nav-item" role="presentation">
                                 <a class="nav-link text-white"
-                                   href="https://ddalmis.org.in/"
+                                   href="https://auth.managemybusinessess.com/Account/Login"
                                    aria-label="Home">
                                     <i class="ri-home-3-fill" style="font-size:20px"></i>
                                 </a>
+                                @* <a class="nav-link text-white"
+                                   href="https://ddalmis.org.in/"
+                                   aria-label="Home">
+                                    <i class="ri-home-3-fill" style="font-size:20px"></i>
+                                </a> *@
                             </li>
                         </ul>
 
@@ -93,10 +98,10 @@
                                 <tr>
                                     <td>
                                         <p>User Agreement - You (the user) can access www.ddalmis.org.in ("the site"), subject to the terms and conditions of use, as changes/updated from time to time entirely at the discretion of DDA as set out below. These are for an indefinite term and you understand and agree to be bound by such terms.</p>
-                                        <p>Changes - DDA reserves its right to add to or change/modify the terms of this agreement including but not limited to suspend/cancel, or discontinue any or all service at any time without notice, make modifications and alterations in any or all of the content, information and services contained on the site without prior notice. You will be deemed to have accepted such change/s if you continue to access the Site subsequent to such chages.</p>
+                                        <p>Changes - DDA reserves its right to add to or change/modify the terms of this agreement including but not limited to suspend/cancel, or discontinue any or all service at any time without notice, make modifications and alterations in any or all of the content, information and services contained on the site without prior notice. You will be deemed to have accepted such change/s if you continue to access the Site subsequent to such changes.</p>
                                         <p>Charges - Currently, the access to the site is free however, DDA reserves its right to charge subscription fees in respect of any part, aspect of the Site upon reasonable prior notice.</p>
                                         <p>Copyright and Trademarks - Unless otherwise stated, copyright and all intellectual property rights in all material presented on the site (including but not limited to text, audio, video or graphical images), trademarks and logos appearing on this site are the property of DDA and is protected under applicable Indian laws. Any infringement shall be vigorously defended and pursued to the fullest extent permitted by law.</p>
-                                        <p>Limited Permission to Copy - You are permitted to print or download extracts from these pages for your personal information & non-commercial use only. Any copies of these pages saved to disk or to any other storage medium may only be used for subsequent viewing purposes or to print extracts for personal use. You may not (whether directly or through the use of any software program) create a database in electronic or structured mannual form by regularly or systematically downloading and storing all or any part of the pages from this site. No part of the Site may be reproduced or transmitted to or stored in any other web site nor may any of its pages or part thereof be disseminated in any electronic or non-electronic form, not included in any public or private electronic retrieval system or service without prior written permission.</p>
+                                        <p>Limited Permission to Copy - You are permitted to print or download extracts from these pages for your personal information & non-commercial use only. Any copies of these pages saved to disk or to any other storage medium may only be used for subsequent viewing purposes or to print extracts for personal use. You may not (whether directly or through the use of any software program) create a database in electronic or structured manual form by regularly or systematically downloading and storing all or any part of the pages from this site. No part of the Site may be reproduced or transmitted to or stored in any other web site nor may any of its pages or part thereof be disseminated in any electronic or non-electronic form, not included in any public or private electronic retrieval system or service without prior written permission.</p>
                                         <p>OTHER TERMS AND CONDITIONS - The term User shall refer to the user who is browsing the site. The term DDA shall refer to DDA. The terms Site refers to www.ddalmis.org.in owned and monitored by DDA.</p>
                                         <p>DDA may terminate User's access at any time for any reason. The provisions regarding disclaimer of warranty, accuracy of information and indemnification shall survive such termination. DDA may monitor access to the site.</p>
                                         <p>DDA shall have no responsibility for any damage to User's computer system or loss of data that result from the download of any content, materials and information from the site.</p>
@@ -126,12 +131,12 @@
                 <a href="#" id="makeinindiaLink" class="m-2">
                     <img src="~/images/logos/make_in_india.png" alt="Make in India" height="40" />
                 </a>
-               @*  <a href="#" id="india_Gov_Link" class="m-2">
+                <a href="#" id="india_Gov_Link" class="m-2">
                     <img src="~/images/logos/india_gov_in.png" alt="india.gov.in" height="40" />
-                </a> *@
-                <a href="#" id="my_gov_Link" class="m-2">
-                    <img src="~/images/logos/mygov_logo.jpg" alt="MyGov" height="40" />
                 </a>
+              @*   <a href="#" id="my_gov_Link" class="m-2">
+                    <img src="~/images/logos/mygov_logo.jpg" alt="MyGov" height="40" />
+                </a> *@
             </div>
             <p class="my-0 py-2 text-center">
                 <a asp-action="Login" asp-controller="Account">Home</a>
@@ -150,7 +155,8 @@
                 | <a asp-action="WebsiteMonitoringPlan" asp-controller="Account">Website Monitoring Plan</a>
                 | <a asp-action="SecurityPolicy" asp-controller="Account">Security Policy</a>
                 | <a asp-action="Feedback" asp-controller="Account">Feedback</a>
-                | <a asp-action="Sitemap" asp-controller="Account">Site map</a><br>
+                | <a asp-action="Sitemap" asp-controller="Account">Site map</a>
+                | <a asp-action="CMAP" asp-controller="Account">CMAP</a><br>
                 &nbsp; &copy; Content Owned by DDA, Government of India. &nbsp;&nbsp;
                 <label>Last Updated : @HttpContextAccessor.HttpContext.Session.GetString("LastUpdatedDate")</label>
             </p>

@@ -40,6 +40,7 @@ namespace DamagePayeePublicInterface.Infrastructure.Extensions
             services.AddScoped<IAuditRepository, AuditRepository>();
             services.AddScoped<INewDamageSelfAssessmentRepository, NewDamageSelfAssessmentRepository>();
             services.AddScoped<IApplicationModificationDetailsRepository, ApplicationModificationDetailsRepository>();
+            services.AddScoped<IFeedbackRepository, FeedbackRepository>();
 
             /* Application Services */
             services.AddScoped<IApplicationModificationDetailsService, ApplicationModificationDetailsService>();
@@ -60,6 +61,7 @@ namespace DamagePayeePublicInterface.Infrastructure.Extensions
             services.AddScoped<IDPPublicPaymentService, DPPublicPaymentService>();
             services.AddScoped<IAuditService, AuditService>();
             services.AddScoped<INewDamageSelfAssessmentService, NewDamageSelfAssessmentService>();
+            services.AddScoped<IFeedbackService, FeedbackService>();
 
         }
     }

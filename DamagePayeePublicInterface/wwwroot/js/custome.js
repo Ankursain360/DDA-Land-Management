@@ -65,7 +65,7 @@ $(document).ready(function () {
         debugger;
         event.preventDefault();
         const message = "You are being redirected to an external website.\nClick OK to continue or Cancel to stay.";
-        const url = "https://www.india.gov.in/";
+        const url = "https://india.gov.in/";
         if (confirm(message)) {
             window.open(url, '_blank');
         }
