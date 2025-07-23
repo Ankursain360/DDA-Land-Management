@@ -154,24 +154,24 @@
                 </a> *@
             </div>
             <p class="my-0 py-2 text-center">
-                <a asp-action="Login" asp-controller="Account">Home</a>
+                 <a asp-action="Login" asp-controller="Account">Home</a>               
+                | <a asp-action="copyRight" asp-controller="Account">Copyright Policy</a>
+                | <a asp-action="CMAP" asp-controller="Account">CMAP</a>
+                | <a asp-action="ContentArchivalCAPPolicy" asp-controller="Account">Content Archival Policy (CAP)</a>
+                | <a asp-action="ContentReviewPolicy" asp-controller="Account">Content Review Policy (CRP)</a>
+                | <a asp-action="HyperlinkPolicy" asp-controller="Account">Hyperlink Policy</a>
                 | <a asp-action="PrivacyPolicy" asp-controller="Account">Privacy Policy</a>
                 | <a asp-action="TermsandConditions" asp-controller="Account">Terms & Conditions</a>
-                | <a asp-action="copyRight" asp-controller="Account">Copyright Policy</a>
-                | <a asp-action="HyperlinkPolicy" asp-controller="Account">Hyperlink Policy</a>
-                | <a asp-action="WebInformationManager" asp-controller="Account">Web Information Manager</a>
+                | <a asp-action="WebsiteMonitoringPlan" asp-controller="Account">Website Monitoring Plan</a>
+                | <a asp-action="ContingencyManagementPlan" asp-controller="Account">Contingency Management Plan</a>
+                | <a asp-action="SecurityPolicy" asp-controller="Account">Security Policy</a>                
                 | <a asp-action="Contactus" asp-controller="Account">Contact Us</a>
                 | <a asp-action="Help" asp-controller="Account">Help</a>
                 | <a asp-action="Disclaimer" asp-controller="Account">Disclaimer</a>
                 | <a asp-action="AboutUs" asp-controller="Account">About Us</a>
-                | <a asp-action="ContingencyManagementPlan" asp-controller="Account">Contingency Management Plan</a>
-                | <a asp-action="ContentArchivalCAPPolicy" asp-controller="Account">Content Archival Policy (CAP)</a>
-                | <a asp-action="ContentReviewPolicy" asp-controller="Account">Content Review Policy (CRP)</a>
-                | <a asp-action="WebsiteMonitoringPlan" asp-controller="Account">Website Monitoring Plan</a>
-                | <a asp-action="SecurityPolicy" asp-controller="Account">Security Policy</a>
+                | <a asp-action="WebInformationManager" asp-controller="Account">Web Information Manager</a>
                 | <a asp-action="Feedback" asp-controller="Account">Feedback</a>
-                | <a asp-action="Sitemap" asp-controller="Account">Site map</a>
-                | <a asp-action="CMAP" asp-controller="Account">CMAP</a><br>
+                | <a asp-action="Sitemap" asp-controller="Account">Site map</a><br>
                 &nbsp; &copy; Content Owned by DDA, Government of India. &nbsp;&nbsp;
                 <label>Last Updated : @HttpContextAccessor.HttpContext.Session.GetString("LastUpdatedDate")</label>
             </p>
