@@ -3,13 +3,14 @@
 }
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
-    <link href="img/favicon.ico" rel="shortcut icon" type="image/x-icon" sizes="16x16" />
     <link rel="icon" href="~/images/favicon.png" type="image/png" sizes="16x16" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>LIMS Public Interface module</title>
+    <meta name="description" content="Land Management information System (LMIS)">
+    <meta name="keywords" content="DDALMIS/DDA Land Management/DDA Lease Property/ DDA Damage Property">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help</title>
     <!--font css-->
     <link rel="stylesheet" href="~/font/open-sans/stylesheet.css" />
 
@@ -65,7 +66,7 @@
     </aside>*@
 
     <partial name="_CookieConsentPartial" />
-    <section class="slow bg-gray">
+    <section class="privacy-section bg-gray">
         <div class="container-fluid">
             <div class="section-wraper px-3  pb-md-0">
                 <div class="form-control" style="margin-top:70px;">
@@ -104,8 +105,8 @@
                                         
                                     </tbody>
                                 </table>
-                                <p style="color:rgb(46,77,185)">Feedback/Suggestion</p>
-                                <p>You can use the Feedback form to submit your comments, feedback, suggestions and ideas for improvements to Delhi Development Authority</p>
+                               @*  <p style="color:rgb(46,77,185)">Feedback/Suggestion</p>
+                                <p>You can use the Feedback form to submit your comments, feedback, suggestions and ideas for improvements to Delhi Development Authority</p> *@
                                 <p style="color:rgb(46,77,185)">Do you need further help?</p>
                                 <p>If you need further help, please &nbsp;<a asp-action="Contactus" asp-controller="Home">Contact us.</a></p>
                             </div>
@@ -120,18 +121,42 @@
     <br /><br />
     <footer class="footers slow">
         <div class="container-fluid">
+            <div class="text-center mt-2 d-none d-md-block">
+                <a href="#" id="digitalindiaLink" class="m-2">
+                    <img src="~/images/logos/digital_india.png" alt="Digital India" height="40" />
+                </a>
+                <a href="#" id="data_Gov_Link" class="m-2">
+                    <img src="~/images/logos/data_gov_in.png" alt="data.gov.in" height="40" />
+                </a>
+                <a href="#" id="makeinindiaLink" class="m-2">
+                    <img src="~/images/logos/make_in_india.png" alt="Make in India" height="40" />
+                </a>
+                <a href="#" id="india_Gov_Link" class="m-2">
+                    <img src="~/images/logos/india_gov_in.png" alt="india.gov.in" height="40" />
+                </a>
+                @*  <a href="#" id="my_gov_Link" class="m-2">
+                    <img src="~/images/logos/mygov_logo.jpg" alt="MyGov" height="40" />
+                </a> *@
+            </div>
             <p class="my-0 py-2 text-center">
                 <a asp-action="Index" asp-controller="Home">Home</a>
-                | <a asp-action="PrivacyPolicy" asp-controller="Home">Privacy Policy</a>
-                | <a asp-action="TermsandConditions" asp-controller="Home">Terms&Conditions</a>
                 | <a asp-action="copyRight" asp-controller="Home">Copyright Policy</a>
-                | <a asp-action="HyperlinkPolicy" asp-controller="Home">Hyperlink policy</a>
-                | <a asp-action="WebInformationManager" asp-controller="Home">Web Information Manager</a>
+                | <a asp-action="CMAP" asp-controller="Home">CMAP</a>
+                | <a asp-action="ContentArchivalCAPPolicy" asp-controller="Home">Content Archival Policy (CAP)</a>
+                | <a asp-action="ContentReviewPolicy" asp-controller="Home">Content Review Policy (CRP)</a>
+                | <a asp-action="HyperlinkPolicy" asp-controller="Home">Hyperlink Policy</a>
+                | <a asp-action="PrivacyPolicy" asp-controller="Home">Privacy Policy</a>
+                | <a asp-action="TermsandConditions" asp-controller="Home">Terms & Conditions</a>
+                | <a asp-action="WebsiteMonitoringPlan" asp-controller="Home">Website Monitoring Plan</a>
+                | <a asp-action="ContingencyManagementPlan" asp-controller="Home">Contingency Management Plan</a>
+                | <a asp-action="SecurityPolicy" asp-controller="Home">Security Policy</a>
                 | <a asp-action="Contactus" asp-controller="Home">Contact Us</a>
                 | <a asp-action="Help" asp-controller="Home">Help</a>
-                | <a asp-action="AboutUs" asp-controller="Home">About Us</a>
                 | <a asp-action="Disclaimer" asp-controller="Home">Disclaimer</a>
-                | <a asp-action="ContingencyManagementPlan" asp-controller="Home">Contingency Management Plan</a><br>
+                | <a asp-action="AboutUs" asp-controller="Home">About Us</a>
+                | <a asp-action="WebInformationManager" asp-controller="Home">Web Information Manager</a>
+                | <a asp-action="Feedback" asp-controller="Home">Feedback</a>
+                | <a asp-action="Sitemap" asp-controller="Home">Site map</a><br>
                 &nbsp; &copy; Content Owned by DDA, Government of India. &nbsp;&nbsp;<label>Last Updated : @Html.Raw(TempData["updatedDate"])</label>
             </p>
         </div>

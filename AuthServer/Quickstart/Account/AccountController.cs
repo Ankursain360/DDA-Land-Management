@@ -914,7 +914,7 @@ namespace IdentityServerHost.Quickstart.UI
 
                 if (result == true)
                 {
-                    TempData["Message"] = AlertMessage.ShowMessage("Your Feedback has been successfully submitted. The System Administrator will revert with a response within 1 working day. Thank you for reaching out.", "Sucess",AlertType.Success);
+                    TempData["Message"] = AlertMessage.ShowMessage("Your Feedback has been successfully submitted. The System Administrator will revert with a response within 2 working days. Thank you for reaching out.", "Sucess",AlertType.Success);
                     return RedirectToAction("Login");
                 }
                 else

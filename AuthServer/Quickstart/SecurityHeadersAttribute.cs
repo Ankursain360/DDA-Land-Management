@@ -39,7 +39,7 @@ namespace IdentityServerHost.Quickstart.UI
                 var csp = string.Join(" ",
                                       "default-src 'self';",
                                       "style-src 'self';",
-                                      "script-src 'self';",
+                                      "script-src 'self' 'unsafe-inline';",
                                       "img-src 'self' data:;",
                                       "object-src 'none';",
                                       "frame-ancestors 'none';",

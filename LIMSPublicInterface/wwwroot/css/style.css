@@ -1790,3 +1790,8 @@ textarea.floating-label-field--s3 {
         border-left: 0;
     }
 }
+.privacy-section {
+    max-height: calc(100vh - 150px); /* 100vh minus header/footer height */
+    overflow-y: auto; /* scroll inside section */
+    padding: 1rem;
+}

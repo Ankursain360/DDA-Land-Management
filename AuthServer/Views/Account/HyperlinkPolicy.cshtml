@@ -9,7 +9,7 @@
     <link rel="icon" href="~/images/favicon.png" type="image/png" sizes="16x16" />
     <meta name="description" content="Land Management information System (LMIS)">
     <meta name="keywords" content="DDALMIS/DDA Land Management/DDA Lease Property/ DDA Damage Property">
-    <title>Hyperlink policy</title>
+    <title>Hyperlink Policy</title>
     <!--font css-->
     <link rel="stylesheet" href="~/font/open-sans/stylesheet.css" />
     @* <a href="d:\office projects\dda_lmis\dda-land-management\authserver\views\account\hyperlinkpolicy.cshtml">d:\office projects\dda_lmis\dda-land-management\authserver\views\account\hyperlinkpolicy.cshtml</a>
@@ -88,11 +88,11 @@
     </aside>*@
 
     <partial name="_CookieConsentPartial" />
-    <section class="slow bg-gray">
+    <section class="privacy-section bg-gray">
         <div class="container-fluid">
             <div class="section-wraper px-3  pb-md-0">
                 <div class="form-control" style="margin-top:70px;">
-                    <h2 class="text-center"><strong>Hyperlink policy</strong></h2>
+                    <h2 class="text-center"><strong>Hyperlink Policy</strong></h2>
                     <div class="card p-3 bg-gray-100 overflow-auto">
                         <div class="row align-items-center">
                             <div class="col-md-12">
@@ -102,6 +102,20 @@
                                             <td>
                                                 <p>At many places in this website, you shall find links to other websites/portals. This links have been placed for your convenience. Delhi Development Authority (DDA) is not responsible for the contents and reliability of the linked websites and does not necessarily endorse the views expressed in them. Mere presence of the link or its listing on this website should not be assumed as endorsement of any kind. We cannot guarantee that these links will work all the time and we have no control over availability of linked pages.</p>
                                                 <p>The website hyper links policy will be reviewed on yearly basis.</p>
+                                                <p>We do not object to you linking directly to the information that is hosted on this portal and no prior permission is required for the same. However, we would like you to inform us about any links provided to this DDA LIMS application so that you can be informed of any changes or updates in that. Also, we do not permit our pages to be loaded into frames on your site. The pages belonging to this DDA LIMS application must load into a newly opened browser window of the User.</p>
+                                                <p>To ensure the accuracy and reliability of hyperlinked content on the website, a defined validation mechanism has been implemented. This involves both automated and manual review processes to verify that all external and internal links are active, relevant, and free from redirects or errors.</p>
+                                                <strong>Tools Used:</strong>
+                                                <ul>
+                                                    <li>The website is scanned regularly using the W3C Link Checker and other automated tools to detect broken or outdated hyperlinks.</li>
+                                                    <li>Manual verification is also conducted during content updates or major revisions to cross-check the accuracy and contextual relevance of linked pages.</li>
+
+                                                </ul>
+                                                <strong>Periodicity:</strong>
+                                                <ul>
+                                                    <li>Automated Link Scanning: Performed monthly using the W3C Broken Link Checker.</li>
+                                                    <li>Manual Review: Conducted on a quarterly basis, and also during any major website updates or audits.</li>
+
+                                                </ul>
                                             </td>
                                         </tr>
 
@@ -119,7 +133,19 @@
     <footer class="footers slow">
         <div class="container-fluid">
             <div class="text-center mt-2">
-                <a href="#" id="digitalindiaLink" class="m-2">
+                <a href="https://www.digitalindia.gov.in/" class="m-2" target="_blank" onclick="return confirm('You are being redirected to an external website. Please note that Delhi Development Authority cannot be held responsible for external websites content &amp; privacy policies.');" aria-label="https://www.digitalindia.gov.in/ - External site that opens in a new window" title="https://www.digitalindia.gov.in/ - External site that opens in a new window" rel="noopener noreferrer">
+                    <img src="~/images/logos/digital_india.png" alt="Digital India" height="40" draggable="false">
+                </a>
+                <a href="https://www.data.gov.in/" class="m-2" target="_blank" onclick="return confirm('You are being redirected to an external website. Please note that Delhi Development Authority cannot be held responsible for external websites content &amp; privacy policies.');" aria-label="https://www.data.gov.in/ - External site that opens in a new window" title="https://www.data.gov.in/ - External site that opens in a new window" rel="noopener noreferrer">
+                    <img src="~/images/logos/data_gov_in.png" alt="data.gov.in" height="40" draggable="false">
+                </a>
+                <a href="https://www.makeinindia.com/" class="m-2" target="_blank" onclick="return confirm('You are being redirected to an external website. Please note that Delhi Development Authority cannot be held responsible for external websites content &amp; privacy policies.');" aria-label="https://www.makeinindia.com/ - External site that opens in a new window" title="https://www.makeinindia.com/ - External site that opens in a new window" rel="noopener noreferrer">
+                    <img src="~/images/logos/make_in_india.png" alt="india.gov.in" height="40" draggable="false">
+                </a>
+                <a href="https://www.india.gov.in/" class="m-2" target="_blank" onclick="return confirm('You are being redirected to an external website. Please note that Delhi Development Authority cannot be held responsible for external websites content &amp; privacy policies.');" aria-label="https://www.india.gov.in/ - External site that opens in a new window" title="https://www.india.gov.in/ - External site that opens in a new window" rel="noopener noreferrer">
+                    <img src="~/images/logos/india_gov_in.png" alt="india.gov.in" height="40" draggable="false">
+                </a>
+                @* <a href="#" id="digitalindiaLink" class="m-2">
                     <img src="~/images/logos/digital_india.png" alt="Digital India" height="40" />
                 </a>
                 <a href="#" id="data_Gov_Link" class="m-2">
@@ -130,7 +156,7 @@
                 </a>
                 <a href="#" id="india_Gov_Link" class="m-2">
                     <img src="~/images/logos/india_gov_in.png" alt="india.gov.in" height="40" />
-                </a>
+                </a> *@
             @*     <a href="#" id="my_gov_Link" class="m-2">
                     <img src="~/images/logos/mygov_logo.jpg" alt="MyGov" height="40" />
                 </a> *@
@@ -138,7 +164,7 @@
             <p class="my-0 py-2 text-center">
                  <a asp-action="Login" asp-controller="Account">Home</a>               
                 | <a asp-action="copyRight" asp-controller="Account">Copyright Policy</a>
-                | <a asp-action="CMAP" asp-controller="Account">CMAP</a>
+                | <a asp-action="CMAP" asp-controller="Account">Content Contribution, Moderation & Approval Policy (CMAP)</a>
                 | <a asp-action="ContentArchivalCAPPolicy" asp-controller="Account">Content Archival Policy (CAP)</a>
                 | <a asp-action="ContentReviewPolicy" asp-controller="Account">Content Review Policy (CRP)</a>
                 | <a asp-action="HyperlinkPolicy" asp-controller="Account">Hyperlink Policy</a>
@@ -153,7 +179,7 @@
                 | <a asp-action="AboutUs" asp-controller="Account">About Us</a>
                 | <a asp-action="WebInformationManager" asp-controller="Account">Web Information Manager</a>
                 | <a asp-action="Feedback" asp-controller="Account">Feedback</a>
-                | <a asp-action="Sitemap" asp-controller="Account">Site map</a><br>
+                | <a asp-action="Sitemap" asp-controller="Account">Site Map</a><br>
                 &nbsp; &copy; Content Owned by DDA, Government of India. &nbsp;&nbsp;
                 <label>Last Updated : @HttpContextAccessor.HttpContext.Session.GetString("LastUpdatedDate")</label>
             </p>
