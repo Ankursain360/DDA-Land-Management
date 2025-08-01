@@ -207,8 +207,8 @@ a.no-dec {
 }
 
 #LoginPage {
-    min-height: 100vh;
-    width: 100%;
+   /* min-height: 100vh;
+    width: 100%;*/
     background-image: url(../login/login-bg.jpg);
     position: relative;
 }
@@ -689,13 +689,13 @@ html, body {
 
 /* Base styles */
 #LoginPage {
-    height: auto;
-    min-height: 100vh;
+    /*height: auto;
+    min-height: 100vh;*/
     display: flex; /* Helps center content if needed */
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    padding: 2rem;
+    padding-bottom: 2rem;    
 }
 
 .login-scroll {
